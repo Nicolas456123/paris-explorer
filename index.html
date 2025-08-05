@@ -900,17 +900,34 @@
                     const response = await fetch('paris-database.json');
                     
                     if (!response.ok) {
-                        throw new Error(`Erreur fichier lieux: HTTP ${response.status}`);
+                        throw new Error(`Erreur fichier lieux: HTTP ${response.status}: ${response.statusText}`);
                     }
                     
-                    // Chargement des lieux
-                    const data = await response.json();
+                    // Vérifier le contenu avant parsing
+                    const textContent = await response.text();
+                    console.log('📄 Taille du fichier:', textContent.length, 'caractères');
+                    console.log('📄 Début du fichier:', textContent.substring(0, 200));
+                    
+                    // Parser le JSON
+                    let data;
+                    try {
+                        data = JSON.parse(textContent);
+                    } catch (parseError) {
+                        console.error('❌ Erreur parsing JSON:', parseError);
+                        throw new Error(`Erreur parsing JSON: ${parseError.message}`);
+                    }
                     
                     console.log('🔍 Structure des données reçues:', Object.keys(data));
-                    console.log('🔍 Contenu data.arrondissements:', !!data.arrondissements);
+                    console.log('🔍 Type de data:', typeof data);
+                    console.log('🔍 data.arrondissements existe?', !!data.arrondissements);
+                    
+                    if (data.arrondissements) {
+                        console.log('🔍 Nombre d\'arrondissements:', Object.keys(data.arrondissements).length);
+                        console.log('🔍 Premier arrondissement:', Object.keys(data.arrondissements)[0]);
+                    }
                     
                     if (!data || !data.arrondissements) {
-                        console.error('❌ Données reçues:', data);
+                        console.error('❌ Structure complète des données:', data);
                         throw new Error('Structure de données invalide: propriété "arrondissements" manquante');
                     }
                     
