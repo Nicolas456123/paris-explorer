@@ -918,19 +918,28 @@
                         throw new Error(`Erreur parsing JSON: ${parseError.message}`);
                     }
                     
-                    // Vérification simple et directe
+                    // Vérification et adaptation de la structure
                     console.log('🔍 Vérification des données...');
+                    console.log('🔍 data est un array?', Array.isArray(data));
                     console.log('🔍 data existe?', !!data);
-                    console.log('🔍 data.arrondissements existe?', !!data.arrondissements);
-                    console.log('🔍 Type de data.arrondissements:', typeof data.arrondissements);
                     
-                    if (data && data.arrondissements) {
+                    // Si c'est un tableau, prendre le premier élément
+                    let jsonData = data;
+                    if (Array.isArray(data) && data.length > 0) {
+                        console.log('📦 Structure tableau détectée, extraction du premier élément');
+                        jsonData = data[0];
+                    }
+                    
+                    console.log('🔍 jsonData.arrondissements existe?', !!jsonData.arrondissements);
+                    console.log('🔍 Type de jsonData.arrondissements:', typeof jsonData.arrondissements);
+                    
+                    if (jsonData && jsonData.arrondissements) {
                         console.log('✅ Structure valide détectée');
-                        console.log('🔍 Nombre d\'arrondissements:', Object.keys(data.arrondissements).length);
-                        this.parisData = data.arrondissements;
+                        console.log('🔍 Nombre d\'arrondissements:', Object.keys(jsonData.arrondissements).length);
+                        this.parisData = jsonData.arrondissements;
                     } else {
                         console.error('❌ Structure invalide');
-                        console.error('data:', data);
+                        console.error('jsonData:', jsonData);
                         throw new Error('Structure de données invalide');
                     }
                     this.isDataLoaded = true;
