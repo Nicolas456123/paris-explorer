@@ -1,4 +1,4 @@
-// ===== USER MANAGER - GESTION DES UTILISATEURS =====
+// ===== USER MANAGER - VERSION REFACTORISÉE =====
 
 class UserManager {
     constructor(app) {
@@ -301,7 +301,7 @@ class UserManager {
             ...user,
             visitedPlaces: Array.from(user.visitedPlaces),
             exportDate: new Date().toISOString(),
-            appVersion: '1.0.0'
+            appVersion: '2.0.0'
         };
         
         return JSON.stringify(exportData, null, 2);
