@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <!-- Styles personnalisés -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
 </head>
 <body>
     <div class="app-container">
@@ -67,12 +69,28 @@
             <div class="nav-tabs">
                 <div class="nav-tab active" data-tab="list">📋 Liste des Lieux</div>
                 <div class="nav-tab" data-tab="map">🗺️ Carte Interactive</div>
+                <div class="nav-tab" data-tab="stats">📊 Statistiques</div>
+                <div class="nav-tab" data-tab="favorites">⭐ Favoris</div>
             </div>
             
             <!-- Contenu onglet Liste -->
             <div class="tab-content active" id="listTab">
                 <div class="search-container">
                     <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher un monument, restaurant, quartier...">
+                    <div class="search-filters">
+                        <select class="filter-select" id="arrondissementFilter">
+                            <option value="">Tous les arrondissements</option>
+                        </select>
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="">Toutes les catégories</option>
+                        </select>
+                        <select class="filter-select" id="statusFilter">
+                            <option value="">Tous les statuts</option>
+                            <option value="visited">Visités</option>
+                            <option value="unvisited">Non visités</option>
+                            <option value="favorites">Favoris</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="controls-row">
@@ -81,6 +99,8 @@
                     <div class="action-buttons">
                         <button class="btn btn-secondary" id="expandAllBtn">📂 Tout Ouvrir</button>
                         <button class="btn btn-secondary" id="collapseAllBtn">📁 Tout Fermer</button>
+                        <button class="btn btn-success" id="exportDataBtn">📤 Exporter</button>
+                        <button class="btn btn-info" id="importDataBtn">📥 Importer</button>
                         <button class="btn btn-danger" id="resetProgressBtn">🗑️ Recommencer</button>
                     </div>
                 </div>
@@ -89,34 +109,80 @@
             <!-- Contenu onglet Carte -->
             <div class="tab-content" id="mapTab">
                 <div class="map-container" id="mapContainer">
-                    <div class="fullscreen-controls" id="mapControls">
-                        <button class="map-control-btn" id="fullscreenBtn" title="Mode plein écran">
-                            🔳
-                        </button>
-                        <button class="map-control-btn" id="centerMapBtn" title="Centrer sur Paris">
-                            🎯
-                        </button>
+                    <div class="map-controls">
+                        <button class="map-control-btn" id="fullscreenBtn" title="Mode plein écran">🔳</button>
+                        <button class="map-control-btn" id="centerMapBtn" title="Centrer sur Paris">🎯</button>
+                        <button class="map-control-btn" id="toggleLayersBtn" title="Basculer les couches">🗂️</button>
                     </div>
                     <!-- La carte Leaflet sera injectée ici -->
+                </div>
+            </div>
+            
+            <!-- Contenu onglet Statistiques -->
+            <div class="tab-content" id="statsTab">
+                <div class="stats-dashboard">
+                    <div class="stats-section">
+                        <h3>📊 Progression par Arrondissement</h3>
+                        <div class="arrondissement-stats" id="arrondissementStats">
+                            <!-- Les statistiques par arrondissement seront générées ici -->
+                        </div>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <h3>📈 Évolution dans le Temps</h3>
+                        <div class="timeline-stats" id="timelineStats">
+                            <!-- Graphique de progression temporelle -->
+                        </div>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <h3>🏆 Achievements</h3>
+                        <div class="achievements-grid" id="achievementsGrid">
+                            <!-- Badges et récompenses -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenu onglet Favoris -->
+            <div class="tab-content" id="favoritesTab">
+                <div class="favorites-container">
+                    <h3>⭐ Mes Lieux Favoris</h3>
+                    <div class="favorites-grid" id="favoritesGrid">
+                        <!-- Les lieux favoris seront affichés ici -->
+                    </div>
                 </div>
             </div>
         </nav>
         
         <!-- Contenu principal -->
         <main class="main-content" id="mainContent">
-            <div class="error-message">
+            <div class="loading-message" id="loadingMessage">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <h3>🗼 Chargement de Paris...</h3>
+                    <p>Préparation de votre exploration parisienne</p>
+                </div>
+            </div>
+            
+            <div class="error-message" id="errorMessage" style="display: none;">
                 <div class="error-content">
                     <h3>🚫 Fichier de données manquant</h3>
-                    <p><strong>L'application a besoin du fichier <code>paris-database.json</code></strong></p>
-                    <p>Ce fichier contient toutes les données des lieux parisiens à explorer.</p>
+                    <p><strong>L'application a besoin du fichier <code>data/paris-index.json</code></strong></p>
+                    <p>Ce fichier contient l'index principal des lieux parisiens à explorer.</p>
                     <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px; text-align: left;">
                         <strong>Pour utiliser cette application :</strong><br>
-                        1. Téléchargez le fichier <code>paris-database.json</code><br>
-                        2. Placez-le dans le même dossier que ce fichier HTML<br>
+                        1. Vérifiez que le dossier <code>data/</code> existe<br>
+                        2. Assurez-vous que <code>paris-index.json</code> est présent<br>
                         3. Servez les fichiers via un serveur web local<br>
                         4. Exemple : <code>python -m http.server 8000</code> puis <code>http://localhost:8000</code>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Contenu dynamique des arrondissements -->
+            <div class="arrondissements-container" id="arrondissementsContainer" style="display: none;">
+                <!-- Les arrondissements seront générés dynamiquement ici -->
             </div>
         </main>
     </div>
@@ -143,16 +209,50 @@
                     <!-- Les utilisateurs seront listés ici -->
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="form-label">Paramètres</label>
+                <div class="settings-grid">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span>Mode sombre</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="notificationsToggle">
+                        <span>Notifications</span>
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <!-- Modal détails du lieu -->
+    <div class="modal" id="placeModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 class="modal-title" id="placeModalTitle"></h3>
+                <button class="close-btn" id="closePlaceModalBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="placeModalContent">
+                <!-- Contenu détaillé du lieu -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Input caché pour l'import de fichiers -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Modules JavaScript -->
-    <script src="data-manager.js"></script>
-    <script src="user-manager.js"></script>
-    <script src="map-manager.js"></script>
-    <script src="ui-manager.js"></script>
-    <script src="main.js"></script>
+    
+    <!-- Modules JavaScript dans l'ordre de dépendance -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/data-manager.js"></script>
+    <script src="assets/js/user-manager.js"></script>
+    <script src="assets/js/map-manager.js"></script>
+    <script src="assets/js/ui-manager.js"></script>
+    <script src="assets/js/search-filter.js"></script>
+    <script src="assets/js/export-import.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
