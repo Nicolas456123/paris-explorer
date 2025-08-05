@@ -3,27 +3,27 @@
 const CACHE_NAME = 'paris-explorer-v2.0.0';
 const OFFLINE_URL = '/offline.html';
 
-// Ressources critiques à mettre en cache
+// Ressources critiques à mettre en cache (NOMS CORRIGES)
 const CRITICAL_RESOURCES = [
     '/',
     '/index.html',
     '/assets/css/main.css',
     '/assets/css/responsive.css',
     '/assets/css/themes.css',
-    '/assets/js/app.js',
+    '/assets/js/app.js',                // ✅ Corrigé (sans -advanced)
     '/assets/js/data-manager.js',
-    '/assets/js/user-manager.js',
-    '/assets/js/ui-manager.js',
+    '/assets/js/user-manager.js',       // ✅ Corrigé (sans -advanced)
+    '/assets/js/ui-manager.js',         // ✅ Corrigé (sans -advanced)
     '/assets/js/map-manager.js',
     '/assets/js/utils.js',
-    '/config.json',
+    '/config.json',                     // ✅ Maintenant créé
     '/manifest.json',
-    OFFLINE_URL
+    OFFLINE_URL                         // ✅ Maintenant créé
 ];
 
 // Ressources secondaires (chargées en arrière-plan)
 const SECONDARY_RESOURCES = [
-    '/assets/js/export-import.js',
+    '/assets/js/export-import.js',      // ✅ Corrigé (sans -advanced)
     '/assets/js/search-filter.js',
     '/paris-database.json',
     '/user/progress.json',
@@ -41,7 +41,7 @@ const EXTERNAL_RESOURCES = [
 
 // === INSTALLATION DU SERVICE WORKER ===
 self.addEventListener('install', event => {
-    console.log('🔧 Installation du Service Worker Paris Explorer');
+    console.log('🔧 Installation du Service Worker Paris Explorer v2.0.0');
     
     event.waitUntil(
         (async () => {
@@ -50,14 +50,39 @@ self.addEventListener('install', event => {
                 const cache = await caches.open(CACHE_NAME);
                 console.log('📦 Mise en cache des ressources critiques...');
                 
-                await cache.addAll(CRITICAL_RESOURCES);
+                // Mise en cache progressive avec gestion d'erreur
+                const criticalPromises = CRITICAL_RESOURCES.map(async (resource) => {
+                    try {
+                        const response = await fetch(resource);
+                        if (response.ok) {
+                            await cache.put(resource, response);
+                            console.log(`✅ Mis en cache: ${resource}`);
+                        } else {
+                            console.warn(`⚠️ Ressource non trouvée: ${resource} (${response.status})`);
+                        }
+                    } catch (error) {
+                        console.warn(`⚠️ Erreur cache: ${resource}`, error.message);
+                    }
+                });
+                
+                await Promise.all(criticalPromises);
                 console.log('✅ Ressources critiques mises en cache');
                 
                 // Préchargement des ressources secondaires en arrière-plan
                 setTimeout(async () => {
                     try {
                         console.log('📦 Préchargement des ressources secondaires...');
-                        await cache.addAll(SECONDARY_RESOURCES);
+                        const secondaryPromises = SECONDARY_RESOURCES.map(async (resource) => {
+                            try {
+                                const response = await fetch(resource);
+                                if (response.ok) {
+                                    await cache.put(resource, response);
+                                }
+                            } catch (error) {
+                                console.warn(`⚠️ Erreur préchargement secondaire: ${resource}`);
+                            }
+                        });
+                        await Promise.all(secondaryPromises);
                         console.log('✅ Ressources secondaires mises en cache');
                     } catch (error) {
                         console.warn('⚠️ Erreur préchargement secondaire:', error);
@@ -268,166 +293,59 @@ self.addEventListener('message', event => {
         case 'PRELOAD_ROUTES':
             preloadRoutes(data?.routes || []);
             break;
-            
-        case 'UPDATE_STRATEGY':
-            updateCacheStrategy(data?.strategy);
-            break;
     }
 });
 
-// === FONCTIONS UTILITAIRES AVANCÉES ===
-
-async function getCacheSize() {
-    try {
-        const cache = await caches.open(CACHE_NAME);
-        const keys = await cache.keys();
-        
-        let totalSize = 0;
-        for (const request of keys) {
-            const response = await cache.match(request);
-            if (response) {
-                const blob = await response.blob();
-                totalSize += blob.size;
-            }
-        }
-        
-        return {
-            items: keys.length,
-            size: totalSize,
-            sizeFormatted: formatBytes(totalSize)
-        };
-    } catch (error) {
-        console.error('Erreur calcul taille cache:', error);
-        return { items: 0, size: 0, sizeFormatted: '0 B' };
-    }
-}
-
-async function clearCache(pattern = null) {
-    try {
-        const cache = await caches.open(CACHE_NAME);
-        const keys = await cache.keys();
-        
-        let cleared = 0;
-        for (const request of keys) {
-            if (!pattern || request.url.includes(pattern)) {
-                await cache.delete(request);
-                cleared++;
-            }
-        }
-        
-        return cleared;
-    } catch (error) {
-        console.error('Erreur nettoyage cache:', error);
-        return 0;
-    }
-}
-
-async function preloadRoutes(routes) {
-    try {
-        const cache = await caches.open(CACHE_NAME);
-        const promises = routes.map(route => {
-            return fetch(route).then(response => {
-                if (response.ok) {
-                    return cache.put(route, response);
-                }
-            }).catch(err => console.warn('Erreur preload:', route, err));
-        });
-        
-        await Promise.allSettled(promises);
-        console.log(`✅ Preload terminé: ${routes.length} routes`);
-    } catch (error) {
-        console.error('Erreur preload routes:', error);
-    }
-}
-
-function updateCacheStrategy(strategy) {
-    // Mise à jour dynamique de la stratégie de cache
-    // Peut être implémenté pour A/B testing des stratégies
-    console.log('Mise à jour stratégie cache:', strategy);
-}
-
-function formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) return '0 B';
-    
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-}
-
-// === GESTION DES NOTIFICATIONS PUSH ===
+// === GESTION DES PUSH NOTIFICATIONS ===
 self.addEventListener('push', event => {
     if (!event.data) return;
     
-    try {
-        const data = event.data.json();
-        const options = {
-            body: data.body || 'Nouvelle notification Paris Explorer',
-            icon: '/icons/icon-192x192.png',
-            badge: '/icons/badge-72x72.png',
-            image: data.image,
-            data: data.data,
-            tag: data.tag || 'paris-explorer',
-            renotify: true,
-            requireInteraction: data.requireInteraction || false,
-            actions: data.actions || [
-                {
-                    action: 'open',
-                    title: 'Ouvrir',
-                    icon: '/icons/open-24x24.png'
-                },
-                {
-                    action: 'dismiss',
-                    title: 'Ignorer',
-                    icon: '/icons/close-24x24.png'
-                }
-            ]
-        };
-        
-        event.waitUntil(
-            self.registration.showNotification(data.title || 'Paris Explorer', options)
-        );
-    } catch (error) {
-        console.error('Erreur notification push:', error);
-    }
+    const data = event.data.json();
+    const options = {
+        body: data.body,
+        icon: '/assets/images/icon-192.png',
+        badge: '/assets/images/badge-72.png',
+        data: data.data,
+        actions: [
+            {
+                action: 'open',
+                title: 'Ouvrir'
+            },
+            {
+                action: 'close',
+                title: 'Fermer'
+            }
+        ]
+    };
+    
+    event.waitUntil(
+        self.registration.showNotification(data.title, options)
+    );
 });
 
 // === GESTION DES CLICS SUR NOTIFICATIONS ===
 self.addEventListener('notificationclick', event => {
     event.notification.close();
     
-    const { action, data } = event;
-    
-    if (action === 'dismiss') {
-        return;
-    }
-    
-    // URL de destination selon l'action
-    let targetUrl = '/';
-    if (data?.url) {
-        targetUrl = data.url;
-    } else if (action === 'open' && data?.place) {
-        targetUrl = `/?place=${data.place}`;
-    }
-    
-    event.waitUntil(
-        clients.matchAll({ type: 'window' }).then(clientList => {
-            // Chercher une fenêtre existante
-            for (const client of clientList) {
-                if (client.url.includes(self.location.origin) && 'focus' in client) {
-                    client.navigate(targetUrl);
-                    return client.focus();
+    if (event.action === 'open' || !event.action) {
+        const targetUrl = event.notification.data?.url || '/';
+        
+        event.waitUntil(
+            clients.matchAll().then(clientList => {
+                // Chercher une fenêtre ouverte
+                for (const client of clientList) {
+                    if (client.url === targetUrl && 'focus' in client) {
+                        return client.focus();
+                    }
                 }
-            }
-            
-            // Ouvrir une nouvelle fenêtre si aucune trouvée
-            if (clients.openWindow) {
-                return clients.openWindow(targetUrl);
-            }
-        })
-    );
+                
+                // Ouvrir une nouvelle fenêtre
+                if (clients.openWindow) {
+                    return clients.openWindow(targetUrl);
+                }
+            })
+        );
+    }
 });
 
 // === SYNCHRONISATION EN ARRIÈRE-PLAN ===
@@ -456,13 +374,52 @@ async function doBackgroundSync() {
     }
 }
 
+// === UTILITAIRES CACHE ===
+async function getCacheSize() {
+    const cache = await caches.open(CACHE_NAME);
+    const keys = await cache.keys();
+    return keys.length;
+}
+
+async function clearCache(pattern) {
+    const cache = await caches.open(CACHE_NAME);
+    const keys = await cache.keys();
+    
+    const toDelete = pattern 
+        ? keys.filter(request => request.url.includes(pattern))
+        : keys;
+    
+    const deleted = await Promise.all(
+        toDelete.map(request => cache.delete(request))
+    );
+    
+    return deleted.filter(Boolean).length;
+}
+
+async function preloadRoutes(routes) {
+    const cache = await caches.open(CACHE_NAME);
+    
+    const preloadPromises = routes.map(async (route) => {
+        try {
+            const response = await fetch(route);
+            if (response.ok) {
+                await cache.put(route, response);
+            }
+        } catch (error) {
+            console.warn(`⚠️ Erreur préchargement: ${route}`);
+        }
+    });
+    
+    await Promise.all(preloadPromises);
+}
+
 // === GESTION DES ERREURS GLOBALES ===
 self.addEventListener('error', event => {
-    console.error('Erreur Service Worker:', event.error);
+    console.error('❌ Erreur Service Worker:', event.error);
 });
 
 self.addEventListener('unhandledrejection', event => {
-    console.error('Promise rejetée dans Service Worker:', event.reason);
+    console.error('❌ Promise rejetée dans Service Worker:', event.reason);
 });
 
-console.log('🗼 Service Worker Paris Explorer chargé et prêt !');
+console.log('🗼 Service Worker Paris Explorer v2.0.0 chargé et prêt !');
