@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paris Explorer - Tracker de Lieux Visités</title>
+    <title>Paris Explorer - Multi-Utilisateurs</title>
     <style>
         * {
             margin: 0;
@@ -11,293 +11,396 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
         html {
             scroll-behavior: smooth;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Display', sans-serif;
+            background: var(--gradient);
             min-height: 100vh;
-            padding: 20px;
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent;
+            padding: 16px;
         }
         
-        .container {
-            max-width: 1200px;
+        .app-container {
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: var(--white);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
         }
         
+        /* Header avec profils utilisateurs */
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 24px;
+            position: relative;
         }
         
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-        
-        .stats {
+        .header-top {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
         
-        .stat {
+        .app-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .user-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .user-selector {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            min-width: 150px;
+        }
+        
+        .user-selector option {
+            background: var(--dark);
+            color: var(--white);
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-outline:hover {
             background: rgba(255,255,255,0.1);
-            padding: 15px 25px;
-            border-radius: 10px;
+        }
+        
+        /* Stats améliorées */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
             text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.2);
         }
         
         .stat-number {
-            font-size: 2em;
-            font-weight: bold;
             display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
         
         .stat-label {
-            font-size: 0.9em;
-            opacity: 0.8;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
         
-        .controls {
-            padding: 15px 20px;
-            background: #f8f9fa;
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--white);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        /* Navigation et filtres */
+        .nav-section {
+            background: var(--light);
+            padding: 20px;
             border-bottom: 1px solid #e9ecef;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
         
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
+        .search-container {
+            margin-bottom: 16px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
             font-size: 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: var(--transition);
+            background: var(--white);
         }
         
-        .search-box:focus {
-            border-color: #667eea;
+        .search-input:focus {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
         
-        .filter-buttons {
+        .filters-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .filter-group {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
         
         .filter-btn {
-            padding: 10px 16px;
-            background: white;
-            border: 2px solid #ddd;
+            padding: 8px 16px;
+            background: var(--white);
+            border: 2px solid #e9ecef;
             border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
             font-size: 14px;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
             white-space: nowrap;
         }
         
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
         .filter-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
         }
         
         .action-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         
-        .export-btn, .toggle-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-        
-        .export-btn:hover, .toggle-btn:hover {
-            background: #218838;
-        }
-        
-        .toggle-btn.secondary {
-            background: #17a2b8;
-        }
-        
-        .toggle-btn.secondary:hover {
-            background: #138496;
-        }
-        
-        .toggle-btn.danger {
-            background: #dc3545;
-        }
-        
-        .toggle-btn.danger:hover {
-            background: #c82333;
-        }
-        
-        .content {
-            padding: 20px 15px;
-            max-height: calc(100vh - 200px);
+        /* Contenu principal */
+        .main-content {
+            padding: 24px;
+            max-height: calc(100vh - 320px);
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
         
-        .arrondissement {
-            margin-bottom: 25px;
-            border: 1px solid #e9ecef;
-            border-radius: 15px;
+        .arrondissement-card {
+            margin-bottom: 24px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            background: var(--white);
             overflow: hidden;
-            transition: box-shadow 0.3s;
-            background: white;
+            transition: var(--transition);
         }
         
-        .arrondissement:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .arrondissement-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
         
         .arrondissement-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: var(--gradient);
+            color: var(--white);
             padding: 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             user-select: none;
-            min-height: 80px;
-            touch-action: manipulation;
         }
         
         .arrondissement-title {
-            font-size: 1.3em;
-            font-weight: 500;
-            line-height: 1.2;
+            font-size: 1.25rem;
+            font-weight: 600;
             flex: 1;
-            margin-right: 15px;
         }
         
         .arrondissement-stats {
-            font-size: 0.85em;
-            opacity: 0.9;
-            text-align: center;
-            margin-right: 15px;
-            white-space: nowrap;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .completion-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
         
         .toggle-icon {
-            font-size: 1.5em;
-            transition: transform 0.3s;
-            min-width: 30px;
-            text-align: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
         }
         
-        .arrondissement.collapsed .toggle-icon {
+        .arrondissement-card.collapsed .toggle-icon {
             transform: rotate(-90deg);
         }
         
         .arrondissement-content {
             display: block;
-            background: white;
         }
         
-        .arrondissement.collapsed .arrondissement-content {
+        .arrondissement-card.collapsed .arrondissement-content {
             display: none;
         }
         
-        .category {
-            border-bottom: 1px solid #f8f9fa;
+        .category-section {
+            border-bottom: 1px solid #f0f0f0;
         }
         
-        .category:last-child {
+        .category-section:last-child {
             border-bottom: none;
         }
         
         .category-header {
             background: #f8f9fa;
-            padding: 15px 20px;
+            padding: 16px 20px;
             font-weight: 600;
-            color: #495057;
-            border-bottom: 1px solid #e9ecef;
+            color: var(--dark);
             display: flex;
             align-items: center;
             gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
         
         .category-icon {
-            font-size: 1.2em;
+            font-size: 1.1rem;
         }
         
         .places-grid {
-            padding: 15px;
+            padding: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
         }
         
-        .place-item {
+        .place-card {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .place-card:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .place-card.visited {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+        
+        .place-card.visited::before {
+            content: '✓';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--success);
+            color: var(--white);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .place-header {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            transition: all 0.3s;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-        
-        .place-item:hover, .place-item:active {
-            background: #e9ecef;
-            transform: translateY(-1px);
-        }
-        
-        .place-item.visited {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
+            gap: 12px;
+            margin-bottom: 12px;
         }
         
         .place-checkbox {
-            margin-top: 3px;
-            transform: scale(1.3);
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
             cursor: pointer;
-            min-width: 18px;
-            min-height: 18px;
+            transform: scale(1.2);
         }
         
         .place-content {
@@ -305,973 +408,1052 @@
         }
         
         .place-name {
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 6px;
+            color: var(--dark);
+            margin-bottom: 8px;
             line-height: 1.3;
-            font-size: 1em;
         }
         
         .place-description {
-            font-size: 0.9em;
             color: #6c757d;
+            font-size: 0.95rem;
             line-height: 1.4;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         .place-tags {
             display: flex;
-            gap: 5px;
-            margin-top: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
         
         .place-tag {
-            background: #667eea;
-            color: white;
+            background: var(--primary);
+            color: var(--white);
             padding: 3px 8px;
             border-radius: 12px;
-            font-size: 0.75em;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        /* Modal profil utilisateur */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c757d;
+            padding: 4px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .user-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .user-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .user-item:last-child {
+            border-bottom: none;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .user-progress {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 20px;
+            background: var(--success);
+            color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(400px);
+            transition: var(--transition);
+            z-index: 1001;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        .notification.warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .notification.info {
+            background: var(--info);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+            
+            .app-title {
+                font-size: 1.8rem;
+            }
+            
+            .header {
+                padding: 16px;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            
+            .user-controls {
+                justify-content: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .nav-section {
+                padding: 16px;
+            }
+            
+            .filters-row {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+            
+            .main-content {
+                padding: 16px;
+                max-height: calc(100vh - 400px);
+            }
+            
+            .places-grid {
+                grid-template-columns: 1fr;
+                padding: 16px;
+                gap: 12px;
+            }
+            
+            .arrondissement-header {
+                padding: 16px;
+            }
+            
+            .arrondissement-title {
+                font-size: 1.1rem;
+            }
+            
+            .modal-content {
+                margin: 16px;
+                padding: 24px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease forwards;
+        }
+        
+        /* Loading states */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 10;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .hidden {
             display: none !important;
         }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                border-radius: 15px;
-            }
-            
-            .header {
-                padding: 20px 15px;
-            }
-            
-            .stats {
-                gap: 10px;
-                flex-direction: column;
-            }
-            
-            .stat {
-                min-width: 120px;
-                padding: 10px 15px;
-            }
-            
-            .stat-number {
-                font-size: 1.5em;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 15px;
-                gap: 12px;
-            }
-            
-            .search-box {
-                min-width: unset;
-                width: 100%;
-                font-size: 16px;
-                padding: 12px 18px;
-            }
-            
-            .filter-buttons {
-                justify-content: center;
-                gap: 6px;
-            }
-            
-            .filter-btn {
-                padding: 8px 12px;
-                font-size: 13px;
-                min-height: 40px;
-            }
-            
-            .action-buttons {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .export-btn, .toggle-btn {
-                flex: 1;
-                justify-content: center;
-                padding: 12px 8px;
-                font-size: 13px;
-                min-height: 44px;
-            }
-            
-            .content {
-                padding: 15px 10px;
-                max-height: calc(100vh - 250px);
-            }
-            
-            .arrondissement {
-                margin-bottom: 20px;
-                border-radius: 12px;
-            }
-            
-            .arrondissement-header {
-                padding: 15px;
-                min-height: 70px;
-            }
-            
-            .arrondissement-title {
-                font-size: 1.1em;
-                margin-right: 10px;
-            }
-            
-            .arrondissement-stats {
-                font-size: 0.8em;
-                margin-right: 10px;
-            }
-            
-            .toggle-icon {
-                font-size: 1.3em;
-                min-width: 25px;
-            }
-            
-            .category-header {
-                padding: 12px 15px;
-                font-size: 0.95em;
-                position: static;
-            }
-            
-            .places-grid {
-                grid-template-columns: 1fr;
-                padding: 12px;
-                gap: 10px;
-            }
-            
-            .place-item {
-                padding: 12px;
-                gap: 12px;
-                border-radius: 10px;
-            }
-            
-            .place-checkbox {
-                transform: scale(1.4);
-                min-width: 20px;
-                min-height: 20px;
-            }
-            
-            .place-name {
-                font-size: 0.95em;
-                margin-bottom: 5px;
-            }
-            
-            .place-description {
-                font-size: 0.85em;
-            }
-            
-            .place-tags {
-                gap: 4px;
-                margin-top: 6px;
-            }
-            
-            .place-tag {
-                padding: 2px 6px;
-                font-size: 0.7em;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .stats {
-                gap: 8px;
-            }
-            
-            .stat {
-                padding: 8px 12px;
-                min-width: 100px;
-            }
-            
-            .stat-number {
-                font-size: 1.3em;
-            }
-            
-            .stat-label {
-                font-size: 0.8em;
-            }
-            
-            .filter-buttons {
-                gap: 4px;
-            }
-            
-            .filter-btn {
-                padding: 6px 8px;
-                font-size: 11px;
-                border-radius: 15px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .export-btn, .toggle-btn {
-                padding: 10px 12px;
-                font-size: 12px;
-                min-height: 40px;
-                border-radius: 20px;
-            }
-            
-            .arrondissement-title {
-                font-size: 0.95em;
-                line-height: 1.2;
-            }
-            
-            .arrondissement-stats {
-                font-size: 0.75em;
-            }
-            
-            .place-name {
-                font-size: 0.9em;
-            }
-            
-            .place-description {
-                font-size: 0.8em;
-            }
-        }
-        
-        /* Amélioration pour très petits écrans */
-        @media (max-width: 360px) {
-            .filter-btn {
-                padding: 5px 6px;
-                font-size: 10px;
-            }
-            
-            .action-buttons .toggle-btn,
-            .action-buttons .export-btn {
-                font-size: 11px;
-                padding: 8px 10px;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🗼 Paris Explorer</h1>
-            <p>Découvrez et trackez tous les lieux secrets de Paris</p>
-            <div class="stats">
-                <div class="stat">
-                    <span class="stat-number" id="total-places">0</span>
+    <div class="app-container">
+        <!-- Header avec gestion des profils -->
+        <header class="header">
+            <div class="header-top">
+                <h1 class="app-title">🗼 Paris Explorer</h1>
+                <div class="user-controls">
+                    <select class="user-selector" id="userSelector">
+                        <option value="">Sélectionner un profil...</option>
+                    </select>
+                    <button class="btn btn-primary" id="manageUsersBtn">👥 Gérer les profils</button>
+                    <button class="btn btn-outline" id="exportBtn">📊 Export</button>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalPlaces">0</span>
                     <span class="stat-label">Lieux Total</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="totalProgress" style="width: 100%"></div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <span class="stat-number" id="visited-places">0</span>
+                <div class="stat-card">
+                    <span class="stat-number" id="visitedPlaces">0</span>
                     <span class="stat-label">Visités</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="visitedProgress" style="width: 0%"></div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <span class="stat-number" id="completion-rate">0%</span>
+                <div class="stat-card">
+                    <span class="stat-number" id="completionRate">0%</span>
                     <span class="stat-label">Progression</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="completionProgress" style="width: 0%"></div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <span class="stat-number" id="last-save">-</span>
-                    <span class="stat-label">Dernière sauvegarde</span>
+                <div class="stat-card">
+                    <span class="stat-number" id="currentStreak">0</span>
+                    <span class="stat-label">Série Actuelle</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="streakProgress" style="width: 0%"></div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </header>
         
-        <div class="controls">
-            <input type="text" class="search-box" placeholder="🔍 Rechercher un lieu, restaurant, musée..." id="search-input">
-            
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Tous</button>
-                <button class="filter-btn" data-filter="visited">Visités</button>
-                <button class="filter-btn" data-filter="unvisited">À visiter</button>
-                <button class="filter-btn" data-filter="monuments">Monuments</button>
-                <button class="filter-btn" data-filter="restaurants">Restaurants</button>
-                <button class="filter-btn" data-filter="culture">Culture</button>
+        <!-- Navigation et filtres -->
+        <nav class="nav-section">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher un lieu, restaurant, musée...">
             </div>
             
-            <div class="action-buttons">
-                <button class="toggle-btn secondary" id="expand-all-btn">📂 Tout ouvrir</button>
-                <button class="toggle-btn secondary" id="collapse-all-btn">📁 Tout fermer</button>
-                <button class="export-btn" id="export-btn">📊 Export</button>
-                <button class="toggle-btn danger" id="clear-btn">🗑️ Effacer</button>
+            <div class="filters-row">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="visited">Visités</button>
+                    <button class="filter-btn" data-filter="unvisited">À visiter</button>
+                    <button class="filter-btn" data-filter="monuments">Monuments</button>
+                    <button class="filter-btn" data-filter="restaurants">Restaurants</button>
+                    <button class="filter-btn" data-filter="culture">Culture</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-outline" id="expandAllBtn">📂 Tout ouvrir</button>
+                    <button class="btn btn-outline" id="collapseAllBtn">📁 Tout fermer</button>
+                    <button class="btn btn-outline" id="resetProgressBtn">🔄 Reset</button>
+                </div>
             </div>
-        </div>
+        </nav>
         
-        <div class="content" id="content">
+        <!-- Contenu principal -->
+        <main class="main-content" id="mainContent">
             <!-- Les arrondissements seront générés ici -->
+        </main>
+    </div>
+    
+    <!-- Modal gestion des utilisateurs -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Gestion des Profils</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Créer un nouveau profil</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" class="form-input" id="newUserName" placeholder="Nom du profil...">
+                    <button class="btn btn-success" id="createUserBtn">Créer</button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Profils existants</label>
+                <div class="user-list" id="userList">
+                    <!-- Les utilisateurs seront listés ici -->
+                </div>
+            </div>
         </div>
     </div>
+    
+    <!-- Container pour les notifications -->
+    <div id="notificationContainer"></div>
 
     <script>
-        // Variables globales
-        let parisData = {};
-        let visitedPlaces = new Set();
-        let currentFilter = 'all';
-        let searchQuery = '';
-        let isDataLoaded = false;
-
-        // Chargement des données depuis paris-database.json
-        async function loadParisData() {
-            try {
-                showLoadingMessage('🔄 Chargement des données de Paris...');
+        // Configuration et état global
+        class ParisExplorer {
+            constructor() {
+                this.parisData = {};
+                this.config = {};
+                this.currentUser = null;
+                this.users = this.loadUsers();
+                this.currentFilter = 'all';
+                this.searchQuery = '';
+                this.isDataLoaded = false;
                 
-                const response = await fetch('paris-database.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const data = await response.json();
-                
-                // Vérifier la structure des données
-                if (!data.arrondissements) {
-                    throw new Error('Structure de données invalide: propriété "arrondissements" manquante');
-                }
-                
-                parisData = data.arrondissements;
-                isDataLoaded = true;
-                
-                // Charger les préférences utilisateur sauvegardées
-                loadUserProgress();
-                
-                hideLoadingMessage();
-                renderContent();
-                updateStats();
-                
-                console.log('✅ Données chargées:', Object.keys(parisData).length, 'arrondissements');
-                
-            } catch (error) {
-                console.error('❌ Erreur lors du chargement des données:', error);
-                showErrorMessage(`
-                    <h3>🚫 Erreur de chargement</h3>
-                    <p><strong>Impossible de charger paris-database.json</strong></p>
-                    <p>Erreur: ${error.message}</p>
-                    <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px;">
-                        <strong>Solutions possibles :</strong><br>
-                        • Vérifiez que le fichier <code>paris-database.json</code> est dans le même dossier que <code>index.html</code><br>
-                        • Si vous testez en local, utilisez un serveur web (pas file://)<br>
-                        • Vérifiez la syntaxe JSON du fichier de données<br><br>
-                        <strong>Serveur local rapide :</strong><br>
-                        <code>python -m http.server 8000</code> puis <code>http://localhost:8000</code>
-                    </div>
-                `);
+                this.init();
             }
-        }
-
-        // Gestion de la sauvegarde utilisateur avec feedback visuel
-        function saveUserProgress() {
-            try {
-                const now = new Date();
-                const userData = {
-                    visitedPlaces: Array.from(visitedPlaces),
-                    lastUpdated: now.toISOString(),
-                    totalPlaces: getTotalPlaces(),
-                    completionRate: Math.round((visitedPlaces.size / getTotalPlaces()) * 100)
-                };
-                localStorage.setItem('paris-explorer-progress', JSON.stringify(userData));
-                
-                // Mettre à jour l'affichage de la dernière sauvegarde
-                lastSaveTime = now;
-                updateLastSaveDisplay(now);
-                
-                // Feedback visuel temporaire
-                showSaveNotification('💾 Sauvegardé automatiquement');
-                console.log('💾 Progression sauvegardée:', visitedPlaces.size, 'lieux visités');
-            } catch (error) {
-                console.warn('⚠️ Impossible de sauvegarder la progression:', error);
-                showSaveNotification('⚠️ Erreur de sauvegarde', 'error');
+            
+            async init() {
+                try {
+                    await this.loadParisData();
+                    this.setupEventListeners();
+                    this.loadUserSelector();
+                    this.autoSelectUser();
+                } catch (error) {
+                    this.showNotification('Erreur lors de l\'initialisation', 'error');
+                    console.error('Erreur d\'initialisation:', error);
+                }
             }
-        }
-
-        function loadUserProgress() {
-            try {
-                const savedData = localStorage.getItem('paris-explorer-progress');
-                if (savedData) {
-                    const userData = JSON.parse(savedData);
-                    const savedPlaces = userData.visitedPlaces || [];
+            
+            // === GESTION DES DONNÉES ===
+            async loadParisData() {
+                try {
+                    this.showNotification('Chargement des données...', 'info');
                     
-                    // Migrer les anciens IDs vers les nouveaux IDs sécurisés
-                    const migratedPlaces = new Set();
+                    // Chargement des deux fichiers en parallèle
+                    const [placesResponse, configResponse] = await Promise.all([
+                        fetch('paris-database.json'),
+                        fetch('config.json').catch(() => null) // Config optionnel
+                    ]);
                     
-                    savedPlaces.forEach(oldPlaceId => {
-                        // Essayer de parser l'ancien format: arrKey-catKey-placeName
-                        const parts = oldPlaceId.split('-');
-                        if (parts.length >= 3) {
-                            const arrKey = parts[0];
-                            const catKey = parts[1];
-                            const placeName = parts.slice(2).join('-'); // Reconstituer le nom avec les tirets
-                            
-                            // Créer le nouvel ID sécurisé
-                            const newPlaceId = createSafePlaceId(arrKey, catKey, placeName);
-                            migratedPlaces.add(newPlaceId);
-                            
-                            // Si l'ID était déjà sécurisé, l'ajouter aussi
-                            if (oldPlaceId !== newPlaceId) {
-                                console.log(`🔄 Migration ID: ${oldPlaceId} → ${newPlaceId}`);
+                    if (!placesResponse.ok) {
+                        throw new Error(`Erreur fichier lieux: HTTP ${placesResponse.status}`);
+                    }
+                    
+                    // Chargement des lieux
+                    const placesData = await placesResponse.json();
+                    this.parisData = placesData.arrondissements;
+                    
+                    // Chargement de la configuration (optionnel)
+                    if (configResponse && configResponse.ok) {
+                        this.config = await configResponse.json();
+                        console.log('✅ Configuration chargée');
+                    } else {
+                        console.log('⚠️ Configuration par défaut utilisée');
+                        this.config = this.getDefaultConfig();
+                    }
+                    
+                    this.isDataLoaded = true;
+                    this.renderContent();
+                    this.updateStats();
+                    this.showNotification('Données chargées avec succès!', 'success');
+                    
+                } catch (error) {
+                    console.error('❌ Erreur lors du chargement:', error);
+                    this.showErrorMessage(`
+                        <h3>🚫 Erreur de chargement</h3>
+                        <p><strong>Impossible de charger les données</strong></p>
+                        <p>Erreur: ${error.message}</p>
+                        <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px;">
+                            <strong>Vérifiez que les fichiers suivants sont présents :</strong><br>
+                            • <code>paris-database.json</code> (obligatoire)<br>
+                            • <code>config.json</code> (optionnel)<br><br>
+                            <strong>Si vous testez en local :</strong><br>
+                            • Utilisez un serveur web : <code>python -m http.server 8000</code><br>
+                            • Puis ouvrez : <code>http://localhost:8000</code>
+                        </div>
+                    `);
+                }
+            }
+            
+            getDefaultConfig() {
+                return {
+                    metadata: {
+                        title: "Paris Explorer",
+                        version: "2.0.0"
+                    },
+                    filters: {
+                        categories: [
+                            { id: "all", name: "Tous", icon: "🌟" },
+                            { id: "visited", name: "Visités", icon: "✅" },
+                            { id: "unvisited", name: "À visiter", icon: "📝" },
+                            { id: "monuments", name: "Monuments", icon: "🏛️" },
+                            { id: "restaurants", name: "Restaurants", icon: "🍽️" },
+                            { id: "culture", name: "Culture", icon: "🎭" }
+                        ]
+                    },
+                    ui: {
+                        messages: {
+                            fr: {
+                                loading: "Chargement...",
+                                search_placeholder: "🔍 Rechercher un lieu...",
+                                select_user: "Sélectionner un profil..."
                             }
-                        } else {
-                            // Garder l'ID tel quel s'il ne peut pas être parsé
-                            migratedPlaces.add(oldPlaceId);
                         }
-                    });
-                    
-                    visitedPlaces = migratedPlaces;
-                    
-                    // Si des migrations ont eu lieu, sauvegarder immédiatement
-                    if (migratedPlaces.size > 0) {
-                        setTimeout(() => saveUserProgress(), 100);
                     }
-                    
-                    // Afficher infos de la dernière sauvegarde
-                    if (userData.lastUpdated) {
-                        const lastUpdate = new Date(userData.lastUpdated);
-                        lastSaveTime = lastUpdate;
-                        updateLastSaveDisplay(lastUpdate);
-                        console.log('📥 Progression chargée:', visitedPlaces.size, 'lieux visités');
-                        console.log('📅 Dernière sauvegarde:', lastUpdate.toLocaleString('fr-FR'));
-                        showSaveNotification(`📥 ${visitedPlaces.size} lieux restaurés`, 'success');
-                    }
-                } else {
-                    console.log('🆕 Nouvelle session - aucune progression sauvegardée');
-                    document.getElementById('last-save').textContent = '-';
+                };
+            }
+            
+
+            
+            // === GESTION DES UTILISATEURS ===
+            loadUsers() {
+                const users = localStorage.getItem('paris-explorer-users');
+                return users ? JSON.parse(users) : {};
+            }
+            
+            saveUsers() {
+                localStorage.setItem('paris-explorer-users', JSON.stringify(this.users));
+            }
+            
+            createUser(name) {
+                if (!name || name.trim() === '') {
+                    this.showNotification('Le nom ne peut pas être vide', 'error');
+                    return false;
                 }
-            } catch (error) {
-                console.warn('⚠️ Impossible de charger la progression sauvegardée:', error);
-                visitedPlaces = new Set();
-                showSaveNotification('⚠️ Erreur chargement données', 'error');
-                document.getElementById('last-save').textContent = 'Erreur';
-            }
-        }
-
-        function updateLastSaveDisplay(date) {
-            const now = new Date();
-            const diffMs = now - date;
-            const diffMins = Math.floor(diffMs / 60000);
-            
-            let displayText;
-            if (diffMins < 1) {
-                displayText = 'À l\'instant';
-            } else if (diffMins < 60) {
-                displayText = `${diffMins}min`;
-            } else if (diffMins < 1440) { // moins de 24h
-                const hours = Math.floor(diffMins / 60);
-                displayText = `${hours}h`;
-            } else {
-                displayText = date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
-            }
-            
-            const lastSaveElement = document.getElementById('last-save');
-            if (lastSaveElement) {
-                lastSaveElement.textContent = displayText;
-                lastSaveElement.title = `Sauvegardé le ${date.toLocaleString('fr-FR')}`;
-            }
-        }
-
-        function showSaveNotification(message, type = 'success') {
-            // Créer ou réutiliser l'élément de notification
-            let notification = document.getElementById('save-notification');
-            if (!notification) {
-                notification = document.createElement('div');
-                notification.id = 'save-notification';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    padding: 12px 20px;
-                    border-radius: 25px;
-                    font-size: 14px;
-                    font-weight: 500;
-                    z-index: 10000;
-                    transition: all 0.3s ease;
-                    transform: translateX(400px);
-                    opacity: 0;
-                `;
-                document.body.appendChild(notification);
-            }
-            
-            // Style selon le type
-            const colors = {
-                success: { bg: '#d4edda', border: '#28a745', color: '#155724' },
-                error: { bg: '#f8d7da', border: '#dc3545', color: '#721c24' },
-                info: { bg: '#d1ecf1', border: '#17a2b8', color: '#0c5460' }
-            };
-            
-            const color = colors[type] || colors.success;
-            notification.style.backgroundColor = color.bg;
-            notification.style.border = `2px solid ${color.border}`;
-            notification.style.color = color.color;
-            notification.textContent = message;
-            
-            // Animation d'apparition
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-                notification.style.opacity = '1';
-            }, 100);
-            
-            // Animation de disparition
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                notification.style.opacity = '0';
-            }, 2500);
-        }
-
-        // Auto-sauvegarde périodique (toutes les 30 secondes si des changements)
-        let hasUnsavedChanges = false;
-        let lastSaveTime = null;
-        
-        function markAsChanged() {
-            hasUnsavedChanges = true;
-        }
-
-        setInterval(() => {
-            if (hasUnsavedChanges && isDataLoaded) {
-                saveUserProgress();
-                hasUnsavedChanges = false;
-            }
-            
-            // Mettre à jour l'affichage de la dernière sauvegarde
-            if (lastSaveTime) {
-                updateLastSaveDisplay(lastSaveTime);
-            }
-        }, 30000); // 30 secondes
-
-        // Mise à jour plus fréquente de l'affichage de la dernière sauvegarde
-        setInterval(() => {
-            if (lastSaveTime) {
-                updateLastSaveDisplay(lastSaveTime);
-            }
-        }, 60000); // 1 minute
-
-        function showLoadingMessage(message) {
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                <div style="text-align: center; padding: 60px 20px; color: #6c757d;">
-                    <div style="font-size: 3em; margin-bottom: 20px;">🗼</div>
-                    <h3>${message}</h3>
-                    <div style="margin-top: 20px;">
-                        <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                    </div>
-                </div>
-                <style>
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            `;
-        }
-
-        function hideLoadingMessage() {
-            // Le message sera remplacé par renderContent()
-        }
-
-        function showErrorMessage(message) {
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                <div style="text-align: center; padding: 40px 20px; max-width: 600px; margin: 0 auto;">
-                    <div style="background: #f8d7da; color: #721c24; padding: 20px; border-radius: 15px; border: 1px solid #f5c6cb;">
-                        ${message}
-                    </div>
-                    <button onclick="location.reload()" style="margin-top: 20px; padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px;">
-                        🔄 Réessayer
-                    </button>
-                </div>
-            `;
-        }
-
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            // Optimisations mobile
-            optimizeForMobile();
-            
-            // Configuration des event listeners
-            setupEventListeners();
-            
-            // Chargement des données
-            loadParisData();
-        });
-
-        function setupEventListeners() {
-            // Recherche
-            document.getElementById('search-input').addEventListener('input', function(e) {
-                searchQuery = e.target.value.toLowerCase();
-                renderContent();
-            });
-
-            // Filtres
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentFilter = this.dataset.filter;
-                    renderContent();
-                });
-            });
-
-            // Export
-            document.getElementById('export-btn').addEventListener('click', exportToJSON);
-
-            // Bouton effacer données
-            document.getElementById('clear-btn').addEventListener('click', clearAllData);
-
-            // Boutons ouvrir/fermer tout
-            document.getElementById('expand-all-btn').addEventListener('click', expandAllArrondissements);
-            document.getElementById('collapse-all-btn').addEventListener('click', collapseAllArrondissements);
-
-            // Toggle arrondissements avec amélioration tactile
-            document.addEventListener('click', handleArrondissementToggle);
-            
-            // Gestion des clics sur les lieux (pour éviter les problèmes d'apostrophes)
-            document.addEventListener('click', function(e) {
-                const placeItem = e.target.closest('.place-item[data-place-id]');
-                if (placeItem) {
-                    const placeId = placeItem.dataset.placeId;
-                    togglePlace(placeId);
-                }
-            });
-            
-            // Gestion des changements de checkbox
-            document.addEventListener('change', function(e) {
-                if (e.target.classList.contains('place-checkbox')) {
-                    const placeId = e.target.dataset.placeId;
-                    if (placeId) {
-                        togglePlace(placeId);
-                    }
-                }
-            });
-            
-            // Gestion des événements tactiles pour mobile
-            document.addEventListener('touchstart', function(e) {
-                // Améliorer la réactivité tactile
-                if (e.target.closest('.place-item') || e.target.closest('.arrondissement-header')) {
-                    e.target.style.transition = 'all 0.1s ease';
-                }
-            }, { passive: true });
-
-            document.addEventListener('touchend', function(e) {
-                // Restaurer la transition normale
-                setTimeout(() => {
-                    if (e.target.style) {
-                        e.target.style.transition = '';
-                    }
-                }, 100);
-            }, { passive: true });
-        }
-
-        function renderContent() {
-            if (!isDataLoaded || Object.keys(parisData).length === 0) {
-                return; // Attendre que les données soient chargées
-            }
-
-            const content = document.getElementById('content');
-            content.innerHTML = '';
-
-            Object.entries(parisData).forEach(([arrKey, arrData]) => {
-                const arrDiv = document.createElement('div');
-                arrDiv.className = 'arrondissement';
                 
-                const totalPlaces = getTotalPlacesInArrondissement(arrData);
-                const visitedInArr = getVisitedPlacesInArrondissement(arrData);
+                const trimmedName = name.trim();
+                if (this.users[trimmedName]) {
+                    this.showNotification('Un profil avec ce nom existe déjà', 'error');
+                    return false;
+                }
+                
+                this.users[trimmedName] = {
+                    name: trimmedName,
+                    visitedPlaces: new Set(),
+                    createdAt: new Date().toISOString(),
+                    lastActive: new Date().toISOString(),
+                    stats: {
+                        totalVisited: 0,
+                        streak: 0,
+                        lastVisit: null
+                    }
+                };
+                
+                this.saveUsers();
+                this.loadUserSelector();
+                this.setCurrentUser(trimmedName);
+                this.showNotification(`Profil "${trimmedName}" créé avec succès!`, 'success');
+                return true;
+            }
+            
+            deleteUser(name) {
+                if (confirm(`Êtes-vous sûr de vouloir supprimer le profil "${name}" ?`)) {
+                    delete this.users[name];
+                    this.saveUsers();
+                    
+                    if (this.currentUser === name) {
+                        this.currentUser = null;
+                        document.getElementById('userSelector').value = '';
+                        this.renderContent();
+                        this.updateStats();
+                    }
+                    
+                    this.loadUserSelector();
+                    this.updateUsersList();
+                    this.showNotification(`Profil "${name}" supprimé`, 'info');
+                }
+            }
+            
+            setCurrentUser(name) {
+                if (this.users[name]) {
+                    this.currentUser = name;
+                    this.users[name].lastActive = new Date().toISOString();
+                    this.saveUsers();
+                    
+                    document.getElementById('userSelector').value = name;
+                    this.renderContent();
+                    this.updateStats();
+                    this.showNotification(`Profil "${name}" sélectionné`, 'success');
+                } else {
+                    this.showNotification('Profil introuvable', 'error');
+                }
+            }
+            
+            getCurrentUserData() {
+                return this.currentUser ? this.users[this.currentUser] : null;
+            }
+            
+            // === INTERFACE UTILISATEUR ===
+            loadUserSelector() {
+                const selector = document.getElementById('userSelector');
+                selector.innerHTML = '<option value="">Sélectionner un profil...</option>';
+                
+                Object.keys(this.users).forEach(name => {
+                    const option = document.createElement('option');
+                    option.value = name;
+                    option.textContent = name;
+                    selector.appendChild(option);
+                });
+            }
+            
+            updateUsersList() {
+                const userList = document.getElementById('userList');
+                userList.innerHTML = '';
+                
+                Object.values(this.users).forEach(user => {
+                    const userItem = document.createElement('div');
+                    userItem.className = 'user-item';
+                    
+                    const visitedCount = Array.isArray(user.visitedPlaces) ? 
+                        user.visitedPlaces.length : 
+                        (user.visitedPlaces instanceof Set ? user.visitedPlaces.size : 0);
+                    
+                    userItem.innerHTML = `
+                        <div class="user-info">
+                            <div class="user-name">${user.name}</div>
+                            <div class="user-progress">${visitedCount} lieux visités</div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-sm btn-success" onclick="app.setCurrentUser('${user.name}')">
+                                Sélectionner
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="app.deleteUser('${user.name}')">
+                                Supprimer
+                            </button>
+                        </div>
+                    `;
+                    
+                    userList.appendChild(userItem);
+                });
+            }
+            
+            autoSelectUser() {
+                const userNames = Object.keys(this.users);
+                if (userNames.length === 1) {
+                    this.setCurrentUser(userNames[0]);
+                } else if (userNames.length === 0) {
+                    this.showModal();
+                }
+            }
+            
+            // === GESTION DES LIEUX ===
+            togglePlace(placeId) {
+                const userData = this.getCurrentUserData();
+                if (!userData) {
+                    this.showNotification('Veuillez sélectionner un profil', 'warning');
+                    return;
+                }
+                
+                // Convertir en Set si nécessaire (compatibilité)
+                if (Array.isArray(userData.visitedPlaces)) {
+                    userData.visitedPlaces = new Set(userData.visitedPlaces);
+                }
+                if (!(userData.visitedPlaces instanceof Set)) {
+                    userData.visitedPlaces = new Set();
+                }
+                
+                const wasVisited = userData.visitedPlaces.has(placeId);
+                
+                if (wasVisited) {
+                    userData.visitedPlaces.delete(placeId);
+                    this.showNotification('Lieu retiré de vos visites', 'info');
+                } else {
+                    userData.visitedPlaces.add(placeId);
+                    userData.stats.lastVisit = new Date().toISOString();
+                    this.showNotification('Lieu ajouté à vos visites!', 'success');
+                }
+                
+                userData.stats.totalVisited = userData.visitedPlaces.size;
+                this.saveUsers();
+                this.renderContent();
+                this.updateStats();
+            }
+            
+            createPlaceId(arrKey, catKey, placeName) {
+                return `${arrKey}-${catKey}-${placeName}`
+                    .replace(/['"]/g, '')
+                    .replace(/[^\w\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .toLowerCase();
+            }
+            
+            // === RENDU DE L'INTERFACE ===
+            renderContent() {
+                if (!this.isDataLoaded) return;
+                
+                const content = document.getElementById('mainContent');
+                content.innerHTML = '';
+                
+                if (!this.parisData.arrondissements) {
+                    content.innerHTML = '<div class="text-center p-4">Aucune donnée disponible</div>';
+                    return;
+                }
+                
+                Object.entries(this.parisData.arrondissements).forEach(([arrKey, arrData]) => {
+                    const arrDiv = this.createArrondissementCard(arrKey, arrData);
+                    content.appendChild(arrDiv);
+                });
+            }
+            
+            createArrondissementCard(arrKey, arrData) {
+                const userData = this.getCurrentUserData();
+                const visitedInArr = this.getVisitedPlacesInArrondissement(arrData, arrKey);
+                const totalInArr = this.getTotalPlacesInArrondissement(arrData);
+                const completionPercent = totalInArr > 0 ? Math.round((visitedInArr / totalInArr) * 100) : 0;
+                
+                const arrDiv = document.createElement('div');
+                arrDiv.className = 'arrondissement-card fade-in';
                 
                 arrDiv.innerHTML = `
-                    <div class="arrondissement-header">
+                    <div class="arrondissement-header" onclick="this.parentElement.classList.toggle('collapsed')">
                         <div class="arrondissement-title">${arrData.title}</div>
                         <div class="arrondissement-stats">
-                            ${visitedInArr}/${totalPlaces} visités
+                            <span class="completion-badge">${visitedInArr}/${totalInArr}</span>
+                            <span class="completion-badge">${completionPercent}%</span>
+                            <div class="toggle-icon">▼</div>
                         </div>
-                        <div class="toggle-icon">▼</div>
                     </div>
                     <div class="arrondissement-content">
-                        ${renderCategories(arrKey, arrData.categories)}
+                        ${this.renderCategories(arrKey, arrData.categories)}
                     </div>
                 `;
                 
-                content.appendChild(arrDiv);
-            });
-        }
-
-        function renderCategories(arrKey, categories) {
-            return Object.entries(categories).map(([catKey, catData]) => {
-                return `
-                    <div class="category">
+                return arrDiv;
+            }
+            
+            renderCategories(arrKey, categories) {
+                return Object.entries(categories).map(([catKey, catData]) => `
+                    <div class="category-section">
                         <div class="category-header">
                             <span class="category-icon">${catData.title.split(' ')[0]}</span>
                             ${catData.title}
                         </div>
                         <div class="places-grid">
-                            ${catData.places.map(place => renderPlace(arrKey, catKey, place)).join('')}
+                            ${catData.places.map(place => this.renderPlace(arrKey, catKey, place)).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            renderPlace(arrKey, catKey, place) {
+                const placeId = this.createPlaceId(arrKey, catKey, place.name);
+                const userData = this.getCurrentUserData();
+                const isVisited = userData && userData.visitedPlaces instanceof Set ? 
+                    userData.visitedPlaces.has(placeId) : false;
+                
+                // Filtres de recherche et statut
+                if (this.searchQuery && !this.matchesSearch(place)) {
+                    return '<div class="hidden"></div>';
+                }
+                
+                if (!this.matchesFilter(isVisited, catKey)) {
+                    return '<div class="hidden"></div>';
+                }
+                
+                return `
+                    <div class="place-card ${isVisited ? 'visited' : ''}" data-place-id="${placeId}">
+                        <div class="place-header">
+                            <input type="checkbox" class="place-checkbox" ${isVisited ? 'checked' : ''} 
+                                   onchange="app.togglePlace('${placeId}')">
+                            <div class="place-content">
+                                <div class="place-name">${place.name}</div>
+                                <div class="place-description">${place.description}</div>
+                                <div class="place-tags">
+                                    ${place.tags.map(tag => `<span class="place-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;
-            }).join('');
-        }
-
-        // Fonction utilitaire pour créer des IDs sécurisés
-        function createSafePlaceId(arrKey, catKey, placeName) {
-            const safePlaceName = placeName
-                .replace(/['"]/g, '')           // Supprimer les apostrophes et guillemets
-                .replace(/[^\w\s-]/g, '')       // Garder seulement lettres, chiffres, espaces et tirets
-                .replace(/\s+/g, '-')           // Remplacer espaces par tirets
-                .toLowerCase();                 // Minuscules pour cohérence
-            
-            return `${arrKey}-${catKey}-${safePlaceName}`;
-        }
-
-        // Fonction pour retrouver un lieu par son ID sécurisé
-        function findPlaceByName(arrKey, catKey, targetName) {
-            if (!isDataLoaded || !parisData[arrKey] || !parisData[arrKey].categories[catKey]) {
-                return null;
             }
             
-            const places = parisData[arrKey].categories[catKey].places || [];
-            return places.find(place => {
-                const safeId = createSafePlaceId(arrKey, catKey, place.name);
-                const targetId = createSafePlaceId(arrKey, catKey, targetName);
-                return safeId === targetId;
-            });
-        }
-
-        function renderPlace(arrKey, catKey, place) {
-            // Créer un ID sécurisé
-            const placeId = createSafePlaceId(arrKey, catKey, place.name);
-            const isVisited = visitedPlaces.has(placeId);
-            
-            // Filtre de recherche
-            if (searchQuery && !place.name.toLowerCase().includes(searchQuery) && 
-                !place.description.toLowerCase().includes(searchQuery) &&
-                !place.tags.some(tag => tag.toLowerCase().includes(searchQuery))) {
-                return '<div class="place-item hidden"></div>';
+            matchesSearch(place) {
+                const query = this.searchQuery.toLowerCase();
+                return place.name.toLowerCase().includes(query) ||
+                       place.description.toLowerCase().includes(query) ||
+                       place.tags.some(tag => tag.toLowerCase().includes(query));
             }
             
-            // Filtre par statut
-            if (currentFilter === 'visited' && !isVisited) return '<div class="place-item hidden"></div>';
-            if (currentFilter === 'unvisited' && isVisited) return '<div class="place-item hidden"></div>';
-            
-            // Filtre par catégorie
-            if (currentFilter === 'monuments' && !catKey.includes('monument')) return '<div class="place-item hidden"></div>';
-            if (currentFilter === 'restaurants' && !catKey.includes('restaurant')) return '<div class="place-item hidden"></div>';
-            if (currentFilter === 'culture' && !['musées', 'culture'].includes(catKey)) return '<div class="place-item hidden"></div>';
-            
-            return `
-                <div class="place-item ${isVisited ? 'visited' : ''}" data-place-id="${placeId}" data-place-name="${place.name}">
-                    <input type="checkbox" class="place-checkbox" ${isVisited ? 'checked' : ''} data-place-id="${placeId}">
-                    <div class="place-content">
-                        <div class="place-name">${place.name}</div>
-                        <div class="place-description">${place.description}</div>
-                        <div class="place-tags">
-                            ${place.tags.map(tag => `<span class="place-tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function togglePlace(placeId) {
-            if (visitedPlaces.has(placeId)) {
-                visitedPlaces.delete(placeId);
-            } else {
-                visitedPlaces.add(placeId);
+            matchesFilter(isVisited, catKey) {
+                switch (this.currentFilter) {
+                    case 'visited': return isVisited;
+                    case 'unvisited': return !isVisited;
+                    case 'monuments': return catKey.includes('monument');
+                    case 'restaurants': return catKey.includes('restaurant');
+                    case 'culture': return catKey === 'culture';
+                    default: return true;
+                }
             }
             
-            // Marquer comme modifié pour la sauvegarde périodique
-            markAsChanged();
-            
-            // Sauvegarder immédiatement
-            saveUserProgress();
-            
-            renderContent();
-            updateStats();
-        }
-
-        function updateStats() {
-            if (!isDataLoaded) {
-                document.getElementById('total-places').textContent = '0';
-                document.getElementById('visited-places').textContent = '0';
-                document.getElementById('completion-rate').textContent = '0%';
-                return;
+            // === STATISTIQUES ===
+            updateStats() {
+                const userData = this.getCurrentUserData();
+                const totalPlaces = this.getTotalPlaces();
+                const visitedCount = userData && userData.visitedPlaces instanceof Set ? 
+                    userData.visitedPlaces.size : 0;
+                const completionRate = totalPlaces > 0 ? Math.round((visitedCount / totalPlaces) * 100) : 0;
+                
+                document.getElementById('totalPlaces').textContent = totalPlaces;
+                document.getElementById('visitedPlaces').textContent = visitedCount;
+                document.getElementById('completionRate').textContent = `${completionRate}%`;
+                document.getElementById('currentStreak').textContent = userData?.stats?.streak || 0;
+                
+                // Mise à jour des barres de progression
+                document.getElementById('visitedProgress').style.width = `${completionRate}%`;
+                document.getElementById('completionProgress').style.width = `${completionRate}%`;
+                document.getElementById('streakProgress').style.width = `${Math.min(userData?.stats?.streak || 0, 20) * 5}%`;
             }
-
-            const totalPlaces = getTotalPlaces();
-            const visitedCount = visitedPlaces.size;
-            const completionRate = totalPlaces > 0 ? Math.round((visitedCount / totalPlaces) * 100) : 0;
             
-            document.getElementById('total-places').textContent = totalPlaces;
-            document.getElementById('visited-places').textContent = visitedCount;
-            document.getElementById('completion-rate').textContent = `${completionRate}%`;
-        }
-
-        function getTotalPlaces() {
-            if (!isDataLoaded) return 0;
-            
-            let total = 0;
-            Object.values(parisData).forEach(arr => {
-                Object.values(arr.categories).forEach(cat => {
-                    total += cat.places.length;
+            getTotalPlaces() {
+                if (!this.isDataLoaded || !this.parisData.arrondissements) return 0;
+                
+                let total = 0;
+                Object.values(this.parisData.arrondissements).forEach(arr => {
+                    Object.values(arr.categories).forEach(cat => {
+                        total += cat.places.length;
+                    });
                 });
-            });
-            return total;
-        }
-
-        function getTotalPlacesInArrondissement(arrData) {
-            let total = 0;
-            if (arrData && arrData.categories) {
-                Object.values(arrData.categories).forEach(cat => {
-                    total += cat.places ? cat.places.length : 0;
-                });
+                return total;
             }
-            return total;
-        }
-
-        function getVisitedPlacesInArrondissement(arrData) {
-            if (!isDataLoaded || !arrData) return 0;
             
-            let visited = 0;
-            Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                (catData.places || []).forEach(place => {
-                    const placeId = `${Object.keys(parisData).find(key => parisData[key] === arrData)}-${catKey}-${place.name}`;
-                    if (visitedPlaces.has(placeId)) visited++;
-                });
-            });
-            return visited;
-        }
-
-        function exportToJSON() {
-            if (!isDataLoaded) {
-                alert('⚠️ Les données ne sont pas encore chargées. Veuillez patienter...');
-                return;
+            getTotalPlacesInArrondissement(arrData) {
+                let total = 0;
+                if (arrData && arrData.categories) {
+                    Object.values(arrData.categories).forEach(cat => {
+                        total += cat.places ? cat.places.length : 0;
+                    });
+                }
+                return total;
             }
-
-            const exportData = {
-                metadata: {
-                    title: "Paris Explorer - Export Personnel",
+            
+            getVisitedPlacesInArrondissement(arrData, arrKey) {
+                const userData = this.getCurrentUserData();
+                if (!userData || !arrData) return 0;
+                
+                let visited = 0;
+                Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
+                    (catData.places || []).forEach(place => {
+                        const placeId = this.createPlaceId(arrKey, catKey, place.name);
+                        if (userData.visitedPlaces instanceof Set && userData.visitedPlaces.has(placeId)) {
+                            visited++;
+                        }
+                    });
+                });
+                return visited;
+            }
+            
+            // === ÉVÉNEMENTS ===
+            setupEventListeners() {
+                // Gestion des utilisateurs
+                document.getElementById('userSelector').addEventListener('change', (e) => {
+                    if (e.target.value) {
+                        this.setCurrentUser(e.target.value);
+                    }
+                });
+                
+                document.getElementById('manageUsersBtn').addEventListener('click', () => {
+                    this.showModal();
+                });
+                
+                document.getElementById('createUserBtn').addEventListener('click', () => {
+                    const nameInput = document.getElementById('newUserName');
+                    if (this.createUser(nameInput.value)) {
+                        nameInput.value = '';
+                        this.updateUsersList();
+                    }
+                });
+                
+                document.getElementById('newUserName').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        document.getElementById('createUserBtn').click();
+                    }
+                });
+                
+                // Modal
+                document.getElementById('closeModalBtn').addEventListener('click', () => {
+                    this.hideModal();
+                });
+                
+                document.getElementById('userModal').addEventListener('click', (e) => {
+                    if (e.target.id === 'userModal') {
+                        this.hideModal();
+                    }
+                });
+                
+                // Recherche
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.searchQuery = e.target.value.toLowerCase();
+                    this.renderContent();
+                });
+                
+                // Filtres
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentFilter = btn.dataset.filter;
+                        this.renderContent();
+                    });
+                });
+                
+                // Actions
+                document.getElementById('expandAllBtn').addEventListener('click', () => {
+                    document.querySelectorAll('.arrondissement-card').forEach(card => {
+                        card.classList.remove('collapsed');
+                    });
+                    this.showNotification('Tous les arrondissements ouverts', 'info');
+                });
+                
+                document.getElementById('collapseAllBtn').addEventListener('click', () => {
+                    document.querySelectorAll('.arrondissement-card').forEach(card => {
+                        card.classList.add('collapsed');
+                    });
+                    this.showNotification('Tous les arrondissements fermés', 'info');
+                });
+                
+                document.getElementById('resetProgressBtn').addEventListener('click', () => {
+                    this.resetUserProgress();
+                });
+                
+                document.getElementById('exportBtn').addEventListener('click', () => {
+                    this.exportUserData();
+                });
+            }
+            
+            // === UTILITAIRES ===
+            showModal() {
+                const modal = document.getElementById('userModal');
+                modal.classList.add('show');
+                this.updateUsersList();
+            }
+            
+            hideModal() {
+                const modal = document.getElementById('userModal');
+                modal.classList.remove('show');
+            }
+            
+            showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.classList.add('show'), 100);
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            resetUserProgress() {
+                const userData = this.getCurrentUserData();
+                if (!userData) {
+                    this.showNotification('Veuillez sélectionner un profil', 'warning');
+                    return;
+                }
+                
+                if (confirm(`Êtes-vous sûr de vouloir effacer toute la progression de "${userData.name}" ?`)) {
+                    userData.visitedPlaces = new Set();
+                    userData.stats = {
+                        totalVisited: 0,
+                        streak: 0,
+                        lastVisit: null
+                    };
+                    
+                    this.saveUsers();
+                    this.renderContent();
+                    this.updateStats();
+                    this.showNotification('Progression effacée', 'info');
+                }
+            }
+            
+            exportUserData() {
+                const userData = this.getCurrentUserData();
+                if (!userData) {
+                    this.showNotification('Veuillez sélectionner un profil', 'warning');
+                    return;
+                }
+                
+                const exportData = {
+                    user: userData.name,
                     exportDate: new Date().toISOString(),
-                    version: "1.0.0"
-                },
-                userProgress: {
-                    visitedPlaces: Array.from(visitedPlaces),
-                    totalVisited: visitedPlaces.size,
-                    totalPlaces: getTotalPlaces(),
-                    completionRate: Math.round((visitedPlaces.size / getTotalPlaces()) * 100)
-                },
-                stats: {
-                    totalArrondissements: Object.keys(parisData).length,
-                    visitedByArrondissement: {}
-                }
-            };
-
-            // Statistiques par arrondissement
-            Object.entries(parisData).forEach(([arrKey, arrData]) => {
-                exportData.stats.visitedByArrondissement[arrKey] = {
-                    total: getTotalPlacesInArrondissement(arrData),
-                    visited: getVisitedPlacesInArrondissement(arrData)
+                    visitedPlaces: Array.from(userData.visitedPlaces),
+                    stats: userData.stats,
+                    totalPlaces: this.getTotalPlaces(),
+                    completionRate: Math.round((userData.visitedPlaces.size / this.getTotalPlaces()) * 100)
                 };
-            });
-            
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `paris-explorer-progress-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function expandAllArrondissements() {
-            const arrondissements = document.querySelectorAll('.arrondissement');
-            arrondissements.forEach(arr => {
-                arr.classList.remove('collapsed');
-            });
-            
-            // Scroll vers le haut pour une meilleure visibilité
-            document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
-            
-            showSaveNotification('📂 Tous les arrondissements ouverts', 'info');
-            console.log('📂 Tous les arrondissements ont été ouverts');
-        }
-
-        function collapseAllArrondissements() {
-            const arrondissements = document.querySelectorAll('.arrondissement');
-            arrondissements.forEach(arr => {
-                arr.classList.add('collapsed');
-            });
-            
-            // Scroll vers le haut pour voir la liste complète
-            document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
-            
-            showSaveNotification('📁 Tous les arrondissements fermés', 'info');
-            console.log('📁 Tous les arrondissements ont été fermés');
-        }
-
-        // Amélioration tactile : toggle au tap/touch
-        function handleArrondissementToggle(event) {
-            // Vérifier que le clic est sur le header et pas sur un enfant avec un handler
-            if (event.target.closest('.arrondissement-header')) {
-                const arr = event.target.closest('.arrondissement');
-                if (arr) {
-                    const wasCollapsed = arr.classList.contains('collapsed');
-                    arr.classList.toggle('collapsed');
-                    
-                    // Feedback tactile léger pour mobile
-                    if ('vibrate' in navigator) {
-                        navigator.vibrate(30);
-                    }
-                    
-                    // Log pour debug
-                    const arrTitle = arr.querySelector('.arrondissement-title').textContent;
-                    console.log(`${wasCollapsed ? '📂 Ouvert' : '📁 Fermé'}: ${arrTitle}`);
-                }
+                
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `paris-explorer-${userData.name}-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                
+                URL.revokeObjectURL(url);
+                this.showNotification('Export réalisé avec succès!', 'success');
             }
         }
-
-        // Optimisation du rendu pour mobile
-        function optimizeForMobile() {
-            // Désactiver les animations sur mobile lent
-            if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
-                const style = document.createElement('style');
-                style.textContent = `
-                    * { 
-                        transition: none !important;
-                        animation: none !important;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            // Optimiser le scroll sur iOS
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                document.querySelector('.content').style.webkitOverflowScrolling = 'touch';
-            }
-        }
-
-        function clearAllData() {
-            if (confirm('⚠️ Êtes-vous sûr de vouloir effacer TOUTES vos données ?\n\nCette action est irréversible et supprimera :\n• Tous les lieux visités cochés\n• Votre progression actuelle\n• Les données sauvegardées localement')) {
-                try {
-                    // Effacer localStorage
-                    localStorage.removeItem('paris-explorer-progress');
-                    
-                    // Réinitialiser les variables
-                    visitedPlaces = new Set();
-                    lastSaveTime = null;
-                    
-                    // Réinitialiser l'affichage
-                    document.getElementById('last-save').textContent = '-';
-                    
-                    // Rafraîchir l'interface
-                    renderContent();
-                    updateStats();
-                    
-                    showSaveNotification('🗑️ Toutes les données ont été effacées', 'info');
-                    console.log('🗑️ Toutes les données utilisateur ont été effacées');
-                } catch (error) {
-                    console.error('❌ Erreur lors de l\'effacement:', error);
-                    showSaveNotification('❌ Erreur lors de l\'effacement', 'error');
-                }
-            }
-        }
-
-        // Fonction globale pour les checkboxes (plus nécessaire avec les event listeners)
-        // window.togglePlace = togglePlace;
+        
+        // Initialisation de l'application
+        let app;
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new ParisExplorer();
+        });
     </script>
 </body>
 </html>
