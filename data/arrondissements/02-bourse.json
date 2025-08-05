@@ -1,0 +1,196 @@
+{
+  "arrondissement": {
+    "id": "2ème",
+    "name": "2ÈME ARRONDISSEMENT - LA BOURSE",
+    "description": "Passages couverts et quartier japonais",
+    "bounds": {
+      "north": 48.8725,
+      "south": 48.8625,
+      "east": 2.3550,
+      "west": 2.3300
+    },
+    "center": [48.8700, 2.3408],
+    "area_km2": 0.99,
+    "population": 22190,
+    "transport": {
+      "metro_stations": [
+        {"name": "Bourse", "lines": ["3"], "coordinates": [48.8692, 2.3412]},
+        {"name": "Grands Boulevards", "lines": ["8", "9"], "coordinates": [48.8719, 2.3436]},
+        {"name": "Réaumur-Sébastopol", "lines": ["3", "4"], "coordinates": [48.8665, 2.3524]},
+        {"name": "Sentier", "lines": ["3"], "coordinates": [48.8671, 2.3470]}
+      ],
+      "description": "Métro : Bourse (3), Grands Boulevards (8,9), Réaumur-Sébastopol (3,4), Sentier (3)"
+    },
+    "categories": {
+      "monuments": {
+        "title": "🏛️ Architecture & Monuments",
+        "places": [
+          {
+            "id": "palais-brongniart",
+            "name": "Palais Brongniart",
+            "description": "Ancienne Bourse, architecture néoclassique Théodore Brongniart",
+            "address": "Place de la Bourse, 75002 Paris",
+            "coordinates": [48.8692, 2.3412],
+            "tags": ["bourse", "néoclassique", "brongniart"]
+          },
+          {
+            "id": "galerie-vivienne",
+            "name": "Galerie Vivienne",
+            "description": "Passage couvert (1823), verrière d'époque, boutiques luxe",
+            "address": "4 Rue des Petits-Champs, 75002 Paris",
+            "coordinates": [48.8667, 2.3379],
+            "tags": ["passage-couvert", "1823", "verrière", "luxe"]
+          },
+          {
+            "id": "passage-des-panoramas",
+            "name": "Passage des Panoramas",
+            "description": "Plus ancien passage de Paris (1799), philatélistes",
+            "address": "11 Boulevard Montmartre, 75002 Paris",
+            "coordinates": [48.8719, 2.3436],
+            "tags": ["plus-ancien", "1799", "philatélistes"]
+          },
+          {
+            "id": "galerie-colbert",
+            "name": "Galerie Colbert",
+            "description": "Passage élégant avec rotonde, Bibliothèque Nationale",
+            "address": "6 Rue des Petits-Champs, 75002 Paris",
+            "coordinates": [48.8669, 2.3382],
+            "tags": ["rotonde", "bibliothèque-nationale", "élégant"]
+          },
+          {
+            "id": "bnf-richelieu",
+            "name": "Bibliothèque Nationale de France - Richelieu",
+            "description": "Site historique, Cabinet des Médailles",
+            "address": "5 Rue Vivienne, 75002 Paris",
+            "coordinates": [48.8689, 2.3392],
+            "tags": ["historique", "médailles", "manuscrits"]
+          },
+          {
+            "id": "passage-jouffroy",
+            "name": "Passage Jouffroy",
+            "description": "Antiquités, librairies, Musée Grévin",
+            "address": "10 Boulevard Montmartre, 75009 Paris",
+            "coordinates": [48.8719, 2.3436],
+            "tags": ["antiquités", "librairies", "grévin"]
+          },
+          {
+            "id": "passage-verdeau",
+            "name": "Passage Verdeau",
+            "description": "Librairies anciennes, galeries d'art",
+            "address": "6 Rue de la Grange-Batelière, 75009 Paris",
+            "coordinates": [48.8719, 2.3436],
+            "tags": ["librairies-anciennes", "galeries-art"]
+          },
+          {
+            "id": "opera-comique",
+            "name": "Opéra-Comique",
+            "description": "Théâtre lyrique, Salle Favart",
+            "address": "1 Place Boieldieu, 75002 Paris",
+            "coordinates": [48.8704, 2.3387],
+            "tags": ["lyrique", "favart", "opéra"]
+          }
+        ]
+      },
+      "restaurants": {
+        "title": "🍽️ Restaurants & Spécialités",
+        "places": [
+          {
+            "id": "rue-sainte-anne",
+            "name": "Rue Sainte-Anne",
+            "description": "Quartier japonais authentique, restaurants familiaux",
+            "address": "Rue Sainte-Anne, 75002 Paris",
+            "coordinates": [48.8689, 2.3350],
+            "tags": ["japonais", "authentique", "familial"]
+          },
+          {
+            "id": "frenchie",
+            "name": "Frenchie",
+            "description": "Bistrot moderne réputé, réservation difficile",
+            "address": "5 Rue du Nil, 75002 Paris",
+            "coordinates": [48.8671, 2.3470],
+            "tags": ["moderne", "réputé", "réservation"]
+          },
+          {
+            "id": "saturne",
+            "name": "Saturne",
+            "description": "Bar à vins naturels, assiettes créatives",
+            "address": "17 Rue Notre-Dame des Victoires, 75002 Paris",
+            "coordinates": [48.8675, 2.3422],
+            "tags": ["vins-naturels", "créatif", "bar-à-vins"]
+          }
+        ]
+      },
+      "bars": {
+        "title": "🍸 Bars Secrets & Speakeasy",
+        "places": [
+          {
+            "id": "experimental-cocktail-club",
+            "name": "Experimental Cocktail Club",
+            "description": "Speakeasy pionnier Paris",
+            "address": "37 Rue Saint-Sauveur, 75002 Paris",
+            "coordinates": [48.8665, 2.3524],
+            "tags": ["speakeasy", "pionnier", "cocktails"]
+          }
+        ]
+      },
+      "culture": {
+        "title": "🎬 Culture & Spectacles",
+        "places": [
+          {
+            "id": "grand-rex",
+            "name": "Grand Rex",
+            "description": "Plus grand cinéma d'Europe, Art déco, visites coulisses",
+            "address": "1 Boulevard Poissonnière, 75002 Paris",
+            "coordinates": [48.8719, 2.3486],
+            "tags": ["plus-grand-cinéma", "art-déco", "coulisses"]
+          },
+          {
+            "id": "theatre-des-varietes",
+            "name": "Théâtre des Variétés",
+            "description": "Théâtre historique, opérettes",
+            "address": "7 Boulevard Montmartre, 75002 Paris",
+            "coordinates": [48.8719, 2.3436],
+            "tags": ["historique", "opérettes", "variétés"]
+          },
+          {
+            "id": "passage-du-grand-cerf",
+            "name": "Passage du Grand-Cerf",
+            "description": "Galeries d'art, ateliers créateurs",
+            "address": "145 Rue Saint-Denis, 75002 Paris",
+            "coordinates": [48.8665, 2.3524],
+            "tags": ["galeries-art", "ateliers", "créateurs"]
+          }
+        ]
+      },
+      "shopping": {
+        "title": "🛍️ Shopping Spécialisé",
+        "places": [
+          {
+            "id": "passage-du-caire",
+            "name": "Passage du Caire",
+            "description": "Plus long passage couvert, textile",
+            "address": "2 Rue du Caire, 75002 Paris",
+            "coordinates": [48.8665, 2.3524],
+            "tags": ["plus-long", "textile", "couvert"]
+          },
+          {
+            "id": "rue-du-mail",
+            "name": "Rue du Mail",
+            "description": "Mode jeune créateurs",
+            "address": "Rue du Mail, 75002 Paris",
+            "coordinates": [48.8665, 2.3440],
+            "tags": ["mode-jeune", "créateurs"]
+          },
+          {
+            "id": "sentier",
+            "name": "Sentier",
+            "description": "Quartier textile historique",
+            "address": "Quartier du Sentier, 75002 Paris",
+            "coordinates": [48.8671, 2.3470],
+            "tags": ["textile", "historique", "quartier"]
+          }
+        ]
+      }
+    }
+  }
+}
