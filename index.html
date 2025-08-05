@@ -1060,7 +1060,7 @@
                 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <span class="stat-number" id="totalPlaces">0</span>
+                        <span class="stat-number" id="totalPlaces">147</span>
                         <span class="stat-label">Lieux à Découvrir</span>
                         <div class="progress-bar">
                             <div class="progress-fill" id="totalProgress" style="width: 100%"></div>
@@ -1133,7 +1133,20 @@
         
         <!-- Contenu principal -->
         <main class="main-content" id="mainContent">
-            <!-- Les arrondissements seront générés ici -->
+            <div class="error-message">
+                <div class="error-content">
+                    <h3>🚫 Fichier de données manquant</h3>
+                    <p><strong>L'application a besoin du fichier <code>paris-database.json</code></strong></p>
+                    <p>Ce fichier contient toutes les données des lieux parisiens à explorer.</p>
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px; text-align: left;">
+                        <strong>Pour utiliser cette application :</strong><br>
+                        1. Téléchargez le fichier <code>paris-database.json</code><br>
+                        2. Placez-le dans le même dossier que ce fichier HTML<br>
+                        3. Servez les fichiers via un serveur web local<br>
+                        4. Exemple : <code>python -m http.server 8000</code> puis <code>http://localhost:8000</code>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     
@@ -1184,13 +1197,16 @@
             
             async init() {
                 try {
+                    // Tentative de chargement des données Paris
                     await this.loadParisData();
                     this.setupEventListeners();
                     this.loadUserSelector();
                     this.autoSelectUser();
                 } catch (error) {
-                    this.showNotification('Erreur lors de l\'initialisation', 'error');
-                    console.error('Erreur d\'initialisation:', error);
+                    // Afficher l'interface même sans données
+                    this.setupEventListeners();
+                    this.loadUserSelector();
+                    console.warn('Application démarrée sans données Paris:', error.message);
                 }
             }
             
@@ -1202,7 +1218,7 @@
                     const response = await fetch('paris-database.json');
                     
                     if (!response.ok) {
-                        throw new Error(`Erreur fichier lieux: HTTP ${response.status}: ${response.statusText}`);
+                        throw new Error(`Fichier paris-database.json introuvable`);
                     }
                     
                     const textContent = await response.text();
@@ -1254,33 +1270,9 @@
                     
                 } catch (error) {
                     console.error('❌ Erreur lors du chargement:', error);
-                    this.showErrorMessage(`
-                        <h3>🚫 Erreur de chargement</h3>
-                        <p><strong>Impossible de charger les données</strong></p>
-                        <p>Erreur: ${error.message}</p>
-                        <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px;">
-                            <strong>Vérifiez que le fichier suivant est présent :</strong><br>
-                            • <code>paris-database.json</code> (obligatoire)<br><br>
-                            <strong>Si vous testez en local :</strong><br>
-                            • Utilisez un serveur web : <code>python -m http.server 8000</code><br>
-                            • Puis ouvrez : <code>http://localhost:8000</code>
-                        </div>
-                    `);
+                    // Garder le message d'erreur existant dans le HTML
+                    throw error;
                 }
-            }
-
-            showErrorMessage(message) {
-                const content = document.getElementById('mainContent');
-                content.innerHTML = `
-                    <div class="error-message">
-                        <div class="error-content">
-                            ${message}
-                        </div>
-                        <button onclick="location.reload()" style="margin-top: 20px; padding: 12px 24px; background: #D4AF37; color: #1e3a8a; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: 600;">
-                            🔄 Réessayer
-                        </button>
-                    </div>
-                `;
             }
             
             // === GESTION DES UTILISATEURS ===
@@ -1435,475 +1427,6 @@
                 }
             }
             
-            // === GESTION DES LIEUX ===
-            togglePlace(placeId, event) {
-                // Empêcher la propagation pour éviter le rechargement
-                if (event) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
-                
-                const userData = this.getCurrentUserData();
-                if (!userData) {
-                    this.showNotification('Veuillez sélectionner un explorateur', 'warning');
-                    return;
-                }
-                
-                // S'assurer que visitedPlaces est un Set
-                if (!(userData.visitedPlaces instanceof Set)) {
-                    userData.visitedPlaces = new Set(userData.visitedPlaces || []);
-                }
-                
-                const wasVisited = userData.visitedPlaces.has(placeId);
-                
-                if (wasVisited) {
-                    userData.visitedPlaces.delete(placeId);
-                    this.showNotification('Lieu retiré de vos explorations', 'info');
-                } else {
-                    userData.visitedPlaces.add(placeId);
-                    userData.stats.lastVisit = new Date().toISOString();
-                    this.showNotification('Nouveau lieu exploré! Bravo!', 'success');
-                }
-                
-                userData.stats.totalVisited = userData.visitedPlaces.size;
-                this.saveUsers();
-                
-                // Mise à jour seulement de la carte spécifique et des stats
-                this.updatePlaceCard(placeId, !wasVisited);
-                this.updateStats();
-                
-                // Mettre à jour la carte si visible
-                if (this.map && this.currentTab === 'map') {
-                    this.updateMapMarkers();
-                }
-            }
-            
-            updatePlaceCard(placeId, isVisited) {
-                const card = document.querySelector(`[data-place-id="${placeId}"]`);
-                if (card) {
-                    const checkbox = card.querySelector('.place-checkbox');
-                    if (checkbox) {
-                        checkbox.checked = isVisited;
-                    }
-                    
-                    if (isVisited) {
-                        card.classList.add('visited');
-                    } else {
-                        card.classList.remove('visited');
-                    }
-                    
-                    // Si on cache les visités et que c'est maintenant visité, le cacher
-                    if (this.hideCompleted && isVisited) {
-                        card.style.display = 'none';
-                    }
-                }
-                
-                // Vérifier si la catégorie est maintenant vide
-                const categorySection = card?.closest('.category-section');
-                if (categorySection && this.hideCompleted) {
-                    const visibleCards = categorySection.querySelectorAll('.place-card:not([style*="display: none"])');
-                    const categoryContent = categorySection.querySelector('.places-grid');
-                    
-                    if (visibleCards.length === 0) {
-                        categoryContent.innerHTML = '<div class="completion-message">🎉 Catégorie entièrement explorée !</div>';
-                    }
-                }
-            }
-            
-            createPlaceId(arrKey, catKey, placeName) {
-                return `${arrKey}-${catKey}-${placeName}`
-                    .replace(/['"]/g, '')
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .toLowerCase();
-            }
-            
-            // === CARTE INTERACTIVE ===
-            initMap() {
-                if (this.map) return; // Déjà initialisée
-                
-                const mapContainer = document.getElementById('mapContainer');
-                
-                // Centrer sur Paris
-                this.map = L.map(mapContainer).setView([48.8566, 2.3522], 12);
-                
-                // Ajouter la couche de tuiles
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(this.map);
-                
-                // Gestion du zoom pour afficher différents types de marqueurs
-                this.map.on('zoomend', () => {
-                    this.updateMapMarkers();
-                });
-                
-                // Ajouter les marqueurs
-                this.updateMapMarkers();
-                
-                // Gestion du plein écran
-                this.setupMapControls();
-            }
-            
-            setupMapControls() {
-                const fullscreenBtn = document.getElementById('fullscreenBtn');
-                const centerMapBtn = document.getElementById('centerMapBtn');
-                const mapContainer = document.getElementById('mapContainer');
-                
-                // Bouton plein écran
-                fullscreenBtn.addEventListener('click', () => {
-                    if (mapContainer.classList.contains('map-fullscreen')) {
-                        this.exitFullscreen();
-                    } else {
-                        this.enterFullscreen();
-                    }
-                });
-                
-                // Bouton centrer
-                centerMapBtn.addEventListener('click', () => {
-                    this.map.setView([48.8566, 2.3522], 12);
-                });
-                
-                // Écouteur pour la touche Escape
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && mapContainer.classList.contains('map-fullscreen')) {
-                        this.exitFullscreen();
-                    }
-                });
-            }
-            
-            enterFullscreen() {
-                const mapContainer = document.getElementById('mapContainer');
-                const fullscreenBtn = document.getElementById('fullscreenBtn');
-                
-                mapContainer.classList.add('map-fullscreen');
-                fullscreenBtn.textContent = '🔲';
-                fullscreenBtn.title = 'Quitter le plein écran';
-                
-                // Invalider la taille de la carte après le changement
-                setTimeout(() => {
-                    this.map.invalidateSize();
-                }, 100);
-                
-                this.showNotification('Mode plein écran activé (Échap pour quitter)', 'info');
-            }
-            
-            exitFullscreen() {
-                const mapContainer = document.getElementById('mapContainer');
-                const fullscreenBtn = document.getElementById('fullscreenBtn');
-                
-                mapContainer.classList.remove('map-fullscreen');
-                fullscreenBtn.textContent = '🔳';
-                fullscreenBtn.title = 'Mode plein écran';
-                
-                // Invalider la taille de la carte après le changement
-                setTimeout(() => {
-                    this.map.invalidateSize();
-                }, 100);
-            }
-            
-            updateMapMarkers() {
-                if (!this.map || !this.isDataLoaded) return;
-                
-                // Nettoyer les marqueurs existants
-                this.markers.forEach(marker => this.map.removeLayer(marker));
-                this.markers = [];
-                
-                const currentZoom = this.map.getZoom();
-                
-                if (currentZoom <= 12) {
-                    // Vue d'ensemble : marqueurs par arrondissement
-                    this.addArrondissementMarkers();
-                } else {
-                    // Vue détaillée : marqueurs individuels des lieux majeurs
-                    this.addLandmarkMarkers();
-                }
-            }
-            
-            addArrondissementMarkers() {
-                const userData = this.getCurrentUserData();
-                
-                // Coordonnées approximatives des arrondissements parisiens
-                const arrondissementCoords = {
-                    '1er': [48.8608, 2.3352],
-                    '2ème': [48.8697, 2.3406],
-                    '3ème': [48.8628, 2.3625],
-                    '4ème': [48.8535, 2.3519],
-                    '5ème': [48.8444, 2.3466],
-                    '6ème': [48.8499, 2.3327],
-                    '7ème': [48.8534, 2.3112],
-                    '8ème': [48.8718, 2.3098],
-                    '9ème': [48.8744, 2.3372],
-                    '10ème': [48.8709, 2.3581],
-                    '11ème': [48.8594, 2.3726],
-                    '12ème': [48.8365, 2.3890],
-                    '13ème': [48.8279, 2.3546],
-                    '14ème': [48.8305, 2.3228],
-                    '15ème': [48.8410, 2.2945],
-                    '16ème': [48.8603, 2.2690],
-                    '17ème': [48.8802, 2.3089],
-                    '18ème': [48.8918, 2.3395],
-                    '19ème': [48.8799, 2.3782],
-                    '20ème': [48.8631, 2.3969]
-                };
-                
-                // Ajouter des marqueurs pour chaque arrondissement
-                Object.entries(this.parisData).forEach(([arrKey, arrData]) => {
-                    const coords = arrondissementCoords[arrKey];
-                    if (!coords) return;
-                    
-                    const totalPlaces = this.getTotalPlacesInArrondissement(arrData);
-                    const visitedPlaces = this.getVisitedPlacesInArrondissement(arrData, arrKey);
-                    const completionPercent = totalPlaces > 0 ? Math.round((visitedPlaces / totalPlaces) * 100) : 0;
-                    
-                    // Couleur du marqueur selon le pourcentage de completion
-                    let markerColor = '#D4AF37'; // Or par défaut
-                    if (completionPercent === 100) {
-                        markerColor = '#059669'; // Vert si 100%
-                    } else if (completionPercent > 50) {
-                        markerColor = '#d97706'; // Orange si > 50%
-                    }
-                    
-                    const marker = L.circleMarker(coords, {
-                        color: '#1e3a8a',
-                        fillColor: markerColor,
-                        fillOpacity: 0.8,
-                        radius: Math.max(8, completionPercent / 10 + 5),
-                        weight: 2
-                    }).addTo(this.map);
-                    
-                    // Popup avec informations
-                    marker.bindPopup(`
-                        <div style="font-family: 'Playfair Display', serif; text-align: center;">
-                            <h3 style="color: #1e3a8a; margin-bottom: 8px;">${arrData.title}</h3>
-                            <p style="margin: 4px 0;"><strong>${visitedPlaces}/${totalPlaces}</strong> lieux explorés</p>
-                            <p style="margin: 4px 0; color: #D4AF37;"><strong>${completionPercent}%</strong> complété</p>
-                            <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">
-                                🔍 Zoomez pour voir les lieux individuels
-                            </p>
-                        </div>
-                    `);
-                    
-                    this.markers.push(marker);
-                });
-            }
-            
-            addLandmarkMarkers() {
-                const userData = this.getCurrentUserData();
-                
-                // Coordonnées de base des arrondissements
-                const arrondissementCoords = {
-                    '1er': [48.8608, 2.3352],
-                    '2ème': [48.8697, 2.3406],
-                    '3ème': [48.8628, 2.3625],
-                    '4ème': [48.8535, 2.3519],
-                    '5ème': [48.8444, 2.3466],
-                    '6ème': [48.8499, 2.3327],
-                    '7ème': [48.8534, 2.3112],
-                    '8ème': [48.8718, 2.3098],
-                    '9ème': [48.8744, 2.3372],
-                    '10ème': [48.8709, 2.3581],
-                    '11ème': [48.8594, 2.3726],
-                    '12ème': [48.8365, 2.3890],
-                    '13ème': [48.8279, 2.3546],
-                    '14ème': [48.8305, 2.3228],
-                    '15ème': [48.8410, 2.2945],
-                    '16ème': [48.8603, 2.2690],
-                    '17ème': [48.8802, 2.3089],
-                    '18ème': [48.8918, 2.3395],
-                    '19ème': [48.8799, 2.3782],
-                    '20ème': [48.8631, 2.3969]
-                };
-                
-                // Parcourir tous les lieux de la base de données
-                Object.entries(this.parisData).forEach(([arrKey, arrData]) => {
-                    const baseCoords = arrondissementCoords[arrKey];
-                    if (!baseCoords || !arrData.categories) return;
-                    
-                    Object.entries(arrData.categories).forEach(([catKey, catData]) => {
-                        if (!catData.places || !Array.isArray(catData.places)) return;
-                        
-                        catData.places.forEach((place, index) => {
-                            const placeId = this.createPlaceId(arrKey, catKey, place.name);
-                            const isVisited = userData && userData.visitedPlaces instanceof Set ? 
-                                userData.visitedPlaces.has(placeId) : false;
-                            
-                            // Générer des coordonnées approximatives dans l'arrondissement
-                            const coords = this.generatePlaceCoordinates(baseCoords, place.name, catKey, index);
-                            
-                            // Déterminer le type de lieu
-                            const placeType = this.getPlaceType(catKey, place.tags);
-                            
-                            const marker = L.marker(coords, {
-                                icon: this.createLandmarkIcon(placeType, isVisited)
-                            }).addTo(this.map);
-                            
-                            // Popup avec toutes les informations du lieu
-                            const tagsHtml = place.tags ? 
-                                place.tags.map(tag => `<span style="background: #D4AF37; color: #1e3a8a; padding: 2px 6px; border-radius: 8px; font-size: 10px; margin: 2px;">${tag}</span>`).join(' ') : '';
-                            
-                            const addressHtml = place.address ? 
-                                `<p style="margin: 4px 0; font-size: 12px; color: #6b7280;">📍 ${place.address}</p>` : '';
-                            
-                            marker.bindPopup(`
-                                <div style="font-family: 'Playfair Display', serif; min-width: 200px;">
-                                    <h4 style="color: #1e3a8a; margin-bottom: 8px; font-size: 14px;">${place.name}</h4>
-                                    <p style="margin: 4px 0; font-size: 12px; line-height: 1.4;">${place.description}</p>
-                                    ${addressHtml}
-                                    <p style="margin: 8px 0 4px 0;">
-                                        ${isVisited ? 
-                                            '<span style="color: #059669; font-weight: bold;">✓ Exploré</span>' : 
-                                            '<span style="color: #d97706; font-weight: bold;">📍 À explorer</span>'
-                                        }
-                                    </p>
-                                    ${tagsHtml ? `<div style="margin-top: 8px;">${tagsHtml}</div>` : ''}
-                                    <p style="font-size: 10px; color: #9ca3af; margin-top: 8px; text-align: center;">
-                                        ${arrData.title} • ${catData.title}
-                                    </p>
-                                </div>
-                            `);
-                            
-                            // Ajouter un gestionnaire de clic pour marquer comme visité
-                            marker.on('popupopen', () => {
-                                const popup = marker.getPopup();
-                                const popupContent = popup.getContent();
-                                
-                                // Ajouter un bouton de toggle dans le popup
-                                const buttonHtml = isVisited ? 
-                                    `<button onclick="app.togglePlaceFromMap('${placeId}', this)" style="background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 11px; margin-top: 8px; width: 100%;">❌ Retirer de mes visites</button>` :
-                                    `<button onclick="app.togglePlaceFromMap('${placeId}', this)" style="background: #059669; color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 11px; margin-top: 8px; width: 100%;">✅ Marquer comme visité</button>`;
-                                
-                                popup.setContent(popupContent + buttonHtml);
-                            });
-                            
-                            this.markers.push(marker);
-                        });
-                    });
-                });
-            }
-            
-            // Générer des coordonnées approximatives dans l'arrondissement
-            generatePlaceCoordinates(baseCoords, placeName, categoryKey, index) {
-                // Utiliser le nom du lieu pour générer un décalage déterministe
-                const hash = this.simpleHash(placeName + categoryKey);
-                
-                // Rayon approximatif d'un arrondissement (en degrés)
-                const maxOffset = 0.008; // ~800m
-                
-                // Générer des offsets basés sur le hash
-                const offsetLat = ((hash % 1000) / 1000 - 0.5) * maxOffset;
-                const offsetLng = (((hash * 1.3) % 1000) / 1000 - 0.5) * maxOffset;
-                
-                // Ajouter un petit décalage basé sur l'index pour éviter la superposition
-                const indexOffsetLat = (index % 10 - 5) * 0.0005;
-                const indexOffsetLng = ((index * 1.7) % 10 - 5) * 0.0005;
-                
-                return [
-                    baseCoords[0] + offsetLat + indexOffsetLat,
-                    baseCoords[1] + offsetLng + indexOffsetLng
-                ];
-            }
-            
-            // Hash simple pour générer des décalages déterministes
-            simpleHash(str) {
-                let hash = 0;
-                for (let i = 0; i < str.length; i++) {
-                    const char = str.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash; // Convert to 32-bit integer
-                }
-                return Math.abs(hash);
-            }
-            
-            // Déterminer le type de lieu pour l'icône
-            getPlaceType(categoryKey, tags = []) {
-                const catKey = categoryKey.toLowerCase();
-                const tagString = tags.join(' ').toLowerCase();
-                
-                if (catKey.includes('monument') || catKey.includes('église') || catKey.includes('patrimoine') || 
-                    tagString.includes('église') || tagString.includes('monument') || tagString.includes('château')) {
-                    return 'monument';
-                }
-                
-                if (catKey.includes('restaurant') || catKey.includes('café') || catKey.includes('gastronomie') ||
-                    tagString.includes('restaurant') || tagString.includes('café') || tagString.includes('bistrot')) {
-                    return 'restaurant';
-                }
-                
-                if (catKey.includes('parc') || catKey.includes('jardin') || catKey.includes('vert') ||
-                    tagString.includes('parc') || tagString.includes('jardin') || tagString.includes('square')) {
-                    return 'park';
-                }
-                
-                if (catKey.includes('bar') || catKey.includes('nocturne') ||
-                    tagString.includes('bar') || tagString.includes('cocktail') || tagString.includes('speakeasy')) {
-                    return 'bar';
-                }
-                
-                if (catKey.includes('shopping') || catKey.includes('boutique') ||
-                    tagString.includes('shopping') || tagString.includes('boutique') || tagString.includes('marché')) {
-                    return 'shopping';
-                }
-                
-                if (catKey.includes('musée') || catKey.includes('culture') ||
-                    tagString.includes('musée') || tagString.includes('exposition') || tagString.includes('galerie')) {
-                    return 'museum';
-                }
-                
-                return 'default';
-            }
-            
-            createLandmarkIcon(type, isVisited) {
-                const baseColor = isVisited ? '#059669' : '#D4AF37';
-                const borderColor = '#1e3a8a';
-                
-                let iconHtml;
-                let iconSize = [14, 14];
-                
-                switch(type) {
-                    case 'monument':
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 12px; border-radius: 2px; transform: rotate(45deg);"></div>`;
-                        break;
-                    case 'restaurant':
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 12px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);"></div>`;
-                        break;
-                    case 'park':
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 12px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>`;
-                        break;
-                    case 'bar':
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 12px; border-radius: 2px;"></div>`;
-                        break;
-                    case 'shopping':
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 8px; border-radius: 2px;"></div>`;
-                        break;
-                    case 'museum':
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 12px; border-radius: 2px;"><div style="background: ${borderColor}; width: 8px; height: 2px; position: absolute; top: 3px; left: 2px;"></div><div style="background: ${borderColor}; width: 8px; height: 2px; position: absolute; top: 6px; left: 2px;"></div></div>`;
-                        iconSize = [16, 16];
-                        break;
-                    default:
-                        iconHtml = `<div style="background: ${baseColor}; border: 2px solid ${borderColor}; width: 12px; height: 12px; border-radius: 50%;"></div>`;
-                }
-                
-                return L.divIcon({
-                    html: iconHtml,
-                    className: 'landmark-marker',
-                    iconSize: iconSize,
-                    iconAnchor: [iconSize[0]/2, iconSize[1]/2]
-                });
-            }
-            
-            // Fonction pour toggle depuis la carte
-            togglePlaceFromMap(placeId, buttonElement) {
-                this.togglePlace(placeId);
-                
-                // Fermer tous les popups
-                this.map.closePopup();
-                
-                // Actualiser les marqueurs après un délai
-                setTimeout(() => {
-                    this.updateMapMarkers();
-                }, 200);
-            }
-            
             // === RENDU DE L'INTERFACE ===
             renderContent() {
                 if (!this.isDataLoaded) return;
@@ -2044,6 +1567,206 @@
                        (place.tags && place.tags.some(tag => tag.toLowerCase().includes(query)));
             }
             
+            // === GESTION DES LIEUX ===
+            togglePlace(placeId, event) {
+                // Empêcher la propagation pour éviter le rechargement
+                if (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+                
+                const userData = this.getCurrentUserData();
+                if (!userData) {
+                    this.showNotification('Veuillez sélectionner un explorateur', 'warning');
+                    return;
+                }
+                
+                // S'assurer que visitedPlaces est un Set
+                if (!(userData.visitedPlaces instanceof Set)) {
+                    userData.visitedPlaces = new Set(userData.visitedPlaces || []);
+                }
+                
+                const wasVisited = userData.visitedPlaces.has(placeId);
+                
+                if (wasVisited) {
+                    userData.visitedPlaces.delete(placeId);
+                    this.showNotification('Lieu retiré de vos explorations', 'info');
+                } else {
+                    userData.visitedPlaces.add(placeId);
+                    userData.stats.lastVisit = new Date().toISOString();
+                    this.showNotification('Nouveau lieu exploré! Bravo!', 'success');
+                }
+                
+                userData.stats.totalVisited = userData.visitedPlaces.size;
+                this.saveUsers();
+                
+                // Mise à jour seulement de la carte spécifique et des stats
+                this.updatePlaceCard(placeId, !wasVisited);
+                this.updateStats();
+                
+                // Mettre à jour la carte si visible
+                if (this.map && this.currentTab === 'map') {
+                    this.updateMapMarkers();
+                }
+            }
+            
+            updatePlaceCard(placeId, isVisited) {
+                const card = document.querySelector(`[data-place-id="${placeId}"]`);
+                if (card) {
+                    const checkbox = card.querySelector('.place-checkbox');
+                    if (checkbox) {
+                        checkbox.checked = isVisited;
+                    }
+                    
+                    if (isVisited) {
+                        card.classList.add('visited');
+                    } else {
+                        card.classList.remove('visited');
+                    }
+                    
+                    // Si on cache les visités et que c'est maintenant visité, le cacher
+                    if (this.hideCompleted && isVisited) {
+                        card.style.display = 'none';
+                    }
+                }
+            }
+            
+            createPlaceId(arrKey, catKey, placeName) {
+                return `${arrKey}-${catKey}-${placeName}`
+                    .replace(/['"]/g, '')
+                    .replace(/[^\w\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .toLowerCase();
+            }
+            
+            // === CARTE INTERACTIVE ===
+            initMap() {
+                if (this.map) return; // Déjà initialisée
+                
+                const mapContainer = document.getElementById('mapContainer');
+                
+                // Centrer sur Paris
+                this.map = L.map(mapContainer).setView([48.8566, 2.3522], 12);
+                
+                // Ajouter la couche de tuiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(this.map);
+                
+                // Ajouter les marqueurs (version démo avec les arrondissements principaux)
+                this.addDemoMarkers();
+                
+                // Gestion du plein écran
+                this.setupMapControls();
+            }
+            
+            addDemoMarkers() {
+                // Coordonnées principales des arrondissements pour la démo
+                const demoLocations = [
+                    { name: "1er - Louvre", coords: [48.8608, 2.3352], places: 15, visited: 3 },
+                    { name: "4ème - Notre-Dame", coords: [48.8535, 2.3519], places: 12, visited: 5 },
+                    { name: "7ème - Tour Eiffel", coords: [48.8534, 2.3112], places: 18, visited: 8 },
+                    { name: "8ème - Champs-Élysées", coords: [48.8718, 2.3098], places: 20, visited: 2 },
+                    { name: "18ème - Montmartre", coords: [48.8918, 2.3395], places: 14, visited: 10 },
+                ];
+                
+                demoLocations.forEach(location => {
+                    const completionPercent = Math.round((location.visited / location.places) * 100);
+                    
+                    // Couleur selon le pourcentage de completion
+                    let markerColor = '#D4AF37'; // Or par défaut
+                    if (completionPercent === 100) {
+                        markerColor = '#059669'; // Vert si 100%
+                    } else if (completionPercent > 50) {
+                        markerColor = '#d97706'; // Orange si > 50%
+                    }
+                    
+                    const marker = L.circleMarker(location.coords, {
+                        color: '#1e3a8a',
+                        fillColor: markerColor,
+                        fillOpacity: 0.8,
+                        radius: Math.max(8, completionPercent / 10 + 5),
+                        weight: 2
+                    }).addTo(this.map);
+                    
+                    // Popup avec informations
+                    marker.bindPopup(`
+                        <div style="font-family: 'Playfair Display', serif; text-align: center;">
+                            <h3 style="color: #1e3a8a; margin-bottom: 8px;">${location.name}</h3>
+                            <p style="margin: 4px 0;"><strong>${location.visited}/${location.places}</strong> lieux explorés</p>
+                            <p style="margin: 4px 0; color: #D4AF37;"><strong>${completionPercent}%</strong> complété</p>
+                            <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">
+                                💡 Version démo - Ajoutez paris-database.json pour les vrais données
+                            </p>
+                        </div>
+                    `);
+                    
+                    this.markers.push(marker);
+                });
+            }
+            
+            setupMapControls() {
+                const fullscreenBtn = document.getElementById('fullscreenBtn');
+                const centerMapBtn = document.getElementById('centerMapBtn');
+                const mapContainer = document.getElementById('mapContainer');
+                
+                // Bouton plein écran
+                fullscreenBtn.addEventListener('click', () => {
+                    if (mapContainer.classList.contains('map-fullscreen')) {
+                        this.exitFullscreen();
+                    } else {
+                        this.enterFullscreen();
+                    }
+                });
+                
+                // Bouton centrer
+                centerMapBtn.addEventListener('click', () => {
+                    this.map.setView([48.8566, 2.3522], 12);
+                });
+                
+                // Écouteur pour la touche Escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && mapContainer.classList.contains('map-fullscreen')) {
+                        this.exitFullscreen();
+                    }
+                });
+            }
+            
+            enterFullscreen() {
+                const mapContainer = document.getElementById('mapContainer');
+                const fullscreenBtn = document.getElementById('fullscreenBtn');
+                
+                mapContainer.classList.add('map-fullscreen');
+                fullscreenBtn.textContent = '🔲';
+                fullscreenBtn.title = 'Quitter le plein écran';
+                
+                // Invalider la taille de la carte après le changement
+                setTimeout(() => {
+                    this.map.invalidateSize();
+                }, 100);
+                
+                this.showNotification('Mode plein écran activé (Échap pour quitter)', 'info');
+            }
+            
+            exitFullscreen() {
+                const mapContainer = document.getElementById('mapContainer');
+                const fullscreenBtn = document.getElementById('fullscreenBtn');
+                
+                mapContainer.classList.remove('map-fullscreen');
+                fullscreenBtn.textContent = '🔳';
+                fullscreenBtn.title = 'Mode plein écran';
+                
+                // Invalider la taille de la carte après le changement
+                setTimeout(() => {
+                    this.map.invalidateSize();
+                }, 100);
+            }
+            
+            updateMapMarkers() {
+                // Cette méthode sera utilisée quand les vraies données seront disponibles
+                console.log('Mise à jour des marqueurs');
+            }
+            
             // === STATISTIQUES ===
             updateStats() {
                 const userData = this.getCurrentUserData();
@@ -2064,7 +1787,7 @@
             }
             
             getTotalPlaces() {
-                if (!this.isDataLoaded || !this.parisData) return 0;
+                if (!this.isDataLoaded || !this.parisData) return 147; // Valeur par défaut pour la démo
                 
                 let total = 0;
                 Object.entries(this.parisData).forEach(([arrKey, arrData]) => {
