@@ -1,0 +1,288 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2025-01-05T14:30:00.000Z",
+    "format": "Paris Explorer User Favorites",
+    "description": "Gestion des lieux favoris et collections personnalisées"
+  },
+  "users": {
+    "Marie_Explorer": {
+      "favorites": {
+        "places": [
+          {
+            "placeId": "1er-monuments-musee-du-louvre",
+            "name": "Musée du Louvre",
+            "arrondissement": "1er",
+            "category": "monuments",
+            "addedAt": "2024-12-15T14:45:00.000Z",
+            "personalRating": 5,
+            "reason": "Incontournable ! La Joconde m'a vraiment marquée",
+            "tags": ["art", "must-see", "famille"],
+            "visitCount": 2,
+            "lastVisit": "2024-12-28T11:20:00.000Z",
+            "photos": ["louvre_pyramide.jpg", "joconde_selfie.jpg"],
+            "coordinates": [48.8606, 2.3376]
+          },
+          {
+            "placeId": "18eme-montmartre-secret-vignes-de-montmartre",
+            "name": "Vignes de Montmartre",
+            "arrondissement": "18ème",
+            "category": "montmartre-secret",
+            "addedAt": "2024-12-22T16:30:00.000Z",
+            "personalRating": 5,
+            "reason": "Lieu magique et secret, peu de touristes",
+            "tags": ["secret", "nature", "authentique"],
+            "visitCount": 1,
+            "lastVisit": "2024-12-22T16:00:00.000Z",
+            "photos": ["vignes_automne.jpg"],
+            "coordinates": [48.8859, 2.3385]
+          },
+          {
+            "placeId": "7eme-jardins-secrets-jardin-catherine-laboure",
+            "name": "Jardin Catherine Labouré",
+            "arrondissement": "7ème",
+            "category": "jardins-secrets",
+            "addedAt": "2025-01-01T12:15:00.000Z",
+            "personalRating": 4,
+            "reason": "Oasis de paix au cœur de Paris",
+            "tags": ["zen", "jardin", "secret"],
+            "visitCount": 1,
+            "lastVisit": "2025-01-01T12:00:00.000Z",
+            "photos": ["jardin_hiver.jpg"],
+            "coordinates": [48.8496, 2.3190]
+          }
+        ],
+        "collections": [
+          {
+            "id": "romantic_paris",
+            "name": "💕 Paris Romantique",
+            "description": "Mes lieux préférés pour une sortie en amoureux",
+            "createdAt": "2024-12-20T18:00:00.000Z",
+            "isPublic": false,
+            "places": [
+              "7eme-monuments-iconiques-tour-eiffel",
+              "1er-espaces-verts-square-du-vert-galant",
+              "4eme-ile-saint-louis-quais-de-seine"
+            ],
+            "color": "#ff69b4",
+            "icon": "💕"
+          },
+          {
+            "id": "hidden_gems",
+            "name": "💎 Trésors Cachés",
+            "description": "Les lieux secrets que j'adore",
+            "createdAt": "2024-12-25T10:30:00.000Z",
+            "isPublic": true,
+            "places": [
+              "18eme-montmartre-secret-vignes-de-montmartre",
+              "7eme-jardins-secrets-jardin-catherine-laboure",
+              "3eme-jardins-secrets-jardin-anne-frank"
+            ],
+            "color": "#9370db",
+            "icon": "💎"
+          },
+          {
+            "id": "rainy_day",
+            "name": "☔ Jour de Pluie",
+            "description": "Parfait quand il pleut",
+            "createdAt": "2025-01-03T14:20:00.000Z",
+            "isPublic": false,
+            "places": [
+              "1er-monuments-musee-du-louvre",
+              "2eme-monuments-galerie-vivienne",
+              "9eme-grands-magasins-galeries-lafayette"
+            ],
+            "color": "#4169e1",
+            "icon": "☔"
+          }
+        ],
+        "wishlist": [
+          {
+            "placeId": "16eme-musees-classe-mondiale-fondation-louis-vuitton",
+            "name": "Fondation Louis Vuitton",
+            "arrondissement": "16ème",
+            "addedAt": "2024-12-30T15:45:00.000Z",
+            "priority": "high",
+            "reason": "Architecture Gehry + collections temporaires",
+            "plannedDate": "2025-01-15T14:00:00.000Z",
+            "notes": "Réserver à l'avance, expo Basquiat jusqu'en février"
+          },
+          {
+            "placeId": "20eme-pere-lachaise-jim-morrison",
+            "name": "Tombe de Jim Morrison",
+            "arrondissement": "20ème",
+            "addedAt": "2025-01-02T11:30:00.000Z",
+            "priority": "medium",
+            "reason": "Fan des Doors depuis toujours",
+            "plannedDate": null,
+            "notes": "Y aller tôt le matin pour éviter la foule"
+          }
+        ],
+        "bucketList": [
+          {
+            "id": "sunset_eiffel",
+            "title": "Coucher de soleil Tour Eiffel",
+            "description": "Voir un coucher de soleil depuis le 2ème étage",
+            "difficulty": "easy",
+            "season": "été",
+            "estimatedDuration": 120,
+            "completed": false,
+            "createdAt": "2024-12-01T10:00:00.000Z"
+          },
+          {
+            "id": "night_louvre",
+            "title": "Louvre de nuit",
+            "description": "Visiter le Louvre en nocturne (vendredi)",
+            "difficulty": "medium",
+            "season": "toute-annee",
+            "estimatedDuration": 180,
+            "completed": false,
+            "createdAt": "2024-12-15T20:00:00.000Z"
+          }
+        ]
+      },
+      "preferences": {
+        "favoriteCategories": ["monuments", "jardins-secrets", "musees"],
+        "leastFavoriteCategories": ["bars", "vie-nocturne"],
+        "preferredVisitTime": "afternoon",
+        "favoriteWeather": "ensoleillé",
+        "averageVisitDuration": 90,
+        "maxWalkingDistance": 5.0,
+        "accessibilityNeeds": [],
+        "languagePreference": "français"
+      }
+    },
+    "Thomas_Parisien": {
+      "favorites": {
+        "places": [
+          {
+            "placeId": "3eme-musees-lieux-artistiques-musee-picasso",
+            "name": "Musée Picasso",
+            "arrondissement": "3ème",
+            "category": "musees-lieux-artistiques",
+            "addedAt": "2024-11-20T11:00:00.000Z",
+            "personalRating": 5,
+            "reason": "Collection exceptionnelle dans un écrin parfait",
+            "tags": ["art", "picasso", "marais"],
+            "visitCount": 3,
+            "lastVisit": "2024-12-15T14:30:00.000Z",
+            "photos": ["picasso_guernica.jpg", "hotel_sale.jpg"],
+            "coordinates": [48.8597, 2.3625]
+          },
+          {
+            "placeId": "4eme-patrimoine-juif-rue-des-rosiers",
+            "name": "Rue des Rosiers",
+            "arrondissement": "4ème",
+            "category": "patrimoine-juif",
+            "addedAt": "2024-11-25T16:20:00.000Z",
+            "personalRating": 4,
+            "reason": "Atmosphère unique, histoire vivante",
+            "tags": ["histoire", "culture", "authentique"],
+            "visitCount": 5,
+            "lastVisit": "2025-01-05T11:30:00.000Z",
+            "photos": ["rosiers_devantures.jpg"],
+            "coordinates": [48.8567, 2.3595]
+          }
+        ],
+        "collections": [
+          {
+            "id": "art_galleries",
+            "name": "🎨 Galeries d'Art",
+            "description": "Circuit des meilleures galeries parisiennes",
+            "createdAt": "2024-11-18T14:00:00.000Z",
+            "isPublic": true,
+            "places": [
+              "3eme-musees-lieux-artistiques-musee-picasso",
+              "16eme-musees-classe-mondiale-musee-art-moderne",
+              "7eme-musees-excellence-musee-orsay"
+            ],
+            "color": "#ff6347",
+            "icon": "🎨"
+          },
+          {
+            "id": "photography_spots",
+            "name": "📸 Spots Photo",
+            "description": "Les meilleurs angles pour photographier Paris",
+            "createdAt": "2024-12-01T09:15:00.000Z",
+            "isPublic": true,
+            "places": [
+              "7eme-monuments-iconiques-tour-eiffel",
+              "18eme-montmartre-mythique-sacre-coeur",
+              "1er-monuments-pont-neuf"
+            ],
+            "color": "#32cd32",
+            "icon": "📸"
+          }
+        ],
+        "wishlist": [
+          {
+            "placeId": "19eme-institutions-culturelles-philharmonie",
+            "name": "Philharmonie de Paris",
+            "arrondissement": "19ème",
+            "addedAt": "2024-12-20T19:30:00.000Z",
+            "priority": "high",
+            "reason": "Architecture Jean Nouvel + acoustique parfaite",
+            "plannedDate": "2025-01-12T20:00:00.000Z",
+            "notes": "Concert Mahler le 12 janvier, réserver rapidement"
+          }
+        ],
+        "bucketList": [
+          {
+            "id": "complete_marais",
+            "title": "Maître du Marais",
+            "description": "Visiter tous les lieux du 3ème et 4ème",
+            "difficulty": "hard",
+            "season": "toute-annee",
+            "estimatedDuration": 2400,
+            "completed": false,
+            "progress": 83,
+            "target": 165,
+            "createdAt": "2024-11-15T09:00:00.000Z"
+          }
+        ]
+      },
+      "preferences": {
+        "favoriteCategories": ["musees-lieux-artistiques", "patrimoine-juif", "culture"],
+        "leastFavoriteCategories": ["shopping", "nightlife"],
+        "preferredVisitTime": "morning",
+        "favoriteWeather": "pluvieux",
+        "averageVisitDuration": 120,
+        "maxWalkingDistance": 8.0,
+        "accessibilityNeeds": [],
+        "languagePreference": "français"
+      }
+    }
+  },
+  "sharedCollections": [
+    {
+      "id": "community_best_2024",
+      "name": "🏆 Meilleurs de 2024",
+      "description": "Les lieux les mieux notés par la communauté",
+      "createdBy": "Thomas_Parisien",
+      "createdAt": "2024-12-31T18:00:00.000Z",
+      "isPublic": true,
+      "contributors": ["Marie_Explorer", "Thomas_Parisien"],
+      "places": [
+        "1er-monuments-musee-du-louvre",
+        "18eme-montmartre-secret-vignes-de-montmartre",
+        "3eme-musees-lieux-artistiques-musee-picasso"
+      ],
+      "likes": 15,
+      "shares": 3,
+      "color": "#ffd700",
+      "icon": "🏆"
+    }
+  ],
+  "statistics": {
+    "totalFavorites": 5,
+    "totalCollections": 5,
+    "totalWishlistItems": 3,
+    "mostFavoritedPlace": {
+      "placeId": "1er-monuments-musee-du-louvre",
+      "name": "Musée du Louvre",
+      "favorites": 1
+    },
+    "mostActiveCollector": "Marie_Explorer",
+    "averageRatingFavorites": 4.6
+  }
+}
