@@ -1,1 +1,652 @@
-
+{
+  "metadata": {
+    "title": "Paris Explorer - Index Principal",
+    "version": "2.0.0",
+    "lastUpdated": "2025-01-05",
+    "totalPlaces": 2127,
+    "totalArrondissements": 20,
+    "description": "Index principal des arrondissements parisiens pour Paris Explorer",
+    "author": "Paris Explorer Team",
+    "license": "MIT",
+    "website": "https://paris-explorer.app",
+    "dataFormat": "modular",
+    "apiVersion": "2.0",
+    "features": [
+      "Architecture modulaire",
+      "Chargement à la demande",
+      "Données séparées par arrondissement",
+      "Cache optimisé",
+      "Recherche avancée",
+      "Support multi-utilisateurs",
+      "Export/Import données",
+      "Mode hors-ligne"
+    ]
+  },
+  "config": {
+    "loadingStrategy": "progressive",
+    "cacheEnabled": true,
+    "cacheDuration": 3600000,
+    "preloadPriority": ["1er", "4ème", "7ème", "16ème", "18ème"],
+    "compression": false,
+    "encryption": false,
+    "offlineMode": true,
+    "autoUpdate": true,
+    "updateInterval": 86400000,
+    "fallbackData": true,
+    "retryAttempts": 3,
+    "timeoutMs": 10000
+  },
+  "arrondissements": {
+    "1er": {
+      "file": "data/arrondissements/01-louvre.json",
+      "title": "1ER ARRONDISSEMENT - LE LOUVRE",
+      "description": "Cœur historique et artistique de Paris",
+      "priority": "high",
+      "coordinates": {
+        "center": [48.8607, 2.3358],
+        "bounds": [[48.8534, 2.3278], [48.8680, 2.3438]]
+      },
+      "metadata": {
+        "estimatedPlaces": 125,
+        "estimatedCategories": 6,
+        "highlights": ["Musée du Louvre", "Sainte-Chapelle", "Palais-Royal", "Place Vendôme"],
+        "transport": ["Louvre-Rivoli (1)", "Châtelet-Les Halles (1,4,7,11,14)", "Palais-Royal (1,7)"],
+        "popularTimes": ["9h-12h", "14h-17h"],
+        "averageVisitDuration": "4-6h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.85,
+        "userRating": 4.8
+      }
+    },
+    "2ème": {
+      "file": "data/arrondissements/02-bourse.json", 
+      "title": "2ÈME ARRONDISSEMENT - LA BOURSE",
+      "description": "Passages couverts et quartier japonais",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8700, 2.3408],
+        "bounds": [[48.8620, 2.3328], [48.8780, 2.3488]]
+      },
+      "metadata": {
+        "estimatedPlaces": 89,
+        "estimatedCategories": 5,
+        "highlights": ["Galerie Vivienne", "Passage des Panoramas", "Rue Sainte-Anne", "Grand Rex"],
+        "transport": ["Bourse (3)", "Grands Boulevards (8,9)", "Sentier (3)", "Réaumur-Sébastopol (3,4)"],
+        "popularTimes": ["12h-14h", "19h-21h"],
+        "averageVisitDuration": "2-3h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.72,
+        "userRating": 4.3
+      }
+    },
+    "3ème": {
+      "file": "data/arrondissements/03-haut-marais.json",
+      "title": "3ÈME ARRONDISSEMENT - HAUT-MARAIS", 
+      "description": "Musées remarquables et vie créative",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8630, 2.3626],
+        "bounds": [[48.8550, 2.3546], [48.8710, 2.3706]]
+      },
+      "metadata": {
+        "estimatedPlaces": 95,
+        "estimatedCategories": 6,
+        "highlights": ["Musée des Arts et Métiers", "Marché des Enfants Rouges", "Square du Temple", "Musée Picasso"],
+        "transport": ["Arts et Métiers (3,11)", "République (3,5,8,9,11)", "Temple (3)", "Filles du Calvaire (8)"],
+        "popularTimes": ["10h-13h", "15h-18h"],
+        "averageVisitDuration": "3-4h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.68,
+        "userRating": 4.5
+      }
+    },
+    "4ème": {
+      "file": "data/arrondissements/04-marais-ile-st-louis.json",
+      "title": "4ÈME ARRONDISSEMENT - MARAIS & ÎLE SAINT-LOUIS",
+      "description": "Cœur historique du Marais et patrimoine juif",
+      "priority": "high",
+      "coordinates": {
+        "center": [48.8534, 2.3488],
+        "bounds": [[48.8454, 2.3408], [48.8614, 2.3568]]
+      },
+      "metadata": {
+        "estimatedPlaces": 142,
+        "estimatedCategories": 8,
+        "highlights": ["Notre-Dame", "Place des Vosges", "Île Saint-Louis", "Rue des Rosiers", "Centre Pompidou"],
+        "transport": ["Saint-Paul (1)", "Hôtel de Ville (1,11)", "Pont Marie (7)", "Châtelet (1,4,7,11,14)"],
+        "popularTimes": ["10h-12h", "14h-17h", "19h-21h"],
+        "averageVisitDuration": "6-8h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.91,
+        "userRating": 4.9
+      }
+    },
+    "5ème": {
+      "file": "data/arrondissements/05-quartier-latin.json",
+      "title": "5ÈME ARRONDISSEMENT - QUARTIER LATIN",
+      "description": "Universités prestigieuses et patrimoine historique",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8462, 2.3372],
+        "bounds": [[48.8382, 2.3292], [48.8542, 2.3452]]
+      },
+      "metadata": {
+        "estimatedPlaces": 118,
+        "estimatedCategories": 8,
+        "highlights": ["Panthéon", "Sorbonne", "Jardin des Plantes", "Shakespeare and Company", "Arènes de Lutèce"],
+        "transport": ["Place Monge (7)", "Cluny-La Sorbonne (10)", "Luxembourg (RER B)", "Cardinal Lemoine (10)"],
+        "popularTimes": ["9h-12h", "14h-16h"],
+        "averageVisitDuration": "4-5h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.76,
+        "userRating": 4.6
+      }
+    },
+    "6ème": {
+      "file": "data/arrondissements/06-saint-germain.json",
+      "title": "6ÈME ARRONDISSEMENT - SAINT-GERMAIN-DES-PRÉS",
+      "description": "Cafés littéraires et jardins du Luxembourg",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8496, 2.3341],
+        "bounds": [[48.8416, 2.3261], [48.8576, 2.3421]]
+      },
+      "metadata": {
+        "estimatedPlaces": 98,
+        "estimatedCategories": 6,
+        "highlights": ["Jardin du Luxembourg", "Café de Flore", "Saint-Sulpice", "Institut de France"],
+        "transport": ["Saint-Germain-des-Prés (4)", "Odéon (4,10)", "Luxembourg (RER B)", "Mabillon (10)"],
+        "popularTimes": ["10h-12h", "15h-18h"],
+        "averageVisitDuration": "3-4h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.82,
+        "userRating": 4.7
+      }
+    },
+    "7ème": {
+      "file": "data/arrondissements/07-invalides-tour-eiffel.json",
+      "title": "7ÈME ARRONDISSEMENT - INVALIDES & TOUR EIFFEL",
+      "description": "Monuments iconiques et musées d'exception",
+      "priority": "high",
+      "coordinates": {
+        "center": [48.8534, 2.2944],
+        "bounds": [[48.8454, 2.2864], [48.8614, 2.3024]]
+      },
+      "metadata": {
+        "estimatedPlaces": 134,
+        "estimatedCategories": 6,
+        "highlights": ["Tour Eiffel", "Musée d'Orsay", "Invalides", "Musée Rodin", "Champ-de-Mars"],
+        "transport": ["Invalides (8,13)", "École Militaire (8)", "Champ-de-Mars-Tour Eiffel (RER C)", "Bir-Hakeim (6)"],
+        "popularTimes": ["9h-11h", "14h-16h", "19h-21h"],
+        "averageVisitDuration": "6-8h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.88,
+        "userRating": 4.9
+      }
+    },
+    "8ème": {
+      "file": "data/arrondissements/08-champs-elysees.json",
+      "title": "8ÈME ARRONDISSEMENT - CHAMPS-ÉLYSÉES",
+      "description": "Luxe, prestige et avenue mythique",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8718, 2.3075],
+        "bounds": [[48.8638, 2.2995], [48.8798, 2.3155]]
+      },
+      "metadata": {
+        "estimatedPlaces": 112,
+        "estimatedCategories": 7,
+        "highlights": ["Champs-Élysées", "Arc de Triomphe", "Grand Palais", "Place de la Concorde", "Madeleine"],
+        "transport": ["Charles-de-Gaulle-Étoile (1,2,6,RER A)", "George V (1)", "Concorde (1,8,12)", "Champs-Élysées-Clemenceau (1,13)"],
+        "popularTimes": ["10h-13h", "15h-19h"],
+        "averageVisitDuration": "4-6h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.79,
+        "userRating": 4.4
+      }
+    },
+    "9ème": {
+      "file": "data/arrondissements/09-opera-pigalle.json",
+      "title": "9ÈME ARRONDISSEMENT - OPÉRA & PIGALLE",
+      "description": "Temples du spectacle et quartier rouge",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8768, 2.3364],
+        "bounds": [[48.8688, 2.3284], [48.8848, 2.3444]]
+      },
+      "metadata": {
+        "estimatedPlaces": 87,
+        "estimatedCategories": 7,
+        "highlights": ["Opéra Garnier", "Galeries Lafayette", "Pigalle", "Moulin Rouge", "Musée Gustave Moreau"],
+        "transport": ["Opéra (3,7,8)", "Pigalle (2,12)", "Chaussée d'Antin (7,9)", "Grands Boulevards (8,9)"],
+        "popularTimes": ["10h-12h", "14h-17h", "20h-23h"],
+        "averageVisitDuration": "3-5h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.71,
+        "userRating": 4.3
+      }
+    },
+    "10ème": {
+      "file": "data/arrondissements/10-canal-saint-martin.json",
+      "title": "10ÈME ARRONDISSEMENT - CANAL SAINT-MARTIN",
+      "description": "Canal romantique et vie bohème",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8709, 2.3674],
+        "bounds": [[48.8629, 2.3594], [48.8789, 2.3754]]
+      },
+      "metadata": {
+        "estimatedPlaces": 73,
+        "estimatedCategories": 6,
+        "highlights": ["Canal Saint-Martin", "Hôtel du Nord", "République", "Du Pain et des Idées", "Point Éphémère"],
+        "transport": ["République (3,5,8,9,11)", "Goncourt (11)", "Jacques-Bonsergent (5)", "Colonel Fabien (2)"],
+        "popularTimes": ["11h-14h", "16h-19h"],
+        "averageVisitDuration": "3-4h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.64,
+        "userRating": 4.4
+      }
+    },
+    "11ème": {
+      "file": "data/arrondissements/11-bastille-oberkampf.json",
+      "title": "11ÈME ARRONDISSEMENT - BASTILLE & OBERKAMPF",
+      "description": "Révolution, gastronomie et vie nocturne",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8594, 2.3765],
+        "bounds": [[48.8514, 2.3685], [48.8674, 2.3845]]
+      },
+      "metadata": {
+        "estimatedPlaces": 81,
+        "estimatedCategories": 7,
+        "highlights": ["Place de la Bastille", "Rue Oberkampf", "Septime", "Le Chateaubriand", "Cirque d'Hiver"],
+        "transport": ["Bastille (1,5,8)", "Oberkampf (5,9)", "République (3,5,8,9,11)", "Voltaire (9)"],
+        "popularTimes": ["12h-14h", "19h-23h"],
+        "averageVisitDuration": "4-6h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.67,
+        "userRating": 4.5
+      }
+    },
+    "12ème": {
+      "file": "data/arrondissements/12-nation-bercy.json",
+      "title": "12ÈME ARRONDISSEMENT - NATION & BERCY",
+      "description": "Espaces verts exceptionnels et patrimoine moderne",
+      "priority": "low",
+      "coordinates": {
+        "center": [48.8448, 2.3776],
+        "bounds": [[48.8368, 2.3696], [48.8528, 2.3856]]
+      },
+      "metadata": {
+        "estimatedPlaces": 79,
+        "estimatedCategories": 6,
+        "highlights": ["Bois de Vincennes", "Bercy Village", "Promenade Plantée", "Cinémathèque Française"],
+        "transport": ["Nation (1,2,6,9,RER A)", "Bercy (6,14)", "Gare de Lyon (1,14,RER A,D)", "Château de Vincennes (1)"],
+        "popularTimes": ["10h-13h", "15h-18h"],
+        "averageVisitDuration": "4-5h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.58,
+        "userRating": 4.2
+      }
+    },
+    "13ème": {
+      "file": "data/arrondissements/13-chinatown-bibliotheque.json",
+      "title": "13ÈME ARRONDISSEMENT - CHINATOWN & BIBLIOTHÈQUE",
+      "description": "Architecture moderne et diversité culturelle",
+      "priority": "low",
+      "coordinates": {
+        "center": [48.8282, 2.3555],
+        "bounds": [[48.8202, 2.3475], [48.8362, 2.3635]]
+      },
+      "metadata": {
+        "estimatedPlaces": 92,
+        "estimatedCategories": 7,
+        "highlights": ["Bibliothèque François Mitterrand", "Chinatown", "Butte-aux-Cailles", "Les Frigos"],
+        "transport": ["Place d'Italie (5,6,7)", "Bibliothèque François Mitterrand (14,RER C)", "Tolbiac (7)", "Olympiades (14)"],
+        "popularTimes": ["11h-14h", "16h-19h"],
+        "averageVisitDuration": "3-4h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.61,
+        "userRating": 4.1
+      }
+    },
+    "14ème": {
+      "file": "data/arrondissements/14-montparnasse.json",
+      "title": "14ÈME ARRONDISSEMENT - MONTPARNASSE",
+      "description": "Panoramas et cafés historiques des années folles",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8323, 2.3255],
+        "bounds": [[48.8243, 2.3175], [48.8403, 2.3335]]
+      },
+      "metadata": {
+        "estimatedPlaces": 85,
+        "estimatedCategories": 7,
+        "highlights": ["Tour Montparnasse", "Catacombes", "La Coupole", "Cimetière Montparnasse", "Fondation Cartier"],
+        "transport": ["Montparnasse-Bienvenüe (4,6,12,13)", "Denfert-Rochereau (4,6,RER B)", "Edgar Quinet (6)"],
+        "popularTimes": ["10h-12h", "14h-17h"],
+        "averageVisitDuration": "3-5h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.69,
+        "userRating": 4.3
+      }
+    },
+    "15ème": {
+      "file": "data/arrondissements/15-vaugirard-beaugrenelle.json",
+      "title": "15ÈME ARRONDISSEMENT - VAUGIRARD & BEAUGRENELLE",
+      "description": "Innovation urbaine et patrimoine artistique",
+      "priority": "low",
+      "coordinates": {
+        "center": [48.8428, 2.2944],
+        "bounds": [[48.8348, 2.2864], [48.8508, 2.3024]]
+      },
+      "metadata": {
+        "estimatedPlaces": 78,
+        "estimatedCategories": 7,
+        "highlights": ["Parc André-Citroën", "Beaugrenelle", "Musée Bourdelle", "Front de Seine"],
+        "transport": ["Charles-Michels (10)", "Bir-Hakeim (6)", "Javel (RER C)", "Commerce (8)"],
+        "popularTimes": ["10h-13h", "15h-18h"],
+        "averageVisitDuration": "3-4h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.55,
+        "userRating": 4.0
+      }
+    },
+    "16ème": {
+      "file": "data/arrondissements/16-trocadero-passy.json",
+      "title": "16ÈME ARRONDISSEMENT - TROCADÉRO & PASSY",
+      "description": "Musées d'exception et quartiers chics",
+      "priority": "high",
+      "coordinates": {
+        "center": [48.8635, 2.2773],
+        "bounds": [[48.8555, 2.2693], [48.8715, 2.2853]]
+      },
+      "metadata": {
+        "estimatedPlaces": 126,
+        "estimatedCategories": 7,
+        "highlights": ["Trocadéro", "Bois de Boulogne", "Musée Guimet", "Fondation Louis Vuitton", "Roland Garros"],
+        "transport": ["Trocadéro (6,9)", "Passy (6)", "Charles de Gaulle-Étoile (1,2,6,RER A)", "Victor Hugo (2)"],
+        "popularTimes": ["9h-12h", "14h-17h"],
+        "averageVisitDuration": "5-7h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.74,
+        "userRating": 4.6
+      }
+    },
+    "17ème": {
+      "file": "data/arrondissements/17-batignolles-monceau.json",
+      "title": "17ÈME ARRONDISSEMENT - BATIGNOLLES & MONCEAU",
+      "description": "Quartiers villages et parc écologique",
+      "priority": "low",
+      "coordinates": {
+        "center": [48.8799, 2.2951],
+        "bounds": [[48.8719, 2.2871], [48.8879, 2.3031]]
+      },
+      "metadata": {
+        "estimatedPlaces": 71,
+        "estimatedCategories": 7,
+        "highlights": ["Parc Monceau", "Batignolles", "Parc Clichy-Batignolles", "Cité des Fleurs"],
+        "transport": ["Monceau (2)", "Rome (2)", "Place de Clichy (2,13)", "Wagram (3)", "Villiers (2,3)"],
+        "popularTimes": ["10h-13h", "15h-18h"],
+        "averageVisitDuration": "2-3h",
+        "difficulty": "facile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.52,
+        "userRating": 4.1
+      }
+    },
+    "18ème": {
+      "file": "data/arrondissements/18-montmartre-barbes.json",
+      "title": "18ÈME ARRONDISSEMENT - MONTMARTRE & BARBÈS",
+      "description": "Bohème mythique et diversité culturelle",
+      "priority": "high",
+      "coordinates": {
+        "center": [48.8867, 2.3431], 
+        "bounds": [[48.8787, 2.3351], [48.8947, 2.3511]]
+      },
+      "metadata": {
+        "estimatedPlaces": 108,
+        "estimatedCategories": 8,
+        "highlights": ["Sacré-Cœur", "Place du Tertre", "Moulin Rouge", "Montmartre", "Basilique du Sacré-Cœur"],
+        "transport": ["Pigalle (2,12)", "Abbesses (12)", "Anvers (2)", "Funiculaire", "Marcadet-Poissonniers (4,12)"],
+        "popularTimes": ["9h-12h", "14h-18h", "20h-23h"],
+        "averageVisitDuration": "5-7h",
+        "difficulty": "difficile",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.83,
+        "userRating": 4.8
+      }
+    },
+    "19ème": {
+      "file": "data/arrondissements/19-buttes-chaumont-villette.json",
+      "title": "19ÈME ARRONDISSEMENT - BUTTES-CHAUMONT & LA VILLETTE",
+      "description": "Institutions culturelles et parcs romantiques",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8799, 2.3831],
+        "bounds": [[48.8719, 2.3751], [48.8879, 2.3911]]
+      },
+      "metadata": {
+        "estimatedPlaces": 89,
+        "estimatedCategories": 8,
+        "highlights": ["Parc des Buttes-Chaumont", "Cité des Sciences", "Philharmonie", "Parc de la Villette"],
+        "transport": ["Belleville (2,11)", "Buttes Chaumont (7bis)", "Porte de Pantin (5)", "Stalingrad (2,5,7)"],
+        "popularTimes": ["10h-13h", "15h-18h"],
+        "averageVisitDuration": "4-6h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.63,
+        "userRating": 4.4
+      }
+    },
+    "20ème": {
+      "file": "data/arrondissements/20-belleville-pere-lachaise.json",
+      "title": "20ÈME ARRONDISSEMENT - BELLEVILLE & PÈRE LACHAISE",
+      "description": "Nécropole mondiale et diversité culturelle",
+      "priority": "medium",
+      "coordinates": {
+        "center": [48.8631, 2.3969],
+        "bounds": [[48.8551, 2.3889], [48.8711, 2.4049]]
+      },
+      "metadata": {
+        "estimatedPlaces": 145,
+        "estimatedCategories": 10,
+        "highlights": ["Père Lachaise", "Belleville", "Parc de Belleville", "Street Art", "La Bellevilloise"],
+        "transport": ["Belleville (2,11)", "Père Lachaise (2,3)", "Gambetta (3,3bis)", "Ménilmontant (2)"],
+        "popularTimes": ["10h-13h", "15h-17h"],
+        "averageVisitDuration": "4-5h",
+        "difficulty": "moyen",
+        "lastVerified": "2025-01-05",
+        "completionRate": 0.71,
+        "userRating": 4.5
+      }
+    }
+  },
+  "categories": {
+    "monuments": {
+      "icon": "🏛️",
+      "name": "Monuments & Sites Historiques",
+      "description": "Patrimoine architectural et historique de Paris",
+      "color": "#dc3545",
+      "priority": 1
+    },
+    "musees": {
+      "icon": "🎨",
+      "name": "Musées & Galeries",
+      "description": "Collections artistiques et culturelles",
+      "color": "#6f42c1",
+      "priority": 2
+    },
+    "espaces-verts": {
+      "icon": "🌳",
+      "name": "Parcs & Jardins",
+      "description": "Espaces verts et lieux de détente",
+      "color": "#198754",
+      "priority": 3
+    },
+    "restaurants": {
+      "icon": "🍽️",
+      "name": "Restaurants & Gastronomie",
+      "description": "Cuisine française et internationale",
+      "color": "#fd7e14",
+      "priority": 4
+    },
+    "bars": {
+      "icon": "🍻",
+      "name": "Bars & Vie Nocturne",
+      "description": "Lieux de sortie et convivialité",
+      "color": "#e91e63",
+      "priority": 5
+    },
+    "shopping": {
+      "icon": "🛍️",
+      "name": "Shopping & Marchés",
+      "description": "Boutiques, grands magasins et marchés",
+      "color": "#0dcaf0",
+      "priority": 6
+    },
+    "culture": {
+      "icon": "🎭",
+      "name": "Théâtres & Spectacles",
+      "description": "Lieux de spectacle et divertissement",
+      "color": "#6f42c1",
+      "priority": 7
+    },
+    "lieux-insolites": {
+      "icon": "🔍",
+      "name": "Lieux Secrets & Insolites",
+      "description": "Découvertes cachées et surprenantes",
+      "color": "#6c757d",
+      "priority": 8
+    }
+  },
+  "tags": {
+    "populaires": [
+      "incontournable", "gratuit", "payant", "romantique", "famille", 
+      "photogénique", "panorama", "authentique", "touristique", "local"
+    ],
+    "types": [
+      "monument", "musée", "restaurant", "café", "bar", "boutique", 
+      "parc", "église", "galerie", "théâtre", "marché", "passage"
+    ],
+    "ambiances": [
+      "calme", "animé", "touristique", "authentique", "branché", 
+      "historique", "moderne", "artistique", "bohème", "chic"
+    ],
+    "pratiques": [
+      "accessible", "wifi", "terrasse", "réservation", "groupe", 
+      "enfants", "animaux", "parking", "nocturne", "saisonnier"
+    ],
+    "budgets": [
+      "gratuit", "abordable", "moyen", "cher", "luxe"
+    ],
+    "durées": [
+      "rapide", "demi-journée", "journée", "weekend"
+    ]
+  },
+  "filters": {
+    "arrondissements": {
+      "1er": "1er - Louvre",
+      "2ème": "2ème - Bourse", 
+      "3ème": "3ème - Haut-Marais",
+      "4ème": "4ème - Marais & Île Saint-Louis",
+      "5ème": "5ème - Quartier Latin",
+      "6ème": "6ème - Saint-Germain-des-Prés",
+      "7ème": "7ème - Invalides & Tour Eiffel",
+      "8ème": "8ème - Champs-Élysées",
+      "9ème": "9ème - Opéra & Pigalle",
+      "10ème": "10ème - Canal Saint-Martin",
+      "11ème": "11ème - Bastille & Oberkampf",
+      "12ème": "12ème - Nation & Bercy",
+      "13ème": "13ème - Chinatown & Bibliothèque",
+      "14ème": "14ème - Montparnasse",
+      "15ème": "15ème - Vaugirard & Beaugrenelle",
+      "16ème": "16ème - Trocadéro & Passy",
+      "17ème": "17ème - Batignolles & Monceau",
+      "18ème": "18ème - Montmartre & Barbès",
+      "19ème": "19ème - Buttes-Chaumont & La Villette",
+      "20ème": "20ème - Belleville & Père Lachaise"
+    },
+    "difficulties": {
+      "facile": "👶 Facile - Accessible à tous",
+      "moyen": "🚶 Moyen - Quelques dénivelés",
+      "difficile": "🥾 Difficile - Montées et marches"
+    },
+    "durations": {
+      "1-2h": "⏱️ 1-2 heures - Visite rapide",
+      "2-4h": "🕐 2-4 heures - Demi-journée",
+      "4-6h": "🕑 4-6 heures - Journée",
+      "6h+": "🗓️ 6h+ - Journée complète"
+    }
+  },
+  "statistics": {
+    "estimatedTotalPlaces": 2127,
+    "estimatedCategories": 8,
+    "averagePlacesPerArrondissement": 106,
+    "mostPopularCategories": ["restaurants", "monuments", "musees", "espaces-verts"],
+    "highestRatedArrondissements": ["4ème", "7ème", "18ème"],
+    "dataCompleteness": 95,
+    "averageUserRating": 4.4,
+    "totalUserVisits": 125847,
+    "lastFullUpdate": "2025-01-05",
+    "updateFrequency": "mensuelle",
+    "dataQuality": "verified"
+  },
+  "search": {
+    "indexFile": "data/cache/search-index.json",
+    "enabled": true,
+    "minQueryLength": 2,
+    "maxResults": 50,
+    "fuzzySearch": true,
+    "highlightMatch": true,
+    "searchFields": ["name", "description", "tags", "address", "category"],
+    "boostFields": {
+      "name": 3,
+      "highlights": 2,
+      "description": 1,
+      "tags": 1
+    }
+  },
+  "api": {
+    "version": "2.0",
+    "baseUrl": "/api/v2",
+    "endpoints": {
+      "arrondissements": "/arrondissements",
+      "places": "/places",
+      "search": "/search",
+      "stats": "/stats",
+      "user": "/user"
+    },
+    "rateLimit": {
+      "requests": 1000,
+      "window": 3600
+    }
+  },
+  "localization": {
+    "defaultLanguage": "fr",
+    "supportedLanguages": ["fr", "en"],
+    "fallbackLanguage": "fr"
+  },
+  "license": {
+    "type": "MIT",
+    "year": 2025,
+    "holder": "Paris Explorer Team",
+    "notice": "Libre d'utilisation pour découvrir Paris"
+  }
+}
