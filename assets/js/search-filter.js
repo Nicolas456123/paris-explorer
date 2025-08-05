@@ -1,650 +1,499 @@
-// ===== SEARCH-FILTER - SYSTÈME DE RECHERCHE ET FILTRES AVANCÉS =====
+// ===== SEARCH & FILTER MANAGER - RECHERCHE ET FILTRES AVANCÉS =====
 
 class SearchFilterManager {
     constructor(app) {
         this.app = app;
-        this.searchIndex = new Map();
+        this.searchQuery = '';
         this.activeFilters = {
             arrondissement: '',
             category: '',
             status: '',
-            tags: [],
-            rating: null,
-            distance: null
+            type: '',
+            budget: '',
+            rating: ''
         };
         this.searchHistory = [];
-        this.maxHistorySize = 50;
-        this.searchCache = new Map();
+        this.searchSuggestions = [];
+        this.debounceTimer = null;
         
-        this.initializeSearch();
+        this.init();
     }
     
     // === INITIALISATION ===
-    
-    initializeSearch() {
+    init() {
         this.loadSearchHistory();
-        this.setupSearchEventListeners();
-        this.setupFilterEventListeners();
+        this.buildSearchIndex();
+        this.setupEventListeners();
+        this.loadFilterOptions();
     }
     
-    setupSearchEventListeners() {
-        const searchInput = Utils.DOM.$('#searchInput');
-        if (searchInput) {
-            // Recherche avec debounce pour les performances
-            const debouncedSearch = Utils.Performance.debounce((query) => {
-                this.performSearch(query);
-            }, 300);
-            
-            searchInput.addEventListener('input', (e) => {
-                debouncedSearch(e.target.value);
-            });
-            
-            // Raccourcis clavier
-            searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    this.clearSearch();
-                } else if (e.key === 'Enter') {
-                    this.addToSearchHistory(e.target.value);
-                }
-            });
-        }
-    }
-    
-    setupFilterEventListeners() {
-        const arrFilter = Utils.DOM.$('#arrondissementFilter');
-        const catFilter = Utils.DOM.$('#categoryFilter');
-        const statusFilter = Utils.DOM.$('#statusFilter');
-        
-        [arrFilter, catFilter, statusFilter].forEach(filter => {
-            if (filter) {
-                filter.addEventListener('change', () => {
-                    this.updateFilters();
-                    this.applyFilters();
-                });
-            }
-        });
-    }
-    
-    // === CONSTRUCTION DE L'INDEX DE RECHERCHE ===
-    
+    // === INDEX DE RECHERCHE ===
     buildSearchIndex() {
-        console.log('🔍 Construction de l\'index de recherche...');
-        this.searchIndex.clear();
+        this.searchIndex = new Map();
         
-        if (!this.app.isDataLoaded) {
-            return;
-        }
+        if (!this.app.isDataLoaded) return;
         
         Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
             Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
                 (catData.places || []).forEach(place => {
                     const placeId = this.app.createPlaceId(arrKey, catKey, place.name);
                     
-                    // Créer l'entrée d'index
-                    const indexEntry = {
-                        id: placeId,
-                        arrondissement: arrKey,
-                        arrondissementTitle: arrData.title,
-                        category: catKey,
-                        categoryTitle: catData.title,
-                        name: place.name,
-                        description: place.description || '',
-                        address: place.address || '',
-                        tags: place.tags || [],
-                        searchText: this.createSearchText(place, arrData.title, catData.title),
-                        keywords: Utils.Text.extractKeywords(
-                            `${place.name} ${place.description} ${(place.tags || []).join(' ')}`
-                        )
-                    };
+                    // Créer l'index de recherche
+                    const searchableText = [
+                        place.name,
+                        place.description || '',
+                        place.address || '',
+                        arrData.title,
+                        catData.title,
+                        ...(place.tags || [])
+                    ].join(' ').toLowerCase();
                     
-                    this.searchIndex.set(placeId, indexEntry);
+                    this.searchIndex.set(placeId, {
+                        place,
+                        arrKey,
+                        catKey,
+                        arrData,
+                        catData,
+                        searchableText,
+                        keywords: this.extractKeywords(searchableText)
+                    });
                 });
             });
         });
         
-        console.log(`✅ Index construit avec ${this.searchIndex.size} lieux`);
+        console.log(`🔍 Index de recherche créé: ${this.searchIndex.size} lieux indexés`);
     }
     
-    createSearchText(place, arrTitle, catTitle) {
-        return [
-            place.name,
-            place.description,
-            place.address,
-            arrTitle,
-            catTitle,
-            ...(place.tags || [])
-        ].filter(Boolean).join(' ').toLowerCase();
+    extractKeywords(text) {
+        // Extraire les mots-clés significatifs
+        const stopWords = ['le', 'la', 'les', 'de', 'du', 'des', 'et', 'ou', 'à', 'dans', 'sur', 'avec', 'pour', 'par', 'un', 'une'];
+        
+        return text
+            .split(/\s+/)
+            .filter(word => word.length > 2 && !stopWords.includes(word))
+            .map(word => word.replace(/[^\w]/g, ''))
+            .filter(word => word.length > 2);
     }
     
-    // === RECHERCHE PRINCIPALE ===
-    
-    performSearch(query) {
-        const trimmedQuery = query.trim();
-        
-        if (trimmedQuery.length === 0) {
-            this.clearSearchResults();
-            return;
+    // === RECHERCHE AVANCÉE ===
+    performSearch(query, filters = {}) {
+        if (!query && Object.values(filters).every(f => !f)) {
+            return this.getAllPlaces();
         }
         
-        // Vérifier le cache
-        const cacheKey = this.getCacheKey(trimmedQuery);
-        if (this.searchCache.has(cacheKey)) {
-            const cachedResults = this.searchCache.get(cacheKey);
-            this.displaySearchResults(cachedResults, trimmedQuery);
-            return;
-        }
-        
-        console.log(`🔍 Recherche: "${trimmedQuery}"`);
-        
-        const startTime = performance.now();
-        const results = this.searchInIndex(trimmedQuery);
-        const endTime = performance.now();
-        
-        console.log(`⏱️ Recherche terminée en ${(endTime - startTime).toFixed(2)}ms - ${results.length} résultats`);
-        
-        // Mettre en cache
-        this.searchCache.set(cacheKey, results);
-        
-        // Limiter la taille du cache
-        if (this.searchCache.size > 100) {
-            const firstKey = this.searchCache.keys().next().value;
-            this.searchCache.delete(firstKey);
-        }
-        
-        this.displaySearchResults(results, trimmedQuery);
-    }
-    
-    searchInIndex(query) {
-        const queryLower = query.toLowerCase();
-        const queryWords = queryLower.split(/\s+/).filter(word => word.length > 1);
         const results = [];
+        const lowerQuery = query.toLowerCase().trim();
         
-        this.searchIndex.forEach((entry, placeId) => {
-            const score = this.calculateSearchScore(entry, queryLower, queryWords);
+        this.searchIndex.forEach((data, placeId) => {
+            let score = 0;
+            let matches = true;
             
-            if (score > 0) {
+            // Score de pertinence textuelle
+            if (lowerQuery) {
+                score += this.calculateTextScore(data, lowerQuery);
+                if (score === 0) matches = false;
+            }
+            
+            // Filtres
+            if (matches && filters.arrondissement && !data.arrKey.includes(filters.arrondissement)) {
+                matches = false;
+            }
+            
+            if (matches && filters.category && !data.catKey.toLowerCase().includes(filters.category.toLowerCase())) {
+                matches = false;
+            }
+            
+            if (matches && filters.status) {
+                const userData = this.app.getCurrentUserData();
+                const isVisited = userData && userData.visitedPlaces instanceof Set ? 
+                    userData.visitedPlaces.has(placeId) : false;
+                
+                if (filters.status === 'visited' && !isVisited) matches = false;
+                if (filters.status === 'unvisited' && isVisited) matches = false;
+            }
+            
+            if (matches && filters.type) {
+                const placeType = this.getPlaceType(data.place, data.catKey);
+                if (placeType !== filters.type) matches = false;
+            }
+            
+            if (matches) {
                 results.push({
-                    ...entry,
-                    score,
-                    matchType: this.getMatchType(entry, queryLower)
+                    ...data,
+                    placeId,
+                    score
                 });
             }
         });
         
-        // Trier par score décroissant
-        return results.sort((a, b) => b.score - a.score);
-    }
-    
-    calculateSearchScore(entry, query, queryWords) {
-        let score = 0;
-        const searchText = entry.searchText;
-        
-        // Score pour correspondance exacte du nom
-        if (entry.name.toLowerCase().includes(query)) {
-            score += 100;
-            
-            // Bonus si c'est le début du nom
-            if (entry.name.toLowerCase().startsWith(query)) {
-                score += 50;
-            }
-        }
-        
-        // Score pour mots-clés individuels
-        queryWords.forEach(word => {
-            if (searchText.includes(word)) {
-                score += 20;
-                
-                // Bonus pour les tags
-                if (entry.tags.some(tag => tag.toLowerCase().includes(word))) {
-                    score += 10;
-                }
-                
-                // Bonus pour l'adresse
-                if (entry.address.toLowerCase().includes(word)) {
-                    score += 15;
-                }
-                
-                // Bonus pour la description
-                if (entry.description.toLowerCase().includes(word)) {
-                    score += 5;
-                }
-            }
-        });
-        
-        // Score pour correspondance floue
-        const fuzzyScore = this.calculateFuzzyScore(entry.name.toLowerCase(), query);
-        if (fuzzyScore > 0.7) {
-            score += Math.floor(fuzzyScore * 30);
-        }
-        
-        return score;
-    }
-    
-    calculateFuzzyScore(text, query) {
-        if (text === query) return 1;
-        if (query.length === 0) return 0;
-        
-        let matches = 0;
-        let queryIndex = 0;
-        
-        for (let i = 0; i < text.length && queryIndex < query.length; i++) {
-            if (text[i] === query[queryIndex]) {
-                matches++;
-                queryIndex++;
-            }
-        }
-        
-        return matches / query.length;
-    }
-    
-    getMatchType(entry, query) {
-        if (entry.name.toLowerCase() === query) return 'exact';
-        if (entry.name.toLowerCase().startsWith(query)) return 'prefix';
-        if (entry.name.toLowerCase().includes(query)) return 'contains';
-        if (entry.tags.some(tag => tag.toLowerCase().includes(query))) return 'tag';
-        if (entry.address.toLowerCase().includes(query)) return 'address';
-        return 'fuzzy';
-    }
-    
-    // === FILTRES ===
-    
-    updateFilters() {
-        const arrFilter = Utils.DOM.$('#arrondissementFilter');
-        const catFilter = Utils.DOM.$('#categoryFilter');
-        const statusFilter = Utils.DOM.$('#statusFilter');
-        
-        this.activeFilters = {
-            arrondissement: arrFilter ? arrFilter.value : '',
-            category: catFilter ? catFilter.value : '',
-            status: statusFilter ? statusFilter.value : '',
-            tags: [],
-            rating: null,
-            distance: null
-        };
-        
-        console.log('🔧 Filtres mis à jour:', this.activeFilters);
-    }
-    
-    applyFilters() {
-        if (!this.app.isDataLoaded) return;
-        
-        const filteredResults = this.filterSearchResults();
-        this.app.uiManager.renderContent();
-        
-        // Mettre à jour les stats des filtres
-        this.updateFilterStats(filteredResults);
-    }
-    
-    filterSearchResults() {
-        const results = [];
-        
-        this.searchIndex.forEach((entry) => {
-            if (this.passesFilters(entry)) {
-                results.push(entry);
-            }
-        });
+        // Trier par score de pertinence
+        results.sort((a, b) => b.score - a.score);
         
         return results;
     }
     
-    passesFilters(entry) {
-        // Filtre arrondissement
-        if (this.activeFilters.arrondissement && 
-            entry.arrondissement !== this.activeFilters.arrondissement) {
-            return false;
-        }
+    calculateTextScore(data, query) {
+        let score = 0;
+        const queryWords = query.split(/\s+/).filter(w => w.length > 1);
         
-        // Filtre catégorie
-        if (this.activeFilters.category && 
-            entry.category !== this.activeFilters.category) {
-            return false;
-        }
-        
-        // Filtre statut
-        if (this.activeFilters.status) {
-            const userData = this.app.getCurrentUserData();
-            const isVisited = userData && userData.visitedPlaces.has(entry.id);
-            
-            switch (this.activeFilters.status) {
-                case 'visited':
-                    if (!isVisited) return false;
-                    break;
-                case 'unvisited':
-                    if (isVisited) return false;
-                    break;
-                case 'favorites':
-                    if (!userData || !userData.favorites || !userData.favorites.has(entry.id)) {
-                        return false;
-                    }
-                    break;
+        queryWords.forEach(word => {
+            // Score exact match nom
+            if (data.place.name.toLowerCase().includes(word)) {
+                score += 10;
             }
-        }
+            
+            // Score match début nom
+            if (data.place.name.toLowerCase().startsWith(word)) {
+                score += 15;
+            }
+            
+            // Score description
+            if (data.place.description && data.place.description.toLowerCase().includes(word)) {
+                score += 5;
+            }
+            
+            // Score adresse
+            if (data.place.address && data.place.address.toLowerCase().includes(word)) {
+                score += 3;
+            }
+            
+            // Score tags
+            if (data.place.tags && data.place.tags.some(tag => tag.toLowerCase().includes(word))) {
+                score += 8;
+            }
+            
+            // Score arrondissement/catégorie
+            if (data.arrData.title.toLowerCase().includes(word) || 
+                data.catData.title.toLowerCase().includes(word)) {
+                score += 4;
+            }
+        });
         
-        // Filtre tags
-        if (this.activeFilters.tags.length > 0) {
-            const hasMatchingTag = this.activeFilters.tags.some(tag => 
-                entry.tags.some(entryTag => 
-                    entryTag.toLowerCase().includes(tag.toLowerCase())
-                )
-            );
-            if (!hasMatchingTag) return false;
-        }
-        
-        return true;
+        return score;
     }
     
     // === SUGGESTIONS DE RECHERCHE ===
-    
-    generateSearchSuggestions(query) {
-        if (!query || query.length < 2) {
-            return this.getPopularSearches();
-        }
+    getSuggestions(query) {
+        if (!query || query.length < 2) return [];
         
-        const suggestions = [];
-        const queryLower = query.toLowerCase();
+        const suggestions = new Set();
+        const lowerQuery = query.toLowerCase();
         
-        // Suggestions basées sur les noms de lieux
-        this.searchIndex.forEach((entry) => {
-            if (entry.name.toLowerCase().startsWith(queryLower)) {
-                suggestions.push({
-                    text: entry.name,
-                    type: 'place',
-                    category: entry.categoryTitle,
-                    arrondissement: entry.arrondissementTitle
-                });
+        this.searchIndex.forEach((data) => {
+            // Suggestions depuis noms de lieux
+            if (data.place.name.toLowerCase().includes(lowerQuery)) {
+                suggestions.add(data.place.name);
             }
-        });
-        
-        // Suggestions basées sur les catégories
-        const categories = this.getUniqueCategories();
-        categories.forEach(cat => {
-            if (cat.toLowerCase().includes(queryLower)) {
-                suggestions.push({
-                    text: cat,
-                    type: 'category'
-                });
-            }
-        });
-        
-        // Suggestions basées sur les arrondissements
-        const arrondissements = this.getUniqueArrondissements();
-        arrondissements.forEach(arr => {
-            if (arr.toLowerCase().includes(queryLower)) {
-                suggestions.push({
-                    text: arr,
-                    type: 'arrondissement'
-                });
-            }
-        });
-        
-        // Limiter et trier
-        return suggestions
-            .slice(0, 10)
-            .sort((a, b) => a.text.localeCompare(b.text));
-    }
-    
-    getPopularSearches() {
-        return this.searchHistory
-            .slice(-10)
-            .reverse()
-            .map(query => ({
-                text: query,
-                type: 'history'
-            }));
-    }
-    
-    // === EXPORT DE FILTRES ===
-    
-    exportFilteredResults(format = 'json') {
-        const filteredResults = this.filterSearchResults();
-        const userData = this.app.getCurrentUserData();
-        
-        const exportData = {
-            metadata: {
-                exportDate: Utils.Date.now(),
-                filters: this.activeFilters,
-                totalResults: filteredResults.length,
-                user: userData ? userData.name : 'Anonymous'
-            },
-            results: filteredResults.map(entry => ({
-                ...entry,
-                isVisited: userData ? userData.visitedPlaces.has(entry.id) : false,
-                isFavorite: userData && userData.favorites ? userData.favorites.has(entry.id) : false
-            }))
-        };
-        
-        const filename = `paris-explorer-filtered-${new Date().toISOString().split('T')[0]}.${format}`;
-        
-        if (format === 'json') {
-            const jsonString = JSON.stringify(exportData, null, 2);
-            this.downloadFile(jsonString, filename, 'application/json');
-        } else if (format === 'csv') {
-            const csvData = this.resultsToCSV(exportData.results);
-            this.downloadFile(csvData, filename, 'text/csv');
-        }
-        
-        this.app.showNotification(`Export filtré téléchargé : ${filename}`, 'success');
-    }
-    
-    resultsToCSV(results) {
-        const headers = [
-            'Nom',
-            'Arrondissement',
-            'Catégorie',
-            'Description',
-            'Adresse',
-            'Tags',
-            'Visité',
-            'Favori'
-        ];
-        
-        const rows = [headers.join(',')];
-        
-        results.forEach(entry => {
-            const row = [
-                `"${entry.name}"`,
-                `"${entry.arrondissementTitle}"`,
-                `"${entry.categoryTitle}"`,
-                `"${(entry.description || '').replace(/"/g, '""')}"`,
-                `"${entry.address}"`,
-                `"${entry.tags.join(', ')}"`,
-                entry.isVisited ? 'Oui' : 'Non',
-                entry.isFavorite ? 'Oui' : 'Non'
-            ];
             
-            rows.push(row.join(','));
+            // Suggestions depuis tags
+            if (data.place.tags) {
+                data.place.tags.forEach(tag => {
+                    if (tag.toLowerCase().includes(lowerQuery)) {
+                        suggestions.add(tag);
+                    }
+                });
+            }
+            
+            // Suggestions depuis arrondissements
+            if (data.arrData.title.toLowerCase().includes(lowerQuery)) {
+                suggestions.add(data.arrData.title);
+            }
         });
         
-        return rows.join('\n');
+        return Array.from(suggestions).slice(0, 8);
     }
     
-    // === STATISTIQUES DE RECHERCHE ===
-    
-    getSearchStatistics() {
-        const stats = {
-            totalPlaces: this.searchIndex.size,
-            searchHistory: this.searchHistory.length,
-            cacheSize: this.searchCache.size,
-            activeFilters: Object.values(this.activeFilters).filter(Boolean).length,
-            popularQueries: this.getPopularQueries(),
-            categoryCounts: this.getCategoryCounts(),
-            arrondissementCounts: this.getArrondissementCounts()
-        };
-        
-        return stats;
+    // === FILTRES AVANCÉS ===
+    loadFilterOptions() {
+        this.loadArrondissementFilter();
+        this.loadCategoryFilter();
     }
     
-    getPopularQueries() {
-        const queryCounts = {};
+    loadArrondissementFilter() {
+        const select = document.getElementById('arrondissementFilter');
+        if (!select) return;
         
-        this.searchHistory.forEach(query => {
-            queryCounts[query] = (queryCounts[query] || 0) + 1;
-        });
+        select.innerHTML = '<option value="">Tous les arrondissements</option>';
         
-        return Object.entries(queryCounts)
-            .sort(([, a], [, b]) => b - a)
-            .slice(0, 10)
-            .map(([query, count]) => ({ query, count }));
-    }
-    
-    getCategoryCounts() {
-        const counts = {};
-        
-        this.searchIndex.forEach(entry => {
-            counts[entry.category] = (counts[entry.category] || 0) + 1;
-        });
-        
-        return counts;
-    }
-    
-    getArrondissementCounts() {
-        const counts = {};
-        
-        this.searchIndex.forEach(entry => {
-            counts[entry.arrondissement] = (counts[entry.arrondissement] || 0) + 1;
-        });
-        
-        return counts;
-    }
-    
-    // === UTILITAIRES ===
-    
-    getCacheKey(query) {
-        return `${query}-${JSON.stringify(this.activeFilters)}`;
-    }
-    
-    clearSearch() {
-        const searchInput = Utils.DOM.$('#searchInput');
-        if (searchInput) {
-            searchInput.value = '';
-            this.clearSearchResults();
+        if (this.app.isDataLoaded) {
+            Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
+                const option = document.createElement('option');
+                option.value = arrKey;
+                option.textContent = arrData.title;
+                select.appendChild(option);
+            });
         }
     }
     
-    clearSearchResults() {
-        this.app.searchQuery = '';
-        this.app.uiManager.renderContent();
+    loadCategoryFilter() {
+        const select = document.getElementById('categoryFilter');
+        if (!select) return;
+        
+        const categories = new Set();
+        
+        if (this.app.isDataLoaded) {
+            Object.values(this.app.parisData).forEach(arrData => {
+                Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
+                    categories.add({
+                        key: catKey,
+                        title: catData.title
+                    });
+                });
+            });
+        }
+        
+        select.innerHTML = '<option value="">Toutes les catégories</option>';
+        Array.from(categories).sort((a, b) => a.title.localeCompare(b.title)).forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat.key;
+            option.textContent = cat.title;
+            select.appendChild(option);
+        });
     }
     
-    displaySearchResults(results, query) {
-        this.app.searchQuery = query;
-        console.log(`🎯 Affichage de ${results.length} résultats pour "${query}"`);
-        this.app.uiManager.renderContent();
-    }
-    
+    // === HISTORIQUE DE RECHERCHE ===
     addToSearchHistory(query) {
-        const trimmedQuery = query.trim();
-        if (trimmedQuery.length < 2) return;
+        if (!query || query.length < 2) return;
         
-        // Supprimer les doublons
-        this.searchHistory = this.searchHistory.filter(q => q !== trimmedQuery);
+        const normalizedQuery = query.trim().toLowerCase();
         
-        // Ajouter en tête
-        this.searchHistory.unshift(trimmedQuery);
+        // Éviter les doublons
+        this.searchHistory = this.searchHistory.filter(h => h.query !== normalizedQuery);
         
-        // Limiter la taille
-        if (this.searchHistory.length > this.maxHistorySize) {
-            this.searchHistory = this.searchHistory.slice(0, this.maxHistorySize);
-        }
+        // Ajouter en premier
+        this.searchHistory.unshift({
+            query: normalizedQuery,
+            timestamp: Date.now(),
+            results: this.performSearch(normalizedQuery).length
+        });
+        
+        // Limiter l'historique
+        this.searchHistory = this.searchHistory.slice(0, 20);
         
         this.saveSearchHistory();
     }
     
     loadSearchHistory() {
-        this.searchHistory = Utils.Storage.load('search-history', []);
+        try {
+            const saved = localStorage.getItem('paris-explorer-search-history');
+            if (saved) {
+                this.searchHistory = JSON.parse(saved);
+            }
+        } catch (error) {
+            console.warn('Erreur chargement historique recherche:', error);
+            this.searchHistory = [];
+        }
     }
     
     saveSearchHistory() {
-        Utils.Storage.save('search-history', this.searchHistory);
+        try {
+            localStorage.setItem('paris-explorer-search-history', 
+                JSON.stringify(this.searchHistory));
+        } catch (error) {
+            console.warn('Erreur sauvegarde historique recherche:', error);
+        }
     }
     
-    getUniqueCategories() {
-        const categories = new Set();
-        this.searchIndex.forEach(entry => categories.add(entry.categoryTitle));
-        return Array.from(categories).sort();
+    // === RECHERCHE GÉOGRAPHIQUE ===
+    searchNearby(latitude, longitude, radius = 1000) {
+        // Recherche par proximité géographique
+        // Nécessite les coordonnées des lieux
+        const results = [];
+        
+        this.searchIndex.forEach((data, placeId) => {
+            if (data.place.coordinates) {
+                const distance = this.calculateDistance(
+                    latitude, longitude,
+                    data.place.coordinates.lat, 
+                    data.place.coordinates.lng
+                );
+                
+                if (distance <= radius) {
+                    results.push({
+                        ...data,
+                        placeId,
+                        distance
+                    });
+                }
+            }
+        });
+        
+        results.sort((a, b) => a.distance - b.distance);
+        return results;
     }
     
-    getUniqueArrondissements() {
-        const arrondissements = new Set();
-        this.searchIndex.forEach(entry => arrondissements.add(entry.arrondissementTitle));
-        return Array.from(arrondissements).sort();
+    calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371e3; // Rayon de la Terre en mètres
+        const φ1 = lat1 * Math.PI/180;
+        const φ2 = lat2 * Math.PI/180;
+        const Δφ = (lat2-lat1) * Math.PI/180;
+        const Δλ = (lon2-lon1) * Math.PI/180;
+        
+        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        
+        return R * c;
     }
     
-    downloadFile(content, filename, mimeType) {
-        const blob = new Blob([content], { type: mimeType });
-        const url = URL.createObjectURL(blob);
+    // === FILTRES INTELLIGENTS ===
+    getSmartFilters() {
+        const userData = this.app.getCurrentUserData();
+        const filters = [];
         
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.style.display = 'none';
-        
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        
-        setTimeout(() => URL.revokeObjectURL(url), 100);
-    }
-    
-    // === MISE À JOUR DES FILTRES DANS L'UI ===
-    
-    populateFilterDropdowns() {
-        this.populateArrondissementFilter();
-        this.populateCategoryFilter();
-    }
-    
-    populateArrondissementFilter() {
-        const select = Utils.DOM.$('#arrondissementFilter');
-        if (!select) return;
-        
-        const arrondissements = this.getUniqueArrondissements();
-        
-        // Vider les options existantes (sauf la première)
-        while (select.children.length > 1) {
-            select.removeChild(select.lastChild);
+        if (userData) {
+            // Filtres basés sur l'activité utilisateur
+            const visitedCount = userData.visitedPlaces?.size || 0;
+            const totalPlaces = this.app.dataManager.getTotalPlaces();
+            
+            if (visitedCount > 0) {
+                filters.push({
+                    label: 'Mes explorations',
+                    filter: { status: 'visited' },
+                    count: visitedCount
+                });
+            }
+            
+            if (visitedCount < totalPlaces) {
+                filters.push({
+                    label: 'À découvrir',
+                    filter: { status: 'unvisited' },
+                    count: totalPlaces - visitedCount
+                });
+            }
+            
+            // Arrondissement favori
+            if (userData.stats?.favoriteArrondissement) {
+                filters.push({
+                    label: `Mon ${userData.stats.favoriteArrondissement}`,
+                    filter: { arrondissement: userData.stats.favoriteArrondissement },
+                    count: 0 // À calculer
+                });
+            }
         }
         
-        arrondissements.forEach(arr => {
-            const option = document.createElement('option');
-            option.value = this.getArrondissementKey(arr);
-            option.textContent = arr;
-            select.appendChild(option);
+        return filters;
+    }
+    
+    // === RECHERCHE VOCALE ===
+    startVoiceSearch() {
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            this.app.showNotification('Recherche vocale non supportée', 'warning');
+            return;
+        }
+        
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        
+        recognition.lang = 'fr-FR';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        
+        recognition.onstart = () => {
+            this.app.showNotification('🎤 Parlez maintenant...', 'info');
+        };
+        
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('searchInput').value = transcript;
+            this.onSearchInput(transcript);
+        };
+        
+        recognition.onerror = () => {
+            this.app.showNotification('Erreur reconnaissance vocale', 'error');
+        };
+        
+        recognition.start();
+    }
+    
+    // === UTILITAIRES ===
+    getAllPlaces() {
+        const results = [];
+        this.searchIndex.forEach((data, placeId) => {
+            results.push({ ...data, placeId, score: 1 });
+        });
+        return results;
+    }
+    
+    getPlaceType(place, categoryKey) {
+        const catKey = categoryKey.toLowerCase();
+        
+        if (catKey.includes('monument') || catKey.includes('patrimoine')) return 'monument';
+        if (catKey.includes('restaurant') || catKey.includes('gastronomie')) return 'restaurant';
+        if (catKey.includes('café') || catKey.includes('cafe')) return 'cafe';
+        if (catKey.includes('bar') || catKey.includes('cocktail')) return 'bar';
+        if (catKey.includes('shopping') || catKey.includes('boutique')) return 'shopping';
+        if (catKey.includes('musée') || catKey.includes('museum')) return 'museum';
+        if (catKey.includes('parc') || catKey.includes('jardin')) return 'park';
+        if (catKey.includes('église') || catKey.includes('cathédrale')) return 'church';
+        if (catKey.includes('hôtel') || catKey.includes('hotel')) return 'hotel';
+        if (catKey.includes('théâtre') || catKey.includes('opéra')) return 'theater';
+        
+        return 'default';
+    }
+    
+    // === ÉVÉNEMENTS ===
+    setupEventListeners() {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(this.debounceTimer);
+                this.debounceTimer = setTimeout(() => {
+                    this.onSearchInput(e.target.value);
+                }, 300);
+            });
+            
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    this.addToSearchHistory(e.target.value);
+                }
+            });
+        }
+        
+        // Filtres
+        ['arrondissementFilter', 'categoryFilter', 'statusFilter'].forEach(filterId => {
+            const filter = document.getElementById(filterId);
+            if (filter) {
+                filter.addEventListener('change', () => {
+                    this.applyFilters();
+                });
+            }
         });
     }
     
-    populateCategoryFilter() {
-        const select = Utils.DOM.$('#categoryFilter');
-        if (!select) return;
+    onSearchInput(query) {
+        this.searchQuery = query;
+        this.app.searchQuery = query.toLowerCase().trim();
         
-        const categories = this.getUniqueCategories();
-        
-        // Vider les options existantes (sauf la première)
-        while (select.children.length > 1) {
-            select.removeChild(select.lastChild);
+        // Afficher suggestions
+        if (query.length >= 2) {
+            this.showSuggestions(query);
+        } else {
+            this.hideSuggestions();
         }
         
-        categories.forEach(cat => {
-            const option = document.createElement('option');
-            option.value = this.getCategoryKey(cat);
-            option.textContent = cat;
-            select.appendChild(option);
-        });
+        // Appliquer la recherche
+        this.app.uiManager.renderContent();
     }
     
-    getArrondissementKey(title) {
-        // Extraire la clé à partir du titre (ex: "1er" depuis "1ER ARRONDISSEMENT - LE LOUVRE")
-        const match = title.match(/^(\d+(?:er|ème)?)/i);
-        return match ? match[1].toLowerCase() : '';
+    applyFilters() {
+        // Récupérer les valeurs des filtres
+        this.activeFilters.arrondissement = document.getElementById('arrondissementFilter')?.value || '';
+        this.activeFilters.category = document.getElementById('categoryFilter')?.value || '';
+        this.activeFilters.status = document.getElementById('statusFilter')?.value || '';
+        
+        // Appliquer les filtres
+        this.app.uiManager.renderContent();
     }
     
-    getCategoryKey(title) {
-        // Simplifier le titre pour obtenir une clé
-        return Utils.Text.createId(title.replace(/[🏛️🍽️☕🍻🛍️🎨🌳⛪🏨🎭📍]/g, '').trim());
+    showSuggestions(query) {
+        const suggestions = this.getSuggestions(query);
+        // Implémentation de l'affichage des suggestions
+        // À intégrer avec l'UI
     }
     
-    updateFilterStats(filteredResults) {
-        // Mettre à jour les compteurs dans l'interface si nécessaire
-        const totalVisible = filteredResults.length;
-        console.log(`📊 ${totalVisible} lieux visibles après filtrage`);
+    hideSuggestions() {
+        // Masquer les suggestions
     }
 }
