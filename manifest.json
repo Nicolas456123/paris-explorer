@@ -1,0 +1,232 @@
+{
+  "name": "Paris Explorer - La Ville Lumière",
+  "short_name": "Paris Explorer",
+  "description": "Découvrez tous les trésors cachés de Paris avec votre guide personnel interactif",
+  "version": "2.0.0",
+  "lang": "fr",
+  "dir": "ltr",
+  
+  "start_url": "/",
+  "scope": "/",
+  "id": "paris-explorer-app",
+  
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  
+  "theme_color": "#D4AF37",
+  "background_color": "#1e3a8a",
+  
+  "categories": [
+    "travel",
+    "lifestyle", 
+    "navigation",
+    "productivity"
+  ],
+  
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96x96.png", 
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128", 
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png", 
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Accueil Paris Explorer - Vue liste des arrondissements"
+    },
+    {
+      "src": "/screenshots/desktop-map.png", 
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Carte interactive avec tous les lieux parisiens"
+    },
+    {
+      "src": "/screenshots/mobile-home.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "platform": "narrow", 
+      "label": "Interface mobile optimisée"
+    },
+    {
+      "src": "/screenshots/mobile-place.png",
+      "sizes": "375x667", 
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Détail d'un lieu avec notes personnelles"
+    }
+  ],
+  
+  "features": [
+    "Cross Platform",
+    "low-latency OffscreenCanvas",
+    "Cross-origin communication",
+    "Dual Engine", 
+    "Ambient Badge"
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Rechercher",
+      "short_name": "Recherche",
+      "description": "Rechercher un lieu parisien",
+      "url": "/?action=search",
+      "icons": [
+        {
+          "src": "/icons/search-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Carte",
+      "short_name": "Carte", 
+      "description": "Ouvrir la carte interactive",
+      "url": "/?tab=map",
+      "icons": [
+        {
+          "src": "/icons/map-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Mes Favoris",
+      "short_name": "Favoris",
+      "description": "Voir mes lieux favoris",
+      "url": "/?tab=favorites", 
+      "icons": [
+        {
+          "src": "/icons/heart-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Statistiques",
+      "short_name": "Stats",
+      "description": "Voir ma progression",
+      "url": "/?tab=stats",
+      "icons": [
+        {
+          "src": "/icons/stats-96x96.png", 
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text", 
+      "url": "url",
+      "files": [
+        {
+          "name": "photos",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  
+  "protocol_handlers": [
+    {
+      "protocol": "web+parisexplorer",
+      "url": "/handle-link?url=%s"
+    }
+  ],
+  
+  "file_handlers": [
+    {
+      "action": "/import",
+      "accept": {
+        "application/json": [".json"],
+        "text/csv": [".csv"]
+      }
+    }
+  ],
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  
+  "permissions": [
+    "geolocation",
+    "notifications",
+    "persistent-storage"
+  ],
+  
+  "prefer_related_applications": false,
+  "related_applications": [],
+  
+  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9"
+}
