@@ -1,1 +1,701 @@
+/* ===== PARIS EXPLORER - STYLES RESPONSIVE ===== */
 
+/* ===== TABLETTES ET ÉCRANS MOYENS ===== */
+@media (max-width: 1024px) {
+    .app-container {
+        border-radius: 16px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .places-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 18px;
+    }
+    
+    .nav-tabs {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-tab {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    
+    .search-filters {
+        gap: 12px;
+    }
+    
+    .filter-select {
+        min-width: 130px;
+        font-size: 13px;
+    }
+    
+    .controls-row {
+        gap: 16px;
+    }
+    
+    .action-buttons {
+        gap: 12px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .map-controls {
+        top: 16px;
+        right: 16px;
+        gap: 10px;
+    }
+    
+    .map-control-btn {
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* ===== PETITES TABLETTES ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 8px;
+    }
+    
+    .app-container {
+        border-radius: 12px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Header mobile */
+    .header {
+        padding: 24px 16px;
+        flex-shrink: 0;
+    }
+    
+    .header-top {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+        margin-bottom: 24px;
+    }
+    
+    .app-title {
+        font-size: 2.4rem;
+        text-align: center;
+    }
+    
+    .app-subtitle {
+        text-align: center;
+    }
+    
+    .user-controls {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .user-selector {
+        min-width: 180px;
+        font-size: 13px;
+    }
+    
+    /* Stats mobile */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 2.2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+    }
+    
+    /* Navigation mobile */
+    .nav-section {
+        padding: 20px 16px;
+        flex-shrink: 0;
+    }
+    
+    .nav-tabs {
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--paris-gold) transparent;
+    }
+    
+    .nav-tabs::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .nav-tabs::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .nav-tabs::-webkit-scrollbar-thumb {
+        background: var(--paris-gold);
+        border-radius: 2px;
+    }
+    
+    .nav-tab {
+        font-size: 13px;
+        white-space: nowrap;
+        min-width: fit-content;
+    }
+    
+    .search-input {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .search-filters {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .filter-select {
+        width: 100%;
+    }
+    
+    .controls-row {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .filter-toggle {
+        padding: 12px 24px;
+        font-size: 13px;
+    }
+    
+    .action-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Contenu principal mobile */
+    .main-content {
+        padding: 20px 16px;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .arrondissement-header {
+        padding: 18px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .arrondissement-title {
+        font-size: 1.1rem;
+        margin-left: 32px;
+    }
+    
+    .arrondissement-number {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    .arrondissement-stats {
+        font-size: 0.85rem;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .places-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .place-card {
+        padding: 20px;
+    }
+    
+    .place-name {
+        font-size: 1.1rem;
+    }
+    
+    .place-description {
+        font-size: 0.95rem;
+    }
+    
+    /* Carte mobile */
+    .map-container {
+        height: 60vh;
+    }
+    
+    .map-controls {
+        top: 12px;
+        right: 12px;
+        gap: 8px;
+    }
+    
+    .map-control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 13px;
+    }
+    
+    /* Modal mobile */
+    .modal-content {
+        margin: 16px;
+        padding: 24px;
+        max-width: none;
+        width: calc(100% - 32px);
+    }
+    
+    .modal-title {
+        font-size: 1.4rem;
+    }
+    
+    .form-input {
+        padding: 12px 16px;
+        font-size: 15px;
+    }
+    
+    .user-list {
+        max-height: 200px;
+    }
+    
+    .user-item {
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .user-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Stats dashboard mobile */
+    .stats-dashboard {
+        gap: 24px;
+    }
+    
+    .stats-section {
+        padding: 20px;
+    }
+    
+    .arrondissement-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Notifications mobile */
+    .notification {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+        padding: 16px 20px;
+        font-size: 14px;
+    }
+    
+    /* Boutons mobile */
+    .btn {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+    
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+/* ===== MOBILES PETITS ===== */
+@media (max-width: 480px) {
+    body {
+        padding: 4px;
+    }
+    
+    .app-container {
+        border-radius: 8px;
+    }
+    
+    /* Header petit mobile */
+    .header {
+        padding: 20px 12px;
+    }
+    
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    .app-subtitle {
+        font-size: 1rem;
+    }
+    
+    .user-selector {
+        min-width: 160px;
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    
+    /* Stats petit mobile */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .stat-card {
+        padding: 16px;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    /* Navigation petit mobile */
+    .nav-section {
+        padding: 16px 12px;
+    }
+    
+    .nav-tabs {
+        gap: 8px;
+    }
+    
+    .nav-tab {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+    
+    .search-input {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .filter-toggle {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+    
+    /* Contenu principal petit mobile */
+    .main-content {
+        padding: 16px 12px;
+    }
+    
+    .arrondissement-header {
+        padding: 16px;
+    }
+    
+    .arrondissement-title {
+        font-size: 1rem;
+        margin-left: 28px;
+    }
+    
+    .arrondissement-number {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    .arrondissement-stats {
+        font-size: 0.8rem;
+        gap: 8px;
+    }
+    
+    .places-grid {
+        padding: 16px;
+        gap: 12px;
+    }
+    
+    .place-card {
+        padding: 16px;
+    }
+    
+    .place-name {
+        font-size: 1rem;
+    }
+    
+    .place-description {
+        font-size: 0.9rem;
+    }
+    
+    .place-header {
+        gap: 16px;
+    }
+    
+    .place-checkbox {
+        transform: scale(1.2);
+    }
+    
+    /* Carte petit mobile */
+    .map-container {
+        height: 50vh;
+    }
+    
+    .map-controls {
+        top: 8px;
+        right: 8px;
+        gap: 6px;
+    }
+    
+    .map-control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+        padding: 8px;
+    }
+    
+    /* Modal petit mobile */
+    .modal-content {
+        margin: 8px;
+        padding: 20px;
+    }
+    
+    .modal-title {
+        font-size: 1.2rem;
+    }
+    
+    .form-input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    
+    .user-list {
+        max-height: 180px;
+    }
+    
+    .user-item {
+        padding: 12px;
+    }
+    
+    .user-name {
+        font-size: 1rem;
+    }
+    
+    .user-progress {
+        font-size: 0.8rem;
+    }
+    
+    /* Stats dashboard petit mobile */
+    .stats-section {
+        padding: 16px;
+    }
+    
+    .stats-section h3 {
+        font-size: 1.1rem;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Notifications petit mobile */
+    .notification {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+    
+    /* Boutons petit mobile */
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .btn-sm {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    /* Tags et badges petit mobile */
+    .place-tag {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .completion-badge {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .address-link {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== MODE PAYSAGE MOBILE ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header {
+        padding: 16px;
+    }
+    
+    .header-top {
+        margin-bottom: 16px;
+    }
+    
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+    }
+    
+    .stat-card {
+        padding: 12px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .nav-section {
+        padding: 16px;
+    }
+    
+    .main-content {
+        max-height: calc(100vh - 280px);
+    }
+    
+    .map-container {
+        height: 70vh;
+    }
+}
+
+/* ===== ACCESSIBILITÉ ET PRÉFÉRENCES UTILISATEUR ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .spinner {
+        animation: none;
+        border: 4px solid var(--paris-gray);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    /* Variables pour le mode sombre automatique */
+    body {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #92400e 75%, #a16207 100%);
+    }
+}
+
+/* ===== IMPRESSION ===== */
+@media print {
+    body {
+        background: white !important;
+        padding: 0;
+    }
+    
+    .app-container {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .header {
+        background: white !important;
+        color: black !important;
+        page-break-after: avoid;
+    }
+    
+    .nav-section {
+        display: none;
+    }
+    
+    .main-content {
+        max-height: none;
+        overflow: visible;
+    }
+    
+    .place-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .modal {
+        display: none !important;
+    }
+    
+    .notification {
+        display: none !important;
+    }
+    
+    .map-container {
+        display: none;
+    }
+    
+    .btn {
+        display: none;
+    }
+}
+
+/* ===== ÉCRANS HAUTE RÉSOLUTION ===== */
+@media (min-resolution: 2dppx) {
+    .app-title {
+        text-rendering: optimizeLegibility;
+    }
+    
+    .place-name {
+        text-rendering: optimizeLegibility;
+    }
+}
+
+/* ===== TRÈS LARGES ÉCRANS ===== */
+@media (min-width: 1400px) {
+    .app-container {
+        max-width: 1600px;
+    }
+    
+    .places-grid {
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
