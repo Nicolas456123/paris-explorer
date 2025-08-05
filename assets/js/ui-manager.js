@@ -1,4 +1,4 @@
-// ===== UI MANAGER - GESTION DE L'INTERFACE UTILISATEUR =====
+// ===== UI MANAGER - VERSION REFACTORISÉE SANS DUPLICATION =====
 
 class UIManager {
     constructor(app) {
@@ -84,7 +84,10 @@ class UIManager {
         if (!this.app.searchQuery) return true;
         
         return Object.entries(arrData.categories || {}).some(([catKey, catData]) => {
-            return (catData.places || []).some(place => this.matchesSearch(place));
+            return (catData.places || []).some(place => 
+                // UTILISE LA MÉTHODE DU DATA-MANAGER (plus de duplication)
+                this.app.dataManager.matchesSearch(place, this.app.searchQuery.toLowerCase())
+            );
         });
     }
     
@@ -149,13 +152,13 @@ class UIManager {
     }
     
     renderPlace(arrKey, catKey, place) {
-        const placeId = this.app.createPlaceId(arrKey, catKey, place.name);
+        const placeId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
         const userData = this.app.getCurrentUserData();
         const isVisited = userData && userData.visitedPlaces instanceof Set ? 
             userData.visitedPlaces.has(placeId) : false;
         
-        // Filtres de recherche et statut
-        if (this.app.searchQuery && !this.matchesSearch(place)) {
+        // Filtres de recherche et statut - UTILISE LA MÉTHODE DU DATA-MANAGER
+        if (this.app.searchQuery && !this.app.dataManager.matchesSearch(place, this.app.searchQuery.toLowerCase())) {
             return '';
         }
         
@@ -204,16 +207,6 @@ class UIManager {
         
         const regex = new RegExp(`(${this.app.searchQuery})`, 'gi');
         return text.replace(regex, '<mark style="background: #F7DC6F; color: #1e3a8a; padding: 1px 3px; border-radius: 3px;">$1</mark>');
-    }
-    
-    matchesSearch(place) {
-        if (!this.app.searchQuery) return true;
-        
-        const query = this.app.searchQuery.toLowerCase();
-        return place.name.toLowerCase().includes(query) ||
-               (place.description && place.description.toLowerCase().includes(query)) ||
-               (place.address && place.address.toLowerCase().includes(query)) ||
-               (place.tags && place.tags.some(tag => tag.toLowerCase().includes(query)));
     }
     
     // === MISE À JOUR DES ÉLÉMENTS ===
@@ -422,6 +415,7 @@ class UIManager {
         this.setupModalEvents();
         this.setupSearchEvents();
         this.setupActionEvents();
+        this.setupKeyboardShortcuts();
     }
     
     setupTabEvents() {
