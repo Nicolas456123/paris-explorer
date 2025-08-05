@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris Explorer - Tracker de Lieux Visités</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box:focus {
+            border-color: #667eea;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .export-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .export-btn:hover {
+            background: #218838;
+        }
+        
+        .content {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .arrondissement {
+            margin-bottom: 40px;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+        
+        .arrondissement:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .arrondissement-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .arrondissement-title {
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+        
+        .arrondissement-stats {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+        
+        .arrondissement.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .arrondissement-content {
+            display: block;
+            background: white;
+        }
+        
+        .arrondissement.collapsed .arrondissement-content {
+            display: none;
+        }
+        
+        .category {
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .category:last-child {
+            border-bottom: none;
+        }
+        
+        .category-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-icon {
+            font-size: 1.2em;
+        }
+        
+        .places-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .place-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .place-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .place-item.visited {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .place-checkbox {
+            margin-top: 2px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        
+        .place-content {
+            flex: 1;
+        }
+        
+        .place-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .place-description {
+            font-size: 0.9em;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+        
+        .place-tags {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .place-tag {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                gap: 15px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+            
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗼 Paris Explorer</h1>
+            <p>Découvrez et trackez tous les lieux secrets de Paris</p>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number" id="total-places">0</span>
+                    <span class="stat-label">Lieux Total</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="visited-places">0</span>
+                    <span class="stat-label">Visités</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="completion-rate">0%</span>
+                    <span class="stat-label">Progression</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <input type="text" class="search-box" placeholder="🔍 Rechercher un lieu, restaurant, musée..." id="search-input">
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="visited">Visités</button>
+                <button class="filter-btn" data-filter="unvisited">À visiter</button>
+                <button class="filter-btn" data-filter="monuments">Monuments</button>
+                <button class="filter-btn" data-filter="restaurants">Restaurants</button>
+                <button class="filter-btn" data-filter="culture">Culture</button>
+            </div>
+            
+            <button class="export-btn" id="export-btn">📊 Exporter JSON</button>
+        </div>
+        
+        <div class="content" id="content">
+            <!-- Les arrondissements seront générés ici -->
+        </div>
+    </div>
+
+    <script>
+        // Base de données des lieux parisiens
+        const parisData = {
+            "1er": {
+                title: "1ER ARRONDISSEMENT - LE LOUVRE",
+                categories: {
+                    "monuments": {
+                        title: "🏛️ Monuments & Sites Historiques",
+                        places: [
+                            { name: "Musée du Louvre", description: "La Joconde, Vénus de Milo, Pyramide de verre, 35 000 œuvres", tags: ["musée", "art", "incontournable"] },
+                            { name: "Sainte-Chapelle", description: "1113 vitraux du XIIIe siècle, chef-d'œuvre gothique", tags: ["église", "gothique", "vitraux"] },
+                            { name: "Conciergerie", description: "Prison de Marie-Antoinette, salle des gardes médiévale", tags: ["histoire", "prison", "médiéval"] },
+                            { name: "Palais-Royal", description: "Jardins, galeries, colonnes de Buren controversées", tags: ["palais", "jardins", "art"] },
+                            { name: "Place Vendôme", description: "Architecture classique, bijoutiers de luxe, Colonne Vendôme", tags: ["place", "luxe", "architecture"] },
+                            { name: "Église Saint-Germain-l'Auxerrois", description: "Église des rois de France, carillon", tags: ["église", "histoire", "royauté"] },
+                            { name: "Pont Neuf", description: "Plus ancien pont de Paris (1607), statue Henri IV", tags: ["pont", "histoire", "statue"] },
+                            { name: "Châtelet-Fontaine", description: "Fontaine du Palmier, théâtres historiques", tags: ["fontaine", "théâtre", "histoire"] },
+                            { name: "Bourse de Commerce", description: "Fondation Pinault, architecture Tadao Ando", tags: ["art", "architecture", "moderne"] },
+                            { name: "Oratoire du Louvre", description: "Temple protestant historique", tags: ["temple", "protestant", "histoire"] },
+                            { name: "Crypte archéologique", description: "Vestiges gallo-romains sous parvis Notre-Dame", tags: ["archéologie", "antique", "souterrain"] }
+                        ]
+                    },
+                    "espaces-verts": {
+                        title: "🌳 Espaces Verts & Lieux Secrets",
+                        places: [
+                            { name: "Jardin des Tuileries", description: "Promenade entre Louvre et Concorde, Musée Orangerie", tags: ["jardin", "promenade", "musée"] },
+                            { name: "Square du Vert-Galant", description: "Pointe de l'île de la Cité, couchers de soleil", tags: ["square", "île", "romantique"] },
+                            { name: "Cour Carrée du Louvre", description: "Architecture Renaissance, concerts gratuits été", tags: ["cour", "renaissance", "concerts"] },
+                            { name: "Jardin de l'Infante", description: "Jardin suspendu secret, vue Seine", tags: ["jardin", "secret", "vue"] },
+                            { name: "Square Jean XXIII", description: "Derrière Notre-Dame, rosiers et pelouses", tags: ["square", "roses", "notre-dame"] }
+                        ]
+                    },
+                    "restaurants": {
+                        title: "🍽️ Restaurants & Gastronomie",
+                        places: [
+                            { name: "Palais Royal Restaurant", description: "⭐⭐ Michelin - 110 Galerie Valois, menu 165-195€", tags: ["michelin", "gastronomie", "luxe"] },
+                            { name: "L'Escargot Montorgueil", description: "Institution depuis 1832, décor historique", tags: ["institution", "historique", "escargot"] },
+                            { name: "Rue Montorgueil", description: "Marché piétonnier, boulangeries artisanales, Stohrer", tags: ["marché", "boulangerie", "piétonnier"] },
+                            { name: "Angelina", description: "Chocolat chaud légendaire depuis 1903", tags: ["chocolat", "salon-thé", "historique"] },
+                            { name: "Loulou", description: "Restaurant terrasse Tuileries, vue Louvre", tags: ["terrasse", "vue", "tuileries"] },
+                            { name: "Verjus", description: "Wine bar caché, cuisine moderne", tags: ["wine-bar", "caché", "moderne"] },
+                            { name: "Le Grand Véfour", description: "⭐⭐⭐ Michelin - Restaurant historique Palais-Royal", tags: ["3-étoiles", "historique", "palais-royal"] },
+                            { name: "Pierre Hermé", description: "Macarons d'exception, créations saisonnières", tags: ["macarons", "pâtisserie", "créateur"] }
+                        ]
+                    }
+                }
+            },
+            "2ème": {
+                title: "2ÈME ARRONDISSEMENT - LA BOURSE",
+                categories: {
+                    "monuments": {
+                        title: "🏛️ Architecture & Monuments",
+                        places: [
+                            { name: "Palais Brongniart", description: "Ancienne Bourse, architecture néoclassique Théodore Brongniart", tags: ["bourse", "néoclassique", "architecture"] },
+                            { name: "Galerie Vivienne", description: "Passage couvert (1823), verrière d'époque, boutiques luxe", tags: ["passage", "verrière", "luxe"] },
+                            { name: "Passage des Panoramas", description: "Plus ancien passage de Paris (1799), philatélistes", tags: ["passage", "ancien", "philatélie"] },
+                            { name: "Galerie Colbert", description: "Passage élégant avec rotonde, Bibliothèque Nationale", tags: ["galerie", "rotonde", "bibliothèque"] },
+                            { name: "Bibliothèque Nationale de France - Richelieu", description: "Site historique, Cabinet des Médailles", tags: ["bibliothèque", "médailles", "historique"] }
+                        ]
+                    },
+                    "restaurants": {
+                        title: "🍽️ Restaurants & Spécialités",
+                        places: [
+                            { name: "Rue Sainte-Anne", description: "Quartier japonais authentique, restaurants familiaux", tags: ["japonais", "authentique", "familial"] },
+                            { name: "Candelaria", description: "Tacos mexicains + speakeasy caché", tags: ["mexicain", "speakeasy", "caché"] },
+                            { name: "Frenchie", description: "Bistrot moderne réputé, réservation difficile", tags: ["bistrot", "moderne", "réputé"] }
+                        ]
+                    }
+                }
+            },
+            "3ème": {
+                title: "3ÈME ARRONDISSEMENT - HAUT-MARAIS",
+                categories: {
+                    "musées": {
+                        title: "🏛️ Musées & Culture",
+                        places: [
+                            { name: "Musée des Arts et Métiers", description: "Sciences et techniques, automates", tags: ["sciences", "techniques", "automates"] },
+                            { name: "Musée Picasso", description: "5000 œuvres dans hôtel Salé XVIIe", tags: ["picasso", "art", "hôtel-particulier"] },
+                            { name: "Musée Carnavalet", description: "Histoire de Paris, collections révolutionnaires", tags: ["histoire", "paris", "révolution"] },
+                            { name: "Archives Nationales", description: "Hôtel de Soubise, documents historiques", tags: ["archives", "documents", "histoire"] }
+                        ]
+                    },
+                    "restaurants": {
+                        title: "🍽️ Gastronomie & Marchés",
+                        places: [
+                            { name: "Marché des Enfants Rouges", description: "Plus ancien marché couvert (1615), cuisine monde", tags: ["marché", "ancien", "international"] },
+                            { name: "Du Pain et des Idées", description: "Boulangerie artisanale réputée, Christophe Vasseur", tags: ["boulangerie", "artisanal", "réputé"] },
+                            { name: "Breizh Café", description: "Crêperie moderne et raffinée, cidres bio", tags: ["crêperie", "moderne", "bio"] },
+                            { name: "L'As du Fallafel", description: "Institution rue des Rosiers (fermé vendredi soir-samedi)", tags: ["fallafel", "institution", "juif"] }
+                        ]
+                    }
+                }
+            },
+            "4ème": {
+                title: "4ÈME ARRONDISSEMENT - MARAIS & ÎLE SAINT-LOUIS",
+                categories: {
+                    "monuments": {
+                        title: "🏛️ Monuments Emblématiques",
+                        places: [
+                            { name: "Notre-Dame de Paris", description: "✨ RÉOUVERT DÉCEMBRE 2024 après restauration", tags: ["cathédrale", "gothique", "réouvert"] },
+                            { name: "Place des Vosges", description: "Plus ancienne place royale (1612), 36 pavillons", tags: ["place", "royale", "architecture"] },
+                            { name: "Centre Pompidou", description: "Art moderne (⚠️ fermeture 2025 pour rénovation)", tags: ["art-moderne", "fermeture", "rénovation"] },
+                            { name: "Hôtel de Ville", description: "Architecture néo-Renaissance, expositions gratuites", tags: ["hôtel-ville", "exposition", "gratuit"] }
+                        ]
+                    },
+                    "patrimoine-juif": {
+                        title: "🏛️ Patrimoine Juif & Mémoire",
+                        places: [
+                            { name: "Rue des Rosiers", description: "Cœur historique quartier juif, devantures Yiddish", tags: ["juif", "historique", "yiddish"] },
+                            { name: "Synagogue des Tournelles", description: "Architecture remarquable, visite guidée", tags: ["synagogue", "architecture", "visite"] },
+                            { name: "Mémorial de la Shoah", description: "Musée et lieu de mémoire, mur des noms", tags: ["mémorial", "shoah", "mémoire"] }
+                        ]
+                    },
+                    "restaurants": {
+                        title: "🍽️ Restaurants & Cafés Emblématiques",
+                        places: [
+                            { name: "L'As du Fallafel", description: "Institution fermée vendredi soir-samedi, Lenny Kravitz", tags: ["fallafel", "institution", "célébrité"] },
+                            { name: "Breizh Café", description: "Crêperie gastronomique, sarrasin bio", tags: ["crêperie", "gastronomique", "bio"] },
+                            { name: "Ma Bourgogne", description: "Bistrot place des Vosges, terrasse historique", tags: ["bistrot", "place-vosges", "terrasse"] },
+                            { name: "Berthillon", description: "Glacier mythique depuis 1954, 70 parfums", tags: ["glacier", "mythique", "parfums"] }
+                        ]
+                    }
+                }
+            },
+            "5ème": {
+                title: "5ÈME ARRONDISSEMENT - QUARTIER LATIN",
+                categories: {
+                    "monuments": {
+                        title: "🏛️ Monuments Historiques & Universitaires",
+                        places: [
+                            { name: "Panthéon", description: "Mausolée grands hommes, pendule de Foucault", tags: ["mausolée", "grands-hommes", "science"] },
+                            { name: "Sorbonne", description: "Université historique, Chapelle Richelieu, amphithéâtres", tags: ["université", "historique", "richelieu"] },
+                            { name: "Arènes de Lutèce", description: "Amphithéâtre gallo-romain Ier siècle, gratuit", tags: ["antique", "amphithéâtre", "gratuit"] },
+                            { name: "Église Saint-Étienne-du-Mont", description: "Architecture gothique-Renaissance, jubé unique", tags: ["église", "gothique", "renaissance"] }
+                        ]
+                    },
+                    "musées": {
+                        title: "🏛️ Musées Spécialisés",
+                        places: [
+                            { name: "Musée de Cluny", description: "Art médiéval privé, Tapisseries Dame à la Licorne", tags: ["médiéval", "tapisseries", "privé"] },
+                            { name: "Institut du Monde Arabe", description: "Architecture Jean Nouvel, terrasse panoramique", tags: ["arabe", "nouvel", "terrasse"] },
+                            { name: "Muséum National d'Histoire Naturelle", description: "Grande Galerie Évolution, minéralogie", tags: ["naturelle", "évolution", "minéralogie"] }
+                        ]
+                    },
+                    "librairies": {
+                        title: "📚 Librairies & Culture Littéraire",
+                        places: [
+                            { name: "Shakespeare and Company", description: "Librairie anglaise mythique, événements", tags: ["librairie", "anglaise", "mythique"] },
+                            { name: "Gibert Jeune", description: "Livres neufs et d'occasion, plusieurs magasins", tags: ["livres", "occasion", "étudiant"] },
+                            { name: "Abbey Bookshop", description: "Librairie canadienne, thé offert", tags: ["librairie", "canadienne", "thé"] }
+                        ]
+                    }
+                }
+            }
+            // Ajoutez les autres arrondissements ici...
+        };
+
+        let visitedPlaces = new Set();
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            renderContent();
+            updateStats();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Recherche
+            document.getElementById('search-input').addEventListener('input', function(e) {
+                searchQuery = e.target.value.toLowerCase();
+                renderContent();
+            });
+
+            // Filtres
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    renderContent();
+                });
+            });
+
+            // Export
+            document.getElementById('export-btn').addEventListener('click', exportToJSON);
+
+            // Toggle arrondissements
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.arrondissement-header')) {
+                    const arr = e.target.closest('.arrondissement');
+                    arr.classList.toggle('collapsed');
+                }
+            });
+        }
+
+        function renderContent() {
+            const content = document.getElementById('content');
+            content.innerHTML = '';
+
+            Object.entries(parisData).forEach(([arrKey, arrData]) => {
+                const arrDiv = document.createElement('div');
+                arrDiv.className = 'arrondissement';
+                
+                const totalPlaces = getTotalPlacesInArrondissement(arrData);
+                const visitedInArr = getVisitedPlacesInArrondissement(arrData);
+                
+                arrDiv.innerHTML = `
+                    <div class="arrondissement-header">
+                        <div class="arrondissement-title">${arrData.title}</div>
+                        <div class="arrondissement-stats">
+                            ${visitedInArr}/${totalPlaces} visités
+                        </div>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                    <div class="arrondissement-content">
+                        ${renderCategories(arrKey, arrData.categories)}
+                    </div>
+                `;
+                
+                content.appendChild(arrDiv);
+            });
+        }
+
+        function renderCategories(arrKey, categories) {
+            return Object.entries(categories).map(([catKey, catData]) => {
+                return `
+                    <div class="category">
+                        <div class="category-header">
+                            <span class="category-icon">${catData.title.split(' ')[0]}</span>
+                            ${catData.title}
+                        </div>
+                        <div class="places-grid">
+                            ${catData.places.map(place => renderPlace(arrKey, catKey, place)).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderPlace(arrKey, catKey, place) {
+            const placeId = `${arrKey}-${catKey}-${place.name}`;
+            const isVisited = visitedPlaces.has(placeId);
+            
+            // Filtre de recherche
+            if (searchQuery && !place.name.toLowerCase().includes(searchQuery) && 
+                !place.description.toLowerCase().includes(searchQuery) &&
+                !place.tags.some(tag => tag.toLowerCase().includes(searchQuery))) {
+                return '<div class="place-item hidden"></div>';
+            }
+            
+            // Filtre par statut
+            if (currentFilter === 'visited' && !isVisited) return '<div class="place-item hidden"></div>';
+            if (currentFilter === 'unvisited' && isVisited) return '<div class="place-item hidden"></div>';
+            
+            // Filtre par catégorie
+            if (currentFilter === 'monuments' && !catKey.includes('monument')) return '<div class="place-item hidden"></div>';
+            if (currentFilter === 'restaurants' && !catKey.includes('restaurant')) return '<div class="place-item hidden"></div>';
+            if (currentFilter === 'culture' && !['musées', 'culture'].includes(catKey)) return '<div class="place-item hidden"></div>';
+            
+            return `
+                <div class="place-item ${isVisited ? 'visited' : ''}" onclick="togglePlace('${placeId}')">
+                    <input type="checkbox" class="place-checkbox" ${isVisited ? 'checked' : ''} onchange="togglePlace('${placeId}')">
+                    <div class="place-content">
+                        <div class="place-name">${place.name}</div>
+                        <div class="place-description">${place.description}</div>
+                        <div class="place-tags">
+                            ${place.tags.map(tag => `<span class="place-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function togglePlace(placeId) {
+            if (visitedPlaces.has(placeId)) {
+                visitedPlaces.delete(placeId);
+            } else {
+                visitedPlaces.add(placeId);
+            }
+            renderContent();
+            updateStats();
+        }
+
+        function updateStats() {
+            const totalPlaces = getTotalPlaces();
+            const visitedCount = visitedPlaces.size;
+            const completionRate = totalPlaces > 0 ? Math.round((visitedCount / totalPlaces) * 100) : 0;
+            
+            document.getElementById('total-places').textContent = totalPlaces;
+            document.getElementById('visited-places').textContent = visitedCount;
+            document.getElementById('completion-rate').textContent = `${completionRate}%`;
+        }
+
+        function getTotalPlaces() {
+            let total = 0;
+            Object.values(parisData).forEach(arr => {
+                Object.values(arr.categories).forEach(cat => {
+                    total += cat.places.length;
+                });
+            });
+            return total;
+        }
+
+        function getTotalPlacesInArrondissement(arrData) {
+            let total = 0;
+            Object.values(arrData.categories).forEach(cat => {
+                total += cat.places.length;
+            });
+            return total;
+        }
+
+        function getVisitedPlacesInArrondissement(arrData) {
+            let visited = 0;
+            Object.entries(arrData.categories).forEach(([catKey, catData]) => {
+                catData.places.forEach(place => {
+                    const placeId = `${Object.keys(parisData).find(key => parisData[key] === arrData)}-${catKey}-${place.name}`;
+                    if (visitedPlaces.has(placeId)) visited++;
+                });
+            });
+            return visited;
+        }
+
+        function exportToJSON() {
+            const exportData = {
+                parisData: parisData,
+                visitedPlaces: Array.from(visitedPlaces),
+                exportDate: new Date().toISOString(),
+                stats: {
+                    totalPlaces: getTotalPlaces(),
+                    visitedCount: visitedPlaces.size,
+                    completionRate: Math.round((visitedPlaces.size / getTotalPlaces()) * 100)
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `paris-explorer-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Fonction globale pour les checkboxes
+        window.togglePlace = togglePlace;
+    </script>
+</body>
+</html>
