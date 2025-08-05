@@ -422,30 +422,19 @@
             margin-bottom: 12px;
         }
         
-        .place-address {
-            margin-top: 8px;
-        }
-        
-        .address-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
+        .place-tags {
+            display: flex;
             gap: 4px;
-            padding: 4px 8px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            margin-top: 8px;
+            flex-wrap: wrap;
         }
         
-        .address-link:hover {
-            background: #f0f2ff;
-            color: #4c5fd9;
-            text-decoration: none;
-        }
-        
-        .address-link:active {
-            transform: translateY(1px);
+        .place-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75em;
         }
         
         /* Modal profil utilisateur */
@@ -704,15 +693,6 @@
                 margin: 16px;
                 padding: 24px;
             }
-            
-            .place-address {
-                margin-top: 6px;
-            }
-            
-            .address-link {
-                font-size: 0.8rem;
-                padding: 3px 6px;
-            }
         }
         
         /* Animations */
@@ -925,9 +905,28 @@
                     
                     // Chargement des lieux
                     const data = await response.json();
-                    this.parisData = data.arrondissements;
                     
+                    if (!data.arrondissements) {
+                        throw new Error('Structure de données invalide: propriété "arrondissements" manquante');
+                    }
+                    
+                    this.parisData = data.arrondissements;
                     this.isDataLoaded = true;
+                    
+                    // Debug: vérifier les données chargées
+                    let totalCalculated = 0;
+                    Object.entries(this.parisData).forEach(([arrKey, arrData]) => {
+                        let arrTotal = 0;
+                        Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
+                            const placesCount = catData.places ? catData.places.length : 0;
+                            arrTotal += placesCount;
+                            console.log(`  ${catKey}: ${placesCount} lieux`);
+                        });
+                        totalCalculated += arrTotal;
+                        console.log(`📍 ${arrKey}: ${arrTotal} lieux total`);
+                    });
+                    console.log(`📊 TOTAL CALCULÉ: ${totalCalculated} lieux`);
+                    
                     this.renderContent();
                     this.updateStats();
                     this.showNotification('Données chargées avec succès!', 'success');
@@ -1180,6 +1179,8 @@
             }
             
             renderCategories(arrKey, categories) {
+                if (!categories) return '';
+                
                 return Object.entries(categories).map(([catKey, catData]) => `
                     <div class="category-section">
                         <div class="category-header">
@@ -1187,7 +1188,7 @@
                             ${catData.title}
                         </div>
                         <div class="places-grid">
-                            ${catData.places.map(place => this.renderPlace(arrKey, catKey, place)).join('')}
+                            ${catData.places ? catData.places.map(place => this.renderPlace(arrKey, catKey, place)).join('') : ''}
                         </div>
                     </div>
                 `).join('');
@@ -1207,11 +1208,6 @@
                 if (!this.matchesFilter(isVisited, catKey)) {
                     return '<div class="hidden"></div>';
                 }
-
-                // Créer le lien Google Maps
-                const mapsUrl = place.address ? 
-                    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}` : 
-                    '';
                 
                 return `
                     <div class="place-card ${isVisited ? 'visited' : ''}" data-place-id="${placeId}">
@@ -1221,11 +1217,9 @@
                             <div class="place-content">
                                 <div class="place-name">${place.name}</div>
                                 <div class="place-description">${place.description}</div>
-                                ${place.address ? `
-                                    <div class="place-address">
-                                        <a href="${mapsUrl}" target="_blank" class="address-link" onclick="event.stopPropagation();">
-                                            📍 ${place.address}
-                                        </a>
+                                ${place.tags ? `
+                                    <div class="place-tags">
+                                        ${place.tags.map(tag => `<span class="place-tag">${tag}</span>`).join('')}
                                     </div>
                                 ` : ''}
                             </div>
@@ -1238,17 +1232,23 @@
                 const query = this.searchQuery.toLowerCase();
                 return place.name.toLowerCase().includes(query) ||
                        place.description.toLowerCase().includes(query) ||
-                       (place.address && place.address.toLowerCase().includes(query));
+                       (place.tags && place.tags.some(tag => tag.toLowerCase().includes(query)));
             }
             
             matchesFilter(isVisited, catKey) {
                 switch (this.currentFilter) {
-                    case 'visited': return isVisited;
-                    case 'unvisited': return !isVisited;
-                    case 'monuments': return catKey.includes('monument');
-                    case 'restaurants': return catKey.includes('restaurant');
-                    case 'culture': return catKey.includes('culture') || catKey.includes('musee') || catKey.includes('librairie');
-                    default: return true;
+                    case 'visited': 
+                        return isVisited;
+                    case 'unvisited': 
+                        return !isVisited;
+                    case 'monuments': 
+                        return ['monuments', 'monuments-iconiques', 'monuments-prestigieux', 'patrimoine', 'architecture', 'sites-historiques', 'patrimoine-architecture', 'monuments-panoramas', 'architecture-monuments', 'architecture-contemporaine', 'architecture-remarquable', 'palais-institutions'].includes(catKey);
+                    case 'restaurants': 
+                        return ['restaurants', 'gastronomie', 'cafes-historiques', 'restaurants-marches', 'restaurants-mythiques', 'restaurants-bistrots', 'restaurants-creperies', 'restaurants-asiatiques', 'restaurants-populaires', 'restaurants-gastronomiques', 'restaurants-guinguettes', 'restaurants-historiques', 'patisseries'].includes(catKey);
+                    case 'culture': 
+                        return ['musees', 'musées', 'culture', 'musees-confidentiels', 'culture-spectacles', 'culture-alternative', 'culture-cinema', 'culture-arts', 'theatres', 'theatres-spectacles', 'cinemas-historiques', 'cinemas', 'librairies', 'temples-spectacle', 'musees-classe-mondiale', 'institutions-culturelles'].includes(catKey);
+                    default: 
+                        return true;
                 }
             }
             
@@ -1269,16 +1269,23 @@
                 document.getElementById('visitedProgress').style.width = `${completionRate}%`;
                 document.getElementById('completionProgress').style.width = `${completionRate}%`;
                 document.getElementById('streakProgress').style.width = `${Math.min(userData?.stats?.streak || 0, 20) * 5}%`;
+                
+                // Debug info
+                console.log(`📊 Stats mise à jour: ${totalPlaces} lieux total, ${visitedCount} visités, ${completionRate}% completion`);
             }
             
             getTotalPlaces() {
                 if (!this.isDataLoaded || !this.parisData) return 0;
                 
                 let total = 0;
-                Object.values(this.parisData).forEach(arr => {
-                    Object.values(arr.categories).forEach(cat => {
-                        total += cat.places.length;
-                    });
+                Object.entries(this.parisData).forEach(([arrKey, arrData]) => {
+                    if (arrData && arrData.categories) {
+                        Object.entries(arrData.categories).forEach(([catKey, catData]) => {
+                            if (catData && catData.places && Array.isArray(catData.places)) {
+                                total += catData.places.length;
+                            }
+                        });
+                    }
                 });
                 return total;
             }
@@ -1286,8 +1293,10 @@
             getTotalPlacesInArrondissement(arrData) {
                 let total = 0;
                 if (arrData && arrData.categories) {
-                    Object.values(arrData.categories).forEach(cat => {
-                        total += cat.places ? cat.places.length : 0;
+                    Object.entries(arrData.categories).forEach(([catKey, catData]) => {
+                        if (catData && catData.places && Array.isArray(catData.places)) {
+                            total += catData.places.length;
+                        }
                     });
                 }
                 return total;
@@ -1299,12 +1308,14 @@
                 
                 let visited = 0;
                 Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                    (catData.places || []).forEach(place => {
-                        const placeId = this.createPlaceId(arrKey, catKey, place.name);
-                        if (userData.visitedPlaces instanceof Set && userData.visitedPlaces.has(placeId)) {
-                            visited++;
-                        }
-                    });
+                    if (catData && catData.places && Array.isArray(catData.places)) {
+                        catData.places.forEach(place => {
+                            const placeId = this.createPlaceId(arrKey, catKey, place.name);
+                            if (userData.visitedPlaces instanceof Set && userData.visitedPlaces.has(placeId)) {
+                                visited++;
+                            }
+                        });
+                    }
                 });
                 return visited;
             }
