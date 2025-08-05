@@ -3,80 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paris Explorer - La Ville Lumière</title>
+    <title>Paris Explorer Avancé - La Ville Lumière</title>
     
     <!-- Leaflet CSS pour la carte -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
+    <!-- Polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Styles personnalisés -->
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main-advanced.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/themes.css">
+    
+    <!-- Meta pour PWA -->
+    <meta name="theme-color" content="#D4AF37">
+    <meta name="description" content="Explorez tous les trésors cachés de Paris avec notre application interactive avancée">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗼</text></svg>">
 </head>
-<body>
+<body class="theme-transition">
     <div class="app-container">
-        <!-- Header parisien -->
+        <!-- Header parisien avancé -->
         <header class="header">
             <div class="header-content">
                 <div class="header-top">
                     <div>
                         <h1 class="app-title">🗼 Paris Explorer</h1>
-                        <p class="app-subtitle">Découvrez la Ville Lumière</p>
+                        <p class="app-subtitle">Découvrez la Ville Lumière - Version Avancée</p>
                     </div>
                     <div class="user-controls">
                         <select class="user-selector" id="userSelector">
                             <option value="">Choisir un explorateur...</option>
                         </select>
                         <button class="btn btn-primary" id="manageUsersBtn">👥 Profils</button>
+                        <button class="btn btn-secondary" id="settingsBtn">⚙️ Paramètres</button>
                     </div>
                 </div>
                 
                 <div class="stats-grid">
                     <div class="stat-card">
                         <span class="stat-number" id="totalPlaces">147</span>
-                        <span class="stat-label">Lieux à Découvrir</span>
+                        <span class="stat-label">Lieux Total</span>
                         <div class="progress-bar">
                             <div class="progress-fill" id="totalProgress" style="width: 100%"></div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number" id="visitedPlaces">0</span>
-                        <span class="stat-label">Lieux Explorés</span>
+                        <span class="stat-label">Explorés</span>
                         <div class="progress-bar">
                             <div class="progress-fill" id="visitedProgress" style="width: 0%"></div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number" id="completionRate">0%</span>
-                        <span class="stat-label">Paris Conquis</span>
+                        <span class="stat-label">Complété</span>
                         <div class="progress-bar">
                             <div class="progress-fill" id="completionProgress" style="width: 0%"></div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number" id="currentStreak">0</span>
-                        <span class="stat-label">Série Exploratrice</span>
+                        <span class="stat-label">Série</span>
                         <div class="progress-bar">
                             <div class="progress-fill" id="streakProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="favoritesCount">0</span>
+                        <span class="stat-label">⭐ Favoris</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="favoritesProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="achievementsCount">0</span>
+                        <span class="stat-label">🏆 Succès</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="achievementsProgress" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
         
-        <!-- Navigation avec onglets -->
+        <!-- Navigation avec onglets avancés -->
         <nav class="nav-section">
             <div class="nav-tabs">
-                <div class="nav-tab active" data-tab="list">📋 Liste des Lieux</div>
-                <div class="nav-tab" data-tab="map">🗺️ Carte Interactive</div>
-                <div class="nav-tab" data-tab="stats">📊 Statistiques</div>
+                <div class="nav-tab active" data-tab="list">📋 Exploration</div>
+                <div class="nav-tab" data-tab="map">🗺️ Carte</div>
                 <div class="nav-tab" data-tab="favorites">⭐ Favoris</div>
+                <div class="nav-tab" data-tab="collections">📚 Collections</div>
+                <div class="nav-tab" data-tab="achievements">🏆 Succès</div>
+                <div class="nav-tab" data-tab="stats">📊 Statistiques</div>
             </div>
             
             <!-- Contenu onglet Liste -->
             <div class="tab-content active" id="listTab">
                 <div class="search-container">
-                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher un monument, restaurant, quartier...">
+                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher un monument, restaurant, quartier, tag...">
                     <div class="search-filters">
                         <select class="filter-select" id="arrondissementFilter">
                             <option value="">Tous les arrondissements</option>
@@ -89,6 +119,10 @@
                             <option value="visited">Visités</option>
                             <option value="unvisited">Non visités</option>
                             <option value="favorites">Favoris</option>
+                            <option value="noted">Avec notes</option>
+                        </select>
+                        <select class="filter-select" id="tagsFilter">
+                            <option value="">Tous les tags</option>
                         </select>
                     </div>
                 </div>
@@ -96,12 +130,17 @@
                 <div class="controls-row">
                     <button class="filter-toggle" id="hideCompletedBtn">👁️ Masquer les Explorés</button>
                     
+                    <div class="view-options">
+                        <button class="btn btn-sm" id="compactViewBtn">📱 Vue Compacte</button>
+                        <button class="btn btn-sm" id="sortBtn">🔄 Trier</button>
+                    </div>
+                    
                     <div class="action-buttons">
                         <button class="btn btn-secondary" id="expandAllBtn">📂 Tout Ouvrir</button>
                         <button class="btn btn-secondary" id="collapseAllBtn">📁 Tout Fermer</button>
                         <button class="btn btn-success" id="exportDataBtn">📤 Exporter</button>
                         <button class="btn btn-info" id="importDataBtn">📥 Importer</button>
-                        <button class="btn btn-danger" id="resetProgressBtn">🗑️ Recommencer</button>
+                        <button class="btn btn-danger" id="resetProgressBtn">🔄 Reset</button>
                     </div>
                 </div>
             </div>
@@ -113,8 +152,36 @@
                         <button class="map-control-btn" id="fullscreenBtn" title="Mode plein écran">🔳</button>
                         <button class="map-control-btn" id="centerMapBtn" title="Centrer sur Paris">🎯</button>
                         <button class="map-control-btn" id="toggleLayersBtn" title="Basculer les couches">🗂️</button>
+                        <button class="map-control-btn" id="mapStyleBtn" title="Style de carte">🎨</button>
                     </div>
                     <!-- La carte Leaflet sera injectée ici -->
+                </div>
+            </div>
+            
+            <!-- Contenu onglet Favoris -->
+            <div class="tab-content" id="favoritesTab">
+                <div class="favorites-container">
+                    <div class="favorites-grid" id="favoritesGrid">
+                        <!-- Les favoris seront affichés ici -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenu onglet Collections -->
+            <div class="tab-content" id="collectionsTab">
+                <div class="collections-container">
+                    <div class="collections-grid" id="collectionsGrid">
+                        <!-- Les collections seront affichées ici -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenu onglet Succès -->
+            <div class="tab-content" id="achievementsTab">
+                <div class="achievements-container">
+                    <div class="achievements-grid" id="achievementsGrid">
+                        <!-- Les achievements seront affichés ici -->
+                    </div>
                 </div>
             </div>
             
@@ -136,20 +203,24 @@
                     </div>
                     
                     <div class="stats-section">
-                        <h3>🏆 Achievements</h3>
-                        <div class="achievements-grid" id="achievementsGrid">
-                            <!-- Badges et récompenses -->
+                        <h3>🏆 Mes Achievements</h3>
+                        <div class="achievements-summary" id="achievementsSummary">
+                            <!-- Résumé des achievements -->
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Contenu onglet Favoris -->
-            <div class="tab-content" id="favoritesTab">
-                <div class="favorites-container">
-                    <h3>⭐ Mes Lieux Favoris</h3>
-                    <div class="favorites-grid" id="favoritesGrid">
-                        <!-- Les lieux favoris seront affichés ici -->
+                    
+                    <div class="stats-section">
+                        <h3>📚 Mes Collections</h3>
+                        <div class="collections-summary" id="collectionsSummary">
+                            <!-- Résumé des collections -->
+                        </div>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <h3>📝 Activité Récente</h3>
+                        <div class="activity-feed" id="activityFeed">
+                            <!-- Feed d'activité -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,21 +232,21 @@
                 <div class="loading-content">
                     <div class="spinner"></div>
                     <h3>🗼 Chargement de Paris...</h3>
-                    <p>Préparation de votre exploration parisienne</p>
+                    <p>Préparation de votre exploration parisienne avancée</p>
                 </div>
             </div>
             
             <div class="error-message" id="errorMessage" style="display: none;">
                 <div class="error-content">
                     <h3>🚫 Fichier de données manquant</h3>
-                    <p><strong>L'application a besoin du fichier <code>data/paris-index.json</code></strong></p>
-                    <p>Ce fichier contient l'index principal des lieux parisiens à explorer.</p>
+                    <p><strong>L'application a besoin du fichier <code>paris-database.json</code></strong></p>
+                    <p>Ce fichier contient la base de données complète des lieux parisiens.</p>
                     <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px; text-align: left;">
                         <strong>Pour utiliser cette application :</strong><br>
-                        1. Vérifiez que le dossier <code>data/</code> existe<br>
-                        2. Assurez-vous que <code>paris-index.json</code> est présent<br>
-                        3. Servez les fichiers via un serveur web local<br>
-                        4. Exemple : <code>python -m http.server 8000</code> puis <code>http://localhost:8000</code>
+                        1. Vérifiez que le fichier <code>paris-database.json</code> existe<br>
+                        2. Servez l'application via un serveur web local<br>
+                        3. Exemple : <code>python -m http.server 8000</code><br>
+                        4. Ouvrez : <code>http://localhost:8000</code>
                     </div>
                 </div>
             </div>
@@ -187,46 +258,151 @@
         </main>
     </div>
     
-    <!-- Modal gestion des utilisateurs -->
+    <!-- Modal gestion des utilisateurs avancé -->
     <div class="modal" id="userModal">
-        <div class="modal-content">
+        <div class="modal-content large">
             <div class="modal-header">
-                <h3 class="modal-title">Gestion des Explorateurs</h3>
+                <h3 class="modal-title">👥 Gestion des Explorateurs</h3>
                 <button class="close-btn" id="closeModalBtn">&times;</button>
             </div>
             
-            <div class="form-group">
-                <label class="form-label">Créer un Nouvel Explorateur</label>
-                <div style="display: flex; gap: 12px;">
-                    <input type="text" class="form-input" id="newUserName" placeholder="Nom de l'explorateur...">
-                    <button class="btn btn-success" id="createUserBtn">Créer</button>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Explorateurs Existants</label>
-                <div class="user-list" id="userList">
-                    <!-- Les utilisateurs seront listés ici -->
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Paramètres</label>
-                <div class="settings-grid">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="darkModeToggle">
-                        <span>Mode sombre</span>
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="notificationsToggle">
-                        <span>Notifications</span>
-                    </label>
+            <div class="modal-body">
+                <div class="user-management-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="create">Créer</button>
+                        <button class="tab-btn" data-tab="manage">Gérer</button>
+                        <button class="tab-btn" data-tab="import">Import/Export</button>
+                    </div>
+                    
+                    <!-- Onglet Création -->
+                    <div class="tab-panel active" id="createTab">
+                        <div class="form-group">
+                            <label class="form-label">Créer un Nouvel Explorateur</label>
+                            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                                <input type="text" class="form-input" id="newUserName" placeholder="Nom de l'explorateur...">
+                                <button class="btn btn-success" id="createUserBtn">Créer</button>
+                            </div>
+                            
+                            <div class="user-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="defaultSettingsCheck">
+                                    <span>Utiliser mes paramètres par défaut</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="copyProgressCheck">
+                                    <span>Copier ma progression actuelle</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Onglet Gestion -->
+                    <div class="tab-panel" id="manageTab">
+                        <div class="form-group">
+                            <label class="form-label">Explorateurs Existants</label>
+                            <div class="user-list" id="userList">
+                                <!-- Les utilisateurs seront listés ici -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Onglet Import/Export -->
+                    <div class="tab-panel" id="importExportTab">
+                        <div class="import-export-options">
+                            <div class="export-section">
+                                <h4>📤 Exporter</h4>
+                                <div class="export-options">
+                                    <button class="btn btn-secondary" onclick="app.uiManager.exportUserData('progress')">Progression</button>
+                                    <button class="btn btn-secondary" onclick="app.uiManager.exportUserData('favorites')">Favoris</button>
+                                    <button class="btn btn-secondary" onclick="app.uiManager.exportUserData('notes')">Notes</button>
+                                    <button class="btn btn-secondary" onclick="app.uiManager.exportUserData('collections')">Collections</button>
+                                    <button class="btn btn-primary" onclick="app.uiManager.exportUserData('complete')">Tout</button>
+                                </div>
+                            </div>
+                            
+                            <div class="import-section">
+                                <h4>📥 Importer</h4>
+                                <div class="import-area">
+                                    <button class="btn btn-primary" onclick="document.getElementById('importFileInput').click()">
+                                        Sélectionner fichier JSON
+                                    </button>
+                                    <p class="import-info">
+                                        Formats supportés : progression, favoris, notes, collections ou données complètes
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Modal détails du lieu -->
+    <!-- Modal Paramètres -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 class="modal-title">⚙️ Paramètres Avancés</h3>
+                <button class="close-btn" id="closeSettingsModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="settingsContainer">
+                    <!-- Les paramètres seront rendus ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Collection -->
+    <div class="modal" id="collectionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="collectionModalTitle">📚 Nouvelle Collection</h3>
+                <button class="close-btn" id="closeCollectionModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nom de la collection</label>
+                    <input type="text" class="form-input" id="collectionName" placeholder="Ex: Mes restaurants préférés">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input" id="collectionDescription" placeholder="Décrivez votre collection..." rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Couleur</label>
+                    <div class="color-picker">
+                        <input type="color" id="collectionColor" value="#3b82f6">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="app.uiManager.closeCollectionModal()">Annuler</button>
+                    <button class="btn btn-primary" id="saveCollectionBtn">Créer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Ajout à Collection -->
+    <div class="modal" id="addToCollectionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📚 Ajouter à une Collection</h3>
+                <button class="close-btn" id="closeAddToCollectionModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="collections-list" id="collectionsListForAdd">
+                    <!-- Liste des collections -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="app.uiManager.closeAddToCollectionModal()">Annuler</button>
+                    <button class="btn btn-primary" onclick="app.uiManager.openCreateCollectionModal()">Nouvelle Collection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Details Lieu -->
     <div class="modal" id="placeModal">
         <div class="modal-content large">
             <div class="modal-header">
@@ -239,20 +415,42 @@
         </div>
     </div>
     
-    <!-- Input caché pour l'import de fichiers -->
+    <!-- Toast Notifications Container -->
+    <div class="notifications-container" id="notificationsContainer">
+        <!-- Les notifications dynamiques apparaîtront ici -->
+    </div>
+    
+    <!-- Inputs cachés -->
     <input type="file" id="importFileInput" accept=".json" style="display: none;">
+    
+    <!-- Loading Spinner Global -->
+    <div class="global-loading" id="globalLoading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Chargement...</p>
+    </div>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
-    <!-- Modules JavaScript dans l'ordre de dépendance -->
+    <!-- Modules JavaScript avancés -->
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/data-manager.js"></script>
-    <script src="assets/js/user-manager.js"></script>
+    <script src="assets/js/user-manager-advanced.js"></script>
     <script src="assets/js/map-manager.js"></script>
-    <script src="assets/js/ui-manager.js"></script>
+    <script src="assets/js/ui-manager-advanced.js"></script>
     <script src="assets/js/search-filter.js"></script>
-    <script src="assets/js/export-import.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/export-import-advanced.js"></script>
+    <script src="assets/js/app-advanced.js"></script>
+    
+    <!-- Service Worker pour PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(registrationError => console.log('SW registration failed'));
+            });
+        }
+    </script>
 </body>
 </html>
