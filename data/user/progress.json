@@ -1,289 +1,244 @@
 {
   "metadata": {
+    "description": "Structure de données pour la progression utilisateur dans Paris Explorer",
     "version": "2.0.0",
-    "lastUpdated": "2025-01-05T14:30:00.000Z",
-    "format": "Paris Explorer User Progress",
-    "description": "Fichier de progression détaillée par utilisateur"
+    "lastUpdated": "2025-01-05"
   },
-  "users": {
-    "Marie_Explorer": {
-      "profile": {
-        "displayName": "Marie Explorer",
-        "createdAt": "2024-12-01T10:00:00.000Z",
-        "lastActive": "2025-01-05T14:30:00.000Z",
-        "avatar": "🗼",
-        "level": "Exploratrice Confirmée",
-        "totalPoints": 2850
+  "template": {
+    "userId": "nom-utilisateur",
+    "createdAt": "2025-01-05T10:30:00.000Z",
+    "lastUpdated": "2025-01-05T15:45:00.000Z",
+    "stats": {
+      "totalVisited": 42,
+      "totalPlaces": 2127,
+      "completionRate": 1.97,
+      "currentStreak": 5,
+      "longestStreak": 12,
+      "firstVisit": "2024-12-15T09:00:00.000Z",
+      "lastVisit": "2025-01-05T14:30:00.000Z",
+      "totalTimeSpent": 18000,
+      "averageRating": 4.2,
+      "discoveredSecrets": 3,
+      "visitsByMonth": {
+        "2024-12": 15,
+        "2025-01": 27
       },
-      "progression": {
-        "totalVisited": 87,
-        "totalPlaces": 2127,
-        "completionRate": 4.09,
-        "currentStreak": 12,
-        "longestStreak": 18,
-        "firstVisit": "2024-12-01T15:30:00.000Z",
-        "lastVisit": "2025-01-05T13:45:00.000Z"
-      },
-      "visitedPlaces": [
-        {
-          "placeId": "1er-monuments-musee-du-louvre",
-          "name": "Musée du Louvre",
-          "arrondissement": "1er",
-          "category": "monuments",
-          "visitedAt": "2024-12-15T14:30:00.000Z",
-          "rating": 5,
-          "timeSpent": 180,
-          "weather": "ensoleillé",
-          "companions": ["famille"],
-          "mood": "émerveillée",
-          "photosCount": 12
-        },
-        {
-          "placeId": "18eme-montmartre-mythique-sacre-coeur",
-          "name": "Basilique du Sacré-Cœur",
-          "arrondissement": "18ème",
-          "category": "montmartre-mythique",
-          "visitedAt": "2024-12-20T16:00:00.000Z",
-          "rating": 4,
-          "timeSpent": 90,
-          "weather": "nuageux",
-          "companions": ["solo"],
-          "mood": "paisible",
-          "photosCount": 8
-        },
-        {
-          "placeId": "7eme-monuments-iconiques-tour-eiffel",
-          "name": "Tour Eiffel",
-          "arrondissement": "7ème",
-          "category": "monuments-iconiques",
-          "visitedAt": "2025-01-02T19:30:00.000Z",
-          "rating": 5,
-          "timeSpent": 120,
-          "weather": "clair",
-          "companions": ["couple"],
-          "mood": "romantique",
-          "photosCount": 25
-        }
-      ],
-      "arrondissementProgress": {
-        "1er": {
-          "visited": 15,
-          "total": 89,
-          "completionRate": 16.85,
-          "lastVisit": "2024-12-28T11:20:00.000Z",
-          "favoriteCategory": "monuments"
-        },
-        "3ème": {
-          "visited": 12,
-          "total": 76,
-          "completionRate": 15.79,
-          "lastVisit": "2025-01-03T15:45:00.000Z",
-          "favoriteCategory": "restaurants"
-        },
-        "7ème": {
-          "visited": 18,
-          "total": 112,
-          "completionRate": 16.07,
-          "lastVisit": "2025-01-02T19:30:00.000Z",
-          "favoriteCategory": "monuments-iconiques"
-        },
-        "18ème": {
-          "visited": 8,
-          "total": 95,
-          "completionRate": 8.42,
-          "lastVisit": "2024-12-20T16:00:00.000Z",
-          "favoriteCategory": "montmartre-mythique"
-        }
-      },
-      "achievements": {
-        "earned": [
-          {
-            "id": "first_visit",
-            "name": "Premier Pas",
-            "description": "Première visite d'un lieu parisien",
-            "unlockedAt": "2024-12-01T15:30:00.000Z",
-            "icon": "👶",
-            "points": 50
-          },
-          {
-            "id": "explorer_10",
-            "name": "Explorateur Débutant",
-            "description": "10 lieux visités",
-            "unlockedAt": "2024-12-10T14:20:00.000Z",
-            "icon": "🎒",
-            "points": 100
-          },
-          {
-            "id": "streak_7",
-            "name": "Semaine Parisienne",
-            "description": "7 jours consécutifs d'exploration",
-            "unlockedAt": "2024-12-22T18:15:00.000Z",
-            "icon": "🗓️",
-            "points": 200
-          },
-          {
-            "id": "monument_lover",
-            "name": "Passionné de Monuments",
-            "description": "20 monuments visités",
-            "unlockedAt": "2025-01-02T19:30:00.000Z",
-            "icon": "🏛️",
-            "points": 300
-          }
-        ],
-        "available": [
-          {
-            "id": "gourmet",
-            "name": "Gourmet",
-            "description": "25 restaurants visités",
-            "progress": 12,
-            "target": 25,
-            "icon": "🍽️",
-            "points": 250
-          },
-          {
-            "id": "all_arrondissements",
-            "name": "Conquérant de Paris",
-            "description": "Visiter tous les 20 arrondissements",
-            "progress": 4,
-            "target": 20,
-            "icon": "👑",
-            "points": 1000
-          }
-        ]
-      },
-      "statistics": {
-        "averageRating": 4.6,
-        "totalTimeSpent": 2890,
-        "averageTimePerPlace": 33.2,
-        "favoriteWeather": "ensoleillé",
-        "favoriteCompanion": "famille",
-        "mostActiveDay": "dimanche",
-        "mostActiveHour": 15,
-        "photographyScore": 195,
-        "explorationRadius": 12.8,
-        "uniqueDaysExploring": 45
-      },
-      "challenges": {
-        "active": [
-          {
-            "id": "weekend_warrior",
-            "name": "Guerrier du Week-end",
-            "description": "Visiter 5 lieux ce week-end",
-            "progress": 2,
-            "target": 5,
-            "deadline": "2025-01-06T23:59:59.000Z",
-            "reward": 150
-          }
-        ],
-        "completed": [
-          {
-            "id": "december_explorer",
-            "name": "Explorateur de Décembre",
-            "description": "Visiter 15 lieux en décembre",
-            "completedAt": "2024-12-30T20:15:00.000Z",
-            "reward": 200
-          }
-        ]
+      "visitsByDay": {
+        "monday": 8,
+        "tuesday": 6,
+        "wednesday": 7,
+        "thursday": 5,
+        "friday": 9,
+        "saturday": 4,
+        "sunday": 3
       }
     },
-    "Thomas_Parisien": {
-      "profile": {
-        "displayName": "Thomas Parisien",
-        "createdAt": "2024-11-15T09:00:00.000Z",
-        "lastActive": "2025-01-05T12:15:00.000Z",
-        "avatar": "🎨",
-        "level": "Maître Explorateur",
-        "totalPoints": 5420
+    "achievements": {
+      "unlocked": [
+        {
+          "id": "discoverer",
+          "unlockedAt": "2024-12-15T09:15:00.000Z",
+          "progress": 1,
+          "requirement": 1
+        },
+        {
+          "id": "explorer", 
+          "unlockedAt": "2024-12-20T16:30:00.000Z",
+          "progress": 10,
+          "requirement": 10
+        },
+        {
+          "id": "gourmet",
+          "unlockedAt": "2024-12-28T19:45:00.000Z",
+          "progress": 20,
+          "requirement": 20
+        }
+      ],
+      "inProgress": [
+        {
+          "id": "adventurer",
+          "progress": 42,
+          "requirement": 50,
+          "progressPercent": 84
+        },
+        {
+          "id": "parisien",
+          "progress": 16,
+          "requirement": 20,
+          "progressPercent": 80,
+          "details": {
+            "visitedArrondissements": [
+              "1er", "2ème", "3ème", "4ème", "5ème", "6ème", "7ème", "8ème",
+              "9ème", "10ème", "11ème", "12ème", "15ème", "16ème", "17ème", "18ème"
+            ],
+            "missingArrondissements": ["13ème", "14ème", "19ème", "20ème"]
+          }
+        }
+      ]
+    },
+    "visitHistory": [
+      {
+        "placeId": "1er-monuments-musee-du-louvre",
+        "visitedAt": "2024-12-15T09:15:00.000Z",
+        "rating": 5,
+        "timeSpent": 180,
+        "weather": "ensoleillé",
+        "companions": ["famille"]
       },
-      "progression": {
+      {
+        "placeId": "7ème-monuments-tour-eiffel",
+        "visitedAt": "2024-12-15T14:30:00.000Z",
+        "rating": 5,
+        "timeSpent": 120,
+        "weather": "nuageux",
+        "companions": ["famille"]
+      },
+      {
+        "placeId": "18ème-monuments-sacre-coeur",
+        "visitedAt": "2024-12-16T16:00:00.000Z",
+        "rating": 4,
+        "timeSpent": 90,
+        "weather": "pluvieux",
+        "companions": ["solo"]
+      }
+    ],
+    "streakHistory": [
+      {
+        "startDate": "2024-12-15",
+        "endDate": "2024-12-19",
+        "length": 5,
+        "placesVisited": 8
+      },
+      {
+        "startDate": "2024-12-22",
+        "endDate": "2025-01-02",
+        "length": 12,
+        "placesVisited": 15
+      },
+      {
+        "startDate": "2025-01-01",
+        "endDate": "2025-01-05",
+        "length": 5,
+        "placesVisited": 7,
+        "current": true
+      }
+    ],
+    "milestones": [
+      {
+        "type": "places_visited",
+        "value": 1,
+        "achievedAt": "2024-12-15T09:15:00.000Z",
+        "title": "Premier pas"
+      },
+      {
+        "type": "places_visited", 
+        "value": 10,
+        "achievedAt": "2024-12-20T16:30:00.000Z",
+        "title": "Exploration lancée"
+      },
+      {
+        "type": "arrondissements_visited",
+        "value": 5,
+        "achievedAt": "2024-12-25T11:00:00.000Z", 
+        "title": "Explorateur multi-quartiers"
+      },
+      {
+        "type": "categories_explored",
+        "value": 10,
+        "achievedAt": "2024-12-30T15:30:00.000Z",
+        "title": "Découvreur éclectique"
+      }
+    ],
+    "preferences": {
+      "favoriteArrondissement": "4ème",
+      "favoriteCategory": "monuments",
+      "preferredTime": "afternoon",
+      "preferredWeather": "ensoleillé",
+      "avgVisitDuration": 105,
+      "explorationStyle": "cultural",
+      "companionPreference": "famille",
+      "lastSyncAt": "2025-01-05T15:45:00.000Z"
+    },
+    "goals": {
+      "monthly": {
+        "target": 20,
+        "current": 12,
+        "deadline": "2025-01-31"
+      },
+      "yearly": {
+        "target": 200,
+        "current": 42,
+        "deadline": "2025-12-31"
+      },
+      "custom": [
+        {
+          "id": "complete-marais",
+          "title": "Conquérir le Marais",
+          "description": "Visiter tous les lieux du 3ème et 4ème arrondissement",
+          "target": 45,
+          "current": 28,
+          "deadline": "2025-06-30",
+          "reward": "Badge Marais Master"
+        }
+      ]
+    }
+  },
+  "examples": {
+    "nouveauUtilisateur": {
+      "userId": "marie-exploratrice",
+      "createdAt": "2025-01-05T10:00:00.000Z",
+      "lastUpdated": "2025-01-05T10:00:00.000Z",
+      "stats": {
+        "totalVisited": 0,
+        "totalPlaces": 2127,
+        "completionRate": 0,
+        "currentStreak": 0,
+        "longestStreak": 0,
+        "firstVisit": null,
+        "lastVisit": null,
+        "totalTimeSpent": 0,
+        "averageRating": 0,
+        "discoveredSecrets": 0,
+        "visitsByMonth": {},
+        "visitsByDay": {}
+      },
+      "achievements": {
+        "unlocked": [],
+        "inProgress": []
+      },
+      "visitHistory": [],
+      "streakHistory": [],
+      "milestones": []
+    },
+    "utilisateurActif": {
+      "userId": "pierre-parisien",
+      "stats": {
         "totalVisited": 156,
         "totalPlaces": 2127,
         "completionRate": 7.33,
-        "currentStreak": 25,
+        "currentStreak": 23,
         "longestStreak": 31,
-        "firstVisit": "2024-11-15T14:00:00.000Z",
-        "lastVisit": "2025-01-05T11:30:00.000Z"
-      },
-      "visitedPlaces": [
-        {
-          "placeId": "3eme-musees-lieux-artistiques-musee-picasso",
-          "name": "Musée Picasso",
-          "arrondissement": "3ème",
-          "category": "musees-lieux-artistiques",
-          "visitedAt": "2024-11-20T10:30:00.000Z",
-          "rating": 5,
-          "timeSpent": 150,
-          "weather": "pluvieux",
-          "companions": ["solo"],
-          "mood": "inspiré",
-          "photosCount": 0
-        }
-      ],
-      "arrondissementProgress": {
-        "3ème": {
-          "visited": 45,
-          "total": 76,
-          "completionRate": 59.21,
-          "lastVisit": "2025-01-04T16:20:00.000Z",
-          "favoriteCategory": "musees-lieux-artistiques"
-        },
-        "4ème": {
-          "visited": 38,
-          "total": 89,
-          "completionRate": 42.70,
-          "lastVisit": "2025-01-05T11:30:00.000Z",
-          "favoriteCategory": "patrimoine-juif"
-        }
+        "discoveredSecrets": 12
       },
       "achievements": {
-        "earned": [
-          {
-            "id": "master_explorer",
-            "name": "Maître Explorateur",
-            "description": "150 lieux visités",
-            "unlockedAt": "2025-01-03T14:45:00.000Z",
-            "icon": "🎖️",
-            "points": 1000
-          }
-        ],
-        "available": []
-      },
-      "statistics": {
-        "averageRating": 4.8,
-        "totalTimeSpent": 7840,
-        "averageTimePerPlace": 50.3,
-        "favoriteWeather": "pluvieux",
-        "favoriteCompanion": "solo",
-        "mostActiveDay": "samedi",
-        "mostActiveHour": 14,
-        "photographyScore": 89,
-        "explorationRadius": 18.5,
-        "uniqueDaysExploring": 78
-      },
-      "challenges": {
-        "active": [],
-        "completed": [
-          {
-            "id": "culture_vulture",
-            "name": "Vautour de la Culture",
-            "description": "Visiter 30 musées",
-            "completedAt": "2024-12-28T17:30:00.000Z",
-            "reward": 500
-          }
+        "unlocked": [
+          "discoverer", "explorer", "adventurer", "gourmet", "culture_lover", 
+          "historian", "night_owl", "secret_hunter"
         ]
       }
     }
   },
-  "globalStatistics": {
-    "totalUsers": 2,
-    "totalVisits": 243,
-    "mostVisitedPlace": {
-      "placeId": "1er-monuments-musee-du-louvre",
-      "name": "Musée du Louvre",
-      "visits": 2
-    },
-    "mostActiveUser": "Thomas_Parisien",
-    "averageCompletionRate": 5.71,
-    "totalAchievementsUnlocked": 6
+  "validation": {
+    "required": ["userId", "createdAt", "stats"],
+    "stats": {
+      "required": ["totalVisited", "totalPlaces", "completionRate"],
+      "types": {
+        "totalVisited": "number",
+        "totalPlaces": "number", 
+        "completionRate": "number",
+        "currentStreak": "number",
+        "longestStreak": "number"
+      }
+    }
   }
 }
