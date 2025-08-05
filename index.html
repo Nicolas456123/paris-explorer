@@ -908,30 +908,31 @@
                     console.log('📄 Taille du fichier:', textContent.length, 'caractères');
                     console.log('📄 Début du fichier:', textContent.substring(0, 200));
                     
-                    // Parser le JSON
+                    // Parser le JSON avec gestion d'erreurs améliorée
                     let data;
                     try {
                         data = JSON.parse(textContent);
+                        console.log('✅ JSON parsé avec succès');
                     } catch (parseError) {
                         console.error('❌ Erreur parsing JSON:', parseError);
                         throw new Error(`Erreur parsing JSON: ${parseError.message}`);
                     }
                     
-                    console.log('🔍 Structure des données reçues:', Object.keys(data));
-                    console.log('🔍 Type de data:', typeof data);
+                    // Vérification simple et directe
+                    console.log('🔍 Vérification des données...');
+                    console.log('🔍 data existe?', !!data);
                     console.log('🔍 data.arrondissements existe?', !!data.arrondissements);
+                    console.log('🔍 Type de data.arrondissements:', typeof data.arrondissements);
                     
-                    if (data.arrondissements) {
+                    if (data && data.arrondissements) {
+                        console.log('✅ Structure valide détectée');
                         console.log('🔍 Nombre d\'arrondissements:', Object.keys(data.arrondissements).length);
-                        console.log('🔍 Premier arrondissement:', Object.keys(data.arrondissements)[0]);
+                        this.parisData = data.arrondissements;
+                    } else {
+                        console.error('❌ Structure invalide');
+                        console.error('data:', data);
+                        throw new Error('Structure de données invalide');
                     }
-                    
-                    if (!data || !data.arrondissements) {
-                        console.error('❌ Structure complète des données:', data);
-                        throw new Error('Structure de données invalide: propriété "arrondissements" manquante');
-                    }
-                    
-                    this.parisData = data.arrondissements;
                     this.isDataLoaded = true;
                     
                     // Debug: vérifier les données chargées
