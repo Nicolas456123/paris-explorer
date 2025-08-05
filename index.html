@@ -315,6 +315,10 @@
                     <span class="stat-number" id="completion-rate">0%</span>
                     <span class="stat-label">Progression</span>
                 </div>
+                <div class="stat">
+                    <span class="stat-number" id="last-save">-</span>
+                    <span class="stat-label">Dernière sauvegarde</span>
+                </div>
             </div>
         </div>
         
@@ -331,6 +335,7 @@
             </div>
             
             <button class="export-btn" id="export-btn">📊 Exporter JSON</button>
+            <button class="export-btn" id="clear-btn" style="background: #dc3545; margin-left: 10px;">🗑️ Effacer</button>
         </div>
         
         <div class="content" id="content">
@@ -393,16 +398,27 @@
             }
         }
 
-        // Gestion de la sauvegarde utilisateur
+        // Gestion de la sauvegarde utilisateur avec feedback visuel
         function saveUserProgress() {
             try {
+                const now = new Date();
                 const userData = {
                     visitedPlaces: Array.from(visitedPlaces),
-                    lastUpdated: new Date().toISOString()
+                    lastUpdated: now.toISOString(),
+                    totalPlaces: getTotalPlaces(),
+                    completionRate: Math.round((visitedPlaces.size / getTotalPlaces()) * 100)
                 };
                 localStorage.setItem('paris-explorer-progress', JSON.stringify(userData));
+                
+                // Mettre à jour l'affichage de la dernière sauvegarde
+                updateLastSaveDisplay(now);
+                
+                // Feedback visuel temporaire
+                showSaveNotification('💾 Sauvegardé automatiquement');
+                console.log('💾 Progression sauvegardée:', visitedPlaces.size, 'lieux visités');
             } catch (error) {
                 console.warn('⚠️ Impossible de sauvegarder la progression:', error);
+                showSaveNotification('⚠️ Erreur de sauvegarde', 'error');
             }
         }
 
@@ -412,13 +428,111 @@
                 if (savedData) {
                     const userData = JSON.parse(savedData);
                     visitedPlaces = new Set(userData.visitedPlaces || []);
-                    console.log('📥 Progression chargée:', visitedPlaces.size, 'lieux visités');
+                    
+                    // Afficher infos de la dernière sauvegarde
+                    if (userData.lastUpdated) {
+                        const lastUpdate = new Date(userData.lastUpdated);
+                        updateLastSaveDisplay(lastUpdate);
+                        console.log('📥 Progression chargée:', visitedPlaces.size, 'lieux visités');
+                        console.log('📅 Dernière sauvegarde:', lastUpdate.toLocaleString('fr-FR'));
+                        showSaveNotification(`📥 ${visitedPlaces.size} lieux restaurés`, 'success');
+                    }
+                } else {
+                    console.log('🆕 Nouvelle session - aucune progression sauvegardée');
+                    document.getElementById('last-save').textContent = '-';
                 }
             } catch (error) {
                 console.warn('⚠️ Impossible de charger la progression sauvegardée:', error);
                 visitedPlaces = new Set();
+                showSaveNotification('⚠️ Erreur chargement données', 'error');
+                document.getElementById('last-save').textContent = 'Erreur';
             }
         }
+
+        function updateLastSaveDisplay(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            
+            let displayText;
+            if (diffMins < 1) {
+                displayText = 'À l\'instant';
+            } else if (diffMins < 60) {
+                displayText = `${diffMins}min`;
+            } else if (diffMins < 1440) { // moins de 24h
+                const hours = Math.floor(diffMins / 60);
+                displayText = `${hours}h`;
+            } else {
+                displayText = date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+            }
+            
+            const lastSaveElement = document.getElementById('last-save');
+            if (lastSaveElement) {
+                lastSaveElement.textContent = displayText;
+                lastSaveElement.title = `Sauvegardé le ${date.toLocaleString('fr-FR')}`;
+            }
+        }
+
+        function showSaveNotification(message, type = 'success') {
+            // Créer ou réutiliser l'élément de notification
+            let notification = document.getElementById('save-notification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'save-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    z-index: 10000;
+                    transition: all 0.3s ease;
+                    transform: translateX(400px);
+                    opacity: 0;
+                `;
+                document.body.appendChild(notification);
+            }
+            
+            // Style selon le type
+            const colors = {
+                success: { bg: '#d4edda', border: '#28a745', color: '#155724' },
+                error: { bg: '#f8d7da', border: '#dc3545', color: '#721c24' },
+                info: { bg: '#d1ecf1', border: '#17a2b8', color: '#0c5460' }
+            };
+            
+            const color = colors[type] || colors.success;
+            notification.style.backgroundColor = color.bg;
+            notification.style.border = `2px solid ${color.border}`;
+            notification.style.color = color.color;
+            notification.textContent = message;
+            
+            // Animation d'apparition
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 100);
+            
+            // Animation de disparition
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                notification.style.opacity = '0';
+            }, 2500);
+        }
+
+        // Auto-sauvegarde périodique (toutes les 30 secondes si des changements)
+        let hasUnsavedChanges = false;
+        function markAsChanged() {
+            hasUnsavedChanges = true;
+        }
+
+        setInterval(() => {
+            if (hasUnsavedChanges && isDataLoaded) {
+                saveUserProgress();
+                hasUnsavedChanges = false;
+            }
+        }, 30000); // 30 secondes
 
         function showLoadingMessage(message) {
             const content = document.getElementById('content');
@@ -482,6 +596,9 @@
 
             // Export
             document.getElementById('export-btn').addEventListener('click', exportToJSON);
+
+            // Bouton effacer données
+            document.getElementById('clear-btn').addEventListener('click', clearAllData);
 
             // Toggle arrondissements
             document.addEventListener('click', function(e) {
@@ -581,7 +698,10 @@
                 visitedPlaces.add(placeId);
             }
             
-            // Sauvegarder automatiquement
+            // Marquer comme modifié pour la sauvegarde périodique
+            markAsChanged();
+            
+            // Sauvegarder immédiatement
             saveUserProgress();
             
             renderContent();
@@ -679,6 +799,31 @@
             a.download = `paris-explorer-progress-${new Date().toISOString().split('T')[0]}.json`;
             a.click();
             URL.revokeObjectURL(url);
+        }
+
+        function clearAllData() {
+            if (confirm('⚠️ Êtes-vous sûr de vouloir effacer TOUTES vos données ?\n\nCette action est irréversible et supprimera :\n• Tous les lieux visités cochés\n• Votre progression actuelle\n• Les données sauvegardées localement')) {
+                try {
+                    // Effacer localStorage
+                    localStorage.removeItem('paris-explorer-progress');
+                    
+                    // Réinitialiser les variables
+                    visitedPlaces = new Set();
+                    
+                    // Réinitialiser l'affichage
+                    document.getElementById('last-save').textContent = '-';
+                    
+                    // Rafraîchir l'interface
+                    renderContent();
+                    updateStats();
+                    
+                    showSaveNotification('🗑️ Toutes les données ont été effacées', 'info');
+                    console.log('🗑️ Toutes les données utilisateur ont été effacées');
+                } catch (error) {
+                    console.error('❌ Erreur lors de l\'effacement:', error);
+                    showSaveNotification('❌ Erreur lors de l\'effacement', 'error');
+                }
+            }
         }
 
         // Fonction globale pour les checkboxes
