@@ -1,70 +1,259 @@
-// ===== DATA MANAGER - GESTION DES DONNÉES PARISIENNES =====
+// ===== DATA MANAGER - GESTION DES DONNÉES PARISIENNES MODULAIRE =====
 
 class DataManager {
     constructor(app) {
         this.app = app;
+        this.cache = new Map();
+        this.loadedArrondissements = new Set();
+        this.loadingPromises = new Map();
+        this.config = {
+            cacheEnabled: true,
+            cacheDuration: 3600000, // 1 heure
+            maxRetries: 3,
+            retryDelay: 1000
+        };
     }
     
-    // === CHARGEMENT DES DONNÉES ===
+    // === CHARGEMENT PRINCIPAL DES DONNÉES ===
+    
     async loadParisData() {
         try {
+            console.log('📊 Chargement des données Paris (nouvelle architecture)...');
             this.app.showNotification('Chargement des trésors parisiens...', 'info');
             
-            const response = await fetch('paris-database.json');
+            // Chargement de l'index principal
+            const indexData = await this.loadParisIndex();
             
+            // Chargement des arrondissements
+            await this.loadArrondissements(indexData.arrondissements);
+            
+            console.log('✅ Toutes les données Paris chargées avec succès');
+            this.app.onDataLoaded();
+            
+        } catch (error) {
+            console.error('❌ Erreur lors du chargement principal:', error);
+            throw error;
+        }
+    }
+    
+    async loadParisIndex() {
+        try {
+            console.log('📋 Chargement de l\'index principal...');
+            
+            const response = await this.fetchWithRetry('data/paris-index.json');
             if (!response.ok) {
-                throw new Error(`Fichier paris-database.json introuvable`);
+                throw new Error(`Index introuvable: ${response.status}`);
+            }
+            
+            const indexData = await response.json();
+            this.validateIndexStructure(indexData);
+            
+            console.log('✅ Index principal chargé:', {
+                version: indexData.metadata?.version,
+                arrondissements: Object.keys(indexData.arrondissements || {}).length,
+                totalPlaces: indexData.metadata?.totalPlaces
+            });
+            
+            return indexData;
+            
+        } catch (error) {
+            console.error('❌ Erreur chargement index:', error);
+            throw new Error(`Impossible de charger l'index principal: ${error.message}`);
+        }
+    }
+    
+    async loadArrondissements(arrondissementsList) {
+        console.log(`📍 Chargement de ${Object.keys(arrondissementsList).length} arrondissements...`);
+        
+        const loadPromises = Object.entries(arrondissementsList).map(([arrKey, arrInfo]) => 
+            this.loadArrondissement(arrKey, arrInfo)
+        );
+        
+        const results = await Promise.allSettled(loadPromises);
+        
+        // Analyser les résultats
+        const successful = results.filter(r => r.status === 'fulfilled').length;
+        const failed = results.filter(r => r.status === 'rejected');
+        
+        console.log(`📊 Chargement terminé: ${successful} réussis, ${failed.length} échecs`);
+        
+        if (failed.length > 0) {
+            failed.forEach((failure, index) => {
+                console.warn(`⚠️ Échec arrondissement ${Object.keys(arrondissementsList)[index]}:`, failure.reason);
+            });
+        }
+        
+        if (successful === 0) {
+            throw new Error('Aucun arrondissement n\'a pu être chargé');
+        }
+        
+        return successful;
+    }
+    
+    async loadArrondissement(arrKey, arrInfo) {
+        try {
+            // Vérifier le cache
+            if (this.cache.has(arrKey) && this.isCacheValid(arrKey)) {
+                console.log(`💾 ${arrKey} chargé depuis le cache`);
+                this.app.parisData[arrKey] = this.cache.get(arrKey).data;
+                return;
+            }
+            
+            // Éviter les chargements multiples simultanés
+            if (this.loadingPromises.has(arrKey)) {
+                return await this.loadingPromises.get(arrKey);
+            }
+            
+            const loadPromise = this.fetchArrondissementData(arrKey, arrInfo);
+            this.loadingPromises.set(arrKey, loadPromise);
+            
+            try {
+                const arrData = await loadPromise;
+                
+                // Validation et mise en cache
+                this.validateArrondissementData(arrKey, arrData);
+                this.cacheArrondissement(arrKey, arrData);
+                
+                // Ajout aux données principales
+                this.app.parisData[arrKey] = arrData;
+                this.loadedArrondissements.add(arrKey);
+                
+                console.log(`✅ ${arrKey} chargé: ${this.getTotalPlacesInArrondissement(arrData)} lieux`);
+                
+            } finally {
+                this.loadingPromises.delete(arrKey);
+            }
+            
+        } catch (error) {
+            console.error(`❌ Erreur chargement ${arrKey}:`, error);
+            throw new Error(`Échec chargement ${arrKey}: ${error.message}`);
+        }
+    }
+    
+    async fetchArrondissementData(arrKey, arrInfo) {
+        const filePath = arrInfo.file || `data/arrondissements/${this.getArrondissementFileName(arrKey)}`;
+        
+        console.log(`📁 Chargement de ${arrKey} depuis ${filePath}...`);
+        
+        const response = await this.fetchWithRetry(filePath);
+        
+        if (!response.ok) {
+            throw new Error(`Fichier ${filePath} introuvable (${response.status})`);
+        }
+        
+        const arrData = await response.json();
+        
+        // Enrichir avec les métadonnées de l'index si disponibles
+        if (arrInfo.metadata) {
+            arrData.metadata = { ...arrData.metadata, ...arrInfo.metadata };
+        }
+        
+        return arrData;
+    }
+    
+    // === FALLBACK VERS L'ANCIEN FORMAT ===
+    
+    async loadFallbackData() {
+        try {
+            console.log('🔄 Chargement des données de fallback (ancien format)...');
+            
+            const response = await this.fetchWithRetry('paris-database.json');
+            if (!response.ok) {
+                throw new Error(`Fallback database introuvable: ${response.status}`);
             }
             
             const textContent = await response.text();
-            console.log('📄 Taille du fichier:', textContent.length, 'caractères');
+            console.log('📄 Taille du fichier fallback:', textContent.length, 'caractères');
             
-            let data;
-            try {
-                data = JSON.parse(textContent);
-                console.log('✅ JSON parsé avec succès');
-            } catch (parseError) {
-                console.error('❌ Erreur parsing JSON:', parseError);
-                throw new Error(`Erreur parsing JSON: ${parseError.message}`);
-            }
-            
-            // Vérification et adaptation de la structure
-            const validatedData = this.validateDataStructure(data);
+            const data = JSON.parse(textContent);
+            const validatedData = this.validateFallbackStructure(data);
             
             if (validatedData) {
-                console.log('✅ Structure valide détectée');
+                console.log('✅ Structure fallback valide détectée');
                 console.log('🔍 Nombre d\'arrondissements:', Object.keys(validatedData).length);
                 
                 this.app.parisData = validatedData;
                 this.logDataSummary(validatedData);
                 this.app.onDataLoaded();
-                
             } else {
-                throw new Error('Structure de données invalide');
+                throw new Error('Structure de données fallback invalide');
             }
             
         } catch (error) {
-            console.error('❌ Erreur lors du chargement:', error);
+            console.error('❌ Erreur lors du chargement fallback:', error);
             throw error;
         }
     }
     
-    // === VALIDATION DE LA STRUCTURE ===
-    validateDataStructure(data) {
-        // Adapter si c'est un tableau
+    // === VALIDATION DES STRUCTURES ===
+    
+    validateIndexStructure(indexData) {
+        if (!indexData || typeof indexData !== 'object') {
+            throw new Error('Index principal invalide');
+        }
+        
+        if (!indexData.metadata) {
+            console.warn('⚠️ Métadonnées manquantes dans l\'index');
+        }
+        
+        if (!indexData.arrondissements || typeof indexData.arrondissements !== 'object') {
+            throw new Error('Liste des arrondissements manquante dans l\'index');
+        }
+        
+        const arrCount = Object.keys(indexData.arrondissements).length;
+        if (arrCount === 0) {
+            throw new Error('Aucun arrondissement défini dans l\'index');
+        }
+        
+        console.log(`✅ Index validé: ${arrCount} arrondissements définis`);
+        return true;
+    }
+    
+    validateArrondissementData(arrKey, arrData) {
+        if (!arrData || typeof arrData !== 'object') {
+            throw new Error(`Données invalides pour ${arrKey}`);
+        }
+        
+        if (!arrData.title) {
+            console.warn(`⚠️ Titre manquant pour ${arrKey}`);
+        }
+        
+        if (!arrData.categories || typeof arrData.categories !== 'object') {
+            throw new Error(`Catégories manquantes pour ${arrKey}`);
+        }
+        
+        // Validation des catégories
+        let totalPlaces = 0;
+        Object.entries(arrData.categories).forEach(([catKey, catData]) => {
+            if (!catData.title) {
+                console.warn(`⚠️ Titre de catégorie manquant: ${arrKey}/${catKey}`);
+            }
+            
+            if (!catData.places || !Array.isArray(catData.places)) {
+                console.warn(`⚠️ Places invalides: ${arrKey}/${catKey}`);
+                catData.places = [];
+            }
+            
+            totalPlaces += catData.places.length;
+        });
+        
+        console.log(`✅ ${arrKey} validé: ${totalPlaces} lieux dans ${Object.keys(arrData.categories).length} catégories`);
+        return true;
+    }
+    
+    validateFallbackStructure(data) {
+        // Logique existante adaptée pour le fallback
         let jsonData = data;
         if (Array.isArray(data) && data.length > 0) {
             console.log('📦 Structure tableau détectée, extraction du premier élément');
             jsonData = data[0];
         }
         
-        // Vérifier la présence des arrondissements
         if (!jsonData || !jsonData.arrondissements) {
             console.error('❌ Structure invalide: pas d\'arrondissements trouvés');
             return null;
         }
         
-        // Valider chaque arrondissement
         const validatedArrondissements = {};
         
         Object.entries(jsonData.arrondissements).forEach(([arrKey, arrData]) => {
@@ -92,7 +281,6 @@ class DataManager {
             return false;
         }
         
-        // Valider les catégories
         let validCategories = 0;
         Object.entries(arrData.categories).forEach(([catKey, catData]) => {
             if (this.validateCategory(arrKey, catKey, catData)) {
@@ -119,7 +307,6 @@ class DataManager {
             return false;
         }
         
-        // Valider les lieux
         let validPlaces = 0;
         catData.places.forEach((place, index) => {
             if (this.validatePlace(arrKey, catKey, place, index)) {
@@ -143,23 +330,151 @@ class DataManager {
         
         if (!place.description || typeof place.description !== 'string') {
             console.warn(`⚠️ ${arrKey}/${catKey}[${index}]: description manquante`);
-            // Non bloquant, on peut continuer
-        }
-        
-        if (place.address && typeof place.address !== 'string') {
-            console.warn(`⚠️ ${arrKey}/${catKey}[${index}]: adresse invalide`);
-            // Non bloquant
-        }
-        
-        if (place.tags && !Array.isArray(place.tags)) {
-            console.warn(`⚠️ ${arrKey}/${catKey}[${index}]: tags invalides`);
-            // Non bloquant
         }
         
         return true;
     }
     
-    // === STATISTIQUES DES DONNÉES ===
+    // === SYSTÈME DE CACHE ===
+    
+    cacheArrondissement(arrKey, data) {
+        if (!this.config.cacheEnabled) return;
+        
+        this.cache.set(arrKey, {
+            data: data,
+            timestamp: Date.now(),
+            size: JSON.stringify(data).length
+        });
+        
+        console.log(`💾 ${arrKey} mis en cache (${this.cache.get(arrKey).size} caractères)`);
+    }
+    
+    isCacheValid(arrKey) {
+        if (!this.cache.has(arrKey)) return false;
+        
+        const cached = this.cache.get(arrKey);
+        const age = Date.now() - cached.timestamp;
+        
+        return age < this.config.cacheDuration;
+    }
+    
+    clearCache() {
+        const cacheSize = this.cache.size;
+        this.cache.clear();
+        this.loadedArrondissements.clear();
+        console.log(`🧹 Cache vidé (${cacheSize} entrées supprimées)`);
+    }
+    
+    getCacheStats() {
+        let totalSize = 0;
+        const stats = {
+            entries: this.cache.size,
+            totalSize: 0,
+            details: []
+        };
+        
+        this.cache.forEach((cached, arrKey) => {
+            totalSize += cached.size;
+            stats.details.push({
+                arrKey,
+                size: cached.size,
+                age: Date.now() - cached.timestamp
+            });
+        });
+        
+        stats.totalSize = totalSize;
+        return stats;
+    }
+    
+    // === UTILITAIRES DE RÉSEAU ===
+    
+    async fetchWithRetry(url, options = {}) {
+        let lastError;
+        
+        for (let attempt = 1; attempt <= this.config.maxRetries; attempt++) {
+            try {
+                console.log(`🌐 Tentative ${attempt}/${this.config.maxRetries}: ${url}`);
+                
+                const response = await fetch(url, {
+                    ...options,
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        ...options.headers
+                    }
+                });
+                
+                if (response.ok) {
+                    console.log(`✅ Succès: ${url} (${response.status})`);
+                    return response;
+                }
+                
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                
+            } catch (error) {
+                lastError = error;
+                console.warn(`⚠️ Échec tentative ${attempt}: ${error.message}`);
+                
+                if (attempt < this.config.maxRetries) {
+                    const delay = this.config.retryDelay * attempt;
+                    console.log(`⏳ Retry dans ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+        
+        throw new Error(`Échec après ${this.config.maxRetries} tentatives: ${lastError.message}`);
+    }
+    
+    // === CHARGEMENT DYNAMIQUE ===
+    
+    async loadArrondissementOnDemand(arrKey) {
+        if (this.loadedArrondissements.has(arrKey)) {
+            return this.app.parisData[arrKey];
+        }
+        
+        console.log(`🔄 Chargement à la demande: ${arrKey}`);
+        
+        try {
+            const arrInfo = { file: `data/arrondissements/${this.getArrondissementFileName(arrKey)}` };
+            await this.loadArrondissement(arrKey, arrInfo);
+            return this.app.parisData[arrKey];
+        } catch (error) {
+            console.error(`❌ Échec chargement à la demande ${arrKey}:`, error);
+            throw error;
+        }
+    }
+    
+    // === UTILITAIRES DE NOMMAGE ===
+    
+    getArrondissementFileName(arrKey) {
+        const fileMap = {
+            '1er': '01-louvre.json',
+            '2ème': '02-bourse.json',
+            '3ème': '03-haut-marais.json',
+            '4ème': '04-marais-ile-st-louis.json',
+            '5ème': '05-quartier-latin.json',
+            '6ème': '06-saint-germain.json',
+            '7ème': '07-invalides-tour-eiffel.json',
+            '8ème': '08-champs-elysees.json',
+            '9ème': '09-opera-pigalle.json',
+            '10ème': '10-canal-saint-martin.json',
+            '11ème': '11-bastille-oberkampf.json',
+            '12ème': '12-nation-bercy.json',
+            '13ème': '13-chinatown-bibliotheque.json',
+            '14ème': '14-montparnasse.json',
+            '15ème': '15-vaugirard-beaugrenelle.json',
+            '16ème': '16-trocadero-passy.json',
+            '17ème': '17-batignolles-monceau.json',
+            '18ème': '18-montmartre-barbes.json',
+            '19ème': '19-buttes-chaumont-villette.json',
+            '20ème': '20-belleville-pere-lachaise.json'
+        };
+        
+        return fileMap[arrKey] || `${arrKey.replace(/[^\w]/g, '')}.json`;
+    }
+    
+    // === STATISTIQUES (méthodes existantes conservées) ===
+    
     logDataSummary(data) {
         let totalPlaces = 0;
         let totalCategories = 0;
@@ -175,7 +490,6 @@ class DataManager {
                 const placesCount = (catData.places || []).length;
                 arrPlaces += placesCount;
                 
-                // Analyser les lieux
                 (catData.places || []).forEach(place => {
                     if (place.address) placesWithAddress++;
                     if (place.tags && place.tags.length > 0) placesWithTags++;
@@ -195,9 +509,8 @@ class DataManager {
         console.log(`   • ${placesWithTags} lieux avec tags (${Math.round(placesWithTags/totalPlaces*100)}%)`);
     }
     
-    // === HELPERS POUR STATISTIQUES ===
     getTotalPlaces() {
-        if (!this.app.isDataLoaded || !this.app.parisData) return 147; // Valeur par défaut pour la démo
+        if (!this.app.isDataLoaded || !this.app.parisData) return 147;
         
         let total = 0;
         Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
@@ -242,7 +555,6 @@ class DataManager {
         return visited;
     }
     
-    // === UTILITAIRES ===
     getPlacesBySearch(query) {
         if (!query || !this.app.isDataLoaded) return [];
         
@@ -273,5 +585,48 @@ class DataManager {
                (place.description && place.description.toLowerCase().includes(query)) ||
                (place.address && place.address.toLowerCase().includes(query)) ||
                (place.tags && place.tags.some(tag => tag.toLowerCase().includes(query)));
+    }
+    
+    // === MÉTHODES D'ANALYSE ===
+    
+    getDataStatistics() {
+        const stats = {
+            loading: {
+                loadedArrondissements: this.loadedArrondissements.size,
+                totalArrondissements: 20,
+                loadingProgress: Math.round((this.loadedArrondissements.size / 20) * 100)
+            },
+            cache: this.getCacheStats(),
+            data: {
+                totalPlaces: this.getTotalPlaces(),
+                averagePlacesPerArrondissement: Math.round(this.getTotalPlaces() / this.loadedArrondissements.size),
+                categoriesCount: this.getCategoriesCount(),
+                tagsCount: this.getTagsCount()
+            }
+        };
+        
+        return stats;
+    }
+    
+    getCategoriesCount() {
+        const categories = new Set();
+        Object.values(this.app.parisData).forEach(arrData => {
+            Object.keys(arrData.categories || {}).forEach(catKey => {
+                categories.add(catKey);
+            });
+        });
+        return categories.size;
+    }
+    
+    getTagsCount() {
+        const tags = new Set();
+        Object.values(this.app.parisData).forEach(arrData => {
+            Object.values(arrData.categories || {}).forEach(catData => {
+                (catData.places || []).forEach(place => {
+                    (place.tags || []).forEach(tag => tags.add(tag));
+                });
+            });
+        });
+        return tags.size;
     }
 }
