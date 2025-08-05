@@ -13,7 +13,7 @@
       "transport": "Métro : Louvre-Rivoli (1), Châtelet-Les Halles (1,4,7,11,14), Palais-Royal (1,7)",
       "categories": {
         "monuments": {
-          "title": "🏛️ Monuments & Sites Historiques",
+          "title": "Monuments & Sites Historiques",
           "places": [
             {
               "name": "Musée du Louvre",
@@ -73,7 +73,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Espaces Verts & Lieux Secrets",
+          "title": "Espaces Verts & Lieux Secrets",
           "places": [
             {
               "name": "Jardin des Tuileries",
@@ -103,7 +103,7 @@
           ]
         },
         "restaurants": {
-          "title": "🍽️ Restaurants & Gastronomie",
+          "title": "Restaurants & Gastronomie",
           "places": [
             {
               "name": "Palais Royal Restaurant",
@@ -158,7 +158,7 @@
           ]
         },
         "shopping": {
-          "title": "🛍️ Shopping & Marchés",
+          "title": "Shopping & Marchés",
           "places": [
             {
               "name": "Forum des Halles",
@@ -193,7 +193,7 @@
           ]
         },
         "culture": {
-          "title": "🎭 Culture & Spectacles",
+          "title": "Culture & Spectacles",
           "places": [
             {
               "name": "Comédie-Française",
@@ -218,7 +218,7 @@
           ]
         },
         "lieux-insolites": {
-          "title": "🏨 Lieux Insolites & Secrets",
+          "title": "Lieux Insolites & Secrets",
           "places": [
             {
               "name": "Hôtel du Petit Moulin",
@@ -250,7 +250,7 @@
       "transport": "Métro : Bourse (3), Grands Boulevards (8,9), Réaumur-Sébastopol (3,4), Sentier (3)",
       "categories": {
         "monuments": {
-          "title": "🏛️ Architecture & Monuments",
+          "title": "Architecture & Monuments",
           "places": [
             {
               "name": "Palais Brongniart",
@@ -295,7 +295,7 @@
           ]
         },
         "restaurants": {
-          "title": "🍽️ Restaurants & Spécialités",
+          "title": "Restaurants & Spécialités",
           "places": [
             {
               "name": "Rue Sainte-Anne",
@@ -360,7 +360,7 @@
           ]
         },
         "culture": {
-          "title": "🎭 Culture & Spectacles",
+          "title": "Culture & Spectacles",
           "places": [
             {
               "name": "Grand Rex",
@@ -380,7 +380,7 @@
           ]
         },
         "shopping": {
-          "title": "🛍️ Shopping Spécialisé",
+          "title": "Shopping Spécialisé",
           "places": [
             {
               "name": "Passage du Caire",
@@ -407,7 +407,7 @@
       "transport": "Métro : Arts et Métiers (3,11), République (3,5,8,9,11), Temple (3), Filles du Calvaire (8)",
       "categories": {
         "musees": {
-          "title": "🏛️ Musées & Culture",
+          "title": "Musées & Culture",
           "places": [
             {
               "name": "Musée des Arts et Métiers",
@@ -447,7 +447,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Parcs & Espaces Secrets",
+          "title": "Parcs & Espaces Secrets",
           "places": [
             {
               "name": "Square du Temple",
@@ -482,7 +482,7 @@
           ]
         },
         "restaurants": {
-          "title": "🍽️ Gastronomie & Marchés",
+          "title": "Gastronomie & Marchés",
           "places": [
             {
               "name": "Marché des Enfants Rouges",
@@ -527,7 +527,7 @@
           ]
         },
         "shopping": {
-          "title": "🛍️ Shopping & Créateurs",
+          "title": "Shopping & Créateurs",
           "places": [
             {
               "name": "Rue de Bretagne",
@@ -562,7 +562,7 @@
           ]
         },
         "bars": {
-          "title": "🎭 Vie Nocturne",
+          "title": "Vie Nocturne",
           "places": [
             {
               "name": "Andy Wahloo",
@@ -589,7 +589,7 @@
       "transport": "Métro : Saint-Paul (1), Hôtel de Ville (1,11), Pont Marie (7), Châtelet (1,4,7,11,14)",
       "categories": {
         "monuments": {
-          "title": "🏛️ Monuments Emblématiques",
+          "title": "Monuments Emblématiques",
           "places": [
             {
               "name": "Notre-Dame de Paris",
@@ -629,7 +629,7 @@
           ]
         },
         "patrimoine-juif": {
-          "title": "🏛️ Patrimoine Juif & Mémoire",
+          "title": "Patrimoine Juif & Mémoire",
           "places": [
             {
               "name": "Rue des Rosiers",
@@ -654,7 +654,7 @@
           ]
         },
         "ile-saint-louis": {
-          "title": "🏛️ Île Saint-Louis - Village sur Seine",
+          "title": "Île Saint-Louis - Village sur Seine",
           "places": [
             {
               "name": "Hôtel Lambert",
@@ -689,7 +689,7 @@
           ]
         },
         "restaurants": {
-          "title": "🍽️ Restaurants & Cafés Emblématiques",
+          "title": "Restaurants & Cafés Emblématiques",
           "places": [
             {
               "name": "L'As du Fallafel",
@@ -769,7 +769,7 @@
           ]
         },
         "shopping": {
-          "title": "🛍️ Shopping & Artisanat",
+          "title": "Shopping & Artisanat",
           "places": [
             {
               "name": "Rue des Franc-Bourgeois",
@@ -804,7 +804,7 @@
           ]
         },
         "culture": {
-          "title": "🎭 Culture & Arts",
+          "title": "Culture & Arts",
           "places": [
             {
               "name": "Maison Européenne de la Photographie",
@@ -861,7 +861,7 @@
       "transport": "Métro : Place Monge (7), Cluny-La Sorbonne (10), Maubert-Mutualité (10), Cardinal Lemoine (10) | RER : Luxembourg (B), Saint-Michel-Notre-Dame (B,C)",
       "categories": {
         "monuments": {
-          "title": "🏛️ Monuments Historiques & Universitaires",
+          "title": "Monuments Historiques & Universitaires",
           "places": [
             {
               "name": "Panthéon",
@@ -901,7 +901,7 @@
           ]
         },
         "musees": {
-          "title": "🏛️ Musées Spécialisés",
+          "title": "Musées Spécialisés",
           "places": [
             {
               "name": "Musée de Cluny",
@@ -936,7 +936,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Espaces Verts & Jardins",
+          "title": "Espaces Verts & Jardins",
           "places": [
             {
               "name": "Jardin des Plantes",
@@ -971,7 +971,7 @@
           ]
         },
         "restaurants": {
-          "title": "🍽️ Restaurants & Brasseries Historiques",
+          "title": "Restaurants & Brasseries Historiques",
           "places": [
             {
               "name": "Shakespeare and Company Café",
@@ -1093,7 +1093,7 @@
       "transport": "Métro : Saint-Germain-des-Prés (4), Odéon (4,10), Mabillon (10), Saint-Sulpice (4) | RER : Luxembourg (B)",
       "categories": {
         "monuments": {
-          "title": "🏛️ Monuments & Institutions",
+          "title": "Monuments & Institutions",
           "places": [
             {
               "name": "Palais du Luxembourg",
@@ -1128,7 +1128,7 @@
           ]
         },
         "jardins-luxembourg": {
-          "title": "🌳 Jardins du Luxembourg - 25 hectares",
+          "title": "Jardins du Luxembourg - 25 hectares",
           "places": [
             {
               "name": "Palais du Luxembourg",
@@ -1203,7 +1203,7 @@
           ]
         },
         "restaurants-gastronomiques": {
-          "title": "🍽️ Restaurants Gastronomiques",
+          "title": "Restaurants Gastronomiques",
           "places": [
             {
               "name": "L'Ami Jean",
@@ -1233,7 +1233,7 @@
           ]
         },
         "shopping": {
-          "title": "🛍️ Shopping Haute Couture & Librairies",
+          "title": "Shopping Haute Couture & Librairies",
           "places": [
             {
               "name": "Boulevard Saint-Germain",
@@ -1268,7 +1268,7 @@
           ]
         },
         "theatres": {
-          "title": "🎭 Théâtres & Culture",
+          "title": "Théâtres & Culture",
           "places": [
             {
               "name": "Théâtre de l'Odéon",
@@ -1360,7 +1360,7 @@
           ]
         },
         "musees-excellence": {
-          "title": "🏛️ Musées d'Excellence Mondiale",
+          "title": "Musées d'Excellence Mondiale",
           "places": [
             {
               "name": "Musée d'Orsay",
@@ -1395,7 +1395,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Parcs & Promenades",
+          "title": "Parcs & Promenades",
           "places": [
             {
               "name": "Champ-de-Mars",
@@ -1425,7 +1425,7 @@
           ]
         },
         "gastronomie": {
-          "title": "🍽️ Gastronomie & Marchés",
+          "title": "Gastronomie & Marchés",
           "places": [
             {
               "name": "Rue Cler",
@@ -1465,7 +1465,7 @@
           ]
         },
         "shopping-luxe": {
-          "title": "🛍️ Shopping Luxe & Épiceries Fines",
+          "title": "Shopping Luxe & Épiceries Fines",
           "places": [
             {
               "name": "Le Bon Marché",
@@ -1517,7 +1517,7 @@
       "transport": "Métro : Charles-de-Gaulle-Étoile (1,2,6), George V (1), Concorde (1,8,12), Champs-Élysées-Clemenceau (1,13) | RER : Charles-de-Gaulle-Étoile (A)",
       "categories": {
         "monuments-prestigieux": {
-          "title": "🏛️ Monuments Prestigieux",
+          "title": "Monuments Prestigieux",
           "places": [
             {
               "name": "Arc de Triomphe",
@@ -1552,7 +1552,7 @@
           ]
         },
         "palais-institutions": {
-          "title": "🏛️ Palais & Institutions",
+          "title": "Palais & Institutions",
           "places": [
             {
               "name": "Grand Palais",
@@ -1582,7 +1582,7 @@
           ]
         },
         "shopping-prestige": {
-          "title": "🛍️ Shopping Avenue Prestigieuse",
+          "title": "Shopping Avenue Prestigieuse",
           "places": [
             {
               "name": "Champs-Élysées",
@@ -1612,7 +1612,7 @@
           ]
         },
         "restaurants-mythiques": {
-          "title": "🍽️ Restaurants & Brasseries Mythiques",
+          "title": "Restaurants & Brasseries Mythiques",
           "places": [
             {
               "name": "Fouquet's",
@@ -1647,7 +1647,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Jardins & Espaces Verts",
+          "title": "Jardins & Espaces Verts",
           "places": [
             {
               "name": "Parc Monceau",
@@ -1667,7 +1667,7 @@
           ]
         },
         "theatres": {
-          "title": "🎭 Théâtres & Spectacles",
+          "title": "Théâtres & Spectacles",
           "places": [
             {
               "name": "Théâtre Marigny",
@@ -1687,7 +1687,7 @@
           ]
         },
         "lieux-insolites": {
-          "title": "🏨 Lieux Secrets & Insolites",
+          "title": "Lieux Secrets & Insolites",
           "places": [
             {
               "name": "Maison Loo",
@@ -1714,7 +1714,7 @@
       "transport": "Métro : Opéra (3,7,8), Pigalle (2,12), Saint-Georges (12), Grands Boulevards (8,9), Chaussée d'Antin (7,9)",
       "categories": {
         "spectacles": {
-          "title": "🎭 Temples du Spectacle",
+          "title": "Temples du Spectacle",
           "places": [
             {
               "name": "Palais Garnier",
@@ -1749,7 +1749,7 @@
           ]
         },
         "musees-confidentiels": {
-          "title": "🏛️ Musées Confidentiels",
+          "title": "Musées Confidentiels",
           "places": [
             {
               "name": "Musée Gustave Moreau",
@@ -1779,7 +1779,7 @@
           ]
         },
         "grands-magasins": {
-          "title": "🛍️ Grands Magasins Historiques",
+          "title": "Grands Magasins Historiques",
           "places": [
             {
               "name": "Galeries Lafayette Haussmann",
@@ -1809,7 +1809,7 @@
           ]
         },
         "restaurants-bistrots": {
-          "title": "🍽️ Restaurants & Bistrots",
+          "title": "Restaurants & Bistrots",
           "places": [
             {
               "name": "Chartier",
@@ -1951,7 +1951,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Espaces Verts & Loisirs",
+          "title": "Espaces Verts & Loisirs",
           "places": [
             {
               "name": "Square Villemin",
@@ -1976,7 +1976,7 @@
           ]
         },
         "restaurants-cultes": {
-          "title": "🍽️ Restaurants & Cafés Cultes",
+          "title": "Restaurants & Cafés Cultes",
           "places": [
             {
               "name": "Du Pain et des Idées",
@@ -2011,7 +2011,7 @@
           ]
         },
         "shopping-creatif": {
-          "title": "🛍️ Shopping Créatif & Vintage",
+          "title": "Shopping Créatif & Vintage",
           "places": [
             {
               "name": "Rue de Marseille",
@@ -2041,7 +2041,7 @@
           ]
         },
         "culture-alternative": {
-          "title": "🎭 Culture Alternative",
+          "title": "Culture Alternative",
           "places": [
             {
               "name": "Point Éphémère",
@@ -2088,7 +2088,7 @@
       "transport": "Métro : Bastille (1,5,8), Oberkampf (5,9), République (3,5,8,9,11), Voltaire (9), Saint-Ambroise (9)",
       "categories": {
         "sites-historiques": {
-          "title": "🏛️ Sites Historiques & Révolutionnaires",
+          "title": "Sites Historiques & Révolutionnaires",
           "places": [
             {
               "name": "Place de la Bastille",
@@ -2118,7 +2118,7 @@
           ]
         },
         "gastronomie-pointe": {
-          "title": "🍽️ Gastronomie de Pointe",
+          "title": "Gastronomie de Pointe",
           "places": [
             {
               "name": "Septime",
@@ -2188,7 +2188,7 @@
           ]
         },
         "culture-arts": {
-          "title": "🎭 Culture & Arts Vivants",
+          "title": "Culture & Arts Vivants",
           "places": [
             {
               "name": "Cirque d'Hiver Bouglione",
@@ -2218,7 +2218,7 @@
           ]
         },
         "shopping-vintage": {
-          "title": "🛍️ Shopping Vintage & Créateurs",
+          "title": "Shopping Vintage & Créateurs",
           "places": [
             {
               "name": "Rue de Charonne",
@@ -2295,7 +2295,7 @@
       "transport": "Métro : Nation (1,2,6,9), Bercy (6,14), Gare de Lyon (1,14) | RER : Nation (A), Gare de Lyon (A,D), Vincennes (A)",
       "categories": {
         "espaces-verts": {
-          "title": "🌳 Espaces Verts Exceptionnels",
+          "title": "Espaces Verts Exceptionnels",
           "places": [
             {
               "name": "Bois de Vincennes",
@@ -2325,7 +2325,7 @@
           ]
         },
         "patrimoine-architecture": {
-          "title": "🏛️ Patrimoine & Architecture",
+          "title": "Patrimoine & Architecture",
           "places": [
             {
               "name": "Château de Vincennes",
@@ -2355,7 +2355,7 @@
           ]
         },
         "restaurants-marches": {
-          "title": "🍽️ Restaurants & Marchés Pittoresques",
+          "title": "Restaurants & Marchés Pittoresques",
           "places": [
             {
               "name": "Bercy Village",
@@ -2385,7 +2385,7 @@
           ]
         },
         "divertissements": {
-          "title": "🎭 Divertissements & Spectacles",
+          "title": "Divertissements & Spectacles",
           "places": [
             {
               "name": "AccorHotels Arena",
@@ -2457,7 +2457,7 @@
       "transport": "Métro : Place d'Italie (5,6,7), Tolbiac (7), Olympiades (14), Chevaleret (6) | RER : Bibliothèque François Mitterrand (C)",
       "categories": {
         "architecture-moderne": {
-          "title": "🏛️ Architecture Moderne & Bibliothèques",
+          "title": "Architecture Moderne & Bibliothèques",
           "places": [
             {
               "name": "Bibliothèque Nationale France",
@@ -2507,7 +2507,7 @@
           ]
         },
         "restaurants-asiatiques": {
-          "title": "🍽️ Restaurants Asiatiques Authentiques",
+          "title": "Restaurants Asiatiques Authentiques",
           "places": [
             {
               "name": "Lao Lane Xang",
@@ -2542,7 +2542,7 @@
           ]
         },
         "espaces-verts": {
-          "title": "🌳 Espaces Verts & Lieux Insolites",
+          "title": "Espaces Verts & Lieux Insolites",
           "places": [
             {
               "name": "Parc de Choisy",
@@ -2577,7 +2577,7 @@
           ]
         },
         "culture-cinema": {
-          "title": "🎭 Culture & Cinéma",
+          "title": "Culture & Cinéma",
           "places": [
             {
               "name": "Cinéma MK2 Bibliothèque",
@@ -2649,7 +2649,7 @@
       "transport": "Métro : Montparnasse-Bienvenüe (4,6,12,13), Edgar Quinet (6), Denfert-Rochereau (4,6) | RER : Denfert-Rochereau (B)",
       "categories": {
         "monuments-panoramas": {
-          "title": "🏛️ Monuments & Panoramas",
+          "title": "Monuments & Panoramas",
           "places": [
             {
               "name": "Tour Montparnasse",
@@ -2679,7 +2679,7 @@
           ]
         },
         "parcs-jardins": {
-          "title": "🌳 Parcs & Jardins Secrets",
+          "title": "Parcs & Jardins Secrets",
           "places": [
             {
               "name": "Parc Montsouris",
@@ -2739,7 +2739,7 @@
           ]
         },
         "restaurants-creperies": {
-          "title": "🍽️ Restaurants & Crêperies",
+          "title": "Restaurants & Crêperies",
           "places": [
             {
               "name": "Crêperie Josselin",
@@ -2769,7 +2769,7 @@
           ]
         },
         "shopping-marches": {
-          "title": "🛍️ Shopping & Marchés Authentiques",
+          "title": "Shopping & Marchés Authentiques",
           "places": [
             {
               "name": "Rue Daguerre",
@@ -2794,7 +2794,7 @@
           ]
         },
         "culture-spectacles": {
-          "title": "🎭 Culture & Spectacles",
+          "title": "Culture & Spectacles",
           "places": [
             {
               "name": "Théâtre Montparnasse",
@@ -2819,7 +2819,7 @@
           ]
         },
         "lieux-secrets": {
-          "title": "🏨 Lieux Secrets & Insolites",
+          "title": "Lieux Secrets & Insolites",
           "places": [
             {
               "name": "Villa Seurat",
@@ -2851,7 +2851,7 @@
       "transport": "Métro : Charles-Michels (10), Bir-Hakeim (6), Commerce (8), Javel (10), Porte de Versailles (12) | RER : Javel (C), Boulevard Victor (C)",
       "categories": {
         "parcs-innovation": {
-          "title": "🌳 Parcs d'Exception & Innovation",
+          "title": "Parcs d'Exception & Innovation",
           "places": [
             {
               "name": "Parc André-Citroën",
@@ -2881,7 +2881,7 @@
           ]
         },
         "musees-patrimoine": {
-          "title": "🏛️ Musées & Patrimoine Artistique",
+          "title": "Musées & Patrimoine Artistique",
           "places": [
             {
               "name": "Musée Bourdelle",
@@ -2906,7 +2906,7 @@
           ]
         },
         "shopping-architecture": {
-          "title": "🛍️ Shopping & Architecture Moderne",
+          "title": "Shopping & Architecture Moderne",
           "places": [
             {
               "name": "Centre Commercial Beaugrenelle",
@@ -2931,7 +2931,7 @@
           ]
         },
         "restaurants-bistronomie": {
-          "title": "🍽️ Restaurants & Bistronomie",
+          "title": "Restaurants & Bistronomie",
           "places": [
             {
               "name": "Le Troquet",
@@ -3001,7 +3001,7 @@
           ]
         },
         "culture-theatre": {
-          "title": "🎭 Culture & Théâtre",
+          "title": "Culture & Théâtre",
           "places": [
             {
               "name": "Théâtre Montparnasse",
@@ -3028,7 +3028,7 @@
       "transport": "Métro : Trocadéro (6,9), Passy (6), Charles de Gaulle-Étoile (1,2,6), Bir-Hakeim (6) | RER : Charles de Gaulle-Étoile (A)",
       "categories": {
         "musees-classe-mondiale": {
-          "title": "🏛️ Musées Classe Mondiale",
+          "title": "Musées Classe Mondiale",
           "places": [
             {
               "name": "Musée d'Art Moderne",
@@ -3068,7 +3068,7 @@
           ]
         },
         "parcs-jardins-prestigieux": {
-          "title": "🌳 Parcs & Jardins Prestigieux",
+          "title": "Parcs & Jardins Prestigieux",
           "places": [
             {
               "name": "Bois de Boulogne",
@@ -3098,7 +3098,7 @@
           ]
         },
         "architecture-monuments": {
-          "title": "🏛️ Architecture & Monuments",
+          "title": "Architecture & Monuments",
           "places": [
             {
               "name": "Palais de Chaillot",
@@ -3128,7 +3128,7 @@
           ]
         },
         "shopping-luxe": {
-          "title": "🛍️ Shopping Luxe & Quartiers Chic",
+          "title": "Shopping Luxe & Quartiers Chic",
           "places": [
             {
               "name": "Avenue Victor Hugo",
@@ -3153,7 +3153,7 @@
           ]
         },
         "restaurants-gastronomiques": {
-          "title": "🍽️ Restaurants Gastronomiques & Palaces",
+          "title": "Restaurants Gastronomiques & Palaces",
           "places": [
             {
               "name": "L'Astrance",
@@ -3240,7 +3240,7 @@
       "transport": "Métro : Monceau (2), Rome (2), Place de Clichy (2,13), Wagram (3), Villiers (2,3)",
       "categories": {
         "parcs-jardins": {
-          "title": "🌳 Parcs & Jardins Remarquables",
+          "title": "Parcs & Jardins Remarquables",
           "places": [
             {
               "name": "Parc Monceau",
@@ -3265,7 +3265,7 @@
           ]
         },
         "architecture-musees": {
-          "title": "🏛️ Architecture & Musées Confidentiels",
+          "title": "Architecture & Musées Confidentiels",
           "places": [
             {
               "name": "Musée Cernuschi",
@@ -3290,7 +3290,7 @@
           ]
         },
         "restaurants-marches": {
-          "title": "🍽️ Restaurants & Marchés Bio",
+          "title": "Restaurants & Marchés Bio",
           "places": [
             {
               "name": "Marché des Batignolles",
@@ -3320,7 +3320,7 @@
           ]
         },
         "shopping-village": {
-          "title": "🛍️ Shopping Village & Créateurs",
+          "title": "Shopping Village & Créateurs",
           "places": [
             {
               "name": "Rue des Batignolles",
@@ -3345,7 +3345,7 @@
           ]
         },
         "culture-spectacles": {
-          "title": "🎭 Culture & Spectacles",
+          "title": "Culture & Spectacles",
           "places": [
             {
               "name": "Théâtre Hébertot",
@@ -3502,7 +3502,7 @@
           ]
         },
         "restaurants-guinguettes": {
-          "title": "🍽️ Restaurants Historiques & Guinguettes",
+          "title": "Restaurants Historiques & Guinguettes",
           "places": [
             {
               "name": "La Maison Rose",
@@ -3557,7 +3557,7 @@
           ]
         },
         "spectacles-cabarets": {
-          "title": "🎭 Spectacles & Cabarets Alternatifs",
+          "title": "Spectacles & Cabarets Alternatifs",
           "places": [
             {
               "name": "Divan du Monde",
@@ -3582,7 +3582,7 @@
           ]
         },
         "shopping-vintage": {
-          "title": "🛍️ Shopping Vintage & Créateurs",
+          "title": "Shopping Vintage & Créateurs",
           "places": [
             {
               "name": "Rue des Martyrs",
@@ -3639,7 +3639,7 @@
       "transport": "Métro : Belleville (2,11), Buttes Chaumont (7bis), Stalingrad (2,5,7), Botzaris (7bis), Porte de Pantin (5) | Tramway : T3b Porte de Pantin",
       "categories": {
         "institutions-culturelles": {
-          "title": "🏛️ Institutions Culturelles Majeures",
+          "title": "Institutions Culturelles Majeures",
           "places": [
             {
               "name": "Cité des Sciences et de l'Industrie",
@@ -3669,7 +3669,7 @@
           ]
         },
         "parcs-exceptionnels": {
-          "title": "🌳 Parcs Exceptionnels & Romantiques",
+          "title": "Parcs Exceptionnels & Romantiques",
           "places": [
             {
               "name": "Parc des Buttes-Chaumont",
@@ -3719,7 +3719,7 @@
           ]
         },
         "restaurants-guinguettes": {
-          "title": "🍽️ Restaurants & Guinguettes Authentiques",
+          "title": "Restaurants & Guinguettes Authentiques",
           "places": [
             {
               "name": "Rosa Bonheur",
@@ -3744,7 +3744,7 @@
           ]
         },
         "spectacles-evenements": {
-          "title": "🎭 Spectacles & Événements",
+          "title": "Spectacles & Événements",
           "places": [
             {
               "name": "Zénith de Paris",
@@ -3927,7 +3927,7 @@
           ]
         },
         "panoramas-espaces-verts": {
-          "title": "🌳 Panoramas & Espaces Verts",
+          "title": "Panoramas & Espaces Verts",
           "places": [
             {
               "name": "Parc de Belleville",
@@ -3952,7 +3952,7 @@
           ]
         },
         "restaurants-populaires": {
-          "title": "🍽️ Restaurants Populaires & Authentiques",
+          "title": "Restaurants Populaires & Authentiques",
           "places": [
             {
               "name": "Le Baratin",
@@ -4002,7 +4002,7 @@
           ]
         },
         "patrimoine-industriel": {
-          "title": "🏛️ Patrimoine Industriel & Historique",
+          "title": "Patrimoine Industriel & Historique",
           "places": [
             {
               "name": "Petite Ceinture",
@@ -4042,7 +4042,7 @@
           ]
         },
         "culture-alternative": {
-          "title": "🎭 Culture Alternative & Associative",
+          "title": "Culture Alternative & Associative",
           "places": [
             {
               "name": "Le Cent Quatre",
@@ -4062,7 +4062,7 @@
           ]
         },
         "marches-commerces": {
-          "title": "🛍️ Marchés & Commerces Populaires",
+          "title": "Marchés & Commerces Populaires",
           "places": [
             {
               "name": "Marché de Ménilmontant",
