@@ -1,507 +1,366 @@
-// ===== UTILS - FONCTIONS UTILITAIRES GLOBALES =====
+// ===== UTILITIES - FONCTIONS UTILITAIRES GÉNÉRALES =====
 
-// === UTILITAIRES DE DATES ===
+// === GESTION DES DATES ===
 const DateUtils = {
-    /**
-     * Formate une date en français
-     */
-    formatDate(date) {
-        if (!date) return 'Jamais';
+    formatDate(date, format = 'fr-FR') {
+        if (!date) return '';
         
         const d = new Date(date);
+        if (isNaN(d.getTime())) return '';
+        
+        return d.toLocaleDateString(format, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    },
+    
+    formatDateTime(date, format = 'fr-FR') {
+        if (!date) return '';
+        
+        const d = new Date(date);
+        if (isNaN(d.getTime())) return '';
+        
+        return d.toLocaleString(format, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    },
+    
+    getRelativeTime(date) {
+        if (!date) return '';
+        
         const now = new Date();
-        const diffTime = Math.abs(now - d);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const d = new Date(date);
+        const diffMs = now - d;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
         
         if (diffDays === 0) return 'Aujourd\'hui';
         if (diffDays === 1) return 'Hier';
         if (diffDays < 7) return `Il y a ${diffDays} jours`;
-        if (diffDays < 30) return `Il y a ${Math.floor(diffDays / 7)} semaine${Math.floor(diffDays / 7) > 1 ? 's' : ''}`;
-        
-        return d.toLocaleDateString('fr-FR', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        if (diffDays < 30) return `Il y a ${Math.floor(diffDays / 7)} semaines`;
+        if (diffDays < 365) return `Il y a ${Math.floor(diffDays / 30)} mois`;
+        return `Il y a ${Math.floor(diffDays / 365)} ans`;
     },
-
-    /**
-     * Calcule la différence en jours entre deux dates
-     */
-    daysBetween(date1, date2) {
-        const d1 = new Date(date1);
-        const d2 = new Date(date2);
-        return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
-    },
-
-    /**
-     * Vérifie si une date est aujourd'hui
-     */
+    
     isToday(date) {
+        if (!date) return false;
         const today = new Date();
         const d = new Date(date);
         return d.toDateString() === today.toDateString();
     },
-
-    /**
-     * Génère un timestamp ISO
-     */
-    now() {
-        return new Date().toISOString();
+    
+    getDaysDifference(date1, date2) {
+        const d1 = new Date(date1);
+        const d2 = new Date(date2);
+        const diffTime = Math.abs(d2 - d1);
+        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     }
 };
 
-// === UTILITAIRES DE TEXTE ===
-const TextUtils = {
-    /**
-     * Nettoie et normalise un texte pour créer un ID
-     */
-    createId(text) {
+// === MANIPULATION DE CHAÎNES ===
+const StringUtils = {
+    slugify(text) {
         return text
+            .toString()
             .toLowerCase()
             .trim()
-            .replace(/[àáâãäå]/g, 'a')
-            .replace(/[èéêë]/g, 'e')
-            .replace(/[ìíîï]/g, 'i')
-            .replace(/[òóôõö]/g, 'o')
-            .replace(/[ùúûü]/g, 'u')
-            .replace(/[ýÿ]/g, 'y')
-            .replace(/[ñ]/g, 'n')
-            .replace(/[ç]/g, 'c')
-            .replace(/[^\w\s-]/g, '')
-            .replace(/\s+/g, '-')
-            .replace(/-+/g, '-')
-            .replace(/^-|-$/g, '');
+            .replace(/[\s\W-]+/g, '-')
+            .replace(/^-+|-+$/g, '');
     },
-
-    /**
-     * Capitalise la première lettre
-     */
+    
+    truncate(text, length = 100, suffix = '...') {
+        if (!text || text.length <= length) return text;
+        return text.substring(0, length).trim() + suffix;
+    },
+    
     capitalize(text) {
+        if (!text) return '';
         return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
     },
-
-    /**
-     * Tronque un texte avec ellipse
-     */
-    truncate(text, length = 100) {
-        if (text.length <= length) return text;
-        return text.substring(0, length) + '...';
+    
+    capitalizeWords(text) {
+        if (!text) return '';
+        return text.split(' ')
+            .map(word => this.capitalize(word))
+            .join(' ');
     },
-
-    /**
-     * Surligne les termes de recherche dans un texte
-     */
-    highlight(text, searchTerm) {
-        if (!searchTerm || !text) return text;
-        
-        const regex = new RegExp(`(${searchTerm})`, 'gi');
-        return text.replace(regex, '<mark style="background: #F7DC6F; color: #1e3a8a; padding: 1px 3px; border-radius: 3px;">$1</mark>');
+    
+    removeAccents(text) {
+        if (!text) return '';
+        return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     },
-
-    /**
-     * Extrait les mots-clés d'un texte
-     */
-    extractKeywords(text) {
-        const stopWords = ['le', 'la', 'les', 'un', 'une', 'des', 'de', 'du', 'et', 'ou', 'à', 'en', 'dans', 'sur', 'avec', 'pour', 'par', 'ce', 'cette', 'ces'];
+    
+    highlightText(text, query, className = 'highlight') {
+        if (!text || !query) return text;
         
-        return text
-            .toLowerCase()
-            .replace(/[^\w\s]/g, ' ')
-            .split(/\s+/)
-            .filter(word => word.length > 2 && !stopWords.includes(word))
-            .filter((word, index, arr) => arr.indexOf(word) === index);
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, `<span class="${className}">$1</span>`);
+    },
+    
+    extractEmoji(text) {
+        if (!text) return '';
+        const emojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
+        const matches = text.match(emojiRegex);
+        return matches ? matches[0] : '';
     }
 };
 
-// === UTILITAIRES DOM ===
-const DOMUtils = {
-    /**
-     * Sélecteur sécurisé
-     */
-    $(selector) {
-        return document.querySelector(selector);
-    },
-
-    /**
-     * Sélecteur multiple sécurisé
-     */
-    $$(selector) {
-        return Array.from(document.querySelectorAll(selector));
-    },
-
-    /**
-     * Crée un élément DOM avec attributs
-     */
-    createElement(tag, attributes = {}, content = '') {
-        const element = document.createElement(tag);
+// === MANIPULATION D'OBJETS ===
+const ObjectUtils = {
+    deepClone(obj) {
+        if (obj === null || typeof obj !== 'object') return obj;
+        if (obj instanceof Date) return new Date(obj.getTime());
+        if (obj instanceof Array) return obj.map(item => this.deepClone(item));
+        if (obj instanceof Set) return new Set(Array.from(obj).map(item => this.deepClone(item)));
+        if (obj instanceof Map) {
+            const cloned = new Map();
+            obj.forEach((value, key) => cloned.set(key, this.deepClone(value)));
+            return cloned;
+        }
         
-        Object.entries(attributes).forEach(([key, value]) => {
-            if (key === 'className') {
-                element.className = value;
-            } else if (key === 'innerHTML') {
-                element.innerHTML = value;
-            } else {
-                element.setAttribute(key, value);
+        const cloned = {};
+        Object.keys(obj).forEach(key => {
+            cloned[key] = this.deepClone(obj[key]);
+        });
+        return cloned;
+    },
+    
+    mergeDeep(target, source) {
+        const output = Object.assign({}, target);
+        
+        if (this.isObject(target) && this.isObject(source)) {
+            Object.keys(source).forEach(key => {
+                if (this.isObject(source[key])) {
+                    if (!(key in target)) {
+                        Object.assign(output, { [key]: source[key] });
+                    } else {
+                        output[key] = this.mergeDeep(target[key], source[key]);
+                    }
+                } else {
+                    Object.assign(output, { [key]: source[key] });
+                }
+            });
+        }
+        
+        return output;
+    },
+    
+    isObject(item) {
+        return item && typeof item === 'object' && !Array.isArray(item);
+    },
+    
+    isEmpty(obj) {
+        if (obj == null) return true;
+        if (typeof obj === 'string' || Array.isArray(obj)) return obj.length === 0;
+        if (obj instanceof Set || obj instanceof Map) return obj.size === 0;
+        return Object.keys(obj).length === 0;
+    },
+    
+    pick(obj, keys) {
+        const result = {};
+        keys.forEach(key => {
+            if (key in obj) {
+                result[key] = obj[key];
             }
         });
-        
-        if (content) {
-            element.textContent = content;
-        }
-        
-        return element;
+        return result;
     },
-
-    /**
-     * Vide un élément de son contenu
-     */
-    empty(element) {
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
-        }
-    },
-
-    /**
-     * Anime un changement de nombre
-     */
-    animateNumber(element, from, to, duration = 1000, suffix = '') {
-        const startTime = Date.now();
-        const difference = to - from;
-        
-        const step = () => {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Fonction d'easing
-            const easedProgress = 1 - Math.pow(1 - progress, 3);
-            const current = Math.round(from + difference * easedProgress);
-            
-            element.textContent = current + suffix;
-            
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            }
-        };
-        
-        requestAnimationFrame(step);
-    },
-
-    /**
-     * Fait défiler vers un élément
-     */
-    scrollToElement(element, offset = 0) {
-        const elementPosition = element.offsetTop;
-        const offsetPosition = elementPosition - offset;
-        
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
+    
+    omit(obj, keys) {
+        const result = { ...obj };
+        keys.forEach(key => delete result[key]);
+        return result;
     }
 };
 
-// === UTILITAIRES DE STOCKAGE ===
-const StorageUtils = {
-    /**
-     * Sauvegarde sécurisée en localStorage
-     */
-    save(key, data) {
-        try {
-            const serialized = JSON.stringify(data);
-            localStorage.setItem(key, serialized);
-            console.log(`💾 Données sauvegardées: ${key}`);
-            return true;
-        } catch (error) {
-            console.error(`❌ Erreur sauvegarde ${key}:`, error);
-            return false;
-        }
-    },
-
-    /**
-     * Chargement sécurisé depuis localStorage
-     */
-    load(key, defaultValue = null) {
-        try {
-            const item = localStorage.getItem(key);
-            if (item === null) return defaultValue;
-            
-            const parsed = JSON.parse(item);
-            console.log(`📥 Données chargées: ${key}`);
-            return parsed;
-        } catch (error) {
-            console.error(`❌ Erreur chargement ${key}:`, error);
-            return defaultValue;
-        }
-    },
-
-    /**
-     * Supprime une clé du localStorage
-     */
-    remove(key) {
-        try {
-            localStorage.removeItem(key);
-            console.log(`🗑️ Données supprimées: ${key}`);
-            return true;
-        } catch (error) {
-            console.error(`❌ Erreur suppression ${key}:`, error);
-            return false;
-        }
-    },
-
-    /**
-     * Vide tout le localStorage de l'app
-     */
-    clear(prefix = 'paris-explorer') {
-        try {
-            const keys = Object.keys(localStorage).filter(key => key.startsWith(prefix));
-            keys.forEach(key => localStorage.removeItem(key));
-            console.log(`🧹 ${keys.length} clés supprimées avec préfixe: ${prefix}`);
-            return true;
-        } catch (error) {
-            console.error('❌ Erreur nettoyage localStorage:', error);
-            return false;
-        }
-    },
-
-    /**
-     * Calcule la taille du localStorage
-     */
-    getSize() {
-        let total = 0;
-        Object.keys(localStorage).forEach(key => {
-            total += localStorage.getItem(key).length;
-        });
-        return {
-            bytes: total,
-            kb: Math.round(total / 1024 * 100) / 100,
-            mb: Math.round(total / (1024 * 1024) * 100) / 100
-        };
-    }
-};
-
-// === UTILITAIRES DE VALIDATION ===
-const ValidationUtils = {
-    /**
-     * Valide un nom d'utilisateur
-     */
-    validateUserName(name) {
-        if (!name || typeof name !== 'string') return false;
-        
-        const trimmed = name.trim();
-        if (trimmed.length < 2) return false;
-        if (trimmed.length > 50) return false;
-        if (!/^[a-zA-ZÀ-ÿ\s\-']+$/.test(trimmed)) return false;
-        
-        return true;
-    },
-
-    /**
-     * Valide un email
-     */
-    validateEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    },
-
-    /**
-     * Valide des coordonnées GPS
-     */
-    validateCoordinates(lat, lng) {
-        const latitude = parseFloat(lat);
-        const longitude = parseFloat(lng);
-        
-        return !isNaN(latitude) && 
-               !isNaN(longitude) && 
-               latitude >= -90 && 
-               latitude <= 90 &&
-               longitude >= -180 && 
-               longitude <= 180;
-    },
-
-    /**
-     * Valide une structure de données de lieu
-     */
-    validatePlace(place) {
-        if (!place || typeof place !== 'object') return false;
-        if (!place.name || typeof place.name !== 'string') return false;
-        if (place.name.trim().length < 2) return false;
-        
-        return true;
-    },
-
-    /**
-     * Valide une structure de données utilisateur
-     */
-    validateUserData(userData) {
-        if (!userData || typeof userData !== 'object') return false;
-        if (!this.validateUserName(userData.name)) return false;
-        if (userData.visitedPlaces && !Array.isArray(userData.visitedPlaces) && !(userData.visitedPlaces instanceof Set)) return false;
-        
-        return true;
-    }
-};
-
-// === UTILITAIRES MATHÉMATIQUES ===
-const MathUtils = {
-    /**
-     * Clamp une valeur entre min et max
-     */
-    clamp(value, min, max) {
-        return Math.min(Math.max(value, min), max);
-    },
-
-    /**
-     * Interpole linéairement entre deux valeurs
-     */
-    lerp(a, b, t) {
-        return a + (b - a) * this.clamp(t, 0, 1);
-    },
-
-    /**
-     * Calcule un pourcentage
-     */
-    percentage(value, total) {
-        if (total === 0) return 0;
-        return Math.round((value / total) * 100);
-    },
-
-    /**
-     * Arrondit à un nombre de décimales
-     */
-    round(value, decimals = 0) {
-        const factor = Math.pow(10, decimals);
-        return Math.round(value * factor) / factor;
-    },
-
-    /**
-     * Génère un nombre aléatoire entre min et max
-     */
-    random(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-};
-
-// === UTILITAIRES D'ARRAYS ===
+// === MANIPULATION DE TABLEAUX ===
 const ArrayUtils = {
-    /**
-     * Retire les doublons d'un array
-     */
-    unique(array) {
+    unique(array, key = null) {
+        if (!Array.isArray(array)) return [];
+        
+        if (key) {
+            const seen = new Set();
+            return array.filter(item => {
+                const val = item[key];
+                if (seen.has(val)) return false;
+                seen.add(val);
+                return true;
+            });
+        }
+        
         return [...new Set(array)];
     },
-
-    /**
-     * Mélange un array (Fisher-Yates)
-     */
+    
+    groupBy(array, key) {
+        if (!Array.isArray(array)) return {};
+        
+        return array.reduce((groups, item) => {
+            const groupKey = typeof key === 'function' ? key(item) : item[key];
+            groups[groupKey] = groups[groupKey] || [];
+            groups[groupKey].push(item);
+            return groups;
+        }, {});
+    },
+    
+    sortBy(array, key, direction = 'asc') {
+        if (!Array.isArray(array)) return [];
+        
+        return [...array].sort((a, b) => {
+            const aVal = typeof key === 'function' ? key(a) : a[key];
+            const bVal = typeof key === 'function' ? key(b) : b[key];
+            
+            if (aVal < bVal) return direction === 'asc' ? -1 : 1;
+            if (aVal > bVal) return direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+    },
+    
+    chunk(array, size) {
+        if (!Array.isArray(array) || size <= 0) return [];
+        
+        const chunks = [];
+        for (let i = 0; i < array.length; i += size) {
+            chunks.push(array.slice(i, i + size));
+        }
+        return chunks;
+    },
+    
     shuffle(array) {
+        if (!Array.isArray(array)) return [];
+        
         const shuffled = [...array];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
         return shuffled;
-    },
+    }
+};
 
-    /**
-     * Groupe les éléments par propriété
-     */
-    groupBy(array, key) {
-        return array.reduce((groups, item) => {
-            const group = item[key];
-            if (!groups[group]) {
-                groups[group] = [];
-            }
-            groups[group].push(item);
-            return groups;
-        }, {});
+// === VALIDATION ===
+const ValidationUtils = {
+    isEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     },
+    
+    isURL(url) {
+        try {
+            new URL(url);
+            return true;
+        } catch {
+            return false;
+        }
+    },
+    
+    isJSON(str) {
+        try {
+            JSON.parse(str);
+            return true;
+        } catch {
+            return false;
+        }
+    },
+    
+    isEmpty(value) {
+        if (value == null) return true;
+        if (typeof value === 'string') return value.trim() === '';
+        if (Array.isArray(value)) return value.length === 0;
+        if (typeof value === 'object') return Object.keys(value).length === 0;
+        return false;
+    },
+    
+    isNumeric(value) {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    }
+};
 
-    /**
-     * Trie un array par propriété
-     */
-    sortBy(array, key, ascending = true) {
-        return [...array].sort((a, b) => {
-            const aVal = a[key];
-            const bVal = b[key];
+// === STORAGE LOCAL ===
+const StorageUtils = {
+    set(key, value, expiry = null) {
+        try {
+            const item = {
+                value,
+                timestamp: Date.now(),
+                expiry
+            };
+            localStorage.setItem(key, JSON.stringify(item));
+            return true;
+        } catch (error) {
+            console.warn('Erreur sauvegarde localStorage:', error);
+            return false;
+        }
+    },
+    
+    get(key, defaultValue = null) {
+        try {
+            const item = localStorage.getItem(key);
+            if (!item) return defaultValue;
             
-            if (aVal < bVal) return ascending ? -1 : 1;
-            if (aVal > bVal) return ascending ? 1 : -1;
-            return 0;
-        });
-    },
-
-    /**
-     * Divise un array en chunks
-     */
-    chunk(array, size) {
-        const chunks = [];
-        for (let i = 0; i < array.length; i += size) {
-            chunks.push(array.slice(i, i + size));
+            const parsed = JSON.parse(item);
+            
+            // Vérifier l'expiration
+            if (parsed.expiry && Date.now() > parsed.expiry) {
+                this.remove(key);
+                return defaultValue;
+            }
+            
+            return parsed.value;
+        } catch (error) {
+            console.warn('Erreur lecture localStorage:', error);
+            return defaultValue;
         }
-        return chunks;
+    },
+    
+    remove(key) {
+        try {
+            localStorage.removeItem(key);
+            return true;
+        } catch (error) {
+            console.warn('Erreur suppression localStorage:', error);
+            return false;
+        }
+    },
+    
+    clear() {
+        try {
+            localStorage.clear();
+            return true;
+        } catch (error) {
+            console.warn('Erreur vidage localStorage:', error);
+            return false;
+        }
+    },
+    
+    size() {
+        return localStorage.length;
+    },
+    
+    keys() {
+        return Object.keys(localStorage);
     }
 };
 
-// === UTILITAIRES DE COULEURS ===
-const ColorUtils = {
-    /**
-     * Convertit hex en RGB
-     */
-    hexToRgb(hex) {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : null;
-    },
-
-    /**
-     * Génère une couleur basée sur une chaîne
-     */
-    stringToColor(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        }
-        
-        const hue = hash % 360;
-        return `hsl(${hue}, 65%, 50%)`;
-    },
-
-    /**
-     * Détermine si une couleur est claire ou sombre
-     */
-    isLight(hex) {
-        const rgb = this.hexToRgb(hex);
-        if (!rgb) return true;
-        
-        const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
-        return brightness > 128;
-    }
-};
-
-// === UTILITAIRES DE PERFORMANCE ===
+// === PERFORMANCE ===
 const PerformanceUtils = {
-    /**
-     * Debounce une fonction
-     */
-    debounce(func, wait) {
+    debounce(func, wait, immediate = false) {
         let timeout;
         return function executedFunction(...args) {
             const later = () => {
-                clearTimeout(timeout);
-                func(...args);
+                timeout = null;
+                if (!immediate) func(...args);
             };
+            const callNow = immediate && !timeout;
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
+            if (callNow) func(...args);
         };
     },
-
-    /**
-     * Throttle une fonction
-     */
+    
     throttle(func, limit) {
         let inThrottle;
         return function executedFunction(...args) {
@@ -512,66 +371,196 @@ const PerformanceUtils = {
             }
         };
     },
-
-    /**
-     * Mesure le temps d'exécution d'une fonction
-     */
-    measureTime(func, label = 'Execution') {
+    
+    measureTime(label, func) {
         const start = performance.now();
         const result = func();
         const end = performance.now();
-        console.log(`⏱️ ${label}: ${(end - start).toFixed(2)}ms`);
+        console.log(`${label}: ${(end - start).toFixed(2)}ms`);
         return result;
+    },
+    
+    defer(func) {
+        return new Promise(resolve => {
+            setTimeout(() => resolve(func()), 0);
+        });
     }
 };
 
-// === UTILITAIRES DE GÉOLOCALISATION ===
+// === NOTIFICATIONS ===
+const NotificationUtils = {
+    show(message, type = 'info', duration = 4000) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        requestAnimationFrame(() => {
+            notification.classList.add('show');
+        });
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, duration);
+        
+        return notification;
+    },
+    
+    success(message, duration = 4000) {
+        return this.show(message, 'success', duration);
+    },
+    
+    error(message, duration = 6000) {
+        return this.show(message, 'error', duration);
+    },
+    
+    warning(message, duration = 5000) {
+        return this.show(message, 'warning', duration);
+    },
+    
+    info(message, duration = 4000) {
+        return this.show(message, 'info', duration);
+    }
+};
+
+// === GÉOLOCALISATION ===
 const GeoUtils = {
-    /**
-     * Calcule la distance entre deux points (Haversine)
-     */
-    distance(lat1, lon1, lat2, lon2) {
-        const R = 6371; // Rayon de la Terre en km
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
+    getCurrentPosition(options = {}) {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) {
+                reject(new Error('Géolocalisation non supportée'));
+                return;
+            }
+            
+            const defaultOptions = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 300000 // 5 minutes
+            };
+            
+            navigator.geolocation.getCurrentPosition(
+                resolve,
+                reject,
+                { ...defaultOptions, ...options }
+            );
+        });
+    },
+    
+    calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371e3; // Rayon de la Terre en mètres
+        const φ1 = lat1 * Math.PI/180;
+        const φ2 = lat2 * Math.PI/180;
+        const Δφ = (lat2-lat1) * Math.PI/180;
+        const Δλ = (lon2-lon1) * Math.PI/180;
         
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                  Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     },
+    
+    formatDistance(distance) {
+        if (distance < 1000) {
+            return `${Math.round(distance)}m`;
+        }
+        return `${(distance / 1000).toFixed(1)}km`;
+    }
+};
 
-    /**
-     * Vérifie si des coordonnées sont dans Paris
-     */
-    isInParis(lat, lng) {
-        // Bounding box approximative de Paris
-        const parisBox = {
-            north: 48.9021,
-            south: 48.8155,
-            east: 2.4699,
-            west: 2.2242
-        };
+// === COULEURS ===
+const ColorUtils = {
+    hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    },
+    
+    rgbToHex(r, g, b) {
+        return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+    },
+    
+    getContrastColor(hexColor) {
+        const rgb = this.hexToRgb(hexColor);
+        if (!rgb) return '#000000';
         
-        return lat >= parisBox.south && 
-               lat <= parisBox.north && 
-               lng >= parisBox.west && 
-               lng <= parisBox.east;
+        const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+        return brightness > 128 ? '#000000' : '#ffffff';
+    },
+    
+    lighten(hexColor, percent) {
+        const rgb = this.hexToRgb(hexColor);
+        if (!rgb) return hexColor;
+        
+        const amount = Math.round(2.55 * percent);
+        return this.rgbToHex(
+            Math.min(255, rgb.r + amount),
+            Math.min(255, rgb.g + amount),
+            Math.min(255, rgb.b + amount)
+        );
+    },
+    
+    darken(hexColor, percent) {
+        return this.lighten(hexColor, -percent);
+    }
+};
+
+// === DEVICE & BROWSER ===
+const DeviceUtils = {
+    isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    },
+    
+    isTablet() {
+        return /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
+    },
+    
+    isDesktop() {
+        return !this.isMobile() && !this.isTablet();
+    },
+    
+    isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    },
+    
+    getViewportSize() {
+        return {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+    },
+    
+    isOnline() {
+        return navigator.onLine;
+    },
+    
+    getLanguage() {
+        return navigator.language || navigator.userLanguage || 'fr-FR';
     }
 };
 
 // === EXPORT GLOBAL ===
 window.Utils = {
     Date: DateUtils,
-    Text: TextUtils,
-    DOM: DOMUtils,
-    Storage: StorageUtils,
-    Validation: ValidationUtils,
-    Math: MathUtils,
+    String: StringUtils,
+    Object: ObjectUtils,
     Array: ArrayUtils,
-    Color: ColorUtils,
+    Validation: ValidationUtils,
+    Storage: StorageUtils,
     Performance: PerformanceUtils,
-    Geo: GeoUtils
+    Notification: NotificationUtils,
+    Geo: GeoUtils,
+    Color: ColorUtils,
+    Device: DeviceUtils
 };
+
+// Compatibility avec anciens noms
+window.DateUtils = DateUtils;
+window.StringUtils = StringUtils;
+window.ArrayUtils = ArrayUtils;
