@@ -1,440 +1,387 @@
 {
   "metadata": {
-    "title": "Paris Explorer - Préférences Utilisateur",
+    "description": "Structure de données pour les préférences et paramètres utilisateur dans Paris Explorer",
     "version": "2.0.0",
-    "lastUpdated": "2025-01-05",
-    "description": "Configuration personnalisée de l'expérience Paris Explorer",
-    "configVersion": "1.0"
+    "lastUpdated": "2025-01-05"
   },
-  "users": {
-    "exemple_utilisateur": {
-      "name": "Exemple Utilisateur",
-      "createdAt": "2025-01-05T10:00:00.000Z",
-      "lastUpdated": "2025-01-05T10:00:00.000Z",
-      "preferences": {
-        "interface": {
-          "theme": "classic",
-          "language": "fr",
-          "fontSize": "medium",
-          "compactMode": false,
-          "animations": true,
-          "colorScheme": "auto",
-          "highContrast": false,
-          "reducedMotion": false,
-          "showEmojis": true,
-          "customColors": {
-            "primary": "#D4AF37",
-            "secondary": "#1e3a8a",
-            "accent": "#F7DC6F"
-          }
-        },
-        "display": {
-          "defaultView": "list",
-          "showCompletionPercentage": true,
-          "showProgressBars": true,
-          "showStats": true,
-          "showArrondissementNumbers": true,
-          "showPlacePhotos": true,
-          "showAddresses": true,
-          "showTags": true,
-          "showDescriptions": true,
-          "cardLayout": "comfortable",
-          "gridColumns": "auto",
-          "expandedByDefault": false
-        },
-        "navigation": {
-          "stickyHeader": true,
-          "breadcrumbs": true,
-          "backToTop": true,
-          "keyboardShortcuts": true,
-          "swipeGestures": true,
-          "autoScroll": "smooth"
-        },
-        "search": {
-          "instantSearch": true,
-          "fuzzySearch": true,
-          "searchDelay": 300,
-          "highlightResults": true,
-          "searchHistory": true,
-          "maxHistoryItems": 20,
-          "searchSuggestions": true,
-          "searchInDescriptions": true,
-          "searchInTags": true,
-          "searchInAddresses": true,
-          "caseSensitive": false
-        },
-        "filters": {
-          "rememberFilters": true,
-          "defaultFilters": {
-            "arrondissement": "all",
-            "category": "all",
-            "status": "all",
-            "rating": "all"
-          },
-          "quickFilters": ["visited", "unvisited", "favorites", "notes"],
-          "customFilters": [
-            {
-              "name": "Mes coups de cœur",
-              "criteria": {
-                "rating": ">=4",
-                "tags": ["incontournable"]
-              }
-            },
-            {
-              "name": "Découvertes récentes",
-              "criteria": {
-                "visitDate": "last_month",
-                "status": "visited"
-              }
-            }
-          ]
-        },
-        "map": {
-          "defaultZoom": 12,
-          "defaultCenter": [48.8566, 2.3522],
-          "mapStyle": "default",
-          "showLabels": true,
-          "showTraffic": false,
-          "showPublicTransport": true,
-          "showBikeStations": false,
-          "clusterMarkers": true,
-          "showHeatmap": false,
-          "autoCenter": true,
-          "followLocation": false,
-          "offlineMode": false,
-          "satelliteView": false,
-          "terrainView": false,
-          "customMarkers": {
-            "visited": {
-              "color": "#059669",
-              "icon": "✓",
-              "size": "medium"
-            },
-            "unvisited": {
-              "color": "#D4AF37", 
-              "icon": "📍",
-              "size": "medium"
-            },
-            "favorite": {
-              "color": "#dc2626",
-              "icon": "⭐",
-              "size": "large"
-            }
-          }
-        },
-        "notifications": {
-          "enabled": true,
-          "position": "top-right",
-          "duration": 4000,
-          "sound": false,
-          "vibration": true,
-          "showOnSuccess": true,
-          "showOnError": true,
-          "showOnWarning": true,
-          "showOnInfo": true,
-          "types": {
-            "placeVisited": true,
-            "goalReached": true,
-            "newDiscover": true,
-            "achievements": true,
-            "reminders": true,
-            "updates": false,
-            "tips": true
-          },
-          "frequency": {
-            "achievements": "immediate",
-            "reminders": "daily",
-            "tips": "weekly"
-          }
-        },
-        "data": {
-          "autoSave": true,
-          "saveInterval": 30,
-          "autoBackup": true,
-          "backupFrequency": "weekly",
-          "cloudSync": false,
-          "dataCompression": true,
-          "exportFormat": "json",
-          "includePhotos": true,
-          "includeNotes": true,
-          "includeBrowsingHistory": false,
-          "maxHistorySize": 1000
-        },
-        "privacy": {
-          "shareProgress": false,
-          "publicProfile": false,
-          "showInLeaderboard": false,
-          "allowAnalytics": false,
-          "trackLocation": false,
-          "sharePhotos": false,
-          "showOnlineStatus": false,
-          "dataRetention": "indefinite"
-        },
-        "goals": {
-          "dailyTarget": 1,
-          "weeklyTarget": 5,
-          "monthlyTarget": 20,
-          "yearlyTarget": 200,
-          "customGoals": [
-            {
-              "name": "Explorer tous les parcs",
-              "target": "visit_all_parks",
-              "deadline": "2025-06-21",
-              "reward": "Picnic parfait !"
-            },
-            {
-              "name": "Gourmet parisien", 
-              "target": "visit_50_restaurants",
-              "deadline": "2025-12-31",
-              "reward": "Dîner gastronomique"
-            }
-          ],
-          "reminderFrequency": "weekly",
-          "celebrateAchievements": true
-        },
-        "accessibility": {
-          "screenReader": false,
-          "keyboardNavigation": true,
-          "focusIndicators": true,
-          "skipLinks": true,
-          "altTextForImages": true,
-          "captionsForVideos": false,
-          "reducedAnimations": false,
-          "largeFonts": false,
-          "highContrastMode": false,
-          "colorBlindMode": "none"
-        },
-        "experimental": {
-          "betaFeatures": false,
-          "newInterface": false,
-          "aiRecommendations": false,
-          "socialFeatures": false,
-          "augmentedReality": false,
-          "voiceControl": false,
-          "gestureNavigation": false
-        },
-        "customization": {
-          "homepage": {
-            "layout": "dashboard",
-            "widgets": [
-              "recent_visits",
-              "next_goals", 
-              "weather",
-              "recommendations",
-              "stats_summary"
-            ],
-            "widgetOrder": [1, 2, 3, 4, 5]
-          },
-          "shortcuts": [
-            {
-              "key": "ctrl+f",
-              "action": "focus_search"
-            },
-            {
-              "key": "ctrl+1",
-              "action": "switch_to_list"
-            },
-            {
-              "key": "ctrl+2", 
-              "action": "switch_to_map"
-            },
-            {
-              "key": "ctrl+u",
-              "action": "user_modal"
-            }
-          ],
-          "quickActions": [
-            "add_to_favorites",
-            "mark_as_visited",
-            "add_note",
-            "share_place",
-            "get_directions"
-          ],
-          "hiddenFeatures": [],
-          "customCSS": "",
-          "customJS": ""
-        }
+  "template": {
+    "userId": "nom-utilisateur",
+    "appearance": {
+      "theme": "paris-classic",
+      "darkMode": false,
+      "autoTheme": true,
+      "customColors": {
+        "primary": "#D4AF37",
+        "secondary": "#1e3a8a",
+        "accent": "#059669"
       },
-      "profile": {
-        "displayName": "Exemple Utilisateur",
-        "bio": "Explorateur passionné de la Ville Lumière",
-        "avatar": "",
-        "city": "Paris",
-        "memberSince": "2025-01-05",
-        "explorerLevel": "Débutant",
-        "badges": [],
-        "socialLinks": {
-          "instagram": "",
-          "twitter": "",
-          "blog": ""
-        },
-        "interests": [
-          "art", "gastronomie", "histoire", "architecture"
-        ],
-        "languages": ["fr", "en"],
-        "timezone": "Europe/Paris"
-      },
-      "statistics": {
-        "sessionCount": 0,
-        "totalTimeSpent": 0,
-        "averageSessionTime": 0,
-        "favoriteDayOfWeek": "",
-        "favoriteTimeOfDay": "",
-        "mostUsedFeatures": [],
-        "searchHistory": [],
-        "clickHeatmap": {},
-        "performanceMetrics": {
-          "loadTime": 0,
-          "errorCount": 0,
-          "crashCount": 0
-        }
-      }
-    }
-  },
-  "global_settings": {
-    "app": {
-      "version": "2.0.0",
-      "updateChannel": "stable",
-      "autoUpdate": true,
-      "telemetry": false,
-      "crashReporting": false,
-      "performanceMonitoring": false
+      "fontSize": "medium",
+      "animations": true,
+      "reducedMotion": false,
+      "highContrast": false,
+      "colorBlindFriendly": false
     },
-    "defaults": {
-      "theme": "classic",
-      "language": "fr",
-      "notifications": true,
+    "language": {
+      "interface": "fr-FR",
+      "content": "fr-FR",
+      "dateFormat": "DD/MM/YYYY",
+      "timeFormat": "24h",
+      "currency": "EUR",
+      "numberFormat": "european"
+    },
+    "navigation": {
+      "defaultView": "list",
+      "showCompletedByDefault": false,
+      "autoExpandCategories": false,
+      "compactMode": false,
+      "showMinimap": true,
+      "itemsPerPage": 20,
+      "sortBy": "name",
+      "sortOrder": "asc",
+      "groupBy": "category"
+    },
+    "map": {
+      "provider": "openstreetmap",
+      "style": "classic",
+      "defaultZoom": 11,
+      "centerLat": 48.8566,
+      "centerLng": 2.3522,
+      "showTraffic": false,
+      "showPublicTransport": true,
+      "showBikeRoutes": true,
+      "markerSize": "medium",
+      "clusterMarkers": true,
+      "fullscreenByDefault": false,
+      "geolocateOnLoad": false
+    },
+    "notifications": {
+      "enabled": true,
+      "browser": true,
+      "email": false,
+      "push": false,
+      "sound": true,
+      "vibration": true,
+      "types": {
+        "achievement": true,
+        "reminder": true,
+        "social": false,
+        "marketing": false,
+        "updates": true
+      },
+      "quiet": {
+        "enabled": false,
+        "startTime": "22:00",
+        "endTime": "08:00"
+      },
+      "frequency": {
+        "daily": false,
+        "weekly": true,
+        "monthly": false
+      }
+    },
+    "privacy": {
+      "profileVisibility": "private",
+      "showActivity": false,
+      "showStats": false,
+      "allowDataCollection": true,
+      "shareAnonymousUsage": true,
+      "allowCookies": true,
+      "autoLocationSharing": false,
+      "publicFavorites": false,
+      "publicNotes": false
+    },
+    "accessibility": {
+      "screenReader": false,
+      "keyboardNavigation": true,
+      "focusIndicators": true,
+      "skipLinks": true,
+      "altTextImages": true,
+      "captionedVideos": true,
+      "largeClickTargets": false,
+      "dyslexiaFont": false
+    },
+    "data": {
       "autoSave": true,
-      "mapZoom": 12
+      "saveInterval": 30,
+      "autoBackup": true,
+      "backupFrequency": "weekly",
+      "syncEnabled": false,
+      "syncProvider": null,
+      "offlineMode": true,
+      "cacheSize": "100MB",
+      "compressionEnabled": true
     },
-    "limits": {
-      "maxUsers": 50,
-      "maxNotesPerUser": 1000,
-      "maxPhotosPerUser": 500,
-      "maxExportSize": "50MB",
-      "sessionTimeout": 86400
+    "exploration": {
+      "defaultRadius": 5000,
+      "preferredTransport": ["walking", "metro"],
+      "explorationStyle": "cultural",
+      "difficulty": "moderate",
+      "groupSize": "small",
+      "budget": "medium",
+      "timeAvailable": 120,
+      "interests": [
+        "monuments",
+        "restaurants", 
+        "culture",
+        "jardins-secrets"
+      ],
+      "avoidCrowds": true,
+      "weatherDependent": true,
+      "accessibilityNeeds": []
     },
-    "features": {
-      "multiUser": true,
-      "offlineMode": false,
-      "cloudSync": false,
-      "socialSharing": false,
-      "exportImport": true,
-      "advancedStats": true,
-      "customThemes": true,
-      "plugins": false
-    }
-  },
-  "presets": {
-    "tourist": {
-      "name": "Touriste",
-      "description": "Configuration pour les visiteurs de Paris",
-      "settings": {
-        "defaultView": "map",
-        "showMainAttractions": true,
-        "simplifiedInterface": true,
-        "autoTranslate": true,
-        "showPrices": true,
-        "showOpeningHours": true
-      }
+    "recommendations": {
+      "enabled": true,
+      "basedOnVisited": true,
+      "basedOnFavorites": true,
+      "basedOnRatings": true,
+      "considerWeather": true,
+      "considerTime": true,
+      "considerLocation": false,
+      "diversityFactor": 0.7,
+      "noveltyWeight": 0.3,
+      "popularityWeight": 0.4
     },
-    "local": {
-      "name": "Parisien",
-      "description": "Configuration pour les habitants de Paris",
-      "settings": {
-        "defaultView": "list",
-        "showHiddenGems": true,
-        "advancedFilters": true,
-        "showNeighborhoodEvents": true,
-        "localRecommendations": true
-      }
+    "social": {
+      "shareProgress": false,
+      "allowFriends": false,
+      "showOnLeaderboard": false,
+      "publicProfile": false,
+      "allowMessages": false,
+      "shareRecommendations": true,
+      "anonymousSharing": true
     },
-    "photographer": {
-      "name": "Photographe",
-      "description": "Configuration pour les amateurs de photo",
-      "settings": {
-        "showPhotoSpots": true,
-        "lightingInfo": true,
-        "bestTimeForPhotos": true,
-        "photoGallery": true,
-        "metadataExport": true
-      }
-    },
-    "foodie": {
-      "name": "Gourmand",
-      "description": "Configuration pour les amateurs de gastronomie",
-      "settings": {
-        "prioritizeRestaurants": true,
-        "showMenus": true,
-        "showRatings": true,
-        "dietaryFilters": true,
-        "priceRanges": true
-      }
-    },
-    "minimalist": {
-      "name": "Minimaliste",
-      "description": "Interface épurée et fonctionnelle",
-      "settings": {
-        "compactMode": true,
-        "hideDecorations": true,
-        "reducedAnimations": true,
-        "essentialFeaturesOnly": true,
-        "fastMode": true
-      }
+    "advanced": {
+      "developerMode": false,
+      "debugMode": false,
+      "betaFeatures": false,
+      "experimentalUI": false,
+      "performanceMode": false,
+      "dataExportFormat": "json",
+      "apiAccess": false,
+      "webhookUrl": null
     }
   },
   "themes": {
-    "classic": {
-      "name": "Classique Parisien",
+    "paris-classic": {
+      "name": "Paris Classique",
+      "description": "Or et bleu royal, l'élégance parisienne",
       "colors": {
         "primary": "#D4AF37",
-        "secondary": "#1e3a8a", 
-        "accent": "#F7DC6F",
-        "success": "#059669",
-        "warning": "#d97706",
-        "error": "#dc2626"
+        "secondary": "#1e3a8a",
+        "background": "#fefefe",
+        "surface": "#faf8f5"
       }
     },
-    "dark": {
-      "name": "Mode Sombre",
+    "paris-dark": {
+      "name": "Paris Nuit",
+      "description": "Mode sombre élégant",
       "colors": {
         "primary": "#fbbf24",
-        "secondary": "#f9fafb",
-        "accent": "#fcd34d",
+        "secondary": "#60a5fa",
         "background": "#1f2937",
         "surface": "#374151"
       }
     },
     "versailles": {
-      "name": "Versailles Royal",
+      "name": "Versailles",
+      "description": "Or et blanc royal",
       "colors": {
         "primary": "#FFD700",
         "secondary": "#000080",
-        "accent": "#FFED4E"
+        "background": "#FFFEF7",
+        "surface": "#FFF8DC"
       }
     },
     "montmartre": {
-      "name": "Montmartre Bohème",
+      "name": "Montmartre",
+      "description": "Rouge et noir bohème",
       "colors": {
         "primary": "#DC143C",
         "secondary": "#2F2F2F",
-        "accent": "#FF6B8A"
+        "background": "#faf8f5",
+        "surface": "#f5f3f0"
       }
     }
   },
-  "import_export": {
-    "supported_formats": ["json", "csv", "pdf", "markdown"],
-    "backup_settings": {
-      "include_notes": true,
-      "include_photos": false,
-      "include_settings": true,
-      "compress": true
+  "presets": {
+    "tourist": {
+      "name": "Touriste",
+      "description": "Paramètres optimisés pour les visiteurs",
+      "settings": {
+        "navigation": {
+          "defaultView": "map",
+          "showCompletedByDefault": false,
+          "autoExpandCategories": true
+        },
+        "exploration": {
+          "explorationStyle": "touristique",
+          "interests": ["monuments", "culture", "restaurants"],
+          "budget": "medium-high"
+        },
+        "map": {
+          "showPublicTransport": true,
+          "geolocateOnLoad": true
+        }
+      }
     },
-    "sync_options": {
-      "google_drive": false,
-      "dropbox": false,
-      "icloud": false,
-      "custom_server": false
+    "local": {
+      "name": "Parisien",
+      "description": "Pour les habitants qui redécouvrent leur ville",
+      "settings": {
+        "navigation": {
+          "defaultView": "list",
+          "showCompletedByDefault": true,
+          "compactMode": true
+        },
+        "exploration": {
+          "explorationStyle": "local",
+          "interests": ["jardins-secrets", "bars", "restaurants"],
+          "avoidCrowds": true
+        }
+      }
+    },
+    "family": {
+      "name": "Famille",
+      "description": "Paramètres pour les sorties en famille",
+      "settings": {
+        "exploration": {
+          "interests": ["parcs", "musees", "divertissements"],
+          "groupSize": "large",
+          "accessibilityNeeds": ["poussette", "enfants"]
+        },
+        "notifications": {
+          "types": {
+            "reminder": true,
+            "achievement": true
+          }
+        }
+      }
+    },
+    "foodie": {
+      "name": "Gourmet",
+      "description": "Pour les passionnés de gastronomie",
+      "settings": {
+        "exploration": {
+          "interests": ["restaurants", "marches", "gastronomie"],
+          "budget": "high"
+        },
+        "recommendations": {
+          "considerTime": true,
+          "basedOnRatings": true
+        }
+      }
+    }
+  },
+  "examples": {
+    "nouveauUtilisateur": {
+      "userId": "marie-debutante",
+      "appearance": {
+        "theme": "paris-classic",
+        "darkMode": false,
+        "animations": true
+      },
+      "language": {
+        "interface": "fr-FR",
+        "dateFormat": "DD/MM/YYYY"
+      },
+      "navigation": {
+        "defaultView": "list",
+        "showCompletedByDefault": false
+      },
+      "notifications": {
+        "enabled": true,
+        "types": {
+          "achievement": true,
+          "reminder": true
+        }
+      }
+    },
+    "utilisateurAvance": {
+      "userId": "pierre-expert",
+      "appearance": {
+        "theme": "custom",
+        "customColors": {
+          "primary": "#8B4513",
+          "secondary": "#CD853F"
+        },
+        "darkMode": true
+      },
+      "navigation": {
+        "compactMode": true,
+        "itemsPerPage": 50,
+        "groupBy": "arrondissement"
+      },
+      "advanced": {
+        "developerMode": true,
+        "betaFeatures": true
+      }
+    }
+  },
+  "validation": {
+    "appearance": {
+      "theme": {
+        "enum": ["paris-classic", "paris-dark", "versailles", "montmartre", "custom"]
+      },
+      "fontSize": {
+        "enum": ["small", "medium", "large", "extra-large"]
+      }
+    },
+    "language": {
+      "interface": {
+        "enum": ["fr-FR", "en-US", "es-ES", "de-DE", "it-IT"]
+      }
+    },
+    "exploration": {
+      "budget": {
+        "enum": ["low", "medium", "medium-high", "high", "luxury"]
+      },
+      "explorationStyle": {
+        "enum": ["touristique", "local", "cultural", "gastronomique", "alternatif"]
+      }
+    }
+  },
+  "migrations": [
+    {
+      "from": "1.0.0",
+      "to": "2.0.0",
+      "description": "Ajout paramètres accessibilité et recommandations",
+      "script": "migrations/1.0.0_to_2.0.0.js"
+    }
+  ],
+  "defaults": {
+    "newUser": {
+      "theme": "paris-classic",
+      "language": "fr-FR",
+      "notifications": true,
+      "autoSave": true,
+      "defaultView": "list"
+    }
+  },
+  "operations": {
+    "updateSettings": {
+      "description": "Mettre à jour les paramètres",
+      "parameters": ["category", "settings"],
+      "returns": "updated settings"
+    },
+    "resetToDefaults": {
+      "description": "Réinitialiser aux valeurs par défaut",
+      "parameters": ["categories?"],
+      "returns": "default settings"
+    },
+    "applyPreset": {
+      "description": "Appliquer un preset de paramètres",
+      "parameters": ["presetId"],
+      "returns": "updated settings"
+    },
+    "exportSettings": {
+      "description": "Exporter les paramètres",
+      "parameters": ["format?"],
+      "returns": "settings file"
+    },
+    "importSettings": {
+      "description": "Importer des paramètres",
+      "parameters": ["settingsData"],
+      "returns": "boolean"
     }
   }
 }
