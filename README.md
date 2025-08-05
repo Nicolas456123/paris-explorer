@@ -8,7 +8,11 @@ Une application web interactive pour explorer et découvrir tous les trésors de
 paris-explorer/
 ├── index.html          # Structure HTML principale
 ├── styles.css          # Feuille de style complète  
-├── app.js              # Logique JavaScript de l'application
+├── main.js             # Point d'entrée et coordination
+├── data-manager.js     # Chargement et validation des données
+├── user-manager.js     # Gestion des utilisateurs et progressions
+├── map-manager.js      # Carte interactive et géocodage
+├── ui-manager.js       # Interface utilisateur et événements
 ├── paris-database.json # Base de données des lieux parisiens (à créer)
 └── README.md           # Cette documentation
 ```
@@ -18,7 +22,11 @@ paris-explorer/
 ### 1. Télécharger les fichiers
 - `index.html` - Page principale
 - `styles.css` - Styles CSS 
-- `app.js` - Code JavaScript
+- `main.js` - Point d'entrée principal
+- `data-manager.js` - Gestion des données
+- `user-manager.js` - Gestion des utilisateurs  
+- `map-manager.js` - Carte interactive
+- `ui-manager.js` - Interface utilisateur
 
 ### 2. Créer la base de données
 Créez un fichier `paris-database.json` avec vos lieux parisiens :
@@ -91,6 +99,48 @@ Puis ouvrez : `http://localhost:8000`
 - **Responsive** mobile et desktop
 - **Animations fluides** et micro-interactions
 - **Interface moderne** avec glassmorphism
+
+## 🏗️ Architecture Modulaire
+
+L'application est construite selon une architecture modulaire pour une meilleure maintenabilité :
+
+### **main.js** - Orchestrateur principal
+- Initialisation de l'application
+- Coordination entre les modules
+- Gestion de l'état global
+- Point d'entrée unique
+
+### **data-manager.js** - Gestionnaire de données  
+- Chargement de `paris-database.json`
+- Validation de la structure des données
+- Calculs de statistiques
+- Cache et optimisations
+
+### **user-manager.js** - Gestionnaire d'utilisateurs
+- Création/suppression des profils
+- Sauvegarde localStorage  
+- Gestion des progressions et visites
+- Statistiques utilisateur avancées
+
+### **map-manager.js** - Gestionnaire de carte
+- Initialisation Leaflet
+- Géocodage automatique des adresses
+- Marqueurs adaptatifs (polygones ⟷ lieux individuels)
+- Contrôles plein écran et navigation
+
+### **ui-manager.js** - Gestionnaire d'interface
+- Rendu des composants
+- Gestion des événements
+- Recherche et filtres
+- Animations et feedbacks
+
+### **Avantages de cette Architecture**
+- ✅ **Séparation des responsabilités** : Chaque module a un rôle précis
+- ✅ **Facilité de maintenance** : Modifications isolées par fonctionnalité  
+- ✅ **Collaboration efficace** : Plusieurs développeurs peuvent travailler simultanément
+- ✅ **Tests ciblés** : Possibilité de tester chaque module indépendamment
+- ✅ **Réutilisabilité** : Modules réutilisables dans d'autres projets
+- ✅ **Débogage simplifié** : Localisation rapide des problèmes
 
 ## 🔧 Technologies
 
