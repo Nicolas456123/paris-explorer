@@ -906,7 +906,11 @@
                     // Chargement des lieux
                     const data = await response.json();
                     
-                    if (!data.arrondissements) {
+                    console.log('🔍 Structure des données reçues:', Object.keys(data));
+                    console.log('🔍 Contenu data.arrondissements:', !!data.arrondissements);
+                    
+                    if (!data || !data.arrondissements) {
+                        console.error('❌ Données reçues:', data);
                         throw new Error('Structure de données invalide: propriété "arrondissements" manquante');
                     }
                     
