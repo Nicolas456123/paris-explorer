@@ -20,7 +20,135 @@
               "name": "Musée du Louvre",
               "description": "La Joconde, Vénus de Milo, Pyramide de verre, 35 000 œuvres",
               "tags": ["musée", "art", "incontournable", "pyramide"]
+            },
+            {
+              "name": "Sainte-Chapelle",
+              "description": "1113 vitraux du XIIIe siècle, chef-d'œuvre gothique",
+              "tags": ["église", "gothique", "vitraux", "médiéval"]
+            },
+            {
+              "name": "Conciergerie",
+              "description": "Prison de Marie-Antoinette, salle des gardes médiévale",
+              "tags": ["histoire", "prison", "marie-antoinette", "médiéval"]
+            },
+            {
+              "name": "Palais-Royal",
+              "description": "Jardins, galeries, colonnes de Buren controversées",
+              "tags": ["palais", "jardins", "art", "colonnes-buren"]
+            },
+            {
+              "name": "Place Vendôme",
+              "description": "Architecture classique, bijoutiers de luxe, Colonne Vendôme",
+              "tags": ["place", "luxe", "architecture", "bijouterie"]
+            },
+            {
+              "name": "Église Saint-Germain-l'Auxerrois",
+              "description": "Église des rois de France, carillon",
+              "tags": ["église", "histoire", "royauté"]
+            },
+            {
+              "name": "Pont Neuf",
+              "description": "Plus ancien pont de Paris (1607), statue Henri IV",
+              "tags": ["pont", "histoire", "statue"]
+            },
+            {
+              "name": "Châtelet-Fontaine",
+              "description": "Fontaine du Palmier, théâtres historiques",
+              "tags": ["fontaine", "théâtre", "histoire"]
+            },
+            {
+              "name": "Bourse de Commerce",
+              "description": "Fondation Pinault, architecture Tadao Ando",
+              "tags": ["art", "architecture", "moderne"]
+            },
+            {
+              "name": "Oratoire du Louvre",
+              "description": "Temple protestant historique",
+              "tags": ["temple", "protestant", "histoire"]
+            },
+            {
+              "name": "Crypte archéologique",
+              "description": "Vestiges gallo-romains sous parvis Notre-Dame",
+              "tags": ["archéologie", "antique", "souterrain"]
             }
+          ]
+        },
+        "espaces-verts": {
+          "title": "🌳 Espaces Verts & Lieux Secrets",
+          "places": [
+            {
+              "name": "Jardin des Tuileries",
+              "description": "Promenade entre Louvre et Concorde, Musée Orangerie",
+              "tags": ["jardin", "promenade", "musée", "orangerie"]
+            },
+            {
+              "name": "Square du Vert-Galant",
+              "description": "Pointe de l'île de la Cité, couchers de soleil",
+              "tags": ["square", "île", "romantique", "coucher-soleil"]
+            },
+            {
+              "name": "Cour Carrée du Louvre",
+              "description": "Architecture Renaissance, concerts gratuits été",
+              "tags": ["cour", "renaissance", "concerts"]
+            },
+            {
+              "name": "Jardin de l'Infante",
+              "description": "Jardin suspendu secret, vue Seine",
+              "tags": ["jardin", "secret", "vue"]
+            },
+            {
+              "name": "Square Jean XXIII",
+              "description": "Derrière Notre-Dame, rosiers et pelouses",
+              "tags": ["square", "roses", "notre-dame"]
+            }
+          ]
+        },
+        "restaurants": {
+          "title": "🍽️ Restaurants & Gastronomie",
+          "places": [
+            {
+              "name": "Palais Royal Restaurant",
+              "description": "⭐⭐ Michelin - 110 Galerie Valois, menu 165-195€",
+              "tags": ["michelin", "gastronomie", "luxe", "2-étoiles"]
+            },
+            {
+              "name": "L'Escargot Montorgueil",
+              "description": "Institution depuis 1832, décor historique",
+              "tags": ["institution", "historique", "escargot"]
+            },
+            {
+              "name": "Rue Montorgueil",
+              "description": "Marché piétonnier, boulangeries artisanales, Stohrer",
+              "tags": ["marché", "boulangerie", "piétonnier"]
+            },
+            {
+              "name": "Angelina",
+              "description": "Chocolat chaud légendaire depuis 1903",
+              "tags": ["chocolat", "salon-thé", "historique", "légendaire"]
+            },
+            {
+              "name": "Loulou",
+              "description": "Restaurant terrasse Tuileries, vue Louvre",
+              "tags": ["terrasse", "vue", "tuileries"]
+            },
+            {
+              "name": "Verjus",
+              "description": "Wine bar caché, cuisine moderne",
+              "tags": ["wine-bar", "caché", "moderne"]
+            },
+            {
+              "name": "Le Grand Véfour",
+              "description": "⭐⭐⭐ Michelin - Restaurant historique Palais-Royal",
+              "tags": ["3-étoiles", "historique", "palais-royal", "guy-martin"]
+            },
+            {
+              "name": "Pierre Hermé",
+              "description": "Macarons d'exception, créations saisonnières",
+              "tags": ["macarons", "pâtisserie", "créateur"]
+            }
+          ]
+        }
+      }
     },
     "11ème": {
       "title": "11ÈME ARRONDISSEMENT - BASTILLE & OBERKAMPF",
@@ -214,567 +342,6 @@
               "name": "Fresque Jérôme Mesnager",
               "description": "Homme blanc iconique",
               "tags": ["mesnager", "homme-blanc", "iconique"]
-            }
-          ]
-        }
-      }
-    },
-    "15ème": {
-      "title": "15ÈME ARRONDISSEMENT - VAUGIRARD & BEAUGRENELLE",
-      "description": "Parcs d'innovation et centre commercial moderne",
-      "transport": ["Charles-Michels (10)", "Bir-Hakeim (6)", "Commerce (8)", "Javel (10)"],
-      "categories": {
-        "parcs-innovation": {
-          "title": "🌳 Parcs d'Exception & Innovation",
-          "places": [
-            {
-              "name": "Parc André-Citroën",
-              "description": "14 hectares, jardins thématiques, Ballon Paris",
-              "tags": ["andré-citroën", "14-hectares", "ballon"]
-            },
-            {
-              "name": "Parc Georges-Brassens",
-              "description": "Vignes Clos Morillons, ruches, théâtre marionnettes",
-              "tags": ["georges-brassens", "vignes", "ruches"]
-            },
-            {
-              "name": "Square Saint-Lambert",
-              "description": "Jardin quartier paisible, jeux enfants",
-              "tags": ["saint-lambert", "paisible", "enfants"]
-            },
-            {
-              "name": "Île aux Cygnes",
-              "description": "Promenade 850m, Statue Liberté, jogging Seine",
-              "tags": ["île-cygnes", "850m", "liberté"]
-            },
-            {
-              "name": "Jardin Atlantique",
-              "description": "Jardin suspendu gare, innovation paysagère",
-              "tags": ["jardin-atlantique", "suspendu", "innovation"]
-            }
-          ]
-        },
-        "musees-patrimoine": {
-          "title": "🏛️ Musées & Patrimoine Artistique",
-          "places": [
-            {
-              "name": "Musée Bourdelle",
-              "description": "Sculptures, atelier reconstitué, jardins",
-              "tags": ["bourdelle", "sculptures", "jardins"]
-            },
-            {
-              "name": "Musée de la Poste",
-              "description": "Histoire postale rénové 2019, philatélie",
-              "tags": ["poste", "postale", "philatélie"]
-            },
-            {
-              "name": "Musée Pasteur",
-              "description": "Appartement et laboratoire savant, souvenirs",
-              "tags": ["pasteur", "laboratoire", "souvenirs"]
-            },
-            {
-              "name": "La Ruche",
-              "description": "Cité artistes historique, ateliers Chagall, Modigliani",
-              "tags": ["ruche", "artistes", "chagall"]
-            }
-          ]
-        },
-        "shopping-moderne": {
-          "title": "🛍️ Shopping & Architecture Moderne",
-          "places": [
-            {
-              "name": "Centre Commercial Beaugrenelle",
-              "description": "120 boutiques sur Seine, architecture contemporaine",
-              "tags": ["beaugrenelle", "120-boutiques", "contemporaine"]
-            },
-            {
-              "name": "Rue de Vaugirard",
-              "description": "Plus longue rue Paris 4,4km, commerces",
-              "tags": ["vaugirard", "4.4km", "longue"]
-            },
-            {
-              "name": "Marché Grenelle",
-              "description": "Mer/Dim sous métro aérien, ambiance populaire",
-              "tags": ["grenelle", "métro-aérien", "populaire"]
-            },
-            {
-              "name": "Rue du Commerce",
-              "description": "Artère commerçante historique, tous commerces",
-              "tags": ["commerce", "artère", "historique"]
-            }
-          ]
-        },
-        "restaurants-bistronomie": {
-          "title": "🍽️ Restaurants & Bistronomie",
-          "places": [
-            {
-              "name": "Le Troquet",
-              "description": "Bistrot gastronomique réputé, cuisine inventive",
-              "tags": ["troquet", "gastronomique", "inventive"]
-            },
-            {
-              "name": "Jadis",
-              "description": "Cuisine moderne inventive, produits saisons",
-              "tags": ["jadis", "moderne", "saisons"]
-            },
-            {
-              "name": "Walczak",
-              "description": "Bistrot secret année 50, fréquenté Brassens (frapper carreau)",
-              "tags": ["walczak", "secret", "brassens"]
-            },
-            {
-              "name": "L'Os à Moelle",
-              "description": "Bistrot populaire, cuisine généreuse, prix doux",
-              "tags": ["os-moelle", "populaire", "généreuse"]
-            }
-          ]
-        },
-        "sports-loisirs": {
-          "title": "🏊 Sports & Loisirs Aquatiques",
-          "places": [
-            {
-              "name": "Piscine Keller",
-              "description": "Piscine Art déco 1924, architecture remarquable",
-              "tags": ["keller", "art-déco", "1924"]
-            },
-            {
-              "name": "Front de Seine",
-              "description": "Tours années 70, architecture brutaliste",
-              "tags": ["front-seine", "années-70", "brutaliste"]
-            },
-            {
-              "name": "Port de Javel",
-              "description": "Activités nautiques Seine, base voile",
-              "tags": ["port-javel", "nautiques", "voile"]
-            },
-            {
-              "name": "Aquaboulevard",
-              "description": "Centre aquatique loisirs, toboggans, vagues",
-              "tags": ["aquaboulevard", "loisirs", "toboggans"]
-            }
-          ]
-        },
-        "jardins-secrets": {
-          "title": "🌿 Jardins Secrets & Méconnus",
-          "places": [
-            {
-              "name": "Square Blomet",
-              "description": "Jardin caché, pelouses, tranquillité résidentielle",
-              "tags": ["blomet", "caché", "résidentielle"]
-            },
-            {
-              "name": "Villa Seurat",
-              "description": "Cité artistes privée, maisons individuelles",
-              "tags": ["villa-seurat", "privée", "individuelles"]
-            },
-            {
-              "name": "Square des Peupliers",
-              "description": "Quartier village, maisons basses",
-              "tags": ["peupliers", "village", "basses"]
-            }
-          ]
-        },
-        "culture-theatre": {
-          "title": "🎭 Culture & Théâtre",
-          "places": [
-            {
-              "name": "Théâtre Montparnasse",
-              "description": "Théâtre privé renommé, comédies succès",
-              "tags": ["théâtre-montparnasse", "privé", "succès"]
-            },
-            {
-              "name": "Théâtre Rive Gauche",
-              "description": "Petite salle intimiste, one-man-show",
-              "tags": ["rive-gauche", "intimiste", "one-man"]
-            },
-            {
-              "name": "Maison des Métallos",
-              "description": "Arts du cirque, danse contemporaine",
-              "tags": ["métallos", "cirque", "contemporaine"]
-            }
-          ]
-        }
-      }
-    },
-    "16ème": {
-      "title": "16ÈME ARRONDISSEMENT - TROCADÉRO & PASSY",
-      "description": "Musées classe mondiale et quartiers chic",
-      "transport": ["Trocadéro (6,9)", "Passy (6)", "Charles de Gaulle-Étoile (1,2,6)", "Bir-Hakeim (6)"],
-      "categories": {
-        "musees-classe-mondiale": {
-          "title": "🏛️ Musées Classe Mondiale",
-          "places": [
-            {
-              "name": "Musée d'Art Moderne",
-              "description": "Art XXe siècle, gratuit collections permanentes",
-              "tags": ["art-moderne", "20ème", "gratuit"]
-            },
-            {
-              "name": "Palais de Tokyo",
-              "description": "Art contemporain, nocturnes minuit, programmation avant-garde",
-              "tags": ["palais-tokyo", "contemporain", "minuit"]
-            },
-            {
-              "name": "Musée Marmottan Monet",
-              "description": "Plus grande collection Monet mondiale, impressionnistes",
-              "tags": ["marmottan", "monet", "impressionnistes"]
-            },
-            {
-              "name": "Musée Guimet",
-              "description": "Arts asiatiques exceptionnels, Angkor, Gandhara",
-              "tags": ["guimet", "asiatiques", "angkor"]
-            },
-            {
-              "name": "Fondation Louis Vuitton",
-              "description": "Architecture Gehry, art contemporain, jardins",
-              "tags": ["vuitton", "gehry", "jardins"]
-            },
-            {
-              "name": "Musée Galliera",
-              "description": "Mode Paris, expositions temporaires couture",
-              "tags": ["galliera", "mode", "couture"]
-            },
-            {
-              "name": "Musée du Vin",
-              "description": "Caves voûtées XVe, dégustation, histoire viticulture",
-              "tags": ["vin", "caves", "viticulture"]
-            }
-          ]
-        },
-        "parcs-jardins": {
-          "title": "🌳 Parcs & Jardins Prestigieux",
-          "places": [
-            {
-              "name": "Bois de Boulogne",
-              "description": "846 hectares, lacs, Longchamp, Auteuil, prostituées nuit",
-              "tags": ["bois-boulogne", "846-hectares", "longchamp"]
-            },
-            {
-              "name": "Jardins du Trocadéro",
-              "description": "Vue Tour Eiffel, fontaines Varsovie, selfies",
-              "tags": ["trocadéro", "tour-eiffel", "fontaines"]
-            },
-            {
-              "name": "Parc de Bagatelle",
-              "description": "Roseraie 10000 rosiers, château XVIIIe, paons",
-              "tags": ["bagatelle", "10000-rosiers", "paons"]
-            },
-            {
-              "name": "Jardins d'Acclimatation",
-              "description": "Parc attractions familial, manèges historiques",
-              "tags": ["acclimatation", "familial", "manèges"]
-            },
-            {
-              "name": "Serres d'Auteuil",
-              "description": "Jardins botaniques, serres tropicales, bambous",
-              "tags": ["auteuil", "botaniques", "bambous"]
-            }
-          ]
-        },
-        "architecture-monuments": {
-          "title": "🏛️ Architecture & Monuments",
-          "places": [
-            {
-              "name": "Palais de Chaillot",
-              "description": "Architecture Art déco, terrasse Trocadéro",
-              "tags": ["chaillot", "art-déco", "terrasse"]
-            },
-            {
-              "name": "Maison de Radio France",
-              "description": "Architecture circulaire, visites studios",
-              "tags": ["radio-france", "circulaire", "studios"]
-            },
-            {
-              "name": "Cimetière de Passy",
-              "description": "Vue Tour Eiffel, tombes Debussy, Fauré",
-              "tags": ["passy", "debussy", "fauré"]
-            },
-            {
-              "name": "Palais Galliera",
-              "description": "Architecture Belle Époque, jardins intérieurs",
-              "tags": ["galliera", "belle-époque", "intérieurs"]
-            },
-            {
-              "name": "Villa Montmorency",
-              "description": "Quartier privé, portail surveillé",
-              "tags": ["montmorency", "privé", "surveillé"]
-            }
-          ]
-        },
-        "shopping-luxe": {
-          "title": "🛍️ Shopping Luxe & Quartiers Chic",
-          "places": [
-            {
-              "name": "Avenue Victor Hugo",
-              "description": "Boutiques grandes marques, luxe accessible",
-              "tags": ["victor-hugo", "grandes-marques", "accessible"]
-            },
-            {
-              "name": "Rue de Passy",
-              "description": "Shopping chic décontracté, cafés terrasses",
-              "tags": ["passy", "chic", "terrasses"]
-            },
-            {
-              "name": "Réciproqué",
-              "description": "Dépôt-vente luxe mythique, Chanel d'occasion",
-              "tags": ["réciproqué", "dépôt-vente", "chanel"]
-            },
-            {
-              "name": "Avenue Montaigne",
-              "description": "Haute couture, maisons mode",
-              "tags": ["montaigne", "haute-couture", "mode"]
-            }
-          ]
-        },
-        "restaurants-gastronomiques": {
-          "title": "🍽️ Restaurants Gastronomiques & Palaces",
-          "places": [
-            {
-              "name": "L'Astrance",
-              "description": "⭐⭐⭐ Michelin - Fusion franco-asiatique Pascal Barbot",
-              "tags": ["astrance", "3-étoiles", "barbot"]
-            },
-            {
-              "name": "Le Pré Catelan",
-              "description": "⭐⭐⭐ Michelin - Gastronomie Bois Boulogne",
-              "tags": ["pré-catelan", "3-étoiles", "boulogne"]
-            },
-            {
-              "name": "6 New York",
-              "description": "Brasserie chic avenue New York, vue Seine",
-              "tags": ["6-new-york", "chic", "seine"]
-            },
-            {
-              "name": "Maison de Balzac",
-              "description": "Café jardin secret, vue Tour Eiffel",
-              "tags": ["balzac", "jardin", "tour-eiffel"]
-            },
-            {
-              "name": "Tokyo Eat",
-              "description": "Restaurant Palais Tokyo, design Philippe Starck",
-              "tags": ["tokyo-eat", "palais", "starck"]
-            }
-          ]
-        },
-        "sports-evenements": {
-          "title": "⚽ Sports & Événements Internationaux",
-          "places": [
-            {
-              "name": "Roland Garros",
-              "description": "Tournoi tennis mai-juin, Centre Court Lenglen",
-              "tags": ["roland-garros", "tennis", "lenglen"]
-            },
-            {
-              "name": "Parc des Princes",
-              "description": "Stade PSG 48712 places, visites guidées",
-              "tags": ["parc-princes", "psg", "48712"]
-            },
-            {
-              "name": "Hippodrome de Longchamp",
-              "description": "Courses chevaux, Prix Arc Triomphe octobre",
-              "tags": ["longchamp", "chevaux", "arc-triomphe"]
-            },
-            {
-              "name": "Racing Club de France",
-              "description": "Club sportif chic, piscine, tennis",
-              "tags": ["racing-club", "chic", "piscine"]
-            }
-          ]
-        },
-        "jardins-secrets": {
-          "title": "🌿 Jardins Secrets & Maisons d'Écrivains",
-          "places": [
-            {
-              "name": "Maison de Balzac",
-              "description": "Demeure écrivain, jardin secret vue Tour Eiffel",
-              "tags": ["maison-balzac", "écrivain", "secret"]
-            },
-            {
-              "name": "Villa Montmorency",
-              "description": "Cité privée, portails, maisons bourgeoises",
-              "tags": ["villa-montmorency", "cité", "bourgeoises"]
-            },
-            {
-              "name": "Square du Ranelagh",
-              "description": "Jardin anglais, théâtre marionnettes",
-              "tags": ["ranelagh", "anglais", "marionnettes"]
-            },
-            {
-              "name": "Jardin du Ranelagh",
-              "description": "Pelouses, jeux enfants, manège 1860",
-              "tags": ["jardin-ranelagh", "pelouses", "manège"]
-            }
-          ]
-        }
-      }
-    },
-    "17ème": {
-      "title": "17ÈME ARRONDISSEMENT - BATIGNOLLES & MONCEAU",
-      "description": "Parcs remarquables et quartier village",
-      "transport": ["Monceau (2)", "Rome (2)", "Place de Clichy (2,13)", "Wagram (3)", "Villiers (2,3)"],
-      "categories": {
-        "parcs-remarquables": {
-          "title": "🌳 Parcs & Jardins Remarquables",
-          "places": [
-            {
-              "name": "Parc Monceau",
-              "description": "8,2 hectares, jardins anglais Haussmann, fabriques romantiques",
-              "tags": ["monceau", "8.2-hectares", "haussmann"]
-            },
-            {
-              "name": "Parc Clichy-Batignolles Martin Luther King",
-              "description": "10 hectares, parc écologique 2007",
-              "tags": ["clichy-batignolles", "10-hectares", "écologique"]
-            },
-            {
-              "name": "Square des Batignolles",
-              "description": "Jardin anglais historique, grotte cascade",
-              "tags": ["square-batignolles", "anglais", "cascade"]
-            },
-            {
-              "name": "Promenade Pereire",
-              "description": "Coulée verte métro aérien, jardins suspendus",
-              "tags": ["pereire", "coulée-verte", "suspendus"]
-            }
-          ]
-        },
-        "architecture-musees": {
-          "title": "🏛️ Architecture & Musées Confidentiels",
-          "places": [
-            {
-              "name": "Musée Cernuschi",
-              "description": "Arts asiatiques, hôtel particulier, bronzes chinois",
-              "tags": ["cernuschi", "asiatiques", "bronzes"]
-            },
-            {
-              "name": "Église Saint-Alexandre-Nevsky",
-              "description": "Cathédrale orthodoxe russe, iconostase",
-              "tags": ["saint-alexandre", "orthodoxe", "iconostase"]
-            },
-            {
-              "name": "Palais des Congrès",
-              "description": "Architecture années 70, concerts, salons",
-              "tags": ["palais-congrès", "années-70", "concerts"]
-            },
-            {
-              "name": "Cité des Fleurs",
-              "description": "Impasse fleurie 1847, villas anglo-normandes",
-              "tags": ["cité-fleurs", "1847", "anglo-normandes"]
-            }
-          ]
-        },
-        "restaurants-marches": {
-          "title": "🍽️ Restaurants & Marchés Bio",
-          "places": [
-            {
-              "name": "Marché des Batignolles",
-              "description": "Marché bio réputé, producteurs locaux",
-              "tags": ["marché-batignolles", "bio", "producteurs"]
-            },
-            {
-              "name": "Rue de Lévis",
-              "description": "Rue commerçante animée, fromagers, bouchers",
-              "tags": ["lévis", "commerçante", "fromagers"]
-            },
-            {
-              "name": "Breizh Café Batignolles",
-              "description": "Crêperie moderne, galettes sarrasin",
-              "tags": ["breizh-batignolles", "crêperie", "sarrasin"]
-            },
-            {
-              "name": "Poussin",
-              "description": "Bar vins naturels, bistronomie, produits saisons",
-              "tags": ["poussin", "naturels", "bistronomie"]
-            },
-            {
-              "name": "Le Bistrot des Dames",
-              "description": "Cuisine traditionnelle, ambiance quartier",
-              "tags": ["bistrot-dames", "traditionnelle", "quartier"]
-            }
-          ]
-        },
-        "shopping-village": {
-          "title": "🛍️ Shopping Village & Créateurs",
-          "places": [
-            {
-              "name": "Rue des Batignolles",
-              "description": "Boutiques créateurs indépendants, concept stores",
-              "tags": ["rue-batignolles", "indépendants", "concept"]
-            },
-            {
-              "name": "Village des Batignolles",
-              "description": "Quartier village rénové, commerces proximité",
-              "tags": ["village-batignolles", "rénové", "proximité"]
-            },
-            {
-              "name": "Avenue de Wagram",
-              "description": "Commerces de proximité, boulangeries artisanales",
-              "tags": ["wagram", "proximité", "artisanales"]
-            },
-            {
-              "name": "Marché Poncelet",
-              "description": "Mar/Jeu/Sam/Dim, ambiance populaire",
-              "tags": ["poncelet", "populaire", "ambiance"]
-            }
-          ]
-        },
-        "culture-spectacles": {
-          "title": "🎭 Culture & Spectacles",
-          "places": [
-            {
-              "name": "Théâtre Hébertot",
-              "description": "Théâtre privé historique, programmation contemporaine",
-              "tags": ["hébertot", "privé", "contemporaine"]
-            },
-            {
-              "name": "Salle Pleyel",
-              "description": "Concerts musique classique, Orchestre de Paris",
-              "tags": ["pleyel", "classique", "orchestre"]
-            },
-            {
-              "name": "Studio des Ursulines",
-              "description": "Cinéma art et essai, débats",
-              "tags": ["ursulines", "art-essai", "débats"]
-            }
-          ]
-        },
-        "bars-familiale": {
-          "title": "🍻 Bars & Vie Nocturne Familiale",
-          "places": [
-            {
-              "name": "Le Consulat",
-              "description": "Bar de quartier convivial, habitants fidèles",
-              "tags": ["consulat", "quartier", "fidèles"]
-            },
-            {
-              "name": "Café des Deux Moulins",
-              "description": "Bar bistrot, ambiance authentique",
-              "tags": ["deux-moulins", "bistrot", "authentique"]
-            },
-            {
-              "name": "L'Endroit",
-              "description": "Bar branché Batignolles, cocktails créatifs",
-              "tags": ["endroit", "branché", "créatifs"]
-            }
-          ]
-        },
-        "lieux-secrets": {
-          "title": "🌿 Lieux Secrets & Impasses",
-          "places": [
-            {
-              "name": "Villa des Ternes",
-              "description": "Impasse privée, maisons bourgeoises",
-              "tags": ["villa-ternes", "privée", "bourgeoises"]
-            },
-            {
-              "name": "Cité Lemercier",
-              "description": "Passage résidentiel calme, pavés",
-              "tags": ["cité-lemercier", "résidentiel", "pavés"]
-            },
-            {
-              "name": "Square Marcel-Pagnol",
-              "description": "Petit jardin caché, aire jeux",
-              "tags": ["marcel-pagnol", "caché", "jeux"]
             }
           ]
         }
@@ -1749,135 +1316,6 @@
           ]
         }
       },
-            {
-              "name": "Sainte-Chapelle",
-              "description": "1113 vitraux du XIIIe siècle, chef-d'œuvre gothique",
-              "tags": ["église", "gothique", "vitraux", "médiéval"]
-            },
-            {
-              "name": "Conciergerie",
-              "description": "Prison de Marie-Antoinette, salle des gardes médiévale",
-              "tags": ["histoire", "prison", "marie-antoinette", "médiéval"]
-            },
-            {
-              "name": "Palais-Royal",
-              "description": "Jardins, galeries, colonnes de Buren controversées",
-              "tags": ["palais", "jardins", "art", "colonnes-buren"]
-            },
-            {
-              "name": "Place Vendôme",
-              "description": "Architecture classique, bijoutiers de luxe, Colonne Vendôme",
-              "tags": ["place", "luxe", "architecture", "bijouterie"]
-            },
-            {
-              "name": "Église Saint-Germain-l'Auxerrois",
-              "description": "Église des rois de France, carillon",
-              "tags": ["église", "histoire", "royauté"]
-            },
-            {
-              "name": "Pont Neuf",
-              "description": "Plus ancien pont de Paris (1607), statue Henri IV",
-              "tags": ["pont", "histoire", "statue"]
-            },
-            {
-              "name": "Châtelet-Fontaine",
-              "description": "Fontaine du Palmier, théâtres historiques",
-              "tags": ["fontaine", "théâtre", "histoire"]
-            },
-            {
-              "name": "Bourse de Commerce",
-              "description": "Fondation Pinault, architecture Tadao Ando",
-              "tags": ["art", "architecture", "moderne"]
-            },
-            {
-              "name": "Oratoire du Louvre",
-              "description": "Temple protestant historique",
-              "tags": ["temple", "protestant", "histoire"]
-            },
-            {
-              "name": "Crypte archéologique",
-              "description": "Vestiges gallo-romains sous parvis Notre-Dame",
-              "tags": ["archéologie", "antique", "souterrain"]
-            }
-          ]
-        },
-        "espaces-verts": {
-          "title": "🌳 Espaces Verts & Lieux Secrets",
-          "places": [
-            {
-              "name": "Jardin des Tuileries",
-              "description": "Promenade entre Louvre et Concorde, Musée Orangerie",
-              "tags": ["jardin", "promenade", "musée", "orangerie"]
-            },
-            {
-              "name": "Square du Vert-Galant",
-              "description": "Pointe de l'île de la Cité, couchers de soleil",
-              "tags": ["square", "île", "romantique", "coucher-soleil"]
-            },
-            {
-              "name": "Cour Carrée du Louvre",
-              "description": "Architecture Renaissance, concerts gratuits été",
-              "tags": ["cour", "renaissance", "concerts"]
-            },
-            {
-              "name": "Jardin de l'Infante",
-              "description": "Jardin suspendu secret, vue Seine",
-              "tags": ["jardin", "secret", "vue"]
-            },
-            {
-              "name": "Square Jean XXIII",
-              "description": "Derrière Notre-Dame, rosiers et pelouses",
-              "tags": ["square", "roses", "notre-dame"]
-            }
-          ]
-        },
-        "restaurants": {
-          "title": "🍽️ Restaurants & Gastronomie",
-          "places": [
-            {
-              "name": "Palais Royal Restaurant",
-              "description": "⭐⭐ Michelin - 110 Galerie Valois, menu 165-195€",
-              "tags": ["michelin", "gastronomie", "luxe", "2-étoiles"]
-            },
-            {
-              "name": "L'Escargot Montorgueil",
-              "description": "Institution depuis 1832, décor historique",
-              "tags": ["institution", "historique", "escargot"]
-            },
-            {
-              "name": "Rue Montorgueil",
-              "description": "Marché piétonnier, boulangeries artisanales, Stohrer",
-              "tags": ["marché", "boulangerie", "piétonnier"]
-            },
-            {
-              "name": "Angelina",
-              "description": "Chocolat chaud légendaire depuis 1903",
-              "tags": ["chocolat", "salon-thé", "historique", "légendaire"]
-            },
-            {
-              "name": "Loulou",
-              "description": "Restaurant terrasse Tuileries, vue Louvre",
-              "tags": ["terrasse", "vue", "tuileries"]
-            },
-            {
-              "name": "Verjus",
-              "description": "Wine bar caché, cuisine moderne",
-              "tags": ["wine-bar", "caché", "moderne"]
-            },
-            {
-              "name": "Le Grand Véfour",
-              "description": "⭐⭐⭐ Michelin - Restaurant historique Palais-Royal",
-              "tags": ["3-étoiles", "historique", "palais-royal", "guy-martin"]
-            },
-            {
-              "name": "Pierre Hermé",
-              "description": "Macarons d'exception, créations saisonnières",
-              "tags": ["macarons", "pâtisserie", "créateur"]
-            }
-          ]
-        }
-      }
-    },
     "6ème": {
       "title": "6ÈME ARRONDISSEMENT - SAINT-GERMAIN-DES-PRÉS",
       "description": "Jardins Luxembourg et cafés philosophiques",
@@ -3946,4 +3384,5 @@
     "ratings": {},
     "visitDates": {}
   }
+}
 }
