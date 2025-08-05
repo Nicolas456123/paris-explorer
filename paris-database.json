@@ -1,0 +1,446 @@
+{
+  "metadata": {
+    "title": "Paris Explorer - Base de données complète",
+    "version": "1.0.0",
+    "lastUpdated": "2025-01-05",
+    "totalArrondissements": 20,
+    "totalPlaces": 2000,
+    "description": "Liste exhaustive des lieux à visiter à Paris par arrondissement"
+  },
+  "arrondissements": {
+    "1er": {
+      "title": "1ER ARRONDISSEMENT - LE LOUVRE",
+      "description": "Cœur historique et artistique de Paris",
+      "transport": ["Louvre-Rivoli (1)", "Châtelet-Les Halles (1,4,7,11,14)", "Palais-Royal (1,7)"],
+      "categories": {
+        "monuments": {
+          "title": "🏛️ Monuments & Sites Historiques",
+          "places": [
+            {
+              "id": "louvre-museum",
+              "name": "Musée du Louvre",
+              "description": "La Joconde, Vénus de Milo, Pyramide de verre, 35 000 œuvres",
+              "address": "Rue de Rivoli, 75001 Paris",
+              "price": "17€",
+              "hours": "9h-18h (fermé mardi)",
+              "tags": ["musée", "art", "incontournable", "pyramide"],
+              "rating": 4.5,
+              "duration": "3-4h",
+              "category": "culture"
+            },
+            {
+              "id": "sainte-chapelle",
+              "name": "Sainte-Chapelle",
+              "description": "1113 vitraux du XIIIe siècle, chef-d'œuvre gothique",
+              "address": "4 Boulevard du Palais, 75001 Paris",
+              "price": "11,50€",
+              "hours": "9h-17h",
+              "tags": ["église", "gothique", "vitraux", "médiéval"],
+              "rating": 4.7,
+              "duration": "1h",
+              "category": "patrimoine"
+            },
+            {
+              "id": "conciergerie",
+              "name": "Conciergerie",
+              "description": "Prison de Marie-Antoinette, salle des gardes médiévale",
+              "address": "2 Boulevard du Palais, 75001 Paris",
+              "price": "11,50€",
+              "hours": "9h30-18h",
+              "tags": ["histoire", "prison", "marie-antoinette", "médiéval"],
+              "rating": 4.2,
+              "duration": "1h30",
+              "category": "histoire"
+            },
+            {
+              "id": "palais-royal",
+              "name": "Palais-Royal",
+              "description": "Jardins, galeries, colonnes de Buren controversées",
+              "address": "Place du Palais Royal, 75001 Paris",
+              "price": "Gratuit",
+              "hours": "7h-22h30",
+              "tags": ["palais", "jardins", "art", "colonnes-buren"],
+              "rating": 4.3,
+              "duration": "1h",
+              "category": "architecture"
+            },
+            {
+              "id": "place-vendome",
+              "name": "Place Vendôme",
+              "description": "Architecture classique, bijoutiers de luxe, Colonne Vendôme",
+              "address": "Place Vendôme, 75001 Paris",
+              "price": "Gratuit",
+              "hours": "24h/24",
+              "tags": ["place", "luxe", "architecture", "bijouterie"],
+              "rating": 4.4,
+              "duration": "30min",
+              "category": "architecture"
+            }
+          ]
+        },
+        "espaces-verts": {
+          "title": "🌳 Espaces Verts & Lieux Secrets",
+          "places": [
+            {
+              "id": "jardin-tuileries",
+              "name": "Jardin des Tuileries",
+              "description": "Promenade entre Louvre et Concorde, Musée Orangerie",
+              "address": "Place de la Concorde, 75001 Paris",
+              "price": "Gratuit",
+              "hours": "7h-21h",
+              "tags": ["jardin", "promenade", "musée", "orangerie"],
+              "rating": 4.6,
+              "duration": "1-2h",
+              "category": "nature"
+            },
+            {
+              "id": "square-vert-galant",
+              "name": "Square du Vert-Galant",
+              "description": "Pointe de l'île de la Cité, couchers de soleil",
+              "address": "15bis Quai du Louvre, 75001 Paris",
+              "price": "Gratuit",
+              "hours": "24h/24",
+              "tags": ["square", "île", "romantique", "coucher-soleil"],
+              "rating": 4.5,
+              "duration": "30min",
+              "category": "nature"
+            }
+          ]
+        },
+        "restaurants": {
+          "title": "🍽️ Restaurants & Gastronomie",
+          "places": [
+            {
+              "id": "palais-royal-restaurant",
+              "name": "Palais Royal Restaurant",
+              "description": "⭐⭐ Michelin - 110 Galerie Valois, menu 165-195€",
+              "address": "110 Galerie de Valois, 75001 Paris",
+              "price": "165-195€",
+              "hours": "12h-14h, 19h30-22h",
+              "tags": ["michelin", "gastronomie", "luxe", "2-étoiles"],
+              "rating": 4.8,
+              "duration": "2-3h",
+              "category": "gastronomie"
+            },
+            {
+              "id": "angelina-rivoli",
+              "name": "Angelina",
+              "description": "Chocolat chaud légendaire depuis 1903",
+              "address": "226 rue de Rivoli, 75001 Paris",
+              "price": "15-25€",
+              "hours": "9h-19h",
+              "tags": ["chocolat", "salon-thé", "historique", "légendaire"],
+              "rating": 4.3,
+              "duration": "1h",
+              "category": "café"
+            },
+            {
+              "id": "grand-vefour",
+              "name": "Le Grand Véfour",
+              "description": "⭐⭐⭐ Michelin - Restaurant historique Palais-Royal",
+              "address": "17 rue de Beaujolais, 75001 Paris",
+              "price": "315€",
+              "hours": "12h-13h30, 20h-21h30",
+              "tags": ["3-étoiles", "historique", "palais-royal", "guy-martin"],
+              "rating": 4.9,
+              "duration": "3h",
+              "category": "gastronomie"
+            }
+          ]
+        }
+      }
+    },
+    "2ème": {
+      "title": "2ÈME ARRONDISSEMENT - LA BOURSE",
+      "description": "Passages couverts et quartier japonais",
+      "transport": ["Bourse (3)", "Grands Boulevards (8,9)", "Réaumur-Sébastopol (3,4)"],
+      "categories": {
+        "monuments": {
+          "title": "🏛️ Architecture & Monuments",
+          "places": [
+            {
+              "id": "galerie-vivienne",
+              "name": "Galerie Vivienne",
+              "description": "Passage couvert (1823), verrière d'époque, boutiques luxe",
+              "address": "4 rue des Petits Champs, 75002 Paris",
+              "price": "Gratuit",
+              "hours": "8h-20h30",
+              "tags": ["passage", "verrière", "luxe", "1823"],
+              "rating": 4.5,
+              "duration": "30min",
+              "category": "architecture"
+            },
+            {
+              "id": "passage-panoramas",
+              "name": "Passage des Panoramas",
+              "description": "Plus ancien passage de Paris (1799), philatélistes",
+              "address": "11 boulevard Montmartre, 75002 Paris",
+              "price": "Gratuit",
+              "hours": "6h-24h",
+              "tags": ["passage", "ancien", "philatélie", "1799"],
+              "rating": 4.2,
+              "duration": "20min",
+              "category": "patrimoine"
+            }
+          ]
+        },
+        "restaurants": {
+          "title": "🍽️ Restaurants & Spécialités",
+          "places": [
+            {
+              "id": "rue-sainte-anne",
+              "name": "Rue Sainte-Anne",
+              "description": "Quartier japonais authentique, restaurants familiaux",
+              "address": "Rue Sainte-Anne, 75002 Paris",
+              "price": "15-30€",
+              "hours": "Variable",
+              "tags": ["japonais", "authentique", "familial", "ramen"],
+              "rating": 4.4,
+              "duration": "1h",
+              "category": "international"
+            }
+          ]
+        }
+      }
+    },
+    "3ème": {
+      "title": "3ÈME ARRONDISSEMENT - HAUT-MARAIS",
+      "description": "Arts, métiers et marché des Enfants Rouges",
+      "transport": ["Arts et Métiers (3,11)", "République (3,5,8,9,11)", "Temple (3)"],
+      "categories": {
+        "musées": {
+          "title": "🏛️ Musées & Culture",
+          "places": [
+            {
+              "id": "musee-arts-metiers",
+              "name": "Musée des Arts et Métiers",
+              "description": "Sciences et techniques, automates",
+              "address": "60 rue Réaumur, 75003 Paris",
+              "price": "8€",
+              "hours": "10h-18h (fermé lundi)",
+              "tags": ["sciences", "techniques", "automates", "innovation"],
+              "rating": 4.3,
+              "duration": "2h",
+              "category": "sciences"
+            },
+            {
+              "id": "musee-picasso",
+              "name": "Musée Picasso",
+              "description": "5000 œuvres dans hôtel Salé XVIIe",
+              "address": "5 rue de Thorigny, 75003 Paris",
+              "price": "16€",
+              "hours": "10h30-18h (fermé lundi)",
+              "tags": ["picasso", "art", "hôtel-particulier", "cubisme"],
+              "rating": 4.4,
+              "duration": "2h",
+              "category": "art"
+            }
+          ]
+        },
+        "restaurants": {
+          "title": "🍽️ Gastronomie & Marchés",
+          "places": [
+            {
+              "id": "marche-enfants-rouges",
+              "name": "Marché des Enfants Rouges",
+              "description": "Plus ancien marché couvert (1615), cuisine monde",
+              "address": "39 rue de Bretagne, 75003 Paris",
+              "price": "10-20€",
+              "hours": "8h30-20h (fermé lundi)",
+              "tags": ["marché", "ancien", "international", "1615"],
+              "rating": 4.5,
+              "duration": "1h",
+              "category": "marché"
+            },
+            {
+              "id": "du-pain-et-des-idees",
+              "name": "Du Pain et des Idées",
+              "description": "Boulangerie artisanale réputée, Christophe Vasseur",
+              "address": "34 rue Yves Toudic, 75010 Paris",
+              "price": "3-8€",
+              "hours": "6h45-20h (fermé lundi-mardi)",
+              "tags": ["boulangerie", "artisanal", "réputé", "vasseur"],
+              "rating": 4.7,
+              "duration": "15min",
+              "category": "boulangerie"
+            }
+          ]
+        }
+      }
+    },
+    "4ème": {
+      "title": "4ÈME ARRONDISSEMENT - MARAIS & ÎLE SAINT-LOUIS",
+      "description": "Cœur historique et village sur Seine",
+      "transport": ["Saint-Paul (1)", "Hôtel de Ville (1,11)", "Pont Marie (7)"],
+      "categories": {
+        "monuments": {
+          "title": "🏛️ Monuments Emblématiques",
+          "places": [
+            {
+              "id": "notre-dame",
+              "name": "Notre-Dame de Paris",
+              "description": "✨ RÉOUVERT DÉCEMBRE 2024 après restauration",
+              "address": "6 Parvis Notre-Dame, 75004 Paris",
+              "price": "Gratuit",
+              "hours": "8h-18h45",
+              "tags": ["cathédrale", "gothique", "réouvert", "restauration"],
+              "rating": 4.8,
+              "duration": "1h30",
+              "category": "patrimoine"
+            },
+            {
+              "id": "place-des-vosges",
+              "name": "Place des Vosges",
+              "description": "Plus ancienne place royale (1612), 36 pavillons",
+              "address": "Place des Vosges, 75004 Paris",
+              "price": "Gratuit",
+              "hours": "24h/24",
+              "tags": ["place", "royale", "architecture", "1612"],
+              "rating": 4.6,
+              "duration": "45min",
+              "category": "architecture"
+            }
+          ]
+        },
+        "patrimoine-juif": {
+          "title": "🏛️ Patrimoine Juif & Mémoire",
+          "places": [
+            {
+              "id": "rue-des-rosiers",
+              "name": "Rue des Rosiers",
+              "description": "Cœur historique quartier juif, devantures Yiddish",
+              "address": "Rue des Rosiers, 75004 Paris",
+              "price": "Gratuit",
+              "hours": "24h/24",
+              "tags": ["juif", "historique", "yiddish", "patrimoine"],
+              "rating": 4.3,
+              "duration": "30min",
+              "category": "patrimoine"
+            },
+            {
+              "id": "memorial-shoah",
+              "name": "Mémorial de la Shoah",
+              "description": "Musée et lieu de mémoire, mur des noms",
+              "address": "17 rue Geoffroy l'Asnier, 75004 Paris",
+              "price": "Gratuit",
+              "hours": "10h-18h (fermé samedi)",
+              "tags": ["mémorial", "shoah", "mémoire", "histoire"],
+              "rating": 4.7,
+              "duration": "2h",
+              "category": "mémoire"
+            }
+          ]
+        },
+        "restaurants": {
+          "title": "🍽️ Restaurants & Cafés Emblématiques",
+          "places": [
+            {
+              "id": "as-du-fallafel",
+              "name": "L'As du Fallafel",
+              "description": "Institution fermée vendredi soir-samedi, Lenny Kravitz",
+              "address": "34 rue des Rosiers, 75004 Paris",
+              "price": "8-12€",
+              "hours": "12h-24h (fermé vendredi soir-samedi)",
+              "tags": ["fallafel", "institution", "célébrité", "kosher"],
+              "rating": 4.2,
+              "duration": "20min",
+              "category": "street-food"
+            },
+            {
+              "id": "berthillon",
+              "name": "Berthillon",
+              "description": "Glacier mythique depuis 1954, 70 parfums",
+              "address": "31 rue Saint-Louis en l'Île, 75004 Paris",
+              "price": "3-6€",
+              "hours": "10h-20h (fermé lundi-mardi)",
+              "tags": ["glacier", "mythique", "parfums", "île-saint-louis"],
+              "rating": 4.5,
+              "duration": "15min",
+              "category": "glacier"
+            }
+          ]
+        }
+      }
+    },
+    "5ème": {
+      "title": "5ÈME ARRONDISSEMENT - QUARTIER LATIN",
+      "description": "Université, Panthéon et librairies mythiques",
+      "transport": ["Place Monge (7)", "Cluny-La Sorbonne (10)", "Maubert-Mutualité (10)"],
+      "categories": {
+        "monuments": {
+          "title": "🏛️ Monuments Historiques & Universitaires",
+          "places": [
+            {
+              "id": "pantheon",
+              "name": "Panthéon",
+              "description": "Mausolée grands hommes, pendule de Foucault",
+              "address": "Place du Panthéon, 75005 Paris",
+              "price": "11,50€",
+              "hours": "10h-18h",
+              "tags": ["mausolée", "grands-hommes", "science", "foucault"],
+              "rating": 4.5,
+              "duration": "1h30",
+              "category": "patrimoine"
+            },
+            {
+              "id": "sorbonne",
+              "name": "Sorbonne",
+              "description": "Université historique, Chapelle Richelieu, amphithéâtres",
+              "address": "47 rue des Écoles, 75005 Paris",
+              "price": "Visites guidées 8€",
+              "hours": "Visites sur réservation",
+              "tags": ["université", "historique", "richelieu", "éducation"],
+              "rating": 4.3,
+              "duration": "1h",
+              "category": "éducation"
+            }
+          ]
+        },
+        "librairies": {
+          "title": "📚 Librairies & Culture Littéraire",
+          "places": [
+            {
+              "id": "shakespeare-and-company",
+              "name": "Shakespeare and Company",
+              "description": "Librairie anglaise mythique, événements",
+              "address": "37 rue de la Bûcherie, 75005 Paris",
+              "price": "Gratuit",
+              "hours": "10h-23h",
+              "tags": ["librairie", "anglaise", "mythique", "événements"],
+              "rating": 4.6,
+              "duration": "45min",
+              "category": "culture"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "filters": {
+    "categories": [
+      "monuments", "musées", "restaurants", "parcs", "shopping", 
+      "culture", "patrimoine", "gastronomie", "bars", "spectacles"
+    ],
+    "types": [
+      "gratuit", "payant", "historique", "moderne", "secret", 
+      "incontournable", "famille", "romantique", "authentique"
+    ],
+    "arrondissements": [
+      "1er", "2ème", "3ème", "4ème", "5ème", "6ème", "7ème", "8ème", 
+      "9ème", "10ème", "11ème", "12ème", "13ème", "14ème", "15ème", 
+      "16ème", "17ème", "18ème", "19ème", "20ème"
+    ],
+    "budget": [
+      "gratuit", "0-10€", "10-25€", "25-50€", "50-100€", "100€+"
+    ]
+  },
+  "userProgress": {
+    "visitedPlaces": [],
+    "favorites": [],
+    "wishlist": [],
+    "notes": {},
+    "photos": {},
+    "ratings": {},
+    "visitDates": {}
+  }
+}
