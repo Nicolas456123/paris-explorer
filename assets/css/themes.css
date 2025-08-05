@@ -1,1 +1,399 @@
+/* ===== PARIS EXPLORER - THÈMES OPTIONNELS ===== */
 
+/* ===== MODE SOMBRE PARISIEN ===== */
+[data-theme="dark"] {
+    /* Variables sombres */
+    --paris-white: #1f2937;
+    --paris-cream: #374151;
+    --paris-dark: #f9fafb;
+    --paris-gray: #d1d5db;
+    --paris-gold: #fbbf24;
+    --paris-gold-light: #fcd34d;
+    --paris-blue: #60a5fa;
+    --paris-blue-light: #93c5fd;
+    
+    /* Gradients sombres */
+    --gradient-paris: linear-gradient(135deg, #1e40af 0%, #fbbf24 100%);
+    --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
+    
+    /* Ombres sombres */
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+}
+
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #92400e 75%, #a16207 100%);
+    color: var(--paris-dark);
+}
+
+[data-theme="dark"] .app-container {
+    background: var(--paris-white);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+[data-theme="dark"] .header {
+    background: var(--gradient-paris);
+}
+
+[data-theme="dark"] .nav-section {
+    background: var(--paris-cream);
+    border-bottom-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .search-input {
+    background: var(--paris-white);
+    border-color: var(--paris-gold);
+    color: var(--paris-dark);
+}
+
+[data-theme="dark"] .search-input:focus {
+    background: var(--paris-cream);
+}
+
+[data-theme="dark"] .filter-select {
+    background: var(--paris-white);
+    color: var(--paris-dark);
+    border-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .arrondissement-card {
+    background: var(--paris-white);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+[data-theme="dark"] .category-header {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, #4b5563 100%);
+    color: var(--paris-blue);
+}
+
+[data-theme="dark"] .place-card {
+    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+[data-theme="dark"] .place-card:hover {
+    background: linear-gradient(135deg, #374151 0%, var(--paris-cream) 100%);
+}
+
+[data-theme="dark"] .place-card.visited {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    border-color: var(--success);
+}
+
+[data-theme="dark"] .address-link {
+    background: rgba(96, 165, 250, 0.2);
+    border-color: rgba(96, 165, 250, 0.3);
+    color: var(--paris-blue);
+}
+
+[data-theme="dark"] .modal-content {
+    background: var(--paris-white);
+    border-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .form-input {
+    background: var(--paris-cream);
+    border-color: var(--paris-gold);
+    color: var(--paris-dark);
+}
+
+[data-theme="dark"] .form-input:focus {
+    background: var(--paris-white);
+}
+
+[data-theme="dark"] .user-list {
+    background: var(--paris-cream);
+    border-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .user-item:hover {
+    background: var(--paris-white);
+}
+
+[data-theme="dark"] .stats-section {
+    background: var(--paris-cream);
+    border-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .timeline-stats {
+    background: var(--paris-white);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+[data-theme="dark"] .error-content {
+    background: #7f1d1d;
+    color: #fca5a5;
+    border-color: #dc2626;
+}
+
+[data-theme="dark"] .loading-content {
+    background: var(--paris-cream);
+    border-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .checkbox-label {
+    border-color: var(--paris-gold);
+}
+
+[data-theme="dark"] .checkbox-label:hover {
+    background: var(--paris-cream);
+}
+
+/* ===== THÈME VERSAILLES (OR ET BLANC) ===== */
+[data-theme="versailles"] {
+    --paris-gold: #FFD700;
+    --paris-gold-light: #FFED4E;
+    --paris-blue: #000080;
+    --paris-blue-light: #4169E1;
+    --paris-white: #FFFEF7;
+    --paris-cream: #FFF8DC;
+    --gradient-paris: linear-gradient(135deg, #000080 0%, #FFD700 100%);
+    --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFED4E 100%);
+}
+
+[data-theme="versailles"] body {
+    background: linear-gradient(135deg, #000080 0%, #4169E1 25%, #FFD700 75%, #FFED4E 100%);
+}
+
+[data-theme="versailles"] .app-container {
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+[data-theme="versailles"] .stat-card {
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+[data-theme="versailles"] .arrondissement-card {
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+[data-theme="versailles"] .place-card {
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+/* ===== THÈME MONTMARTRE (ROUGE ET NOIR) ===== */
+[data-theme="montmartre"] {
+    --paris-gold: #DC143C;
+    --paris-gold-light: #FF6B8A;
+    --paris-blue: #2F2F2F;
+    --paris-blue-light: #696969;
+    --paris-red: #8B0000;
+    --gradient-paris: linear-gradient(135deg, #2F2F2F 0%, #DC143C 100%);
+    --gradient-gold: linear-gradient(135deg, #DC143C 0%, #FF6B8A 100%);
+}
+
+[data-theme="montmartre"] body {
+    background: linear-gradient(135deg, #2F2F2F 0%, #696969 25%, #DC143C 75%, #FF6B8A 100%);
+}
+
+[data-theme="montmartre"] .app-container {
+    border-color: rgba(220, 20, 60, 0.3);
+}
+
+[data-theme="montmartre"] .nav-section {
+    border-bottom-color: var(--paris-gold);
+}
+
+[data-theme="montmartre"] .search-input {
+    border-color: var(--paris-gold);
+}
+
+[data-theme="montmartre"] .filter-select {
+    border-color: var(--paris-gold);
+}
+
+/* ===== THÈME SAINT-GERMAIN (VERT ET OR) ===== */
+[data-theme="saint-germain"] {
+    --paris-gold: #D4AF37;
+    --paris-gold-light: #F7DC6F;
+    --paris-blue: #2E7D32;
+    --paris-blue-light: #4CAF50;
+    --paris-cream: #F1F8E9;
+    --success: #388E3C;
+    --gradient-paris: linear-gradient(135deg, #2E7D32 0%, #D4AF37 100%);
+    --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F7DC6F 100%);
+}
+
+[data-theme="saint-germain"] body {
+    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 25%, #D4AF37 75%, #F7DC6F 100%);
+}
+
+[data-theme="saint-germain"] .place-card.visited {
+    background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 100%);
+    border-color: var(--success);
+}
+
+/* ===== THÈME MARAIS (BRUN ET BEIGE) ===== */
+[data-theme="marais"] {
+    --paris-gold: #CD853F;
+    --paris-gold-light: #DEB887;
+    --paris-blue: #8B4513;
+    --paris-blue-light: #A0522D;
+    --paris-cream: #FAF0E6;
+    --paris-white: #FFF8DC;
+    --gradient-paris: linear-gradient(135deg, #8B4513 0%, #CD853F 100%);
+    --gradient-gold: linear-gradient(135deg, #CD853F 0%, #DEB887 100%);
+}
+
+[data-theme="marais"] body {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 25%, #CD853F 75%, #DEB887 100%);
+}
+
+/* ===== THÈME HAUTE COUTURE (NOIR ET ARGENT) ===== */
+[data-theme="haute-couture"] {
+    --paris-gold: #C0C0C0;
+    --paris-gold-light: #E5E5E5;
+    --paris-blue: #000000;
+    --paris-blue-light: #333333;
+    --paris-white: #F8F8FF;
+    --paris-cream: #F5F5F5;
+    --gradient-paris: linear-gradient(135deg, #000000 0%, #C0C0C0 100%);
+    --gradient-gold: linear-gradient(135deg, #C0C0C0 0%, #E5E5E5 100%);
+}
+
+[data-theme="haute-couture"] body {
+    background: linear-gradient(135deg, #000000 0%, #333333 25%, #C0C0C0 75%, #E5E5E5 100%);
+}
+
+[data-theme="haute-couture"] .app-container {
+    border-color: rgba(192, 192, 192, 0.3);
+}
+
+/* ===== ANIMATIONS DE TRANSITION DE THÈME ===== */
+.theme-transition * {
+    transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease !important;
+}
+
+/* ===== THÈME SAISONNIER AUTOMATIQUE ===== */
+[data-theme="auto"] {
+    /* Variables qui changent selon la saison */
+}
+
+/* Printemps (Mars-Mai) */
+[data-theme="auto"][data-season="spring"] {
+    --paris-gold: #90EE90;
+    --paris-gold-light: #98FB98;
+    --paris-blue: #228B22;
+    --paris-blue-light: #32CD32;
+    --gradient-paris: linear-gradient(135deg, #228B22 0%, #90EE90 100%);
+}
+
+/* Été (Juin-Août) */
+[data-theme="auto"][data-season="summer"] {
+    --paris-gold: #FFD700;
+    --paris-gold-light: #FFED4E;
+    --paris-blue: #FF6347;
+    --paris-blue-light: #FF7F50;
+    --gradient-paris: linear-gradient(135deg, #FF6347 0%, #FFD700 100%);
+}
+
+/* Automne (Septembre-Novembre) */
+[data-theme="auto"][data-season="autumn"] {
+    --paris-gold: #FF8C00;
+    --paris-gold-light: #FFA500;
+    --paris-blue: #8B4513;
+    --paris-blue-light: #CD853F;
+    --gradient-paris: linear-gradient(135deg, #8B4513 0%, #FF8C00 100%);
+}
+
+/* Hiver (Décembre-Février) */
+[data-theme="auto"][data-season="winter"] {
+    --paris-gold: #87CEEB;
+    --paris-gold-light: #B0E0E6;
+    --paris-blue: #4682B4;
+    --paris-blue-light: #5F9EA0;
+    --gradient-paris: linear-gradient(135deg, #4682B4 0%, #87CEEB 100%);
+}
+
+/* ===== THÈME CONTRASTE ÉLEVÉ (ACCESSIBILITÉ) ===== */
+[data-theme="high-contrast"] {
+    --paris-gold: #FFFF00;
+    --paris-gold-light: #FFFF99;
+    --paris-blue: #000000;
+    --paris-blue-light: #333333;
+    --paris-white: #FFFFFF;
+    --paris-cream: #FFFFFF;
+    --paris-dark: #000000;
+    --paris-gray: #000000;
+    --success: #00FF00;
+    --paris-red: #FF0000;
+    --warning: #FF8800;
+    --info: #0088FF;
+    
+    /* Bordures plus épaisses pour le contraste */
+    --shadow: 0 0 0 2px #000000;
+    --shadow-lg: 0 0 0 3px #000000;
+    --shadow-xl: 0 0 0 4px #000000;
+}
+
+[data-theme="high-contrast"] body {
+    background: #FFFFFF;
+    color: #000000;
+}
+
+[data-theme="high-contrast"] .app-container {
+    border: 3px solid #000000;
+}
+
+[data-theme="high-contrast"] .place-card,
+[data-theme="high-contrast"] .arrondissement-card,
+[data-theme="high-contrast"] .modal-content,
+[data-theme="high-contrast"] .search-input,
+[data-theme="high-contrast"] .btn {
+    border: 2px solid #000000 !important;
+}
+
+[data-theme="high-contrast"] .place-card.visited {
+    background: #CCFFCC !important;
+    border-color: #00FF00 !important;
+}
+
+/* ===== PRÉFÉRENCES UTILISATEUR ===== */
+@media (prefers-contrast: high) {
+    :root {
+        --paris-gold: #FFFF00;
+        --paris-blue: #000000;
+        --paris-white: #FFFFFF;
+        --paris-dark: #000000;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --paris-white: #1f2937;
+        --paris-cream: #374151;
+        --paris-dark: #f9fafb;
+        --paris-gray: #d1d5db;
+    }
+    
+    body:not([data-theme]) {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #92400e 75%, #a16207 100%);
+    }
+}
+
+/* ===== ANIMATIONS THÉMATIQUES ===== */
+@keyframes parisSparkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+[data-theme="versailles"] .stat-card::before {
+    animation: parisSparkle 2s ease-in-out infinite;
+}
+
+[data-theme="montmartre"] .place-card:hover::before {
+    animation: parisSparkle 1s ease-in-out infinite;
+}
+
+/* ===== THÈME PERSONNALISÉ (CSS Custom Properties) ===== */
+[data-theme="custom"] {
+    --paris-gold: var(--custom-primary, #D4AF37);
+    --paris-gold-light: var(--custom-primary-light, #F7DC6F);
+    --paris-blue: var(--custom-secondary, #1e3a8a);
+    --paris-blue-light: var(--custom-secondary-light, #3b82f6);
+    --paris-white: var(--custom-background, #fefefe);
+    --paris-cream: var(--custom-surface, #faf8f5);
+    --gradient-paris: linear-gradient(135deg, var(--custom-secondary) 0%, var(--custom-primary) 100%);
+    --gradient-gold: linear-gradient(135deg, var(--custom-primary) 0%, var(--custom-primary-light) 100%);
+}
