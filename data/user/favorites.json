@@ -1,288 +1,274 @@
 {
   "metadata": {
+    "description": "Structure de données pour les lieux favoris des utilisateurs dans Paris Explorer",
     "version": "2.0.0",
-    "lastUpdated": "2025-01-05T14:30:00.000Z",
-    "format": "Paris Explorer User Favorites",
-    "description": "Gestion des lieux favoris et collections personnalisées"
+    "lastUpdated": "2025-01-05"
   },
-  "users": {
-    "Marie_Explorer": {
-      "favorites": {
-        "places": [
+  "template": {
+    "userId": "nom-utilisateur",
+    "favorites": [
+      {
+        "placeId": "1er-monuments-musee-du-louvre",
+        "addedAt": "2024-12-15T09:30:00.000Z",
+        "rating": 5,
+        "personalNote": "Absolument magnifique ! La Joconde vaut le détour malgré la foule.",
+        "tags": ["art", "incontournable", "famille"],
+        "category": "monument",
+        "arrondissement": "1er",
+        "visitCount": 3,
+        "lastVisit": "2025-01-02T14:00:00.000Z",
+        "photos": [
           {
-            "placeId": "1er-monuments-musee-du-louvre",
-            "name": "Musée du Louvre",
-            "arrondissement": "1er",
-            "category": "monuments",
-            "addedAt": "2024-12-15T14:45:00.000Z",
-            "personalRating": 5,
-            "reason": "Incontournable ! La Joconde m'a vraiment marquée",
-            "tags": ["art", "must-see", "famille"],
-            "visitCount": 2,
-            "lastVisit": "2024-12-28T11:20:00.000Z",
-            "photos": ["louvre_pyramide.jpg", "joconde_selfie.jpg"],
-            "coordinates": [48.8606, 2.3376]
-          },
-          {
-            "placeId": "18eme-montmartre-secret-vignes-de-montmartre",
-            "name": "Vignes de Montmartre",
-            "arrondissement": "18ème",
-            "category": "montmartre-secret",
-            "addedAt": "2024-12-22T16:30:00.000Z",
-            "personalRating": 5,
-            "reason": "Lieu magique et secret, peu de touristes",
-            "tags": ["secret", "nature", "authentique"],
-            "visitCount": 1,
-            "lastVisit": "2024-12-22T16:00:00.000Z",
-            "photos": ["vignes_automne.jpg"],
-            "coordinates": [48.8859, 2.3385]
-          },
-          {
-            "placeId": "7eme-jardins-secrets-jardin-catherine-laboure",
-            "name": "Jardin Catherine Labouré",
-            "arrondissement": "7ème",
-            "category": "jardins-secrets",
-            "addedAt": "2025-01-01T12:15:00.000Z",
-            "personalRating": 4,
-            "reason": "Oasis de paix au cœur de Paris",
-            "tags": ["zen", "jardin", "secret"],
-            "visitCount": 1,
-            "lastVisit": "2025-01-01T12:00:00.000Z",
-            "photos": ["jardin_hiver.jpg"],
-            "coordinates": [48.8496, 2.3190]
+            "url": "path/to/photo1.jpg",
+            "caption": "Pyramide du Louvre au coucher de soleil",
+            "takenAt": "2024-12-15T17:30:00.000Z"
           }
         ],
-        "collections": [
+        "memories": [
           {
-            "id": "romantic_paris",
-            "name": "💕 Paris Romantique",
-            "description": "Mes lieux préférés pour une sortie en amoureux",
-            "createdAt": "2024-12-20T18:00:00.000Z",
-            "isPublic": false,
-            "places": [
-              "7eme-monuments-iconiques-tour-eiffel",
-              "1er-espaces-verts-square-du-vert-galant",
-              "4eme-ile-saint-louis-quais-de-seine"
-            ],
-            "color": "#ff69b4",
-            "icon": "💕"
-          },
-          {
-            "id": "hidden_gems",
-            "name": "💎 Trésors Cachés",
-            "description": "Les lieux secrets que j'adore",
-            "createdAt": "2024-12-25T10:30:00.000Z",
-            "isPublic": true,
-            "places": [
-              "18eme-montmartre-secret-vignes-de-montmartre",
-              "7eme-jardins-secrets-jardin-catherine-laboure",
-              "3eme-jardins-secrets-jardin-anne-frank"
-            ],
-            "color": "#9370db",
-            "icon": "💎"
-          },
-          {
-            "id": "rainy_day",
-            "name": "☔ Jour de Pluie",
-            "description": "Parfait quand il pleut",
-            "createdAt": "2025-01-03T14:20:00.000Z",
-            "isPublic": false,
-            "places": [
-              "1er-monuments-musee-du-louvre",
-              "2eme-monuments-galerie-vivienne",
-              "9eme-grands-magasins-galeries-lafayette"
-            ],
-            "color": "#4169e1",
-            "icon": "☔"
+            "date": "2024-12-15",
+            "title": "Première visite",
+            "description": "Découverte avec les enfants, moments magiques"
           }
         ],
-        "wishlist": [
+        "shareData": {
+          "shared": true,
+          "sharedAt": "2024-12-16T10:00:00.000Z",
+          "platform": "instagram",
+          "public": false
+        }
+      },
+      {
+        "placeId": "7ème-restaurants-du-pain-et-des-idees",
+        "addedAt": "2024-12-20T08:45:00.000Z",
+        "rating": 5,
+        "personalNote": "La meilleure boulangerie de Paris ! Pain aux raisins divin.",
+        "tags": ["boulangerie", "petit-déjeuner", "artisanal"],
+        "category": "restaurant",
+        "arrondissement": "7ème",
+        "visitCount": 8,
+        "lastVisit": "2025-01-05T08:30:00.000Z",
+        "recurring": {
+          "frequency": "weekly",
+          "dayOfWeek": "saturday",
+          "timeSlot": "morning"
+        },
+        "recommendations": [
           {
-            "placeId": "16eme-musees-classe-mondiale-fondation-louis-vuitton",
-            "name": "Fondation Louis Vuitton",
-            "arrondissement": "16ème",
-            "addedAt": "2024-12-30T15:45:00.000Z",
-            "priority": "high",
-            "reason": "Architecture Gehry + collections temporaires",
-            "plannedDate": "2025-01-15T14:00:00.000Z",
-            "notes": "Réserver à l'avance, expo Basquiat jusqu'en février"
+            "item": "Pain aux raisins",
+            "rating": 5,
+            "price": "2.50€"
           },
           {
-            "placeId": "20eme-pere-lachaise-jim-morrison",
-            "name": "Tombe de Jim Morrison",
-            "arrondissement": "20ème",
-            "addedAt": "2025-01-02T11:30:00.000Z",
-            "priority": "medium",
-            "reason": "Fan des Doors depuis toujours",
-            "plannedDate": null,
-            "notes": "Y aller tôt le matin pour éviter la foule"
-          }
-        ],
-        "bucketList": [
-          {
-            "id": "sunset_eiffel",
-            "title": "Coucher de soleil Tour Eiffel",
-            "description": "Voir un coucher de soleil depuis le 2ème étage",
-            "difficulty": "easy",
-            "season": "été",
-            "estimatedDuration": 120,
-            "completed": false,
-            "createdAt": "2024-12-01T10:00:00.000Z"
-          },
-          {
-            "id": "night_louvre",
-            "title": "Louvre de nuit",
-            "description": "Visiter le Louvre en nocturne (vendredi)",
-            "difficulty": "medium",
-            "season": "toute-annee",
-            "estimatedDuration": 180,
-            "completed": false,
-            "createdAt": "2024-12-15T20:00:00.000Z"
+            "item": "Pistachio escargot",
+            "rating": 5,
+            "price": "3.00€"
           }
         ]
+      }
+    ],
+    "collections": [
+      {
+        "id": "weekend-famille",
+        "name": "Sorties famille week-end",
+        "description": "Mes lieux favoris pour les sorties en famille",
+        "createdAt": "2024-12-18T15:00:00.000Z",
+        "placeIds": [
+          "1er-monuments-musee-du-louvre",
+          "5ème-espaces-verts-jardin-des-plantes",
+          "16ème-espaces-verts-bois-de-boulogne",
+          "12ème-divertissements-zoo-de-vincennes"
+        ],
+        "color": "#4CAF50",
+        "icon": "👨‍👩‍👧‍👦",
+        "isPublic": false,
+        "tags": ["famille", "enfants", "week-end"]
       },
-      "preferences": {
-        "favoriteCategories": ["monuments", "jardins-secrets", "musees"],
-        "leastFavoriteCategories": ["bars", "vie-nocturne"],
-        "preferredVisitTime": "afternoon",
-        "favoriteWeather": "ensoleillé",
-        "averageVisitDuration": 90,
-        "maxWalkingDistance": 5.0,
-        "accessibilityNeeds": [],
-        "languagePreference": "français"
+      {
+        "id": "gastronomie-secrete",
+        "name": "Pépites gastronomiques",
+        "description": "Mes découvertes culinaires secrètes",
+        "createdAt": "2024-12-22T19:30:00.000Z",
+        "placeIds": [
+          "11ème-restaurants-septime",
+          "3ème-restaurants-marche-des-enfants-rouges",
+          "7ème-restaurants-du-pain-et-des-idees"
+        ],
+        "color": "#FF9800",
+        "icon": "🍽️",
+        "isPublic": true,
+        "sharedWith": ["alice-foodie", "marc-chef"],
+        "tags": ["gastronomie", "secret", "qualité"]
+      }
+    ],
+    "wishlists": [
+      {
+        "id": "a-decouvrir-2025",
+        "name": "À découvrir en 2025",
+        "description": "Ma liste des lieux prioritaires pour cette année",
+        "createdAt": "2025-01-01T00:00:00.000Z",
+        "placeIds": [
+          "14ème-culture-fondation-cartier",
+          "19ème-parcs-parc-des-buttes-chaumont",
+          "20ème-patrimoine-pere-lachaise"
+        ],
+        "priority": "high",
+        "deadline": "2025-12-31",
+        "reminderFrequency": "monthly"
+      }
+    ],
+    "statistics": {
+      "totalFavorites": 2,
+      "totalCollections": 2,
+      "totalWishlists": 1,
+      "favoriteArrondissement": "7ème",
+      "favoriteCategory": "restaurants",
+      "averageRating": 5.0,
+      "mostVisitedFavorite": {
+        "placeId": "7ème-restaurants-du-pain-et-des-idees",
+        "visitCount": 8
+      },
+      "lastActivity": "2025-01-05T08:30:00.000Z"
+    }
+  },
+  "schemas": {
+    "favorite": {
+      "required": ["placeId", "addedAt"],
+      "optional": ["rating", "personalNote", "tags", "visitCount", "photos", "memories"],
+      "types": {
+        "placeId": "string",
+        "addedAt": "iso-date",
+        "rating": "number (1-5)",
+        "personalNote": "string",
+        "tags": "array[string]",
+        "visitCount": "number",
+        "lastVisit": "iso-date"
       }
     },
-    "Thomas_Parisien": {
-      "favorites": {
-        "places": [
-          {
-            "placeId": "3eme-musees-lieux-artistiques-musee-picasso",
-            "name": "Musée Picasso",
-            "arrondissement": "3ème",
-            "category": "musees-lieux-artistiques",
-            "addedAt": "2024-11-20T11:00:00.000Z",
-            "personalRating": 5,
-            "reason": "Collection exceptionnelle dans un écrin parfait",
-            "tags": ["art", "picasso", "marais"],
-            "visitCount": 3,
-            "lastVisit": "2024-12-15T14:30:00.000Z",
-            "photos": ["picasso_guernica.jpg", "hotel_sale.jpg"],
-            "coordinates": [48.8597, 2.3625]
-          },
-          {
-            "placeId": "4eme-patrimoine-juif-rue-des-rosiers",
-            "name": "Rue des Rosiers",
-            "arrondissement": "4ème",
-            "category": "patrimoine-juif",
-            "addedAt": "2024-11-25T16:20:00.000Z",
-            "personalRating": 4,
-            "reason": "Atmosphère unique, histoire vivante",
-            "tags": ["histoire", "culture", "authentique"],
-            "visitCount": 5,
-            "lastVisit": "2025-01-05T11:30:00.000Z",
-            "photos": ["rosiers_devantures.jpg"],
-            "coordinates": [48.8567, 2.3595]
-          }
-        ],
-        "collections": [
-          {
-            "id": "art_galleries",
-            "name": "🎨 Galeries d'Art",
-            "description": "Circuit des meilleures galeries parisiennes",
-            "createdAt": "2024-11-18T14:00:00.000Z",
-            "isPublic": true,
-            "places": [
-              "3eme-musees-lieux-artistiques-musee-picasso",
-              "16eme-musees-classe-mondiale-musee-art-moderne",
-              "7eme-musees-excellence-musee-orsay"
-            ],
-            "color": "#ff6347",
-            "icon": "🎨"
-          },
-          {
-            "id": "photography_spots",
-            "name": "📸 Spots Photo",
-            "description": "Les meilleurs angles pour photographier Paris",
-            "createdAt": "2024-12-01T09:15:00.000Z",
-            "isPublic": true,
-            "places": [
-              "7eme-monuments-iconiques-tour-eiffel",
-              "18eme-montmartre-mythique-sacre-coeur",
-              "1er-monuments-pont-neuf"
-            ],
-            "color": "#32cd32",
-            "icon": "📸"
-          }
-        ],
-        "wishlist": [
-          {
-            "placeId": "19eme-institutions-culturelles-philharmonie",
-            "name": "Philharmonie de Paris",
-            "arrondissement": "19ème",
-            "addedAt": "2024-12-20T19:30:00.000Z",
-            "priority": "high",
-            "reason": "Architecture Jean Nouvel + acoustique parfaite",
-            "plannedDate": "2025-01-12T20:00:00.000Z",
-            "notes": "Concert Mahler le 12 janvier, réserver rapidement"
-          }
-        ],
-        "bucketList": [
-          {
-            "id": "complete_marais",
-            "title": "Maître du Marais",
-            "description": "Visiter tous les lieux du 3ème et 4ème",
-            "difficulty": "hard",
-            "season": "toute-annee",
-            "estimatedDuration": 2400,
-            "completed": false,
-            "progress": 83,
-            "target": 165,
-            "createdAt": "2024-11-15T09:00:00.000Z"
-          }
-        ]
-      },
-      "preferences": {
-        "favoriteCategories": ["musees-lieux-artistiques", "patrimoine-juif", "culture"],
-        "leastFavoriteCategories": ["shopping", "nightlife"],
-        "preferredVisitTime": "morning",
-        "favoriteWeather": "pluvieux",
-        "averageVisitDuration": 120,
-        "maxWalkingDistance": 8.0,
-        "accessibilityNeeds": [],
-        "languagePreference": "français"
+    "collection": {
+      "required": ["id", "name", "createdAt", "placeIds"],
+      "optional": ["description", "color", "icon", "isPublic", "tags"],
+      "types": {
+        "id": "string",
+        "name": "string",
+        "placeIds": "array[string]",
+        "color": "hex-color",
+        "isPublic": "boolean"
       }
     }
   },
-  "sharedCollections": [
-    {
-      "id": "community_best_2024",
-      "name": "🏆 Meilleurs de 2024",
-      "description": "Les lieux les mieux notés par la communauté",
-      "createdBy": "Thomas_Parisien",
-      "createdAt": "2024-12-31T18:00:00.000Z",
-      "isPublic": true,
-      "contributors": ["Marie_Explorer", "Thomas_Parisien"],
-      "places": [
-        "1er-monuments-musee-du-louvre",
-        "18eme-montmartre-secret-vignes-de-montmartre",
-        "3eme-musees-lieux-artistiques-musee-picasso"
+  "examples": {
+    "utilisateurBasique": {
+      "userId": "sophie-touriste",
+      "favorites": [
+        {
+          "placeId": "7ème-monuments-tour-eiffel",
+          "addedAt": "2024-12-15T14:30:00.000Z",
+          "rating": 5,
+          "personalNote": "Vue imprenable ! Magique au coucher de soleil.",
+          "tags": ["emblématique", "photo", "romantique"]
+        }
       ],
-      "likes": 15,
-      "shares": 3,
-      "color": "#ffd700",
-      "icon": "🏆"
-    }
-  ],
-  "statistics": {
-    "totalFavorites": 5,
-    "totalCollections": 5,
-    "totalWishlistItems": 3,
-    "mostFavoritedPlace": {
-      "placeId": "1er-monuments-musee-du-louvre",
-      "name": "Musée du Louvre",
-      "favorites": 1
+      "collections": [],
+      "wishlists": [],
+      "statistics": {
+        "totalFavorites": 1,
+        "totalCollections": 0,
+        "totalWishlists": 0,
+        "averageRating": 5.0
+      }
     },
-    "mostActiveCollector": "Marie_Explorer",
-    "averageRatingFavorites": 4.6
+    "collectionneur": {
+      "userId": "julien-collectionneur",
+      "favorites": [],
+      "collections": [
+        {
+          "id": "street-art-belleville",
+          "name": "Street Art Belleville", 
+          "description": "Circuit découverte street art à Belleville",
+          "placeIds": [
+            "20ème-street-art-rue-denoyez",
+            "20ème-street-art-belleville-graffiti",
+            "19ème-street-art-canal-ourcq"
+          ],
+          "color": "#E91E63",
+          "icon": "🎨",
+          "isPublic": true,
+          "tags": ["street-art", "alternatif", "circuit"]
+        },
+        {
+          "id": "jardins-secrets-paris",
+          "name": "Jardins secrets de Paris",
+          "description": "Mes espaces verts cachés préférés",
+          "placeIds": [
+            "4ème-jardins-jardin-anne-frank",
+            "7ème-jardins-jardin-catherine-laboure",
+            "14ème-jardins-passage-denfer"
+          ],
+          "color": "#4CAF50",
+          "icon": "🌿",
+          "isPublic": false,
+          "tags": ["jardins", "secret", "nature"]
+        }
+      ],
+      "statistics": {
+        "totalFavorites": 0,
+        "totalCollections": 2,
+        "favoriteCategory": "espaces-verts"
+      }
+    }
+  },
+  "operations": {
+    "addToFavorites": {
+      "description": "Ajouter un lieu aux favoris",
+      "parameters": ["placeId", "rating?", "personalNote?", "tags?"],
+      "returns": "favorite object"
+    },
+    "removeFromFavorites": {
+      "description": "Retirer un lieu des favoris",
+      "parameters": ["placeId"],
+      "returns": "boolean"
+    },
+    "createCollection": {
+      "description": "Créer une nouvelle collection",
+      "parameters": ["name", "description?", "placeIds?", "color?", "icon?"],
+      "returns": "collection object"
+    },
+    "addToCollection": {
+      "description": "Ajouter un lieu à une collection",
+      "parameters": ["collectionId", "placeId"],
+      "returns": "boolean"
+    },
+    "searchFavorites": {
+      "description": "Rechercher dans les favoris",
+      "parameters": ["query", "filters?"],
+      "returns": "array[favorite]"
+    }
+  },
+  "validation": {
+    "favorite": {
+      "placeId": {
+        "pattern": "^[0-9]+[a-z]+-[a-z-]+-[a-z0-9-]+$",
+        "example": "1er-monuments-musee-du-louvre"
+      },
+      "rating": {
+        "min": 1,
+        "max": 5,
+        "type": "integer"
+      },
+      "tags": {
+        "maxItems": 10,
+        "itemMaxLength": 20
+      }
+    },
+    "collection": {
+      "name": {
+        "minLength": 1,
+        "maxLength": 50
+      },
+      "placeIds": {
+        "maxItems": 100
+      }
+    }
   }
 }
