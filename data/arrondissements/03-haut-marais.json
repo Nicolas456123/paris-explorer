@@ -1,0 +1,244 @@
+{
+  "arrondissement": {
+    "id": "3ème",
+    "name": "3ÈME ARRONDISSEMENT - HAUT-MARAIS",
+    "description": "Musées remarquables et vie créative",
+    "bounds": {
+      "north": 48.8700,
+      "south": 48.8580,
+      "east": 2.3680,
+      "west": 2.3500
+    },
+    "center": [48.8630, 2.3626],
+    "area_km2": 1.17,
+    "population": 34248,
+    "transport": {
+      "metro_stations": [
+        {"name": "Arts et Métiers", "lines": ["3", "11"], "coordinates": [48.8665, 2.3553]},
+        {"name": "République", "lines": ["3", "5", "8", "9", "11"], "coordinates": [48.8676, 2.3633]},
+        {"name": "Temple", "lines": ["3"], "coordinates": [48.8658, 2.3616]},
+        {"name": "Filles du Calvaire", "lines": ["8"], "coordinates": [48.8635, 2.3665]}
+      ],
+      "description": "Métro : Arts et Métiers (3,11), République (3,5,8,9,11), Temple (3), Filles du Calvaire (8)"
+    },
+    "categories": {
+      "musees": {
+        "title": "🎨 Musées & Culture",
+        "places": [
+          {
+            "id": "musee-des-arts-et-metiers",
+            "name": "Musée des Arts et Métiers",
+            "description": "Sciences et techniques, automates",
+            "address": "60 Rue Réaumur, 75003 Paris",
+            "coordinates": [48.8665, 2.3553],
+            "tags": ["sciences", "techniques", "automates"]
+          },
+          {
+            "id": "musee-picasso",
+            "name": "Musée Picasso",
+            "description": "5000 œuvres dans hôtel Salé XVIIe",
+            "address": "5 Rue de Thorigny, 75003 Paris",
+            "coordinates": [48.8598, 2.3622],
+            "tags": ["picasso", "hotel-sale", "art-moderne"]
+          },
+          {
+            "id": "musee-carnavalet",
+            "name": "Musée Carnavalet",
+            "description": "Histoire de Paris, collections révolutionnaires",
+            "address": "23 Rue de Sévigné, 75003 Paris",
+            "coordinates": [48.8570, 2.3620],
+            "tags": ["histoire-paris", "révolution", "carnavalet"]
+          },
+          {
+            "id": "archives-nationales",
+            "name": "Archives Nationales",
+            "description": "Hôtel de Soubise, documents historiques",
+            "address": "60 Rue des Francs-Bourgeois, 75003 Paris",
+            "coordinates": [48.8601, 2.3582],
+            "tags": ["archives", "soubise", "documents"]
+          },
+          {
+            "id": "maison-nicolas-flamel",
+            "name": "Maison de Nicolas Flamel",
+            "description": "Plus ancienne maison Paris (1407)",
+            "address": "51 Rue de Montmorency, 75003 Paris",
+            "coordinates": [48.8648, 2.3554],
+            "tags": ["nicolas-flamel", "1407", "plus-ancienne"]
+          },
+          {
+            "id": "musee-chasse-nature",
+            "name": "Musée de la Chasse et de la Nature",
+            "description": "Hôtel Guénégaud, collections insolites",
+            "address": "62 Rue des Archives, 75003 Paris",
+            "coordinates": [48.8620, 2.3590],
+            "tags": ["chasse", "nature", "guenegaud"]
+          },
+          {
+            "id": "galerie-thaddaeus-ropac",
+            "name": "Galerie Thaddaeus Ropac",
+            "description": "Art contemporain international",
+            "address": "7 Rue Debelleyme, 75003 Paris",
+            "coordinates": [48.8598, 2.3622],
+            "tags": ["art-contemporain", "galerie", "international"]
+          }
+        ]
+      },
+      "espaces-verts": {
+        "title": "🌳 Parcs & Espaces Secrets",
+        "places": [
+          {
+            "id": "square-du-temple",
+            "name": "Square du Temple",
+            "description": "Plus grand parc Marais, ancien enclos Templiers",
+            "address": "64 Rue de Bretagne, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["plus-grand-parc", "templiers", "enclos"]
+          },
+          {
+            "id": "carreau-du-temple",
+            "name": "Carreau du Temple",
+            "description": "Marché couvert rénové, expos temporaires",
+            "address": "4 Rue Eugène Spuller, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["marché-couvert", "rénové", "expositions"]
+          },
+          {
+            "id": "square-emile-chautemps",
+            "name": "Square Émile-Chautemps",
+            "description": "Petit jardin caché, aires de jeux",
+            "address": "Square Émile-Chautemps, 75003 Paris",
+            "coordinates": [48.8665, 2.3553],
+            "tags": ["jardin-caché", "aires-jeux", "petit"]
+          },
+          {
+            "id": "jardin-archives-nationales",
+            "name": "Jardin des Archives Nationales",
+            "description": "8000m², jardins à la française",
+            "address": "60 Rue des Francs-Bourgeois, 75003 Paris",
+            "coordinates": [48.8601, 2.3582],
+            "tags": ["8000m2", "française", "archives"]
+          },
+          {
+            "id": "passage-de-lancre",
+            "name": "Passage de l'Ancre",
+            "description": "Passage secret végétalisé, réparateur parapluies",
+            "address": "223 Rue Saint-Martin, 75003 Paris",
+            "coordinates": [48.8665, 2.3553],
+            "tags": ["secret", "végétalisé", "parapluies"]
+          }
+        ]
+      },
+      "restaurants": {
+        "title": "🍽️ Gastronomie & Marchés",
+        "places": [
+          {
+            "id": "marche-enfants-rouges",
+            "name": "Marché des Enfants Rouges",
+            "description": "Plus ancien marché couvert (1615), cuisine monde",
+            "address": "39 Rue de Bretagne, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["plus-ancien", "1615", "cuisine-monde"]
+          },
+          {
+            "id": "breizh-cafe",
+            "name": "Breizh Café",
+            "description": "Crêperie moderne et raffinée, cidres bio",
+            "address": "109 Rue Vieille du Temple, 75003 Paris",
+            "coordinates": [48.8598, 2.3622],
+            "tags": ["crêperie", "moderne", "cidres-bio"]
+          },
+          {
+            "id": "cafe-charlot",
+            "name": "Café Charlot",
+            "description": "Brasserie branchée, terrasse prisée",
+            "address": "38 Rue de Bretagne, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["brasserie", "branchée", "terrasse"]
+          },
+          {
+            "id": "wild-and-the-moon",
+            "name": "Wild & the Moon",
+            "description": "Cuisine végétale, jus pressés",
+            "address": "55 Rue Charlot, 75003 Paris",
+            "coordinates": [48.8630, 2.3626],
+            "tags": ["végétale", "jus-pressés", "healthy"]
+          }
+        ]
+      },
+      "shopping": {
+        "title": "🛍️ Shopping & Créateurs",
+        "places": [
+          {
+            "id": "rue-de-bretagne",
+            "name": "Rue de Bretagne",
+            "description": "Boutiques créateurs émergents, concept stores",
+            "address": "Rue de Bretagne, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["créateurs", "émergents", "concept-stores"]
+          },
+          {
+            "id": "rue-charlot",
+            "name": "Rue Charlot",
+            "description": "Galeries d'art contemporain, design",
+            "address": "Rue Charlot, 75003 Paris",
+            "coordinates": [48.8630, 2.3626],
+            "tags": ["galeries-art", "contemporain", "design"]
+          },
+          {
+            "id": "merci",
+            "name": "Merci",
+            "description": "Concept store design et déco, café",
+            "address": "111 Boulevard Beaumarchais, 75003 Paris",
+            "coordinates": [48.8594, 2.3665],
+            "tags": ["concept-store", "design", "déco"]
+          },
+          {
+            "id": "the-broken-arm",
+            "name": "The Broken Arm",
+            "description": "Mode masculine/féminine avant-garde",
+            "address": "12 Rue Perrée, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["mode", "avant-garde", "masculin-féminin"]
+          },
+          {
+            "id": "leclaireur",
+            "name": "L'Éclaireur",
+            "description": "Mode conceptuelle depuis 1980",
+            "address": "40 Rue de Sévigné, 75003 Paris",
+            "coordinates": [48.8570, 2.3620],
+            "tags": ["conceptuelle", "1980", "mode"]
+          }
+        ]
+      },
+      "bars": {
+        "title": "🍻 Vie Nocturne",
+        "places": [
+          {
+            "id": "andy-wahloo",
+            "name": "Andy Wahloo",
+            "description": "Bar marocain pop, décoration atypique",
+            "address": "69 Rue des Gravilliers, 75003 Paris",
+            "coordinates": [48.8665, 2.3553],
+            "tags": ["marocain", "pop", "atypique"]
+          },
+          {
+            "id": "grazie",
+            "name": "Grazie",
+            "description": "Bar à vins italiens, charcuterie",
+            "address": "91 Boulevard Beaumarchais, 75003 Paris",
+            "coordinates": [48.8594, 2.3665],
+            "tags": ["vins-italiens", "charcuterie", "bar"]
+          },
+          {
+            "id": "le-progres",
+            "name": "Le Progrès",
+            "description": "Bistrot populaire, clientèle éclectique",
+            "address": "1 Rue de Bretagne, 75003 Paris",
+            "coordinates": [48.8658, 2.3616],
+            "tags": ["bistrot", "populaire", "éclectique"]
+          }
+        ]
+      }
+    }
+  }
+}
