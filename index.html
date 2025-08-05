@@ -689,7 +689,39 @@
                 const savedData = localStorage.getItem('paris-explorer-progress');
                 if (savedData) {
                     const userData = JSON.parse(savedData);
-                    visitedPlaces = new Set(userData.visitedPlaces || []);
+                    const savedPlaces = userData.visitedPlaces || [];
+                    
+                    // Migrer les anciens IDs vers les nouveaux IDs sécurisés
+                    const migratedPlaces = new Set();
+                    
+                    savedPlaces.forEach(oldPlaceId => {
+                        // Essayer de parser l'ancien format: arrKey-catKey-placeName
+                        const parts = oldPlaceId.split('-');
+                        if (parts.length >= 3) {
+                            const arrKey = parts[0];
+                            const catKey = parts[1];
+                            const placeName = parts.slice(2).join('-'); // Reconstituer le nom avec les tirets
+                            
+                            // Créer le nouvel ID sécurisé
+                            const newPlaceId = createSafePlaceId(arrKey, catKey, placeName);
+                            migratedPlaces.add(newPlaceId);
+                            
+                            // Si l'ID était déjà sécurisé, l'ajouter aussi
+                            if (oldPlaceId !== newPlaceId) {
+                                console.log(`🔄 Migration ID: ${oldPlaceId} → ${newPlaceId}`);
+                            }
+                        } else {
+                            // Garder l'ID tel quel s'il ne peut pas être parsé
+                            migratedPlaces.add(oldPlaceId);
+                        }
+                    });
+                    
+                    visitedPlaces = migratedPlaces;
+                    
+                    // Si des migrations ont eu lieu, sauvegarder immédiatement
+                    if (migratedPlaces.size > 0) {
+                        setTimeout(() => saveUserProgress(), 100);
+                    }
                     
                     // Afficher infos de la dernière sauvegarde
                     if (userData.lastUpdated) {
@@ -890,6 +922,25 @@
             // Toggle arrondissements avec amélioration tactile
             document.addEventListener('click', handleArrondissementToggle);
             
+            // Gestion des clics sur les lieux (pour éviter les problèmes d'apostrophes)
+            document.addEventListener('click', function(e) {
+                const placeItem = e.target.closest('.place-item[data-place-id]');
+                if (placeItem) {
+                    const placeId = placeItem.dataset.placeId;
+                    togglePlace(placeId);
+                }
+            });
+            
+            // Gestion des changements de checkbox
+            document.addEventListener('change', function(e) {
+                if (e.target.classList.contains('place-checkbox')) {
+                    const placeId = e.target.dataset.placeId;
+                    if (placeId) {
+                        togglePlace(placeId);
+                    }
+                }
+            });
+            
             // Gestion des événements tactiles pour mobile
             document.addEventListener('touchstart', function(e) {
                 // Améliorer la réactivité tactile
@@ -956,8 +1007,34 @@
             }).join('');
         }
 
+        // Fonction utilitaire pour créer des IDs sécurisés
+        function createSafePlaceId(arrKey, catKey, placeName) {
+            const safePlaceName = placeName
+                .replace(/['"]/g, '')           // Supprimer les apostrophes et guillemets
+                .replace(/[^\w\s-]/g, '')       // Garder seulement lettres, chiffres, espaces et tirets
+                .replace(/\s+/g, '-')           // Remplacer espaces par tirets
+                .toLowerCase();                 // Minuscules pour cohérence
+            
+            return `${arrKey}-${catKey}-${safePlaceName}`;
+        }
+
+        // Fonction pour retrouver un lieu par son ID sécurisé
+        function findPlaceByName(arrKey, catKey, targetName) {
+            if (!isDataLoaded || !parisData[arrKey] || !parisData[arrKey].categories[catKey]) {
+                return null;
+            }
+            
+            const places = parisData[arrKey].categories[catKey].places || [];
+            return places.find(place => {
+                const safeId = createSafePlaceId(arrKey, catKey, place.name);
+                const targetId = createSafePlaceId(arrKey, catKey, targetName);
+                return safeId === targetId;
+            });
+        }
+
         function renderPlace(arrKey, catKey, place) {
-            const placeId = `${arrKey}-${catKey}-${place.name}`;
+            // Créer un ID sécurisé
+            const placeId = createSafePlaceId(arrKey, catKey, place.name);
             const isVisited = visitedPlaces.has(placeId);
             
             // Filtre de recherche
@@ -977,8 +1054,8 @@
             if (currentFilter === 'culture' && !['musées', 'culture'].includes(catKey)) return '<div class="place-item hidden"></div>';
             
             return `
-                <div class="place-item ${isVisited ? 'visited' : ''}" onclick="togglePlace('${placeId}')">
-                    <input type="checkbox" class="place-checkbox" ${isVisited ? 'checked' : ''} onchange="togglePlace('${placeId}')">
+                <div class="place-item ${isVisited ? 'visited' : ''}" data-place-id="${placeId}" data-place-name="${place.name}">
+                    <input type="checkbox" class="place-checkbox" ${isVisited ? 'checked' : ''} data-place-id="${placeId}">
                     <div class="place-content">
                         <div class="place-name">${place.name}</div>
                         <div class="place-description">${place.description}</div>
@@ -1193,8 +1270,8 @@
             }
         }
 
-        // Fonction globale pour les checkboxes
-        window.togglePlace = togglePlace;
+        // Fonction globale pour les checkboxes (plus nécessaire avec les event listeners)
+        // window.togglePlace = togglePlace;
     </script>
 </body>
 </html>
