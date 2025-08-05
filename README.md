@@ -23,7 +23,7 @@ Un projet interactif pour découvrir et tracker plus de **2000 lieux secrets et 
 
 1. **Forkez ce repository**
 2. **Activez GitHub Pages** dans Settings > Pages > Source: Deploy from a branch > main
-3. **Accédez à votre site** : `https://[votre-username].github.io/paris-explorer`
+3. **Accédez à votre site** : `https://nicolas456123.github.io/VisiteParis/`
 
 ### Option 2 : Local
 
