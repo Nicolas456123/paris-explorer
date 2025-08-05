@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris Explorer - Mode Hors Ligne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #D4AF37 75%, #F7DC6F 100%);
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .offline-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .offline-message {
+            font-size: 1.1rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        
+        .offline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.7);
+            color: #1f2937;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
+        }
+        
+        .cached-info {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: #065f46;
+        }
+        
+        .cached-info-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        
+        .status-indicator.online {
+            background: #22c55e;
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 24px;
+                margin: 16px;
+            }
+            
+            .offline-icon {
+                font-size: 3rem;
+            }
+            
+            .offline-title {
+                font-size: 1.5rem;
+            }
+            
+            .offline-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">🗼</div>
+        <h1 class="offline-title">Mode Hors Ligne</h1>
+        <p class="offline-message">
+            Vous n'êtes pas connecté à Internet, mais vous pouvez continuer à explorer Paris avec les données mises en cache !
+        </p>
+        
+        <div class="offline-actions">
+            <button class="btn btn-primary" onclick="tryReload()">
+                🔄 Réessayer la connexion
+            </button>
+            <a href="/" class="btn btn-secondary">
+                🏠 Retour à l'accueil
+            </a>
+        </div>
+        
+        <div class="cached-info">
+            <div class="cached-info-title">
+                <div class="status-indicator" id="statusIndicator"></div>
+                Status de connexion
+            </div>
+            <div id="connectionStatus">
+                Vérification de la connexion...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vérification périodique de la connexion
+        function checkConnection() {
+            const statusIndicator = document.getElementById('statusIndicator');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusIndicator.classList.add('online');
+                connectionStatus.textContent = 'Connexion rétablie ! Vous pouvez recharger la page.';
+            } else {
+                statusIndicator.classList.remove('online');
+                connectionStatus.textContent = 'Hors ligne - Utilisation des données en cache';
+            }
+        }
+        
+        // Essayer de recharger l'application
+        function tryReload() {
+            if (navigator.onLine) {
+                window.location.href = '/';
+            } else {
+                alert('Aucune connexion Internet détectée. Veuillez vérifier votre connexion.');
+            }
+        }
+        
+        // Écouter les changements de connexion
+        window.addEventListener('online', checkConnection);
+        window.addEventListener('offline', checkConnection);
+        
+        // Vérification initiale
+        checkConnection();
+        
+        // Vérification périodique
+        setInterval(checkConnection, 5000);
+        
+        // Redirection automatique si la connexion revient
+        window.addEventListener('online', () => {
+            setTimeout(() => {
+                if (navigator.onLine) {
+                    window.location.href = '/';
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
