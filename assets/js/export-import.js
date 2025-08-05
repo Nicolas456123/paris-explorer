@@ -1,609 +1,500 @@
-// ===== EXPORT-IMPORT - GESTION DES EXPORTS/IMPORTS DE DONNÉES =====
+// ===== EXPORT-IMPORT MANAGER - GESTION AVANCÉE DES DONNÉES =====
 
 class ExportImportManager {
     constructor(app) {
         this.app = app;
-        this.supportedFormats = ['json', 'csv', 'txt'];
+        this.setupEventListeners();
     }
     
     // === EXPORT DES DONNÉES ===
-    
-    /**
-     * Exporte les données utilisateur en JSON
-     */
-    exportUserDataJSON(userName) {
+    async exportUserData(format = 'json', userName = null) {
         try {
-            const userData = this.app.userManager.users[userName];
-            if (!userData) {
-                throw new Error(`Utilisateur "${userName}" introuvable`);
+            const targetUser = userName || this.app.currentUser;
+            if (!targetUser) {
+                this.app.showNotification('Veuillez sélectionner un utilisateur', 'warning');
+                return;
             }
             
+            const userData = this.app.userManager.users[targetUser];
+            if (!userData) {
+                this.app.showNotification('Utilisateur introuvable', 'error');
+                return;
+            }
+            
+            // Préparer les données d'export
             const exportData = {
                 metadata: {
-                    appName: 'Paris Explorer',
-                    version: '2.0.0',
-                    exportDate: Utils.Date.now(),
-                    exportedBy: userName,
+                    exportDate: new Date().toISOString(),
+                    appVersion: '2.0.0',
+                    exportFormat: format,
+                    userName: targetUser,
                     totalPlaces: this.app.dataManager.getTotalPlaces()
                 },
-                user: {
+                userData: {
                     ...userData,
                     visitedPlaces: Array.from(userData.visitedPlaces || []),
-                    favorites: Array.from(userData.favorites || [])
+                    favorites: Array.from(userData.favorites || []),
+                    notes: userData.notes || {},
+                    customTags: userData.customTags || []
                 },
-                statistics: this.generateUserStatistics(userData)
+                visitedDetails: this.getVisitedPlacesDetails(userData)
             };
             
-            const jsonString = JSON.stringify(exportData, null, 2);
-            const filename = `paris-explorer-${Utils.Text.createId(userName)}-${new Date().toISOString().split('T')[0]}.json`;
-            
-            this.downloadFile(jsonString, filename, 'application/json');
-            
-            console.log(`✅ Export JSON réussi pour ${userName}`);
-            this.app.showNotification(`Export JSON téléchargé : ${filename}`, 'success');
-            
-            return exportData;
-            
-        } catch (error) {
-            console.error('❌ Erreur export JSON:', error);
-            this.app.showNotification(`Erreur export JSON : ${error.message}`, 'error');
-            throw error;
-        }
-    }
-    
-    /**
-     * Exporte les données utilisateur en CSV
-     */
-    exportUserDataCSV(userName) {
-        try {
-            const userData = this.app.userManager.users[userName];
-            if (!userData) {
-                throw new Error(`Utilisateur "${userName}" introuvable`);
-            }
-            
-            const csvData = this.generateCSVData(userData);
-            const filename = `paris-explorer-${Utils.Text.createId(userName)}-${new Date().toISOString().split('T')[0]}.csv`;
-            
-            this.downloadFile(csvData, filename, 'text/csv');
-            
-            console.log(`✅ Export CSV réussi pour ${userName}`);
-            this.app.showNotification(`Export CSV téléchargé : ${filename}`, 'success');
-            
-            return csvData;
-            
-        } catch (error) {
-            console.error('❌ Erreur export CSV:', error);
-            this.app.showNotification(`Erreur export CSV : ${error.message}`, 'error');
-            throw error;
-        }
-    }
-    
-    /**
-     * Exporte un rapport de progression en TXT
-     */
-    exportProgressReport(userName) {
-        try {
-            const userData = this.app.userManager.users[userName];
-            if (!userData) {
-                throw new Error(`Utilisateur "${userName}" introuvable`);
-            }
-            
-            const report = this.generateProgressReport(userData);
-            const filename = `rapport-paris-${Utils.Text.createId(userName)}-${new Date().toISOString().split('T')[0]}.txt`;
-            
-            this.downloadFile(report, filename, 'text/plain');
-            
-            console.log(`✅ Export rapport réussi pour ${userName}`);
-            this.app.showNotification(`Rapport téléchargé : ${filename}`, 'success');
-            
-            return report;
-            
-        } catch (error) {
-            console.error('❌ Erreur export rapport:', error);
-            this.app.showNotification(`Erreur export rapport : ${error.message}`, 'error');
-            throw error;
-        }
-    }
-    
-    /**
-     * Exporte tous les utilisateurs
-     */
-    exportAllUsers() {
-        try {
-            const allUsers = {};
-            
-            Object.entries(this.app.userManager.users).forEach(([name, userData]) => {
-                allUsers[name] = {
-                    ...userData,
-                    visitedPlaces: Array.from(userData.visitedPlaces || []),
-                    favorites: Array.from(userData.favorites || [])
-                };
-            });
-            
-            const exportData = {
-                metadata: {
-                    appName: 'Paris Explorer',
-                    version: '2.0.0',
-                    exportDate: Utils.Date.now(),
-                    totalUsers: Object.keys(allUsers).length,
-                    totalPlaces: this.app.dataManager.getTotalPlaces()
-                },
-                users: allUsers
-            };
-            
-            const jsonString = JSON.stringify(exportData, null, 2);
-            const filename = `paris-explorer-all-users-${new Date().toISOString().split('T')[0]}.json`;
-            
-            this.downloadFile(jsonString, filename, 'application/json');
-            
-            console.log(`✅ Export tous utilisateurs réussi`);
-            this.app.showNotification(`Export complet téléchargé : ${filename}`, 'success');
-            
-            return exportData;
-            
-        } catch (error) {
-            console.error('❌ Erreur export tous utilisateurs:', error);
-            this.app.showNotification(`Erreur export complet : ${error.message}`, 'error');
-            throw error;
-        }
-    }
-    
-    // === IMPORT DES DONNÉES ===
-    
-    /**
-     * Importe des données depuis un fichier
-     */
-    async importData(file) {
-        try {
-            if (!file) {
-                throw new Error('Aucun fichier sélectionné');
-            }
-            
-            const fileContent = await this.readFile(file);
-            const fileExtension = file.name.split('.').pop().toLowerCase();
-            
-            switch (fileExtension) {
+            // Exporter selon le format
+            switch (format.toLowerCase()) {
                 case 'json':
-                    return await this.importJSONData(fileContent, file.name);
+                    await this.exportToJSON(exportData, targetUser);
+                    break;
                 case 'csv':
-                    return await this.importCSVData(fileContent, file.name);
+                    await this.exportToCSV(exportData, targetUser);
+                    break;
+                case 'pdf':
+                    await this.exportToPDF(exportData, targetUser);
+                    break;
+                case 'html':
+                    await this.exportToHTML(exportData, targetUser);
+                    break;
                 default:
-                    throw new Error(`Format de fichier non supporté : ${fileExtension}`);
+                    throw new Error(`Format non supporté: ${format}`);
             }
+            
+            this.app.showNotification(`Export ${format.toUpperCase()} réussi !`, 'success');
             
         } catch (error) {
-            console.error('❌ Erreur import:', error);
-            this.app.showNotification(`Erreur import : ${error.message}`, 'error');
-            throw error;
+            console.error('Erreur export:', error);
+            this.app.showNotification(`Erreur lors de l'export: ${error.message}`, 'error');
         }
     }
     
-    /**
-     * Importe des données JSON
-     */
-    async importJSONData(content, filename) {
-        try {
-            const data = JSON.parse(content);
-            
-            // Validation de la structure
-            if (!this.validateImportData(data)) {
-                throw new Error('Structure de données invalide');
-            }
-            
-            let importedCount = 0;
-            
-            // Import d'un utilisateur unique
-            if (data.user) {
-                const result = await this.importSingleUser(data.user);
-                if (result) importedCount = 1;
-            }
-            
-            // Import de plusieurs utilisateurs
-            if (data.users) {
-                for (const [userName, userData] of Object.entries(data.users)) {
-                    const result = await this.importSingleUser(userData);
-                    if (result) importedCount++;
-                }
-            }
-            
-            if (importedCount > 0) {
-                this.app.userManager.saveUsers();
-                this.app.uiManager.loadUserSelector();
-                this.app.uiManager.updateUsersList();
-                
-                console.log(`✅ Import réussi: ${importedCount} utilisateur(s)`);
-                this.app.showNotification(`Import réussi : ${importedCount} profil(s) importé(s)`, 'success');
-            } else {
-                throw new Error('Aucune donnée valide trouvée');
-            }
-            
-            return { imported: importedCount, filename };
-            
-        } catch (error) {
-            console.error('❌ Erreur import JSON:', error);
-            throw new Error(`Erreur import JSON : ${error.message}`);
-        }
+    // === EXPORT JSON ===
+    async exportToJSON(data, userName) {
+        const jsonString = JSON.stringify(data, null, 2);
+        const fileName = `paris-explorer-${userName}-${this.getDateString()}.json`;
+        
+        this.downloadFile(jsonString, fileName, 'application/json');
     }
     
-    /**
-     * Importe un utilisateur unique
-     */
-    async importSingleUser(userData) {
-        try {
-            if (!Utils.Validation.validateUserData(userData)) {
-                console.warn('⚠️ Données utilisateur invalides, ignorées');
-                return false;
-            }
-            
-            const userName = userData.name;
-            
-            // Vérifier si l'utilisateur existe déjà
-            if (this.app.userManager.users[userName]) {
-                const confirmed = confirm(`L'utilisateur "${userName}" existe déjà. Voulez-vous l'écraser ?`);
-                if (!confirmed) {
-                    return false;
-                }
-            }
-            
-            // Convertir les arrays en Set si nécessaire
-            const importedUser = {
-                ...userData,
-                visitedPlaces: new Set(userData.visitedPlaces || []),
-                favorites: new Set(userData.favorites || []),
-                lastActive: Utils.Date.now(),
-                stats: {
-                    totalVisited: (userData.visitedPlaces || []).length,
-                    streak: userData.stats?.streak || 0,
-                    lastVisit: userData.stats?.lastVisit || null,
-                    favoriteArrondissement: userData.stats?.favoriteArrondissement || null,
-                    totalSessionTime: userData.stats?.totalSessionTime || 0,
-                    ...userData.stats
-                }
-            };
-            
-            this.app.userManager.users[userName] = importedUser;
-            
-            console.log(`✅ Utilisateur importé: ${userName}`);
-            return true;
-            
-        } catch (error) {
-            console.error(`❌ Erreur import utilisateur:`, error);
-            return false;
-        }
-    }
-    
-    // === GÉNÉRATION DE DONNÉES ===
-    
-    /**
-     * Génère des statistiques utilisateur pour l'export
-     */
-    generateUserStatistics(userData) {
-        const totalPlaces = this.app.dataManager.getTotalPlaces();
-        const visitedCount = userData.visitedPlaces ? userData.visitedPlaces.size : 0;
+    // === EXPORT CSV ===
+    async exportToCSV(data, userName) {
+        const csvRows = [];
         
-        const stats = {
-            progression: {
-                totalPlaces,
-                visitedPlaces: visitedCount,
-                completionRate: Utils.Math.percentage(visitedCount, totalPlaces),
-                remainingPlaces: totalPlaces - visitedCount
-            },
-            timeline: {
-                createdAt: userData.createdAt,
-                lastActive: userData.lastActive,
-                daysSinceCreation: userData.createdAt ? Utils.Date.daysBetween(userData.createdAt, new Date()) : 0,
-                currentStreak: userData.stats?.streak || 0
-            },
-            categories: this.generateCategoryStatistics(userData),
-            arrondissements: this.generateArrondissementStatistics(userData)
-        };
-        
-        return stats;
-    }
-    
-    /**
-     * Génère des statistiques par catégorie
-     */
-    generateCategoryStatistics(userData) {
-        const categoryStats = {};
-        
-        if (!this.app.isDataLoaded || !userData.visitedPlaces) {
-            return categoryStats;
-        }
-        
-        Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
-            Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                if (!categoryStats[catKey]) {
-                    categoryStats[catKey] = {
-                        title: catData.title,
-                        total: 0,
-                        visited: 0
-                    };
-                }
-                
-                const places = catData.places || [];
-                categoryStats[catKey].total += places.length;
-                
-                places.forEach(place => {
-                    const placeId = this.app.createPlaceId(arrKey, catKey, place.name);
-                    if (userData.visitedPlaces.has(placeId)) {
-                        categoryStats[catKey].visited++;
-                    }
-                });
-            });
-        });
-        
-        // Calculer les pourcentages
-        Object.values(categoryStats).forEach(stat => {
-            stat.completionRate = Utils.Math.percentage(stat.visited, stat.total);
-        });
-        
-        return categoryStats;
-    }
-    
-    /**
-     * Génère des statistiques par arrondissement
-     */
-    generateArrondissementStatistics(userData) {
-        const arrStats = {};
-        
-        if (!this.app.isDataLoaded || !userData.visitedPlaces) {
-            return arrStats;
-        }
-        
-        Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
-            const totalInArr = this.app.dataManager.getTotalPlacesInArrondissement(arrData);
-            const visitedInArr = this.app.dataManager.getVisitedPlacesInArrondissement(arrData, arrKey);
-            
-            arrStats[arrKey] = {
-                title: arrData.title,
-                total: totalInArr,
-                visited: visitedInArr,
-                completionRate: Utils.Math.percentage(visitedInArr, totalInArr),
-                categories: Object.keys(arrData.categories || {}).length
-            };
-        });
-        
-        return arrStats;
-    }
-    
-    /**
-     * Génère des données CSV
-     */
-    generateCSVData(userData) {
-        const headers = [
-            'Arrondissement',
-            'Catégorie',
+        // En-têtes
+        csvRows.push([
             'Lieu',
+            'Arrondissement', 
+            'Catégorie',
             'Description',
             'Adresse',
             'Visité',
-            'Date_Visite',
+            'Date de visite',
+            'Note personnelle',
             'Tags'
-        ];
+        ]);
         
-        const rows = [headers.join(',')];
-        
-        if (this.app.isDataLoaded) {
-            Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
-                Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                    (catData.places || []).forEach(place => {
-                        const placeId = this.app.createPlaceId(arrKey, catKey, place.name);
-                        const isVisited = userData.visitedPlaces.has(placeId);
-                        
-                        const row = [
-                            `"${arrData.title || arrKey}"`,
-                            `"${catData.title || catKey}"`,
-                            `"${place.name}"`,
-                            `"${(place.description || '').replace(/"/g, '""')}"`,
-                            `"${place.address || ''}"`,
-                            isVisited ? 'Oui' : 'Non',
-                            isVisited ? Utils.Date.formatDate(userData.stats?.lastVisit) : '',
-                            `"${(place.tags || []).join(', ')}"`
-                        ];
-                        
-                        rows.push(row.join(','));
-                    });
-                });
-            });
-        }
-        
-        return rows.join('\n');
-    }
-    
-    /**
-     * Génère un rapport de progression textuel
-     */
-    generateProgressReport(userData) {
-        const stats = this.generateUserStatistics(userData);
-        const date = new Date().toLocaleDateString('fr-FR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+        // Données des lieux
+        data.visitedDetails.forEach(place => {
+            csvRows.push([
+                this.escapeCsvField(place.name),
+                this.escapeCsvField(place.arrondissement),
+                this.escapeCsvField(place.category),
+                this.escapeCsvField(place.description),
+                this.escapeCsvField(place.address || ''),
+                place.visited ? 'Oui' : 'Non',
+                place.visitDate || '',
+                this.escapeCsvField(place.note || ''),
+                this.escapeCsvField((place.tags || []).join('; '))
+            ]);
         });
         
-        let report = `
-╔══════════════════════════════════════════════════════════════╗
-║                     PARIS EXPLORER                          ║
-║                 RAPPORT DE PROGRESSION                       ║
-╚══════════════════════════════════════════════════════════════╝
-
-👤 Explorateur : ${userData.name}
-📅 Rapport généré le : ${date}
-⏰ Heure : ${new Date().toLocaleTimeString('fr-FR')}
-
-═══════════════════════════════════════════════════════════════
-
-📊 STATISTIQUES GÉNÉRALES
-
-🏛️ Lieux explorés : ${stats.progression.visitedPlaces} / ${stats.progression.totalPlaces}
-📈 Taux de completion : ${stats.progression.completionRate}%
-📍 Lieux restants : ${stats.progression.remainingPlaces}
-🔥 Série actuelle : ${stats.timeline.currentStreak} jour(s)
-
-📅 Compte créé : ${Utils.Date.formatDate(userData.createdAt)}
-🕐 Dernière activité : ${Utils.Date.formatDate(userData.lastActive)}
-⏳ Ancienneté : ${stats.timeline.daysSinceCreation} jour(s)
-
-═══════════════════════════════════════════════════════════════
-
-🗺️ PROGRESSION PAR ARRONDISSEMENT
-
-`;
+        const csvContent = csvRows.map(row => row.join(',')).join('\n');
+        const fileName = `paris-explorer-${userName}-${this.getDateString()}.csv`;
         
-        // Ajouter les stats par arrondissement
-        Object.entries(stats.arrondissements)
-            .sort(([a], [b]) => a.localeCompare(b))
-            .forEach(([arrKey, arrStat]) => {
-                const progress = '█'.repeat(Math.floor(arrStat.completionRate / 5));
-                const empty = '░'.repeat(20 - Math.floor(arrStat.completionRate / 5));
-                
-                report += `${arrKey.padEnd(4)} │ ${progress}${empty} │ ${arrStat.completionRate.toString().padStart(3)}% │ ${arrStat.visited}/${arrStat.total}\n`;
-            });
+        this.downloadFile(csvContent, fileName, 'text/csv');
+    }
+    
+    // === EXPORT HTML ===
+    async exportToHTML(data, userName) {
+        const htmlContent = this.generateHTMLReport(data, userName);
+        const fileName = `paris-explorer-${userName}-${this.getDateString()}.html`;
         
-        report += `
-═══════════════════════════════════════════════════════════════
-
-🎯 PROGRESSION PAR CATÉGORIE
-
-`;
+        this.downloadFile(htmlContent, fileName, 'text/html');
+    }
+    
+    generateHTMLReport(data, userName) {
+        const visitedCount = data.userData.visitedPlaces.length;
+        const totalPlaces = data.metadata.totalPlaces;
+        const completionRate = Math.round((visitedCount / totalPlaces) * 100);
         
-        // Ajouter les stats par catégorie
-        Object.entries(stats.categories)
-            .sort(([, a], [, b]) => b.completionRate - a.completionRate)
-            .slice(0, 10) // Top 10
-            .forEach(([catKey, catStat]) => {
-                const progress = '█'.repeat(Math.floor(catStat.completionRate / 5));
-                const empty = '░'.repeat(20 - Math.floor(catStat.completionRate / 5));
-                
-                report += `${Utils.Text.truncate(catStat.title, 25).padEnd(25)} │ ${progress}${empty} │ ${catStat.completionRate.toString().padStart(3)}%\n`;
-            });
+        return `
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris Explorer - Rapport de ${userName}</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #D4AF37 100%);
+            color: #1f2937;
+        }
+        .report-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #D4AF37;
+            padding-bottom: 20px;
+        }
+        .title {
+            font-size: 2.5rem;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #D4AF37;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            border-left: 4px solid #D4AF37;
+            padding-left: 15px;
+        }
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .place-card {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #D4AF37;
+        }
+        .place-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+        .place-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .place-address {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        .export-info {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        @media print {
+            body { background: white; }
+            .report-container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="header">
+            <h1 class="title">🗼 Paris Explorer</h1>
+            <p class="subtitle">Rapport d'exploration de ${userName}</p>
+            <p>Généré le ${new Date(data.metadata.exportDate).toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric', 
+                month: 'long',
+                day: 'numeric'
+            })}</p>
+        </div>
         
-        report += `
-═══════════════════════════════════════════════════════════════
-
-🏆 FÉLICITATIONS !
-
-`;
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">${visitedCount}</div>
+                <div class="stat-label">Lieux Explorés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${totalPlaces}</div>
+                <div class="stat-label">Lieux Total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${completionRate}%</div>
+                <div class="stat-label">Paris Conquis</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">${data.userData.stats?.streak || 0}</div>
+                <div class="stat-label">Série Actuelle</div>
+            </div>
+        </div>
         
-        if (stats.progression.completionRate === 100) {
-            report += `🎉 INCROYABLE ! Vous avez exploré tout Paris !\n`;
-            report += `👑 Vous êtes maintenant un véritable Parisien !\n`;
-        } else if (stats.progression.completionRate >= 75) {
-            report += `🌟 Excellente progression ! Vous connaissez très bien Paris !\n`;
-            report += `🎯 Plus que ${stats.progression.remainingPlaces} lieux à découvrir !\n`;
-        } else if (stats.progression.completionRate >= 50) {
-            report += `👍 Belle exploration ! Vous êtes à mi-parcours !\n`;
-            report += `🚀 Continuez sur cette lancée !\n`;
-        } else if (stats.progression.completionRate >= 25) {
-            report += `🌱 Bon début d'exploration !\n`;
-            report += `💪 Il reste encore beaucoup à découvrir !\n`;
-        } else {
-            report += `🚀 L'aventure parisienne ne fait que commencer !\n`;
-            report += `✨ Tant de merveilles vous attendent !\n`;
+        <div class="section">
+            <h2 class="section-title">🏛️ Lieux Explorés</h2>
+            <div class="places-grid">
+                ${data.visitedDetails.filter(p => p.visited).map(place => `
+                    <div class="place-card">
+                        <div class="place-name">${place.name}</div>
+                        <div class="place-description">${place.description}</div>
+                        <div class="place-address">📍 ${place.address || 'Adresse non disponible'}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        
+        <div class="export-info">
+            <p>📊 Rapport généré par Paris Explorer v${data.metadata.appVersion}</p>
+            <p>🗼 Continuez votre exploration sur paris-explorer.fr</p>
+        </div>
+    </div>
+</body>
+</html>`;
+    }
+    
+    // === IMPORT DES DONNÉES ===
+    async importUserData() {
+        try {
+            const fileInput = document.getElementById('importFileInput');
+            if (!fileInput) {
+                console.error('Input file non trouvé');
+                return;
+            }
+            
+            fileInput.click();
+            
+        } catch (error) {
+            console.error('Erreur import:', error);
+            this.app.showNotification(`Erreur lors de l'import: ${error.message}`, 'error');
+        }
+    }
+    
+    async handleFileImport(file) {
+        try {
+            const fileName = file.name.toLowerCase();
+            
+            if (fileName.endsWith('.json')) {
+                await this.importFromJSON(file);
+            } else if (fileName.endsWith('.csv')) {
+                await this.importFromCSV(file);
+            } else {
+                throw new Error('Format de fichier non supporté. Utilisez JSON ou CSV.');
+            }
+            
+        } catch (error) {
+            console.error('Erreur import fichier:', error);
+            this.app.showNotification(`Erreur import: ${error.message}`, 'error');
+        }
+    }
+    
+    async importFromJSON(file) {
+        const text = await file.text();
+        const data = JSON.parse(text);
+        
+        // Validation de la structure
+        if (!data.userData || !data.userData.name) {
+            throw new Error('Structure de fichier JSON invalide');
         }
         
-        report += `
-═══════════════════════════════════════════════════════════════
-
-Généré par Paris Explorer v2.0.0
-https://github.com/paris-explorer
-
-Bon voyage dans la Ville Lumière ! 🗼✨
-`;
+        const userName = data.userData.name;
         
-        return report;
+        // Demander confirmation si l'utilisateur existe
+        if (this.app.userManager.users[userName]) {
+            if (!confirm(`L'utilisateur "${userName}" existe déjà. Voulez-vous l'écraser ?`)) {
+                return;
+            }
+        }
+        
+        // Reconstituer les Set depuis les Array
+        const userData = {
+            ...data.userData,
+            visitedPlaces: new Set(data.userData.visitedPlaces || []),
+            favorites: new Set(data.userData.favorites || [])
+        };
+        
+        // Importer l'utilisateur
+        this.app.userManager.users[userName] = userData;
+        this.app.userManager.saveUsers();
+        this.app.uiManager.loadUserSelector();
+        
+        this.app.showNotification(`Utilisateur "${userName}" importé avec succès !`, 'success');
     }
     
     // === UTILITAIRES ===
-    
-    /**
-     * Lit un fichier de manière asynchrone
-     */
-    readFile(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            
-            reader.onload = (e) => resolve(e.target.result);
-            reader.onerror = (e) => reject(new Error('Erreur lecture fichier'));
-            
-            reader.readAsText(file);
+    getVisitedPlacesDetails(userData) {
+        const details = [];
+        
+        if (!this.app.isDataLoaded) return details;
+        
+        Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
+            Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
+                (catData.places || []).forEach(place => {
+                    const placeId = this.app.createPlaceId(arrKey, catKey, place.name);
+                    const isVisited = userData.visitedPlaces instanceof Set ? 
+                        userData.visitedPlaces.has(placeId) : false;
+                    
+                    details.push({
+                        id: placeId,
+                        name: place.name,
+                        description: place.description,
+                        address: place.address,
+                        tags: place.tags,
+                        arrondissement: arrData.title,
+                        category: catData.title,
+                        visited: isVisited,
+                        visitDate: userData.visitDates?.[placeId] || '',
+                        note: userData.notes?.[placeId] || ''
+                    });
+                });
+            });
         });
+        
+        return details;
     }
     
-    /**
-     * Télécharge un fichier
-     */
-    downloadFile(content, filename, mimeType) {
+    escapeCsvField(field) {
+        if (!field) return '';
+        
+        const fieldStr = String(field);
+        if (fieldStr.includes(',') || fieldStr.includes('"') || fieldStr.includes('\n')) {
+            return `"${fieldStr.replace(/"/g, '""')}"`;
+        }
+        return fieldStr;
+    }
+    
+    getDateString() {
+        return new Date().toISOString().split('T')[0];
+    }
+    
+    downloadFile(content, fileName, mimeType) {
         const blob = new Blob([content], { type: mimeType });
         const url = URL.createObjectURL(blob);
         
         const a = document.createElement('a');
         a.href = url;
-        a.download = filename;
-        a.style.display = 'none';
-        
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         
-        // Nettoyer l'URL
-        setTimeout(() => URL.revokeObjectURL(url), 100);
+        URL.revokeObjectURL(url);
     }
     
-    /**
-     * Valide les données d'import
-     */
-    validateImportData(data) {
-        if (!data || typeof data !== 'object') {
-            return false;
+    // === SAUVEGARDE CLOUD (OPTIONNEL) ===
+    async syncToCloud(userData) {
+        // Implémentation future pour synchronisation cloud
+        try {
+            // API call vers service de synchronisation
+            console.log('Sync cloud non implémenté');
+        } catch (error) {
+            console.warn('Erreur sync cloud:', error);
         }
-        
-        // Validation pour un utilisateur unique
-        if (data.user) {
-            return Utils.Validation.validateUserData(data.user);
-        }
-        
-        // Validation pour plusieurs utilisateurs
-        if (data.users) {
-            return Object.values(data.users).every(user => 
-                Utils.Validation.validateUserData(user)
-            );
-        }
-        
-        return false;
     }
     
-    /**
-     * Obtient les statistiques d'export
-     */
-    getExportStats() {
-        const users = this.app.userManager.users;
-        const totalUsers = Object.keys(users).length;
-        let totalVisited = 0;
+    // === ÉVÉNEMENTS ===
+    setupEventListeners() {
+        // Import de fichier
+        const importFileInput = document.getElementById('importFileInput');
+        if (importFileInput) {
+            importFileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    this.handleFileImport(file);
+                }
+                e.target.value = ''; // Reset input
+            });
+        }
         
-        Object.values(users).forEach(user => {
-            totalVisited += user.visitedPlaces ? user.visitedPlaces.size : 0;
+        // Export buttons
+        const exportBtn = document.getElementById('exportDataBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                this.showExportModal();
+            });
+        }
+        
+        const importBtn = document.getElementById('importDataBtn');
+        if (importBtn) {
+            importBtn.addEventListener('click', () => {
+                this.importUserData();
+            });
+        }
+    }
+    
+    showExportModal() {
+        // Créer modal d'export dynamique
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📊 Exporter vos données</h3>
+                    <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Format d'export</label>
+                        <select id="exportFormat" class="form-input">
+                            <option value="json">JSON - Données complètes</option>
+                            <option value="csv">CSV - Tableur Excel</option>
+                            <option value="html">HTML - Rapport visuel</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" onclick="app.exportImportManager.exportUserData(document.getElementById('exportFormat').value); this.closest('.modal').remove();">
+                            📤 Exporter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.classList.add('show');
+        
+        // Fermeture par clic overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
         });
-        
-        return {
-            totalUsers,
-            totalPlaces: this.app.dataManager.getTotalPlaces(),
-            totalVisited,
-            averageProgression: totalUsers > 0 ? 
-                Utils.Math.percentage(totalVisited / totalUsers, this.app.dataManager.getTotalPlaces()) : 0,
-            lastExport: Utils.Storage.load('last-export-date'),
-            exportCount: Utils.Storage.load('export-count', 0)
-        };
-    }
-    
-    /**
-     * Met à jour les statistiques d'export
-     */
-    updateExportStats() {
-        const currentCount = Utils.Storage.load('export-count', 0);
-        Utils.Storage.save('export-count', currentCount + 1);
-        Utils.Storage.save('last-export-date', Utils.Date.now());
     }
 }
