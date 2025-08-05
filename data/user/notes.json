@@ -1,267 +1,334 @@
 {
   "metadata": {
-    "title": "Paris Explorer - Notes Personnelles",
+    "description": "Structure de données pour les notes personnelles des utilisateurs dans Paris Explorer",
     "version": "2.0.0",
-    "lastUpdated": "2025-01-05",
-    "description": "Système de notes personnelles pour l'exploration parisienne",
-    "totalNotes": 0,
-    "totalWords": 0
+    "lastUpdated": "2025-01-05"
   },
-  "users": {
-    "exemple_utilisateur": {
-      "name": "Exemple Utilisateur",
-      "createdAt": "2025-01-05T10:00:00.000Z",
-      "lastUpdated": "2025-01-05T10:00:00.000Z",
-      "stats": {
-        "totalNotes": 3,
-        "totalWords": 150,
-        "favoriteCategories": ["restaurants", "monuments"],
-        "mostActiveMonth": "2025-01"
+  "template": {
+    "userId": "nom-utilisateur",
+    "notes": {
+      "1er-monuments-musee-du-louvre": {
+        "placeId": "1er-monuments-musee-du-louvre",
+        "content": "Arriver tôt pour éviter la foule. Prévoir 3h minimum. La Joconde est plus petite qu'imaginé mais l'émotion est là ! Les enfants ont adoré les momies égyptiennes.",
+        "createdAt": "2024-12-15T09:45:00.000Z",
+        "lastModified": "2024-12-20T16:30:00.000Z",
+        "tags": ["conseil", "famille", "timing"],
+        "category": "visit-note",
+        "rating": 5,
+        "mood": "émerveillé",
+        "weather": "ensoleillé",
+        "companions": ["famille"],
+        "highlights": [
+          "La Joconde",
+          "Vénus de Milo", 
+          "Sarcophages égyptiens"
+        ],
+        "tips": [
+          "Réserver en ligne à l'avance",
+          "Entrée gratuite premier dimanche du mois",
+          "Audioguide recommandé pour les enfants"
+        ],
+        "expenses": {
+          "entrance": "17€ x 2 adultes",
+          "audioguide": "5€ x 2",
+          "total": "44€"
+        },
+        "photos": [
+          {
+            "filename": "louvre_pyramide.jpg",
+            "caption": "Vue depuis la pyramide",
+            "takenAt": "2024-12-15T09:30:00.000Z"
+          }
+        ],
+        "attachments": [
+          {
+            "type": "ticket",
+            "filename": "louvre_ticket.pdf",
+            "description": "Ticket d'entrée"
+          }
+        ],
+        "isPrivate": false,
+        "shareableUrl": "https://paris-explorer.fr/share/note/abc123"
       },
-      "notes": {
-        "places": {
-          "1er-monuments-musee-du-louvre": {
-            "id": "1er-monuments-musee-du-louvre",
-            "title": "Visite du Louvre",
-            "content": "Absolument incontournable ! Prévoir minimum 4h. La Joconde est plus petite que prévu mais l'émotion est là. Les salles égyptiennes sont fascinantes. Conseil : y aller tôt le matin ou réserver en ligne.",
-            "rating": 5,
-            "visitDate": "2024-12-15",
-            "createdAt": "2024-12-15T16:30:00.000Z",
-            "updatedAt": "2024-12-15T16:30:00.000Z",
-            "tags": ["art", "incontournable", "foule"],
-            "photos": [],
-            "recommendations": {
-              "bestTime": "9h-11h ou 17h-fermeture",
-              "duration": "4h minimum",
-              "budget": "17€ (tarif plein)",
-              "tips": "Audioguide recommandé, entrée gratuite 1er dimanche du mois"
-            },
-            "mood": "émerveillé",
-            "weather": "ensoleillé",
-            "companions": ["Marie", "Thomas"]
-          },
-          "5eme-restaurants-shakespeare-and-company-cafe": {
-            "id": "5eme-restaurants-shakespeare-and-company-cafe",
-            "title": "Brunch littéraire",
-            "content": "Parfait pour un brunch en weekend ! L'ambiance librairie est authentique. Les pancakes sont excellents. Un peu cher mais l'expérience vaut le coup. Idéal pour un rendez-vous romantique.",
-            "rating": 4,
-            "visitDate": "2024-12-20",
-            "createdAt": "2024-12-20T11:45:00.000Z",
-            "updatedAt": "2024-12-20T11:45:00.000Z",
-            "tags": ["brunch", "littérature", "romantique"],
-            "photos": ["shakespeare_pancakes.jpg"],
-            "recommendations": {
-              "bestTime": "Weekend 10h-14h",
-              "duration": "1h30",
-              "budget": "25-35€ par personne",
-              "tips": "Réserver à l'avance, explorer la librairie après le repas"
-            },
-            "mood": "détendu",
-            "weather": "pluvieux",
-            "companions": ["Sophie"]
-          }
+      "3ème-restaurants-marche-des-enfants-rouges": {
+        "placeId": "3ème-restaurants-marche-des-enfants-rouges",
+        "content": "Marché couvert authentique ! Le stand japonais Taeko est excellent (gyoza 8€). Ambiance locale, parfait pour un déjeuner entre amis. Éviter le week-end si on veut de la place.",
+        "createdAt": "2024-12-18T13:15:00.000Z",
+        "lastModified": "2024-12-18T13:15:00.000Z",
+        "tags": ["marché", "japonais", "authentique"],
+        "category": "food-review",
+        "rating": 4,
+        "mood": "satisfait",
+        "weather": "nuageux",
+        "companions": ["amis"],
+        "highlights": [
+          "Stand Taeko (japonais)",
+          "Ambiance authentique",
+          "Prix raisonnables"
+        ],
+        "tips": [
+          "Y aller en semaine plutôt",
+          "Essayer les gyoza de Taeko",
+          "Apporter de l'espèce"
+        ],
+        "expenses": {
+          "repas": "12€",
+          "boisson": "3€",
+          "total": "15€"
         },
-        "arrondissements": {
-          "1er": {
-            "title": "Cœur historique de Paris",
-            "content": "L'arrondissement le plus touristique mais pour de bonnes raisons ! Beaucoup de monde mais chaque lieu est exceptionnel. Prévoir plusieurs visites pour tout voir correctement.",
-            "createdAt": "2024-12-15T20:00:00.000Z",
-            "updatedAt": "2024-12-20T15:00:00.000Z",
-            "tags": ["historique", "touristique", "art"],
-            "visitedPlaces": 5,
-            "totalPlaces": 15,
-            "favoriteSpots": ["Musée du Louvre", "Jardin des Tuileries"],
-            "recommendations": {
-              "bestSeason": "Automne et printemps",
-              "timeNeeded": "3-4 visites minimum",
-              "budget": "Élevé",
-              "tips": "Acheter le Paris Museum Pass pour éviter les files"
-            }
+        "recommendations": [
+          {
+            "dish": "Gyoza du stand Taeko",
+            "price": "8€",
+            "rating": 5
           },
-          "18eme": {
-            "title": "Montmartre authentique",
-            "content": "Au-delà des clichés touristiques, Montmartre garde une âme d'artiste. Explorer les petites rues loin de la Place du Tertre pour découvrir le vrai charme du quartier.",
-            "createdAt": "2024-12-18T14:30:00.000Z",
-            "updatedAt": "2024-12-18T14:30:00.000Z",
-            "tags": ["bohème", "art", "authentique"],
-            "visitedPlaces": 3,
-            "totalPlaces": 12,
-            "favoriteSpots": ["Vignes de Montmartre", "Villa Léandre"],
-            "recommendations": {
-              "bestTime": "Tôt le matin ou fin d'après-midi",
-              "transport": "Funiculaire ou métro + marche",
-              "budget": "Modéré",
-              "tips": "Porter des chaussures confortables, beaucoup de montées"
-            }
+          {
+            "dish": "Sandwich morocain",
+            "price": "7€", 
+            "rating": 4
           }
+        ]
+      }
+    },
+    "journals": [
+      {
+        "id": "week-1-2025",
+        "title": "Première semaine d'exploration 2025",
+        "period": {
+          "start": "2025-01-01",
+          "end": "2025-01-07"
         },
-        "general": {
-          "planning": {
-            "title": "Planning exploration Paris 2025",
-            "content": "Objectif : découvrir au moins 5 lieux par mois. Focus sur les arrondissements moins touristiques (10e, 11e, 20e) pour une expérience plus authentique.",
-            "createdAt": "2025-01-01T09:00:00.000Z",
-            "updatedAt": "2025-01-05T10:00:00.000Z",
-            "tags": ["planning", "objectifs"],
-            "goals": [
-              "Visiter tous les marchés couverts de Paris",
-              "Découvrir 10 jardins secrets",
-              "Essayer la gastronomie de chaque arrondissement",
-              "Parcourir la petite ceinture"
-            ],
-            "monthlyTargets": {
-              "janvier": "13e - Chinatown et Bibliothèque François Mitterrand",
-              "février": "20e - Père Lachaise et Belleville",
-              "mars": "19e - Parc des Buttes-Chaumont et Canal"
-            }
-          },
-          "discoveries": {
-            "title": "Mes plus belles découvertes",
-            "content": "Lieux qui m'ont marqué et que je recommande absolument à mes amis. Souvent des endroits méconnus ou des expériences uniques.",
-            "createdAt": "2024-12-25T15:00:00.000Z",
-            "updatedAt": "2025-01-05T10:00:00.000Z",
-            "tags": ["coups de cœur", "recommandations"],
-            "topDiscoveries": [
-              {
-                "place": "Jardin Anne-Frank (4e)",
-                "reason": "Oasis de paix caché, très émouvant"
-              },
-              {
-                "place": "Du Pain et des Idées (10e)",
-                "reason": "Meilleure boulangerie de Paris, pain aux raisins divin"
-              },
-              {
-                "place": "Parc des Buttes-Chaumont (19e)",
-                "reason": "Vue exceptionnelle, romantique au coucher du soleil"
-              }
-            ]
-          }
+        "content": "Excellente semaine pour commencer l'année ! J'ai découvert 3 nouveaux lieux dans le Marais. Le temps était parfait pour se promener. Objectif : explorer au moins un nouveau lieu par semaine.",
+        "createdAt": "2025-01-07T20:00:00.000Z",
+        "placesVisited": [
+          "3ème-musees-musee-carnavalet",
+          "4ème-patrimoine-place-des-vosges",
+          "4ème-bars-gay-open-cafe"
+        ],
+        "stats": {
+          "placesVisited": 3,
+          "timeSpent": 5.5,
+          "averageRating": 4.3,
+          "expenses": 45
         },
-        "lists": {
-          "wish_list": {
-            "title": "Liste de souhaits - À découvrir",
-            "items": [
-              {
-                "place": "Les Catacombes (14e)",
-                "priority": "high",
-                "reason": "Expérience unique, réserver à l'avance",
-                "estimatedDate": "2025-02-15"
-              },
-              {
-                "place": "Tour Eiffel sommet (7e)",
-                "priority": "medium",
-                "reason": "Classique mais jamais fait jusqu'au bout",
-                "estimatedDate": "2025-03-20"
-              },
-              {
-                "place": "Marché aux Puces de Saint-Ouen",
-                "priority": "low",
-                "reason": "Chiner des antiquités",
-                "estimatedDate": "2025-04-10"
-              }
-            ],
-            "createdAt": "2025-01-01T12:00:00.000Z",
-            "updatedAt": "2025-01-05T10:00:00.000Z"
+        "mood": "motivé",
+        "highlights": [
+          "Découverte du musée Carnavalet",
+          "Café parfait place des Vosges",
+          "Rencontre sympa à l'Open Café"
+        ],
+        "goals": [
+          "Continuer 1 lieu/semaine",
+          "Explorer plus le 20ème arrondissement"
+        ]
+      }
+    ],
+    "templates": [
+      {
+        "id": "restaurant-review",
+        "name": "Critique Restaurant",
+        "fields": [
+          {
+            "name": "ambiance",
+            "type": "select",
+            "options": ["intime", "animé", "familial", "romantique", "décontracté"]
           },
-          "seasonal": {
-            "spring": {
-              "title": "Printemps parisien",
-              "suggestions": [
-                "Jardins du Luxembourg en fleurs",
-                "Terrasses de café aux beaux jours",
-                "Promenade sur les quais de Seine"
-              ]
-            },
-            "summer": {
-              "title": "Été à Paris",
-              "suggestions": [
-                "Paris Plages",
-                "Cinéma en plein air Parc de la Villette",
-                "Rooftops avec vue"
-              ]
-            },
-            "autumn": {
-              "title": "Automne doré",
-              "suggestions": [
-                "Père Lachaise aux couleurs d'automne",
-                "Châtaignes grillées dans les rues",
-                "Cafés cosy pour se réchauffer"
-              ]
-            },
-            "winter": {
-              "title": "Magie hivernale",
-              "suggestions": [
-                "Marchés de Noël",
-                "Musées pour échapper au froid",
-                "Vin chaud place Saint-Germain"
-              ]
-            }
+          {
+            "name": "service",
+            "type": "rating",
+            "max": 5
+          },
+          {
+            "name": "rapport_qualite_prix",
+            "type": "rating", 
+            "max": 5
+          },
+          {
+            "name": "plat_recommande",
+            "type": "text"
+          },
+          {
+            "name": "prix_moyen",
+            "type": "number",
+            "unit": "€"
           }
+        ]
+      }
+    ],
+    "statistics": {
+      "totalNotes": 2,
+      "totalJournals": 1,
+      "averageNoteLength": 150,
+      "mostActiveMonth": "2024-12",
+      "favoriteCategory": "food-review",
+      "totalWords": 300,
+      "lastActivity": "2025-01-07T20:00:00.000Z"
+    }
+  },
+  "noteCategories": {
+    "visit-note": {
+      "name": "Note de visite",
+      "icon": "📝",
+      "color": "#2196F3",
+      "template": ["content", "rating", "highlights", "tips"]
+    },
+    "food-review": {
+      "name": "Critique culinaire", 
+      "icon": "🍽️",
+      "color": "#FF9800",
+      "template": ["content", "rating", "recommendations", "expenses"]
+    },
+    "cultural-review": {
+      "name": "Critique culturelle",
+      "icon": "🎭",
+      "color": "#9C27B0",
+      "template": ["content", "rating", "highlights", "cultural-notes"]
+    },
+    "practical-info": {
+      "name": "Infos pratiques",
+      "icon": "ℹ️",
+      "color": "#607D8B",
+      "template": ["tips", "expenses", "accessibility", "timing"]
+    },
+    "memory": {
+      "name": "Souvenir",
+      "icon": "💭",
+      "color": "#E91E63",
+      "template": ["content", "mood", "companions", "photos"]
+    }
+  },
+  "moodOptions": [
+    {
+      "value": "émerveillé",
+      "emoji": "🤩",
+      "color": "#FFD700"
+    },
+    {
+      "value": "satisfait",
+      "emoji": "😊", 
+      "color": "#4CAF50"
+    },
+    {
+      "value": "déçu",
+      "emoji": "😞",
+      "color": "#F44336"
+    },
+    {
+      "value": "surpris",
+      "emoji": "😲",
+      "color": "#FF9800"
+    },
+    {
+      "value": "nostalgique",
+      "emoji": "🥰",
+      "color": "#E91E63"
+    },
+    {
+      "value": "inspiré",
+      "emoji": "✨",
+      "color": "#9C27B0"
+    }
+  ],
+  "examples": {
+    "noteRapide": {
+      "placeId": "16ème-musees-musee-marmottan",
+      "content": "Collection Monet extraordinaire ! Impression, soleil levant vaut le déplacement.",
+      "createdAt": "2025-01-05T15:30:00.000Z",
+      "tags": ["monet", "impressionnisme"],
+      "category": "visit-note",
+      "rating": 5
+    },
+    "noteDetaillee": {
+      "placeId": "11ème-restaurants-septime",
+      "content": "Expérience gastronomique mémorable ! Menu dégustation 5 services parfaitement exécuté. Le chef Bertrand Grébaut maîtrise l'art de sublimer les légumes. Service irréprochable, ambiance décontractée malgré le standing. Réservation indispensable, compter 3 mois d'avance minimum.",
+      "createdAt": "2024-12-28T21:45:00.000Z",
+      "lastModified": "2024-12-29T09:00:00.000Z",
+      "tags": ["gastronomie", "michelin", "légumes", "créatif"],
+      "category": "food-review",
+      "rating": 5,
+      "mood": "émerveillé",
+      "companions": ["couple"],
+      "highlights": [
+        "Menu dégustation 5 services",
+        "Légumes de saison sublimés",
+        "Service parfait"
+      ],
+      "tips": [
+        "Réserver 3 mois à l'avance",
+        "Menu végétarien disponible",
+        "Cave à vins exceptionnelle"
+      ],
+      "expenses": {
+        "menu": "95€ x 2",
+        "vins": "120€",
+        "total": "310€"
+      },
+      "recommendations": [
+        {
+          "dish": "Betterave et caviar d'Aquitaine",
+          "rating": 5,
+          "note": "Équilibre parfait"
         }
-      }
+      ]
     }
   },
-  "templates": {
-    "place_note": {
-      "title": "",
-      "content": "",
-      "rating": null,
-      "visitDate": null,
-      "tags": [],
-      "photos": [],
-      "recommendations": {
-        "bestTime": "",
-        "duration": "",
-        "budget": "",
-        "tips": ""
+  "operations": {
+    "createNote": {
+      "description": "Créer une nouvelle note",
+      "parameters": ["placeId", "content", "category?", "rating?", "tags?"],
+      "returns": "note object"
+    },
+    "updateNote": {
+      "description": "Modifier une note existante", 
+      "parameters": ["placeId", "updates"],
+      "returns": "note object"
+    },
+    "searchNotes": {
+      "description": "Rechercher dans les notes",
+      "parameters": ["query", "filters?"],
+      "returns": "array[note]"
+    },
+    "exportNotes": {
+      "description": "Exporter les notes",
+      "parameters": ["format", "filters?"],
+      "returns": "file data"
+    }
+  },
+  "validation": {
+    "note": {
+      "placeId": {
+        "required": true,
+        "pattern": "^[0-9]+[a-z]+-[a-z-]+-[a-z0-9-]+$"
       },
-      "mood": "",
-      "weather": "",
-      "companions": []
-    },
-    "arrondissement_note": {
-      "title": "",
-      "content": "",
-      "tags": [],
-      "visitedPlaces": 0,
-      "totalPlaces": 0,
-      "favoriteSpots": [],
-      "recommendations": {
-        "bestSeason": "",
-        "timeNeeded": "",
-        "budget": "",
-        "tips": ""
+      "content": {
+        "required": true,
+        "minLength": 1,
+        "maxLength": 5000
+      },
+      "rating": {
+        "min": 1,
+        "max": 5,
+        "type": "integer"
+      },
+      "tags": {
+        "maxItems": 20,
+        "itemMaxLength": 30
       }
     }
   },
-  "categories": {
-    "moods": [
-      "émerveillé", "détendu", "inspiré", "nostalgique", 
-      "curieux", "surpris", "contemplatif", "joyeux"
-    ],
-    "weather": [
-      "ensoleillé", "nuageux", "pluvieux", "neigeux", 
-      "venteux", "brumeux", "orageux"
-    ],
-    "tags_suggestions": [
-      "incontournable", "secret", "romantique", "familial",
-      "art", "histoire", "gastronomie", "nature", "vue",
-      "gratuit", "cher", "authentique", "touristique",
-      "calme", "animé", "moderne", "historique"
-    ]
-  },
-  "export_formats": {
-    "pdf": {
-      "enabled": true,
-      "include_photos": true,
-      "page_format": "A4"
+  "integrations": {
+    "sharing": {
+      "platforms": ["twitter", "instagram", "facebook"],
+      "formats": ["text", "image", "story"]
     },
-    "markdown": {
-      "enabled": true,
-      "structure": "hierarchical"
+    "export": {
+      "formats": ["pdf", "markdown", "html", "json"],
+      "templates": ["journal", "guide", "recommendations"]
     },
-    "json": {
-      "enabled": true,
-      "compressed": false
+    "sync": {
+      "providers": ["google-drive", "dropbox", "onedrive"],
+      "autoSync": true,
+      "conflictResolution": "latest-wins"
     }
   }
 }
