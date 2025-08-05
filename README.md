@@ -1,60 +1,41 @@
-# 🗼 Paris Explorer - Multi-Utilisateurs
+# 🗼 Paris Explorer - La Ville Lumière
 
-Un projet interactif pour découvrir et tracker plus de **1500 lieux secrets et incontournables** de Paris, avec un système multi-utilisateurs avancé.
+Une application web interactive pour explorer et découvrir tous les trésors de Paris, arrondissement par arrondissement.
 
-![Paris Explorer](https://img.shields.io/badge/Paris-Explorer-blue?style=for-the-badge&logo=github)
-![Places](https://img.shields.io/badge/Lieux-1500+-green?style=for-the-badge)
-![Users](https://img.shields.io/badge/Multi-Utilisateurs-orange?style=for-the-badge)
+## 📁 Structure du Projet
 
-## ✨ Nouvelles Fonctionnalités v2.0
-
-- 👥 **Système Multi-Utilisateurs** - Chaque personne a sa propre progression
-- 📊 **Statistiques Personnalisées** - Suivi détaillé par profil utilisateur
-- 🎯 **Succès & Achievements** - Débloquez des badges en explorant
-- 💾 **Sauvegarde Automatique** - Progression sauvée toutes les 30 secondes
-- 📱 **Interface Optimisée** - Design moderne et responsive
-- 🔍 **Recherche Avancée** - Trouvez rapidement ce que vous cherchez
-
-## 📁 Architecture des Fichiers
-
-Le projet utilise maintenant **2 fichiers séparés** pour plus de flexibilité :
-
-### Fichiers Obligatoires
 ```
-📁 mon-projet-paris/
-├── 📄 index.html                 # Interface principale
-├── 📄 paris-database.json        # ⭐ LIEUX À VISITER (modifiable)
-└── 📄 README.md                  # Documentation
+paris-explorer/
+├── index.html          # Structure HTML principale
+├── styles.css          # Feuille de style complète  
+├── app.js              # Logique JavaScript de l'application
+├── paris-database.json # Base de données des lieux parisiens (à créer)
+└── README.md           # Cette documentation
 ```
 
-### Fichiers Optionnels
-```
-├── 📄 config.json               # Configuration système (optionel)
-└── 📁 assets/                   # Images et ressources
-```
+## 🚀 Installation et Utilisation
 
-## 🗂️ Structure des Données
+### 1. Télécharger les fichiers
+- `index.html` - Page principale
+- `styles.css` - Styles CSS 
+- `app.js` - Code JavaScript
 
-### `paris-database.json` - Lieux à Visiter
-Ce fichier contient **uniquement les lieux** et peut être modifié facilement :
+### 2. Créer la base de données
+Créez un fichier `paris-database.json` avec vos lieux parisiens :
 
 ```json
 {
-  "metadata": {
-    "title": "Paris Explorer - Base de données complète",
-    "version": "1.0.0",
-    "totalPlaces": 1500
-  },
   "arrondissements": {
     "1er": {
-      "title": "1ER ARRONDISSEMENT - LE LOUVRE",
+      "title": "1er arrondissement - Louvre",
       "categories": {
         "monuments": {
-          "title": "🏛️ Monuments & Sites Historiques",
+          "title": "🏛️ Monuments Historiques",
           "places": [
             {
               "name": "Musée du Louvre",
-              "description": "La Joconde, Vénus de Milo...",
+              "description": "Le plus grand musée d'art au monde",
+              "address": "Rue de Rivoli, 75001 Paris",
               "tags": ["musée", "art", "incontournable"]
             }
           ]
@@ -65,234 +46,146 @@ Ce fichier contient **uniquement les lieux** et peut être modifié facilement :
 }
 ```
 
-### `config.json` - Configuration Système (Optionnel)
-Ce fichier contient la configuration, les filtres, les succès, etc.
-Si absent, l'application utilise une configuration par défaut.
+### 3. Servir l'application
+L'application doit être servie via un serveur web local :
 
-## 🚀 Installation & Utilisation
-
-### Option 1 : Serveur Local (Recommandé)
 ```bash
-# 1. Téléchargez tous les fichiers dans un dossier
-# 2. Lancez un serveur local
+# Python 3
 python -m http.server 8000
-# ou
+
+# Node.js
 npx serve .
 
-# 3. Ouvrez votre navigateur
-http://localhost:8000
+# PHP
+php -S localhost:8000
 ```
 
-### Option 2 : GitHub Pages
-1. **Forkez** ce repository
-2. **Activez GitHub Pages** : Settings > Pages > Deploy from branch > main
-3. **Accédez** à votre site : `https://[username].github.io/paris-explorer/`
+Puis ouvrez : `http://localhost:8000`
 
-## 👥 Système Multi-Utilisateurs
+## ✨ Fonctionnalités
 
-### Créer un Profil
-1. Cliquez sur "👥 Gérer les profils"
-2. Entrez un nom de profil
-3. Cliquez sur "Créer"
+### 👥 Multi-Utilisateurs
+- Création/gestion de profils d'explorateurs
+- Sauvegarde automatique des progressions
+- Statistiques individuelles
 
-### Changer de Profil
-- Sélectionnez un profil dans la liste déroulante
-- Votre progression est automatiquement chargée
+### 🗺️ Carte Interactive Avancée
+- **Zoom adaptatif** : Polygones des arrondissements ⟷ Lieux individuels
+- **Géocodage automatique** des adresses avec API Nominatim
+- **Marqueurs typés** avec emojis (🏛️ monuments, 🍽️ restaurants, etc.)
+- **Mode plein écran** et contrôles avancés
 
-### Données Sauvées par Profil
-- ✅ Lieux visités
-- ⭐ Lieux favoris  
-- 📝 Notes personnelles
-- 📊 Statistiques détaillées
-- 🏆 Succès débloqués
+### 📋 Interface Liste
+- **Recherche intelligente** par nom, description, tags, adresse
+- **Filtres** : masquer les lieux explorés
+- **Actions groupées** : tout ouvrir/fermer, recommencer
 
-## 🎯 Système de Succès
+### 📊 Système de Progression
+- Suivi des lieux visités par utilisateur
+- Barres de progression animées
+- Statistiques détaillées par arrondissement
 
-Débloquez des achievements en explorant Paris :
+## 🎨 Design
 
-| Badge | Nom | Description |
-|-------|-----|-------------|
-| 🏆 | Découvreur | Visitez votre premier lieu |
-| 🗺️ | Explorateur | Visitez 10 lieux différents |
-| 🎒 | Aventurier | Visitez 50 lieux |
-| 👑 | Conquérant | Visitez 100 lieux |
-| 🗼 | Vrai Parisien | Visitez tous les arrondissements |
-| 🍽️ | Gourmet | Visitez 20 restaurants |
-| 🎭 | Amateur de Culture | Visitez 15 musées/théâtres |
-| 🔍 | Chasseur de Secrets | Découvrez 10 lieux secrets |
+- **Thème parisien** avec couleurs or et bleu royal
+- **Responsive** mobile et desktop
+- **Animations fluides** et micro-interactions
+- **Interface moderne** avec glassmorphism
 
-## ✏️ Modifier les Lieux
+## 🔧 Technologies
 
-Pour ajouter/modifier des lieux, éditez **uniquement** le fichier `paris-database.json` :
+- **HTML5** structure sémantique
+- **CSS3** avec variables modernes et flexbox/grid
+- **JavaScript ES6+** avec classes et async/await
+- **Leaflet.js** pour la cartographie interactive
+- **API Nominatim** pour le géocodage des adresses
+- **LocalStorage** pour la persistance des données
 
-### Ajouter un Lieu
-```json
-{
-  "name": "Mon Nouveau Lieu",
-  "description": "Description détaillée de ce lieu incroyable",
-  "tags": ["nouveau", "secret", "authentique"]
+## 📱 Responsive Design
+
+L'application s'adapte automatiquement :
+- **Desktop** : Interface complète avec sidebar
+- **Tablet** : Layout adaptatif
+- **Mobile** : Interface optimisée tactile
+
+## 🗺️ Format des Adresses
+
+Les adresses sont automatiquement géocodées. Formats supportés :
+- `"Rue de Rivoli, 75001 Paris"` ✅ (recommandé)
+- `"Place Vendôme, Paris"` ✅
+- `"Tour Eiffel"` ✅
+
+## 🚧 Développement
+
+### Ajouter de nouveaux types de lieux
+Dans `app.js`, modifiez la fonction `getPlaceType()` :
+
+```javascript
+getPlaceType(categoryKey) {
+    const catKey = categoryKey.toLowerCase();
+    
+    if (catKey.includes('cinema')) return 'cinema'; // Nouveau type
+    // ... autres types
 }
 ```
 
-### Ajouter une Catégorie
-```json
-"ma-nouvelle-categorie": {
-  "title": "🎪 Ma Catégorie",
-  "places": [...]
-}
+Puis ajoutez l'emoji correspondant dans `createPlaceMarker()` :
+
+```javascript
+const typeIcons = {
+    'cinema': '🎬', // Nouveau
+    'monument': '🏛️',
+    // ... autres icônes
+};
 ```
 
-### Ajouter un Arrondissement
-```json
-"21ème": {
-  "title": "21ÈME ARRONDISSEMENT - MON QUARTIER",
-  "description": "Description de mon quartier",
-  "categories": {...}
-}
-```
-
-## 📊 Export de Données
-
-### Formats Disponibles
-- **JSON** - Données complètes pour backup
-- **CSV** - Pour Excel/Google Sheets
-- **PDF** - Rapport imprimable (à venir)
-
-### Contenu de l'Export
-- Liste des lieux visités
-- Statistiques personnelles
-- Progression par arrondissement  
-- Date et heure de l'export
-
-## 🎨 Personnalisation
-
-### Modifier l'Apparence
-Éditez les variables CSS dans `index.html` :
+### Personnaliser les couleurs
+Dans `styles.css`, modifiez les variables CSS :
 
 ```css
 :root {
-  --primary: #667eea;     /* Couleur principale */
-  --secondary: #764ba2;   /* Couleur secondaire */
-  --success: #28a745;     /* Vert (lieux visités) */
+    --paris-gold: #D4AF37;     /* Or parisien */
+    --paris-blue: #1e3a8a;     /* Bleu royal */
+    --success: #059669;         /* Vert validation */
+    /* ... autres couleurs */
 }
 ```
 
-### Modifier la Configuration
-Créez un fichier `config.json` pour personnaliser :
-- Messages de l'interface
-- Couleurs des filtres  
-- Liste des achievements
-- Paramètres par défaut
+## 📊 Structure de la Base de Données
 
-## 🔧 Fonctionnalités Avancées
-
-### Recherche Intelligente
-- **Recherche floue** - Trouve même avec des fautes de frappe
-- **Recherche par tags** - Tapez "michelin" pour les restaurants étoilés
-- **Recherche par arrondissement** - "18ème" pour Montmartre
-
-### Filtres Dynamiques
-- **Par catégorie** - Monuments, Restaurants, Culture...
-- **Par statut** - Visités, À visiter
-- **Par budget** - Gratuit, Payant, Luxe
-
-### Navigation Tactile
-- **Swipe** pour naviguer sur mobile
-- **Tap** pour ouvrir/fermer les sections
-- **Long press** pour actions rapides
-
-## 📱 Compatibilité
-
-- ✅ **Chrome** 90+
-- ✅ **Firefox** 88+  
-- ✅ **Safari** 14+
-- ✅ **Edge** 90+
-- ✅ **Mobile** iOS 14+, Android 10+
-
-## 🛠️ Développement
-
-### Structure Technique
-```
-paris-explorer/
-├── index.html              # App principale (HTML + CSS + JS)
-├── paris-database.json     # Base de données lieux
-├── config.json            # Configuration optionnelle
-└── README.md              # Documentation
+```json
+{
+  "arrondissements": {
+    "[clé-arrondissement]": {
+      "title": "Nom complet de l'arrondissement",
+      "categories": {
+        "[clé-catégorie]": {
+          "title": "🏛️ Nom de la catégorie avec emoji",
+          "places": [
+            {
+              "name": "Nom du lieu",
+              "description": "Description détaillée",
+              "address": "Adresse complète avec code postal", 
+              "tags": ["tag1", "tag2", "tag3"]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
 ```
 
-### Technologies Utilisées
-- **HTML5** - Structure sémantique
-- **CSS3** - Animations et responsive design
-- **JavaScript ES6+** - Logique applicative  
-- **LocalStorage** - Sauvegarde locale
-- **Service Worker** - Cache et offline (à venir)
+## 🔍 APIs Utilisées
 
-### Contribuer
-
-1. **Forkez** le projet
-2. **Créez une branche** : `git checkout -b nouvelle-fonctionnalite`
-3. **Committez** : `git commit -m 'Ajout fonctionnalité X'`
-4. **Pushez** : `git push origin nouvelle-fonctionnalite`  
-5. **Créez une Pull Request**
-
-## 🐛 Résolution de Problèmes
-
-### Erreur "Impossible de charger les données"
-- ✅ Vérifiez que `paris-database.json` est présent
-- ✅ Utilisez un serveur web (pas `file://`)
-- ✅ Vérifiez la syntaxe JSON avec un validateur
-
-### Progression non sauvée
-- ✅ Vérifiez que le localStorage est activé
-- ✅ Créez un profil utilisateur
-- ✅ Attendez 30 secondes pour la sauvegarde auto
-
-### Interface cassée sur mobile
-- ✅ Videz le cache du navigateur
-- ✅ Rechargez la page (Ctrl+F5)
-- ✅ Vérifiez la version de votre navigateur
-
-## 📈 Roadmap v2.1
-
-### Prochaines Fonctionnalités
-- [ ] **Mode hors-ligne** complet
-- [ ] **Géolocalisation** et navigation GPS
-- [ ] **Photos utilisateurs** pour chaque lieu
-- [ ] **Partage social** de découvertes
-- [ ] **Import** de listes externes
-- [ ] **API** pour développeurs tiers
-
-### Améliorations Interface
-- [ ] **Mode sombre** complet
-- [ ] **Thèmes personnalisables**
-- [ ] **Widgets** de statistiques
-- [ ] **Notifications push** pour nouveaux lieux
+- **OpenStreetMap Nominatim** : Géocodage gratuit des adresses
+- **OpenData Paris** : Polygones des arrondissements parisiens
+- **Leaflet** : Affichage des cartes interactives
 
 ## 📄 Licence
 
-Ce projet est sous licence **MIT** - Voir [LICENSE](LICENSE) pour plus de détails.
-
-### Utilisation Libre
-- ✅ Usage personnel et commercial
-- ✅ Modification du code source
-- ✅ Distribution et redistribution
-- ✅ Intégration dans d'autres projets
-
-## 🙏 Crédits
-
-- **Données** : Compilation communautaire
-- **Design** : Inspiration Material Design 3
-- **Icons** : Emojis Unicode standards
-- **Photos** : Contributions utilisateurs
-
-## 🤝 Communauté
-
-- **GitHub Discussions** : [Forum communauté](https://github.com/[username]/paris-explorer/discussions)
-- **Issues** : [Signaler un bug](https://github.com/[username]/paris-explorer/issues)
-- **Wiki** : [Documentation avancée](https://github.com/[username]/paris-explorer/wiki)
+Projet libre d'utilisation pour découvrir Paris ! 🇫🇷
 
 ---
 
-**🚀 Commencez votre exploration multi-utilisateurs de Paris dès maintenant !**
-
-*Découvrez les secrets de la Ville Lumière en famille ou entre amis, chacun avec sa propre progression.*
+**Bon voyage dans la Ville Lumière !** ✨
