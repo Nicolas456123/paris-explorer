@@ -1,0 +1,267 @@
+{
+  "metadata": {
+    "title": "Paris Explorer - Notes Personnelles",
+    "version": "2.0.0",
+    "lastUpdated": "2025-01-05",
+    "description": "Système de notes personnelles pour l'exploration parisienne",
+    "totalNotes": 0,
+    "totalWords": 0
+  },
+  "users": {
+    "exemple_utilisateur": {
+      "name": "Exemple Utilisateur",
+      "createdAt": "2025-01-05T10:00:00.000Z",
+      "lastUpdated": "2025-01-05T10:00:00.000Z",
+      "stats": {
+        "totalNotes": 3,
+        "totalWords": 150,
+        "favoriteCategories": ["restaurants", "monuments"],
+        "mostActiveMonth": "2025-01"
+      },
+      "notes": {
+        "places": {
+          "1er-monuments-musee-du-louvre": {
+            "id": "1er-monuments-musee-du-louvre",
+            "title": "Visite du Louvre",
+            "content": "Absolument incontournable ! Prévoir minimum 4h. La Joconde est plus petite que prévu mais l'émotion est là. Les salles égyptiennes sont fascinantes. Conseil : y aller tôt le matin ou réserver en ligne.",
+            "rating": 5,
+            "visitDate": "2024-12-15",
+            "createdAt": "2024-12-15T16:30:00.000Z",
+            "updatedAt": "2024-12-15T16:30:00.000Z",
+            "tags": ["art", "incontournable", "foule"],
+            "photos": [],
+            "recommendations": {
+              "bestTime": "9h-11h ou 17h-fermeture",
+              "duration": "4h minimum",
+              "budget": "17€ (tarif plein)",
+              "tips": "Audioguide recommandé, entrée gratuite 1er dimanche du mois"
+            },
+            "mood": "émerveillé",
+            "weather": "ensoleillé",
+            "companions": ["Marie", "Thomas"]
+          },
+          "5eme-restaurants-shakespeare-and-company-cafe": {
+            "id": "5eme-restaurants-shakespeare-and-company-cafe",
+            "title": "Brunch littéraire",
+            "content": "Parfait pour un brunch en weekend ! L'ambiance librairie est authentique. Les pancakes sont excellents. Un peu cher mais l'expérience vaut le coup. Idéal pour un rendez-vous romantique.",
+            "rating": 4,
+            "visitDate": "2024-12-20",
+            "createdAt": "2024-12-20T11:45:00.000Z",
+            "updatedAt": "2024-12-20T11:45:00.000Z",
+            "tags": ["brunch", "littérature", "romantique"],
+            "photos": ["shakespeare_pancakes.jpg"],
+            "recommendations": {
+              "bestTime": "Weekend 10h-14h",
+              "duration": "1h30",
+              "budget": "25-35€ par personne",
+              "tips": "Réserver à l'avance, explorer la librairie après le repas"
+            },
+            "mood": "détendu",
+            "weather": "pluvieux",
+            "companions": ["Sophie"]
+          }
+        },
+        "arrondissements": {
+          "1er": {
+            "title": "Cœur historique de Paris",
+            "content": "L'arrondissement le plus touristique mais pour de bonnes raisons ! Beaucoup de monde mais chaque lieu est exceptionnel. Prévoir plusieurs visites pour tout voir correctement.",
+            "createdAt": "2024-12-15T20:00:00.000Z",
+            "updatedAt": "2024-12-20T15:00:00.000Z",
+            "tags": ["historique", "touristique", "art"],
+            "visitedPlaces": 5,
+            "totalPlaces": 15,
+            "favoriteSpots": ["Musée du Louvre", "Jardin des Tuileries"],
+            "recommendations": {
+              "bestSeason": "Automne et printemps",
+              "timeNeeded": "3-4 visites minimum",
+              "budget": "Élevé",
+              "tips": "Acheter le Paris Museum Pass pour éviter les files"
+            }
+          },
+          "18eme": {
+            "title": "Montmartre authentique",
+            "content": "Au-delà des clichés touristiques, Montmartre garde une âme d'artiste. Explorer les petites rues loin de la Place du Tertre pour découvrir le vrai charme du quartier.",
+            "createdAt": "2024-12-18T14:30:00.000Z",
+            "updatedAt": "2024-12-18T14:30:00.000Z",
+            "tags": ["bohème", "art", "authentique"],
+            "visitedPlaces": 3,
+            "totalPlaces": 12,
+            "favoriteSpots": ["Vignes de Montmartre", "Villa Léandre"],
+            "recommendations": {
+              "bestTime": "Tôt le matin ou fin d'après-midi",
+              "transport": "Funiculaire ou métro + marche",
+              "budget": "Modéré",
+              "tips": "Porter des chaussures confortables, beaucoup de montées"
+            }
+          }
+        },
+        "general": {
+          "planning": {
+            "title": "Planning exploration Paris 2025",
+            "content": "Objectif : découvrir au moins 5 lieux par mois. Focus sur les arrondissements moins touristiques (10e, 11e, 20e) pour une expérience plus authentique.",
+            "createdAt": "2025-01-01T09:00:00.000Z",
+            "updatedAt": "2025-01-05T10:00:00.000Z",
+            "tags": ["planning", "objectifs"],
+            "goals": [
+              "Visiter tous les marchés couverts de Paris",
+              "Découvrir 10 jardins secrets",
+              "Essayer la gastronomie de chaque arrondissement",
+              "Parcourir la petite ceinture"
+            ],
+            "monthlyTargets": {
+              "janvier": "13e - Chinatown et Bibliothèque François Mitterrand",
+              "février": "20e - Père Lachaise et Belleville",
+              "mars": "19e - Parc des Buttes-Chaumont et Canal"
+            }
+          },
+          "discoveries": {
+            "title": "Mes plus belles découvertes",
+            "content": "Lieux qui m'ont marqué et que je recommande absolument à mes amis. Souvent des endroits méconnus ou des expériences uniques.",
+            "createdAt": "2024-12-25T15:00:00.000Z",
+            "updatedAt": "2025-01-05T10:00:00.000Z",
+            "tags": ["coups de cœur", "recommandations"],
+            "topDiscoveries": [
+              {
+                "place": "Jardin Anne-Frank (4e)",
+                "reason": "Oasis de paix caché, très émouvant"
+              },
+              {
+                "place": "Du Pain et des Idées (10e)",
+                "reason": "Meilleure boulangerie de Paris, pain aux raisins divin"
+              },
+              {
+                "place": "Parc des Buttes-Chaumont (19e)",
+                "reason": "Vue exceptionnelle, romantique au coucher du soleil"
+              }
+            ]
+          }
+        },
+        "lists": {
+          "wish_list": {
+            "title": "Liste de souhaits - À découvrir",
+            "items": [
+              {
+                "place": "Les Catacombes (14e)",
+                "priority": "high",
+                "reason": "Expérience unique, réserver à l'avance",
+                "estimatedDate": "2025-02-15"
+              },
+              {
+                "place": "Tour Eiffel sommet (7e)",
+                "priority": "medium",
+                "reason": "Classique mais jamais fait jusqu'au bout",
+                "estimatedDate": "2025-03-20"
+              },
+              {
+                "place": "Marché aux Puces de Saint-Ouen",
+                "priority": "low",
+                "reason": "Chiner des antiquités",
+                "estimatedDate": "2025-04-10"
+              }
+            ],
+            "createdAt": "2025-01-01T12:00:00.000Z",
+            "updatedAt": "2025-01-05T10:00:00.000Z"
+          },
+          "seasonal": {
+            "spring": {
+              "title": "Printemps parisien",
+              "suggestions": [
+                "Jardins du Luxembourg en fleurs",
+                "Terrasses de café aux beaux jours",
+                "Promenade sur les quais de Seine"
+              ]
+            },
+            "summer": {
+              "title": "Été à Paris",
+              "suggestions": [
+                "Paris Plages",
+                "Cinéma en plein air Parc de la Villette",
+                "Rooftops avec vue"
+              ]
+            },
+            "autumn": {
+              "title": "Automne doré",
+              "suggestions": [
+                "Père Lachaise aux couleurs d'automne",
+                "Châtaignes grillées dans les rues",
+                "Cafés cosy pour se réchauffer"
+              ]
+            },
+            "winter": {
+              "title": "Magie hivernale",
+              "suggestions": [
+                "Marchés de Noël",
+                "Musées pour échapper au froid",
+                "Vin chaud place Saint-Germain"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "templates": {
+    "place_note": {
+      "title": "",
+      "content": "",
+      "rating": null,
+      "visitDate": null,
+      "tags": [],
+      "photos": [],
+      "recommendations": {
+        "bestTime": "",
+        "duration": "",
+        "budget": "",
+        "tips": ""
+      },
+      "mood": "",
+      "weather": "",
+      "companions": []
+    },
+    "arrondissement_note": {
+      "title": "",
+      "content": "",
+      "tags": [],
+      "visitedPlaces": 0,
+      "totalPlaces": 0,
+      "favoriteSpots": [],
+      "recommendations": {
+        "bestSeason": "",
+        "timeNeeded": "",
+        "budget": "",
+        "tips": ""
+      }
+    }
+  },
+  "categories": {
+    "moods": [
+      "émerveillé", "détendu", "inspiré", "nostalgique", 
+      "curieux", "surpris", "contemplatif", "joyeux"
+    ],
+    "weather": [
+      "ensoleillé", "nuageux", "pluvieux", "neigeux", 
+      "venteux", "brumeux", "orageux"
+    ],
+    "tags_suggestions": [
+      "incontournable", "secret", "romantique", "familial",
+      "art", "histoire", "gastronomie", "nature", "vue",
+      "gratuit", "cher", "authentique", "touristique",
+      "calme", "animé", "moderne", "historique"
+    ]
+  },
+  "export_formats": {
+    "pdf": {
+      "enabled": true,
+      "include_photos": true,
+      "page_format": "A4"
+    },
+    "markdown": {
+      "enabled": true,
+      "structure": "hierarchical"
+    },
+    "json": {
+      "enabled": true,
+      "compressed": false
+    }
+  }
+}
