@@ -142,6 +142,9 @@ class ParisExplorerAdvanced {
     
     // === GESTION PWA ===
     initializePWA() {
+        // Service Worker temporairement désactivé pour debug
+        console.log('🔧 PWA temporairement désactivé pour debug');
+        /*
         // Registration du Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
@@ -157,14 +160,7 @@ class ParisExplorerAdvanced {
                     console.warn('⚠️ Service Worker échoué:', error);
                 });
         }
-        
-        // Install Prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            this.showInstallPrompt(deferredPrompt);
-        });
+        */
     }
     
     showInstallPrompt(deferredPrompt) {
