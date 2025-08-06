@@ -12,10 +12,6 @@
     <meta name="apple-mobile-web-app-title" content="Paris Explorer">
     <link rel="manifest" href="manifest.json">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
-    
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -48,88 +44,83 @@
                     <option value="">Sélectionner...</option>
                 </select>
                 <button class="btn btn-sm" id="addUserBtn">+ Nouveau</button>
-                <button class="btn btn-sm" id="manageUsersBtn">Gérer</button>
-            </div>
-            
-            <!-- Barre de recherche avancée -->
-            <div class="search-section">
-                <div class="search-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Rechercher un lieu, monument, restaurant...">
-                    <button class="search-btn" id="searchBtn">🔍</button>
-                    <button class="voice-search-btn" id="voiceSearchBtn" title="Recherche vocale">🎤</button>
-                </div>
-                
-                <!-- Filtres avancés -->
-                <div class="filters-container">
-                    <select id="arrondissementFilter" class="filter-select">
-                        <option value="">Tous les arrondissements</option>
-                    </select>
-                    <select id="categoryFilter" class="filter-select">
-                        <option value="">Toutes les catégories</option>
-                    </select>
-                    <select id="statusFilter" class="filter-select">
-                        <option value="">Tous les statuts</option>
-                        <option value="visited">Visités</option>
-                        <option value="not-visited">Non visités</option>
-                        <option value="favorites">Favoris</option>
-                    </select>
-                    
-                    <div class="filter-actions">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="hideCompletedFilter">
-                            Masquer les visités
-                        </label>
-                        <button class="btn btn-sm" id="clearFiltersBtn">Effacer</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Onglets de navigation -->
-            <div class="tabs-container">
-                <button class="tab-btn active" data-tab="list">📋 Liste</button>
-                <button class="tab-btn" data-tab="map">🗺️ Carte</button>
-                <button class="tab-btn" data-tab="favorites">⭐ Favoris</button>
-                <button class="tab-btn" data-tab="collections">📚 Collections</button>
-                <button class="tab-btn" data-tab="achievements">🏆 Succès</button>
-                <button class="tab-btn" data-tab="stats">📊 Statistiques</button>
             </div>
         </nav>
 
-        <!-- Zone de contenu principal -->
-        <main class="main-content" id="mainContent">
+        <!-- Contrôles Recherche et Filtres -->
+        <section class="controls-section">
+            <div class="controls-container">
+                <!-- Barre de recherche intelligente -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="🔍 Rechercher monuments, restaurants, cafés..." autocomplete="off">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+
+                <!-- Filtres avancés -->
+                <div class="filters-container">
+                    <select id="arrondissementFilter" class="filter-select">
+                        <option value="">📍 Tous les arrondissements</option>
+                    </select>
+
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">🎯 Toutes les catégories</option>
+                    </select>
+
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">📊 Statut</option>
+                        <option value="visited">✅ Visités</option>
+                        <option value="not-visited">⏳ À visiter</option>
+                        <option value="favorites">⭐ Favoris</option>
+                    </select>
+
+                    <div class="view-controls">
+                        <button class="btn-icon" id="resetFiltersBtn" title="Réinitialiser filtres">🔄</button>
+                        <button class="btn-icon" id="viewModeBtn" title="Mode d'affichage">📋</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Onglets Navigation -->
+        <nav class="tabs-navigation">
+            <button class="tab-btn active" data-tab="list">📋 Liste</button>
+            <button class="tab-btn" data-tab="map">🗺️ Carte</button>
+            <button class="tab-btn" data-tab="favorites">⭐ Favoris</button>
+            <button class="tab-btn" data-tab="collections">📚 Collections</button>
+            <button class="tab-btn" data-tab="achievements">🏆 Succès</button>
+            <button class="tab-btn" data-tab="stats">📊 Stats</button>
+        </nav>
+
+        <!-- Contenu Principal -->
+        <main class="main-content">
             <!-- Onglet Liste -->
             <div class="tab-content active" id="listTab">
                 <div class="content-header">
-                    <h2>📋 Lieux de Paris</h2>
-                    <div class="content-actions">
-                        <div class="view-controls">
-                            <button class="btn-icon" id="listViewBtn" title="Vue liste">📋</button>
-                            <button class="btn-icon" id="gridViewBtn" title="Vue grille">▦</button>
-                            <button class="btn-icon" id="compactViewBtn" title="Vue compacte">☰</button>
+                    <div class="progress-overview">
+                        <div class="overall-stats">
+                            <span class="stat-item">📍 <span id="totalPlaces">0</span> lieux</span>
+                            <span class="stat-item">✅ <span id="visitedPlaces">0</span> visités</span>
+                            <span class="stat-item">📊 <span id="completionRate">0%</span></span>
                         </div>
-                        <div class="sort-controls">
-                            <select id="sortSelect" class="sort-select">
-                                <option value="default">Tri par défaut</option>
-                                <option value="alphabetical">Alphabétique</option>
-                                <option value="completion">Par progression</option>
-                                <option value="category">Par catégorie</option>
-                            </select>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="placesContainer" class="places-container">
+                
+                <div id="dataContainer" class="data-container">
                     <!-- Le contenu sera généré par JavaScript -->
                 </div>
             </div>
             
             <!-- Onglet Carte -->
             <div class="tab-content" id="mapTab">
-                <div class="content-header">
-                    <h2>🗺️ Carte Interactive</h2>
-                    <div class="map-controls">
-                        <button class="map-control-btn" id="centerMapBtn" title="Centrer sur Paris">🎯</button>
-                        <button class="map-control-btn" id="fullscreenMapBtn" title="Plein écran">⛶</button>
-                        <button class="map-control-btn" id="layersBtn" title="Couches">🗂️</button>
+                <div class="map-controls">
+                    <div class="map-legend">
+                        <span class="legend-item">✅ <span style="color: #059669;">Visité</span></span>
+                        <span class="legend-item">📍 <span style="color: #D4AF37;">À explorer</span></span>
                     </div>
                 </div>
                 <div id="mapContainer" class="map-container">
@@ -181,11 +172,7 @@
             <!-- Onglet Statistiques -->
             <div class="tab-content" id="statsTab">
                 <div class="content-header">
-                    <h2>📊 Mes Statistiques</h2>
-                    <div class="content-actions">
-                        <button class="btn btn-secondary" id="exportStatsBtn">📤 Exporter</button>
-                        <button class="btn btn-secondary" id="resetStatsBtn">🔄 Reset</button>
-                    </div>
+                    <h2>📊 Statistiques Détaillées</h2>
                 </div>
                 <div id="statsContainer" class="stats-container">
                     <!-- Les statistiques seront générées par JavaScript -->
@@ -194,77 +181,68 @@
         </main>
     </div>
     
-    <!-- Modal Ajouter Utilisateur -->
-    <div class="modal" id="addUserModal">
+    <!-- Modals -->
+    
+    <!-- Modal Ajout Utilisateur -->
+    <div class="modal" id="userModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">👤 Nouvel Utilisateur</h3>
-                <button class="close-btn" id="closeAddUserModalBtn">&times;</button>
+                <button class="close-btn" id="closeUserModalBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="newUserName">Nom d'utilisateur :</label>
-                    <input type="text" id="newUserName" class="form-input" placeholder="Entrez votre nom" maxlength="30">
-                </div>
-                <div class="form-actions">
-                    <button class="btn btn-primary" id="createUserBtn">Créer</button>
-                    <button class="btn btn-secondary" id="cancelCreateUserBtn">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal Gérer Utilisateurs -->
-    <div class="modal" id="manageUsersModal">
-        <div class="modal-content large">
-            <div class="modal-header">
-                <h3 class="modal-title">👥 Gestion des Utilisateurs</h3>
-                <button class="close-btn" id="closeManageUsersModalBtn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="user-management">
-                    <div class="user-list" id="userList">
-                        <!-- La liste des utilisateurs sera générée ici -->
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="userName">Nom :</label>
+                        <input type="text" id="userName" required maxlength="30" placeholder="Entrez le nom">
                     </div>
-                    
-                    <div class="management-actions">
-                        <div class="export-section">
-                            <h4>📤 Exporter</h4>
-                            <div class="export-options">
-                                <button class="btn btn-primary" onclick="app.exportImport.exportUserData('json')">JSON</button>
-                                <button class="btn btn-primary" onclick="app.exportImport.exportUserData('csv')">CSV</button>
-                                <button class="btn btn-primary" onclick="app.exportImport.exportUserData('pdf')">PDF</button>
-                                <button class="btn btn-primary" onclick="app.exportImport.exportCompleteUserData()">Tout</button>
-                            </div>
-                        </div>
-                        
-                        <div class="import-section">
-                            <h4>📥 Importer</h4>
-                            <div class="import-area">
-                                <button class="btn btn-primary" onclick="document.getElementById('importFileInput').click()">
-                                    Sélectionner fichier JSON
-                                </button>
-                                <p class="import-info">
-                                    Formats supportés : progression, favoris, notes, collections ou données complètes
-                                </p>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="userColor">Couleur :</label>
+                        <select id="userColor">
+                            <option value="#D4AF37">🟡 Or</option>
+                            <option value="#059669">🟢 Vert</option>
+                            <option value="#DC2626">🔴 Rouge</option>
+                            <option value="#7C3AED">🟣 Violet</option>
+                            <option value="#EA580C">🟠 Orange</option>
+                            <option value="#0891B2">🔵 Bleu</option>
+                        </select>
                     </div>
-                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="saveUserBtn">Créer</button>
+                <button class="btn btn-secondary" id="cancelUserBtn">Annuler</button>
             </div>
         </div>
     </div>
     
     <!-- Modal Paramètres -->
     <div class="modal" id="settingsModal">
-        <div class="modal-content large">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">⚙️ Paramètres Avancés</h3>
-                <button class="close-btn" id="closeSettingsModalBtn">&times;</button>
+                <h3 class="modal-title">⚙️ Paramètres</h3>
+                <button class="close-btn" id="closeSettingsBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="settingsContainer">
-                    <!-- Les paramètres seront rendus ici -->
+                <div class="settings-section">
+                    <h4>Affichage</h4>
+                    <div class="setting-item">
+                        <label for="themeSelect">Thème :</label>
+                        <select id="themeSelect">
+                            <option value="default">🌟 Parisien (défaut)</option>
+                            <option value="dark">🌙 Sombre</option>
+                            <option value="light">☀️ Clair</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Données</h4>
+                    <div class="setting-actions">
+                        <button class="btn btn-primary" id="exportAllBtn">📤 Exporter toutes les données</button>
+                        <button class="btn btn-secondary" id="importDataBtn">📥 Importer des données</button>
+                        <button class="btn btn-danger" id="clearAllDataBtn">🗑️ Effacer toutes les données</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -278,47 +256,49 @@
                 <button class="close-btn" id="closeCollectionModalBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="collectionName">Nom de la collection :</label>
-                    <input type="text" id="collectionName" class="form-input" placeholder="Ex: Mes restaurants favoris">
-                </div>
-                <div class="form-group">
-                    <label for="collectionDescription">Description :</label>
-                    <textarea id="collectionDescription" class="form-textarea" placeholder="Décrivez votre collection..."></textarea>
-                </div>
-                <div class="form-actions">
-                    <button class="btn btn-primary" id="saveCollectionBtn">Sauvegarder</button>
-                    <button class="btn btn-secondary" id="cancelCollectionBtn">Annuler</button>
-                </div>
+                <form id="collectionForm">
+                    <div class="form-group">
+                        <label for="collectionName">Nom de la collection :</label>
+                        <input type="text" id="collectionName" required placeholder="Mes restaurants favoris...">
+                    </div>
+                    <div class="form-group">
+                        <label for="collectionDescription">Description :</label>
+                        <textarea id="collectionDescription" placeholder="Description optionnelle..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="collectionColor">Couleur :</label>
+                        <select id="collectionColor">
+                            <option value="#D4AF37">🟡 Or</option>
+                            <option value="#059669">🟢 Vert</option>
+                            <option value="#DC2626">🔴 Rouge</option>
+                            <option value="#7C3AED">🟣 Violet</option>
+                            <option value="#EA580C">🟠 Orange</option>
+                            <option value="#0891B2">🔵 Bleu</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="saveCollectionBtn">Sauvegarder</button>
+                <button class="btn btn-secondary" id="cancelCollectionBtn">Annuler</button>
             </div>
         </div>
     </div>
     
-    <!-- Modal Note -->
+    <!-- Modal Notes -->
     <div class="modal" id="noteModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="noteModalTitle">📝 Ajouter une Note</h3>
+                <h3 class="modal-title" id="noteModalTitle">📝 Notes</h3>
                 <button class="close-btn" id="closeNoteModalBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="noteContent">Note personnelle :</label>
-                    <textarea id="noteContent" class="form-textarea" placeholder="Partagez votre expérience, vos conseils..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="noteRating">Évaluation :</label>
-                    <div class="rating-input" id="noteRating">
-                        <button class="star-btn" data-rating="1">⭐</button>
-                        <button class="star-btn" data-rating="2">⭐</button>
-                        <button class="star-btn" data-rating="3">⭐</button>
-                        <button class="star-btn" data-rating="4">⭐</button>
-                        <button class="star-btn" data-rating="5">⭐</button>
+                <div class="note-form">
+                    <textarea id="noteTextarea" placeholder="Ajoutez vos notes, impressions, conseils..."></textarea>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="saveNoteBtn">Sauvegarder</button>
+                        <button class="btn btn-secondary" id="cancelNoteBtn">Annuler</button>
                     </div>
-                </div>
-                <div class="form-actions">
-                    <button class="btn btn-primary" id="saveNoteBtn">Sauvegarder</button>
-                    <button class="btn btn-secondary" id="cancelNoteBtn">Annuler</button>
                 </div>
             </div>
         </div>
@@ -354,7 +334,7 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
-    <!-- Modules JavaScript (NOMS CORRIGES) -->
+    <!-- Modules JavaScript -->
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/data-manager.js"></script>
     <script src="assets/js/user-manager.js"></script>
@@ -364,7 +344,7 @@
     <script src="assets/js/export-import.js"></script>
     <script src="assets/js/app.js"></script>
     
-    <!-- Service Worker pour PWA (À LA RACINE) -->
+    <!-- Service Worker pour PWA -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
