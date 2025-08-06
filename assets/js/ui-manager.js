@@ -219,7 +219,96 @@ class UIManager {
             settingsBtn.addEventListener('click', () => this.showSettingsModal());
         }
         
+        // Événements modal utilisateur
+        this.setupUserModalEvents();
+        
         console.log('✅ Événements UI configurés');
+    }
+    
+    setupUserModalEvents() {
+        console.log('🔧 Configuration événements modal utilisateur');
+        
+        // Chercher le bouton Créer avec plusieurs IDs possibles
+        let saveUserBtn = this.safeGetElement('saveUserBtn') || 
+                         this.safeGetElement('createUserBtn') ||
+                         document.querySelector('.btn-primary');
+        
+        if (saveUserBtn) {
+            console.log('✅ Bouton Créer trouvé:', saveUserBtn.textContent);
+            saveUserBtn.onclick = () => this.handleCreateUser();
+        } else {
+            console.error('❌ Bouton Créer non trouvé');
+        }
+        
+        // Chercher le bouton Annuler
+        let cancelUserBtn = this.safeGetElement('cancelUserBtn') || 
+                           document.querySelector('.btn-secondary');
+        
+        if (cancelUserBtn) {
+            console.log('✅ Bouton Annuler trouvé:', cancelUserBtn.textContent);
+            cancelUserBtn.onclick = () => this.hideModal();
+        }
+        
+        // Sélecteur utilisateur
+        const userSelect = this.safeGetElement('userSelect');
+        if (userSelect) {
+            userSelect.addEventListener('change', (e) => {
+                if (e.target.value) {
+                    this.app.userManager.setCurrentUser(e.target.value);
+                }
+            });
+        }
+    }
+    
+    handleCreateUser() {
+        console.log('🔧 handleCreateUser appelé');
+        
+        const nameInput = this.safeGetElement('userName') || 
+                         document.querySelector('input[type="text"]');
+        const colorSelect = this.safeGetElement('userColor') || 
+                           document.querySelector('select');
+        
+        console.log('📝 Nom input:', nameInput?.value);
+        console.log('🎨 Couleur select:', colorSelect?.value);
+        
+        if (!nameInput) {
+            console.error('❌ Champ nom manquant');
+            this.app.showNotification('❌ Erreur: champ nom manquant', 'error');
+            return;
+        }
+        
+        const name = nameInput.value.trim();
+        const color = colorSelect?.value || '#D4AF37';
+        
+        if (!name) {
+            this.app.showNotification('❌ Le nom ne peut pas être vide', 'error');
+            return;
+        }
+        
+        console.log('🎯 Création utilisateur:', name, color);
+        
+        try {
+            if (this.app.userManager.createUser(name, color)) {
+                console.log('✅ Utilisateur créé avec succès');
+                this.hideModal();
+                this.loadUserSelector();
+                
+                // Vider le formulaire
+                nameInput.value = '';
+                if (colorSelect) colorSelect.value = '#D4AF37';
+                
+                // Sélectionner le nouvel utilisateur
+                const newUser = this.app.userManager.users.find(u => u.name === name);
+                if (newUser) {
+                    this.app.userManager.setCurrentUser(newUser.id);
+                }
+            } else {
+                console.error('❌ Échec création utilisateur');
+            }
+        } catch (error) {
+            console.error('❌ Erreur création:', error);
+            this.app.showNotification('❌ Erreur lors de la création', 'error');
+        }
     }
     
     setupModalEvents() {
@@ -309,6 +398,7 @@ class UIManager {
     
     // === MODALS ===
     showUserModal() {
+        console.log('🔧 Affichage modal utilisateur');
         const modal = this.safeGetElement('userModal');
         if (modal) {
             modal.style.display = 'flex';
@@ -319,6 +409,11 @@ class UIManager {
             if (nameInput) {
                 setTimeout(() => nameInput.focus(), 100);
             }
+            
+            // S'assurer que les événements sont bien connectés
+            this.setupUserModalEvents();
+        } else {
+            console.error('❌ Modal userModal introuvable');
         }
     }
     
