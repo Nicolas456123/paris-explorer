@@ -1,139 +1,95 @@
-// ===== SERVICE WORKER - PARIS EXPLORER PWA =====
+// ===== SERVICE WORKER PARIS EXPLORER - VERSION SANS IMAGES =====
 
 const CACHE_NAME = 'paris-explorer-v2.0.0';
 const OFFLINE_URL = '/offline.html';
 
-// Ressources critiques à mettre en cache (NOMS CORRIGES)
-const CRITICAL_RESOURCES = [
+// === RESSOURCES À METTRE EN CACHE ===
+const CORE_ASSETS = [
     '/',
     '/index.html',
+    '/offline.html',
+    '/manifest.json',
+    '/config.js',
+    '/paris-index.json',
+    
+    // CSS
     '/assets/css/main.css',
     '/assets/css/responsive.css',
     '/assets/css/themes.css',
-    '/assets/js/app.js',                // ✅ Corrigé (sans -advanced)
-    '/assets/js/data-manager.js',
-    '/assets/js/user-manager.js',       // ✅ Corrigé (sans -advanced)
-    '/assets/js/ui-manager.js',         // ✅ Corrigé (sans -advanced)
-    '/assets/js/map-manager.js',
+    
+    // JavaScript
     '/assets/js/utils.js',
-    '/config.json',                     // ✅ Maintenant créé
-    '/manifest.json',
-    OFFLINE_URL                         // ✅ Maintenant créé
-];
-
-// Ressources secondaires (chargées en arrière-plan)
-const SECONDARY_RESOURCES = [
-    '/assets/js/export-import.js',      // ✅ Corrigé (sans -advanced)
+    '/assets/js/data-manager.js',
+    '/assets/js/user-manager.js',
+    '/assets/js/map-manager.js',
+    '/assets/js/ui-manager.js',
     '/assets/js/search-filter.js',
-    '/paris-database.json',
-    '/user/progress.json',
-    '/user/favorites.json',
-    '/user/notes.json',
-    '/user/settings.json'
+    '/assets/js/export-import.js',
+    '/assets/js/app.js',
+    
+    // Données Paris
+    '/arrondissements/01-louvre.json',
+    '/arrondissements/02-bourse.json',
+    '/arrondissements/03-haut-marais.json',
+    '/arrondissements/04-marais-ile-saint-louis.json',
+    '/arrondissements/05-quartier-latin.json',
+    '/arrondissements/06-saint-germain.json',
+    '/arrondissements/07-invalides-tour-eiffel.json',
+    '/arrondissements/08-champs-elysees.json',
+    '/arrondissements/09-opera-pigalle.json',
+    '/arrondissements/10-canal-saint-martin.json',
+    '/arrondissements/11-bastille-oberkampf.json',
+    '/arrondissements/12-nation-bercy.json',
+    '/arrondissements/13-chinatown-bibliotheque.json',
+    '/arrondissements/14-montparnasse.json',
+    '/arrondissements/15-beaugrenelle-commerce.json',
+    '/arrondissements/16-trocadero-auteuil.json',
+    '/arrondissements/17-batignolles-monceau.json',
+    '/arrondissements/18-montmartre.json',
+    '/arrondissements/19-villette-buttes-chaumont.json',
+    '/arrondissements/20-belleville-menilmontant.json'
 ];
 
-// Ressources externes (CDN)
-const EXTERNAL_RESOURCES = [
-    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
-    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
-    'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap'
-];
-
-// === INSTALLATION DU SERVICE WORKER ===
+// === INSTALLATION ===
 self.addEventListener('install', event => {
-    console.log('🔧 Installation du Service Worker Paris Explorer v2.0.0');
+    console.log('🔄 Installation du Service Worker...');
     
     event.waitUntil(
-        (async () => {
-            try {
-                // Cache des ressources critiques
-                const cache = await caches.open(CACHE_NAME);
-                console.log('📦 Mise en cache des ressources critiques...');
-                
-                // Mise en cache progressive avec gestion d'erreur
-                const criticalPromises = CRITICAL_RESOURCES.map(async (resource) => {
-                    try {
-                        const response = await fetch(resource);
-                        if (response.ok) {
-                            await cache.put(resource, response);
-                            console.log(`✅ Mis en cache: ${resource}`);
-                        } else {
-                            console.warn(`⚠️ Ressource non trouvée: ${resource} (${response.status})`);
-                        }
-                    } catch (error) {
-                        console.warn(`⚠️ Erreur cache: ${resource}`, error.message);
-                    }
-                });
-                
-                await Promise.all(criticalPromises);
-                console.log('✅ Ressources critiques mises en cache');
-                
-                // Préchargement des ressources secondaires en arrière-plan
-                setTimeout(async () => {
-                    try {
-                        console.log('📦 Préchargement des ressources secondaires...');
-                        const secondaryPromises = SECONDARY_RESOURCES.map(async (resource) => {
-                            try {
-                                const response = await fetch(resource);
-                                if (response.ok) {
-                                    await cache.put(resource, response);
-                                }
-                            } catch (error) {
-                                console.warn(`⚠️ Erreur préchargement secondaire: ${resource}`);
-                            }
-                        });
-                        await Promise.all(secondaryPromises);
-                        console.log('✅ Ressources secondaires mises en cache');
-                    } catch (error) {
-                        console.warn('⚠️ Erreur préchargement secondaire:', error);
-                    }
-                }, 1000);
-                
-                // Forcer l'activation immédiate
-                self.skipWaiting();
-                
-            } catch (error) {
-                console.error('❌ Erreur installation Service Worker:', error);
-            }
-        })()
+        caches.open(CACHE_NAME)
+            .then(cache => {
+                console.log('📦 Mise en cache des ressources principales...');
+                return cache.addAll(CORE_ASSETS);
+            })
+            .then(() => {
+                console.log('✅ Installation terminée');
+                return self.skipWaiting();
+            })
+            .catch(error => {
+                console.error('❌ Erreur installation:', error);
+            })
     );
 });
 
-// === ACTIVATION DU SERVICE WORKER ===
+// === ACTIVATION ===
 self.addEventListener('activate', event => {
-    console.log('🚀 Activation du Service Worker Paris Explorer');
+    console.log('🚀 Activation du Service Worker...');
     
     event.waitUntil(
-        (async () => {
-            try {
-                // Nettoyage des anciens caches
-                const cacheNames = await caches.keys();
-                const oldCaches = cacheNames.filter(name => 
-                    name.startsWith('paris-explorer-') && name !== CACHE_NAME
+        caches.keys()
+            .then(cacheNames => {
+                return Promise.all(
+                    cacheNames.map(cacheName => {
+                        if (cacheName !== CACHE_NAME) {
+                            console.log('🗑️ Suppression ancien cache:', cacheName);
+                            return caches.delete(cacheName);
+                        }
+                    })
                 );
-                
-                if (oldCaches.length > 0) {
-                    console.log('🧹 Nettoyage des anciens caches:', oldCaches);
-                    await Promise.all(oldCaches.map(name => caches.delete(name)));
-                }
-                
-                // Prise de contrôle immédiate
-                await self.clients.claim();
-                console.log('✅ Service Worker activé et contrôle pris');
-                
-                // Notification aux clients
-                const clients = await self.clients.matchAll();
-                clients.forEach(client => {
-                    client.postMessage({
-                        type: 'SW_ACTIVATED',
-                        version: CACHE_NAME
-                    });
-                });
-                
-            } catch (error) {
-                console.error('❌ Erreur activation Service Worker:', error);
-            }
-        })()
+            })
+            .then(() => {
+                console.log('✅ Activation terminée');
+                return self.clients.claim();
+            })
     );
 });
 
@@ -142,119 +98,67 @@ self.addEventListener('fetch', event => {
     const { request } = event;
     const url = new URL(request.url);
     
-    // Ignorer les requêtes non-GET et cross-origin spéciales
-    if (request.method !== 'GET' || 
-        url.origin !== self.location.origin && !isAllowedExternal(url)) {
-        return;
+    // Stratégie Cache First pour les ressources statiques
+    if (isStaticAsset(url.pathname)) {
+        event.respondWith(
+            caches.match(request)
+                .then(response => {
+                    if (response) {
+                        return response;
+                    }
+                    
+                    return fetch(request)
+                        .then(response => {
+                            // Mettre en cache les nouvelles ressources valides
+                            if (response.status === 200) {
+                                const responseClone = response.clone();
+                                caches.open(CACHE_NAME)
+                                    .then(cache => cache.put(request, responseClone));
+                            }
+                            return response;
+                        });
+                })
+                .catch(() => {
+                    // Si hors ligne et ressource HTML, servir la page offline
+                    if (request.destination === 'document') {
+                        return caches.match(OFFLINE_URL);
+                    }
+                    return new Response('Ressource non disponible hors ligne', {
+                        status: 408,
+                        headers: { 'Content-Type': 'text/plain' }
+                    });
+                })
+        );
     }
     
-    event.respondWith(handleFetch(request));
+    // Stratégie Network First pour les données dynamiques et externes
+    else if (isAllowedExternal(url) || url.pathname.includes('.json')) {
+        event.respondWith(
+            fetch(request)
+                .then(response => {
+                    if (response.status === 200) {
+                        const responseClone = response.clone();
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.put(request, responseClone));
+                    }
+                    return response;
+                })
+                .catch(() => {
+                    return caches.match(request)
+                        .then(response => {
+                            if (response) {
+                                return response;
+                            }
+                            throw new Error('Ressource non disponible');
+                        });
+                })
+        );
+    }
 });
 
-async function handleFetch(request) {
-    const url = new URL(request.url);
-    
-    try {
-        // Stratégie par type de ressource
-        if (isCriticalResource(url.pathname)) {
-            return await cacheFirst(request);
-        } else if (isApiResource(url.pathname)) {
-            return await networkFirst(request);
-        } else if (isStaticResource(url.pathname)) {
-            return await staleWhileRevalidate(request);
-        } else {
-            return await networkFirst(request);
-        }
-    } catch (error) {
-        console.warn('⚠️ Erreur fetch:', url.pathname, error);
-        return await handleFetchError(request);
-    }
-}
-
-// === STRATÉGIES DE CACHE ===
-
-// Cache First - Pour les ressources critiques statiques
-async function cacheFirst(request) {
-    const cached = await caches.match(request);
-    if (cached) {
-        return cached;
-    }
-    
-    const response = await fetch(request);
-    if (response.ok) {
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(request, response.clone());
-    }
-    return response;
-}
-
-// Network First - Pour les données dynamiques
-async function networkFirst(request) {
-    try {
-        const response = await fetch(request);
-        if (response.ok) {
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, response.clone());
-        }
-        return response;
-    } catch (error) {
-        const cached = await caches.match(request);
-        if (cached) {
-            return cached;
-        }
-        throw error;
-    }
-}
-
-// Stale While Revalidate - Pour les ressources qui peuvent être mises à jour
-async function staleWhileRevalidate(request) {
-    const cached = await caches.match(request);
-    
-    const fetchPromise = fetch(request).then(response => {
-        if (response.ok) {
-            const cache = caches.open(CACHE_NAME);
-            cache.then(c => c.put(request, response.clone()));
-        }
-        return response;
-    }).catch(() => null);
-    
-    return cached || await fetchPromise;
-}
-
-// === GESTION DES ERREURS ===
-async function handleFetchError(request) {
-    const url = new URL(request.url);
-    
-    // Page offline pour les pages HTML
-    if (request.mode === 'navigate') {
-        const offlineResponse = await caches.match(OFFLINE_URL);
-        if (offlineResponse) {
-            return offlineResponse;
-        }
-    }
-    
-    // Réponse vide pour les autres ressources
-    return new Response('', {
-        status: 408,
-        statusText: 'Timeout'
-    });
-}
-
-// === UTILITAIRES ===
-function isCriticalResource(pathname) {
-    return CRITICAL_RESOURCES.some(resource => 
-        pathname === resource || pathname.endsWith(resource)
-    );
-}
-
-function isApiResource(pathname) {
-    return pathname.includes('/api/') || 
-           pathname.endsWith('.json') ||
-           pathname.includes('nominatim.openstreetmap.org');
-}
-
-function isStaticResource(pathname) {
-    return /\.(css|js|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/.test(pathname);
+// === FONCTIONS UTILITAIRES ===
+function isStaticAsset(pathname) {
+    return /\.(css|js|woff|woff2|ttf|eot)$/.test(pathname);
 }
 
 function isAllowedExternal(url) {
@@ -303,8 +207,6 @@ self.addEventListener('push', event => {
     const data = event.data.json();
     const options = {
         body: data.body,
-        icon: '/assets/images/icon-192.png',
-        badge: '/assets/images/badge-72.png',
         data: data.data,
         actions: [
             {
@@ -348,78 +250,59 @@ self.addEventListener('notificationclick', event => {
     }
 });
 
-// === SYNCHRONISATION EN ARRIÈRE-PLAN ===
-self.addEventListener('sync', event => {
-    if (event.tag === 'background-sync') {
-        event.waitUntil(doBackgroundSync());
-    }
-});
-
-async function doBackgroundSync() {
-    try {
-        console.log('🔄 Synchronisation en arrière-plan...');
-        
-        // Synchroniser les données utilisateur si connecté
-        const clients = await self.clients.matchAll();
-        clients.forEach(client => {
-            client.postMessage({
-                type: 'BACKGROUND_SYNC',
-                action: 'sync_user_data'
-            });
-        });
-        
-        console.log('✅ Synchronisation terminée');
-    } catch (error) {
-        console.error('❌ Erreur synchronisation:', error);
-    }
-}
-
-// === UTILITAIRES CACHE ===
+// === FONCTIONS UTILITAIRES AVANCÉES ===
 async function getCacheSize() {
     const cache = await caches.open(CACHE_NAME);
     const keys = await cache.keys();
-    return keys.length;
+    let totalSize = 0;
+    
+    for (const key of keys) {
+        const response = await cache.match(key);
+        if (response) {
+            const blob = await response.blob();
+            totalSize += blob.size;
+        }
+    }
+    
+    return {
+        count: keys.length,
+        size: totalSize,
+        formattedSize: formatBytes(totalSize)
+    };
 }
 
 async function clearCache(pattern) {
     const cache = await caches.open(CACHE_NAME);
     const keys = await cache.keys();
+    let cleared = 0;
     
-    const toDelete = pattern 
-        ? keys.filter(request => request.url.includes(pattern))
-        : keys;
+    for (const key of keys) {
+        if (!pattern || key.url.includes(pattern)) {
+            await cache.delete(key);
+            cleared++;
+        }
+    }
     
-    const deleted = await Promise.all(
-        toDelete.map(request => cache.delete(request))
-    );
-    
-    return deleted.filter(Boolean).length;
+    return cleared;
 }
 
 async function preloadRoutes(routes) {
     const cache = await caches.open(CACHE_NAME);
     
-    const preloadPromises = routes.map(async (route) => {
+    for (const route of routes) {
         try {
-            const response = await fetch(route);
-            if (response.ok) {
-                await cache.put(route, response);
-            }
+            await cache.add(route);
+            console.log(`✅ Route préchargée: ${route}`);
         } catch (error) {
-            console.warn(`⚠️ Erreur préchargement: ${route}`);
+            console.warn(`⚠️ Échec préchargement: ${route}`, error);
         }
-    });
-    
-    await Promise.all(preloadPromises);
+    }
 }
 
-// === GESTION DES ERREURS GLOBALES ===
-self.addEventListener('error', event => {
-    console.error('❌ Erreur Service Worker:', event.error);
-});
-
-self.addEventListener('unhandledrejection', event => {
-    console.error('❌ Promise rejetée dans Service Worker:', event.reason);
-});
-
-console.log('🗼 Service Worker Paris Explorer v2.0.0 chargé et prêt !');
+function formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
