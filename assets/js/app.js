@@ -1,349 +1,324 @@
-// ===== PARIS EXPLORER AVANCÉ - APPLICATION PRINCIPALE =====
+// ===== PARIS EXPLORER - APPLICATION PRINCIPALE CORRIGÉE =====
 
-// Configuration et état global de l'application avancée
-class ParisExplorerAdvanced {
+class ParisExplorerApp {
     constructor() {
-        // Configuration avancée
-        this.config = {
-            version: '2.0.0-advanced',
-            features: {
-                collections: true,
-                achievements: true,
-                notes: true,
-                advancedSearch: true,
-                exportImport: true,
-                theming: true,
-                pwa: true
-            },
-            performance: {
-                debounceDelay: 300,
-                cacheExpiry: 3600000, // 1 heure
-                maxCacheSize: 100
-            }
-        };
-        
-        // État de l'application
-        this.parisData = {};
-        this.currentUser = null;
-        this.searchQuery = '';
-        this.activeFilters = {
-            arrondissement: '',
-            category: '',
-            status: '',
-            tags: '',
-            hideCompleted: false
-        };
+        // Configuration et état
+        this.version = '2.0.1';
+        this.config = {};
         this.isDataLoaded = false;
+        this.parisData = {};
         this.currentTab = 'list';
-        this.viewMode = 'normal'; // normal, compact
-        this.sortMode = 'default'; // default, alphabetical, completion, popularity
+        this.searchQuery = '';
+        this.currentUser = null;
         
-        // Cache performance
-        this.cache = new Map();
-        this.debounceTimers = new Map();
+        // Managers
+        this.dataManager = new DataManager(this);
+        this.userManager = new UserManager(this);
+        this.uiManager = new UIManager(this);
+        this.mapManager = new MapManager(this);
+        this.searchFilter = new SearchFilter(this);
+        this.exportImport = new ExportImport(this);
         
-        // Événements personnalisés
-        this.eventBus = new EventTarget();
-        
-        // Initialiser les modules
-        this.initializeModules();
-        
-        this.init();
+        // États d'initialisation
+        this.initializationSteps = {
+            config: false,
+            users: false,
+            data: false,
+            ui: false,
+            complete: false
+        };
     }
     
-    initializeModules() {
-        try {
-            // Modules spécialisés avancés
-            this.dataManager = new DataManager(this);
-            this.userManager = new UserManager(this);
-            this.mapManager = new MapManager(this);
-            this.uiManager = new UIManager(this);
-            
-            // Tenter d'initialiser SearchFilter avec fallback
-            try {
-                this.searchFilter = window.SearchFilter ? new SearchFilter(this) : 
-                                   window.SearchFilterManager ? new SearchFilterManager(this) : null;
-            } catch (e) {
-                console.warn('SearchFilter non disponible:', e);
-                this.searchFilter = null;
-            }
-            
-            try {
-                this.exportImport = new ExportImport(this);
-            } catch (e) {
-                console.warn('ExportImport non disponible:', e);
-                this.exportImport = null;
-            }
-            
-        } catch (error) {
-            console.error('Erreur initialisation modules:', error);
-        }
-    }
-    
+    // === INITIALISATION PRINCIPALE ===
     async init() {
-        console.log('🗼 Initialisation Paris Explorer Avancé v' + this.config.version);
+        console.log(`🗼 Initialisation Paris Explorer v${this.version}`);
+        console.log('📅 Démarrage:', new Date().toLocaleString('fr-FR'));
         
         try {
-            // Phase 1: Initialisation de base
-            this.showGlobalLoading('Initialisation...');
+            // Étape 1: Configuration
+            this.showGlobalLoading('Chargement de la configuration...');
+            await this.loadConfig();
+            this.initializationSteps.config = true;
             
-            // Chargement utilisateurs depuis stockage modulaire
+            // Étape 2: Utilisateurs
+            this.showGlobalLoading('Chargement des utilisateurs...');
             this.userManager.loadUsers();
-            
-            // Migration des données legacy si nécessaire
             await this.userManager.migrateFromLegacyFormat();
+            this.initializationSteps.users = true;
             
-            // Phase 2: Chargement des données Paris
-            this.showGlobalLoading('Chargement des données parisiennes...');
-            await this.dataManager.loadParisData();
+            // Étape 3: Données Paris - FORCER LE CHARGEMENT COMPLET
+            this.showGlobalLoading('Chargement complet des données parisiennes...');
+            const dataLoaded = await this.dataManager.loadParisData();
+            this.initializationSteps.data = dataLoaded;
             
-            // Phase 3: Configuration de l'interface
-            this.showGlobalLoading('Configuration de l\'interface...');
+            if (dataLoaded) {
+                const totalLieux = this.dataManager.getTotalPlaces();
+                console.log(`📊 ${totalLieux} lieux chargés au total`);
+                
+                if (totalLieux < 1000) {
+                    console.warn(`⚠️ Seulement ${totalLieux} lieux - données possiblement incomplètes`);
+                    this.showNotification(`⚠️ ${totalLieux} lieux chargés (vérifiez les données)`, 'warning');
+                } else {
+                    console.log(`✅ Chargement réussi : ${totalLieux} lieux disponibles`);
+                }
+            }
+            
+            // Étape 4: Interface utilisateur
+            this.showGlobalLoading('Initialisation de l\'interface...');
             this.uiManager.setupEventListeners();
             this.uiManager.loadUserSelector();
+            this.searchFilter.initializeFilters();
+            this.initializationSteps.ui = true;
             
-            // Initialiser les filtres si disponible
-            if (this.searchFilter && this.searchFilter.initializeFilters) {
-                this.searchFilter.initializeFilters();
-            }
-            
-            // Phase 4: Sélection utilisateur
+            // Étape 5: Sélection utilisateur
+            this.showGlobalLoading('Configuration utilisateur...');
             this.userManager.autoSelectUser();
             
-            // Phase 5: Configuration PWA
+            // Étape 6: PWA et événements globaux
             this.initializePWA();
-            
-            // Phase 6: Événements globaux
             this.setupGlobalEventListeners();
             
+            // Finalisation
             this.hideGlobalLoading();
-            console.log('✅ Application avancée initialisée avec succès');
+            this.initializationSteps.complete = true;
+            
+            console.log('✅ Initialisation terminée avec succès');
+            console.log('📊 État de l\'application:', this.getAppStatus());
+            
+            // Notification de succès
+            const totalLieux = this.dataManager.getTotalPlaces();
+            this.showNotification(`🗼 Paris Explorer prêt ! ${totalLieux} lieux à découvrir`, 'success', 3000);
             
             // Vérifier les achievements au démarrage
             setTimeout(() => {
-                this.userManager.checkAchievements();
+                if (this.userManager.getCurrentUserData()) {
+                    this.userManager.checkAchievements();
+                }
             }, 1000);
             
         } catch (error) {
-            this.hideGlobalLoading();
             console.error('❌ Erreur critique lors de l\'initialisation:', error);
-            
-            // Mode dégradé : afficher l'interface même sans données
+            this.handleInitializationError(error);
+        }
+    }
+    
+    // === CHARGEMENT DE LA CONFIGURATION ===
+    async loadConfig() {
+        try {
+            const response = await fetch('config.js');
+            if (response.ok) {
+                const configText = await response.text();
+                // Enlever les commentaires et parser le JSON
+                const cleanConfig = configText.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+                this.config = JSON.parse(cleanConfig);
+                console.log('⚙️ Configuration chargée');
+            } else {
+                throw new Error('Configuration introuvable');
+            }
+        } catch (error) {
+            console.warn('⚠️ Configuration par défaut utilisée');
+            this.config = this.getDefaultConfig();
+        }
+    }
+    
+    getDefaultConfig() {
+        return {
+            app: {
+                name: "Paris Explorer",
+                version: this.version,
+                theme: "paris-classic"
+            },
+            features: {
+                search: { maxResults: 500 },
+                map: { enabled: true },
+                notifications: { enabled: true }
+            },
+            ui: {
+                itemsPerPage: 50,
+                defaultView: "list"
+            }
+        };
+    }
+    
+    // === GESTION D'ERREUR D'INITIALISATION ===
+    handleInitializationError(error) {
+        this.hideGlobalLoading();
+        
+        // Mode dégradé : afficher l'interface même en cas d'erreur
+        console.log('🚨 Activation du mode dégradé');
+        
+        try {
+            // Essayer d'initialiser l'interface minimale
             this.uiManager.setupEventListeners();
             this.uiManager.loadUserSelector();
+            this.searchFilter.initializeFilters();
             
-            if (this.searchFilter && this.searchFilter.initializeFilters) {
-                this.searchFilter.initializeFilters();
+            // Message d'erreur persistant
+            this.showNotification(
+                '⚠️ Erreur d\'initialisation - Mode dégradé activé', 
+                'error', 
+                0, // Persistant
+                [
+                    { label: 'Recharger', onclick: 'location.reload()' },
+                    { label: 'Continuer', onclick: 'this.parentElement.parentElement.remove()' }
+                ]
+            );
+            
+            // Interface d'erreur dans le contenu principal
+            const mainContent = document.querySelector('.tab-content.active');
+            if (mainContent) {
+                mainContent.innerHTML = `
+                    <div class="error-container">
+                        <h3>🚨 Erreur d'initialisation</h3>
+                        <p>L'application n'a pas pu se charger complètement.</p>
+                        <p><strong>Erreur:</strong> ${error.message}</p>
+                        <div class="error-actions">
+                            <button class="btn btn-primary" onclick="location.reload()">🔄 Recharger la page</button>
+                            <button class="btn btn-secondary" onclick="app.loadFallbackData()">📋 Données minimales</button>
+                        </div>
+                    </div>
+                `;
             }
             
-            this.showNotification('⚠️ Mode dégradé activé', 'warning');
-        }
-    }
-    
-    // === GESTION PWA ===
-    initializePWA() {
-        // Service Worker temporairement désactivé pour debug
-        console.log('🔧 PWA temporairement désactivé pour debug');
-        /*
-        // Registration du Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('✅ Service Worker enregistré');
-                    
-                    // Écouter les mises à jour
-                    registration.addEventListener('updatefound', () => {
-                        this.showUpdatePrompt();
-                    });
-                })
-                .catch(error => {
-                    console.warn('⚠️ Service Worker échoué:', error);
-                });
-        }
-        */
-    }
-    
-    showInstallPrompt(deferredPrompt) {
-        const installNotification = document.createElement('div');
-        installNotification.className = 'install-prompt';
-        installNotification.innerHTML = `
-            <div class="install-content">
-                <span>📱 Installer Paris Explorer en tant qu'application</span>
-                <div class="install-actions">
-                    <button class="btn btn-primary" id="installBtn">Installer</button>
-                    <button class="btn btn-secondary" id="dismissBtn">Plus tard</button>
+        } catch (uiError) {
+            console.error('❌ Erreur critique UI:', uiError);
+            document.body.innerHTML = `
+                <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+                    <h1>🚨 Erreur Critique</h1>
+                    <p>L'application ne peut pas démarrer.</p>
+                    <button onclick="location.reload()" style="padding: 10px 20px; font-size: 16px;">🔄 Recharger</button>
                 </div>
-            </div>
-        `;
-        
-        document.body.appendChild(installNotification);
-        
-        document.getElementById('installBtn').addEventListener('click', async () => {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`PWA installation: ${outcome}`);
-            installNotification.remove();
-        });
-        
-        document.getElementById('dismissBtn').addEventListener('click', () => {
-            installNotification.remove();
-        });
-        
-        // Auto-dismiss après 10 secondes
-        setTimeout(() => {
-            if (installNotification.parentNode) {
-                installNotification.remove();
-            }
-        }, 10000);
+            `;
+        }
     }
     
-    showUpdatePrompt() {
-        const updateNotification = document.createElement('div');
-        updateNotification.className = 'update-prompt';
-        updateNotification.innerHTML = `
-            <div class="update-content">
-                <span>🔄 Une nouvelle version est disponible</span>
-                <button class="btn btn-primary" onclick="window.location.reload()">Mettre à jour</button>
-            </div>
-        `;
+    // === DONNÉES DE SECOURS ===
+    loadFallbackData() {
+        console.log('🆘 Chargement des données de secours...');
         
-        document.body.appendChild(updateNotification);
-    }
-    
-    // === MÉTHODES DE COORDINATION AVANCÉES ===
-    onDataLoaded() {
-        this.isDataLoaded = true;
-        this.clearCache();
+        this.dataManager.loadFallbackData();
         this.uiManager.renderContent();
-        this.uiManager.updateStats();
         
-        // Initialiser les filtres si disponible
-        if (this.searchFilter && this.searchFilter.populateFilterOptions) {
-            this.searchFilter.populateFilterOptions();
-        }
-        
-        // Émettre événement personnalisé
-        this.emit('dataLoaded', { totalPlaces: this.dataManager.getTotalPlaces() });
-        
-        this.showNotification('🗼 Trésors parisiens chargés avec succès!', 'success');
+        this.showNotification('📋 Données minimales chargées', 'info');
     }
     
-    onUserChanged(user) {
-        this.currentUser = user;
-        this.clearCache();
-        this.uiManager.renderContent();
-        this.uiManager.updateStats();
-        
-        if (this.currentTab === 'map' && this.mapManager) {
-            this.mapManager.updateMarkers();
+    // === PWA ===
+    initializePWA() {
+        if ('serviceWorker' in navigator) {
+            console.log('🔧 Initialisation du Service Worker PWA...');
+            
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker enregistré');
+                        
+                        registration.addEventListener('updatefound', () => {
+                            console.log('🆕 Mise à jour disponible');
+                            this.showNotification(
+                                '🆕 Une mise à jour est disponible', 
+                                'info', 
+                                0,
+                                [{ label: 'Actualiser', onclick: 'location.reload()' }]
+                            );
+                        });
+                    })
+                    .catch(error => {
+                        console.warn('⚠️ Service Worker non disponible:', error);
+                    });
+            });
         }
         
-        this.emit('userChanged', { user });
-        
-        if (user) {
-            this.showNotification(`👤 Basculé vers ${user.name}`, 'info');
-        }
+        // Installation PWA
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('📱 PWA installable détectée');
+            e.preventDefault();
+            
+            this.showNotification(
+                '📱 Installer Paris Explorer comme application ?', 
+                'info', 
+                10000,
+                [
+                    { 
+                        label: 'Installer', 
+                        onclick: `
+                            e.prompt();
+                            e.userChoice.then((choiceResult) => {
+                                console.log(choiceResult.outcome === 'accepted' ? '✅ PWA installée' : '❌ Installation annulée');
+                            });
+                            this.parentElement.parentElement.remove();
+                        `
+                    },
+                    { label: 'Plus tard', onclick: 'this.parentElement.parentElement.remove()' }
+                ]
+            );
+        });
     }
     
-    // === GESTION DES ÉVÉNEMENTS GLOBAUX ===
+    // === ÉVÉNEMENTS GLOBAUX ===
     setupGlobalEventListeners() {
-        // Onglets
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('tab-btn')) {
-                this.switchTab(e.target.dataset.tab);
-            }
+        // Gestion des erreurs JavaScript
+        window.addEventListener('error', (event) => {
+            console.error('❌ Erreur JavaScript:', event.error);
+            this.showNotification('Une erreur inattendue s\'est produite', 'error');
         });
         
-        // Recherche globale
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'f') {
-                e.preventDefault();
-                document.getElementById('searchInput')?.focus();
+        // Gestion des erreurs de ressources
+        window.addEventListener('unhandledrejection', (event) => {
+            console.error('❌ Promise rejetée:', event.reason);
+            event.preventDefault();
+        });
+        
+        // Gestion de la connexion
+        window.addEventListener('online', () => {
+            console.log('🌐 Connexion rétablie');
+            this.showNotification('Connexion internet rétablie', 'success');
+        });
+        
+        window.addEventListener('offline', () => {
+            console.log('📵 Connexion perdue');
+            this.showNotification('Fonctionnement hors ligne activé', 'warning');
+        });
+        
+        // Gestion du redimensionnement pour la carte
+        window.addEventListener('resize', () => {
+            if (this.mapManager.map && this.currentTab === 'map') {
+                setTimeout(() => {
+                    this.mapManager.map.invalidateSize();
+                }, 100);
             }
         });
         
         // Raccourcis clavier
         document.addEventListener('keydown', (e) => {
-            if (e.altKey) {
-                switch (e.key) {
-                    case '1': this.switchTab('list'); break;
-                    case '2': this.switchTab('map'); break;
-                    case '3': this.switchTab('favorites'); break;
-                    case '4': this.switchTab('collections'); break;
-                    case '5': this.switchTab('achievements'); break;
-                    case '6': this.switchTab('stats'); break;
+            // Ctrl/Cmd + K : Focus sur la recherche
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }
+            
+            // Échap : Nettoyer la recherche
+            if (e.key === 'Escape') {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput && searchInput.value) {
+                    searchInput.value = '';
+                    this.searchQuery = '';
+                    this.uiManager.renderContent();
                 }
             }
         });
+        
+        console.log('⚙️ Événements globaux configurés');
     }
     
-    // === GESTION DES ONGLETS ===
-    switchTab(tabName) {
-        if (this.currentTab === tabName) return;
+    // === SYSTÈME DE NOTIFICATIONS ===
+    showNotification(message, type = 'info', duration = 3000, actions = []) {
+        console.log(`📢 Notification ${type}:`, message);
         
-        // Cacher tous les onglets
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        // Afficher l'onglet sélectionné
-        const targetTab = document.getElementById(tabName + 'Tab');
-        const targetBtn = document.querySelector(`[data-tab="${tabName}"]`);
-        
-        if (targetTab) targetTab.classList.add('active');
-        if (targetBtn) targetBtn.classList.add('active');
-        
-        this.currentTab = tabName;
-        
-        // Actions spécifiques par onglet
-        switch (tabName) {
-            case 'map':
-                if (this.mapManager) {
-                    setTimeout(() => this.mapManager.initializeMap(), 100);
-                }
-                break;
-            case 'favorites':
-                this.uiManager.renderFavorites();
-                break;
-            case 'collections':
-                this.uiManager.renderCollections();
-                break;
-            case 'achievements':
-                this.uiManager.renderAchievements();
-                break;
-            case 'stats':
-                this.uiManager.renderStats();
-                break;
-            default:
-                this.uiManager.renderContent();
-        }
-        
-        this.emit('tabChanged', { tab: tabName });
-    }
-    
-    // === SYSTÈME D'ÉVÉNEMENTS ===
-    emit(eventName, data = {}) {
-        const event = new CustomEvent(eventName, { detail: data });
-        this.eventBus.dispatchEvent(event);
-    }
-    
-    on(eventName, callback) {
-        this.eventBus.addEventListener(eventName, callback);
-    }
-    
-    off(eventName, callback) {
-        this.eventBus.removeEventListener(eventName, callback);
-    }
-    
-    // === NOTIFICATIONS ===
-    showNotification(message, type = 'info', duration = 4000, actions = []) {
         const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        
+        notification.className = `notification ${type}`;
         notification.innerHTML = `
             <div class="notification-content">
                 <div class="notification-icon">${this.getNotificationIcon(type)}</div>
@@ -359,11 +334,21 @@ class ParisExplorerAdvanced {
             </div>
         `;
         
-        const container = document.getElementById('notificationsContainer') || document.body;
+        // Container des notifications
+        let container = document.getElementById('notificationsContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'notificationsContainer';
+            container.className = 'notifications-container';
+            document.body.appendChild(container);
+        }
+        
         container.appendChild(notification);
         
+        // Animation d'entrée
         setTimeout(() => notification.classList.add('show'), 100);
         
+        // Suppression automatique
         if (duration > 0) {
             setTimeout(() => {
                 notification.classList.remove('show');
@@ -371,7 +356,7 @@ class ParisExplorerAdvanced {
             }, duration);
         }
         
-        // Limiter le nombre de notifications simultanées
+        // Limiter le nombre de notifications
         const notifications = container.querySelectorAll('.notification');
         if (notifications.length > 5) {
             notifications[0].remove();
@@ -381,7 +366,7 @@ class ParisExplorerAdvanced {
     getNotificationIcon(type) {
         const icons = {
             success: '✅',
-            error: '❌',
+            error: '❌', 
             warning: '⚠️',
             info: 'ℹ️',
             achievement: '🏆'
@@ -391,11 +376,22 @@ class ParisExplorerAdvanced {
     
     // === LOADING GLOBAL ===
     showGlobalLoading(message = 'Chargement...') {
-        const loading = document.getElementById('globalLoading');
-        if (loading) {
-            loading.querySelector('p').textContent = message;
-            loading.style.display = 'flex';
+        let loading = document.getElementById('globalLoading');
+        if (!loading) {
+            loading = document.createElement('div');
+            loading.id = 'globalLoading';
+            loading.className = 'global-loading';
+            loading.innerHTML = `
+                <div class="loading-content">
+                    <div class="loading-spinner"></div>
+                    <p>Chargement...</p>
+                </div>
+            `;
+            document.body.appendChild(loading);
         }
+        
+        loading.querySelector('p').textContent = message;
+        loading.style.display = 'flex';
     }
     
     hideGlobalLoading() {
@@ -405,85 +401,111 @@ class ParisExplorerAdvanced {
         }
     }
     
-    // === MÉTHODES UTILITAIRES AVANCÉES ===
+    // === UTILITAIRES ===
     getCurrentUserData() {
         return this.userManager.getCurrentUserData();
     }
     
     getUsers() {
-        return this.userManager.users; // Array maintenant
+        return this.userManager.users;
     }
     
     createPlaceId(arrKey, catKey, placeName) {
-        return `${arrKey}-${catKey}-${placeName}`
-            .replace(/['"]/g, '')
-            .replace(/[^\w\s-]/g, '')
-            .replace(/\s+/g, '-')
-            .toLowerCase();
+        return this.dataManager.createPlaceId(arrKey, catKey, placeName);
     }
     
-    // === CACHE ET PERFORMANCE ===
-    clearCache() {
-        this.cache.clear();
-        console.log('🧹 Cache vidé');
+    // === DIAGNOSTIC ===
+    getAppStatus() {
+        return {
+            version: this.version,
+            initialized: this.initializationSteps.complete,
+            dataLoaded: this.isDataLoaded,
+            totalPlaces: this.dataManager.getTotalPlaces(),
+            currentUser: this.userManager.getCurrentUserName(),
+            totalUsers: Object.keys(this.userManager.users).length,
+            currentTab: this.currentTab,
+            mapReady: this.mapManager.isInitialized()
+        };
     }
     
-    getCachedData(key) {
-        const cached = this.cache.get(key);
-        if (cached && Date.now() - cached.timestamp < this.config.performance.cacheExpiry) {
-            return cached.data;
-        }
-        return null;
-    }
-    
-    setCachedData(key, data) {
-        if (this.cache.size >= this.config.performance.maxCacheSize) {
-            const firstKey = this.cache.keys().next().value;
-            this.cache.delete(firstKey);
-        }
+    // === MÉTHODES DE DEBUG ===
+    debug() {
+        console.group('🔍 Debug Paris Explorer');
+        console.log('État app:', this.getAppStatus());
+        console.log('Données Paris:', Object.keys(this.parisData));
+        console.log('Utilisateurs:', Object.keys(this.userManager.users));
+        console.log('Configuration:', this.config);
+        console.groupEnd();
         
-        this.cache.set(key, {
-            data,
-            timestamp: Date.now()
-        });
+        return this.getAppStatus();
     }
     
-    // === DEBOUNCE ===
-    debounce(func, key, delay = null) {
-        const debounceDelay = delay || this.config.performance.debounceDelay;
-        
-        if (this.debounceTimers.has(key)) {
-            clearTimeout(this.debounceTimers.get(key));
-        }
-        
-        const timer = setTimeout(func, debounceDelay);
-        this.debounceTimers.set(key, timer);
-    }
-    
-    // === VÉRIFICATIONS ET MISES À JOUR ===
+    // === VÉRIFICATIONS ===
     checkForUpdates() {
-        // Vérifier si une nouvelle version est disponible
         if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
             navigator.serviceWorker.controller.postMessage({ type: 'CHECK_UPDATE' });
         }
     }
+    
+    // === MÉTHODES PUBLIQUES ===
+    reload() {
+        console.log('🔄 Rechargement de l\'application...');
+        this.showGlobalLoading('Rechargement en cours...');
+        
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    }
+    
+    switchTab(tabName) {
+        this.currentTab = tabName;
+        this.uiManager.switchTab(tabName);
+    }
+    
+    // === GESTION D'URGENCE ===
+    emergencyReset() {
+        if (confirm('⚠️ Réinitialiser complètement l\'application ? Toutes les données seront perdues !')) {
+            console.log('🚨 Réinitialisation d\'urgence');
+            
+            // Nettoyer le localStorage
+            Object.values(this.userManager.storageKeys).forEach(key => {
+                localStorage.removeItem(key);
+            });
+            
+            // Nettoyer autres données
+            localStorage.removeItem('paris-explorer-cache');
+            localStorage.removeItem('paris-explorer-settings');
+            
+            this.showNotification('🚨 Réinitialisation effectuée - Rechargement...', 'warning');
+            
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
+    }
 }
 
-// === INITIALISATION GLOBALE ===
-let app;
-
+// === INITIALISATION AUTOMATIQUE ===
 document.addEventListener('DOMContentLoaded', () => {
-    try {
-        app = new ParisExplorerAdvanced();
-        window.parisApp = app; // Exposition globale pour debug
-    } catch (error) {
-        console.error('❌ Erreur fatale:', error);
-        document.body.innerHTML = `
-            <div style="padding: 20px; text-align: center; color: red;">
-                <h2>⚠️ Erreur de chargement</h2>
-                <p>Une erreur critique s'est produite. Veuillez recharger la page.</p>
-                <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 20px;">🔄 Recharger</button>
-            </div>
-        `;
-    }
+    console.log('🚀 DOM chargé, démarrage de Paris Explorer...');
+    
+    // Créer l'instance globale
+    window.app = new ParisExplorerApp();
+    
+    // Démarrer l'initialisation
+    app.init().catch(error => {
+        console.error('❌ Échec de l\'initialisation:', error);
+    });
 });
+
+// === EXPOSITION GLOBALE POUR DEBUGGING ===
+window.ParisExplorer = {
+    version: '2.0.1',
+    debug: () => window.app ? window.app.debug() : 'App non initialisée',
+    reload: () => window.app ? window.app.reload() : location.reload(),
+    reset: () => window.app ? window.app.emergencyReset() : null,
+    status: () => window.app ? window.app.getAppStatus() : 'App non initialisée'
+};
+
+console.log('🗼 Paris Explorer 2.0.1 - Prêt pour l\'initialisation');
+console.log('💻 Debug disponible via:', Object.keys(window.ParisExplorer));
