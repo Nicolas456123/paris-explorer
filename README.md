@@ -164,17 +164,6 @@ npx serve .
 
 **Note :** Un serveur local est requis pour le fonctionnement de la PWA.
 
-## 📊 Performance & Optimisation
-
-### **Volume et Richesse des Données**
-- **📊 20 arrondissements** × **Métadonnées complètes**
-- **🗺️ 2000+ lieux** avec **coordonnées GPS précises**  
-- **🚇 100+ stations métro** géolocalisées avec lignes
-- **📍 Limites géographiques** exactes par arrondissement
-- **🏛️ Catégories multiples** : Monuments, restaurants, parcs, shopping...
-- **🏷️ Tags riches** : "incontournable", "art", "pyramide", "joconde"...
-- **📝 Descriptions détaillées** : Contexte historique et culturel
-
 ### **Stockage Modulaire**
 ```
 localStorage:
@@ -236,47 +225,3 @@ window.ParisExplorer = {
     getAccessibleLines: (coordinates) => lines[]
 };
 ```
-
-## 🌟 **Qualité Exceptionnelle des Données**
-
-### **Précision Géographique**
-- **Coordonnées GPS** au mètre près pour chaque lieu
-- **Polygones d'arrondissements** avec limites officielles  
-- **Centres géographiques** calculés précisément
-- **Superficies exactes** (ex: 1.83 km² pour le 1er)
-
-### **Richesse du Contenu**
-- **Descriptions détaillées** : "La Joconde, Vénus de Milo, Pyramide de verre, 35 000 œuvres"
-- **Tags sémantiques** : "incontournable", "art", "pyramide", "joconde"
-- **Context historique** intégré dans les descriptions
-- **Adresses complètes** pour navigation GPS
-
-### **Données Démographiques et Transport**
-- **Population exacte** par arrondissement (ex: 16,888 hab)
-- **Stations métro géolocalisées** avec toutes les lignes
-- **Accessibilité transport** calculée automatiquement
-- **Itinéraires optimisés** possibles entre lieux
-
-*Cette base de données représente des centaines d'heures de recherche et de vérification pour offrir l'expérience parisienne la plus riche et précise possible !*
-
-## 📈 Roadmap v2.1
-
-- [ ] **Mode collaboratif** - Exploration en équipe temps réel
-- [ ] **IA Recommendations** - Suggestions basées sur géolocalisation  
-- [ ] **Réalité Augmentée** - Infos contextuelles via caméra
-- [ ] **Calculs d'itinéraires** - Optimisation multi-lieux avec transports
-- [ ] **API Externe** - Synchronisation cloud et données temps réel
-- [ ] **Mode guidé** - Visites thématiques automatiques
-
-## 📞 Support & Contribution
-
-- **Documentation complète** : Voir `/docs/` (à venir)
-- **Issues GitHub** : [Signaler un bug](https://github.com/votre-repo/issues)
-- **Contributions** : Pull requests welcome !
-- **Contact** : contact@parisexplorer.fr
-
----
-
-**🗼 Paris Explorer v2.0.0 - L'expérience parisienne ultime !**
-
-*Explorez, découvrez, collectionnez - Tous les trésors de Paris dans votre poche*
