@@ -1,6 +1,6 @@
 {
   "name": "Paris Explorer",
-  "short_name": "Paris Explorer",
+  "short_name": "Paris Explorer", 
   "description": "Découvrez tous les trésors de Paris avec un système multi-utilisateurs sophistiqué",
   "start_url": "/",
   "display": "standalone",
@@ -9,49 +9,5 @@
   "background_color": "#1e3a8a",
   "lang": "fr-FR",
   "scope": "/",
-  "categories": ["travel", "lifestyle", "education"],
-  "related_applications": [
-    {
-      "platform": "webapp",
-      "url": "https://parisexplorer.fr/manifest.json"
-    }
-  ],
-  "prefer_related_applications": false,
-  "file_handlers": [
-    {
-      "action": "/import",
-      "accept": {
-        "application/json": [".json"],
-        "text/csv": [".csv"]
-      }
-    }
-  ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+parisexplorer",
-      "url": "/share?data=%s"
-    }
-  ],
-  "share_target": {
-    "action": "/share",
-    "method": "POST",
-    "enctype": "multipart/form-data",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url",
-      "files": [
-        {
-          "name": "data",
-          "accept": ["application/json", "text/csv"]
-        }
-      ]
-    }
-  },
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
-  "launch_handler": {
-    "client_mode": "focus-existing"
-  }
+  "categories": ["travel", "lifestyle", "education"]
 }
