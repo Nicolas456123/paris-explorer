@@ -5,283 +5,300 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paris Explorer - Découvrez tous les trésors de Paris</title>
     
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#D4AF37">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Paris Explorer">
+    <!-- Meta SEO -->
+    <meta name="description" content="Explorez Paris avec Paris Explorer ! Découvrez plus de 2000 lieux emblématiques, restaurants, monuments et secrets de la capitale française.">
+    <meta name="keywords" content="Paris, exploration, monuments, restaurants, tourisme, guide, France">
+    <meta name="author" content="Paris Explorer Team">
+    
+    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/themes.css">
+    <!-- Icônes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icon-16.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/images/icon-192.png">
     
-    <!-- Preconnect pour optimiser le chargement -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Meta PWA -->
+    <meta name="theme-color" content="#D4AF37">
+    <meta name="background-color" content="#1e3a8a">
+    <meta name="display" content="standalone">
+    <meta name="orientation" content="portrait-primary">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin="">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Styles additionnels pour les suggestions de recherche -->
+    <style>
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--paris-white);
+            border: 2px solid var(--paris-gold);
+            border-top: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .suggestion-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition-fast);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-item:hover,
+        .suggestion-item.highlighted {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--paris-blue);
+        }
+        
+        .suggestion-icon {
+            opacity: 0.6;
+            font-size: 14px;
+        }
+        
+        .suggestion-text {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .suggestion-history {
+            opacity: 0.4;
+            font-size: 12px;
+        }
+        
+        /* Styles pour les contrôles de carte */
+        .map-controls {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .map-controls .btn {
+            padding: 8px 12px;
+            min-width: auto;
+            font-size: 14px;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+        }
+        
+        /* Mode plein écran pour la carte */
+        .map-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            border-radius: 0 !important;
+        }
+        
+        .map-fullscreen .map-controls {
+            top: 20px;
+            right: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="app-container" id="appContainer">
-        <!-- Header avec navigation -->
+    <!-- Container Principal -->
+    <div class="app-container">
+        <!-- En-tête -->
         <header class="header">
-            <div class="header-content">
-                <h1 class="app-title">🗼 Paris Explorer</h1>
-                <div class="header-actions">
-                    <button class="btn-header" id="settingsBtn" title="Paramètres">⚙️</button>
-                    <button class="btn-header" id="helpBtn" title="Aide">❓</button>
-                </div>
-            </div>
+            <h1>🗼 Paris Explorer</h1>
+            <p class="subtitle">Découvrez tous les trésors de la Ville Lumière</p>
         </header>
-
-        <!-- Section Navigation -->
-        <nav class="nav-section">
-            <div class="user-section">
-                <label for="userSelect">👤 Utilisateur :</label>
+        
+        <!-- Navigation et Sélection Utilisateur -->
+        <section class="nav-section">
+            <div class="user-selector">
                 <select id="userSelect" class="user-select">
-                    <option value="">Sélectionner...</option>
+                    <option value="">Sélectionner un utilisateur...</option>
                 </select>
-                <button class="btn btn-sm" id="addUserBtn">+ Nouveau</button>
+                <button class="btn btn-primary" id="newUserBtn">👤 Nouveau</button>
+                <button class="btn btn-secondary" id="manageUsersBtn">⚙️ Gérer</button>
             </div>
-        </nav>
-
-        <!-- Contrôles Recherche et Filtres -->
-        <section class="controls-section">
-            <div class="controls-container">
-                <!-- Barre de recherche intelligente -->
-                <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="🔍 Rechercher monuments, restaurants, cafés..." autocomplete="off">
-                    <div class="search-suggestions" id="searchSuggestions"></div>
+            
+            <!-- Recherche Avancée -->
+            <div class="search-section">
+                <div class="search-container" style="position: relative;">
+                    <input type="text" id="searchInput" class="search-input" 
+                           placeholder="🔍 Rechercher un lieu, monument, restaurant..." 
+                           autocomplete="off">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                    <button class="voice-search-btn" id="voiceSearchBtn" title="Recherche vocale">🎤</button>
+                    
+                    <!-- Container pour les suggestions (sera créé dynamiquement) -->
                 </div>
-
-                <!-- Filtres avancés -->
+                
+                <!-- Filtres Avancés -->
                 <div class="filters-container">
                     <select id="arrondissementFilter" class="filter-select">
-                        <option value="">📍 Tous les arrondissements</option>
+                        <option value="">Tous les arrondissements</option>
                     </select>
-
+                    
                     <select id="categoryFilter" class="filter-select">
-                        <option value="">🎯 Toutes les catégories</option>
+                        <option value="">Toutes les catégories</option>
                     </select>
-
+                    
                     <select id="statusFilter" class="filter-select">
-                        <option value="">📊 Statut</option>
+                        <option value="">Tous les statuts</option>
                         <option value="visited">✅ Visités</option>
-                        <option value="not-visited">⏳ À visiter</option>
+                        <option value="not-visited">⭕ Non visités</option>
                         <option value="favorites">⭐ Favoris</option>
                     </select>
-
-                    <div class="view-controls">
-                        <button class="btn-icon" id="resetFiltersBtn" title="Réinitialiser filtres">🔄</button>
-                        <button class="btn-icon" id="viewModeBtn" title="Mode d'affichage">📋</button>
+                    
+                    <div class="filter-actions">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hideCompletedFilter">
+                            Masquer les visités
+                        </label>
+                        <button class="btn btn-sm btn-secondary" id="clearFiltersBtn">🗑️ Effacer</button>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Onglets Navigation -->
-        <nav class="tabs-navigation">
+        
+        <!-- Onglets de Navigation -->
+        <nav class="tabs-container">
             <button class="tab-btn active" data-tab="list">📋 Liste</button>
             <button class="tab-btn" data-tab="map">🗺️ Carte</button>
             <button class="tab-btn" data-tab="favorites">⭐ Favoris</button>
             <button class="tab-btn" data-tab="collections">📚 Collections</button>
+            <button class="tab-btn" data-tab="stats">📊 Statistiques</button>
             <button class="tab-btn" data-tab="achievements">🏆 Succès</button>
-            <button class="tab-btn" data-tab="stats">📊 Stats</button>
+            <button class="tab-btn" data-tab="settings">⚙️ Paramètres</button>
+            <button class="tab-btn" data-tab="users">👥 Utilisateurs</button>
         </nav>
-
-        <!-- Contenu Principal -->
-        <main class="main-content">
+        
+        <!-- Contenu des Onglets -->
+        <main>
             <!-- Onglet Liste -->
-            <div class="tab-content active" id="listTab">
-                <div class="content-header">
-                    <div class="progress-overview">
-                        <div class="overall-stats">
-                            <span class="stat-item">📍 <span id="totalPlaces">0</span> lieux</span>
-                            <span class="stat-item">✅ <span id="visitedPlaces">0</span> visités</span>
-                            <span class="stat-item">📊 <span id="completionRate">0%</span></span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="dataContainer" class="data-container">
-                    <!-- Le contenu sera généré par JavaScript -->
+            <div id="listContent" class="tab-content active">
+                <div class="loading-message">
+                    <div class="message-icon">🗼</div>
+                    <h3>Chargement des données parisiennes...</h3>
+                    <p>Préparation de votre exploration de Paris</p>
                 </div>
             </div>
             
             <!-- Onglet Carte -->
-            <div class="tab-content" id="mapTab">
-                <div class="map-controls">
-                    <div class="map-legend">
-                        <span class="legend-item">✅ <span style="color: #059669;">Visité</span></span>
-                        <span class="legend-item">📍 <span style="color: #D4AF37;">À explorer</span></span>
+            <div id="mapContent" class="tab-content">
+                <div id="mapContainer" style="position: relative;">
+                    <!-- La carte Leaflet sera initialisée ici -->
+                    <div class="map-loading" style="display: flex; align-items: center; justify-content: center; height: 100%; background: #a8d3f0; color: white; font-size: 1.2rem;">
+                        🗺️ Chargement de la carte de Paris...
                     </div>
                 </div>
-                <div id="mapContainer" class="map-container">
-                    <!-- La carte Leaflet sera initialisée ici -->
+                
+                <!-- Contrôles de Carte -->
+                <div class="map-controls">
+                    <button class="btn btn-primary" id="fullscreenBtn" title="Plein écran">🔲</button>
+                    <button class="btn btn-secondary" id="centerMapBtn" title="Centrer">🎯</button>
                 </div>
             </div>
             
             <!-- Onglet Favoris -->
-            <div class="tab-content" id="favoritesTab">
-                <div class="content-header">
-                    <h2>⭐ Mes Favoris</h2>
-                    <div class="content-actions">
-                        <button class="btn btn-primary" id="exportFavoritesBtn">📤 Exporter</button>
-                        <button class="btn btn-secondary" id="clearFavoritesBtn">🗑️ Vider</button>
-                    </div>
-                </div>
-                <div id="favoritesContainer" class="favorites-container">
-                    <!-- Les favoris seront générés par JavaScript -->
+            <div id="favoritesContent" class="tab-content">
+                <div class="empty-state">
+                    <div class="empty-icon">⭐</div>
+                    <h3>Vos lieux favoris</h3>
+                    <p>Ajoutez des lieux à vos favoris en cliquant sur l'étoile ☆</p>
                 </div>
             </div>
             
             <!-- Onglet Collections -->
-            <div class="tab-content" id="collectionsTab">
-                <div class="content-header">
-                    <h2>📚 Mes Collections</h2>
-                    <div class="content-actions">
-                        <button class="btn btn-primary" id="createCollectionBtn">+ Nouvelle Collection</button>
-                        <button class="btn btn-secondary" id="importCollectionBtn">📥 Importer</button>
-                    </div>
-                </div>
-                <div id="collectionsContainer" class="collections-container">
-                    <!-- Les collections seront générées par JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Onglet Achievements -->
-            <div class="tab-content" id="achievementsTab">
-                <div class="content-header">
-                    <h2>🏆 Succès & Récompenses</h2>
-                    <div class="achievement-stats">
-                        <span id="achievementProgress">0 / 42 succès débloqués</span>
-                    </div>
-                </div>
-                <div id="achievementsContainer" class="achievements-container">
-                    <!-- Les achievements seront générés par JavaScript -->
+            <div id="collectionsContent" class="tab-content">
+                <div class="empty-state">
+                    <div class="empty-icon">📚</div>
+                    <h3>Vos collections personnalisées</h3>
+                    <p>Organisez vos découvertes par thèmes</p>
                 </div>
             </div>
             
             <!-- Onglet Statistiques -->
-            <div class="tab-content" id="statsTab">
-                <div class="content-header">
-                    <h2>📊 Statistiques Détaillées</h2>
+            <div id="statsContent" class="tab-content">
+                <div class="stats-loading">
+                    <div class="message-icon">📊</div>
+                    <h3>Calcul de vos statistiques...</h3>
+                    <p>Analyse de votre progression parisienne</p>
                 </div>
-                <div id="statsContainer" class="stats-container">
-                    <!-- Les statistiques seront générées par JavaScript -->
+            </div>
+            
+            <!-- Onglet Succès -->
+            <div id="achievementsContent" class="tab-content">
+                <div class="achievements-loading">
+                    <div class="message-icon">🏆</div>
+                    <h3>Vos succès d'exploration</h3>
+                    <p>Débloquez des achievements en explorant Paris !</p>
+                </div>
+            </div>
+            
+            <!-- Onglet Paramètres -->
+            <div id="settingsContent" class="tab-content">
+                <div class="settings-loading">
+                    <div class="message-icon">⚙️</div>
+                    <h3>Configuration de l'application</h3>
+                    <p>Personnalisez votre expérience Paris Explorer</p>
+                </div>
+            </div>
+            
+            <!-- Onglet Gestion Utilisateurs -->
+            <div id="usersContent" class="tab-content">
+                <div class="users-loading">
+                    <div class="message-icon">👥</div>
+                    <h3>Gestion des utilisateurs</h3>
+                    <p>Créez et gérez vos profils d'exploration</p>
                 </div>
             </div>
         </main>
     </div>
     
-    <!-- Modals -->
+    <!-- MODALS -->
     
-    <!-- Modal Ajout Utilisateur -->
+    <!-- Modal Création/Gestion Utilisateur -->
     <div class="modal" id="userModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">👤 Nouvel Utilisateur</h3>
+                <h3 class="modal-title">👤 Gestion des Utilisateurs</h3>
                 <button class="close-btn" id="closeUserModalBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="userForm">
-                    <div class="form-group">
-                        <label for="userName">Nom :</label>
-                        <input type="text" id="userName" required maxlength="30" placeholder="Entrez le nom">
-                    </div>
-                    <div class="form-group">
-                        <label for="userColor">Couleur :</label>
-                        <select id="userColor">
-                            <option value="#D4AF37">🟡 Or</option>
-                            <option value="#059669">🟢 Vert</option>
-                            <option value="#DC2626">🔴 Rouge</option>
-                            <option value="#7C3AED">🟣 Violet</option>
-                            <option value="#EA580C">🟠 Orange</option>
-                            <option value="#0891B2">🔵 Bleu</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="saveUserBtn">Créer</button>
-                <button class="btn btn-secondary" id="cancelUserBtn">Annuler</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal Paramètres -->
-    <div class="modal" id="settingsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">⚙️ Paramètres</h3>
-                <button class="close-btn" id="closeSettingsBtn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="settings-section">
-                    <h4>Affichage</h4>
-                    <div class="setting-item">
-                        <label for="themeSelect">Thème :</label>
-                        <select id="themeSelect">
-                            <option value="default">🌟 Parisien (défaut)</option>
-                            <option value="dark">🌙 Sombre</option>
-                            <option value="light">☀️ Clair</option>
-                        </select>
-                    </div>
+                <div class="user-form">
+                    <label for="userNameInput">Nom de l'utilisateur :</label>
+                    <input type="text" id="userNameInput" class="form-input" 
+                           placeholder="Entrez le nom du nouvel utilisateur..." maxlength="50">
+                    <small class="setting-help">
+                        Le nom d'utilisateur doit être unique et ne peut pas être modifié.
+                    </small>
                 </div>
-                
-                <div class="settings-section">
-                    <h4>Données</h4>
-                    <div class="setting-actions">
-                        <button class="btn btn-primary" id="exportAllBtn">📤 Exporter toutes les données</button>
-                        <button class="btn btn-secondary" id="importDataBtn">📥 Importer des données</button>
-                        <button class="btn btn-danger" id="clearAllDataBtn">🗑️ Effacer toutes les données</button>
-                    </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="createUser()">✨ Créer l'utilisateur</button>
+                    <button class="btn btn-secondary" onclick="app.uiManager.hideModal()">Annuler</button>
                 </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal Collection -->
-    <div class="modal" id="collectionModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="collectionModalTitle">📚 Nouvelle Collection</h3>
-                <button class="close-btn" id="closeCollectionModalBtn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="collectionForm">
-                    <div class="form-group">
-                        <label for="collectionName">Nom de la collection :</label>
-                        <input type="text" id="collectionName" required placeholder="Mes restaurants favoris...">
-                    </div>
-                    <div class="form-group">
-                        <label for="collectionDescription">Description :</label>
-                        <textarea id="collectionDescription" placeholder="Description optionnelle..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="collectionColor">Couleur :</label>
-                        <select id="collectionColor">
-                            <option value="#D4AF37">🟡 Or</option>
-                            <option value="#059669">🟢 Vert</option>
-                            <option value="#DC2626">🔴 Rouge</option>
-                            <option value="#7C3AED">🟣 Violet</option>
-                            <option value="#EA580C">🟠 Orange</option>
-                            <option value="#0891B2">🔵 Bleu</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="saveCollectionBtn">Sauvegarder</button>
-                <button class="btn btn-secondary" id="cancelCollectionBtn">Annuler</button>
             </div>
         </div>
     </div>
@@ -290,60 +307,219 @@
     <div class="modal" id="noteModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="noteModalTitle">📝 Notes</h3>
+                <h3 class="modal-title">📝 Note Personnelle</h3>
                 <button class="close-btn" id="closeNoteModalBtn">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="note-form">
-                    <textarea id="noteTextarea" placeholder="Ajoutez vos notes, impressions, conseils..."></textarea>
-                    <div class="form-actions">
-                        <button class="btn btn-primary" id="saveNoteBtn">Sauvegarder</button>
-                        <button class="btn btn-secondary" id="cancelNoteBtn">Annuler</button>
-                    </div>
+                    <label for="noteTextarea">Votre note :</label>
+                    <textarea id="noteTextarea" class="form-textarea" 
+                              placeholder="Ajoutez vos impressions, conseils ou souvenirs..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" id="saveNoteBtn">💾 Sauvegarder</button>
+                    <button class="btn btn-secondary" id="cancelNoteBtn">Annuler</button>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Modal Details Lieu -->
+    <!-- Modal Détails Lieu -->
     <div class="modal" id="placeModal">
         <div class="modal-content large">
             <div class="modal-header">
-                <h3 class="modal-title" id="placeModalTitle"></h3>
+                <h3 class="modal-title" id="placeModalTitle">Détails du lieu</h3>
                 <button class="close-btn" id="closePlaceModalBtn">&times;</button>
             </div>
             <div class="modal-body" id="placeModalContent">
-                <!-- Contenu détaillé du lieu -->
+                <!-- Le contenu sera généré dynamiquement -->
             </div>
         </div>
     </div>
     
-    <!-- Toast Notifications Container -->
+    <!-- Modal Import -->
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📥 Importer des données</h3>
+                <button class="close-btn" onclick="app.uiManager.hideModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="import-section">
+                    <h4>📄 Sélectionner le fichier</h4>
+                    <input type="file" id="importFileInput" accept=".json" class="form-input">
+                    <small class="setting-help">
+                        Formats supportés : JSON (exporté depuis Paris Explorer)
+                    </small>
+                </div>
+                
+                <div class="import-options">
+                    <h4>⚙️ Options d'import</h4>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="replaceDataCheckbox" checked>
+                        <span class="checkmark"></span>
+                        Remplacer les données existantes
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="importSettingsCheckbox" checked>
+                        <span class="checkmark"></span>
+                        Importer les paramètres
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="importSearchHistoryCheckbox">
+                        <span class="checkmark"></span>
+                        Importer l'historique de recherche
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="app.exportImport.processImport()">
+                        📥 Importer
+                    </button>
+                    <button class="btn btn-secondary" onclick="app.uiManager.hideModal()">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Container des Notifications -->
     <div class="notifications-container" id="notificationsContainer">
         <!-- Les notifications dynamiques apparaîtront ici -->
     </div>
     
-    <!-- Inputs cachés -->
-    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+    <!-- Input caché pour l'import de fichiers -->
+    <input type="file" id="hiddenImportInput" accept=".json" style="display: none;">
     
     <!-- Loading Spinner Global -->
     <div class="global-loading" id="globalLoading" style="display: none;">
-        <div class="loading-spinner"></div>
-        <p>Chargement...</p>
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Chargement de Paris Explorer...</p>
+            <small style="color: var(--paris-gray); margin-top: 10px;">
+                Préparation de votre exploration parisienne
+            </small>
+        </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
-    <!-- Modules JavaScript dans le bon ordre -->
+    <!-- SCRIPTS -->
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <!-- Modules JavaScript (dans le bon ordre) -->
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/data-manager.js"></script>
     <script src="assets/js/user-manager.js"></script>
     <script src="assets/js/map-manager.js"></script>
-    <script src="assets/js/ui-manager.js"></script>
     <script src="assets/js/search-filter.js"></script>
     <script src="assets/js/export-import.js"></script>
+    <script src="assets/js/ui-manager.js"></script>
     <script src="assets/js/app.js"></script>
-
+    
+    <!-- Service Worker pour PWA -->
+    <script>
+        // Enregistrement du Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker enregistré:', registration.scope);
+                        
+                        // Écouter les mises à jour
+                        registration.addEventListener('updatefound', () => {
+                            console.log('🆕 Mise à jour du Service Worker disponible');
+                        });
+                    })
+                    .catch(registrationError => {
+                        console.warn('⚠️ Échec enregistrement Service Worker:', registrationError);
+                    });
+            });
+        }
+        
+        // Gestion de l'installation PWA
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('📱 PWA installable détectée');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Afficher une notification d'installation après un délai
+            setTimeout(() => {
+                if (deferredPrompt && window.app) {
+                    window.app.showNotification(
+                        '📱 Installer Paris Explorer comme application ?',
+                        'info',
+                        10000,
+                        [
+                            { 
+                                label: 'Installer', 
+                                onclick: `
+                                    deferredPrompt.prompt();
+                                    deferredPrompt.userChoice.then((choiceResult) => {
+                                        console.log(choiceResult.outcome === 'accepted' ? '✅ PWA installée' : '❌ Installation annulée');
+                                        deferredPrompt = null;
+                                    });
+                                    this.parentElement.parentElement.remove();
+                                `
+                            },
+                            { label: 'Plus tard', onclick: 'this.parentElement.parentElement.remove()' }
+                        ]
+                    );
+                }
+            }, 3000);
+        });
+        
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('✅ Paris Explorer installé comme PWA');
+            if (window.app) {
+                window.app.showNotification('✅ Paris Explorer installé !', 'success');
+            }
+        });
+        
+        // Debug global
+        window.debugParisExplorer = () => {
+            if (window.app) {
+                console.group('🗼 Debug Paris Explorer');
+                console.log('Version:', window.app.version);
+                console.log('État:', window.app.getAppStatus());
+                console.log('Utilisateurs:', Object.keys(window.app.userManager.users));
+                console.log('Données chargées:', window.app.isDataLoaded);
+                console.log('Total lieux:', window.app.dataManager?.getTotalPlaces());
+                console.log('Recherche:', window.app.searchFilter?.getSearchStatistics());
+                console.groupEnd();
+            } else {
+                console.log('❌ Application non initialisée');
+            }
+        };
+        
+        // Message de bienvenue dans la console
+        console.log(`
+🗼 Paris Explorer v2.0.1
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📍 Explorez plus de 2000 lieux parisiens
+🎯 Système multi-utilisateurs avancé  
+🗺️ Carte interactive Leaflet
+🔍 Recherche et filtres intelligents
+📊 Suivi de progression détaillé
+🏆 Système d'achievements
+📱 PWA avec mode hors-ligne
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💻 Debug: window.debugParisExplorer()
+🔧 Reset: window.ParisExplorer.reset()
+        `);
+    </script>
+    
+    <!-- Tracking et Analytics (désactivé par défaut) -->
+    <!-- 
+    <script>
+        // Ajouter ici vos scripts d'analytics si nécessaire
+        // Google Analytics, Matomo, etc.
+    </script>
+    -->
 </body>
 </html>
