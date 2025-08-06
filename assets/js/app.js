@@ -415,7 +415,7 @@ class ParisExplorerAdvanced {
     }
     
     getUsers() {
-        return this.userManager.users;
+        return this.userManager.users; // Array maintenant
     }
     
     createPlaceId(arrKey, catKey, placeName) {
