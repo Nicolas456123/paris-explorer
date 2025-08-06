@@ -36,8 +36,8 @@ class DataManager {
     // === CHARGEMENT INDEX PRINCIPAL ===
     async loadParisIndex() {
         try {
-            console.log('📄 Chargement paris-index.json...');
-            const response = await fetch('paris-index.json');
+            console.log('📄 Chargement data/paris-index.json...');
+            const response = await fetch('data/paris-index.json');
             
             if (!response.ok) {
                 throw new Error(`Index principal introuvable (${response.status})`);
@@ -91,7 +91,7 @@ class DataManager {
             const fileName = this.getArrondissementFileName(arrKey);
             console.log(`📁 Chargement ${arrKey} depuis ${fileName}...`);
             
-            const response = await fetch(`arrondissements/${fileName}`);
+            const response = await fetch(`data/arrondissements/${fileName}`);
             
             if (!response.ok) {
                 throw new Error(`Fichier ${fileName} introuvable (${response.status})`);
