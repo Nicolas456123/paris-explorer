@@ -3,13 +3,24 @@
 // Configuration et état global de l'application avancée
 class ParisExplorerAdvanced {
     constructor() {
-        // Modules spécialisés avancés
-        this.dataManager = new DataManager(this);
-        this.userManager = new UserManager(this);
-        this.mapManager = new MapManager(this);
-        this.uiManager = new UIManager(this);
-        this.searchFilter = new SearchFilter(this);
-        this.exportImport = new ExportImport(this);
+        // Configuration avancée
+        this.config = {
+            version: '2.0.0-advanced',
+            features: {
+                collections: true,
+                achievements: true,
+                notes: true,
+                advancedSearch: true,
+                exportImport: true,
+                theming: true,
+                pwa: true
+            },
+            performance: {
+                debounceDelay: 300,
+                cacheExpiry: 3600000, // 1 heure
+                maxCacheSize: 100
+            }
+        };
         
         // État de l'application
         this.parisData = {};
@@ -34,26 +45,39 @@ class ParisExplorerAdvanced {
         // Événements personnalisés
         this.eventBus = new EventTarget();
         
-        // Configuration avancée
-        this.config = {
-            version: '2.0.0-advanced',
-            features: {
-                collections: true,
-                achievements: true,
-                notes: true,
-                advancedSearch: true,
-                exportImport: true,
-                theming: true,
-                pwa: true
-            },
-            performance: {
-                debounceDelay: 300,
-                cacheExpiry: 3600000, // 1 heure
-                maxCacheSize: 100
-            }
-        };
+        // Initialiser les modules
+        this.initializeModules();
         
         this.init();
+    }
+    
+    initializeModules() {
+        try {
+            // Modules spécialisés avancés
+            this.dataManager = new DataManager(this);
+            this.userManager = new UserManager(this);
+            this.mapManager = new MapManager(this);
+            this.uiManager = new UIManager(this);
+            
+            // Tenter d'initialiser SearchFilter avec fallback
+            try {
+                this.searchFilter = window.SearchFilter ? new SearchFilter(this) : 
+                                   window.SearchFilterManager ? new SearchFilterManager(this) : null;
+            } catch (e) {
+                console.warn('SearchFilter non disponible:', e);
+                this.searchFilter = null;
+            }
+            
+            try {
+                this.exportImport = new ExportImport(this);
+            } catch (e) {
+                console.warn('ExportImport non disponible:', e);
+                this.exportImport = null;
+            }
+            
+        } catch (error) {
+            console.error('Erreur initialisation modules:', error);
+        }
     }
     
     async init() {
@@ -77,7 +101,11 @@ class ParisExplorerAdvanced {
             this.showGlobalLoading('Configuration de l\'interface...');
             this.uiManager.setupEventListeners();
             this.uiManager.loadUserSelector();
-            this.searchFilter.initializeFilters();
+            
+            // Initialiser les filtres si disponible
+            if (this.searchFilter && this.searchFilter.initializeFilters) {
+                this.searchFilter.initializeFilters();
+            }
             
             // Phase 4: Sélection utilisateur
             this.userManager.autoSelectUser();
@@ -98,139 +126,45 @@ class ParisExplorerAdvanced {
             
         } catch (error) {
             this.hideGlobalLoading();
+            console.error('❌ Erreur critique lors de l\'initialisation:', error);
             
             // Mode dégradé : afficher l'interface même sans données
             this.uiManager.setupEventListeners();
             this.uiManager.loadUserSelector();
-            this.searchFilter.initializeFilters();
             
-            console.warn('⚠️ Application démarrée en mode dégradé:', error.message);
-            this.showNotification('Mode démonstration - Créez un profil pour commencer', 'warning');
-        }
-    }
-    
-    // === GESTION AVANCÉE DES ÉVÉNEMENTS ===
-    setupGlobalEventListeners() {
-        // Raccourcis clavier avancés
-        document.addEventListener('keydown', this.handleGlobalKeyboard.bind(this));
-        
-        // Gestion de la visibilité de la page
-        document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
-        
-        // Gestion des erreurs globales
-        window.addEventListener('error', this.handleGlobalError.bind(this));
-        
-        // Sauvegarde automatique périodique
-        setInterval(() => {
-            if (this.currentUser) {
-                this.userManager.saveUsers();
-                console.log('💾 Sauvegarde automatique effectuée');
+            if (this.searchFilter && this.searchFilter.initializeFilters) {
+                this.searchFilter.initializeFilters();
             }
-        }, 30000); // Toutes les 30 secondes
-        
-        // Vérification des achievements périodique
-        setInterval(() => {
-            if (this.currentUser) {
-                this.userManager.checkAchievements();
-            }
-        }, 60000); // Toutes les minutes
-    }
-    
-    handleGlobalKeyboard(event) {
-        // Ctrl/Cmd + F : Focus recherche
-        if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
-            event.preventDefault();
-            document.getElementById('searchInput').focus();
-        }
-        
-        // Ctrl/Cmd + U : Ouvrir gestion utilisateurs
-        if ((event.ctrlKey || event.metaKey) && event.key === 'u') {
-            event.preventDefault();
-            this.uiManager.showModal();
-        }
-        
-        // Ctrl/Cmd + S : Sauvegarder
-        if ((event.ctrlKey || event.metaKey) && event.key === 's') {
-            event.preventDefault();
-            this.userManager.saveUsers();
-            this.showNotification('💾 Données sauvegardées', 'success');
-        }
-        
-        // Ctrl/Cmd + E : Exporter
-        if ((event.ctrlKey || event.metaKey) && event.key === 'e') {
-            event.preventDefault();
-            this.exportImport.exportCompleteUserData(this.currentUser);
-        }
-        
-        // Navigation par onglets (Ctrl/Cmd + 1-6)
-        if ((event.ctrlKey || event.metaKey) && event.key >= '1' && event.key <= '6') {
-            event.preventDefault();
-            const tabs = ['list', 'map', 'favorites', 'collections', 'achievements', 'stats'];
-            const tabIndex = parseInt(event.key) - 1;
-            if (tabs[tabIndex]) {
-                this.uiManager.switchTab(tabs[tabIndex]);
-            }
-        }
-        
-        // Échap : Fermer modals et dropdowns
-        if (event.key === 'Escape') {
-            // Fermer dropdowns
-            document.querySelectorAll('.dropdown.open').forEach(dropdown => {
-                dropdown.classList.remove('open');
-            });
             
-            // Fermer modals
-            const modals = document.querySelectorAll('.modal.show');
-            modals.forEach(modal => {
-                modal.classList.remove('show');
-            });
-        }
-    }
-    
-    handleVisibilityChange() {
-        if (document.hidden) {
-            // Page cachée : sauvegarder les données
-            if (this.currentUser) {
-                this.userManager.saveUsers();
-                console.log('💾 Sauvegarde avant masquage de la page');
-            }
-        } else {
-            // Page visible : vérifier les mises à jour
-            this.checkForUpdates();
-        }
-    }
-    
-    handleGlobalError(event) {
-        console.error('❌ Erreur globale:', event.error);
-        this.showNotification('Une erreur est survenue. Les données ont été sauvegardées.', 'error');
-        
-        // Sauvegarde d'urgence
-        if (this.currentUser) {
-            this.userManager.saveUsers();
+            this.showNotification('⚠️ Mode dégradé activé', 'warning');
         }
     }
     
     // === GESTION PWA ===
     initializePWA() {
-        // Gestion de l'installation PWA
-        let deferredPrompt;
+        // Registration du Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('✅ Service Worker enregistré');
+                    
+                    // Écouter les mises à jour
+                    registration.addEventListener('updatefound', () => {
+                        this.showUpdatePrompt();
+                    });
+                })
+                .catch(error => {
+                    console.warn('⚠️ Service Worker échoué:', error);
+                });
+        }
         
+        // Install Prompt
+        let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            
-            // Afficher un bouton d'installation personnalisé
             this.showInstallPrompt(deferredPrompt);
         });
-        
-        // Gestion de la mise à jour du service worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.addEventListener('message', (event) => {
-                if (event.data && event.data.type === 'UPDATE_AVAILABLE') {
-                    this.showUpdatePrompt();
-                }
-            });
-        }
     }
     
     showInstallPrompt(deferredPrompt) {
@@ -286,7 +220,11 @@ class ParisExplorerAdvanced {
         this.clearCache();
         this.uiManager.renderContent();
         this.uiManager.updateStats();
-        this.searchFilter.populateFilterOptions();
+        
+        // Initialiser les filtres si disponible
+        if (this.searchFilter && this.searchFilter.populateFilterOptions) {
+            this.searchFilter.populateFilterOptions();
+        }
         
         // Émettre événement personnalisé
         this.emit('dataLoaded', { totalPlaces: this.dataManager.getTotalPlaces() });
@@ -294,65 +232,83 @@ class ParisExplorerAdvanced {
         this.showNotification('🗼 Trésors parisiens chargés avec succès!', 'success');
     }
     
-    onUserChanged(userName) {
-        this.currentUser = userName;
+    onUserChanged(user) {
+        this.currentUser = user;
         this.clearCache();
-        
-        // Appliquer les paramètres utilisateur
-        const userData = this.getCurrentUserData();
-        if (userData?.settings) {
-            this.userManager.applySettings();
-        }
-        
-        // Mettre à jour l'interface
         this.uiManager.renderContent();
         this.uiManager.updateStats();
         
-        // Mettre à jour tous les onglets
-        if (this.currentTab === 'favorites') {
-            this.uiManager.renderFavorites();
-        } else if (this.currentTab === 'collections') {
-            this.uiManager.renderCollections();
-        } else if (this.currentTab === 'achievements') {
-            this.uiManager.renderAchievements();
+        if (this.currentTab === 'map' && this.mapManager) {
+            this.mapManager.updateMarkers();
         }
         
-        // Mettre à jour la carte si visible
-        if (this.mapManager.map && this.currentTab === 'map') {
-            this.mapManager.updateMapMarkers();
-        }
+        this.emit('userChanged', { user });
         
-        // Émettre événement
-        this.emit('userChanged', { userName, userData });
+        if (user) {
+            this.showNotification(`👤 Basculé vers ${user.name}`, 'info');
+        }
     }
     
-    onPlaceToggled(placeId, isVisited) {
-        // Invalidate cache
-        this.invalidateCache(`place-${placeId}`);
+    // === GESTION DES ÉVÉNEMENTS GLOBAUX ===
+    setupGlobalEventListeners() {
+        // Onglets
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab-btn')) {
+                this.switchTab(e.target.dataset.tab);
+            }
+        });
         
-        // Mettre à jour l'interface
-        this.uiManager.updatePlaceCard(placeId, isVisited);
-        this.uiManager.updateStats();
+        // Recherche globale
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('searchInput')?.focus();
+            }
+        });
         
-        // Mettre à jour la carte si visible
-        if (this.mapManager.map && this.currentTab === 'map') {
-            this.mapManager.updateMapMarkers();
-        }
-        
-        // Vérifier les achievements
-        this.userManager.checkAchievements();
-        
-        // Émettre événement
-        this.emit('placeToggled', { placeId, isVisited });
+        // Raccourcis clavier
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey) {
+                switch (e.key) {
+                    case '1': this.switchTab('list'); break;
+                    case '2': this.switchTab('map'); break;
+                    case '3': this.switchTab('favorites'); break;
+                    case '4': this.switchTab('collections'); break;
+                    case '5': this.switchTab('achievements'); break;
+                    case '6': this.switchTab('stats'); break;
+                }
+            }
+        });
     }
     
-    onTabChanged(tabName) {
+    // === GESTION DES ONGLETS ===
+    switchTab(tabName) {
+        if (this.currentTab === tabName) return;
+        
+        // Cacher tous les onglets
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Afficher l'onglet sélectionné
+        const targetTab = document.getElementById(tabName + 'Tab');
+        const targetBtn = document.querySelector(`[data-tab="${tabName}"]`);
+        
+        if (targetTab) targetTab.classList.add('active');
+        if (targetBtn) targetBtn.classList.add('active');
+        
         this.currentTab = tabName;
         
-        // Rendu spécifique selon l'onglet
+        // Actions spécifiques par onglet
         switch (tabName) {
             case 'map':
-                setTimeout(() => this.mapManager.initMap(), 100);
+                if (this.mapManager) {
+                    setTimeout(() => this.mapManager.initializeMap(), 100);
+                }
                 break;
             case 'favorites':
                 this.uiManager.renderFavorites();
@@ -364,88 +320,19 @@ class ParisExplorerAdvanced {
                 this.uiManager.renderAchievements();
                 break;
             case 'stats':
-                this.uiManager.renderAdvancedStats();
+                this.uiManager.renderStats();
                 break;
+            default:
+                this.uiManager.renderContent();
         }
         
-        // Émettre événement
-        this.emit('tabChanged', { tabName });
-    }
-    
-    onSearchChanged(query, filters) {
-        this.searchQuery = query;
-        this.activeFilters = { ...this.activeFilters, ...filters };
-        
-        // Debounce pour éviter trop de rendus
-        this.debounce('search', () => {
-            this.uiManager.renderContent();
-        }, this.config.performance.debounceDelay);
-        
-        // Émettre événement
-        this.emit('searchChanged', { query, filters });
-    }
-    
-    onFilterChanged(filterType, value) {
-        this.activeFilters[filterType] = value;
-        this.uiManager.renderContent();
-        
-        // Émettre événement
-        this.emit('filterChanged', { filterType, value });
-    }
-    
-    // === SYSTÈME DE CACHE AVANCÉ ===
-    getCached(key) {
-        const cached = this.cache.get(key);
-        if (cached && Date.now() - cached.timestamp < this.config.performance.cacheExpiry) {
-            return cached.data;
-        }
-        this.cache.delete(key);
-        return null;
-    }
-    
-    setCached(key, data) {
-        // Limiter la taille du cache
-        if (this.cache.size >= this.config.performance.maxCacheSize) {
-            const firstKey = this.cache.keys().next().value;
-            this.cache.delete(firstKey);
-        }
-        
-        this.cache.set(key, {
-            data,
-            timestamp: Date.now()
-        });
-    }
-    
-    clearCache() {
-        this.cache.clear();
-        console.log('🗑️ Cache vidé');
-    }
-    
-    invalidateCache(pattern) {
-        for (const key of this.cache.keys()) {
-            if (key.includes(pattern)) {
-                this.cache.delete(key);
-            }
-        }
-    }
-    
-    // === SYSTÈME DE DEBOUNCE ===
-    debounce(key, func, delay) {
-        if (this.debounceTimers.has(key)) {
-            clearTimeout(this.debounceTimers.get(key));
-        }
-        
-        const timer = setTimeout(() => {
-            func();
-            this.debounceTimers.delete(key);
-        }, delay);
-        
-        this.debounceTimers.set(key, timer);
+        this.emit('tabChanged', { tab: tabName });
     }
     
     // === SYSTÈME D'ÉVÉNEMENTS ===
-    emit(eventName, data) {
-        this.eventBus.dispatchEvent(new CustomEvent(eventName, { detail: data }));
+    emit(eventName, data = {}) {
+        const event = new CustomEvent(eventName, { detail: data });
+        this.eventBus.dispatchEvent(event);
     }
     
     on(eventName, callback) {
@@ -456,10 +343,10 @@ class ParisExplorerAdvanced {
         this.eventBus.removeEventListener(eventName, callback);
     }
     
-    // === NOTIFICATIONS AVANCÉES ===
-    showNotification(message, type = 'success', duration = 4000, actions = []) {
+    // === NOTIFICATIONS ===
+    showNotification(message, type = 'info', duration = 4000, actions = []) {
         const notification = document.createElement('div');
-        notification.className = `notification advanced ${type}`;
+        notification.className = `notification notification-${type}`;
         
         notification.innerHTML = `
             <div class="notification-content">
@@ -539,6 +426,44 @@ class ParisExplorerAdvanced {
             .toLowerCase();
     }
     
+    // === CACHE ET PERFORMANCE ===
+    clearCache() {
+        this.cache.clear();
+        console.log('🧹 Cache vidé');
+    }
+    
+    getCachedData(key) {
+        const cached = this.cache.get(key);
+        if (cached && Date.now() - cached.timestamp < this.config.performance.cacheExpiry) {
+            return cached.data;
+        }
+        return null;
+    }
+    
+    setCachedData(key, data) {
+        if (this.cache.size >= this.config.performance.maxCacheSize) {
+            const firstKey = this.cache.keys().next().value;
+            this.cache.delete(firstKey);
+        }
+        
+        this.cache.set(key, {
+            data,
+            timestamp: Date.now()
+        });
+    }
+    
+    // === DEBOUNCE ===
+    debounce(func, key, delay = null) {
+        const debounceDelay = delay || this.config.performance.debounceDelay;
+        
+        if (this.debounceTimers.has(key)) {
+            clearTimeout(this.debounceTimers.get(key));
+        }
+        
+        const timer = setTimeout(func, debounceDelay);
+        this.debounceTimers.set(key, timer);
+    }
+    
     // === VÉRIFICATIONS ET MISES À JOUR ===
     checkForUpdates() {
         // Vérifier si une nouvelle version est disponible
@@ -546,148 +471,23 @@ class ParisExplorerAdvanced {
             navigator.serviceWorker.controller.postMessage({ type: 'CHECK_UPDATE' });
         }
     }
-    
-    // === ANALYTICS ET PERFORMANCE ===
-    logPerformance(action, duration) {
-        console.log(`⚡ Performance ${action}: ${duration}ms`);
-        
-        // En production, envoyer vers un service d'analytics
-        if (this.config.features.analytics) {
-            // analytics.track(action, { duration });
-        }
-    }
-    
-    logUserAction(action, data = {}) {
-        console.log(`👤 Action utilisateur: ${action}`, data);
-        
-        // En production, envoyer vers un service d'analytics
-        if (this.config.features.analytics) {
-            // analytics.track(action, data);
-        }
-    }
-    
-    // === SAUVEGARDE D'URGENCE ===
-    emergencySave() {
-        try {
-            this.userManager.saveUsers();
-            this.showNotification('💾 Sauvegarde d\'urgence effectuée', 'success');
-            return true;
-        } catch (error) {
-            console.error('❌ Échec sauvegarde d\'urgence:', error);
-            return false;
-        }
-    }
-    
-    // === GESTIONNAIRE D'ERREURS AVANCÉ ===
-    handleError(error, context = '') {
-        console.error(`❌ Erreur ${context}:`, error);
-        
-        // Sauvegarde d'urgence
-        this.emergencySave();
-        
-        // Notification à l'utilisateur
-        this.showNotification(
-            `Erreur ${context}. Données sauvegardées.`, 
-            'error',
-            5000,
-            [
-                {
-                    label: 'Recharger',
-                    onclick: 'window.location.reload()'
-                }
-            ]
-        );
-        
-        // Log pour debugging
-        this.logUserAction('error', { error: error.message, context });
-    }
-    
-    // === MÉTHODES DE CLEANUP ===
-    cleanup() {
-        // Nettoyer les timers
-        this.debounceTimers.forEach(timer => clearTimeout(timer));
-        this.debounceTimers.clear();
-        
-        // Vider le cache
-        this.clearCache();
-        
-        // Supprimer les event listeners
-        this.eventBus.removeEventListener();
-        
-        console.log('🧹 Nettoyage de l\'application effectué');
-    }
-    
-    // === MÉTHODES DE DÉBOGAGE ===
-    getDebugInfo() {
-        return {
-            version: this.config.version,
-            user: this.currentUser,
-            dataLoaded: this.isDataLoaded,
-            cacheSize: this.cache.size,
-            activeFilters: this.activeFilters,
-            currentTab: this.currentTab,
-            totalPlaces: this.dataManager?.getTotalPlaces() || 0,
-            userData: this.getCurrentUserData()
-        };
-    }
-    
-    exportDebugInfo() {
-        const debugInfo = this.getDebugInfo();
-        const blob = new Blob([JSON.stringify(debugInfo, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `paris-explorer-debug-${Date.now()}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        this.showNotification('📊 Informations de débogage exportées', 'info');
-    }
 }
 
-// Variable globale pour l'accès depuis le HTML
+// === INITIALISATION GLOBALE ===
 let app;
 
-// Initialisation de l'application avancée au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Démarrage Paris Explorer Avancé...');
-    
     try {
         app = new ParisExplorerAdvanced();
-        
-        // Exposer des méthodes globales pour le débogage
-        window.parisExplorerDebug = {
-            getInfo: () => app.getDebugInfo(),
-            exportDebug: () => app.exportDebugInfo(),
-            clearCache: () => app.clearCache(),
-            emergencySave: () => app.emergencySave()
-        };
-        
+        window.parisApp = app; // Exposition globale pour debug
     } catch (error) {
-        console.error('❌ Erreur critique lors de l\'initialisation:', error);
-        
-        // Mode de récupération
+        console.error('❌ Erreur fatale:', error);
         document.body.innerHTML = `
-            <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #1e3a8a 0%, #D4AF37 100%); color: white; font-family: sans-serif; text-align: center;">
-                <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px);">
-                    <h1>🗼 Paris Explorer</h1>
-                    <p>Une erreur critique s'est produite lors du chargement.</p>
-                    <button onclick="window.location.reload()" style="padding: 12px 24px; background: #D4AF37; color: #1e3a8a; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 16px;">
-                        Recharger la page
-                    </button>
-                </div>
+            <div style="padding: 20px; text-align: center; color: red;">
+                <h2>⚠️ Erreur de chargement</h2>
+                <p>Une erreur critique s'est produite. Veuillez recharger la page.</p>
+                <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 20px;">🔄 Recharger</button>
             </div>
         `;
-    }
-});
-
-// Gestion de la fermeture de la page
-window.addEventListener('beforeunload', () => {
-    if (app) {
-        app.emergencySave();
-        app.cleanup();
     }
 });
