@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "Paris Explorer",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Découvrez tous les trésors de Paris avec un système multi-utilisateurs sophistiqué",
     "author": "Paris Explorer Team",
     "theme": "paris-classic",
@@ -31,7 +31,7 @@
       "fuzzySearch": true,
       "voiceSearch": true,
       "minChars": 2,
-      "maxResults": 100
+      "maxResults": 500
     },
     "map": {
       "enabled": true,
@@ -57,7 +57,7 @@
   },
   "ui": {
     "defaultView": "list",
-    "itemsPerPage": 20,
+    "itemsPerPage": 50,
     "compactMode": false,
     "animations": {
       "enabled": true,
@@ -99,52 +99,19 @@
     "retries": 3,
     "rateLimiting": {
       "enabled": false,
-      "requests": 100,
-      "window": 3600000
+      "requestsPerHour": 1000
     }
-  },
-  "storage": {
-    "engine": "localStorage",
-    "encryption": false,
-    "compression": true,
-    "autoCleanup": true,
-    "maxAge": 2592000000
-  },
-  "security": {
-    "validateInput": true,
-    "sanitizeHtml": true,
-    "preventXSS": true,
-    "maxFileSize": 10485760
   },
   "debug": {
     "enabled": false,
-    "level": "info",
-    "console": true,
-    "performance": false
+    "logLevel": "info",
+    "showPerformance": false
   },
-  "experimental": {
-    "webAssembly": false,
-    "serviceWorkerUpdate": true,
-    "backgroundSync": true,
-    "pushNotifications": false
-  },
-  "urls": {
-    "homepage": "/",
-    "help": "/help",
-    "privacy": "/privacy",
-    "terms": "/terms",
-    "contact": "/contact"
-  },
-  "contact": {
-    "email": "contact@parisexplorer.fr",
-    "website": "https://parisexplorer.fr",
-    "github": "https://github.com/paris-explorer",
-    "support": "https://support.parisexplorer.fr"
-  },
-  "metadata": {
-    "created": "2024-01-01T00:00:00.000Z",
-    "updated": "2025-08-06T00:00:00.000Z",
-    "configVersion": "2.0.0",
-    "compatibleVersions": ["2.0.0", "2.0.1"]
+  "data": {
+    "loadingStrategy": "progressive",
+    "forceLoadAll": true,
+    "cacheEnabled": true,
+    "retryAttempts": 3,
+    "timeoutMs": 15000
   }
 }
