@@ -1,132 +1,184 @@
-// ===== EXPORT-IMPORT MANAGER - GESTION AVANCÉE DES DONNÉES =====
+// ===== EXPORT IMPORT - VERSION CORRIGÉE COMPLÈTE =====
 
-class ExportImportManager {
+class ExportImport {
     constructor(app) {
         this.app = app;
-        this.setupEventListeners();
+        this.supportedFormats = ['json', 'csv', 'html', 'txt'];
+        this.isExporting = false;
+        this.isImporting = false;
     }
     
-    // === EXPORT DES DONNÉES ===
-    async exportUserData(format = 'json', userName = null) {
+    // === EXPORT UTILISATEUR COMPLET ===
+    exportUserData(userName = null) {
+        const targetUser = userName || this.app.userManager.getCurrentUserName();
+        
+        if (!targetUser) {
+            this.app.showNotification('Aucun utilisateur à exporter', 'error');
+            return;
+        }
+        
+        if (this.isExporting) {
+            this.app.showNotification('Export déjà en cours...', 'warning');
+            return;
+        }
+        
+        this.isExporting = true;
+        console.log(`📤 Export des données de l'utilisateur: ${targetUser}`);
+        
         try {
-            const targetUser = userName || this.app.currentUser;
-            if (!targetUser) {
-                this.app.showNotification('Veuillez sélectionner un utilisateur', 'warning');
-                return;
-            }
-            
             const userData = this.app.userManager.users[targetUser];
             if (!userData) {
-                this.app.showNotification('Utilisateur introuvable', 'error');
-                return;
+                throw new Error('Utilisateur introuvable');
             }
             
-            // Préparer les données d'export
             const exportData = {
                 metadata: {
+                    appName: 'Paris Explorer',
+                    appVersion: this.app.version,
                     exportDate: new Date().toISOString(),
-                    appVersion: '2.0.0',
-                    exportFormat: format,
-                    userName: targetUser,
-                    totalPlaces: this.app.dataManager.getTotalPlaces()
+                    exportedBy: targetUser,
+                    format: 'json',
+                    dataVersion: '2.0.0'
                 },
-                userData: {
-                    ...userData,
+                user: {
+                    name: targetUser,
                     visitedPlaces: Array.from(userData.visitedPlaces || []),
-                    favorites: Array.from(userData.favorites || []),
+                    favorites: userData.favorites || [],
                     notes: userData.notes || {},
-                    customTags: userData.customTags || []
+                    settings: userData.settings || {},
+                    collections: userData.collections || {},
+                    achievements: userData.achievements || {},
+                    stats: userData.stats || {}
                 },
-                visitedDetails: this.getVisitedPlacesDetails(userData)
+                searchHistory: this.app.searchFilter.exportSearchHistory(),
+                additionalData: {
+                    totalPlacesAvailable: this.app.dataManager.getTotalPlaces(),
+                    progressPercentage: this.calculateUserProgress(userData)
+                }
             };
             
-            // Exporter selon le format
-            switch (format.toLowerCase()) {
-                case 'json':
-                    await this.exportToJSON(exportData, targetUser);
-                    break;
-                case 'csv':
-                    await this.exportToCSV(exportData, targetUser);
-                    break;
-                case 'pdf':
-                    await this.exportToPDF(exportData, targetUser);
-                    break;
-                case 'html':
-                    await this.exportToHTML(exportData, targetUser);
-                    break;
-                default:
-                    throw new Error(`Format non supporté: ${format}`);
-            }
+            // Générer le nom de fichier
+            const timestamp = new Date().toISOString().split('T')[0];
+            const filename = `paris-explorer-${targetUser}-${timestamp}.json`;
             
-            this.app.showNotification(`Export ${format.toUpperCase()} réussi !`, 'success');
+            // Télécharger le fichier
+            this.downloadFile(JSON.stringify(exportData, null, 2), filename, 'application/json');
+            
+            this.app.showNotification(`✅ Données de ${targetUser} exportées !`, 'success');
+            console.log('✅ Export utilisateur terminé');
             
         } catch (error) {
-            console.error('Erreur export:', error);
-            this.app.showNotification(`Erreur lors de l'export: ${error.message}`, 'error');
+            console.error('❌ Erreur export utilisateur:', error);
+            this.app.showNotification('Erreur lors de l\'export', 'error');
+        } finally {
+            this.isExporting = false;
         }
     }
     
-    // === EXPORT JSON ===
-    async exportToJSON(data, userName) {
-        const jsonString = JSON.stringify(data, null, 2);
-        const fileName = `paris-explorer-${userName}-${this.getDateString()}.json`;
+    // === EXPORT PAR FORMAT ===
+    exportUserDataAsCSV(userName = null) {
+        const targetUser = userName || this.app.userManager.getCurrentUserName();
         
-        this.downloadFile(jsonString, fileName, 'application/json');
+        if (!targetUser) {
+            this.app.showNotification('Aucun utilisateur sélectionné', 'error');
+            return;
+        }
+        
+        try {
+            console.log(`📊 Export CSV des données de ${targetUser}`);
+            
+            const userData = this.app.userManager.users[targetUser];
+            const csvData = this.convertUserDataToCSV(userData, targetUser);
+            
+            const timestamp = new Date().toISOString().split('T')[0];
+            const filename = `paris-explorer-${targetUser}-${timestamp}.csv`;
+            
+            this.downloadFile(csvData, filename, 'text/csv');
+            
+            this.app.showNotification(`📊 Export CSV terminé !`, 'success');
+            
+        } catch (error) {
+            console.error('❌ Erreur export CSV:', error);
+            this.app.showNotification('Erreur lors de l\'export CSV', 'error');
+        }
     }
     
-    // === EXPORT CSV ===
-    async exportToCSV(data, userName) {
-        const csvRows = [];
+    exportUserDataAsHTML(userName = null) {
+        const targetUser = userName || this.app.userManager.getCurrentUserName();
+        
+        if (!targetUser) {
+            this.app.showNotification('Aucun utilisateur sélectionné', 'error');
+            return;
+        }
+        
+        try {
+            console.log(`📄 Export HTML des données de ${targetUser}`);
+            
+            const userData = this.app.userManager.users[targetUser];
+            const htmlData = this.convertUserDataToHTML(userData, targetUser);
+            
+            const timestamp = new Date().toISOString().split('T')[0];
+            const filename = `paris-explorer-${targetUser}-${timestamp}.html`;
+            
+            this.downloadFile(htmlData, filename, 'text/html');
+            
+            this.app.showNotification(`📄 Rapport HTML généré !`, 'success');
+            
+        } catch (error) {
+            console.error('❌ Erreur export HTML:', error);
+            this.app.showNotification('Erreur lors de l\'export HTML', 'error');
+        }
+    }
+    
+    // === CONVERSION EN CSV ===
+    convertUserDataToCSV(userData, userName) {
+        const rows = [];
         
         // En-têtes
-        csvRows.push([
-            'Lieu',
-            'Arrondissement', 
-            'Catégorie',
-            'Description',
-            'Adresse',
-            'Visité',
-            'Date de visite',
-            'Note personnelle',
-            'Tags'
-        ]);
+        rows.push('Type,Identifiant,Nom,Arrondissement,Catégorie,Statut,Date,Notes');
         
-        // Données des lieux
-        data.visitedDetails.forEach(place => {
-            csvRows.push([
-                this.escapeCsvField(place.name),
-                this.escapeCsvField(place.arrondissement),
-                this.escapeCsvField(place.category),
-                this.escapeCsvField(place.description),
-                this.escapeCsvField(place.address || ''),
-                place.visited ? 'Oui' : 'Non',
-                place.visitDate || '',
-                this.escapeCsvField(place.note || ''),
-                this.escapeCsvField((place.tags || []).join('; '))
-            ]);
-        });
+        // Lieux visités
+        if (userData.visitedPlaces) {
+            userData.visitedPlaces.forEach(placeId => {
+                const details = this.getPlaceDetailsFromId(placeId);
+                if (details) {
+                    rows.push(`Lieu,${placeId},"${details.name}","${details.arrondissement}","${details.category}",Visité,"${new Date().toISOString()}",""`);
+                }
+            });
+        }
         
-        const csvContent = csvRows.map(row => row.join(',')).join('\n');
-        const fileName = `paris-explorer-${userName}-${this.getDateString()}.csv`;
+        // Favoris
+        if (userData.favorites) {
+            userData.favorites.forEach(fav => {
+                const details = this.getPlaceDetailsFromId(fav.placeId);
+                if (details) {
+                    rows.push(`Favori,${fav.placeId},"${details.name}","${details.arrondissement}","${details.category}",Favori,"${fav.addedAt}",""`);
+                }
+            });
+        }
         
-        this.downloadFile(csvContent, fileName, 'text/csv');
+        // Notes
+        if (userData.notes) {
+            Object.entries(userData.notes).forEach(([placeId, note]) => {
+                const details = this.getPlaceDetailsFromId(placeId);
+                if (details) {
+                    rows.push(`Note,${placeId},"${details.name}","${details.arrondissement}","${details.category}",Note,"${new Date().toISOString()}","${note.replace(/"/g, '""')}"`);
+                }
+            });
+        }
+        
+        return rows.join('\n');
     }
     
-    // === EXPORT HTML ===
-    async exportToHTML(data, userName) {
-        const htmlContent = this.generateHTMLReport(data, userName);
-        const fileName = `paris-explorer-${userName}-${this.getDateString()}.html`;
+    // === CONVERSION EN HTML ===
+    convertUserDataToHTML(userData, userName) {
+        const visitedCount = userData.visitedPlaces ? userData.visitedPlaces.size : 0;
+        const favoritesCount = userData.favorites ? userData.favorites.length : 0;
+        const notesCount = userData.notes ? Object.keys(userData.notes).length : 0;
+        const achievementsCount = userData.achievements ? Object.keys(userData.achievements).length : 0;
+        const progressPercent = this.calculateUserProgress(userData);
         
-        this.downloadFile(htmlContent, fileName, 'text/html');
-    }
-    
-    generateHTMLReport(data, userName) {
-        const visitedCount = data.userData.visitedPlaces.length;
-        const totalPlaces = data.metadata.totalPlaces;
-        const completionRate = Math.round((visitedCount / totalPlaces) * 100);
-        
-        return `
-<!DOCTYPE html>
+        return `<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -134,46 +186,41 @@ class ExportImportManager {
     <title>Paris Explorer - Rapport de ${userName}</title>
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #D4AF37 100%);
-            color: #1f2937;
-        }
-        .report-container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 3px solid #D4AF37;
-            padding-bottom: 20px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #D4AF37 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
-        .title {
+        .header h1 {
+            margin: 0;
             font-size: 2.5rem;
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            color: #6b7280;
+            font-weight: 300;
         }
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin: 30px 0;
+            margin-bottom: 30px;
         }
         .stat-card {
-            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            padding: 20px;
+            background: white;
+            padding: 25px;
             border-radius: 12px;
             text-align: center;
-            border: 2px solid #D4AF37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #D4AF37;
         }
         .stat-number {
             font-size: 2rem;
@@ -182,305 +229,257 @@ class ExportImportManager {
         }
         .stat-label {
             color: #6b7280;
-            font-size: 0.9rem;
-            text-transform: uppercase;
+            margin-top: 5px;
+            font-weight: 500;
         }
         .section {
-            margin: 40px 0;
-        }
-        .section-title {
-            font-size: 1.5rem;
-            color: #1e3a8a;
-            margin-bottom: 20px;
-            border-left: 4px solid #D4AF37;
-            padding-left: 15px;
-        }
-        .places-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .place-card {
-            background: #f9fafb;
-            padding: 20px;
+            background: white;
+            margin: 20px 0;
             border-radius: 12px;
-            border-left: 4px solid #D4AF37;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .section-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #D4AF37 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .section-content {
+            padding: 25px;
+        }
+        .place-item {
+            padding: 15px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .place-item:last-child {
+            border-bottom: none;
         }
         .place-name {
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             color: #1e3a8a;
-            margin-bottom: 8px;
         }
-        .place-description {
+        .place-location {
             color: #6b7280;
             font-size: 0.9rem;
-            line-height: 1.4;
         }
-        .place-address {
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #9ca3af;
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D4AF37, #1e3a8a);
+            transition: width 0.3s ease;
         }
         .export-info {
             text-align: center;
+            color: #6b7280;
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            font-size: 0.8rem;
-            color: #9ca3af;
+            border-top: 2px solid #f3f4f6;
         }
         @media print {
             body { background: white; }
-            .report-container { box-shadow: none; }
+            .section { break-inside: avoid; }
         }
     </style>
 </head>
 <body>
-    <div class="report-container">
-        <div class="header">
-            <h1 class="title">🗼 Paris Explorer</h1>
-            <p class="subtitle">Rapport d'exploration de ${userName}</p>
-            <p>Généré le ${new Date(data.metadata.exportDate).toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                year: 'numeric', 
-                month: 'long',
-                day: 'numeric'
-            })}</p>
+    <div class="header">
+        <h1>🗼 Paris Explorer</h1>
+        <h2>Rapport d'exploration de ${userName}</h2>
+        <p>Généré le ${new Date().toLocaleDateString('fr-FR')}</p>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">${visitedCount}</div>
+            <div class="stat-label">Lieux visités</div>
         </div>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">${visitedCount}</div>
-                <div class="stat-label">Lieux Explorés</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${totalPlaces}</div>
-                <div class="stat-label">Lieux Total</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${completionRate}%</div>
-                <div class="stat-label">Paris Conquis</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">${data.userData.stats?.streak || 0}</div>
-                <div class="stat-label">Série Actuelle</div>
-            </div>
+        <div class="stat-card">
+            <div class="stat-number">${favoritesCount}</div>
+            <div class="stat-label">Favoris</div>
         </div>
-        
-        <div class="section">
-            <h2 class="section-title">🏛️ Lieux Explorés</h2>
-            <div class="places-grid">
-                ${data.visitedDetails.filter(p => p.visited).map(place => `
-                    <div class="place-card">
-                        <div class="place-name">${place.name}</div>
-                        <div class="place-description">${place.description}</div>
-                        <div class="place-address">📍 ${place.address || 'Adresse non disponible'}</div>
-                    </div>
-                `).join('')}
+        <div class="stat-card">
+            <div class="stat-number">${notesCount}</div>
+            <div class="stat-label">Notes</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">${achievementsCount}</div>
+            <div class="stat-label">Succès</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-header">📊 Progression Générale</div>
+        <div class="section-content">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${progressPercent}%"></div>
             </div>
+            <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #1e3a8a;">
+                ${progressPercent}% de Paris exploré
+            </p>
         </div>
-        
-        <div class="export-info">
-            <p>📊 Rapport généré par Paris Explorer v${data.metadata.appVersion}</p>
-            <p>🗼 Continuez votre exploration sur paris-explorer.fr</p>
-        </div>
+    </div>
+    
+    ${this.generateHTMLSections(userData)}
+    
+    <div class="export-info">
+        <p>📄 Rapport généré par Paris Explorer v${this.app.version}</p>
+        <p>🗓️ ${new Date().toLocaleString('fr-FR')}</p>
     </div>
 </body>
 </html>`;
     }
     
-    // === IMPORT DES DONNÉES ===
-    async importUserData() {
-        try {
-            const fileInput = document.getElementById('importFileInput');
-            if (!fileInput) {
-                console.error('Input file non trouvé');
-                return;
-            }
+    // === GÉNÉRATION DES SECTIONS HTML ===
+    generateHTMLSections(userData) {
+        let html = '';
+        
+        // Section lieux visités
+        if (userData.visitedPlaces && userData.visitedPlaces.size > 0) {
+            html += `
+                <div class="section">
+                    <div class="section-header">✅ Lieux Visités (${userData.visitedPlaces.size})</div>
+                    <div class="section-content">
+            `;
             
-            fileInput.click();
-            
-        } catch (error) {
-            console.error('Erreur import:', error);
-            this.app.showNotification(`Erreur lors de l'import: ${error.message}`, 'error');
-        }
-    }
-    
-    async handleFileImport(file) {
-        try {
-            const fileName = file.name.toLowerCase();
-            
-            if (fileName.endsWith('.json')) {
-                await this.importFromJSON(file);
-            } else if (fileName.endsWith('.csv')) {
-                await this.importFromCSV(file);
-            } else {
-                throw new Error('Format de fichier non supporté. Utilisez JSON ou CSV.');
-            }
-            
-        } catch (error) {
-            console.error('Erreur import fichier:', error);
-            this.app.showNotification(`Erreur import: ${error.message}`, 'error');
-        }
-    }
-    
-    async importFromJSON(file) {
-        const text = await file.text();
-        const data = JSON.parse(text);
-        
-        // Validation de la structure
-        if (!data.userData || !data.userData.name) {
-            throw new Error('Structure de fichier JSON invalide');
-        }
-        
-        const userName = data.userData.name;
-        
-        // Demander confirmation si l'utilisateur existe
-        if (this.app.userManager.users[userName]) {
-            if (!confirm(`L'utilisateur "${userName}" existe déjà. Voulez-vous l'écraser ?`)) {
-                return;
-            }
-        }
-        
-        // Reconstituer les Set depuis les Array
-        const userData = {
-            ...data.userData,
-            visitedPlaces: new Set(data.userData.visitedPlaces || []),
-            favorites: new Set(data.userData.favorites || [])
-        };
-        
-        // Importer l'utilisateur
-        this.app.userManager.users[userName] = userData;
-        this.app.userManager.saveUsers();
-        this.app.uiManager.loadUserSelector();
-        
-        this.app.showNotification(`Utilisateur "${userName}" importé avec succès !`, 'success');
-    }
-    
-    // === UTILITAIRES ===
-    getVisitedPlacesDetails(userData) {
-        const details = [];
-        
-        if (!this.app.isDataLoaded) return details;
-        
-        Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
-            Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                (catData.places || []).forEach(place => {
-                    const placeId = this.app.createPlaceId(arrKey, catKey, place.name);
-                    const isVisited = userData.visitedPlaces instanceof Set ? 
-                        userData.visitedPlaces.has(placeId) : false;
-                    
-                    details.push({
-                        id: placeId,
-                        name: place.name,
-                        description: place.description,
-                        address: place.address,
-                        tags: place.tags,
-                        arrondissement: arrData.title,
-                        category: catData.title,
-                        visited: isVisited,
-                        visitDate: userData.visitDates?.[placeId] || '',
-                        note: userData.notes?.[placeId] || ''
-                    });
-                });
-            });
-        });
-        
-        return details;
-    }
-    
-    escapeCsvField(field) {
-        if (!field) return '';
-        
-        const fieldStr = String(field);
-        if (fieldStr.includes(',') || fieldStr.includes('"') || fieldStr.includes('\n')) {
-            return `"${fieldStr.replace(/"/g, '""')}"`;
-        }
-        return fieldStr;
-    }
-    
-    getDateString() {
-        return new Date().toISOString().split('T')[0];
-    }
-    
-    downloadFile(content, fileName, mimeType) {
-        const blob = new Blob([content], { type: mimeType });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        
-        URL.revokeObjectURL(url);
-    }
-    
-    // === SAUVEGARDE CLOUD (OPTIONNEL) ===
-    async syncToCloud(userData) {
-        // Implémentation future pour synchronisation cloud
-        try {
-            // API call vers service de synchronisation
-            console.log('Sync cloud non implémenté');
-        } catch (error) {
-            console.warn('Erreur sync cloud:', error);
-        }
-    }
-    
-    // === ÉVÉNEMENTS ===
-    setupEventListeners() {
-        // Import de fichier
-        const importFileInput = document.getElementById('importFileInput');
-        if (importFileInput) {
-            importFileInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    this.handleFileImport(file);
+            userData.visitedPlaces.forEach(placeId => {
+                const details = this.getPlaceDetailsFromId(placeId);
+                if (details) {
+                    html += `
+                        <div class="place-item">
+                            <div>
+                                <div class="place-name">${details.name}</div>
+                                <div class="place-location">${details.arrondissement} • ${details.category}</div>
+                            </div>
+                        </div>
+                    `;
                 }
-                e.target.value = ''; // Reset input
             });
+            
+            html += `</div></div>`;
         }
         
-        // Export buttons
-        const exportBtn = document.getElementById('exportDataBtn');
-        if (exportBtn) {
-            exportBtn.addEventListener('click', () => {
-                this.showExportModal();
+        // Section favoris
+        if (userData.favorites && userData.favorites.length > 0) {
+            html += `
+                <div class="section">
+                    <div class="section-header">⭐ Favoris (${userData.favorites.length})</div>
+                    <div class="section-content">
+            `;
+            
+            userData.favorites.forEach(fav => {
+                const details = this.getPlaceDetailsFromId(fav.placeId);
+                if (details) {
+                    html += `
+                        <div class="place-item">
+                            <div>
+                                <div class="place-name">${details.name}</div>
+                                <div class="place-location">${details.arrondissement} • ${details.category}</div>
+                            </div>
+                            <div style="color: #6b7280; font-size: 0.9rem;">
+                                Ajouté le ${new Date(fav.addedAt).toLocaleDateString('fr-FR')}
+                            </div>
+                        </div>
+                    `;
+                }
             });
+            
+            html += `</div></div>`;
         }
         
-        const importBtn = document.getElementById('importDataBtn');
-        if (importBtn) {
-            importBtn.addEventListener('click', () => {
-                this.importUserData();
+        // Section achievements
+        if (userData.achievements && Object.keys(userData.achievements).length > 0) {
+            html += `
+                <div class="section">
+                    <div class="section-header">🏆 Succès Débloqués (${Object.keys(userData.achievements).length})</div>
+                    <div class="section-content">
+            `;
+            
+            Object.entries(userData.achievements).forEach(([key, achievement]) => {
+                html += `
+                    <div class="place-item">
+                        <div>
+                            <div class="place-name">${achievement.icon} ${achievement.title}</div>
+                            <div class="place-location">${achievement.description}</div>
+                        </div>
+                        <div style="color: #6b7280; font-size: 0.9rem;">
+                            ${new Date(achievement.unlockedAt).toLocaleDateString('fr-FR')}
+                        </div>
+                    </div>
+                `;
             });
+            
+            html += `</div></div>`;
+        }
+        
+        return html;
+    }
+    
+    // === IMPORT DE DONNÉES ===
+    showImportModal() {
+        const modal = document.getElementById('importModal');
+        if (modal) {
+            this.app.uiManager.showModal('importModal');
+        } else {
+            this.createImportModal();
         }
     }
     
-    showExportModal() {
-        // Créer modal d'export dynamique
+    createImportModal() {
         const modal = document.createElement('div');
+        modal.id = 'importModal';
         modal.className = 'modal';
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>📊 Exporter vos données</h3>
-                    <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    <h3 class="modal-title">📥 Importer des données</h3>
+                    <button class="close-btn" onclick="app.uiManager.hideModal()">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="form-label">Format d'export</label>
-                        <select id="exportFormat" class="form-input">
-                            <option value="json">JSON - Données complètes</option>
-                            <option value="csv">CSV - Tableur Excel</option>
-                            <option value="html">HTML - Rapport visuel</option>
-                        </select>
+                    <div class="import-section">
+                        <h4>📄 Sélectionner le fichier</h4>
+                        <input type="file" id="importFileInput" accept=".json" class="form-input">
+                        <small class="setting-help">
+                            Formats supportés: JSON (exporté depuis Paris Explorer)
+                        </small>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-success" onclick="app.exportImportManager.exportUserData(document.getElementById('exportFormat').value); this.closest('.modal').remove();">
-                            📤 Exporter
+                    
+                    <div class="import-options">
+                        <h4>⚙️ Options d'import</h4>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="replaceDataCheckbox" checked>
+                            <span class="checkmark"></span>
+                            Remplacer les données existantes
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="importSettingsCheckbox" checked>
+                            <span class="checkmark"></span>
+                            Importer les paramètres
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="importSearchHistoryCheckbox">
+                            <span class="checkmark"></span>
+                            Importer l'historique de recherche
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="app.exportImport.processImport()">
+                            📥 Importer
+                        </button>
+                        <button class="btn btn-secondary" onclick="app.uiManager.hideModal()">
+                            Annuler
                         </button>
                     </div>
                 </div>
@@ -488,13 +487,390 @@ class ExportImportManager {
         `;
         
         document.body.appendChild(modal);
-        modal.classList.add('show');
+        this.app.uiManager.showModal('importModal');
+    }
+    
+    async processImport() {
+        if (this.isImporting) {
+            this.app.showNotification('Import déjà en cours...', 'warning');
+            return;
+        }
         
-        // Fermeture par clic overlay
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
+        const fileInput = document.getElementById('importFileInput');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            this.app.showNotification('Veuillez sélectionner un fichier', 'error');
+            return;
+        }
+        
+        this.isImporting = true;
+        console.log('📥 Import de fichier:', file.name);
+        
+        try {
+            const fileContent = await this.readFile(file);
+            const importData = JSON.parse(fileContent);
+            
+            // Validation des données
+            if (!this.validateImportData(importData)) {
+                throw new Error('Format de fichier invalide');
             }
+            
+            // Options d'import
+            const options = {
+                replaceData: document.getElementById('replaceDataCheckbox').checked,
+                importSettings: document.getElementById('importSettingsCheckbox').checked,
+                importSearchHistory: document.getElementById('importSearchHistoryCheckbox').checked
+            };
+            
+            // Traitement de l'import
+            const success = await this.importUserData(importData, options);
+            
+            if (success) {
+                this.app.uiManager.hideModal();
+                this.app.showNotification('✅ Données importées avec succès !', 'success');
+                
+                // Recharger l'interface
+                this.app.uiManager.loadUserSelector();
+                this.app.uiManager.renderContent();
+                
+                // Réinitialiser les filtres si nécessaire
+                if (options.importSearchHistory) {
+                    this.app.searchFilter.updateIndex();
+                }
+            }
+            
+        } catch (error) {
+            console.error('❌ Erreur import:', error);
+            this.app.showNotification(`Erreur lors de l'import: ${error.message}`, 'error');
+        } finally {
+            this.isImporting = false;
+        }
+    }
+    
+    // === TRAITEMENT DE L'IMPORT ===
+    async importUserData(importData, options) {
+        console.log('📥 Traitement des données importées...');
+        
+        const userData = importData.user;
+        if (!userData || !userData.name) {
+            throw new Error('Données utilisateur manquantes');
+        }
+        
+        const userName = userData.name;
+        const existingUser = this.app.userManager.users[userName];
+        
+        // Vérifier si l'utilisateur existe
+        if (existingUser && !options.replaceData) {
+            const userChoice = confirm(`L'utilisateur "${userName}" existe déjà. Voulez-vous le remplacer ?`);
+            if (!userChoice) {
+                return false;
+            }
+        }
+        
+        // Préparer les nouvelles données utilisateur
+        const newUserData = {
+            name: userName,
+            visitedPlaces: new Set(userData.visitedPlaces || []),
+            favorites: userData.favorites || [],
+            notes: userData.notes || {},
+            settings: options.importSettings ? (userData.settings || {}) : (existingUser?.settings || this.app.userManager.getDefaultSettings()),
+            collections: userData.collections || {},
+            achievements: userData.achievements || {},
+            stats: userData.stats || {
+                totalVisited: userData.visitedPlaces ? userData.visitedPlaces.length : 0,
+                createdAt: userData.stats?.createdAt || new Date().toISOString(),
+                lastActivity: new Date().toISOString()
+            }
+        };
+        
+        // Fusionner avec les données existantes si nécessaire
+        if (existingUser && !options.replaceData) {
+            // Fusionner les lieux visités
+            existingUser.visitedPlaces.forEach(placeId => {
+                newUserData.visitedPlaces.add(placeId);
+            });
+            
+            // Fusionner les favoris
+            const existingFavoriteIds = existingUser.favorites.map(fav => fav.placeId);
+            newUserData.favorites = [...existingUser.favorites];
+            userData.favorites.forEach(fav => {
+                if (!existingFavoriteIds.includes(fav.placeId)) {
+                    newUserData.favorites.push(fav);
+                }
+            });
+            
+            // Fusionner les notes
+            newUserData.notes = { ...existingUser.notes, ...newUserData.notes };
+            
+            // Fusionner les achievements
+            newUserData.achievements = { ...existingUser.achievements, ...newUserData.achievements };
+        }
+        
+        // Sauvegarder l'utilisateur
+        this.app.userManager.users[userName] = newUserData;
+        this.app.userManager.saveUsers();
+        
+        // Importer l'historique de recherche si demandé
+        if (options.importSearchHistory && importData.searchHistory) {
+            this.app.searchFilter.importSearchHistory(importData.searchHistory);
+        }
+        
+        // Sélectionner l'utilisateur importé
+        this.app.userManager.selectUser(userName);
+        
+        console.log('✅ Import utilisateur terminé');
+        return true;
+    }
+    
+    // === VALIDATION DES DONNÉES D'IMPORT ===
+    validateImportData(data) {
+        if (!data || typeof data !== 'object') {
+            console.error('❌ Données d\'import invalides: pas un objet');
+            return false;
+        }
+        
+        if (!data.metadata || !data.metadata.appName) {
+            console.error('❌ Métadonnées manquantes');
+            return false;
+        }
+        
+        if (data.metadata.appName !== 'Paris Explorer') {
+            console.error('❌ Fichier non compatible:', data.metadata.appName);
+            return false;
+        }
+        
+        if (!data.user || !data.user.name) {
+            console.error('❌ Données utilisateur manquantes');
+            return false;
+        }
+        
+        console.log('✅ Données d\'import valides');
+        return true;
+    }
+    
+    // === UTILITAIRES DE FICHIER ===
+    readFile(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.onerror = (e) => reject(new Error('Erreur lecture fichier'));
+            reader.readAsText(file);
         });
+    }
+    
+    downloadFile(content, filename, mimeType) {
+        const blob = new Blob([content], { type: mimeType });
+        const url = window.URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.style.display = 'none';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Nettoyer l'URL
+        setTimeout(() => {
+            window.URL.revokeObjectURL(url);
+        }, 1000);
+        
+        console.log('📁 Fichier téléchargé:', filename);
+    }
+    
+    // === UTILITAIRES DE DONNÉES ===
+    getPlaceDetailsFromId(placeId) {
+        // Rechercher les détails d'un lieu par son ID
+        if (!this.app.parisData) return null;
+        
+        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
+            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
+                for (const place of catData.places || []) {
+                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
+                    if (currentPlaceId === placeId) {
+                        return {
+                            id: placeId,
+                            name: place.name,
+                            arrondissement: arrData.title,
+                            category: catData.title,
+                            description: place.description,
+                            address: place.address,
+                            tags: place.tags || []
+                        };
+                    }
+                }
+            }
+        }
+        
+        return {
+            id: placeId,
+            name: 'Lieu inconnu',
+            arrondissement: 'Inconnu',
+            category: 'Inconnu',
+            description: '',
+            address: '',
+            tags: []
+        };
+    }
+    
+    calculateUserProgress(userData) {
+        if (!userData) return 0;
+        
+        const totalPlaces = this.app.dataManager.getTotalPlaces();
+        const visitedPlaces = userData.visitedPlaces ? userData.visitedPlaces.size : 0;
+        
+        return totalPlaces > 0 ? Math.round((visitedPlaces / totalPlaces) * 100) : 0;
+    }
+    
+    // === EXPORT DE TOUTES LES DONNÉES ===
+    exportAllData() {
+        if (this.isExporting) {
+            this.app.showNotification('Export déjà en cours...', 'warning');
+            return;
+        }
+        
+        this.isExporting = true;
+        console.log('📤 Export de toutes les données utilisateurs...');
+        
+        try {
+            const allUsersData = {
+                metadata: {
+                    appName: 'Paris Explorer',
+                    appVersion: this.app.version,
+                    exportDate: new Date().toISOString(),
+                    format: 'json',
+                    dataVersion: '2.0.0',
+                    exportType: 'all_users'
+                },
+                users: {},
+                searchHistory: this.app.searchFilter.exportSearchHistory(),
+                appSettings: this.app.config || {}
+            };
+            
+            // Exporter tous les utilisateurs
+            Object.entries(this.app.userManager.users).forEach(([userName, userData]) => {
+                allUsersData.users[userName] = {
+                    name: userName,
+                    visitedPlaces: Array.from(userData.visitedPlaces || []),
+                    favorites: userData.favorites || [],
+                    notes: userData.notes || {},
+                    settings: userData.settings || {},
+                    collections: userData.collections || {},
+                    achievements: userData.achievements || {},
+                    stats: userData.stats || {}
+                };
+            });
+            
+            const timestamp = new Date().toISOString().split('T')[0];
+            const filename = `paris-explorer-tous-utilisateurs-${timestamp}.json`;
+            
+            this.downloadFile(JSON.stringify(allUsersData, null, 2), filename, 'application/json');
+            
+            this.app.showNotification(`✅ Toutes les données exportées !`, 'success');
+            console.log('✅ Export global terminé');
+            
+        } catch (error) {
+            console.error('❌ Erreur export global:', error);
+            this.app.showNotification('Erreur lors de l\'export global', 'error');
+        } finally {
+            this.isExporting = false;
+        }
+    }
+    
+    // === SAUVEGARDE AUTOMATIQUE ===
+    enableAutoBackup() {
+        console.log('💾 Activation de la sauvegarde automatique...');
+        
+        const interval = this.app.config?.users?.backupInterval || 300000; // 5 minutes par défaut
+        
+        this.backupInterval = setInterval(() => {
+            this.createAutoBackup();
+        }, interval);
+        
+        console.log(`✅ Sauvegarde automatique activée (${interval/1000}s)`);
+    }
+    
+    disableAutoBackup() {
+        if (this.backupInterval) {
+            clearInterval(this.backupInterval);
+            this.backupInterval = null;
+            console.log('💾 Sauvegarde automatique désactivée');
+        }
+    }
+    
+    createAutoBackup() {
+        try {
+            const currentUser = this.app.userManager.getCurrentUserName();
+            if (!currentUser) return;
+            
+            const userData = this.app.userManager.users[currentUser];
+            if (!userData) return;
+            
+            const backupData = {
+                timestamp: new Date().toISOString(),
+                user: currentUser,
+                data: {
+                    visitedPlaces: Array.from(userData.visitedPlaces || []),
+                    favorites: userData.favorites || [],
+                    notes: userData.notes || {},
+                    achievements: userData.achievements || {}
+                }
+            };
+            
+            // Sauvegarder dans localStorage avec rotation
+            const backups = JSON.parse(localStorage.getItem('paris-explorer-auto-backups') || '[]');
+            backups.unshift(backupData);
+            
+            // Garder seulement les 10 dernières sauvegardes
+            const limitedBackups = backups.slice(0, 10);
+            localStorage.setItem('paris-explorer-auto-backups', JSON.stringify(limitedBackups));
+            
+            console.log('💾 Sauvegarde automatique créée pour', currentUser);
+            
+        } catch (error) {
+            console.error('❌ Erreur sauvegarde automatique:', error);
+        }
+    }
+    
+    // === RÉCUPÉRATION DE SAUVEGARDE ===
+    restoreFromAutoBackup() {
+        try {
+            const backups = JSON.parse(localStorage.getItem('paris-explorer-auto-backups') || '[]');
+            
+            if (backups.length === 0) {
+                this.app.showNotification('Aucune sauvegarde automatique trouvée', 'info');
+                return;
+            }
+            
+            const latestBackup = backups[0];
+            const userChoice = confirm(`Restaurer la sauvegarde automatique de ${latestBackup.user} du ${new Date(latestBackup.timestamp).toLocaleString('fr-FR')} ?`);
+            
+            if (userChoice) {
+                const userData = this.app.userManager.users[latestBackup.user];
+                if (userData) {
+                    userData.visitedPlaces = new Set(latestBackup.data.visitedPlaces);
+                    userData.favorites = latestBackup.data.favorites;
+                    userData.notes = latestBackup.data.notes;
+                    userData.achievements = latestBackup.data.achievements;
+                    
+                    this.app.userManager.saveUsers();
+                    this.app.uiManager.renderContent();
+                    
+                    this.app.showNotification('✅ Sauvegarde restaurée !', 'success');
+                }
+            }
+            
+        } catch (error) {
+            console.error('❌ Erreur restauration:', error);
+            this.app.showNotification('Erreur lors de la restauration', 'error');
+        }
+    }
+    
+    // === NETTOYAGE ===
+    cleanup() {
+        this.disableAutoBackup();
+        console.log('🧹 Export/Import nettoyé');
     }
 }
