@@ -770,6 +770,17 @@ body {
     text-decoration: underline;
 }
 
+/* === MARQUEURS DE CARTE PERSONNALISÉS === */
+.custom-marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+.custom-marker .marker-content:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
 .place-tags {
     display: flex;
     gap: 6px;

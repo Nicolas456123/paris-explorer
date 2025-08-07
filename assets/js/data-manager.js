@@ -111,7 +111,14 @@ class DataManager {
             }
         }
         
-        console.log(`📊 Résultats: ${loadedCount} chargés, ${failedCount} échoués`);
+        console.log(`📊 Résultats: ${loadedCount} chargés, ${failedCount} échoués sur ${totalCount} total`);
+        
+        // Debug détaillé des arrondissements chargés
+        Object.keys(this.app.parisData).forEach(arrKey => {
+            const arrData = this.app.parisData[arrKey];
+            const categoriesCount = Object.keys(arrData?.categories || arrData?.arrondissement?.categories || {}).length;
+            console.log(`📍 ${arrKey}: ${categoriesCount} catégories chargées`);
+        });
         
         if (loadedCount === 0) {
             throw new Error('Aucun arrondissement n\'a pu être chargé');
@@ -283,7 +290,11 @@ delay(ms) {
             const arrData = this.app.parisData[arrKey];
             if (this.validateArrondissement(arrKey, arrData)) {
                 validArrondissements++;
-                totalPlaces += this.getTotalPlacesInArrondissement(arrData);
+                const placesInArr = this.getTotalPlacesInArrondissement(arrData);
+                totalPlaces += placesInArr;
+                console.log(`📊 ${arrKey}: ${placesInArr} lieux`);
+            } else {
+                console.warn(`⚠️ ${arrKey}: arrondissement invalide`);
             }
         });
         
@@ -431,8 +442,11 @@ delay(ms) {
         
         let total = 0;
         Object.values(this.app.parisData).forEach(arrData => {
-            if (arrData?.categories) {
-                Object.values(arrData.categories).forEach(catData => {
+            // Utiliser la même logique que getTotalPlacesInArrondissement
+            const categories = arrData?.categories || arrData?.arrondissement?.categories;
+            
+            if (categories && typeof categories === 'object') {
+                Object.values(categories).forEach(catData => {
                     if (catData?.places && Array.isArray(catData.places)) {
                         total += catData.places.length;
                     }

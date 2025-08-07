@@ -323,15 +323,50 @@ class MapManager {
         const markerIcon = this.getPlaceIcon(categoryKey);
         
         try {
-            const marker = L.circleMarker(coords, {
-                color: '#ffffff',
-                fillColor: markerColor,
-                fillOpacity: isVisited ? 0.9 : 0.7,
-                radius: isVisited ? 8 : 6,
-                weight: 2
-            }).addTo(this.map);
+            // Créer un marqueur avec icône personnalisée
+            const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: `
+                    <div class="marker-content" style="
+                        background: ${markerColor}; 
+                        border: 3px solid #ffffff;
+                        border-radius: 50%;
+                        width: ${isVisited ? 32 : 28}px;
+                        height: ${isVisited ? 32 : 28}px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: ${isVisited ? 16 : 14}px;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                    ">
+                        ${markerIcon}
+                    </div>
+                `,
+                iconSize: [isVisited ? 32 : 28, isVisited ? 32 : 28],
+                iconAnchor: [isVisited ? 16 : 14, isVisited ? 16 : 14],
+                popupAnchor: [0, isVisited ? -16 : -14]
+            });
             
-            marker.bindPopup(this.createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon));
+            const marker = L.marker(coords, { icon: customIcon }).addTo(this.map);
+            
+            // Créer un ID unique pour ce lieu
+            const placeId = this.app.dataManager.createPlaceId(
+                Object.keys(this.app.parisData).find(arrKey => 
+                    Object.values(this.app.parisData[arrKey].categories || {}).some(cat =>
+                        (cat.places || []).some(p => p.name === place.name)
+                    )
+                ), 
+                categoryKey, 
+                place.name
+            );
+            
+            marker.bindPopup(this.createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId));
+            
+            // Stocker l'ID pour pouvoir mettre à jour le marqueur
+            marker._placeId = placeId;
+            marker._isVisited = isVisited;
             
             return marker;
             
@@ -341,7 +376,7 @@ class MapManager {
         }
     }
     
-    createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon) {
+    createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId) {
         const statusColor = isVisited ? '#059669' : '#6b7280';
         const statusText = isVisited ? '✅ Visité' : '⭕ Non visité';
         
@@ -378,11 +413,150 @@ class MapManager {
                     </div>
                 ` : ''}
                 
+                <div style="text-align: center; margin: 12px 0;">
+                    <button onclick="window.app.mapManager.toggleVisitedFromMap('${placeId}')" 
+                            style="
+                                background: ${isVisited ? '#dc2626' : '#059669'}; 
+                                color: white; 
+                                border: none; 
+                                padding: 8px 16px; 
+                                border-radius: 8px; 
+                                cursor: pointer; 
+                                font-size: 14px; 
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                            "
+                            onmouseover="this.style.opacity='0.8'"
+                            onmouseout="this.style.opacity='1'">
+                        ${isVisited ? '❌ Marquer non visité' : '✅ Marquer visité'}
+                    </button>
+                </div>
+                
                 <div style="text-align: center; margin-top: 12px; padding-top: 8px; border-top: 1px solid #e5e7eb;">
                     <p style="color: #9ca3af; font-size: 12px; margin: 0;">${arrondissementName}</p>
                 </div>
             </div>
         `;
+    }
+    
+    // === TOGGLE VISITÉ DEPUIS LA CARTE ===
+    toggleVisitedFromMap(placeId) {
+        if (!placeId) {
+            console.error('❌ PlaceId manquant pour toggle');
+            return;
+        }
+        
+        console.log(`🔄 Toggle visité pour: ${placeId}`);
+        
+        // Utiliser la méthode existante du userManager
+        const success = this.app.userManager.togglePlaceVisited(placeId);
+        
+        if (success) {
+            // Mettre à jour le marqueur sur la carte
+            this.updateMarkerAfterToggle(placeId);
+            
+            // Notification
+            const userData = this.app.getCurrentUserData();
+            const isNowVisited = userData && userData.visitedPlaces.has(placeId);
+            
+            this.app.showNotification(
+                isNowVisited ? '✅ Lieu marqué comme visité' : '⭕ Lieu marqué comme non visité',
+                'success',
+                2000
+            );
+            
+            // Fermer le popup et le rouvrir pour mettre à jour le contenu
+            this.map.closePopup();
+        } else {
+            this.app.showNotification('❌ Erreur lors de la mise à jour', 'error');
+        }
+    }
+    
+    // === MISE À JOUR DES MARQUEURS ===
+    updateMarkerAfterToggle(placeId) {
+        // Trouver le marqueur correspondant
+        const marker = this.markers.find(m => m._placeId === placeId);
+        if (!marker) {
+            console.warn(`⚠️ Marqueur non trouvé pour ${placeId}`);
+            return;
+        }
+        
+        // Obtenir le nouveau statut
+        const userData = this.app.getCurrentUserData();
+        const isNowVisited = userData && userData.visitedPlaces.has(placeId);
+        
+        // Mettre à jour l'icône du marqueur
+        const coords = marker.getLatLng();
+        const place = this.getPlaceFromMarker(marker);
+        const categoryKey = this.getCategoryFromMarker(marker);
+        const arrondissementName = this.getArrondissementFromMarker(marker);
+        
+        if (place && categoryKey && arrondissementName) {
+            // Supprimer l'ancien marqueur
+            this.map.removeLayer(marker);
+            
+            // Créer le nouveau marqueur avec le bon statut
+            const newMarker = this.createPlaceMarker(coords, place, categoryKey, isNowVisited, arrondissementName);
+            
+            // Remplacer dans la liste
+            const index = this.markers.indexOf(marker);
+            if (index !== -1) {
+                this.markers[index] = newMarker;
+            }
+        }
+    }
+    
+    // Méthodes utilitaires pour récupérer les données du marqueur
+    getPlaceFromMarker(marker) {
+        // Chercher dans toutes les données pour retrouver le lieu
+        const placeId = marker._placeId;
+        if (!placeId) return null;
+        
+        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
+            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
+                for (const place of catData.places || []) {
+                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
+                    if (currentPlaceId === placeId) {
+                        return place;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    getCategoryFromMarker(marker) {
+        const placeId = marker._placeId;
+        if (!placeId) return null;
+        
+        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
+            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
+                for (const place of catData.places || []) {
+                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
+                    if (currentPlaceId === placeId) {
+                        return catKey;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    getArrondissementFromMarker(marker) {
+        const placeId = marker._placeId;
+        if (!placeId) return null;
+        
+        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
+            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
+                for (const place of catData.places || []) {
+                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
+                    if (currentPlaceId === placeId) {
+                        return arrData.name || arrKey;
+                    }
+                }
+            }
+        }
+        return null;
     }
     
     // === UTILITAIRES ===
@@ -406,16 +580,48 @@ class MapManager {
     getPlaceIcon(categoryKey) {
         const catKey = categoryKey.toLowerCase();
         
-        if (catKey.includes('monument')) return '🏛️';
-        if (catKey.includes('restaurant')) return '🍽️';
-        if (catKey.includes('café')) return '☕';
-        if (catKey.includes('bar')) return '🍻';
-        if (catKey.includes('shopping')) return '🛍️';
-        if (catKey.includes('musée')) return '🎨';
+        // Monuments et patrimoine
+        if (catKey.includes('monument') || catKey.includes('patrimoine')) return '🏛️';
+        if (catKey.includes('église') || catKey.includes('cathédrale') || catKey.includes('basilique')) return '⛪';
+        if (catKey.includes('château') || catKey.includes('palais')) return '🏰';
+        if (catKey.includes('pont')) return '🌉';
+        
+        // Culture et art
+        if (catKey.includes('musée') || catKey.includes('museum')) return '🎨';
+        if (catKey.includes('théâtre') || catKey.includes('opéra') || catKey.includes('spectacle')) return '🎭';
+        if (catKey.includes('cinéma')) return '🎬';
+        if (catKey.includes('galerie')) return '🖼️';
+        if (catKey.includes('bibliothèque')) return '📚';
+        
+        // Restauration
+        if (catKey.includes('restaurant') || catKey.includes('gastronomie')) return '🍽️';
+        if (catKey.includes('café') || catKey.includes('salon-de-thé')) return '☕';
+        if (catKey.includes('bar') || catKey.includes('cocktail') || catKey.includes('brasserie')) return '🍺';
+        if (catKey.includes('boulangerie') || catKey.includes('pâtisserie')) return '🥖';
+        if (catKey.includes('marché') || catKey.includes('food')) return '🏪';
+        
+        // Shopping et commerce
+        if (catKey.includes('shopping') || catKey.includes('boutique') || catKey.includes('magasin')) return '🛍️';
+        if (catKey.includes('grand-magasin')) return '🏬';
+        
+        // Nature et espaces verts
         if (catKey.includes('parc') || catKey.includes('jardin')) return '🌳';
-        if (catKey.includes('église')) return '⛪';
-        if (catKey.includes('hôtel')) return '🏨';
-        if (catKey.includes('théâtre')) return '🎭';
+        if (catKey.includes('square')) return '🌿';
+        if (catKey.includes('fontaine')) return '⛲';
+        
+        // Hébergement
+        if (catKey.includes('hôtel') || catKey.includes('hotel')) return '🏨';
+        
+        // Architecture moderne
+        if (catKey.includes('moderne') || catKey.includes('contemporain')) return '🏢';
+        if (catKey.includes('tour') || catKey.includes('gratte-ciel')) return '🏗️';
+        
+        // Transport
+        if (catKey.includes('gare') || catKey.includes('station')) return '🚉';
+        if (catKey.includes('métro')) return '🚇';
+        
+        // Quartiers et zones
+        if (catKey.includes('quartier') || catKey.includes('village')) return '🏘️';
         
         return '📍';
     }
