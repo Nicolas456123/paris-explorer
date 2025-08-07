@@ -100,6 +100,14 @@ class UIManager {
         // Événements de carte
         this.setupMapEvents();
         
+        // Configuration mobile des onglets
+        this.setupMobileTabsPosition();
+        
+        // Gérer le redimensionnement
+        window.addEventListener('resize', () => {
+            this.setupMobileTabsPosition();
+        });
+        
         console.log('✅ Événements UI configurés');
     }
     
@@ -136,6 +144,63 @@ class UIManager {
         if (centerMapBtn) {
             centerMapBtn.addEventListener('click', () => {
                 this.app.mapManager.centerMap();
+            });
+        }
+    }
+    
+    // === GESTION MOBILE DES ONGLETS ===
+    setupMobileTabsPosition() {
+        const isMobile = window.innerWidth <= 768;
+        const tabsContainer = document.querySelector('.tabs-container');
+        
+        if (!tabsContainer) return;
+        
+        if (isMobile) {
+            // Sur mobile, calculer la position après header et nav
+            const header = document.querySelector('.header');
+            const navSection = document.querySelector('.nav-section');
+            
+            if (header && navSection) {
+                const headerHeight = header.offsetHeight;
+                const navHeight = navSection.offsetHeight;
+                const totalOffset = headerHeight + navHeight;
+                
+                // Positionner les onglets fixes
+                tabsContainer.style.position = 'fixed';
+                tabsContainer.style.top = `${totalOffset}px`;
+                tabsContainer.style.left = '0';
+                tabsContainer.style.right = '0';
+                tabsContainer.style.zIndex = '1000';
+                
+                // Ajuster le padding du contenu principal
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.style.paddingTop = `${totalOffset + tabsContainer.offsetHeight + 10}px`;
+                }
+                
+                // S'assurer que les contenus d'onglets ont assez d'espace
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.style.paddingTop = '16px';
+                    content.style.height = `calc(100vh - ${totalOffset + tabsContainer.offsetHeight + 20}px)`;
+                    content.style.overflowY = 'auto';
+                });
+            }
+        } else {
+            // Sur desktop, réinitialiser les styles
+            tabsContainer.style.position = '';
+            tabsContainer.style.top = '';
+            tabsContainer.style.left = '';
+            tabsContainer.style.right = '';
+            tabsContainer.style.zIndex = '';
+            
+            const mainContent = document.querySelector('main');
+            if (mainContent) {
+                mainContent.style.paddingTop = '';
+            }
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.paddingTop = '';
+                content.style.height = '';
             });
         }
     }
