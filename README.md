@@ -1,6 +1,6 @@
 # 🗼 Paris Explorer - Système Complet PWA
 
-Une application web avancée pour explorer et découvrir tous les trésors de Paris avec un système multi-utilisateurs sophistiqué et une PWA complète.
+Une application web avancée pour explorer et découvrir tous les trésors de Paris avec un système multi-utilisateurs et une PWA.
 
 ## 📁 Structure Réelle du Projet
 
