@@ -693,7 +693,7 @@ class ExportImport {
                         return {
                             id: placeId,
                             name: place.name,
-                            arrondissement: arrData.arrondissement?.name || arrKey,
+                            arrondissement: arrData.name || arrKey,
                             category: catData.title,
                             description: place.description,
                             address: place.address,

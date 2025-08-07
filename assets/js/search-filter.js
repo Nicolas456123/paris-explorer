@@ -116,7 +116,7 @@ class SearchFilter {
         }
         
         // Arrondissement
-        const arrName = arrData.arrondissement?.name || '';
+        const arrName = arrData.name || '';
         if (arrName) {
             terms.add(arrName.toLowerCase());
             arrName.toLowerCase().split(/\s+/).forEach(word => {
@@ -275,7 +275,7 @@ class SearchFilter {
         });
         
         // Score arrondissement/catégorie
-        const arrName = data.arrData.arrondissement?.name || '';
+        const arrName = data.arrData.name || '';
         if (arrName.toLowerCase().includes(query) || 
             data.catData.title.toLowerCase().includes(query)) {
             score += 15;
@@ -293,7 +293,7 @@ class SearchFilter {
     
     // === FILTRES DE CORRESPONDANCE ===
     matchesArrondissementFilter(data, arrFilter) {
-        const arrName = data.arrData.arrondissement?.name || '';
+        const arrName = data.arrData.name || '';
         return data.arrKey.includes(arrFilter) || 
                arrName.toLowerCase().includes(arrFilter.toLowerCase());
     }
@@ -553,7 +553,7 @@ class SearchFilter {
                 option.value = arrKey;
                 
                 // Le nom est dans arrondissement.name
-                const name = arrData.arrondissement?.name || arrKey;
+                const name = arrData.name || arrKey;
                 const displayName = name.replace(/^\d+[ER|ÈME]+ ARRONDISSEMENT - /, '');
                 option.textContent = `${arrKey} - ${displayName}`;
                 select.appendChild(option);

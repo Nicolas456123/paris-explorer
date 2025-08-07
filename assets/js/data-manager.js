@@ -231,10 +231,27 @@ validateArrondissementData(data) {
 
 // === TRAITEMENT DES DONNÉES D'ARRONDISSEMENT ===
 processArrondissementData(arrKey, arrData) {
-    // La structure a les catégories dans arrondissement.categories
-    // On copie les catégories à la racine pour simplifier l'accès
-    if (arrData.arrondissement?.categories) {
-        arrData.categories = arrData.arrondissement.categories;
+    // Normaliser la structure pour un accès facile
+    if (arrData.arrondissement) {
+        // Copier les catégories à la racine pour simplifier l'accès
+        if (arrData.arrondissement.categories) {
+            arrData.categories = arrData.arrondissement.categories;
+        }
+        
+        // Copier le nom à la racine pour un accès facile
+        if (arrData.arrondissement.name) {
+            arrData.name = arrData.arrondissement.name;
+        }
+        
+        // Copier la description si elle existe
+        if (arrData.arrondissement.description) {
+            arrData.description = arrData.arrondissement.description;
+        }
+    }
+    
+    // Fallback pour le nom si pas trouvé
+    if (!arrData.name) {
+        arrData.name = arrKey;
     }
     
     // Stocker les données dans l'app
@@ -243,7 +260,7 @@ processArrondissementData(arrKey, arrData) {
     // Marquer comme chargé
     this.loadedFiles.add(arrKey);
     
-    const categoryCount = Object.keys(arrData.arrondissement?.categories || {}).length;
+    const categoryCount = Object.keys(arrData.categories || {}).length;
     console.log(`✅ ${arrKey} traité avec ${categoryCount} catégories`);
 }
 
@@ -280,7 +297,8 @@ delay(ms) {
             return false;
         }
         
-        const arrName = arrData.arrondissement?.name;
+        // Vérifier le nom après normalisation
+        const arrName = arrData.name || arrData.arrondissement?.name;
         if (!arrName) {
             console.warn(`⚠️ ${arrKey}: nom d'arrondissement manquant`);
             return false;
@@ -427,13 +445,19 @@ delay(ms) {
     
     getTotalPlacesInArrondissement(arrData) {
         let total = 0;
-        if (arrData?.categories) {
-            Object.values(arrData.categories).forEach(catData => {
+        
+        // Chercher les catégories dans la structure normalisée (arrData.categories)
+        // ou dans la structure originale (arrData.arrondissement.categories)
+        const categories = arrData?.categories || arrData?.arrondissement?.categories;
+        
+        if (categories && typeof categories === 'object') {
+            Object.values(categories).forEach(catData => {
                 if (catData?.places && Array.isArray(catData.places)) {
                     total += catData.places.length;
                 }
             });
         }
+        
         return total;
     }
     

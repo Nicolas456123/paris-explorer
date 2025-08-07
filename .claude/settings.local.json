@@ -3,7 +3,11 @@
     "allow": [
       "Bash(python:*)",
       "Bash(del test-server.html)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(for file in *.json)",
+      "Bash(do echo:*)",
+      "Bash(echo:*)",
+      "Bash(done)"
     ],
     "deny": []
   }

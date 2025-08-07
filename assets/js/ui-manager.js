@@ -315,7 +315,7 @@ class UIManager {
         if (!this.app.searchQuery) return true;
         
         const query = this.app.searchQuery.toLowerCase();
-        const arrName = arrData.arrondissement?.name || '';
+        const arrName = arrData.name || '';
         return arrName.toLowerCase().includes(query) ||
                Object.values(arrData.categories || {}).some(catData =>
                    (catData.places || []).some(place => this.placeMatchesSearch(place, query))
@@ -368,7 +368,7 @@ class UIManager {
             <div class="arrondissement-card" data-arr="${arrKey}">
                 <div class="arrondissement-header" onclick="this.parentElement.classList.toggle('expanded')">
                     <div class="arrondissement-info">
-                        <h3>${arrData.arrondissement?.name || arrKey}</h3>
+                        <h3>${arrData.name || arrKey}</h3>
                         <div class="arrondissement-stats">
                             <div class="stat-item">
                                 <span class="stat-number">${visitedPlaces}/${totalPlaces}</span>
@@ -1113,7 +1113,7 @@ class UIManager {
         return `
             <div class="favorite-card">
                 <h5>${details.place.name}</h5>
-                <p class="favorite-location">${details.arrData.arrondissement?.name || details.arrKey}</p>
+                <p class="favorite-location">${details.arrData.name || details.arrKey}</p>
                 <p class="favorite-category">${this.getCategoryIcon(details.catKey)} ${details.catData.title}</p>
                 <small>Ajouté le ${new Date(favorite.addedAt).toLocaleDateString('fr-FR')}</small>
             </div>
@@ -1132,7 +1132,7 @@ class UIManager {
             html += `
                 <div class="arrondissement-progress-item">
                     <div class="progress-info">
-                        <span class="progress-name">${arrData.arrondissement?.name || arrKey}</span>
+                        <span class="progress-name">${arrData.name || arrKey}</span>
                         <span class="progress-stats">${visitedPlaces}/${totalPlaces} - ${completionPercent}%</span>
                     </div>
                     <div class="progress-bar">

@@ -202,7 +202,7 @@ class MapManager {
                         const isVisited = userData && userData.visitedPlaces instanceof Set ? 
                             userData.visitedPlaces.has(placeId) : false;
                         
-                        const arrondissementName = arrData.arrondissement?.name || arrKey;
+                        const arrondissementName = arrData.name || arrKey;
                         const marker = this.createPlaceMarker(coords, place, catKey, isVisited, arrondissementName);
                         if (marker) {
                             this.markers.push(marker);
@@ -278,7 +278,7 @@ class MapManager {
         
         return `
             <div style="font-family: 'Segoe UI', sans-serif; text-align: center; min-width: 250px;">
-                <h3 style="color: #1e3a8a; margin: 0 0 12px 0; font-size: 16px;">${arrData.arrondissement?.name || arrKey}</h3>
+                <h3 style="color: #1e3a8a; margin: 0 0 12px 0; font-size: 16px;">${arrData.name || arrKey}</h3>
                 <div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 16px; border-radius: 8px; margin: 12px 0;">
                     <p style="margin: 6px 0; font-weight: bold; font-size: 18px;">${visitedPlaces}/${totalPlaces} lieux explorés</p>
                     <div style="background: #e5e7eb; height: 8px; border-radius: 4px; margin: 10px 0; overflow: hidden;">

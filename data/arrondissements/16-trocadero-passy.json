@@ -216,7 +216,8 @@
       },
       "restaurants-gastronomiques": {
         "title": "🍽️ Restaurants Gastronomiques & Palaces",
-        "places": [lastrance",
+        "places": [{
+            "id": "lastrance",
             "name": "L'Astrance",
             "description": "⭐⭐⭐ Michelin - Fusion franco-asiatique Pascal Barbot",
             "address": "4 Rue Beethoven, 75116 Paris",
