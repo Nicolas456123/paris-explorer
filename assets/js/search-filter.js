@@ -116,9 +116,10 @@ class SearchFilter {
         }
         
         // Arrondissement
-        if (arrData.title) {
-            terms.add(arrData.title.toLowerCase());
-            arrData.title.toLowerCase().split(/\s+/).forEach(word => {
+        const arrName = arrData.arrondissement?.name || '';
+        if (arrName) {
+            terms.add(arrName.toLowerCase());
+            arrName.toLowerCase().split(/\s+/).forEach(word => {
                 if (word.length > 2) terms.add(word);
             });
         }
@@ -274,7 +275,8 @@ class SearchFilter {
         });
         
         // Score arrondissement/catégorie
-        if (data.arrData.title.toLowerCase().includes(query) || 
+        const arrName = data.arrData.arrondissement?.name || '';
+        if (arrName.toLowerCase().includes(query) || 
             data.catData.title.toLowerCase().includes(query)) {
             score += 15;
         }
@@ -291,8 +293,9 @@ class SearchFilter {
     
     // === FILTRES DE CORRESPONDANCE ===
     matchesArrondissementFilter(data, arrFilter) {
+        const arrName = data.arrData.arrondissement?.name || '';
         return data.arrKey.includes(arrFilter) || 
-               data.arrData.title.toLowerCase().includes(arrFilter.toLowerCase());
+               arrName.toLowerCase().includes(arrFilter.toLowerCase());
     }
     
     matchesCategoryFilter(data, catFilter) {
@@ -548,7 +551,11 @@ class SearchFilter {
             Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
                 const option = document.createElement('option');
                 option.value = arrKey;
-                option.textContent = `${arrKey} - ${arrData.title.replace(/^\d+[ER|ÈME]+ ARRONDISSEMENT - /, '')}`;
+                
+                // Le nom est dans arrondissement.name
+                const name = arrData.arrondissement?.name || arrKey;
+                const displayName = name.replace(/^\d+[ER|ÈME]+ ARRONDISSEMENT - /, '');
+                option.textContent = `${arrKey} - ${displayName}`;
                 select.appendChild(option);
             });
         }

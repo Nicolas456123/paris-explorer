@@ -280,8 +280,9 @@ delay(ms) {
             return false;
         }
         
-        if (!arrData.title) {
-            console.warn(`⚠️ ${arrKey}: titre manquant`);
+        const arrName = arrData.arrondissement?.name;
+        if (!arrName) {
+            console.warn(`⚠️ ${arrKey}: nom d'arrondissement manquant`);
             return false;
         }
         
