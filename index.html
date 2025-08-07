@@ -296,7 +296,7 @@
                     </small>
                 </div>
                 <div class="form-actions">
-                    <button class="btn btn-primary" onclick="createUser()">✨ Créer l'utilisateur</button>
+                    <button class="btn btn-primary" onclick="window.createUser()">✨ Créer l'utilisateur</button>
                     <button class="btn btn-secondary" onclick="app.uiManager.hideModal()">Annuler</button>
                 </div>
             </div>
@@ -411,21 +411,21 @@
             crossorigin=""></script>
     
     <!-- Modules JavaScript (dans le bon ordre) -->
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/data-manager.js"></script>
-    <script src="assets/js/user-manager.js"></script>
-    <script src="assets/js/map-manager.js"></script>
-    <script src="assets/js/search-filter.js"></script>
-    <script src="assets/js/export-import.js"></script>
-    <script src="assets/js/ui-manager.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/utils.js?v=2.0.2"></script>
+    <script src="assets/js/data-manager.js?v=2.0.2"></script>
+    <script src="assets/js/user-manager.js?v=2.0.2"></script>
+    <script src="assets/js/map-manager.js?v=2.0.2"></script>
+    <script src="assets/js/search-filter.js?v=2.0.2"></script>
+    <script src="assets/js/export-import.js?v=2.0.2"></script>
+    <script src="assets/js/ui-manager.js?v=2.0.2"></script>
+    <script src="assets/js/app.js?v=2.0.2"></script>
     
     <!-- Service Worker pour PWA -->
     <script>
         // Enregistrement du Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('./sw.js')
                     .then(registration => {
                         console.log('✅ Service Worker enregistré:', registration.scope);
                         

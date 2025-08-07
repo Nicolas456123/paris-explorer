@@ -464,7 +464,14 @@ class UIManager {
                 ` : ''}
                 
                 ${place.address ? `
-                    <p class="place-address">📍 ${place.address}</p>
+                    <p class="place-address">
+                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
+                           target="_blank" 
+                           style="color: inherit; text-decoration: none; cursor: pointer;"
+                           title="Voir sur Google Maps">
+                            📍 ${place.address}
+                        </a>
+                    </p>
                 ` : ''}
                 
                 ${place.tags && place.tags.length > 0 ? `
@@ -1209,11 +1216,14 @@ class UIManager {
                     ${place.address ? `
                         <div class="detail-section">
                             <h5>📍 Adresse</h5>
-                            <p>${place.address}</p>
-                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
-                               target="_blank" class="btn btn-secondary">
-                                🗺️ Voir sur Google Maps
-                            </a>
+                            <p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
+                                   target="_blank" 
+                                   style="color: var(--paris-blue); text-decoration: underline; cursor: pointer;"
+                                   title="Voir sur Google Maps">
+                                    ${place.address} 🗺️
+                                </a>
+                            </p>
                         </div>
                     ` : ''}
                     
@@ -1277,7 +1287,7 @@ class UIManager {
 }
 
 // === FONCTIONS GLOBALES UTILITAIRES ===
-function createUser() {
+window.createUser = function() {
     const input = document.getElementById('userNameInput');
     const userName = input.value.trim();
     

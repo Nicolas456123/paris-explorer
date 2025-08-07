@@ -366,12 +366,14 @@ class MapManager {
                 
                 ${place.address ? `
                     <div style="text-align: center; margin: 12px 0;">
-                        <p style="color: #6b7280; font-size: 13px; font-style: italic; margin: 6px 0;">${place.address}</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
-                           target="_blank" 
-                           style="background: #1e3a8a; color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 12px; display: inline-block;">
-                            🗺️ Ouvrir dans Maps
-                        </a>
+                        <p style="margin: 6px 0;">
+                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
+                               target="_blank" 
+                               style="color: #6b7280; font-size: 13px; font-style: italic; text-decoration: none;"
+                               title="Voir sur Google Maps">
+                                📍 ${place.address}
+                            </a>
+                        </p>
                     </div>
                 ` : ''}
                 

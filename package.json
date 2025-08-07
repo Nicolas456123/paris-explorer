@@ -1,0 +1,13 @@
+{
+  "name": "paris-explorer",
+  "version": "2.0.1",
+  "description": "Découvrez tous les trésors de Paris",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve -s ."
+  },
+  "keywords": ["paris", "explorer", "tourism", "pwa"],
+  "author": "Paris Explorer Team",
+  "license": "MIT"
+}

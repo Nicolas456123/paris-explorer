@@ -5,7 +5,8 @@ class DataManager {
         this.app = app;
         this.loadedFiles = new Set();
         this.cacheDuration = 3600000; // 1 heure
-        this.retryAttempts = 3;
+        this.retryAttempts = 1; // Réduire pour accélérer
+        this.retryDelay = 500; // 500ms pour accélérer
         this.loadingQueue = [];
         this.isLoading = false;
     }
@@ -124,61 +125,42 @@ async loadSingleArrondissement(arrKey, arrInfo, attempt = 1) {
     const maxAttempts = this.retryAttempts;
     
     try {
-        // ✅ Amélioration : plusieurs fallbacks pour les noms de fichiers
-        const possiblePaths = [
-            // 1. Chemin défini dans l'index (priorité)
-            arrInfo.file,
-            // 2. Fallback avec transformation basique
-            `data/arrondissements/${arrKey.toLowerCase().replace('ème', 'eme')}.json`,
-            // 3. Fallback avec mappings spécifiques pour les cas problématiques
-            this.getSpecificFilePath(arrKey),
-            // 4. Fallback avec numéro uniquement
-            `data/arrondissements/${this.extractArrNumber(arrKey)}.json`
-        ].filter(path => path); // Enlever les valeurs null/undefined
-
-        console.log(`🔄 Tentative ${attempt}/${maxAttempts} pour ${arrKey}`);
+        // ✅ Utiliser directement le mapping spécifique (un seul chemin valide)
+        const filePath = this.getSpecificFilePath(arrKey);
         
-        // Essayer chaque chemin possible
-        for (let i = 0; i < possiblePaths.length; i++) {
-            const filePath = possiblePaths[i];
-            console.log(`  📁 Essai chemin ${i + 1}: ${filePath}`);
-            
-            try {
-                const response = await fetch(filePath, {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json' },
-                    cache: 'no-cache'
-                });
-                
-                if (response.ok) {
-                    const arrData = await response.json();
-                    
-                    // Valider les données
-                    if (this.validateArrondissementData(arrData)) {
-                        // Processus des données
-                        this.processArrondissementData(arrKey, arrData);
-                        console.log(`✅ ${arrKey} chargé via chemin ${i + 1}`);
-                        return true;
-                    } else {
-                        console.warn(`⚠️ Données invalides dans ${filePath}`);
-                        continue;
-                    }
-                } else if (response.status === 404) {
-                    console.warn(`❌ 404: ${filePath} non trouvé`);
-                    continue; // Essayer le chemin suivant
-                } else {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-            } catch (fetchError) {
-                console.warn(`❌ Erreur fetch ${filePath}:`, fetchError.message);
-                if (i === possiblePaths.length - 1) {
-                    throw fetchError; // C'était le dernier essai
-                }
-                continue;
-            }
+        if (!filePath) {
+            console.error(`❌ Pas de chemin défini pour ${arrKey}`);
+            return false;
         }
+
+        console.log(`📁 Chargement ${arrKey}: ${filePath}`);
         
-        throw new Error(`Aucun fichier trouvé pour ${arrKey} après ${possiblePaths.length} tentatives`);
+        try {
+            const response = await fetch(filePath, {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' },
+                cache: 'no-cache'
+            });
+            
+            if (response.ok) {
+                const arrData = await response.json();
+                
+                // Valider les données
+                if (this.validateArrondissementData(arrData)) {
+                    // Processus des données
+                    this.processArrondissementData(arrKey, arrData);
+                    console.log(`✅ ${arrKey} chargé`);
+                    return true;
+                } else {
+                    console.warn(`⚠️ Données invalides dans ${filePath}`);
+                    return false;
+                }
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+        } catch (fetchError) {
+            throw fetchError;
+        }
         
     } catch (error) {
         if (attempt < maxAttempts) {
@@ -194,11 +176,26 @@ async loadSingleArrondissement(arrKey, arrInfo, attempt = 1) {
     // Mappings spécifiques pour les cas problématiques
 getSpecificFilePath(arrKey) {
     const specificMappings = {
+        '1er': 'data/arrondissements/01-louvre.json',
+        '2ème': 'data/arrondissements/02-bourse.json',
+        '3ème': 'data/arrondissements/03-haut-marais.json',
         '4ème': 'data/arrondissements/04-marais-ile-saint-louis.json',
+        '5ème': 'data/arrondissements/05-quartier-latin.json',
         '6ème': 'data/arrondissements/06-saint-germain.json',
         '7ème': 'data/arrondissements/07-invalides-tour-eiffel.json',
+        '8ème': 'data/arrondissements/08-champs-elysees.json',
+        '9ème': 'data/arrondissements/09-opera-pigalle.json',
         '10ème': 'data/arrondissements/10-canal-saint-martin.json',
-        // Ajoutez d'autres mappings si nécessaire
+        '11ème': 'data/arrondissements/11-bastille-oberkampf.json',
+        '12ème': 'data/arrondissements/12-nation-bercy.json',
+        '13ème': 'data/arrondissements/13-chinatown-bibliotheque.json',
+        '14ème': 'data/arrondissements/14-montparnasse.json',
+        '15ème': 'data/arrondissements/15-vaugirard-beaugrenelle.json',
+        '16ème': 'data/arrondissements/16-trocadero-passy.json',
+        '17ème': 'data/arrondissements/17-batignolles-monceau.json',
+        '18ème': 'data/arrondissements/18-montmartre-barbes.json',
+        '19ème': 'data/arrondissements/19-buttes-chaumont-villette.json',
+        '20ème': 'data/arrondissements/20-belleville-pere-lachaise.json'
     };
     
     return specificMappings[arrKey] || null;
@@ -217,22 +214,37 @@ validateArrondissementData(data) {
     }
     
     // Vérifier la structure de base
-    const requiredFields = ['arrondissement'];
-    for (const field of requiredFields) {
-        if (!data[field]) {
-            console.warn(`❌ Champ obligatoire manquant: ${field}`);
-            return false;
-        }
-    }
-    
-    // Vérifier que l'arrondissement a des catégories
-    if (!data.categories || Object.keys(data.categories).length === 0) {
-        console.warn('❌ Aucune catégorie trouvée');
+    if (!data.arrondissement) {
+        console.warn('❌ Champ arrondissement manquant');
         return false;
     }
     
-    console.log('✅ Structure des données valide');
+    // Les catégories sont dans arrondissement.categories
+    if (!data.arrondissement.categories || Object.keys(data.arrondissement.categories).length === 0) {
+        console.warn('❌ Aucune catégorie trouvée dans arrondissement.categories');
+        return false;
+    }
+    
+    console.log(`✅ Structure valide avec ${Object.keys(data.arrondissement.categories).length} catégories`);
     return true;
+}
+
+// === TRAITEMENT DES DONNÉES D'ARRONDISSEMENT ===
+processArrondissementData(arrKey, arrData) {
+    // La structure a les catégories dans arrondissement.categories
+    // On copie les catégories à la racine pour simplifier l'accès
+    if (arrData.arrondissement?.categories) {
+        arrData.categories = arrData.arrondissement.categories;
+    }
+    
+    // Stocker les données dans l'app
+    this.app.parisData[arrKey] = arrData;
+    
+    // Marquer comme chargé
+    this.loadedFiles.add(arrKey);
+    
+    const categoryCount = Object.keys(arrData.arrondissement?.categories || {}).length;
+    console.log(`✅ ${arrKey} traité avec ${categoryCount} catégories`);
 }
 
 // ✅ Fonction utilitaire pour les délais
