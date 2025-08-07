@@ -126,7 +126,6 @@
         @media (max-width: 768px) {
             .tabs-container {
                 position: fixed !important;
-                top: auto !important;
                 left: 0 !important;
                 right: 0 !important;
                 z-index: 1000 !important;
@@ -134,16 +133,42 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
                 padding: 8px !important;
                 margin: 0 !important;
+                /* Position calculée dynamiquement par JS */
             }
             
+            /* Réinitialiser les hauteurs problématiques */
             .tab-content {
-                padding-top: 80px !important;
-                height: calc(100vh - 300px) !important;
-                overflow-y: auto !important;
+                padding-top: 16px !important;
+                height: auto !important;
+                min-height: 400px !important;
+                overflow-y: visible !important;
+                position: relative !important;
             }
             
             main {
                 position: relative !important;
+                /* Padding calculé dynamiquement par JS */
+            }
+            
+            /* S'assurer que le contenu est visible */
+            .tab-content.active {
+                display: block !important;
+                visibility: visible !important;
+            }
+            
+            /* CSS de débogage mobile - contour rouge temporaire */
+            .tab-content {
+                border: 2px solid red !important;
+                background-color: #fffaaa !important;
+                margin-top: 10px !important;
+            }
+            
+            main {
+                border: 2px solid blue !important;
+            }
+            
+            .tabs-container {
+                border: 2px solid green !important;
             }
         }
     </style>
@@ -442,8 +467,8 @@
     <script src="assets/js/map-manager.js?v=2.0.8"></script>
     <script src="assets/js/search-filter.js?v=2.0.8"></script>
     <script src="assets/js/export-import.js?v=2.0.8"></script>
-    <script src="assets/js/ui-manager.js?v=2.0.8"></script>
-    <script src="assets/js/app.js?v=2.0.8"></script>
+    <script src="assets/js/ui-manager.js?v=2.0.9"></script>
+    <script src="assets/js/app.js?v=2.0.9"></script>
     
     <!-- Service Worker pour PWA -->
     <script>
