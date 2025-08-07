@@ -1,5 +1,72 @@
 // ===== UTILITIES - FONCTIONS UTILITAIRES COMPLÈTES =====
 
+// === LIENS GOOGLE MAPS OPTIMISÉS ===
+/**
+ * Génère une URL Google Maps optimale pour un lieu
+ * @param {Object} place - Objet lieu avec name, address, etc.
+ * @param {Array} placeCoordinates - Coordonnées [lat, lng] optionnelles
+ * @returns {string} - URL Google Maps optimisée
+ */
+function generateGoogleMapsUrl(place, placeCoordinates = null) {
+    // Priorité 1: Si on a des coordonnées précises, les utiliser avec le nom du lieu
+    if (placeCoordinates && Array.isArray(placeCoordinates) && placeCoordinates.length >= 2) {
+        const lat = placeCoordinates[0];
+        const lng = placeCoordinates[1];
+        
+        // URL avec coordonnées + nom du lieu pour plus de précision
+        const query = encodeURIComponent(`${place.name}, Paris`);
+        return `https://www.google.com/maps/search/?api=1&query=${query}&center=${lat},${lng}&zoom=18`;
+    }
+    
+    // Priorité 2: Si on a une adresse précise, l'utiliser avec le nom
+    if (place.address && place.address.trim()) {
+        const fullQuery = `${place.name}, ${place.address.trim()}`;
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullQuery)}`;
+    }
+    
+    // Priorité 3: Fallback avec juste le nom + Paris
+    const fallbackQuery = `${place.name}, Paris`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fallbackQuery)}`;
+}
+
+/**
+ * Valide et suggère des améliorations pour les coordonnées
+ * @param {Array} coordinates - Coordonnées [lat, lng]
+ * @param {string} placeName - Nom du lieu pour debug
+ * @returns {Object} - {isValid: boolean, suggestion: string}
+ */
+function validateAndSuggestCoordinates(coordinates, placeName) {
+    if (!Array.isArray(coordinates) || coordinates.length < 2) {
+        return {
+            isValid: false,
+            suggestion: `${placeName}: Coordonnées manquantes ou format invalide`
+        };
+    }
+    
+    const [lat, lng] = coordinates;
+    
+    // Coordonnées de Paris approximatives
+    const PARIS_LAT_MIN = 48.815, PARIS_LAT_MAX = 48.902;
+    const PARIS_LNG_MIN = 2.224, PARIS_LNG_MAX = 2.470;
+    
+    if (typeof lat !== 'number' || typeof lng !== 'number') {
+        return {
+            isValid: false,
+            suggestion: `${placeName}: Coordonnées doivent être des nombres`
+        };
+    }
+    
+    // Vérifier si les coordonnées sont dans Paris
+    if (lat < PARIS_LAT_MIN || lat > PARIS_LAT_MAX || lng < PARIS_LNG_MIN || lng > PARIS_LNG_MAX) {
+        return {
+            isValid: false,
+            suggestion: `${placeName}: Coordonnées hors de Paris (lat: ${lat}, lng: ${lng})`
+        };
+    }
+    
+    return { isValid: true, suggestion: null };
+}
+
 // === UTILITAIRES DE BASE ===
 
 /**

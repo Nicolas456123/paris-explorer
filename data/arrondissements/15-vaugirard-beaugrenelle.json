@@ -67,7 +67,7 @@
             "name": "Jardin Atlantique",
             "description": "Jardin suspendu gare, innovation paysagère",
             "address": "Gare Montparnasse, 75014 Paris",
-            "coordinates": [48.8420, 2.3220],
+            "coordinates": [48.8399, 2.3190],
             "tags": ["jardin-suspendu", "innovation", "paysagère"]
           }
         ]
@@ -236,7 +236,7 @@
             "name": "Villa Seurat",
             "description": "Cité artistes privée, maisons individuelles",
             "address": "Villa Seurat, 75014 Paris",
-            "coordinates": [48.8220, 2.3340],
+            "coordinates": [48.8266, 2.3328],
             "tags": ["cité-artistes", "privée", "maisons-individuelles"]
           },
           {
@@ -244,7 +244,7 @@
             "name": "Square des Peupliers",
             "description": "Quartier village, maisons basses (13e limitrophe)",
             "address": "Square des Peupliers, 75013 Paris",
-            "coordinates": [48.8270, 2.3480],
+            "coordinates": [48.8256, 2.3537],
             "tags": ["quartier-village", "maisons-basses", "limitrophe"]
           }
         ]
@@ -257,7 +257,7 @@
             "name": "Théâtre Montparnasse",
             "description": "Théâtre privé renommé, comédies succès",
             "address": "31 Rue de la Gaîté, 75014 Paris",
-            "coordinates": [48.8390, 2.3230],
+            "coordinates": [48.8369, 2.3205],
             "tags": ["privé", "renommé", "comédies-succès"]
           },
           {
@@ -265,7 +265,7 @@
             "name": "Théâtre Rive Gauche",
             "description": "Petite salle intimiste, one-man-show",
             "address": "6 Rue de la Gaîté, 75014 Paris",
-            "coordinates": [48.8390, 2.3235],
+            "coordinates": [48.8369, 2.3205],
             "tags": ["petite-salle", "intimiste", "one-man-show"]
           },
           {
@@ -273,7 +273,7 @@
             "name": "Maison des Métallos",
             "description": "Arts du cirque, danse contemporaine",
             "address": "94 Rue Jean-Pierre Timbaud, 75011 Paris",
-            "coordinates": [48.8650, 2.3720],
+            "coordinates": [48.8677, 2.3779],
             "tags": ["arts-du-cirque", "danse-contemporaine"]
           }
         ]

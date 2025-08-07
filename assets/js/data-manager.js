@@ -40,9 +40,10 @@ class DataManager {
             
             if (totalPlaces < 1000) {
                 console.warn(`⚠️ Seulement ${totalPlaces} lieux chargés - données incomplètes`);
-                this.app.showNotification(`⚠️ ${totalPlaces} lieux chargés (données partielles)`, 'warning');
+                // Notification supprimée - trop envahissante
             } else {
-                this.app.showNotification(`✅ ${totalPlaces} lieux de Paris chargés !`, 'success');
+                console.log(`✅ ${totalPlaces} lieux de Paris chargés !`);
+                // Notification de succès supprimée - visible dans la console
             }
             
             return true;
@@ -431,7 +432,7 @@ delay(ms) {
         
         this.app.isDataLoaded = true;
         console.log('✅ Données de fallback chargées');
-        this.app.showNotification('Mode dégradé : données minimales chargées', 'warning');
+        // Notification de fallback supprimée
     }
     
     // === UTILITAIRES DE DONNÉES ===
@@ -509,19 +510,22 @@ delay(ms) {
     }
     
     getPlaceCoordinates(place, arrKey) {
-        // Priorité 1: coordonnées du lieu
+        // Priorité 1: coordonnées exactes du lieu
         if (place.coordinates && this.validateCoordinates(place.coordinates)) {
             return place.coordinates;
         }
         
-        // Priorité 2: coordonnées de l'arrondissement avec décalage aléatoire
+        // Priorité 2: Si on a une adresse, ne pas utiliser de coordonnées approximatives
+        // Google Maps se débrouillera mieux avec l'adresse qu'avec des coords aléatoires
+        if (place.address && place.address.trim()) {
+            return null; // Laisser Google Maps gérer l'adresse
+        }
+        
+        // Priorité 3: coordonnées du centre de l'arrondissement (sans décalage aléatoire)
+        // Seulement si on n'a ni coordonnées précises ni adresse
         const arrCoords = this.getArrondissementCoordinates(arrKey);
         if (arrCoords) {
-            const [lat, lng] = arrCoords;
-            // Décalage aléatoire de ±0.005 degrés (≈ 500m)
-            const offsetLat = lat + (Math.random() - 0.5) * 0.01;
-            const offsetLng = lng + (Math.random() - 0.5) * 0.01;
-            return [offsetLat, offsetLng];
+            return arrCoords; // Coordonnées exactes du centre de l'arrondissement
         }
         
         return null;

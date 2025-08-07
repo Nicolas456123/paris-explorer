@@ -8,6 +8,10 @@ class MapManager {
         this.arrondissementLayer = null;
         this.isMapReady = false;
         this.isFullscreen = false;
+        this.fullscreenToggling = false;
+        this.escapeListenerAdded = false;
+        this.originalParent = null;
+        this.originalNextSibling = null;
     }
     
     // === INITIALISATION DE LA CARTE ===
@@ -78,24 +82,24 @@ class MapManager {
                 }, 100);
             });
             
-            // Gestion des événements de zoom
+            // Événement de zoom intelligent - change seulement le type d'affichage
+            let lastZoomLevel = this.map.getZoom();
             this.map.on('zoomend', () => {
-                const zoom = this.map.getZoom();
-                console.log(`🔍 Zoom changé: ${zoom}`);
-                this.updateMapContent();
+                const currentZoom = this.map.getZoom();
+                const wasOverviewMode = lastZoomLevel <= 12;
+                const isOverviewMode = currentZoom <= 12;
+                
+                // Ne recharger que si on change de mode (overview ↔ détaillé)
+                if (wasOverviewMode !== isOverviewMode) {
+                    console.log(`🔍 Changement de mode: ${isOverviewMode ? 'vue d\'ensemble' : 'vue détaillée'}`);
+                    this.clearMapMarkers();
+                    this.loadMapContent();
+                }
+                
+                lastZoomLevel = currentZoom;
             });
             
-            // Gestion des déplacements
-            this.map.on('moveend', () => {
-                const center = this.map.getCenter();
-                console.log(`📍 Centre: [${center.lat.toFixed(4)}, ${center.lng.toFixed(4)}]`);
-            });
-            
-            // Événement de clic pour debugging
-            this.map.on('click', (e) => {
-                console.log(`👆 Clic carte: [${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}]`);
-                this.app.showNotification(`Position: ${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}`, 'info', 2000);
-            });
+            // Événement de clic supprimé - plus d'affichage de coordonnées inutiles
             
             // Gestion d'erreurs de chargement
             this.map.on('error', (e) => {
@@ -103,8 +107,10 @@ class MapManager {
                 this.app.showNotification('Erreur de chargement de la carte', 'error');
             });
             
-            // Initialiser les contrôles
-            this.setupMapControls();
+            // Initialiser les contrôles après un délai pour s'assurer que les boutons sont dans le DOM
+            setTimeout(() => {
+                this.setupMapControls();
+            }, 200);
             
             console.log('✅ Carte complètement initialisée');
             
@@ -219,7 +225,8 @@ class MapManager {
             console.warn('⚠️ Aucun marqueur ajouté, fallback vers les données demo');
             this.loadDemoData();
         } else {
-            this.app.showNotification(`🗺️ ${markersAdded} lieux affichés sur la carte`, 'success');
+            console.log(`🗺️ ${markersAdded} lieux affichés sur la carte`);
+            // Notification supprimée - information visible dans la console
         }
     }
     
@@ -269,7 +276,7 @@ class MapManager {
         }
         
         console.log(`✅ ${this.markers.length} marqueurs demo ajoutés`);
-        this.app.showNotification(`🗺️ Carte de démonstration chargée (${this.markers.length} arrondissements)`, 'info');
+        // Notification demo supprimée
     }
     
     // === CRÉATION DES POPUPS ===
@@ -362,7 +369,7 @@ class MapManager {
                 place.name
             );
             
-            marker.bindPopup(this.createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId));
+            marker.bindPopup(this.createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId, coords));
             
             // Stocker l'ID pour pouvoir mettre à jour le marqueur
             marker._placeId = placeId;
@@ -376,7 +383,7 @@ class MapManager {
         }
     }
     
-    createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId) {
+    createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId, coords) {
         const statusColor = isVisited ? '#059669' : '#6b7280';
         const statusText = isVisited ? '✅ Visité' : '⭕ Non visité';
         
@@ -403,7 +410,7 @@ class MapManager {
                 ${place.address ? `
                     <div style="text-align: center; margin: 12px 0;">
                         <p style="margin: 6px 0;">
-                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
+                            <a href="${generateGoogleMapsUrl(place, coords)}" 
                                target="_blank" 
                                style="color: #6b7280; font-size: 13px; font-style: italic; text-decoration: none;"
                                title="Voir sur Google Maps">
@@ -462,7 +469,7 @@ class MapManager {
             this.app.showNotification(
                 isNowVisited ? '✅ Lieu marqué comme visité' : '⭕ Lieu marqué comme non visité',
                 'success',
-                2000
+                1000  // Durée réduite à 1 seconde
             );
             
             // Fermer le popup et le rouvrir pour mettre à jour le contenu
@@ -659,67 +666,174 @@ class MapManager {
     
     // === CONTRÔLES DE CARTE ===
     setupMapControls() {
+        console.log('🎮 Configuration des contrôles de carte...');
+        
         const fullscreenBtn = document.getElementById('fullscreenBtn');
         const centerMapBtn = document.getElementById('centerMapBtn');
         
+        console.log('🔍 Boutons trouvés:', { 
+            fullscreen: !!fullscreenBtn, 
+            center: !!centerMapBtn 
+        });
+        
         if (fullscreenBtn) {
-            fullscreenBtn.addEventListener('click', () => {
+            // Supprimer les anciens événements s'ils existent
+            fullscreenBtn.replaceWith(fullscreenBtn.cloneNode(true));
+            const newFullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            newFullscreenBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('🔲 Clic bouton plein écran');
                 this.toggleFullscreen();
             });
+            console.log('✅ Événement plein écran configuré');
+        } else {
+            console.error('❌ Bouton plein écran introuvable');
         }
         
         if (centerMapBtn) {
             centerMapBtn.addEventListener('click', () => {
+                console.log('🎯 Clic bouton centrage');
                 this.centerMap();
             });
+            console.log('✅ Événement centrage configuré');
+        } else {
+            console.error('❌ Bouton centrage introuvable');
         }
         
-        // Écouteur pour la touche Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isFullscreen) {
-                this.exitFullscreen();
-            }
-        });
+        // Écouteur pour la touche Escape (une seule fois)
+        if (!this.escapeListenerAdded) {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.isFullscreen) {
+                    console.log('⌨️ Touche Escape pressée, sortie du plein écran');
+                    this.exitFullscreen();
+                }
+            });
+            this.escapeListenerAdded = true;
+        }
     }
     
     toggleFullscreen() {
+        // Éviter les doubles clics
+        if (this.fullscreenToggling) {
+            console.log('🔄 Toggle en cours, ignoré');
+            return;
+        }
+        
+        this.fullscreenToggling = true;
+        console.log('🔄 Toggle fullscreen, état actuel:', this.isFullscreen);
+        
         if (this.isFullscreen) {
             this.exitFullscreen();
         } else {
             this.enterFullscreen();
         }
+        
+        // Réactiver après 500ms
+        setTimeout(() => {
+            this.fullscreenToggling = false;
+        }, 500);
     }
     
     enterFullscreen() {
         const mapContainer = document.getElementById('mapContainer');
-        if (!mapContainer) return;
+        if (!mapContainer) {
+            console.error('❌ MapContainer introuvable pour le plein écran');
+            return;
+        }
         
+        console.log('📦 Container avant plein écran:', {
+            className: mapContainer.className,
+            parent: mapContainer.parentElement.tagName,
+            position: getComputedStyle(mapContainer).position
+        });
+        
+        // Sauvegarder la position originale dans le DOM
+        this.originalParent = mapContainer.parentElement;
+        this.originalNextSibling = mapContainer.nextSibling;
+        
+        // Déplacer le container vers le body pour éviter les contraintes CSS
+        document.body.appendChild(mapContainer);
+        
+        // Ajouter la classe CSS pour le plein écran
         mapContainer.classList.add('map-fullscreen');
+        
+        // Force les styles directement
+        mapContainer.style.position = 'fixed';
+        mapContainer.style.top = '0';
+        mapContainer.style.left = '0';
+        mapContainer.style.width = '100vw';
+        mapContainer.style.height = '100vh';
+        mapContainer.style.zIndex = '99999';
+        mapContainer.style.backgroundColor = 'white';
+        mapContainer.style.borderRadius = '0';
+        mapContainer.style.margin = '0';
+        mapContainer.style.padding = '0';
+        mapContainer.style.boxSizing = 'border-box';
+        
         this.isFullscreen = true;
         
+        console.log('📦 Container après plein écran:', {
+            className: mapContainer.className,
+            parent: mapContainer.parentElement.tagName,
+            position: getComputedStyle(mapContainer).position,
+            width: getComputedStyle(mapContainer).width,
+            height: getComputedStyle(mapContainer).height
+        });
+        
+        // Invalider la taille de la carte
         setTimeout(() => {
             if (this.map) {
                 this.map.invalidateSize();
+                console.log('🗺️ Taille de carte invalidée');
             }
         }, 100);
         
-        console.log('🔲 Mode plein écran activé');
+        console.log('🔲 Mode plein écran activé - container déplacé vers body');
     }
     
     exitFullscreen() {
         const mapContainer = document.getElementById('mapContainer');
         if (!mapContainer) return;
         
+        console.log('📤 Sortie du plein écran');
+        
+        // Supprimer la classe CSS
         mapContainer.classList.remove('map-fullscreen');
+        
+        // Réinitialiser tous les styles directs
+        mapContainer.style.position = '';
+        mapContainer.style.top = '';
+        mapContainer.style.left = '';
+        mapContainer.style.width = '';
+        mapContainer.style.height = '';
+        mapContainer.style.zIndex = '';
+        mapContainer.style.backgroundColor = '';
+        mapContainer.style.borderRadius = '';
+        mapContainer.style.margin = '';
+        mapContainer.style.padding = '';
+        mapContainer.style.boxSizing = '';
+        
+        // Remettre le container à sa place originale dans le DOM
+        if (this.originalParent) {
+            if (this.originalNextSibling) {
+                this.originalParent.insertBefore(mapContainer, this.originalNextSibling);
+            } else {
+                this.originalParent.appendChild(mapContainer);
+            }
+        }
+        
         this.isFullscreen = false;
         
         setTimeout(() => {
             if (this.map) {
                 this.map.invalidateSize();
+                console.log('🗺️ Taille de carte réajustée');
             }
         }, 100);
         
-        console.log('🔲 Mode plein écran désactivé');
+        console.log('🔲 Mode plein écran désactivé - container remis à sa place');
     }
     
     centerMap() {
@@ -733,7 +847,7 @@ class MapManager {
         }
         
         console.log('🎯 Carte centrée');
-        this.app.showNotification('Carte centrée', 'info', 1500);
+        // Notification 'centrage' supprimée - action évidente
     }
     
     // === GESTION DES MARQUEURS ===
@@ -817,7 +931,8 @@ class MapManager {
         const coords = this.getArrondissementCoordinates(arrKey);
         if (coords && this.map) {
             this.map.setView(coords, 14);
-            this.app.showNotification(`Zoom sur ${arrKey}`, 'info');
+            console.log(`🎯 Zoom sur ${arrKey}`);
+            // Notification zoom supprimée - action évidente
         }
     }
     

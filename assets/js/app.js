@@ -483,6 +483,64 @@ class ParisExplorerApp {
             }, 2000);
         }
     }
+    
+    // === VALIDATION DES COORDONNÉES ===
+    validateAllCoordinates() {
+        if (!this.isDataLoaded) {
+            console.warn('⚠️ Données non chargées');
+            return;
+        }
+        
+        console.group('📍 Validation des coordonnées');
+        let totalPlaces = 0;
+        let placesWithCoords = 0;
+        let validCoords = 0;
+        let invalidCoords = [];
+        
+        Object.entries(this.parisData).forEach(([arrKey, arrData]) => {
+            const categories = arrData?.categories || arrData?.arrondissement?.categories || {};
+            
+            Object.entries(categories).forEach(([catKey, catData]) => {
+                (catData.places || []).forEach(place => {
+                    totalPlaces++;
+                    
+                    if (place.coordinates) {
+                        placesWithCoords++;
+                        const validation = validateAndSuggestCoordinates(place.coordinates, place.name);
+                        
+                        if (validation.isValid) {
+                            validCoords++;
+                        } else {
+                            invalidCoords.push({
+                                arrondissement: arrKey,
+                                lieu: place.name,
+                                coords: place.coordinates,
+                                probleme: validation.suggestion
+                            });
+                        }
+                    }
+                });
+            });
+        });
+        
+        console.log(`📊 Total des lieux: ${totalPlaces}`);
+        console.log(`📍 Lieux avec coordonnées: ${placesWithCoords} (${Math.round(placesWithCoords/totalPlaces*100)}%)`);
+        console.log(`✅ Coordonnées valides: ${validCoords} (${Math.round(validCoords/placesWithCoords*100)}%)`);
+        console.log(`❌ Coordonnées invalides: ${invalidCoords.length}`);
+        
+        if (invalidCoords.length > 0) {
+            console.group('❌ Coordonnées problématiques:');
+            invalidCoords.forEach(item => {
+                console.warn(`${item.arrondissement} - ${item.lieu}: ${item.probleme}`);
+            });
+            console.groupEnd();
+        } else {
+            console.log('🎉 Toutes les coordonnées sont valides !');
+        }
+        
+        console.groupEnd();
+        return { totalPlaces, placesWithCoords, validCoords, invalidCoords };
+    }
 }
 
 // === INITIALISATION AUTOMATIQUE ===
@@ -504,7 +562,8 @@ window.ParisExplorer = {
     debug: () => window.app ? window.app.debug() : 'App non initialisée',
     reload: () => window.app ? window.app.reload() : location.reload(),
     reset: () => window.app ? window.app.emergencyReset() : null,
-    status: () => window.app ? window.app.getAppStatus() : 'App non initialisée'
+    status: () => window.app ? window.app.getAppStatus() : 'App non initialisée',
+    validateCoords: () => window.app ? window.app.validateAllCoordinates() : 'App non initialisée'
 };
 
 console.log('🗼 Paris Explorer 2.0.1 - Prêt pour l\'initialisation');

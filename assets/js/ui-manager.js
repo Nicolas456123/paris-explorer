@@ -467,7 +467,7 @@ class UIManager {
                 
                 ${place.address ? `
                     <p class="place-address">
-                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
+                        <a href="${generateGoogleMapsUrl(place, this.app.dataManager.getPlaceCoordinates(place, arrKey))}" 
                            target="_blank" 
                            style="color: inherit; text-decoration: none; cursor: pointer;"
                            title="Voir sur Google Maps">
@@ -1219,7 +1219,7 @@ class UIManager {
                         <div class="detail-section">
                             <h5>📍 Adresse</h5>
                             <p>
-                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}" 
+                                <a href="${generateGoogleMapsUrl(place, this.app.dataManager.getPlaceCoordinates(place, arrKey))}" 
                                    target="_blank" 
                                    style="color: var(--paris-blue); text-decoration: underline; cursor: pointer;"
                                    title="Voir sur Google Maps">

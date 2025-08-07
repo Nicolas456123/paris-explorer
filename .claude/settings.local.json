@@ -7,7 +7,9 @@
       "Bash(for file in *.json)",
       "Bash(do echo:*)",
       "Bash(echo:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(find:*)",
+      "Bash(start python -m http.server 8080)"
     ],
     "deny": []
   }

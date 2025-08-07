@@ -106,15 +106,36 @@
             border-radius: var(--border-radius);
         }
         
-        /* Mode plein écran pour la carte */
-        .map-fullscreen {
+        /* Mode plein écran pour la carte - priorité maximale */
+        #mapContainer.map-fullscreen {
             position: fixed !important;
             top: 0 !important;
             left: 0 !important;
             width: 100vw !important;
             height: 100vh !important;
-            z-index: 9999 !important;
+            z-index: 99999 !important;
             border-radius: 0 !important;
+            background: white !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+        }
+        
+        /* S'assurer que la carte Leaflet prend toute la taille */
+        #mapContainer.map-fullscreen .leaflet-container {
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+        }
+        
+        /* Masquer le reste du contenu en mode plein écran */
+        body:has(#mapContainer.map-fullscreen) .header,
+        body:has(#mapContainer.map-fullscreen) .nav-section,
+        body:has(#mapContainer.map-fullscreen) .tabs-container {
+            display: none !important;
         }
         
         .map-fullscreen .map-controls {
@@ -231,12 +252,12 @@
                     <div class="map-loading" style="display: flex; align-items: center; justify-content: center; height: 100%; background: #a8d3f0; color: white; font-size: 1.2rem;">
                         🗺️ Chargement de la carte de Paris...
                     </div>
-                </div>
-                
-                <!-- Contrôles de Carte -->
-                <div class="map-controls">
-                    <button class="btn btn-primary" id="fullscreenBtn" title="Plein écran">🔲</button>
-                    <button class="btn btn-secondary" id="centerMapBtn" title="Centrer">🎯</button>
+                    
+                    <!-- Contrôles de Carte -->
+                    <div class="map-controls">
+                        <button class="btn btn-primary" id="fullscreenBtn" title="Plein écran">🔲</button>
+                        <button class="btn btn-secondary" id="centerMapBtn" title="Centrer">🎯</button>
+                    </div>
                 </div>
             </div>
             
@@ -430,14 +451,14 @@
             crossorigin=""></script>
     
     <!-- Modules JavaScript (dans le bon ordre) -->
-    <script src="assets/js/utils.js?v=2.0.8"></script>
-    <script src="assets/js/data-manager.js?v=2.0.8"></script>
+    <script src="assets/js/utils.js?v=2.4.0"></script>
+    <script src="assets/js/data-manager.js?v=2.4.0"></script>
     <script src="assets/js/user-manager.js?v=2.0.8"></script>
-    <script src="assets/js/map-manager.js?v=2.0.8"></script>
+    <script src="assets/js/map-manager.js?v=2.5.2"></script>
     <script src="assets/js/search-filter.js?v=2.0.8"></script>
     <script src="assets/js/export-import.js?v=2.0.8"></script>
-    <script src="assets/js/ui-manager.js?v=2.1.0"></script>
-    <script src="assets/js/app.js?v=2.1.0"></script>
+    <script src="assets/js/ui-manager.js?v=2.3.0"></script>
+    <script src="assets/js/app.js?v=2.3.0"></script>
     
     <!-- Service Worker pour PWA -->
     <script>

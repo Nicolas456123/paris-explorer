@@ -203,7 +203,7 @@
             "name": "Studio des Ursulines",
             "description": "Cinéma art et essai, débats",
             "address": "10 Rue des Ursulines, 75005 Paris",
-            "coordinates": [48.8440, 2.3430],
+            "coordinates": [48.8427, 2.3421],
             "tags": ["art-et-essai", "débats"]
           }
         ]
@@ -216,7 +216,7 @@
             "name": "Le Consulat",
             "description": "Bar de quartier convivial, habitants fidèles",
             "address": "18 Rue Norvins, 75018 Paris",
-            "coordinates": [48.8862, 2.3412],
+            "coordinates": [48.8870, 2.3398],
             "tags": ["quartier-convivial", "habitants-fidèles"]
           },
           {
@@ -224,7 +224,7 @@
             "name": "Café des Deux Moulins",
             "description": "Bar bistrot, ambiance authentique",
             "address": "15 Rue Lepic, 75018 Paris",
-            "coordinates": [48.8856, 2.3343],
+            "coordinates": [48.8850, 2.3336],
             "tags": ["bar-bistrot", "ambiance-authentique"]
           },
           {
@@ -261,7 +261,7 @@
             "name": "Square Marcel-Pagnol",
             "description": "Petit jardin caché, aire jeux",
             "address": "Square Marcel-Pagnol, 75008 Paris",
-            "coordinates": [48.8760, 2.3060],
+            "coordinates": [48.8758, 2.3211],
             "tags": ["petit-jardin", "caché", "aire-jeux"]
           }
         ]
