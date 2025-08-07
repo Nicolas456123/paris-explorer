@@ -100,14 +100,6 @@ class UIManager {
         // Événements de carte
         this.setupMapEvents();
         
-        // Configuration mobile des onglets
-        this.setupMobileTabsPosition();
-        
-        // Gérer le redimensionnement
-        window.addEventListener('resize', () => {
-            this.setupMobileTabsPosition();
-        });
-        
         console.log('✅ Événements UI configurés');
     }
     
@@ -148,89 +140,6 @@ class UIManager {
         }
     }
     
-    // === GESTION MOBILE DES ONGLETS ===
-    setupMobileTabsPosition() {
-        const isMobile = window.innerWidth <= 768;
-        const tabsContainer = document.querySelector('.tabs-container');
-        
-        if (!tabsContainer) return;
-        
-        if (isMobile) {
-            console.log('📱 Configuration mobile des onglets');
-            
-            // Attendre que les éléments soient rendus
-            setTimeout(() => {
-                const header = document.querySelector('.header');
-                const navSection = document.querySelector('.nav-section');
-                
-                if (header && navSection) {
-                    const headerHeight = header.offsetHeight || header.clientHeight;
-                    const navHeight = navSection.offsetHeight || navSection.clientHeight;
-                    const totalOffset = headerHeight + navHeight;
-                    
-                    console.log(`📐 Header: ${headerHeight}px, Nav: ${navHeight}px, Total: ${totalOffset}px`);
-                    
-                    // Positionner les onglets fixes
-                    tabsContainer.style.position = 'fixed';
-                    tabsContainer.style.top = `${totalOffset}px`;
-                    tabsContainer.style.left = '0';
-                    tabsContainer.style.right = '0';
-                    tabsContainer.style.zIndex = '1000';
-                    tabsContainer.style.backgroundColor = '#ffffff';
-                    
-                    // Calculer la hauteur des onglets
-                    const tabsHeight = tabsContainer.offsetHeight || 60; // fallback
-                    const totalTopOffset = totalOffset + tabsHeight;
-                    
-                    console.log(`📏 Hauteur onglets: ${tabsHeight}px, Offset total: ${totalTopOffset}px`);
-                    
-                    // Ajuster le contenu principal
-                    const mainContent = document.querySelector('main');
-                    if (mainContent) {
-                        mainContent.style.paddingTop = `${totalTopOffset + 10}px`;
-                        console.log(`📄 Main padding-top: ${totalTopOffset + 10}px`);
-                    }
-                    
-                    // S'assurer que les contenus sont visibles
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.style.minHeight = '400px';
-                        content.style.display = content.classList.contains('active') ? 'block' : 'none';
-                        content.style.paddingTop = '16px';
-                        content.style.paddingBottom = '40px';
-                    });
-                    
-                    // Forcer la réapparition du contenu actif
-                    const activeContent = document.querySelector('.tab-content.active');
-                    if (activeContent) {
-                        activeContent.style.display = 'block';
-                        activeContent.style.visibility = 'visible';
-                        console.log('✅ Contenu actif rendu visible');
-                    }
-                }
-            }, 100); // Petit délai pour s'assurer que tout est rendu
-            
-        } else {
-            console.log('💻 Configuration desktop des onglets');
-            // Sur desktop, réinitialiser les styles
-            tabsContainer.style.position = '';
-            tabsContainer.style.top = '';
-            tabsContainer.style.left = '';
-            tabsContainer.style.right = '';
-            tabsContainer.style.zIndex = '';
-            tabsContainer.style.backgroundColor = '';
-            
-            const mainContent = document.querySelector('main');
-            if (mainContent) {
-                mainContent.style.paddingTop = '';
-            }
-            
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.style.paddingTop = '';
-                content.style.paddingBottom = '';
-                content.style.minHeight = '';
-            });
-        }
-    }
     
     // === CHANGEMENT D'ONGLET ===
     switchTab(tabName) {
@@ -245,16 +154,7 @@ class UIManager {
         const newContent = document.getElementById(`${tabName}Content`);
         
         if (newTab) newTab.classList.add('active');
-        if (newContent) {
-            newContent.classList.add('active');
-            
-            // Sur mobile, s'assurer que le contenu est visible
-            if (window.innerWidth <= 768) {
-                newContent.style.display = 'block';
-                newContent.style.visibility = 'visible';
-                console.log(`📱 Contenu ${tabName} rendu visible sur mobile`);
-            }
-        }
+        if (newContent) newContent.classList.add('active');
         
         // Actions spécifiques par onglet
         switch (tabName) {
@@ -304,11 +204,6 @@ class UIManager {
         }
         
         this.app.currentTab = tabName;
-        
-        // Recalculer les positions mobiles après changement d'onglet
-        if (window.innerWidth <= 768) {
-            setTimeout(() => this.setupMobileTabsPosition(), 50);
-        }
     }
     
     // === INITIALISATION DE L'ONGLET CARTE ===

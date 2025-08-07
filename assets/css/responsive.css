@@ -70,26 +70,25 @@
     
     .app-container {
         border-radius: 12px;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        overflow: visible;
     }
     
     /* Structure mobile optimisée */
     main {
         flex: 1;
-        overflow: hidden;
+        overflow: visible;
         display: flex;
         flex-direction: column;
-        position: relative;
     }
     
     .tab-content {
         flex: 1;
         overflow-y: auto;
         padding: 16px;
-        padding-top: 70px; /* Espace pour les onglets fixes */
     }
     
     /* Header mobile */
@@ -149,25 +148,16 @@
         flex-shrink: 0;
     }
     
-    /* Correction des noms de classes pour les onglets */
+    /* Onglets mobiles simplifiés */
     .tabs-container {
-        gap: 8px;
+        gap: 12px;
         overflow-x: auto;
-        padding: 8px;
+        padding: 8px 16px;
         scrollbar-width: thin;
         scrollbar-color: var(--paris-gold) transparent;
         flex-shrink: 0;
         background: var(--paris-white);
         border-bottom: 2px solid var(--paris-gold);
-        position: fixed;
-        top: auto;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        margin-bottom: 0;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        /* Calculer la position après le header et la navigation */
-        /* Cette valeur sera ajustée dynamiquement par JS */
     }
     
     .tabs-container::-webkit-scrollbar {
@@ -187,13 +177,9 @@
         font-size: 13px;
         white-space: nowrap;
         min-width: fit-content;
-        padding: 10px 14px;
+        padding: 8px 12px;
         border-radius: 6px;
         flex-shrink: 0;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     
     .search-input {

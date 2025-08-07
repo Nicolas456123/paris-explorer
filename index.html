@@ -30,9 +30,9 @@
           crossorigin="">
     
     <!-- CSS Principal -->
-    <link rel="stylesheet" href="assets/css/main.css?v=2.0.8">
-    <link rel="stylesheet" href="assets/css/themes.css?v=2.0.8">
-    <link rel="stylesheet" href="assets/css/responsive.css?v=2.0.8">
+    <link rel="stylesheet" href="assets/css/main.css?v=2.1.0">
+    <link rel="stylesheet" href="assets/css/themes.css?v=2.1.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=2.1.0">
     
     <!-- Styles additionnels pour les suggestions de recherche -->
     <style>
@@ -122,53 +122,22 @@
             right: 20px;
         }
         
-        /* Fix critique pour les onglets mobiles */
+        /* Fix simple pour mobile responsive */
         @media (max-width: 768px) {
-            .tabs-container {
-                position: fixed !important;
-                left: 0 !important;
-                right: 0 !important;
-                z-index: 1000 !important;
-                background: white !important;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-                padding: 8px !important;
-                margin: 0 !important;
-                /* Position calculée dynamiquement par JS */
-            }
-            
-            /* Réinitialiser les hauteurs problématiques */
-            .tab-content {
-                padding-top: 16px !important;
+            .app-container {
                 height: auto !important;
-                min-height: 400px !important;
-                overflow-y: visible !important;
-                position: relative !important;
+                min-height: 100vh !important;
+                overflow: visible !important;
             }
             
             main {
-                position: relative !important;
-                /* Padding calculé dynamiquement par JS */
+                overflow: visible !important;
+                height: auto !important;
             }
             
-            /* S'assurer que le contenu est visible */
-            .tab-content.active {
-                display: block !important;
-                visibility: visible !important;
-            }
-            
-            /* CSS de débogage mobile - contour rouge temporaire */
             .tab-content {
-                border: 2px solid red !important;
-                background-color: #fffaaa !important;
-                margin-top: 10px !important;
-            }
-            
-            main {
-                border: 2px solid blue !important;
-            }
-            
-            .tabs-container {
-                border: 2px solid green !important;
+                height: auto !important;
+                overflow: visible !important;
             }
         }
     </style>
@@ -467,8 +436,8 @@
     <script src="assets/js/map-manager.js?v=2.0.8"></script>
     <script src="assets/js/search-filter.js?v=2.0.8"></script>
     <script src="assets/js/export-import.js?v=2.0.8"></script>
-    <script src="assets/js/ui-manager.js?v=2.0.9"></script>
-    <script src="assets/js/app.js?v=2.0.9"></script>
+    <script src="assets/js/ui-manager.js?v=2.1.0"></script>
+    <script src="assets/js/app.js?v=2.1.0"></script>
     
     <!-- Service Worker pour PWA -->
     <script>
