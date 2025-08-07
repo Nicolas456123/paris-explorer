@@ -487,6 +487,39 @@ class UserManager {
         return !isCurrentlyVisited;
     }
     
+    // === TOGGLE PAR ID DE LIEU (pour la carte) ===
+    togglePlaceVisited(placeId) {
+        const userData = this.getCurrentUserData();
+        if (!userData) return false;
+        
+        if (!placeId) {
+            console.error('❌ PlaceId manquant pour togglePlaceVisited');
+            return false;
+        }
+        
+        const isCurrentlyVisited = userData.visitedPlaces.has(placeId);
+        
+        if (isCurrentlyVisited) {
+            userData.visitedPlaces.delete(placeId);
+            console.log(`❌ Lieu retiré: ${placeId}`);
+        } else {
+            userData.visitedPlaces.add(placeId);
+            console.log(`✅ Lieu ajouté: ${placeId}`);
+        }
+        
+        // Mettre à jour les statistiques
+        userData.stats.totalVisited = userData.visitedPlaces.size;
+        userData.stats.lastActivity = new Date().toISOString();
+        
+        // Sauvegarder
+        this.saveUsers();
+        
+        // Vérifier les achievements après changement
+        this.checkAchievements();
+        
+        return true;
+    }
+    
     // === GESTION DES FAVORIS ===
     toggleFavorite(arrKey, catKey, placeName) {
         const userData = this.getCurrentUserData();
