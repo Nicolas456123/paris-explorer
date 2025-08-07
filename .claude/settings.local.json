@@ -9,7 +9,8 @@
       "Bash(echo:*)",
       "Bash(done)",
       "Bash(find:*)",
-      "Bash(start python -m http.server 8080)"
+      "Bash(start python -m http.server 8080)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

@@ -1,0 +1,100 @@
+{
+  "timestamp": "2025-08-07T23:48:48.665Z",
+  "summary": {
+    "files_processed": 20,
+    "corrections_applied": 6,
+    "known_fixes_available": 6
+  },
+  "applied_fixes": [
+    {
+      "file": "01-louvre.json",
+      "category": "monuments",
+      "place": "Musée du Louvre",
+      "oldCoordinates": [
+        48.8606,
+        2.3376
+      ],
+      "newCoordinates": [
+        48.862513,
+        2.33593
+      ],
+      "source": "Nominatim",
+      "confidence": 0.47
+    },
+    {
+      "file": "01-louvre.json",
+      "category": "monuments",
+      "place": "Palais-Royal",
+      "oldCoordinates": [
+        48.8632,
+        2.3367
+      ],
+      "newCoordinates": [
+        48.862564,
+        2.3367804175609663
+      ],
+      "source": "Photon",
+      "confidence": 0.7
+    },
+    {
+      "file": "01-louvre.json",
+      "category": "restaurants",
+      "place": "Le Grand Véfour",
+      "oldCoordinates": [
+        48.8661,
+        2.338
+      ],
+      "newCoordinates": [
+        48.8661551,
+        2.3379157
+      ],
+      "source": "Photon",
+      "confidence": 0.7
+    },
+    {
+      "file": "07-invalides-tour-eiffel.json",
+      "category": "monuments-iconiques",
+      "place": "Tour Eiffel",
+      "oldCoordinates": [
+        48.8584,
+        2.2945
+      ],
+      "newCoordinates": [
+        48.85826,
+        2.294501
+      ],
+      "source": "Photon",
+      "confidence": 0.7
+    },
+    {
+      "file": "08-champs-elysees.json",
+      "category": "espaces-verts",
+      "place": "Square Marcel-Pagnol",
+      "oldCoordinates": [
+        48.8759,
+        2.3203
+      ],
+      "newCoordinates": [
+        48.87591845,
+        2.3204255100976594
+      ],
+      "source": "Photon",
+      "confidence": 0.7
+    },
+    {
+      "file": "17-batignolles-monceau.json",
+      "category": "lieux-secrets",
+      "place": "Square Marcel-Pagnol",
+      "oldCoordinates": [
+        48.8758,
+        2.3211
+      ],
+      "newCoordinates": [
+        48.87591845,
+        2.3204255100976594
+      ],
+      "source": "Photon",
+      "confidence": 0.7
+    }
+  ]
+}
