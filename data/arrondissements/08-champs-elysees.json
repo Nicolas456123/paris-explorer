@@ -65,7 +65,7 @@
             "name": "Madeleine",
             "description": "Église néoclassique, colonnes corinthiennes, concerts",
             "address": "Place de la Madeleine, 75008 Paris",
-            "coordinates": [48.8701, 2.3245],
+            "coordinates": [48.8687, 2.3212],
             "tags": ["néoclassique", "corinthiennes", "concerts"]
           }
         ]
@@ -139,7 +139,7 @@
             "name": "Galeries Lafayette Champs-Élysées",
             "description": "Grand magasin, terrasse panoramique",
             "address": "60 Avenue des Champs-Élysées, 75008 Paris",
-            "coordinates": [48.8698, 2.3078],
+            "coordinates": [48.8707, 2.3028],
             "tags": ["grand-magasin", "panoramique"]
           }
         ]
@@ -160,7 +160,7 @@
             "name": "Pierre Hermé Champs-Élysées",
             "description": "Macarons et pâtisseries d'exception",
             "address": "72 Avenue des Champs-Élysées, 75008 Paris",
-            "coordinates": [48.8698, 2.3078],
+            "coordinates": [48.8713, 2.3008],
             "tags": ["macarons", "exception"]
           },
           {
@@ -176,7 +176,7 @@
             "name": "Ladurée Champs-Élysées",
             "description": "Salon de thé historique, macarons",
             "address": "75 Avenue des Champs-Élysées, 75008 Paris",
-            "coordinates": [48.8698, 2.3078],
+            "coordinates": [48.8715, 2.3002],
             "tags": ["salon-thé", "historique"]
           },
           {
@@ -213,7 +213,7 @@
             "name": "Square Marcel-Pagnol",
             "description": "Jardin caché près Madeleine",
             "address": "Square Marcel-Pagnol, 75008 Paris",
-            "coordinates": [48.8701, 2.3245],
+            "coordinates": [48.8759, 2.3203],
             "tags": ["caché", "madeleine"]
           },
           {

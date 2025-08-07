@@ -208,7 +208,7 @@
             "name": "Restaurant du Palais Royal",
             "description": "Terrasse galeries historiques",
             "address": "43 Rue de Valois, 75001 Paris",
-            "coordinates": [48.8632, 2.3367],
+            "coordinates": [48.8628, 2.3350],
             "tags": ["terrasse", "galeries", "historique"]
           },
           {
@@ -224,7 +224,7 @@
             "name": "Le Grand Véfour",
             "description": "⭐⭐⭐ Michelin - Restaurant historique Palais-Royal",
             "address": "17 Rue de Beaujolais, 75001 Paris",
-            "coordinates": [48.8632, 2.3367],
+            "coordinates": [48.8661, 2.3380],
             "tags": ["3-michelin", "historique", "palais-royal"]
           }
         ]
@@ -269,7 +269,7 @@
             "name": "Louvre des Antiquaires",
             "description": "250 antiquaires sous un toit",
             "address": "2 Place du Palais-Royal, 75001 Paris",
-            "coordinates": [48.8632, 2.3367],
+            "coordinates": [48.8630, 2.3372],
             "tags": ["250-antiquaires", "art", "collection"]
           },
           {

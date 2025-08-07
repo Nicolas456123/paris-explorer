@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correcteur de Coordonnées - Paris Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .problem-section {
+            background: white;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .problem-header {
+            background: #dc2626;
+            color: white;
+            padding: 15px 25px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .problem-content {
+            padding: 25px;
+        }
+        .place-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f9fafb;
+            position: relative;
+        }
+        .place-item.fixed {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+        .coords-display {
+            font-family: 'Courier New', monospace;
+            background: #374151;
+            color: #f3f4f6;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .coords-new {
+            background: #059669;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .btn-success {
+            background: #059669;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #047857;
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .progress-bar {
+            background: #e5e7eb;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #059669, #10b981);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1e40af;
+        }
+        .log-console {
+            background: #1f2937;
+            color: #f3f4f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .search-result {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 8px 0;
+        }
+        .confidence-bar {
+            background: #e5e7eb;
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .confidence-fill {
+            background: linear-gradient(90deg, #dc2626, #f59e0b, #059669);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛠️ Correcteur de Coordonnées - Paris Explorer</h1>
+        <p>Outil automatique de correction des coordonnées GPS problématiques</p>
+        <div style="margin-top: 15px;">
+            <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 14px;">
+                🎯 Focalisation sur les doublons critiques identifiés
+            </span>
+        </div>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+            <div class="stat-number" id="totalProblems">5</div>
+            <div>Groupes problématiques</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="affectedPlaces">19</div>
+            <div>Lieux affectés</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="fixedPlaces">0</div>
+            <div>Lieux corrigés</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="successRate">0%</div>
+            <div>Taux de succès</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <h3>🔧 Actions Globales</h3>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <button class="btn-primary" onclick="fixAllKnownProblems()">
+                🚀 Corriger tous les problèmes identifiés
+            </button>
+            <button class="btn-success" onclick="searchAllMissingCoords()">
+                🔍 Rechercher coordonnées manquantes
+            </button>
+            <button class="btn-primary" onclick="exportCorrectedData()">
+                📥 Exporter données corrigées
+            </button>
+            <label>
+                <input type="checkbox" id="autoApply" checked> 
+                Appliquer automatiquement les corrections haute confiance
+            </label>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div id="progressText">Prêt à commencer la correction</div>
+    </div>
+
+    <div class="log-console" id="logConsole">
+        🔧 Console de logs - Prêt à débuter la correction des coordonnées...
+    </div>
+
+    <!-- Groupe 1: Square Marcel-Pagnol & Madeleine -->
+    <div class="problem-section">
+        <div class="problem-header">
+            <div>🚨 Problème Critique #1: Square Marcel-Pagnol & Église Madeleine</div>
+            <button class="btn-success" onclick="fixGroup1()">Corriger ce groupe</button>
+        </div>
+        <div class="problem-content">
+            <p><strong>Coordonnées partagées problématiques:</strong> <span class="coords-display">[48.8701, 2.3245]</span></p>
+            
+            <div class="place-item" id="place-madeleine">
+                <strong>🏛️ Église de la Madeleine</strong><br>
+                <em>Place de la Madeleine, 75008 Paris</em><br>
+                <div class="coords-display">[48.8701, 2.3245]</div>
+                <div id="madeleine-result"></div>
+            </div>
+            
+            <div class="place-item" id="place-pagnol">
+                <strong>🌳 Square Marcel-Pagnol</strong><br>
+                <em>Square Marcel-Pagnol, 75008 Paris</em><br>
+                <div class="coords-display">[48.8701, 2.3245]</div>
+                <div id="pagnol-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Groupe 2: Zone Palais-Royal -->
+    <div class="problem-section">
+        <div class="problem-header">
+            <div>🚨 Problème Critique #2: Zone Palais-Royal (5 lieux identiques)</div>
+            <button class="btn-success" onclick="fixGroup2()">Corriger ce groupe</button>
+        </div>
+        <div class="problem-content">
+            <p><strong>Coordonnées partagées problématiques:</strong> <span class="coords-display">[48.8632, 2.3367]</span></p>
+            
+            <div class="place-item" id="place-palais-royal">
+                <strong>🏛️ Palais-Royal</strong><br>
+                <em>Place du Palais-Royal, 75001 Paris</em><br>
+                <div id="palais-royal-result"></div>
+            </div>
+            
+            <div class="place-item" id="place-grand-vefour">
+                <strong>🍽️ Le Grand Véfour (3⭐ Michelin)</strong><br>
+                <em>17 Rue de Beaujolais, 75001 Paris</em><br>
+                <div id="grand-vefour-result"></div>
+            </div>
+            
+            <div class="place-item" id="place-restaurant-palais">
+                <strong>🍴 Restaurant du Palais Royal</strong><br>
+                <em>43 Rue de Valois, 75001 Paris</em><br>
+                <div id="restaurant-palais-result"></div>
+            </div>
+            
+            <div class="place-item" id="place-louvre-antiquaires">
+                <strong>🏪 Louvre des Antiquaires</strong><br>
+                <em>2 Place du Palais-Royal, 75001 Paris</em><br>
+                <div id="louvre-antiquaires-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Groupe 3: Champs-Élysées boutiques -->
+    <div class="problem-section">
+        <div class="problem-header">
+            <div>🚨 Problème Critique #3: Boutiques Champs-Élysées (4 lieux identiques)</div>
+            <button class="btn-success" onclick="fixGroup3()">Corriger ce groupe</button>
+        </div>
+        <div class="problem-content">
+            <p><strong>Coordonnées partagées problématiques:</strong> <span class="coords-display">[48.8698, 2.3078]</span></p>
+            
+            <div class="place-item" id="place-galeries-lafayette">
+                <strong>🛍️ Galeries Lafayette Champs-Élysées</strong><br>
+                <em>60 Avenue des Champs-Élysées, 75008 Paris</em><br>
+                <div id="galeries-lafayette-result"></div>
+            </div>
+            
+            <div class="place-item" id="place-pierre-herme">
+                <strong>🍰 Pierre Hermé Champs-Élysées</strong><br>
+                <em>72 Avenue des Champs-Élysées, 75008 Paris</em><br>
+                <div id="pierre-herme-result"></div>
+            </div>
+            
+            <div class="place-item" id="place-laduree">
+                <strong>🧁 Ladurée Champs-Élysées</strong><br>
+                <em>75 Avenue des Champs-Élysées, 75008 Paris</em><br>
+                <div id="laduree-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let fixedCount = 0;
+        let totalToFix = 19;
+        
+        // Problèmes connus avec leurs corrections espérées
+        const knownProblems = {
+            group1: {
+                'Église de la Madeleine': { address: 'Place de la Madeleine, 75008 Paris', current: [48.8701, 2.3245] },
+                'Square Marcel-Pagnol': { address: 'Square Marcel-Pagnol, 75008 Paris', current: [48.8701, 2.3245] }
+            },
+            group2: {
+                'Palais-Royal': { address: 'Place du Palais-Royal, 75001 Paris', current: [48.8632, 2.3367] },
+                'Le Grand Véfour': { address: '17 Rue de Beaujolais, 75001 Paris', current: [48.8632, 2.3367] },
+                'Restaurant du Palais Royal': { address: '43 Rue de Valois, 75001 Paris', current: [48.8632, 2.3367] },
+                'Louvre des Antiquaires': { address: '2 Place du Palais-Royal, 75001 Paris', current: [48.8632, 2.3367] }
+            },
+            group3: {
+                'Galeries Lafayette Champs-Élysées': { address: '60 Avenue des Champs-Élysées, 75008 Paris', current: [48.8698, 2.3078] },
+                'Pierre Hermé Champs-Élysées': { address: '72 Avenue des Champs-Élysées, 75008 Paris', current: [48.8698, 2.3078] },
+                'Ladurée Champs-Élysées': { address: '75 Avenue des Champs-Élysées, 75008 Paris', current: [48.8698, 2.3078] }
+            }
+        };
+
+        function log(message, type = 'info') {
+            const console = document.getElementById('logConsole');
+            const timestamp = new Date().toLocaleTimeString();
+            const icon = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
+            console.innerHTML += `\n[${timestamp}] ${icon} ${message}`;
+            console.scrollTop = console.scrollHeight;
+        }
+
+        async function searchCoordinates(placeName, address) {
+            log(`🔍 Recherche de "${placeName}" à l'adresse "${address}"`);
+            
+            try {
+                // Utiliser Nominatim (OpenStreetMap)
+                const query = encodeURIComponent(`${placeName}, ${address}`);
+                const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=3&countrycodes=fr`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data && data.length > 0) {
+                    const best = data[0];
+                    const lat = parseFloat(best.lat);
+                    const lng = parseFloat(best.lon);
+                    const confidence = parseFloat(best.importance || 0.5);
+                    
+                    // Vérifier que c'est dans Paris
+                    if (lat >= 48.815 && lat <= 48.902 && lng >= 2.224 && lng <= 2.469) {
+                        log(`✅ Trouvé "${placeName}": [${lat.toFixed(6)}, ${lng.toFixed(6)}] (confiance: ${(confidence * 100).toFixed(1)}%)`);
+                        return {
+                            coordinates: [lat, lng],
+                            confidence: confidence,
+                            source: 'Nominatim',
+                            display_name: best.display_name
+                        };
+                    } else {
+                        log(`⚠️ "${placeName}": coordonnées hors de Paris`, 'warning');
+                        return null;
+                    }
+                } else {
+                    log(`❌ Aucun résultat pour "${placeName}"`, 'error');
+                    return null;
+                }
+                
+            } catch (error) {
+                log(`❌ Erreur recherche "${placeName}": ${error.message}`, 'error');
+                return null;
+            }
+        }
+
+        async function fixPlace(placeName, address, resultElementId) {
+            const result = await searchCoordinates(placeName, address);
+            const element = document.getElementById(resultElementId);
+            
+            if (result) {
+                element.innerHTML = `
+                    <div class="search-result">
+                        <strong>✅ Nouvelles coordonnées trouvées:</strong><br>
+                        <span class="coords-display coords-new">[${result.coordinates[0].toFixed(6)}, ${result.coordinates[1].toFixed(6)}]</span><br>
+                        <small>Source: ${result.source} | Confiance: ${(result.confidence * 100).toFixed(1)}%</small>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" style="width: ${result.confidence * 100}%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Marquer comme corrigé
+                element.closest('.place-item').classList.add('fixed');
+                fixedCount++;
+                updateStats();
+                
+                return result;
+            } else {
+                element.innerHTML = `
+                    <div style="background: #fef2f2; border: 1px solid #dc2626; padding: 10px; border-radius: 6px; margin: 8px 0;">
+                        <strong>❌ Correction échouée</strong><br>
+                        <small>Aucune coordonnée fiable trouvée</small>
+                    </div>
+                `;
+                return null;
+            }
+        }
+
+        async function fixGroup1() {
+            log('🚀 Début correction Groupe 1: Madeleine & Square Marcel-Pagnol');
+            
+            await fixPlace('Église de la Madeleine', 'Place de la Madeleine, 75008 Paris', 'madeleine-result');
+            await sleep(1000);
+            await fixPlace('Square Marcel-Pagnol', 'Square Marcel-Pagnol, 75008 Paris', 'pagnol-result');
+            
+            log('✅ Groupe 1 traité');
+        }
+
+        async function fixGroup2() {
+            log('🚀 Début correction Groupe 2: Zone Palais-Royal');
+            
+            await fixPlace('Palais-Royal', 'Place du Palais-Royal, 75001 Paris', 'palais-royal-result');
+            await sleep(1000);
+            await fixPlace('Le Grand Véfour', '17 Rue de Beaujolais, 75001 Paris', 'grand-vefour-result');
+            await sleep(1000);
+            await fixPlace('Restaurant du Palais Royal', '43 Rue de Valois, 75001 Paris', 'restaurant-palais-result');
+            await sleep(1000);
+            await fixPlace('Louvre des Antiquaires', '2 Place du Palais-Royal, 75001 Paris', 'louvre-antiquaires-result');
+            
+            log('✅ Groupe 2 traité');
+        }
+
+        async function fixGroup3() {
+            log('🚀 Début correction Groupe 3: Boutiques Champs-Élysées');
+            
+            await fixPlace('Galeries Lafayette', '60 Avenue des Champs-Élysées, 75008 Paris', 'galeries-lafayette-result');
+            await sleep(1000);
+            await fixPlace('Pierre Hermé', '72 Avenue des Champs-Élysées, 75008 Paris', 'pierre-herme-result');
+            await sleep(1000);
+            await fixPlace('Ladurée', '75 Avenue des Champs-Élysées, 75008 Paris', 'laduree-result');
+            
+            log('✅ Groupe 3 traité');
+        }
+
+        async function fixAllKnownProblems() {
+            log('🚀 Début de la correction globale de tous les problèmes identifiés');
+            updateProgress(0);
+            
+            await fixGroup1();
+            updateProgress(33);
+            
+            await fixGroup2();
+            updateProgress(66);
+            
+            await fixGroup3();
+            updateProgress(100);
+            
+            log('🎉 Correction globale terminée !', 'success');
+        }
+
+        function updateStats() {
+            document.getElementById('fixedPlaces').textContent = fixedCount;
+            document.getElementById('successRate').textContent = Math.round((fixedCount / totalToFix) * 100) + '%';
+        }
+
+        function updateProgress(percent) {
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressText').textContent = 
+                `Progression: ${percent}% (${fixedCount}/${totalToFix} lieux corrigés)`;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function exportCorrectedData() {
+            log('📊 Génération du fichier de corrections...', 'info');
+            
+            // Collecter toutes les corrections
+            const corrections = [];
+            document.querySelectorAll('.place-item.fixed').forEach(item => {
+                const name = item.querySelector('strong').textContent;
+                const coords = item.querySelector('.coords-new');
+                if (coords) {
+                    const coordsText = coords.textContent;
+                    const matches = coordsText.match(/\[([\d\.]+),\s*([\d\.]+)\]/);
+                    if (matches) {
+                        corrections.push({
+                            name: name,
+                            newCoordinates: [parseFloat(matches[1]), parseFloat(matches[2])],
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                }
+            });
+
+            const exportData = {
+                correctionReport: {
+                    timestamp: new Date().toISOString(),
+                    totalFixed: corrections.length,
+                    corrections: corrections
+                }
+            };
+
+            // Télécharger le fichier
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `corrections-coordonnees-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            log(`📥 Fichier de corrections téléchargé: ${corrections.length} corrections`, 'success');
+        }
+
+        // Initialisation
+        log('🛠️ Correcteur de coordonnées initialisé');
+        log('📍 5 groupes problématiques identifiés, 19 lieux à corriger');
+        log('🎯 Prêt à commencer les corrections automatiques');
+    </script>
+</body>
+</html>
