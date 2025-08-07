@@ -120,54 +120,125 @@ class DataManager {
     }
     
     // === CHARGEMENT D'UN ARRONDISSEMENT ===
-    async loadSingleArrondissement(arrKey, arrInfo, attempt = 1) {
-        const maxAttempts = this.retryAttempts;
+async loadSingleArrondissement(arrKey, arrInfo, attempt = 1) {
+    const maxAttempts = this.retryAttempts;
+    
+    try {
+        // ✅ Amélioration : plusieurs fallbacks pour les noms de fichiers
+        const possiblePaths = [
+            // 1. Chemin défini dans l'index (priorité)
+            arrInfo.file,
+            // 2. Fallback avec transformation basique
+            `data/arrondissements/${arrKey.toLowerCase().replace('ème', 'eme')}.json`,
+            // 3. Fallback avec mappings spécifiques pour les cas problématiques
+            this.getSpecificFilePath(arrKey),
+            // 4. Fallback avec numéro uniquement
+            `data/arrondissements/${this.extractArrNumber(arrKey)}.json`
+        ].filter(path => path); // Enlever les valeurs null/undefined
+
+        console.log(`🔄 Tentative ${attempt}/${maxAttempts} pour ${arrKey}`);
         
-        try {
-            const filePath = arrInfo.file || `data/arrondissements/${arrKey.toLowerCase().replace('ème', 'eme')}.json`;
+        // Essayer chaque chemin possible
+        for (let i = 0; i < possiblePaths.length; i++) {
+            const filePath = possiblePaths[i];
+            console.log(`  📁 Essai chemin ${i + 1}: ${filePath}`);
             
-            console.log(`🔄 Tentative ${attempt}/${maxAttempts} pour ${arrKey}: ${filePath}`);
-            
-            // Timeout personnalisé
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000);
-            
-            const response = await fetch(filePath, {
-                signal: controller.signal,
-                cache: 'default'
-            });
-            
-            clearTimeout(timeoutId);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const arrData = await response.json();
-            
-            // Validation des données
-            if (this.validateArrondissement(arrKey, arrData)) {
-                this.app.parisData[arrKey] = arrData;
-                this.loadedFiles.add(filePath);
-                return true;
-            } else {
-                console.warn(`⚠️ Données invalides pour ${arrKey}`);
-                return false;
-            }
-            
-        } catch (error) {
-            console.warn(`⚠️ Tentative ${attempt}/${maxAttempts} échouée pour ${arrKey}:`, error.message);
-            
-            if (attempt < maxAttempts) {
-                // Attendre avant retry
-                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
-                return this.loadSingleArrondissement(arrKey, arrInfo, attempt + 1);
-            } else {
-                console.error(`❌ Échec définitif pour ${arrKey} après ${maxAttempts} tentatives`);
-                return false;
+            try {
+                const response = await fetch(filePath, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' },
+                    cache: 'no-cache'
+                });
+                
+                if (response.ok) {
+                    const arrData = await response.json();
+                    
+                    // Valider les données
+                    if (this.validateArrondissementData(arrData)) {
+                        // Processus des données
+                        this.processArrondissementData(arrKey, arrData);
+                        console.log(`✅ ${arrKey} chargé via chemin ${i + 1}`);
+                        return true;
+                    } else {
+                        console.warn(`⚠️ Données invalides dans ${filePath}`);
+                        continue;
+                    }
+                } else if (response.status === 404) {
+                    console.warn(`❌ 404: ${filePath} non trouvé`);
+                    continue; // Essayer le chemin suivant
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (fetchError) {
+                console.warn(`❌ Erreur fetch ${filePath}:`, fetchError.message);
+                if (i === possiblePaths.length - 1) {
+                    throw fetchError; // C'était le dernier essai
+                }
+                continue;
             }
         }
+        
+        throw new Error(`Aucun fichier trouvé pour ${arrKey} après ${possiblePaths.length} tentatives`);
+        
+    } catch (error) {
+        if (attempt < maxAttempts) {
+            console.log(`⏳ Retry ${arrKey} dans ${this.retryDelay}ms...`);
+            await this.delay(this.retryDelay);
+            return await this.loadSingleArrondissement(arrKey, arrInfo, attempt + 1);
+        }
+        
+        console.error(`❌ Échec définitif pour ${arrKey}:`, error);
+        return false;
     }
+}
+    // Mappings spécifiques pour les cas problématiques
+getSpecificFilePath(arrKey) {
+    const specificMappings = {
+        '4ème': 'data/arrondissements/04-marais-ile-saint-louis.json',
+        '6ème': 'data/arrondissements/06-saint-germain.json',
+        '7ème': 'data/arrondissements/07-invalides-tour-eiffel.json',
+        '10ème': 'data/arrondissements/10-canal-saint-martin.json',
+        // Ajoutez d'autres mappings si nécessaire
+    };
+    
+    return specificMappings[arrKey] || null;
+}
+
+// Extraire le numéro d'arrondissement
+extractArrNumber(arrKey) {
+    const match = arrKey.match(/(\d+)/);
+    return match ? match[1].padStart(2, '0') : null;
+}
+    // ✅ Amélioration : validation plus stricte des données
+validateArrondissementData(data) {
+    if (!data || typeof data !== 'object') {
+        console.warn('❌ Données non valides: pas un objet');
+        return false;
+    }
+    
+    // Vérifier la structure de base
+    const requiredFields = ['arrondissement'];
+    for (const field of requiredFields) {
+        if (!data[field]) {
+            console.warn(`❌ Champ obligatoire manquant: ${field}`);
+            return false;
+        }
+    }
+    
+    // Vérifier que l'arrondissement a des catégories
+    if (!data.categories || Object.keys(data.categories).length === 0) {
+        console.warn('❌ Aucune catégorie trouvée');
+        return false;
+    }
+    
+    console.log('✅ Structure des données valide');
+    return true;
+}
+
+// ✅ Fonction utilitaire pour les délais
+delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
     
     // === VALIDATION DES DONNÉES ===
     validateLoadedData() {
