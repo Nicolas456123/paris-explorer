@@ -89,6 +89,10 @@
             "coordinates": [
               48.8738,
               2.295
+            ],
+            "tags": [
+              "vue-360",
+              "soldat-inconnu"
             ]
           },
           {
@@ -99,6 +103,11 @@
             "coordinates": [
               48.8656,
               2.3212
+            ],
+            "tags": [
+              "plus-grande",
+              "8-64-ha",
+              "obélisque"
             ]
           },
           {
@@ -109,6 +118,11 @@
             "coordinates": [
               48.8656,
               2.3212
+            ],
+            "tags": [
+              "égyptien",
+              "3300-ans",
+              "hiéroglyphes"
             ]
           },
           {
@@ -119,6 +133,10 @@
             "coordinates": [
               48.8701,
               2.3167
+            ],
+            "tags": [
+              "présidentielle",
+              "grilles-dorées"
             ]
           },
           {
@@ -129,6 +147,11 @@
             "coordinates": [
               48.8687,
               2.3212
+            ],
+            "tags": [
+              "néoclassique",
+              "corinthiennes",
+              "concerts"
             ]
           }
         ]
@@ -144,6 +167,10 @@
             "coordinates": [
               48.8664,
               2.3122
+            ],
+            "tags": [
+              "prestigieuses",
+              "art-nouveau"
             ]
           },
           {
@@ -154,6 +181,11 @@
             "coordinates": [
               48.8664,
               2.3144
+            ],
+            "tags": [
+              "beaux-arts",
+              "gratuit",
+              "jardins"
             ]
           },
           {
@@ -164,6 +196,10 @@
             "coordinates": [
               48.8664,
               2.3134
+            ],
+            "tags": [
+              "interactives",
+              "planétarium"
             ]
           },
           {
@@ -174,6 +210,10 @@
             "coordinates": [
               48.8756,
               2.3089
+            ],
+            "tags": [
+              "collection-privée",
+              "hôtel-particulier"
             ]
           }
         ]
@@ -189,6 +229,11 @@
             "coordinates": [
               48.8698,
               2.3078
+            ],
+            "tags": [
+              "1-9km",
+              "flagship",
+              "internationaux"
             ]
           },
           {
@@ -199,6 +244,10 @@
             "coordinates": [
               48.8712,
               2.3022
+            ],
+            "tags": [
+              "plus-grand",
+              "4-étages"
             ]
           },
           {
@@ -209,6 +258,11 @@
             "coordinates": [
               48.8689,
               2.3011
+            ],
+            "tags": [
+              "montaigne",
+              "saint-honoré",
+              "george-v"
             ]
           },
           {
@@ -219,6 +273,10 @@
             "coordinates": [
               48.8707,
               2.3028
+            ],
+            "tags": [
+              "grand-magasin",
+              "panoramique"
             ]
           }
         ]
@@ -234,6 +292,11 @@
             "coordinates": [
               48.8712,
               2.3022
+            ],
+            "tags": [
+              "historique",
+              "césar",
+              "terrasse-rouge"
             ]
           },
           {
@@ -244,6 +307,10 @@
             "coordinates": [
               48.8713,
               2.3008
+            ],
+            "tags": [
+              "macarons",
+              "exception"
             ]
           },
           {
@@ -254,6 +321,10 @@
             "coordinates": [
               48.8712,
               2.3011
+            ],
+            "tags": [
+              "2-étoiles",
+              "comptoir"
             ]
           },
           {
@@ -264,6 +335,10 @@
             "coordinates": [
               48.8715,
               2.3002
+            ],
+            "tags": [
+              "salon-thé",
+              "historique"
             ]
           },
           {
@@ -274,6 +349,10 @@
             "coordinates": [
               48.8701,
               2.3134
+            ],
+            "tags": [
+              "3-étoiles",
+              "palace"
             ]
           },
           {
@@ -284,6 +363,11 @@
             "coordinates": [
               48.8734,
               2.3067
+            ],
+            "tags": [
+              "terrasse-secrète",
+              "1500m2",
+              "pacaud"
             ]
           }
         ]
@@ -299,6 +383,11 @@
             "coordinates": [
               48.8789,
               2.3089
+            ],
+            "tags": [
+              "8-2-hectares",
+              "anglais",
+              "romantiques"
             ]
           },
           {
@@ -309,6 +398,10 @@
             "coordinates": [
               48.87591845,
               2.3204255100976594
+            ],
+            "tags": [
+              "caché",
+              "madeleine"
             ],
             "geocoding": {
               "source": "Photon",
@@ -328,6 +421,10 @@
             "coordinates": [
               48.8676,
               2.3134
+            ],
+            "tags": [
+              "ombragées",
+              "marigny"
             ]
           }
         ]
@@ -343,6 +440,10 @@
             "coordinates": [
               48.8676,
               2.3134
+            ],
+            "tags": [
+              "prestige",
+              "garnier"
             ]
           },
           {
@@ -353,6 +454,10 @@
             "coordinates": [
               48.8676,
               2.3067
+            ],
+            "tags": [
+              "art-déco",
+              "classiques"
             ]
           },
           {
@@ -363,6 +468,10 @@
             "coordinates": [
               48.8712,
               2.3011
+            ],
+            "tags": [
+              "revue",
+              "dîner-spectacle"
             ]
           }
         ]
@@ -378,6 +487,11 @@
             "coordinates": [
               48.8789,
               2.3011
+            ],
+            "tags": [
+              "pagode-chinoise",
+              "privée",
+              "visites-rares"
             ]
           },
           {
@@ -388,6 +502,10 @@
             "coordinates": [
               48.8689,
               2.3212
+            ],
+            "tags": [
+              "secret",
+              "boissy-anglas"
             ]
           }
         ]

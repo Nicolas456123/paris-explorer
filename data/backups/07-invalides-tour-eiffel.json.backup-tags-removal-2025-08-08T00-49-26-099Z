@@ -96,6 +96,11 @@
               48.85826,
               2.294501
             ],
+            "tags": [
+              "3-étages",
+              "276m",
+              "illuminations"
+            ],
             "geocoding": {
               "source": "Photon",
               "confidence": 0.7,
@@ -114,6 +119,10 @@
             "coordinates": [
               48.8564,
               2.3134
+            ],
+            "tags": [
+              "napoléon",
+              "dôme-mansart"
             ]
           },
           {
@@ -124,6 +133,10 @@
             "coordinates": [
               48.8634,
               2.3134
+            ],
+            "tags": [
+              "plus-beau",
+              "art-nouveau"
             ]
           },
           {
@@ -134,6 +147,10 @@
             "coordinates": [
               48.8612,
               2.3189
+            ],
+            "tags": [
+              "palais-bourbon",
+              "visites"
             ]
           },
           {
@@ -144,6 +161,10 @@
             "coordinates": [
               48.8534,
               2.3056
+            ],
+            "tags": [
+              "gabriel",
+              "cour-honneur"
             ]
           },
           {
@@ -154,6 +175,10 @@
             "coordinates": [
               48.8556,
               2.2978
+            ],
+            "tags": [
+              "24-hectares",
+              "française"
             ]
           }
         ]
@@ -169,6 +194,10 @@
             "coordinates": [
               48.8598,
               2.3267
+            ],
+            "tags": [
+              "impressionniste",
+              "mondiale"
             ]
           },
           {
@@ -179,6 +208,11 @@
             "coordinates": [
               48.8556,
               2.3145
+            ],
+            "tags": [
+              "sculptures",
+              "hôtel-biron",
+              "3-hectares"
             ]
           },
           {
@@ -189,6 +223,10 @@
             "coordinates": [
               48.8601,
               2.2978
+            ],
+            "tags": [
+              "civilisations",
+              "jean-nouvel"
             ]
           },
           {
@@ -199,6 +237,10 @@
             "coordinates": [
               48.8564,
               2.3134
+            ],
+            "tags": [
+              "militaire",
+              "armes-anciennes"
             ]
           },
           {
@@ -209,6 +251,11 @@
             "coordinates": [
               48.8564,
               2.3134
+            ],
+            "tags": [
+              "maquettes",
+              "fortifiées",
+              "unique"
             ]
           }
         ]
@@ -224,6 +271,10 @@
             "coordinates": [
               48.8556,
               2.2978
+            ],
+            "tags": [
+              "tour-eiffel",
+              "aires-jeux"
             ]
           },
           {
@@ -234,6 +285,10 @@
             "coordinates": [
               48.8578,
               2.3134
+            ],
+            "tags": [
+              "perspective",
+              "500m"
             ]
           },
           {
@@ -244,6 +299,10 @@
             "coordinates": [
               48.8534,
               2.3056
+            ],
+            "tags": [
+              "française",
+              "grilles-dorées"
             ]
           },
           {
@@ -254,6 +313,10 @@
             "coordinates": [
               48.8601,
               2.2978
+            ],
+            "tags": [
+              "promenade",
+              "contemporaine"
             ]
           }
         ]
@@ -269,6 +332,10 @@
             "coordinates": [
               48.8578,
               2.3056
+            ],
+            "tags": [
+              "village-parisien",
+              "fromagers"
             ]
           },
           {
@@ -279,6 +346,10 @@
             "coordinates": [
               48.8589,
               2.3034
+            ],
+            "tags": [
+              "basque",
+              "survoltée"
             ]
           },
           {
@@ -289,6 +360,10 @@
             "coordinates": [
               48.8534,
               2.3089
+            ],
+            "tags": [
+              "tour-eiffel",
+              "bio"
             ]
           },
           {
@@ -299,6 +374,10 @@
             "coordinates": [
               48.8489,
               2.3289
+            ],
+            "tags": [
+              "mythique",
+              "traditionnel"
             ]
           },
           {
@@ -309,6 +388,10 @@
             "coordinates": [
               48.8489,
               2.3223
+            ],
+            "tags": [
+              "temple",
+              "gastronomie"
             ]
           }
         ]
@@ -324,6 +407,11 @@
             "coordinates": [
               48.8489,
               2.3223
+            ],
+            "tags": [
+              "premier",
+              "1852",
+              "luxe"
             ]
           },
           {
@@ -334,6 +422,10 @@
             "coordinates": [
               48.8489,
               2.3223
+            ],
+            "tags": [
+              "internationale",
+              "cave"
             ]
           },
           {
@@ -344,6 +436,10 @@
             "coordinates": [
               48.8556,
               2.3223
+            ],
+            "tags": [
+              "créateurs",
+              "antiquaires"
             ]
           }
         ]
@@ -359,6 +455,11 @@
             "coordinates": [
               48.8523,
               2.3189
+            ],
+            "tags": [
+              "potager",
+              "vignes",
+              "poules"
             ]
           },
           {
@@ -369,6 +470,10 @@
             "coordinates": [
               48.8545,
               2.3223
+            ],
+            "tags": [
+              "secret",
+              "diplomates"
             ]
           },
           {
@@ -379,6 +484,10 @@
             "coordinates": [
               48.8534,
               2.3
+            ],
+            "tags": [
+              "miniature",
+              "faux-rochers"
             ]
           }
         ]

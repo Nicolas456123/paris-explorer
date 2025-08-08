@@ -97,6 +97,24 @@
         flex-shrink: 0;
     }
     
+    /* Stats header mobile */
+    .stats-header {
+        padding: 16px;
+    }
+    
+    .stats-overview {
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    
+    .stats-overview .stat-number {
+        font-size: 1.6rem;
+    }
+    
+    .stats-overview .stat-label {
+        font-size: 0.8rem;
+    }
+    
     .header-top {
         flex-direction: column;
         gap: 20px;
@@ -375,6 +393,25 @@
         padding: 20px 12px;
     }
     
+    /* Stats header petit mobile */
+    .stats-header {
+        padding: 12px;
+    }
+    
+    .stats-overview {
+        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+    }
+    
+    .stats-overview .stat-number {
+        font-size: 1.4rem;
+    }
+    
+    .stats-overview .stat-label {
+        font-size: 0.75rem;
+    }
+    
     .app-title {
         font-size: 2rem;
     }
@@ -434,7 +471,7 @@
         touch-action: manipulation;
     }
     
-    .search-btn, .voice-search-btn {
+    .search-btn {
         min-width: 44px;
         min-height: 44px;
     }

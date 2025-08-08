@@ -550,6 +550,7 @@ delay(ms) {
         let totalPlaces = 0;
         let totalCategories = 0;
         let placesWithAddress = 0;
+        let placesWithTags = 0;
         let placesWithCoordinates = 0;
         
         Object.entries(data).forEach(([arrKey, arrData]) => {
@@ -563,7 +564,9 @@ delay(ms) {
                 
                 places.forEach(place => {
                     if (place.address) placesWithAddress++;
-                    );
+                    if (place.tags && place.tags.length > 0) placesWithTags++;
+                    if (place.coordinates) placesWithCoordinates++;
+                });
             });
             
             totalPlaces += arrPlaces;
@@ -578,6 +581,7 @@ delay(ms) {
         
         if (totalPlaces > 0) {
             console.log(`   • ${placesWithAddress} lieux avec adresse (${Math.round(placesWithAddress/totalPlaces*100)}%)`);
+            console.log(`   • ${placesWithTags} lieux avec tags (${Math.round(placesWithTags/totalPlaces*100)}%)`);
             console.log(`   • ${placesWithCoordinates} lieux avec coordonnées (${Math.round(placesWithCoordinates/totalPlaces*100)}%)`);
         }
     }

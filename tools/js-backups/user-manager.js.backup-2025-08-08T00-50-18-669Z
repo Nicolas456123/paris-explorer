@@ -194,8 +194,6 @@ class UserManager {
         
         // Mettre à jour l'interface
         this.app.uiManager.renderContent();
-        this.app.uiManager.updateStatsHeader();
-        this.app.uiManager.showUserDisplay(userName);
         
         // Notification
         this.app.showNotification(`Bienvenue ${userName}!`, 'success', 2000);
@@ -208,8 +206,7 @@ class UserManager {
         const userNames = Object.keys(this.users);
         
         if (userNames.length === 0) {
-            console.log('👤 Aucun utilisateur, affichage de la gestion...');
-            this.app.uiManager.showUserManagement();
+            console.log('👤 Aucun utilisateur, création automatique...');
             this.app.uiManager.switchTab('users');
             return;
         }

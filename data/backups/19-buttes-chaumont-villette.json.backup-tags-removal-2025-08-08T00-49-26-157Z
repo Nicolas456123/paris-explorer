@@ -4,81 +4,24 @@
     "name": "19ÈME ARRONDISSEMENT - BUTTES-CHAUMONT & LA VILLETTE",
     "description": "Institutions culturelles et parcs romantiques",
     "bounds": {
-      "north": 48.9,
-      "south": 48.87,
-      "east": 2.4,
-      "west": 2.35
+      "north": 48.9000,
+      "south": 48.8700,
+      "east": 2.4000,
+      "west": 2.3500
     },
-    "center": [
-      48.8799,
-      2.3831
-    ],
+    "center": [48.8799, 2.3831],
     "area_km2": 6.79,
     "population": 184712,
     "transport": {
       "metro_stations": [
-        {
-          "name": "Belleville",
-          "lines": [
-            "2",
-            "11"
-          ],
-          "coordinates": [
-            48.872,
-            2.3767
-          ]
-        },
-        {
-          "name": "Buttes Chaumont",
-          "lines": [
-            "7bis"
-          ],
-          "coordinates": [
-            48.8754,
-            2.3811
-          ]
-        },
-        {
-          "name": "Stalingrad",
-          "lines": [
-            "2",
-            "5",
-            "7"
-          ],
-          "coordinates": [
-            48.8837,
-            2.3681
-          ]
-        },
-        {
-          "name": "Botzaris",
-          "lines": [
-            "7bis"
-          ],
-          "coordinates": [
-            48.8758,
-            2.3811
-          ]
-        },
-        {
-          "name": "Porte de Pantin",
-          "lines": [
-            "5"
-          ],
-          "coordinates": [
-            48.8936,
-            2.3901
-          ]
-        }
+        {"name": "Belleville", "lines": ["2", "11"], "coordinates": [48.8720, 2.3767]},
+        {"name": "Buttes Chaumont", "lines": ["7bis"], "coordinates": [48.8754, 2.3811]},
+        {"name": "Stalingrad", "lines": ["2", "5", "7"], "coordinates": [48.8837, 2.3681]},
+        {"name": "Botzaris", "lines": ["7bis"], "coordinates": [48.8758, 2.3811]},
+        {"name": "Porte de Pantin", "lines": ["5"], "coordinates": [48.8936, 2.3901]}
       ],
       "tramway": [
-        {
-          "name": "T3b Porte de Pantin",
-          "coordinates": [
-            48.8936,
-            2.3901
-          ]
-        }
+        {"name": "T3b Porte de Pantin", "coordinates": [48.8936, 2.3901]}
       ],
       "description": "Métro : Belleville (2,11), Buttes Chaumont (7bis), Stalingrad (2,5,7), Botzaris (7bis), Porte de Pantin (5) | Tramway : T3b Porte de Pantin"
     },
@@ -91,50 +34,40 @@
             "name": "Cité des Sciences et de l'Industrie",
             "description": "Plus grand musée science Europe",
             "address": "30 Avenue Corentin Cariou, 75019 Paris",
-            "coordinates": [
-              48.8958,
-              2.3878
-            ]
+            "coordinates": [48.8958, 2.3878],
+            "tags": ["plus-grand-musée", "science-europe"]
           },
           {
             "id": "philharmonie-de-paris",
             "name": "Philharmonie de Paris",
             "description": "Salle Jean Nouvel 2400 places, acoustique parfaite",
             "address": "221 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["jean-nouvel", "2400-places", "acoustique-parfaite"]
           },
           {
             "id": "le-centquatre",
             "name": "Le Centquatre",
             "description": "Centre artistique pluridisciplinaire, résidences artistes",
             "address": "5 Rue Curial, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.37
-            ]
+            "coordinates": [48.8900, 2.3700],
+            "tags": ["centre-artistique", "pluridisciplinaire", "résidences-artistes"]
           },
           {
             "id": "grande-halle-de-la-villette",
             "name": "Grande Halle de la Villette",
             "description": "Expositions, concerts, architecture industrielle",
             "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["expositions", "concerts", "architecture-industrielle"]
           },
           {
             "id": "cite-de-la-musique",
             "name": "Cité de la Musique",
             "description": "Musée instruments, concerts, médiathèque",
             "address": "221 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["musée-instruments", "concerts", "médiathèque"]
           }
         ]
       },
@@ -146,40 +79,32 @@
             "name": "Parc des Buttes-Chaumont",
             "description": "25 hectares, Temple Sybille, lac, belvédère",
             "address": "1 Rue Botzaris, 75019 Paris",
-            "coordinates": [
-              48.8754,
-              2.3811
-            ]
+            "coordinates": [48.8754, 2.3811],
+            "tags": ["25-hectares", "temple-sybille", "lac", "belvédère"]
           },
           {
             "id": "parc-de-la-villette",
             "name": "Parc de la Villette",
             "description": "55 hectares, jardins thématiques, folies Bernard Tschumi",
             "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["55-hectares", "jardins-thématiques", "folies-tschumi"]
           },
           {
             "id": "bassin-de-la-villette",
             "name": "Bassin de la Villette",
             "description": "Plus grand plan eau Paris, baignade été gratuite",
             "address": "Bassin de la Villette, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.37
-            ]
+            "coordinates": [48.8900, 2.3700],
+            "tags": ["plus-grand-plan-eau", "baignade-été", "gratuite"]
           },
           {
             "id": "canal-de-lourcq",
             "name": "Canal de l'Ourcq",
             "description": "Promenade vélo 108km, croisières fluviales, jogging",
             "address": "Canal de l'Ourcq, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.38
-            ]
+            "coordinates": [48.8900, 2.3800],
+            "tags": ["promenade-vélo", "108km", "croisières-fluviales", "jogging"]
           }
         ]
       },
@@ -191,40 +116,32 @@
             "name": "La Mouzaïa",
             "description": "Villas pittoresques 1920, ruelles fleuries pavées",
             "address": "Rue de la Mouzaïa, 75019 Paris",
-            "coordinates": [
-              48.875,
-              2.388
-            ]
+            "coordinates": [48.8750, 2.3880],
+            "tags": ["villas-pittoresques", "1920", "ruelles-fleuries", "pavées"]
           },
           {
             "id": "butte-bergeyre",
             "name": "Butte Bergeyre",
             "description": "Point culminant 100m, vignes Clos Chaufourniers, vue panoramique",
             "address": "Rue Georges Lardennois, 75019 Paris",
-            "coordinates": [
-              48.878,
-              2.385
-            ]
+            "coordinates": [48.8780, 2.3850],
+            "tags": ["point-culminant", "100m", "vignes", "clos-chaufourniers", "vue-panoramique"]
           },
           {
             "id": "quartier-damerique",
             "name": "Quartier d'Amérique",
             "description": "Ancien carrières, architecture éclectique",
             "address": "Avenue Mathurin Moreau, 75019 Paris",
-            "coordinates": [
-              48.88,
-              2.382
-            ]
+            "coordinates": [48.8800, 2.3820],
+            "tags": ["ancien-carrières", "architecture-éclectique"]
           },
           {
             "id": "villa-de-lermitage",
             "name": "Villa de l'Ermitage",
             "description": "Impasse privée, maisons individuelles jardins",
             "address": "Villa de l'Ermitage, 75020 Paris",
-            "coordinates": [
-              48.872,
-              2.385
-            ]
+            "coordinates": [48.8720, 2.3850],
+            "tags": ["impasse-privée", "maisons-individuelles", "jardins"]
           }
         ]
       },
@@ -236,40 +153,32 @@
             "name": "Rosa Bonheur",
             "description": "Guinguette Buttes-Chaumont, terrasse populaire, tapas",
             "address": "2 Avenue de la Cascade, 75019 Paris",
-            "coordinates": [
-              48.8754,
-              2.3811
-            ]
+            "coordinates": [48.8754, 2.3811],
+            "tags": ["guinguette", "buttes-chaumont", "terrasse-populaire", "tapas"]
           },
           {
             "id": "paname-brewing-company",
             "name": "Paname Brewing Company",
             "description": "Brasserie artisanale bassin, terrasse eau",
             "address": "41 Quai de la Loire, 75019 Paris",
-            "coordinates": [
-              48.887,
-              2.372
-            ]
+            "coordinates": [48.8870, 2.3720],
+            "tags": ["brasserie-artisanale", "bassin", "terrasse-eau"]
           },
           {
             "id": "le-pavillon-du-lac",
             "name": "Le Pavillon du Lac",
             "description": "Restaurant romantique parc, cuisine française",
             "address": "1 Rue Botzaris, 75019 Paris",
-            "coordinates": [
-              48.8754,
-              2.3811
-            ]
+            "coordinates": [48.8754, 2.3811],
+            "tags": ["restaurant-romantique", "parc", "cuisine-française"]
           },
           {
             "id": "rue-de-belleville",
             "name": "Rue de Belleville",
             "description": "Restaurants monde entier, prix étudiants",
             "address": "Rue de Belleville, 75019 Paris",
-            "coordinates": [
-              48.872,
-              2.3767
-            ]
+            "coordinates": [48.8720, 2.3767],
+            "tags": ["restaurants-monde", "prix-étudiants"]
           }
         ]
       },
@@ -281,40 +190,32 @@
             "name": "Zénith de Paris",
             "description": "Concerts internationaux 6400 places, programmation éclectique",
             "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["concerts-internationaux", "6400-places", "programmation-éclectique"]
           },
           {
             "id": "theatre-paris-villette",
             "name": "Théâtre Paris-Villette",
             "description": "Créations contemporaines, résidences artistes",
             "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["créations-contemporaines", "résidences-artistes"]
           },
           {
             "id": "cabaret-sauvage",
             "name": "Cabaret Sauvage",
             "description": "Spectacles éclectiques sous chapiteau, world music",
             "address": "59 Boulevard Macdonald, 75019 Paris",
-            "coordinates": [
-              48.895,
-              2.385
-            ]
+            "coordinates": [48.8950, 2.3850],
+            "tags": ["spectacles-éclectiques", "chapiteau", "world-music"]
           },
           {
             "id": "cinema-en-plein-air",
             "name": "Cinéma en plein air",
             "description": "Projections été Parc Villette, entrée gratuite",
             "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["projections-été", "parc-villette", "entrée-gratuite"]
           }
         ]
       },
@@ -326,30 +227,24 @@
             "name": "Les Orgues de Flandre",
             "description": "Tours iconiques Martin Schulz van Treeck 1980",
             "address": "Avenue de Flandre, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.375
-            ]
+            "coordinates": [48.8900, 2.3750],
+            "tags": ["tours-iconiques", "martin-schulz-van-treeck", "1980"]
           },
           {
             "id": "siege-parti-communiste",
             "name": "Siège Parti Communiste",
             "description": "Architecture Oscar Niemeyer 1971, béton courbe",
             "address": "2 Place du Colonel Fabien, 75019 Paris",
-            "coordinates": [
-              48.8766,
-              2.3697
-            ]
+            "coordinates": [48.8766, 2.3697],
+            "tags": ["oscar-niemeyer", "1971", "béton-courbe"]
           },
           {
             "id": "rotonde-de-la-villette",
             "name": "Rotonde de la Villette",
             "description": "Barrière d'octroi Ledoux, pavillon historique",
             "address": "Place de la Bataille de Stalingrad, 75019 Paris",
-            "coordinates": [
-              48.8837,
-              2.3681
-            ]
+            "coordinates": [48.8837, 2.3681],
+            "tags": ["barrière-octroi", "ledoux", "pavillon-historique"]
           }
         ]
       },
@@ -361,30 +256,24 @@
             "name": "Jardin naturel Pierre-Emmanuel",
             "description": "Nature sauvage, biodiversité préservée",
             "address": "Square du Père Lachaise, 75020 Paris",
-            "coordinates": [
-              48.863,
-              2.3969
-            ]
+            "coordinates": [48.8630, 2.3969],
+            "tags": ["nature-sauvage", "biodiversité-préservée"]
           },
           {
             "id": "square-severine",
             "name": "Square Séverine",
             "description": "Petit jardin caché, tranquillité résidentielle",
             "address": "Square Séverine, 75019 Paris",
-            "coordinates": [
-              48.878,
-              2.385
-            ]
+            "coordinates": [48.8780, 2.3850],
+            "tags": ["petit-jardin", "caché", "tranquillité-résidentielle"]
           },
           {
             "id": "parc-de-la-butte-du-chapeau-rouge",
             "name": "Parc de la Butte-du-Chapeau-Rouge",
             "description": "Colline méconnue, vue Est parisien",
             "address": "Rue de la Butte du Chapeau Rouge, 75019 Paris",
-            "coordinates": [
-              48.88,
-              2.39
-            ]
+            "coordinates": [48.8800, 2.3900],
+            "tags": ["colline-méconnue", "vue-est-parisien"]
           }
         ]
       },
@@ -396,30 +285,24 @@
             "name": "Parc de la Villette",
             "description": "Œuvres art contemporain plein air",
             "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "coordinates": [48.8890, 2.3930],
+            "tags": ["œuvres-art-contemporain", "plein-air"]
           },
           {
             "id": "canal-de-lourcq-art",
             "name": "Canal de l'Ourcq",
             "description": "Fresques murales, art urbain légal",
             "address": "Canal de l'Ourcq, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.38
-            ]
+            "coordinates": [48.8900, 2.3800],
+            "tags": ["fresques-murales", "art-urbain-légal"]
           },
           {
             "id": "pont-de-crimee",
             "name": "Pont de Crimée",
             "description": "Tags autorisés, galerie urbaine évolutive",
             "address": "Rue de Crimée, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.382
-            ]
+            "coordinates": [48.8890, 2.3820],
+            "tags": ["tags-autorisés", "galerie-urbaine", "évolutive"]
           }
         ]
       }
@@ -429,11 +312,6 @@
     "created": "2025-01-05",
     "version": "2.0.0",
     "total_places": 26,
-    "featured_places": [
-      "parc-des-buttes-chaumont",
-      "cite-des-sciences-et-de-lindustrie",
-      "philharmonie-de-paris",
-      "la-mouzaia"
-    ]
+    "featured_places": ["parc-des-buttes-chaumont", "cite-des-sciences-et-de-lindustrie", "philharmonie-de-paris", "la-mouzaia"]
   }
 }

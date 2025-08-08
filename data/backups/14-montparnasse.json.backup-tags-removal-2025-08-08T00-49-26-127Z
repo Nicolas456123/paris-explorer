@@ -4,85 +4,24 @@
     "name": "14ÈME ARRONDISSEMENT - MONTPARNASSE",
     "description": "Panoramas et cafés historiques des années folles",
     "bounds": {
-      "north": 48.841,
-      "south": 48.823,
-      "east": 2.338,
-      "west": 2.305
+      "north": 48.8410,
+      "south": 48.8230,
+      "east": 2.3380,
+      "west": 2.3050
     },
-    "center": [
-      48.8323,
-      2.3255
-    ],
+    "center": [48.8323, 2.3255],
     "area_km2": 5.64,
     "population": 137834,
     "transport": {
       "metro_stations": [
-        {
-          "name": "Montparnasse-Bienvenüe",
-          "lines": [
-            "4",
-            "6",
-            "12",
-            "13"
-          ],
-          "coordinates": [
-            48.842,
-            2.322
-          ]
-        },
-        {
-          "name": "Edgar Quinet",
-          "lines": [
-            "6"
-          ],
-          "coordinates": [
-            48.8407,
-            2.3258
-          ]
-        },
-        {
-          "name": "Denfert-Rochereau",
-          "lines": [
-            "4",
-            "6"
-          ],
-          "coordinates": [
-            48.8337,
-            2.3324
-          ]
-        },
-        {
-          "name": "Pernety",
-          "lines": [
-            "13"
-          ],
-          "coordinates": [
-            48.8338,
-            2.3178
-          ]
-        },
-        {
-          "name": "Plaisance",
-          "lines": [
-            "13"
-          ],
-          "coordinates": [
-            48.8315,
-            2.3151
-          ]
-        }
+        {"name": "Montparnasse-Bienvenüe", "lines": ["4", "6", "12", "13"], "coordinates": [48.8420, 2.3220]},
+        {"name": "Edgar Quinet", "lines": ["6"], "coordinates": [48.8407, 2.3258]},
+        {"name": "Denfert-Rochereau", "lines": ["4", "6"], "coordinates": [48.8337, 2.3324]},
+        {"name": "Pernety", "lines": ["13"], "coordinates": [48.8338, 2.3178]},
+        {"name": "Plaisance", "lines": ["13"], "coordinates": [48.8315, 2.3151]}
       ],
       "rer_stations": [
-        {
-          "name": "Denfert-Rochereau",
-          "lines": [
-            "B"
-          ],
-          "coordinates": [
-            48.8337,
-            2.3324
-          ]
-        }
+        {"name": "Denfert-Rochereau", "lines": ["B"], "coordinates": [48.8337, 2.3324]}
       ],
       "description": "Métro : Montparnasse-Bienvenüe (4,6,12,13), Edgar Quinet (6), Denfert-Rochereau (4,6) | RER : Denfert-Rochereau (B)"
     },
@@ -95,50 +34,40 @@
             "name": "Tour Montparnasse",
             "description": "Vue 360° terrasse, observatoire 56ème étage",
             "address": "33 Avenue du Maine, 75015 Paris",
-            "coordinates": [
-              48.842,
-              2.322
-            ]
+            "coordinates": [48.8420, 2.3220],
+            "tags": ["panorama", "56ème-étage", "vue-360"]
           },
           {
             "id": "catacombes-de-paris",
             "name": "Catacombes de Paris",
             "description": "Ossuaire 6M Parisiens, réservation obligatoire",
             "address": "1 Avenue du Colonel Henri Rol-Tanguy, 75014 Paris",
-            "coordinates": [
-              48.8338,
-              2.3324
-            ]
+            "coordinates": [48.8338, 2.3324],
+            "tags": ["ossuaire", "6-millions", "réservation-obligatoire"]
           },
           {
             "id": "cimetiere-du-montparnasse",
             "name": "Cimetière du Montparnasse",
             "description": "Tombes Baudelaire, Gainsbourg, Soutine",
             "address": "3 Boulevard Edgar Quinet, 75014 Paris",
-            "coordinates": [
-              48.8388,
-              2.3262
-            ]
+            "coordinates": [48.8388, 2.3262],
+            "tags": ["baudelaire", "gainsbourg", "soutine", "cimetière"]
           },
           {
             "id": "observatoire-de-paris",
             "name": "Observatoire de Paris",
             "description": "Visites guidées astronomie, méridien origine",
             "address": "61 Avenue de l'Observatoire, 75014 Paris",
-            "coordinates": [
-              48.8366,
-              2.3365
-            ]
+            "coordinates": [48.8366, 2.3365],
+            "tags": ["astronomie", "méridien", "visites-guidées"]
           },
           {
             "id": "lion-de-belfort",
             "name": "Lion de Belfort",
             "description": "Réplique Bartholdi, place Denfert-Rochereau",
             "address": "Place Denfert-Rochereau, 75014 Paris",
-            "coordinates": [
-              48.8337,
-              2.3324
-            ]
+            "coordinates": [48.8337, 2.3324],
+            "tags": ["bartholdi", "réplique", "lion"]
           }
         ]
       },
@@ -150,50 +79,40 @@
             "name": "Parc Montsouris",
             "description": "15 hectares, lac, pavillon météorologie, pelouses",
             "address": "2 Rue Gazan, 75014 Paris",
-            "coordinates": [
-              48.822,
-              2.3365
-            ]
+            "coordinates": [48.8220, 2.3365],
+            "tags": ["15-hectares", "lac", "météorologie", "pelouses"]
           },
           {
             "id": "square-aspirant-dunand",
             "name": "Square de l'Aspirant-Dunand",
             "description": "Jardin caché Plaisance, aires de jeux",
             "address": "Square de l'Aspirant-Dunand, 75014 Paris",
-            "coordinates": [
-              48.8319,
-              2.3165
-            ]
+            "coordinates": [48.8319, 2.3165],
+            "tags": ["jardin-caché", "plaisance", "aires-de-jeux"]
           },
           {
             "id": "jardin-atlantique",
             "name": "Jardin Atlantique",
             "description": "Jardin suspendu Gare Montparnasse, prouesse technique",
             "address": "Gare Montparnasse, 75014 Paris",
-            "coordinates": [
-              48.842,
-              2.322
-            ]
+            "coordinates": [48.8420, 2.3220],
+            "tags": ["jardin-suspendu", "gare-montparnasse", "prouesse-technique"]
           },
           {
             "id": "square-gaston-baty",
             "name": "Square Gaston-Baty",
             "description": "Petit square théâtral, statues masques",
             "address": "Square Gaston-Baty, 75014 Paris",
-            "coordinates": [
-              48.8315,
-              2.3181
-            ]
+            "coordinates": [48.8315, 2.3181],
+            "tags": ["théâtral", "statues-masques", "petit-square"]
           },
           {
             "id": "reservoir-montsouris",
             "name": "Réservoir Montsouris",
             "description": "Architecture industrielle, point eau Paris",
             "address": "Avenue Reille, 75014 Paris",
-            "coordinates": [
-              48.825,
-              2.338
-            ]
+            "coordinates": [48.8250, 2.3380],
+            "tags": ["architecture-industrielle", "point-eau", "réservoir"]
           }
         ]
       },
@@ -205,50 +124,40 @@
             "name": "La Coupole",
             "description": "Brasserie artistes 1927, piliers peints, huîtres",
             "address": "102 Boulevard du Montparnasse, 75014 Paris",
-            "coordinates": [
-              48.842,
-              2.329
-            ]
+            "coordinates": [48.8420, 2.3290],
+            "tags": ["1927", "piliers-peints", "huîtres", "artistes"]
           },
           {
             "id": "le-dome",
             "name": "Le Dôme",
             "description": "Institution fruits mer 1898, Hemingway, Picasso",
             "address": "108 Boulevard du Montparnasse, 75014 Paris",
-            "coordinates": [
-              48.842,
-              2.3285
-            ]
+            "coordinates": [48.8420, 2.3285],
+            "tags": ["1898", "fruits-de-mer", "hemingway", "picasso"]
           },
           {
             "id": "closerie-des-lilas",
             "name": "Closerie des Lilas",
             "description": "Café littéraire Hemingway, bar piano",
             "address": "171 Boulevard du Montparnasse, 75006 Paris",
-            "coordinates": [
-              48.839,
-              2.3315
-            ]
+            "coordinates": [48.8390, 2.3315],
+            "tags": ["littéraire", "hemingway", "bar-piano"]
           },
           {
             "id": "la-rotonde",
             "name": "La Rotonde",
             "description": "Rendez-vous artistes début XXe, terrasse historique",
             "address": "105 Boulevard du Montparnasse, 75006 Paris",
-            "coordinates": [
-              48.842,
-              2.3295
-            ]
+            "coordinates": [48.8420, 2.3295],
+            "tags": ["début-xxe", "artistes", "terrasse-historique"]
           },
           {
             "id": "le-select",
             "name": "Le Select",
             "description": "Bar américain 1925, premier cocktails Paris",
             "address": "99 Boulevard du Montparnasse, 75006 Paris",
-            "coordinates": [
-              48.842,
-              2.33
-            ]
+            "coordinates": [48.8420, 2.3300],
+            "tags": ["1925", "bar-américain", "premier-cocktails"]
           }
         ]
       },
@@ -260,50 +169,40 @@
             "name": "Crêperie Josselin",
             "description": "Authentique bretonne, sarrasin tradition, cidre",
             "address": "67 Rue du Montparnasse, 75014 Paris",
-            "coordinates": [
-              48.841,
-              2.327
-            ]
+            "coordinates": [48.8410, 2.3270],
+            "tags": ["bretonne", "sarrasin", "cidre", "authentique"]
           },
           {
             "id": "lassiette",
             "name": "L'Assiette",
             "description": "Bistrot traditionnel réputé, cuisine de grand-mère",
             "address": "181 Rue du Château, 75014 Paris",
-            "coordinates": [
-              48.831,
-              2.32
-            ]
+            "coordinates": [48.8310, 2.3200],
+            "tags": ["bistrot", "traditionnel", "grand-mère"]
           },
           {
             "id": "rue-daguerre",
             "name": "Rue Daguerre",
             "description": "Épiceries fines, fromagers Laurent Dubois",
             "address": "Rue Daguerre, 75014 Paris",
-            "coordinates": [
-              48.833,
-              2.329
-            ]
+            "coordinates": [48.8330, 2.3290],
+            "tags": ["épiceries-fines", "laurent-dubois", "fromagers"]
           },
           {
             "id": "la-cerisaie",
             "name": "La Cerisaie",
             "description": "Bistrot moderne, cuisine saisons, cave sélection",
             "address": "70 Boulevard Edgar Quinet, 75014 Paris",
-            "coordinates": [
-              48.84,
-              2.326
-            ]
+            "coordinates": [48.8400, 2.3260],
+            "tags": ["bistrot-moderne", "cuisine-saisons", "cave"]
           },
           {
             "id": "cobea",
             "name": "Cobéa",
             "description": "Gastronomie moderne, chef Jérémie Tourdjman",
             "address": "11 Rue Raymond Losserand, 75014 Paris",
-            "coordinates": [
-              48.838,
-              2.319
-            ]
+            "coordinates": [48.8380, 2.3190],
+            "tags": ["gastronomie", "jérémie-tourdjman", "moderne"]
           }
         ]
       },
@@ -315,40 +214,32 @@
             "name": "Rue Daguerre",
             "description": "Rue piétonne commerçante, artisans bouche",
             "address": "Rue Daguerre, 75014 Paris",
-            "coordinates": [
-              48.833,
-              2.329
-            ]
+            "coordinates": [48.8330, 2.3290],
+            "tags": ["piétonne", "commerçante", "artisans-bouche"]
           },
           {
             "id": "marche-edgar-quinet",
             "name": "Marché Edgar Quinet",
             "description": "Mer/Sam matin, produits régionaux",
             "address": "Boulevard Edgar Quinet, 75014 Paris",
-            "coordinates": [
-              48.84,
-              2.326
-            ]
+            "coordinates": [48.8400, 2.3260],
+            "tags": ["mer-sam", "produits-régionaux", "marché"]
           },
           {
             "id": "brocante-porte-de-vanves",
             "name": "Brocante Porte de Vanves",
             "description": "Marché puces week-end, antiquités abordables",
             "address": "Avenue Georges Lafenestre, 75014 Paris",
-            "coordinates": [
-              48.828,
-              2.306
-            ]
+            "coordinates": [48.8280, 2.3060],
+            "tags": ["puces", "week-end", "antiquités-abordables"]
           },
           {
             "id": "rue-dalesia",
             "name": "Rue d'Alésia",
             "description": "Shopping populaire, outlets, déstockage",
             "address": "Rue d'Alésia, 75014 Paris",
-            "coordinates": [
-              48.828,
-              2.316
-            ]
+            "coordinates": [48.8280, 2.3160],
+            "tags": ["shopping-populaire", "outlets", "déstockage"]
           }
         ]
       },
@@ -360,40 +251,32 @@
             "name": "Théâtre Montparnasse",
             "description": "Programmation contemporaine, comédies succès",
             "address": "31 Rue de la Gaîté, 75014 Paris",
-            "coordinates": [
-              48.839,
-              2.323
-            ]
+            "coordinates": [48.8390, 2.3230],
+            "tags": ["contemporaine", "comédies", "succès"]
           },
           {
             "id": "theatre-de-la-gaite",
             "name": "Théâtre de la Gaîté",
             "description": "Opérettes, comédies musicales, répertoire",
             "address": "26 Rue de la Gaîté, 75014 Paris",
-            "coordinates": [
-              48.839,
-              2.3235
-            ]
+            "coordinates": [48.8390, 2.3235],
+            "tags": ["opérettes", "comédies-musicales", "répertoire"]
           },
           {
             "id": "cinema-lentrepot",
             "name": "Cinéma L'Entrepôt",
             "description": "Cinéma d'art essai, restaurant bio",
             "address": "7 Rue Francis de Pressensé, 75014 Paris",
-            "coordinates": [
-              48.835,
-              2.317
-            ]
+            "coordinates": [48.8350, 2.3170],
+            "tags": ["art-essai", "restaurant-bio", "cinéma"]
           },
           {
             "id": "fondation-cartier",
             "name": "Fondation Cartier",
             "description": "Art contemporain, architecture Jean Nouvel",
             "address": "261 Boulevard Raspail, 75014 Paris",
-            "coordinates": [
-              48.838,
-              2.333
-            ]
+            "coordinates": [48.8380, 2.3330],
+            "tags": ["art-contemporain", "jean-nouvel", "architecture"]
           }
         ]
       },
@@ -405,40 +288,32 @@
             "name": "Villa Seurat",
             "description": "Impasse artistes, ateliers Henry Miller, Soutine",
             "address": "Villa Seurat, 75014 Paris",
-            "coordinates": [
-              48.822,
-              2.334
-            ]
+            "coordinates": [48.8220, 2.3340],
+            "tags": ["impasse-artistes", "henry-miller", "soutine"]
           },
           {
             "id": "passage-denfer",
             "name": "Passage d'Enfer",
             "description": "Ruelle cachée, maisons particulières",
             "address": "Passage d'Enfer, 75014 Paris",
-            "coordinates": [
-              48.834,
-              2.331
-            ]
+            "coordinates": [48.8340, 2.3310],
+            "tags": ["ruelle-cachée", "maisons-particulières"]
           },
           {
             "id": "square-montsouris",
             "name": "Square Montsouris",
             "description": "Quartier pavillons, architecture éclectique",
             "address": "Square de Montsouris, 75014 Paris",
-            "coordinates": [
-              48.822,
-              2.338
-            ]
+            "coordinates": [48.8220, 2.3380],
+            "tags": ["pavillons", "architecture-éclectique", "quartier"]
           },
           {
             "id": "rue-tombe-issoire",
             "name": "Rue de la Tombe-Issoire",
             "description": "Ancien chemin rural, histoire médiévale",
             "address": "Rue de la Tombe-Issoire, 75014 Paris",
-            "coordinates": [
-              48.829,
-              2.333
-            ]
+            "coordinates": [48.8290, 2.3330],
+            "tags": ["chemin-rural", "histoire-médiévale", "ancien"]
           }
         ]
       }
@@ -448,11 +323,6 @@
     "created": "2025-01-05",
     "version": "2.0.0",
     "total_places": 29,
-    "featured_places": [
-      "tour-montparnasse",
-      "catacombes-de-paris",
-      "la-coupole",
-      "parc-montsouris"
-    ]
+    "featured_places": ["tour-montparnasse", "catacombes-de-paris", "la-coupole", "parc-montsouris"]
   }
 }

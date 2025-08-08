@@ -45,6 +45,14 @@ class UIManager {
             });
         }
         
+        const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+        if (voiceSearchBtn && 'webkitSpeechRecognition' in window) {
+            voiceSearchBtn.addEventListener('click', () => {
+                this.startVoiceSearch();
+            });
+        } else if (voiceSearchBtn) {
+            voiceSearchBtn.style.display = 'none';
+        }
         
         // Filtres
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
@@ -92,9 +100,6 @@ class UIManager {
         // Événements de carte
         this.setupMapEvents();
         
-        // Événements pour basculer entre les modes d'affichage utilisateur
-        this.setupUserDisplayEvents();
-        
         console.log('✅ Événements UI configurés');
     }
     
@@ -135,49 +140,7 @@ class UIManager {
         }
     }
     
-    // === ÉVÉNEMENTS D'AFFICHAGE UTILISATEUR ===
-    setupUserDisplayEvents() {
-        const changeUserBtn = document.getElementById('changeUserBtn');
-        if (changeUserBtn) {
-            changeUserBtn.addEventListener('click', () => {
-                this.showUserManagement();
-            });
-        }
-    }
     
-    // === GESTION AFFICHAGE UTILISATEUR ===
-    showUserManagement() {
-        const managementSection = document.getElementById('userManagementSection');
-        const displaySection = document.getElementById('userDisplaySection');
-        
-        if (managementSection) managementSection.style.display = 'flex';
-        if (displaySection) displaySection.style.display = 'none';
-        
-        console.log('👥 Mode gestion utilisateur activé');
-    }
-    
-    showUserDisplay(userName) {
-        const managementSection = document.getElementById('userManagementSection');
-        const displaySection = document.getElementById('userDisplaySection');
-        const userNameElement = document.getElementById('currentUserName');
-        
-        if (managementSection) managementSection.style.display = 'none';
-        if (displaySection) displaySection.style.display = 'flex';
-        if (userNameElement) userNameElement.textContent = userName;
-        
-        console.log('👤 Mode affichage utilisateur activé pour:', userName);
-    }
-    
-    hideUserManagement() {
-        const managementSection = document.getElementById('userManagementSection');
-        const displaySection = document.getElementById('userDisplaySection');
-        
-        if (managementSection) managementSection.style.display = 'none';
-        if (displaySection) displaySection.style.display = 'none';
-        
-        console.log('🚫 Sections utilisateur masquées');
-    }
-
     // === CHANGEMENT D'ONGLET ===
     switchTab(tabName) {
         console.log(`🔄 Changement d'onglet vers: ${tabName}`);
@@ -208,6 +171,11 @@ class UIManager {
             case 'favorites':
                 console.log('⭐ Activation onglet favoris');
                 this.renderFavorites();
+                break;
+                
+            case 'collections':
+                console.log('📚 Activation onglet collections');
+                this.renderCollections();
                 break;
                 
             case 'stats':
@@ -288,9 +256,6 @@ class UIManager {
         
         // Ajouter les événements aux cartes
         this.attachPlaceCardEvents();
-        
-        // Mettre à jour les statistiques
-        this.updateStatsHeader();
         
         console.log('✅ Contenu rendu');
     }
@@ -513,7 +478,7 @@ class UIManager {
                 
                 ${place.tags && place.tags.length > 0 ? `
                     <div class="place-tags">
-                        ${''}
+                        ${place.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
                 ` : ''}
                 
@@ -591,9 +556,6 @@ class UIManager {
         
         // Mettre à jour les statistiques d'arrondissement
         this.updateArrondissementStats();
-        
-        // Mettre à jour les statistiques header
-        this.updateStatsHeader();
     }
     
     updateArrondissementStats() {
@@ -730,48 +692,10 @@ class UIManager {
         
         // Rafraîchir l'affichage
         this.renderContent();
-        this.updateStatsHeader();
         
         this.app.showNotification('Filtres effacés', 'success', 2000);
     }
     
-    // === MISE À JOUR DES STATISTIQUES HEADER ===
-    updateStatsHeader() {
-        if (!this.app.isDataLoaded || !this.app.parisData) {
-            this.setStatsHeaderLoading();
-            return;
-        }
-        
-        const userData = this.app.getCurrentUserData();
-        const totalPlaces = this.app.dataManager.getTotalPlaces();
-        const visitedCount = userData ? userData.visitedPlaces.size : 0;
-        const favoritesCount = userData ? userData.favorites.length : 0;
-        const completionPercent = totalPlaces > 0 ? Math.round((visitedCount / totalPlaces) * 100) : 0;
-        
-        // Mettre à jour les éléments DOM
-        const totalPlacesElement = document.getElementById('totalPlacesCount');
-        const visitedPlacesElement = document.getElementById('visitedPlacesCount');
-        const completionElement = document.getElementById('completionPercent');
-        const favoritesElement = document.getElementById('favoritesCount');
-        
-        if (totalPlacesElement) totalPlacesElement.textContent = totalPlaces.toLocaleString('fr-FR');
-        if (visitedPlacesElement) visitedPlacesElement.textContent = visitedCount.toLocaleString('fr-FR');
-        if (completionElement) completionElement.textContent = `${completionPercent}%`;
-        if (favoritesElement) favoritesElement.textContent = favoritesCount.toLocaleString('fr-FR');
-        
-        console.log(`📊 Stats mises à jour: ${visitedCount}/${totalPlaces} (${completionPercent}%) - ${favoritesCount} favoris`);
-    }
-    
-    setStatsHeaderLoading() {
-        const elements = ['totalPlacesCount', 'visitedPlacesCount', 'completionPercent', 'favoritesCount'];
-        elements.forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = id === 'completionPercent' ? '-%' : '-';
-            }
-        });
-    }
-
     // === CHARGEMENT DU SÉLECTEUR D'UTILISATEUR ===
     loadUserSelector() {
         const userSelect = document.getElementById('userSelect');
@@ -827,6 +751,43 @@ class UIManager {
     }
     
     // === RECHERCHE VOCALE ===
+    startVoiceSearch() {
+        if (!('webkitSpeechRecognition' in window)) {
+            this.app.showNotification('Recherche vocale non supportée', 'error');
+            return;
+        }
+        
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'fr-FR';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        
+        recognition.onstart = () => {
+            this.app.showNotification('🎤 Parlez maintenant...', 'info', 0);
+        };
+        
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.value = transcript;
+                this.app.searchFilter.onSearchInput(transcript);
+            }
+            this.hideModal();
+            this.app.showNotification(`Recherche: "${transcript}"`, 'success');
+        };
+        
+        recognition.onerror = (event) => {
+            this.hideModal();
+            this.app.showNotification('Erreur de reconnaissance vocale', 'error');
+        };
+        
+        recognition.onend = () => {
+            this.hideModal();
+        };
+        
+        recognition.start();
+    }
     
     // === RENDU DES AUTRES ONGLETS ===
     renderFavorites() {
@@ -1272,7 +1233,7 @@ class UIManager {
                         <div class="detail-section">
                             <h5>🏷️ Tags</h5>
                             <div class="tags-list">
-                                ${''}
+                                ${place.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                             </div>
                         </div>
                     ` : ''}

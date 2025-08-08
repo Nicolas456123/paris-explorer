@@ -4,87 +4,24 @@
     "name": "12ÈME ARRONDISSEMENT - NATION & BERCY",
     "description": "Espaces verts exceptionnels et patrimoine moderne",
     "bounds": {
-      "north": 48.855,
-      "south": 48.83,
-      "east": 2.41,
-      "west": 2.365
+      "north": 48.8550,
+      "south": 48.8300,
+      "east": 2.4100,
+      "west": 2.3650
     },
-    "center": [
-      48.8448,
-      2.3776
-    ],
+    "center": [48.8448, 2.3776],
     "area_km2": 16.32,
     "population": 143577,
     "transport": {
       "metro_stations": [
-        {
-          "name": "Nation",
-          "lines": [
-            "1",
-            "2",
-            "6",
-            "9"
-          ],
-          "coordinates": [
-            48.8489,
-            2.3967
-          ]
-        },
-        {
-          "name": "Bercy",
-          "lines": [
-            "6",
-            "14"
-          ],
-          "coordinates": [
-            48.8434,
-            2.3789
-          ]
-        },
-        {
-          "name": "Gare de Lyon",
-          "lines": [
-            "1",
-            "14"
-          ],
-          "coordinates": [
-            48.8445,
-            2.3734
-          ]
-        }
+        {"name": "Nation", "lines": ["1", "2", "6", "9"], "coordinates": [48.8489, 2.3967]},
+        {"name": "Bercy", "lines": ["6", "14"], "coordinates": [48.8434, 2.3789]},
+        {"name": "Gare de Lyon", "lines": ["1", "14"], "coordinates": [48.8445, 2.3734]}
       ],
       "rer_stations": [
-        {
-          "name": "Nation",
-          "lines": [
-            "A"
-          ],
-          "coordinates": [
-            48.8489,
-            2.3967
-          ]
-        },
-        {
-          "name": "Gare de Lyon",
-          "lines": [
-            "A",
-            "D"
-          ],
-          "coordinates": [
-            48.8445,
-            2.3734
-          ]
-        },
-        {
-          "name": "Vincennes",
-          "lines": [
-            "A"
-          ],
-          "coordinates": [
-            48.8456,
-            2.4389
-          ]
-        }
+        {"name": "Nation", "lines": ["A"], "coordinates": [48.8489, 2.3967]},
+        {"name": "Gare de Lyon", "lines": ["A", "D"], "coordinates": [48.8445, 2.3734]},
+        {"name": "Vincennes", "lines": ["A"], "coordinates": [48.8456, 2.4389]}
       ],
       "description": "Métro : Nation (1,2,6,9), Bercy (6,14), Gare de Lyon (1,14) | RER : Nation (A), Gare de Lyon (A,D), Vincennes (A)"
     },
@@ -97,40 +34,32 @@
             "name": "Bois de Vincennes",
             "description": "995 hectares, lac Daumesnil, temple bouddhiste",
             "address": "Bois de Vincennes, 75012 Paris",
-            "coordinates": [
-              48.8289,
-              2.4324
-            ]
+            "coordinates": [48.8289, 2.4324],
+            "tags": ["995-hectares", "lac-daumesnil", "temple-bouddhiste"]
           },
           {
             "id": "parc-de-bercy",
             "name": "Parc de Bercy",
             "description": "Design contemporaire, Maison Jardinage, potagers",
             "address": "128 Quai de Bercy, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3812
-            ]
+            "coordinates": [48.8423, 2.3812],
+            "tags": ["contemporaire", "jardinage", "potagers"]
           },
           {
             "id": "promenade-plantee",
             "name": "Promenade Plantée",
             "description": "Voie verte surélevée 4,7 km, jardins suspendus",
             "address": "1 Coulée Verte René-Dumont, 75012 Paris",
-            "coordinates": [
-              48.8456,
-              2.3889
-            ]
+            "coordinates": [48.8456, 2.3889],
+            "tags": ["voie-verte", "4-7km", "suspendus"]
           },
           {
             "id": "square-charles-peguy",
             "name": "Square Charles-Péguy",
             "description": "Jardin caché, jeux enfants, tranquillité",
             "address": "Square Charles-Péguy, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3889
-            ]
+            "coordinates": [48.8423, 2.3889],
+            "tags": ["caché", "tranquillité"]
           }
         ]
       },
@@ -142,50 +71,40 @@
             "name": "Château de Vincennes",
             "description": "Forteresse médiévale, Sainte-Chapelle gothique",
             "address": "Avenue de Paris, 94300 Vincennes",
-            "coordinates": [
-              48.8456,
-              2.4356
-            ]
+            "coordinates": [48.8456, 2.4356],
+            "tags": ["forteresse", "médiévale", "sainte-chapelle"]
           },
           {
             "id": "cinematheque-francaise",
             "name": "Cinémathèque Française",
             "description": "Architecture Frank Gehry, musée cinéma",
             "address": "51 Rue de Bercy, 75012 Paris",
-            "coordinates": [
-              48.8434,
-              2.3823
-            ]
+            "coordinates": [48.8434, 2.3823],
+            "tags": ["frank-gehry", "musée-cinéma"]
           },
           {
             "id": "opera-bastille",
             "name": "Opéra de Paris Bastille",
             "description": "Visites guidées techniques, coulisses",
             "address": "Place de la Bastille, 75012 Paris",
-            "coordinates": [
-              48.8534,
-              2.3689
-            ]
+            "coordinates": [48.8534, 2.3689],
+            "tags": ["visites-techniques", "coulisses"]
           },
           {
             "id": "viaduc-des-arts",
             "name": "Viaduc des Arts",
             "description": "50 ateliers artisans sous arches chemin fer",
             "address": "9 Avenue Daumesnil, 75012 Paris",
-            "coordinates": [
-              48.8456,
-              2.3889
-            ]
+            "coordinates": [48.8456, 2.3889],
+            "tags": ["50-ateliers", "arches", "chemin-fer"]
           },
           {
             "id": "palais-omnisports-bercy",
             "name": "Palais Omnisports Bercy",
             "description": "Architecture pyramidale, concerts",
             "address": "8 Boulevard de Bercy, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3812
-            ]
+            "coordinates": [48.8423, 2.3812],
+            "tags": ["pyramidale", "concerts"]
           }
         ]
       },
@@ -197,50 +116,40 @@
             "name": "Bercy Village",
             "description": "Restaurants anciennes halles à vin, terrasses",
             "address": "Cour Saint-Emilion, 75012 Paris",
-            "coordinates": [
-              48.8434,
-              2.3823
-            ]
+            "coordinates": [48.8434, 2.3823],
+            "tags": ["halles-vin", "terrasses"]
           },
           {
             "id": "marche-daligre",
             "name": "Marché d'Aligre",
             "description": "Marché pittoresque, atmosphère authentique populaire",
             "address": "Place d'Aligre, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3878
-            ]
+            "coordinates": [48.8423, 2.3878],
+            "tags": ["pittoresque", "authentique", "populaire"]
           },
           {
             "id": "le-train-bleu",
             "name": "Le Train Bleu",
             "description": "Restaurant Belle Époque Gare Lyon, décors historiques",
             "address": "Place Louis-Armand, 75012 Paris",
-            "coordinates": [
-              48.8445,
-              2.3734
-            ]
+            "coordinates": [48.8445, 2.3734],
+            "tags": ["belle-époque", "gare-lyon", "historiques"]
           },
           {
             "id": "rue-de-charenton",
             "name": "Rue de Charenton",
             "description": "Boulangeries artisanales, épiceries fines quartier",
             "address": "Rue de Charenton, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3812
-            ]
+            "coordinates": [48.8423, 2.3812],
+            "tags": ["artisanales", "épiceries-fines"]
           },
           {
             "id": "douze",
             "name": "Douze",
             "description": "Food court 1000m², circuit court, anti-gaspillage",
             "address": "12 Rue de Charenton, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3812
-            ]
+            "coordinates": [48.8423, 2.3812],
+            "tags": ["food-court", "circuit-court", "anti-gaspillage"]
           }
         ]
       },
@@ -252,40 +161,32 @@
             "name": "AccorHotels Arena",
             "description": "Concerts internationaux, événements sportifs",
             "address": "8 Boulevard de Bercy, 75012 Paris",
-            "coordinates": [
-              48.8423,
-              2.3812
-            ]
+            "coordinates": [48.8423, 2.3812],
+            "tags": ["internationaux", "sportifs"]
           },
           {
             "id": "zoo-de-vincennes",
             "name": "Zoo de Vincennes",
             "description": "Parc zoologique moderne, biodômes",
             "address": "Avenue Daumesnil, 75012 Paris",
-            "coordinates": [
-              48.8289,
-              2.4156
-            ]
+            "coordinates": [48.8289, 2.4156],
+            "tags": ["zoologique", "biodômes"]
           },
           {
             "id": "foire-du-trone",
             "name": "Foire du Trône",
             "description": "Fête foraine historique (printemps), manèges",
             "address": "Pelouse de Reuilly, 75012 Paris",
-            "coordinates": [
-              48.8389,
-              2.4078
-            ]
+            "coordinates": [48.8389, 2.4078],
+            "tags": ["foraine", "printemps", "manèges"]
           },
           {
             "id": "aquarium-tropical",
             "name": "Aquarium tropical",
             "description": "Palais Porte Dorée, poissons exotiques",
             "address": "293 Avenue Daumesnil, 75012 Paris",
-            "coordinates": [
-              48.8356,
-              2.4078
-            ]
+            "coordinates": [48.8356, 2.4078],
+            "tags": ["porte-dorée", "exotiques"]
           }
         ]
       },
@@ -297,20 +198,16 @@
             "name": "Port de l'Arsenal",
             "description": "Marina plaisance, promenade quais",
             "address": "Port de l'Arsenal, 75012 Paris",
-            "coordinates": [
-              48.8512,
-              2.3656
-            ]
+            "coordinates": [48.8512, 2.3656],
+            "tags": ["marina", "plaisance", "quais"]
           },
           {
             "id": "cimetiere-de-picpus",
             "name": "Cimetière de Picpus",
             "description": "Seul cimetière privé Paris, fosse commune 1794",
             "address": "35 Rue de Picpus, 75012 Paris",
-            "coordinates": [
-              48.8389,
-              2.4011
-            ]
+            "coordinates": [48.8389, 2.4011],
+            "tags": ["privé", "fosse-commune", "1794"]
           }
         ]
       },
@@ -322,10 +219,8 @@
             "name": "Musée des Arts Forains",
             "description": "Collection unique manèges anciens (sur réservation)",
             "address": "53 Avenue des Terroirs de France, 75012 Paris",
-            "coordinates": [
-              48.8356,
-              2.3889
-            ]
+            "coordinates": [48.8356, 2.3889],
+            "tags": ["unique", "manèges", "réservation"]
           }
         ]
       }

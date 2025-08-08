@@ -696,7 +696,8 @@ class ExportImport {
                             arrondissement: arrData.name || arrKey,
                             category: catData.title,
                             description: place.description,
-                            address: place.address
+                            address: place.address,
+                            tags: place.tags || []
                         };
                     }
                 }
@@ -710,7 +711,7 @@ class ExportImport {
             category: 'Inconnu',
             description: '',
             address: '',
-            
+            tags: []
         };
     }
     

@@ -108,6 +108,13 @@ class SearchFilter {
             });
         }
         
+        // Tags
+        if (place.tags && Array.isArray(place.tags)) {
+            place.tags.forEach(tag => {
+                terms.add(tag.toLowerCase());
+            });
+        }
+        
         // Arrondissement
         const arrName = arrData.name || '';
         if (arrName) {
@@ -237,6 +244,15 @@ class SearchFilter {
             score += 30;
         }
         
+        // Score pour correspondance dans les tags
+        if (data.place.tags) {
+            data.place.tags.forEach(tag => {
+                if (tag.toLowerCase().includes(query)) {
+                    score += 40;
+                }
+            });
+        }
+        
         // Score pour correspondance dans l'adresse
         if (data.place.address && data.place.address.toLowerCase().includes(query)) {
             score += 20;
@@ -342,7 +358,12 @@ class SearchFilter {
             }
             
             // Suggestions depuis tags populaires
-            
+            if (data.place.tags) {
+                data.place.tags.forEach(tag => {
+                    if (suggestions.size < maxSuggestions && 
+                        tag.toLowerCase().includes(lowerQuery)) {
+                        suggestions.add(tag);
+                    }
                 });
             }
         });
@@ -718,14 +739,24 @@ class SearchFilter {
         const lowerTags = tags.map(tag => tag.toLowerCase());
         
         this.searchIndex.forEach((data, placeId) => {
-            );
+            if (data.place.tags) {
+                const placeTags = data.place.tags.map(tag => tag.toLowerCase());
+                const matches = lowerTags.filter(tag => placeTags.includes(tag));
+                
+                if (matches.length > 0) {
+                    results.push({
+                        ...data,
+                        matchingTags: matches,
+                        score: matches.length * 10
+                    });
                 }
             }
         });
         
         // Trier par score (nombre de tags correspondants)
         results.sort((a, b) => b.score - a.score);
-
+        
+        console.log(`🏷️ ${results.length} résultats trouvés pour les tags:`, tags);
         return results;
     }
     

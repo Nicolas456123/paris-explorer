@@ -388,7 +388,10 @@ class MapManager {
         const statusText = isVisited ? '✅ Visité' : '⭕ Non visité';
         
         // Tags
-        const tagsHtml = '';
+        const tagsHtml = place.tags && place.tags.length > 0 ? 
+            place.tags.slice(0, 3).map(tag => 
+                `<span style="background: rgba(30, 58, 138, 0.1); color: #1e3a8a; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin: 2px;">${tag}</span>`
+            ).join(' ') : '';
         
         return `
             <div style="font-family: 'Segoe UI', sans-serif; min-width: 220px; max-width: 300px;">

@@ -172,14 +172,44 @@
             <p class="subtitle">Découvrez tous les trésors de la Ville Lumière</p>
         </header>
         
+        <!-- Statistiques générales -->
+        <section class="stats-header" id="statsHeader">
+            <div class="stats-overview">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalPlacesCount">-</span>
+                    <span class="stat-label">Lieux total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="visitedPlacesCount">-</span>
+                    <span class="stat-label">Lieux visités</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="completionPercent">-%</span>
+                    <span class="stat-label">Progression</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="favoritesCount">-</span>
+                    <span class="stat-label">Favoris</span>
+                </div>
+            </div>
+        </section>
+        
         <!-- Navigation et Sélection Utilisateur -->
         <section class="nav-section">
-            <div class="user-selector">
+            <div class="user-selector" id="userManagementSection">
                 <select id="userSelect" class="user-select">
                     <option value="">Sélectionner un utilisateur...</option>
                 </select>
                 <button class="btn btn-primary" id="newUserBtn">👤 Nouveau</button>
                 <button class="btn btn-secondary" id="manageUsersBtn">⚙️ Gérer</button>
+            </div>
+            
+            <!-- Zone utilisateur compacte -->
+            <div class="user-display" id="userDisplaySection" style="display: none;">
+                <div class="current-user-info">
+                    <span class="user-name" id="currentUserName">-</span>
+                    <button class="btn btn-sm btn-secondary" id="changeUserBtn" title="Changer d'utilisateur">👤</button>
+                </div>
             </div>
             
             <!-- Recherche Avancée -->
@@ -189,7 +219,6 @@
                            placeholder="🔍 Rechercher un lieu, monument, restaurant..." 
                            autocomplete="off">
                     <button class="search-btn" id="searchBtn">🔍</button>
-                    <button class="voice-search-btn" id="voiceSearchBtn" title="Recherche vocale">🎤</button>
                     
                     <!-- Container pour les suggestions (sera créé dynamiquement) -->
                 </div>
@@ -227,7 +256,6 @@
             <button class="tab-btn active" data-tab="list">📋 Liste</button>
             <button class="tab-btn" data-tab="map">🗺️ Carte</button>
             <button class="tab-btn" data-tab="favorites">⭐ Favoris</button>
-            <button class="tab-btn" data-tab="collections">📚 Collections</button>
             <button class="tab-btn" data-tab="stats">📊 Statistiques</button>
             <button class="tab-btn" data-tab="achievements">🏆 Succès</button>
             <button class="tab-btn" data-tab="settings">⚙️ Paramètres</button>
@@ -270,14 +298,6 @@
                 </div>
             </div>
             
-            <!-- Onglet Collections -->
-            <div id="collectionsContent" class="tab-content">
-                <div class="empty-state">
-                    <div class="empty-icon">📚</div>
-                    <h3>Vos collections personnalisées</h3>
-                    <p>Organisez vos découvertes par thèmes</p>
-                </div>
-            </div>
             
             <!-- Onglet Statistiques -->
             <div id="statsContent" class="tab-content">

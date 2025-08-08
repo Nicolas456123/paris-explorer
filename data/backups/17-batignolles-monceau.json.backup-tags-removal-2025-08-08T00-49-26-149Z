@@ -84,6 +84,12 @@
             "coordinates": [
               48.8795,
               2.3089
+            ],
+            "tags": [
+              "8-2-hectares",
+              "jardins-anglais",
+              "haussmann",
+              "fabriques-romantiques"
             ]
           },
           {
@@ -94,6 +100,11 @@
             "coordinates": [
               48.89,
               2.315
+            ],
+            "tags": [
+              "10-hectares",
+              "écologique",
+              "2007"
             ]
           },
           {
@@ -104,6 +115,11 @@
             "coordinates": [
               48.885,
               2.32
+            ],
+            "tags": [
+              "jardin-anglais",
+              "historique",
+              "grotte-cascade"
             ]
           },
           {
@@ -114,6 +130,11 @@
             "coordinates": [
               48.885,
               2.295
+            ],
+            "tags": [
+              "coulée-verte",
+              "métro-aérien",
+              "jardins-suspendus"
             ]
           }
         ]
@@ -129,6 +150,11 @@
             "coordinates": [
               48.878,
               2.312
+            ],
+            "tags": [
+              "arts-asiatiques",
+              "hôtel-particulier",
+              "bronzes-chinois"
             ]
           },
           {
@@ -139,6 +165,11 @@
             "coordinates": [
               48.878,
               2.303
+            ],
+            "tags": [
+              "orthodoxe-russe",
+              "iconostase",
+              "cathédrale"
             ]
           },
           {
@@ -149,6 +180,11 @@
             "coordinates": [
               48.878,
               2.284
+            ],
+            "tags": [
+              "années-70",
+              "concerts",
+              "salons"
             ]
           },
           {
@@ -159,6 +195,11 @@
             "coordinates": [
               48.89,
               2.31
+            ],
+            "tags": [
+              "impasse-fleurie",
+              "1847",
+              "villas-anglo-normandes"
             ]
           }
         ]
@@ -174,6 +215,11 @@
             "coordinates": [
               48.885,
               2.318
+            ],
+            "tags": [
+              "marché-bio",
+              "réputé",
+              "producteurs-locaux"
             ]
           },
           {
@@ -184,6 +230,12 @@
             "coordinates": [
               48.884,
               2.307
+            ],
+            "tags": [
+              "commerçante",
+              "animée",
+              "fromagers",
+              "bouchers"
             ]
           },
           {
@@ -194,6 +246,10 @@
             "coordinates": [
               48.885,
               2.316
+            ],
+            "tags": [
+              "crêperie-moderne",
+              "galettes-sarrasin"
             ]
           },
           {
@@ -204,6 +260,11 @@
             "coordinates": [
               48.889,
               2.324
+            ],
+            "tags": [
+              "vins-naturels",
+              "bistronomie",
+              "produits-saisons"
             ]
           },
           {
@@ -214,6 +275,10 @@
             "coordinates": [
               48.884,
               2.319
+            ],
+            "tags": [
+              "cuisine-traditionnelle",
+              "ambiance-quartier"
             ]
           }
         ]
@@ -229,6 +294,10 @@
             "coordinates": [
               48.885,
               2.318
+            ],
+            "tags": [
+              "créateurs-indépendants",
+              "concept-stores"
             ]
           },
           {
@@ -239,6 +308,11 @@
             "coordinates": [
               48.888,
               2.317
+            ],
+            "tags": [
+              "quartier-village",
+              "rénové",
+              "commerces-proximité"
             ]
           },
           {
@@ -249,6 +323,10 @@
             "coordinates": [
               48.882,
               2.3
+            ],
+            "tags": [
+              "commerces-proximité",
+              "boulangeries-artisanales"
             ]
           },
           {
@@ -259,6 +337,10 @@
             "coordinates": [
               48.88,
               2.298
+            ],
+            "tags": [
+              "mar-jeu-sam-dim",
+              "ambiance-populaire"
             ]
           }
         ]
@@ -274,6 +356,10 @@
             "coordinates": [
               48.885,
               2.318
+            ],
+            "tags": [
+              "privé-historique",
+              "programmation-contemporaine"
             ]
           },
           {
@@ -284,6 +370,10 @@
             "coordinates": [
               48.877,
               2.303
+            ],
+            "tags": [
+              "musique-classique",
+              "orchestre-de-paris"
             ]
           },
           {
@@ -294,6 +384,10 @@
             "coordinates": [
               48.8427,
               2.3421
+            ],
+            "tags": [
+              "art-et-essai",
+              "débats"
             ]
           }
         ]
@@ -309,6 +403,10 @@
             "coordinates": [
               48.887,
               2.3398
+            ],
+            "tags": [
+              "quartier-convivial",
+              "habitants-fidèles"
             ]
           },
           {
@@ -319,6 +417,10 @@
             "coordinates": [
               48.885,
               2.3336
+            ],
+            "tags": [
+              "bar-bistrot",
+              "ambiance-authentique"
             ]
           },
           {
@@ -329,6 +431,10 @@
             "coordinates": [
               48.886,
               2.314
+            ],
+            "tags": [
+              "branché-batignolles",
+              "cocktails-créatifs"
             ]
           }
         ]
@@ -344,6 +450,10 @@
             "coordinates": [
               48.878,
               2.292
+            ],
+            "tags": [
+              "impasse-privée",
+              "maisons-bourgeoises"
             ]
           },
           {
@@ -354,6 +464,11 @@
             "coordinates": [
               48.889,
               2.322
+            ],
+            "tags": [
+              "passage-résidentiel",
+              "calme",
+              "pavés"
             ]
           },
           {
@@ -364,6 +479,11 @@
             "coordinates": [
               48.87591845,
               2.3204255100976594
+            ],
+            "tags": [
+              "petit-jardin",
+              "caché",
+              "aire-jeux"
             ],
             "geocoding": {
               "source": "Photon",

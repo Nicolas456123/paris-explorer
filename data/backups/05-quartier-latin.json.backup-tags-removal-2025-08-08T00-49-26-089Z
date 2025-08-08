@@ -4,82 +4,24 @@
     "name": "5ÈME ARRONDISSEMENT - QUARTIER LATIN",
     "description": "Universités prestigieuses et patrimoine historique",
     "bounds": {
-      "north": 48.852,
-      "south": 48.84,
-      "east": 2.365,
-      "west": 2.32
+      "north": 48.8520,
+      "south": 48.8400,
+      "east": 2.3650,
+      "west": 2.3200
     },
-    "center": [
-      48.8462,
-      2.3372
-    ],
+    "center": [48.8462, 2.3372],
     "area_km2": 2.54,
     "population": 61531,
     "transport": {
       "metro_stations": [
-        {
-          "name": "Place Monge",
-          "lines": [
-            "7"
-          ],
-          "coordinates": [
-            48.8434,
-            2.3517
-          ]
-        },
-        {
-          "name": "Cluny-La Sorbonne",
-          "lines": [
-            "10"
-          ],
-          "coordinates": [
-            48.8507,
-            2.3441
-          ]
-        },
-        {
-          "name": "Maubert-Mutualité",
-          "lines": [
-            "10"
-          ],
-          "coordinates": [
-            48.8495,
-            2.3485
-          ]
-        },
-        {
-          "name": "Cardinal Lemoine",
-          "lines": [
-            "10"
-          ],
-          "coordinates": [
-            48.8473,
-            2.3515
-          ]
-        }
+        {"name": "Place Monge", "lines": ["7"], "coordinates": [48.8434, 2.3517]},
+        {"name": "Cluny-La Sorbonne", "lines": ["10"], "coordinates": [48.8507, 2.3441]},
+        {"name": "Maubert-Mutualité", "lines": ["10"], "coordinates": [48.8495, 2.3485]},
+        {"name": "Cardinal Lemoine", "lines": ["10"], "coordinates": [48.8473, 2.3515]}
       ],
       "rer_stations": [
-        {
-          "name": "Luxembourg",
-          "lines": [
-            "B"
-          ],
-          "coordinates": [
-            48.8462,
-            2.3372
-          ]
-        },
-        {
-          "name": "Saint-Michel-Notre-Dame",
-          "lines": [
-            "B",
-            "C"
-          ],
-          "coordinates": [
-            48.8534,
-            2.3444
-          ]
-        }
+        {"name": "Luxembourg", "lines": ["B"], "coordinates": [48.8462, 2.3372]},
+        {"name": "Saint-Michel-Notre-Dame", "lines": ["B", "C"], "coordinates": [48.8534, 2.3444]}
       ],
       "description": "Métro : Place Monge (7), Cluny-La Sorbonne (10), Maubert-Mutualité (10), Cardinal Lemoine (10) | RER : Luxembourg (B), Saint-Michel-Notre-Dame (B,C)"
     },
@@ -92,70 +34,56 @@
             "name": "Panthéon",
             "description": "Mausolée grands hommes, pendule de Foucault",
             "address": "Place du Panthéon, 75005 Paris",
-            "coordinates": [
-              48.8462,
-              2.3456
-            ]
+            "coordinates": [48.8462, 2.3456],
+            "tags": ["mausolée", "grands-hommes", "pendule-foucault"]
           },
           {
             "id": "sorbonne",
             "name": "Sorbonne",
             "description": "Université historique, Chapelle Richelieu, amphithéâtres",
             "address": "21 Rue de l'École de Médecine, 75006 Paris",
-            "coordinates": [
-              48.8484,
-              2.3428
-            ]
+            "coordinates": [48.8484, 2.3428],
+            "tags": ["université", "chapelle-richelieu", "amphithéâtres"]
           },
           {
             "id": "arenes-de-lutece",
             "name": "Arènes de Lutèce",
             "description": "Amphithéâtre gallo-romain Ier siècle, gratuit",
             "address": "49 Rue Monge, 75005 Paris",
-            "coordinates": [
-              48.8434,
-              2.3531
-            ]
+            "coordinates": [48.8434, 2.3531],
+            "tags": ["gallo-romain", "amphithéâtre", "ier-siècle", "gratuit"]
           },
           {
             "id": "eglise-saint-etienne-du-mont",
             "name": "Église Saint-Étienne-du-Mont",
             "description": "Architecture gothique-Renaissance, jubé unique",
             "address": "Place Sainte-Geneviève, 75005 Paris",
-            "coordinates": [
-              48.8467,
-              2.3472
-            ]
+            "coordinates": [48.8467, 2.3472],
+            "tags": ["gothique-renaissance", "jubé", "unique"]
           },
           {
             "id": "college-de-france",
             "name": "Collège de France",
             "description": "Cours publics gratuits, recherche d'excellence",
             "address": "11 Place Marcelin Berthelot, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3444
-            ]
+            "coordinates": [48.8498, 2.3444],
+            "tags": ["cours-publics", "gratuits", "recherche"]
           },
           {
             "id": "ecole-normale-superieure",
             "name": "École Normale Supérieure",
             "description": "Cour d'honneur, bibliothèque Jourdan",
             "address": "45 Rue d'Ulm, 75005 Paris",
-            "coordinates": [
-              48.8431,
-              2.3445
-            ]
+            "coordinates": [48.8431, 2.3445],
+            "tags": ["ens", "cour-honneur", "bibliothèque-jourdan"]
           },
           {
             "id": "college-des-bernardins",
             "name": "Collège des Bernardins",
             "description": "Architecture cistercienne, nef restaurée",
             "address": "20 Rue de Poissy, 75005 Paris",
-            "coordinates": [
-              48.8509,
-              2.3536
-            ]
+            "coordinates": [48.8509, 2.3536],
+            "tags": ["cistercienne", "nef-restaurée"]
           }
         ]
       },
@@ -167,40 +95,32 @@
             "name": "Musée de Cluny",
             "description": "Art médiéval, Tapisseries Dame à la Licorne",
             "address": "6 Place Paul Painlevé, 75005 Paris",
-            "coordinates": [
-              48.8507,
-              2.3441
-            ]
+            "coordinates": [48.8507, 2.3441],
+            "tags": ["art-médiéval", "dame-licorne", "tapisseries"]
           },
           {
             "id": "institut-du-monde-arabe",
             "name": "Institut du Monde Arabe",
             "description": "Architecture Jean Nouvel, terrasse panoramique",
             "address": "1 Rue des Fossés Saint-Bernard, 75005 Paris",
-            "coordinates": [
-              48.8487,
-              2.3559
-            ]
+            "coordinates": [48.8487, 2.3559],
+            "tags": ["jean-nouvel", "terrasse", "panoramique"]
           },
           {
             "id": "museum-national-histoire-naturelle",
             "name": "Muséum National d'Histoire Naturelle",
             "description": "Grande Galerie Évolution, minéralogie",
             "address": "57 Rue Cuvier, 75005 Paris",
-            "coordinates": [
-              48.8434,
-              2.3565
-            ]
+            "coordinates": [48.8434, 2.3565],
+            "tags": ["évolution", "minéralogie", "sciences-naturelles"]
           },
           {
             "id": "musee-sculpture-plein-air",
             "name": "Musée de la Sculpture en Plein Air",
             "description": "Quai Saint-Bernard, gratuit",
             "address": "Quai Saint-Bernard, 75005 Paris",
-            "coordinates": [
-              48.8467,
-              2.3598
-            ]
+            "coordinates": [48.8467, 2.3598],
+            "tags": ["sculpture", "plein-air", "gratuit"]
           }
         ]
       },
@@ -212,40 +132,32 @@
             "name": "Jardin des Plantes",
             "description": "28 hectares, serres tropicales, roseraie",
             "address": "57 Rue Cuvier, 75005 Paris",
-            "coordinates": [
-              48.8434,
-              2.3565
-            ]
+            "coordinates": [48.8434, 2.3565],
+            "tags": ["28-hectares", "serres-tropicales", "roseraie"]
           },
           {
             "id": "square-rene-viviani",
             "name": "Square René-Viviani",
             "description": "Vue Notre-Dame, arbre le plus vieux Paris",
             "address": "Square René-Viviani, 75005 Paris",
-            "coordinates": [
-              48.8522,
-              2.3476
-            ]
+            "coordinates": [48.8522, 2.3476],
+            "tags": ["vue-notre-dame", "arbre-ancien", "paris"]
           },
           {
             "id": "jardin-medieval-cluny",
             "name": "Jardin Médiéval Musée Cluny",
             "description": "Plantes médicinales, atmosphère Moyen-Âge",
             "address": "6 Place Paul Painlevé, 75005 Paris",
-            "coordinates": [
-              48.8507,
-              2.3441
-            ]
+            "coordinates": [48.8507, 2.3441],
+            "tags": ["plantes-médicinales", "moyen-âge"]
           },
           {
             "id": "square-capitan",
             "name": "Square Capitan",
             "description": "Petit jardin caché, fontaine Wallace",
             "address": "Square Capitan, 75005 Paris",
-            "coordinates": [
-              48.8456,
-              2.3478
-            ]
+            "coordinates": [48.8456, 2.3478],
+            "tags": ["jardin-caché", "fontaine-wallace"]
           }
         ]
       },
@@ -257,50 +169,40 @@
             "name": "Shakespeare and Company Café",
             "description": "Café littéraire, brunch anglais",
             "address": "37 Rue de la Bûcherie, 75005 Paris",
-            "coordinates": [
-              48.8522,
-              2.3467
-            ]
+            "coordinates": [48.8522, 2.3467],
+            "tags": ["café-littéraire", "brunch-anglais"]
           },
           {
             "id": "le-coupe-chou",
             "name": "Le Coupe-Chou",
             "description": "Restaurant médiéval Louis XIII, cheminées",
             "address": "9 Rue de Lanneau, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3478
-            ]
+            "coordinates": [48.8498, 2.3478],
+            "tags": ["médiéval", "louis-xiii", "cheminées"]
           },
           {
             "id": "rue-mouffetard",
             "name": "Rue Mouffetard",
             "description": "Marché, restaurants du monde, ambiance étudiante",
             "address": "Rue Mouffetard, 75005 Paris",
-            "coordinates": [
-              48.8423,
-              2.3489
-            ]
+            "coordinates": [48.8423, 2.3489],
+            "tags": ["marché", "restaurants-monde", "étudiante"]
           },
           {
             "id": "le-polidor",
             "name": "Le Polidor",
             "description": "Bistrot 1845, décor préservé, cuisine traditionnelle",
             "address": "41 Rue Monsieur le Prince, 75006 Paris",
-            "coordinates": [
-              48.8498,
-              2.3398
-            ]
+            "coordinates": [48.8498, 2.3398],
+            "tags": ["bistrot-1845", "décor-préservé", "traditionnel"]
           },
           {
             "id": "brasserie-balzar",
             "name": "Brasserie Balzar",
             "description": "Institution, clientèle littéraire et universitaire",
             "address": "49 Rue des École, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3456
-            ]
+            "coordinates": [48.8498, 2.3456],
+            "tags": ["institution", "littéraire", "universitaire"]
           }
         ]
       },
@@ -312,30 +214,24 @@
             "name": "Shakespeare and Company",
             "description": "Librairie anglaise mythique, événements",
             "address": "37 Rue de la Bûcherie, 75005 Paris",
-            "coordinates": [
-              48.8522,
-              2.3467
-            ]
+            "coordinates": [48.8522, 2.3467],
+            "tags": ["librairie-anglaise", "mythique", "événements"]
           },
           {
             "id": "gibert-jeune",
             "name": "Gibert Jeune",
             "description": "Livres neufs et d'occasion, plusieurs magasins",
             "address": "5 Place Saint-Michel, 75006 Paris",
-            "coordinates": [
-              48.8534,
-              2.3434
-            ]
+            "coordinates": [48.8534, 2.3434],
+            "tags": ["neufs", "occasion", "plusieurs-magasins"]
           },
           {
             "id": "abbey-bookshop",
             "name": "Abbey Bookshop",
             "description": "Librairie canadienne, thé offert",
             "address": "29 Rue de la Parcheminerie, 75005 Paris",
-            "coordinates": [
-              48.8521,
-              2.3465
-            ]
+            "coordinates": [48.8521, 2.3465],
+            "tags": ["canadienne", "thé-offert"]
           }
         ]
       },
@@ -347,30 +243,24 @@
             "name": "Cinéma du Panthéon",
             "description": "Films d'auteur, rétrospectives",
             "address": "13 Rue Victor Cousin, 75005 Paris",
-            "coordinates": [
-              48.8467,
-              2.3445
-            ]
+            "coordinates": [48.8467, 2.3445],
+            "tags": ["films-auteur", "rétrospectives"]
           },
           {
             "id": "studio-des-ursulines",
             "name": "Studio des Ursulines",
             "description": "Cinéma historique, débats post-projection",
             "address": "10 Rue des Ursulines, 75005 Paris",
-            "coordinates": [
-              48.8445,
-              2.3423
-            ]
+            "coordinates": [48.8445, 2.3423],
+            "tags": ["historique", "débats"]
           },
           {
             "id": "le-champo",
             "name": "Le Champo",
             "description": "Cinéma culte, programmation éclectique",
             "address": "51 Rue des École, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3456
-            ]
+            "coordinates": [48.8498, 2.3456],
+            "tags": ["culte", "éclectique"]
           }
         ]
       }

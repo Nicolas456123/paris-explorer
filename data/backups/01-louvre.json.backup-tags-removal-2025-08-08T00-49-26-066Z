@@ -69,6 +69,12 @@
               48.862513,
               2.33593
             ],
+            "tags": [
+              "incontournable",
+              "art",
+              "pyramide",
+              "joconde"
+            ],
             "geocoding": {
               "source": "Nominatim",
               "confidence": 0.47,
@@ -87,6 +93,11 @@
             "coordinates": [
               48.8553,
               2.3447
+            ],
+            "tags": [
+              "gothique",
+              "vitraux",
+              "religieux"
             ]
           },
           {
@@ -97,6 +108,11 @@
             "coordinates": [
               48.8554,
               2.3452
+            ],
+            "tags": [
+              "histoire",
+              "marie-antoinette",
+              "prison"
             ]
           },
           {
@@ -107,6 +123,11 @@
             "coordinates": [
               48.862564,
               2.3367804175609663
+            ],
+            "tags": [
+              "jardin",
+              "architecture",
+              "colonnes-buren"
             ],
             "geocoding": {
               "source": "Photon",
@@ -126,6 +147,11 @@
             "coordinates": [
               48.8677,
               2.3297
+            ],
+            "tags": [
+              "luxe",
+              "bijouterie",
+              "architecture-classique"
             ]
           },
           {
@@ -136,6 +162,11 @@
             "coordinates": [
               48.8605,
               2.34
+            ],
+            "tags": [
+              "religieux",
+              "royauté",
+              "carillon"
             ]
           },
           {
@@ -146,6 +177,11 @@
             "coordinates": [
               48.8567,
               2.3417
+            ],
+            "tags": [
+              "pont",
+              "henri-iv",
+              "historique"
             ]
           },
           {
@@ -156,6 +192,10 @@
             "coordinates": [
               48.8576,
               2.3474
+            ],
+            "tags": [
+              "fontaine",
+              "théâtre"
             ]
           },
           {
@@ -166,6 +206,11 @@
             "coordinates": [
               48.8612,
               2.3422
+            ],
+            "tags": [
+              "art-contemporain",
+              "tadao-ando",
+              "pinault"
             ]
           },
           {
@@ -176,6 +221,11 @@
             "coordinates": [
               48.8621,
               2.3378
+            ],
+            "tags": [
+              "protestant",
+              "temple",
+              "historique"
             ]
           }
         ]
@@ -191,6 +241,11 @@
             "coordinates": [
               48.8634,
               2.3275
+            ],
+            "tags": [
+              "jardin",
+              "orangerie",
+              "promenade"
             ]
           },
           {
@@ -201,6 +256,11 @@
             "coordinates": [
               48.8564,
               2.341
+            ],
+            "tags": [
+              "coucher-soleil",
+              "île-de-la-cité",
+              "romantique"
             ]
           },
           {
@@ -211,6 +271,11 @@
             "coordinates": [
               48.8606,
               2.3398
+            ],
+            "tags": [
+              "renaissance",
+              "concerts",
+              "gratuit"
             ]
           },
           {
@@ -221,6 +286,11 @@
             "coordinates": [
               48.8601,
               2.3412
+            ],
+            "tags": [
+              "secret",
+              "suspendu",
+              "vue-seine"
             ]
           },
           {
@@ -231,6 +301,11 @@
             "coordinates": [
               48.853,
               2.3498
+            ],
+            "tags": [
+              "notre-dame",
+              "rosiers",
+              "tranquille"
             ]
           }
         ]
@@ -246,6 +321,11 @@
             "coordinates": [
               48.8632,
               2.3367
+            ],
+            "tags": [
+              "michelin",
+              "gastronomie",
+              "luxe"
             ]
           },
           {
@@ -256,6 +336,11 @@
             "coordinates": [
               48.865,
               2.3467
+            ],
+            "tags": [
+              "historique",
+              "escargot",
+              "1832"
             ]
           },
           {
@@ -266,6 +351,11 @@
             "coordinates": [
               48.8648,
               2.3467
+            ],
+            "tags": [
+              "marché",
+              "boulangerie",
+              "piétonnier"
             ]
           },
           {
@@ -276,6 +366,11 @@
             "coordinates": [
               48.8656,
               2.3276
+            ],
+            "tags": [
+              "chocolat-chaud",
+              "1903",
+              "légendaire"
             ]
           },
           {
@@ -286,6 +381,11 @@
             "coordinates": [
               48.8634,
               2.3275
+            ],
+            "tags": [
+              "terrasse",
+              "tuileries",
+              "vue-louvre"
             ]
           },
           {
@@ -296,6 +396,11 @@
             "coordinates": [
               48.8662,
               2.3373
+            ],
+            "tags": [
+              "wine-bar",
+              "caché",
+              "moderne"
             ]
           },
           {
@@ -306,6 +411,11 @@
             "coordinates": [
               48.8628,
               2.335
+            ],
+            "tags": [
+              "terrasse",
+              "galeries",
+              "historique"
             ]
           },
           {
@@ -316,6 +426,11 @@
             "coordinates": [
               48.8593,
               2.3445
+            ],
+            "tags": [
+              "michelin",
+              "franco-chinois",
+              "thé"
             ]
           },
           {
@@ -326,6 +441,11 @@
             "coordinates": [
               48.8661551,
               2.3379157
+            ],
+            "tags": [
+              "3-michelin",
+              "historique",
+              "palais-royal"
             ],
             "geocoding": {
               "source": "Photon",
@@ -350,6 +470,11 @@
             "coordinates": [
               48.8608,
               2.347
+            ],
+            "tags": [
+              "centre-commercial",
+              "canopée",
+              "150-boutiques"
             ]
           },
           {
@@ -360,6 +485,11 @@
             "coordinates": [
               48.8606,
               2.3354
+            ],
+            "tags": [
+              "souvenirs",
+              "mode",
+              "galignani"
             ]
           },
           {
@@ -370,6 +500,11 @@
             "coordinates": [
               48.8656,
               2.3276
+            ],
+            "tags": [
+              "anglais",
+              "livres",
+              "international"
             ]
           },
           {
@@ -380,6 +515,11 @@
             "coordinates": [
               48.8631,
               2.3423
+            ],
+            "tags": [
+              "passage-couvert",
+              "1826",
+              "antiquaires"
             ]
           },
           {
@@ -390,6 +530,11 @@
             "coordinates": [
               48.863,
               2.3372
+            ],
+            "tags": [
+              "250-antiquaires",
+              "art",
+              "collection"
             ]
           },
           {
@@ -400,6 +545,11 @@
             "coordinates": [
               48.8621,
               2.3378
+            ],
+            "tags": [
+              "haute-couture",
+              "joaillerie",
+              "luxe"
             ]
           }
         ]
@@ -415,6 +565,11 @@
             "coordinates": [
               48.8656,
               2.3364
+            ],
+            "tags": [
+              "théâtre-national",
+              "richelieu",
+              "classique"
             ]
           },
           {
@@ -425,6 +580,11 @@
             "coordinates": [
               48.8576,
               2.3474
+            ],
+            "tags": [
+              "opéra",
+              "classique",
+              "comédie-musicale"
             ]
           },
           {
@@ -435,6 +595,11 @@
             "coordinates": [
               48.8576,
               2.3474
+            ],
+            "tags": [
+              "danse",
+              "contemporain",
+              "avant-garde"
             ]
           },
           {
@@ -445,6 +610,11 @@
             "coordinates": [
               48.8606,
               2.3376
+            ],
+            "tags": [
+              "musique-de-chambre",
+              "concerts",
+              "louvre"
             ]
           }
         ]
@@ -460,6 +630,11 @@
             "coordinates": [
               48.8656,
               2.3364
+            ],
+            "tags": [
+              "plus-petit",
+              "passage-couvert",
+              "secret"
             ]
           }
         ]
