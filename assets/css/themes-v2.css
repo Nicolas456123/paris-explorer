@@ -1,0 +1,313 @@
+/* ===== PARIS EXPLORER - SYSTÈME DE THÈMES V2 ===== */
+/* Chaque thème a une version claire et sombre */
+
+/* ===== MODE SOMBRE GLOBAL (appliqué à tous les thèmes) ===== */
+[data-mode="dark"] {
+    /* Variables de base pour le mode sombre */
+    --text-primary: #f0f0f0;
+    --text-secondary: #c0c0c0;
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #2d2d44;
+    --border-color: #404040;
+    --hover-bg: rgba(255, 255, 255, 0.1);
+    
+    /* Ombres plus prononcées en mode sombre */
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+}
+
+/* ===== THÈME CLASSIQUE ===== */
+/* Version Claire (par défaut) */
+[data-theme="classic"]:not([data-mode="dark"]) {
+    --paris-gold: #D4AF37;
+    --paris-gold-light: #F4E19C;
+    --paris-blue: #1e3a8a;
+    --paris-blue-light: #3730a3;
+    --paris-white: #FFFFFF;
+    --paris-cream: #FAF9F6;
+    --paris-dark: #1F2937;
+    --paris-gray: #6B7280;
+    --gradient-paris: linear-gradient(135deg, #1e3a8a 0%, #D4AF37 100%);
+}
+
+/* Version Sombre */
+[data-theme="classic"][data-mode="dark"] {
+    --paris-gold: #ffd700;
+    --paris-gold-light: #ffed4e;
+    --paris-blue: #5e9fff;
+    --paris-blue-light: #87bfff;
+    --paris-white: var(--bg-primary);
+    --paris-cream: var(--bg-secondary);
+    --paris-dark: var(--text-primary);
+    --paris-gray: var(--text-secondary);
+    --gradient-paris: linear-gradient(135deg, #1e40af 0%, #ffd700 100%);
+}
+
+/* ===== THÈME VERSAILLES ===== */
+/* Version Claire */
+[data-theme="versailles"]:not([data-mode="dark"]) {
+    --paris-gold: #FFD700;
+    --paris-gold-light: #FFF8DC;
+    --paris-blue: #4169E1;
+    --paris-blue-light: #6495ED;
+    --paris-white: #FFFAFA;
+    --paris-cream: #FFF5EE;
+    --paris-dark: #191970;
+    --paris-gray: #778899;
+    --gradient-paris: linear-gradient(135deg, #4169E1 0%, #FFD700 100%);
+}
+
+/* Version Sombre */
+[data-theme="versailles"][data-mode="dark"] {
+    --paris-gold: #ffdb58;
+    --paris-gold-light: #fff44f;
+    --paris-blue: #6495ed;
+    --paris-blue-light: #87ceeb;
+    --paris-white: var(--bg-primary);
+    --paris-cream: var(--bg-secondary);
+    --paris-dark: var(--text-primary);
+    --paris-gray: var(--text-secondary);
+    --gradient-paris: linear-gradient(135deg, #191970 0%, #ffdb58 100%);
+}
+
+/* ===== THÈME MONTMARTRE ===== */
+/* Version Claire */
+[data-theme="montmartre"]:not([data-mode="dark"]) {
+    --paris-gold: #D4AF37;
+    --paris-gold-light: #F4E19C;
+    --paris-blue: #B22222;
+    --paris-blue-light: #DC143C;
+    --paris-white: #FFF5F5;
+    --paris-cream: #FFE4E1;
+    --paris-dark: #8B0000;
+    --paris-gray: #CD5C5C;
+    --gradient-paris: linear-gradient(135deg, #B22222 0%, #D4AF37 100%);
+}
+
+/* Version Sombre */
+[data-theme="montmartre"][data-mode="dark"] {
+    --paris-gold: #ffd700;
+    --paris-gold-light: #ffed4e;
+    --paris-blue: #ff6b6b;
+    --paris-blue-light: #ff8787;
+    --paris-white: var(--bg-primary);
+    --paris-cream: var(--bg-secondary);
+    --paris-dark: var(--text-primary);
+    --paris-gray: var(--text-secondary);
+    --gradient-paris: linear-gradient(135deg, #8b0000 0%, #ffd700 100%);
+}
+
+/* ===== THÈME SAINT-GERMAIN ===== */
+/* Version Claire */
+[data-theme="saint-germain"]:not([data-mode="dark"]) {
+    --paris-gold: #D4AF37;
+    --paris-gold-light: #F7DC6F;
+    --paris-blue: #2E7D32;
+    --paris-blue-light: #4CAF50;
+    --paris-white: #FFFFFF;
+    --paris-cream: #F1F8E9;
+    --paris-dark: #1B5E20;
+    --paris-gray: #689F38;
+    --gradient-paris: linear-gradient(135deg, #2E7D32 0%, #D4AF37 100%);
+}
+
+/* Version Sombre */
+[data-theme="saint-germain"][data-mode="dark"] {
+    --paris-gold: #ffd700;
+    --paris-gold-light: #ffed4e;
+    --paris-blue: #66bb6a;
+    --paris-blue-light: #81c784;
+    --paris-white: var(--bg-primary);
+    --paris-cream: var(--bg-secondary);
+    --paris-dark: var(--text-primary);
+    --paris-gray: var(--text-secondary);
+    --gradient-paris: linear-gradient(135deg, #1b5e20 0%, #ffd700 100%);
+}
+
+/* ===== THÈME MARAIS ===== */
+/* Version Claire */
+[data-theme="marais"]:not([data-mode="dark"]) {
+    --paris-gold: #CD853F;
+    --paris-gold-light: #DEB887;
+    --paris-blue: #8B4513;
+    --paris-blue-light: #A0522D;
+    --paris-white: #FFF8DC;
+    --paris-cream: #FAF0E6;
+    --paris-dark: #654321;
+    --paris-gray: #BC9A6A;
+    --gradient-paris: linear-gradient(135deg, #8B4513 0%, #CD853F 100%);
+}
+
+/* Version Sombre */
+[data-theme="marais"][data-mode="dark"] {
+    --paris-gold: #daa520;
+    --paris-gold-light: #f0e68c;
+    --paris-blue: #cd853f;
+    --paris-blue-light: #deb887;
+    --paris-white: var(--bg-primary);
+    --paris-cream: var(--bg-secondary);
+    --paris-dark: var(--text-primary);
+    --paris-gray: var(--text-secondary);
+    --gradient-paris: linear-gradient(135deg, #654321 0%, #daa520 100%);
+}
+
+/* ===== THÈME HAUTE COUTURE ===== */
+/* Version Claire */
+[data-theme="haute-couture"]:not([data-mode="dark"]) {
+    --paris-gold: #C0C0C0;
+    --paris-gold-light: #E5E5E5;
+    --paris-blue: #000000;
+    --paris-blue-light: #333333;
+    --paris-white: #F8F8FF;
+    --paris-cream: #F5F5F5;
+    --paris-dark: #000000;
+    --paris-gray: #696969;
+    --gradient-paris: linear-gradient(135deg, #000000 0%, #C0C0C0 100%);
+}
+
+/* Version Sombre */
+[data-theme="haute-couture"][data-mode="dark"] {
+    --paris-gold: #e5e5e5;
+    --paris-gold-light: #ffffff;
+    --paris-blue: #c0c0c0;
+    --paris-blue-light: #d3d3d3;
+    --paris-white: #0a0a0a;
+    --paris-cream: #1a1a1a;
+    --paris-dark: var(--text-primary);
+    --paris-gray: var(--text-secondary);
+    --gradient-paris: linear-gradient(135deg, #0a0a0a 0%, #e5e5e5 100%);
+}
+
+/* ===== THÈME CONTRASTE ÉLEVÉ ===== */
+/* Version Claire */
+[data-theme="high-contrast"]:not([data-mode="dark"]) {
+    --paris-gold: #FFFF00;
+    --paris-gold-light: #FFFF99;
+    --paris-blue: #000000;
+    --paris-blue-light: #333333;
+    --paris-white: #FFFFFF;
+    --paris-cream: #FFFFFF;
+    --paris-dark: #000000;
+    --paris-gray: #000000;
+    --gradient-paris: linear-gradient(135deg, #000000 0%, #FFFF00 100%);
+}
+
+/* Version Sombre */
+[data-theme="high-contrast"][data-mode="dark"] {
+    --paris-gold: #FFFF00;
+    --paris-gold-light: #FFFF99;
+    --paris-blue: #00FFFF;
+    --paris-blue-light: #99FFFF;
+    --paris-white: #000000;
+    --paris-cream: #0a0a0a;
+    --paris-dark: #FFFFFF;
+    --paris-gray: #CCCCCC;
+    --gradient-paris: linear-gradient(135deg, #000000 0%, #FFFF00 100%);
+}
+
+/* ===== STYLES COMMUNS POUR LE MODE SOMBRE ===== */
+[data-mode="dark"] body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #614124 75%, #8b5a2b 100%);
+    color: var(--text-primary);
+}
+
+[data-mode="dark"] .app-container {
+    background: var(--paris-white);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+[data-mode="dark"] .header {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, rgba(45, 45, 68, 0.95) 100%);
+    color: var(--paris-dark);
+}
+
+[data-mode="dark"] .place-card {
+    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-mode="dark"] .place-card:hover {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
+    border-color: var(--paris-gold);
+}
+
+/* Notifications en mode sombre */
+[data-mode="dark"] .notification {
+    color: #1a1a1a !important;
+}
+
+[data-mode="dark"] .notification.success {
+    background: linear-gradient(135deg, #86efac 0%, #4ade80 100%) !important;
+    border-color: #22c55e !important;
+}
+
+[data-mode="dark"] .notification.error {
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%) !important;
+    border-color: #ef4444 !important;
+}
+
+[data-mode="dark"] .notification.info {
+    background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%) !important;
+    border-color: #3b82f6 !important;
+}
+
+[data-mode="dark"] .notification.warning {
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%) !important;
+    border-color: #f59e0b !important;
+}
+
+/* Inputs et formulaires en mode sombre */
+[data-mode="dark"] .search-input,
+[data-mode="dark"] .filter-select,
+[data-mode="dark"] .form-input {
+    background: var(--paris-cream);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-mode="dark"] .search-input:focus,
+[data-mode="dark"] .filter-select:focus,
+[data-mode="dark"] .form-input:focus {
+    background: var(--bg-secondary);
+    border-color: var(--paris-gold);
+}
+
+/* Modals en mode sombre */
+[data-mode="dark"] .modal-content {
+    background: var(--paris-white);
+    border-color: var(--paris-gold);
+    color: var(--text-primary);
+}
+
+/* Cartes et sections en mode sombre */
+[data-mode="dark"] .arrondissement-card {
+    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+    border-color: var(--border-color);
+}
+
+[data-mode="dark"] .category-header {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
+    color: var(--paris-gold);
+}
+
+[data-mode="dark"] .stats-section {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
+    border-color: var(--border-color);
+}
+
+/* Animations thématiques */
+@keyframes parisSparkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes fadeInParis {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-paris {
+    animation: fadeInParis 0.5s ease-out;
+}

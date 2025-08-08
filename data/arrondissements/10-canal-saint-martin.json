@@ -65,14 +65,19 @@
       "description": "Métro : République (3,5,8,9,11), Goncourt (11), Jacques-Bonsergent (5), Colonel Fabien (2)"
     },
     "categories": {
-      "canal-promenades": {
-        "title": "Canal",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "canal-saint-martin",
             "name": "Canal Saint-Martin",
             "description": "4,6 km, 9 écluses, croisières fluviales",
-            "address": "Canal Saint-Martin, 75010 Paris"
+            "address": "Canal Saint-Martin, 75010 Paris",
+            "coordinates": [
+              48.8688696,
+              2.3673736
+            ]
           },
           {
             "id": "ecluses-du-canal",
@@ -81,39 +86,14 @@
             "address": "Écluses du Canal Saint-Martin, 75010 Paris"
           },
           {
-            "id": "passerelles-pietonnieres",
-            "name": "Passerelles piétonnières",
-            "description": "Points de vue photographiques, couchers soleil",
-            "address": "Canal Saint-Martin, 75010 Paris"
-          },
-          {
-            "id": "hotel-du-nord",
-            "name": "Hôtel du Nord",
-            "description": "Façade mythique film Marcel Carné, restaurant",
-            "address": "102 Quai de Jemmapes, 75010 Paris"
-          },
-          {
-            "id": "pont-tournant-crimee",
-            "name": "Pont tournant rue Crimée",
-            "description": "Dernier pont mobile Paris",
-            "address": "Rue de Crimée, 75019 Paris"
-          },
-          {
-            "id": "bassin-de-la-villette",
-            "name": "Bassin de la Villette",
-            "description": "Plus grand plan d'eau Paris, cinéma plein air",
-            "address": "Bassin de la Villette, 75019 Paris"
-          }
-        ]
-      },
-      "espaces-verts": {
-        "title": "Parcs",
-        "places": [
-          {
             "id": "square-villemin",
             "name": "Square Villemin",
             "description": "Parc ancien hôpital militaire, aires jeux",
-            "address": "Square Villemin, 75010 Paris"
+            "address": "Square Villemin, 75010 Paris",
+            "coordinates": [
+              48.875028,
+              2.3598013
+            ]
           },
           {
             "id": "jardin-lucien-bossoutrot",
@@ -122,108 +102,234 @@
             "address": "Jardin Lucien-Bossoutrot, 75010 Paris"
           },
           {
-            "id": "paris-plages-canal",
-            "name": "Paris Plages Canal",
-            "description": "Aménagement estival, transats, activités nautiques",
-            "address": "Canal Saint-Martin, 75010 Paris"
-          },
-          {
             "id": "square-alban-satragne",
             "name": "Square Alban-Satragne",
             "description": "Petit square méconnu, tranquillité",
-            "address": "Square Alban-Satragne, 75010 Paris"
+            "address": "Square Alban-Satragne, 75010 Paris",
+            "coordinates": [
+              48.8753961,
+              2.3553082
+            ]
           }
         ]
       },
-      "restaurants-cultes": {
-        "title": "Restaurants",
+      "monuments": {
+        "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
-            "id": "du-pain-et-des-idees",
-            "name": "Du Pain et des Idées",
-            "description": "Boulangerie artisanale référence, Christophe Vasseur",
-            "address": "34 Rue Yves Toudic, 75010 Paris"
+            "id": "hotel-du-nord",
+            "name": "Hôtel du Nord",
+            "description": "Façade mythique film Marcel Carné, restaurant",
+            "address": "102 Quai de Jemmapes, 75010 Paris",
+            "coordinates": [
+              48.8735504,
+              2.3640543
+            ]
           },
           {
-            "id": "chez-prune",
-            "name": "Chez Prune",
-            "description": "Café emblématique canal depuis 2000, brunch",
-            "address": "36 Rue Beaurepaire, 75010 Paris"
-          },
-          {
-            "id": "le-verre-vole",
-            "name": "Le Verre Volé",
-            "description": "Bar vins naturels incontournable, cave sélection",
-            "address": "67 Rue de Lancry, 75010 Paris"
-          },
-          {
-            "id": "holybelly",
-            "name": "Holybelly",
-            "description": "Coffee shop australien, brunch tendance",
-            "address": "19 Rue Lucien Sampaix, 75010 Paris"
+            "id": "pont-tournant-crimee",
+            "name": "Pont tournant rue Crimée",
+            "description": "Dernier pont mobile Paris",
+            "address": "Rue de Crimée, 75019 Paris",
+            "coordinates": [
+              48.8872669,
+              2.3806718
+            ]
           }
         ]
       },
-      "shopping-creatif": {
-        "title": "Shopping",
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
-            "id": "rue-de-marseille",
-            "name": "Rue de Marseille",
-            "description": "Boutiques vintage et créateurs indépendants",
-            "address": "Rue de Marseille, 75010 Paris"
+            "id": "bassin-de-la-villette",
+            "name": "Bassin de la Villette",
+            "description": "Plus grand plan d'eau Paris, cinéma plein air",
+            "address": "Bassin de la Villette, 75019 Paris",
+            "coordinates": [
+              48.883966,
+              2.3693023
+            ]
           },
-          {
-            "id": "marche-saint-martin",
-            "name": "Marché Saint-Martin",
-            "description": "Mar/Ven/Sam matin, produits frais locaux",
-            "address": "31 Rue du Château d'Eau, 75010 Paris"
-          },
-          {
-            "id": "la-consigne",
-            "name": "La Consigne",
-            "description": "Concept store zéro déchet, bocaux consignés",
-            "address": "53 Rue de Marseille, 75010 Paris"
-          },
-          {
-            "id": "artazart",
-            "name": "Artazart",
-            "description": "Librairie design, architecture, beaux livres",
-            "address": "83 Quai de Valmy, 75010 Paris"
-          }
-        ]
-      },
-      "culture-alternative": {
-        "title": "Culture",
-        "places": [
           {
             "id": "point-ephemere",
             "name": "Point Éphémère",
             "description": "Centre artistique, concerts, expositions, péniche",
-            "address": "200 Quai de Valmy, 75010 Paris"
+            "address": "200 Quai de Valmy, 75010 Paris",
+            "coordinates": [
+              48.8815168,
+              2.3685729
+            ]
           },
           {
             "id": "new-morning",
             "name": "New Morning",
             "description": "Jazz club mythique, programmation internationale",
-            "address": "7 Rue des Petites Écuries, 75010 Paris"
+            "address": "7 Rue des Petites Écuries, 75010 Paris",
+            "coordinates": [
+              48.8730649,
+              2.3534395
+            ]
+          },
+          {
+            "id": "espace-pierre-cardin",
+            "name": "Espace Pierre Cardin",
+            "description": "Théâtre et expositions art contemporain",
+            "address": "1 Avenue Gabriel, 75008 Paris",
+            "coordinates": [
+              48.8674937,
+              2.3187387
+            ]
           }
         ]
       },
-      "bars-secrets": {
-        "title": "Bars",
+      "restaurants": {
+        "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
+        "places": [
+          {
+            "id": "du-pain-et-des-idees",
+            "name": "Du Pain et des Idées",
+            "description": "Boulangerie artisanale référence, Christophe Vasseur",
+            "address": "34 Rue Yves Toudic, 75010 Paris",
+            "coordinates": [
+              48.871197,
+              2.3628861
+            ]
+          },
+          {
+            "id": "chez-prune",
+            "name": "Chez Prune",
+            "description": "Café emblématique canal depuis 2000, brunch",
+            "address": "36 Rue Beaurepaire, 75010 Paris",
+            "coordinates": [
+              48.8715315,
+              2.3645207
+            ]
+          },
+          {
+            "id": "le-verre-vole",
+            "name": "Le Verre Volé",
+            "description": "Bar vins naturels incontournable, cave sélection",
+            "address": "67 Rue de Lancry, 75010 Paris",
+            "coordinates": [
+              48.8728588,
+              2.3635317
+            ]
+          },
+          {
+            "id": "holybelly",
+            "name": "Holybelly",
+            "description": "Coffee shop australien, brunch tendance",
+            "address": "19 Rue Lucien Sampaix, 75010 Paris",
+            "coordinates": [
+              48.8723817,
+              2.3608685
+            ]
+          },
+          {
+            "id": "myrthe",
+            "name": "Myrthe",
+            "description": "Épicerie fine + cantine, plateaux charcuterie-fromage",
+            "address": "64 Rue de la Folie-Méricourt, 75011 Paris",
+            "coordinates": [
+              48.8649676,
+              2.3711282
+            ]
+          }
+        ]
+      },
+      "shopping": {
+        "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
+        "places": [
+          {
+            "id": "rue-de-marseille",
+            "name": "Rue de Marseille",
+            "description": "Boutiques vintage et créateurs indépendants",
+            "address": "Rue de Marseille, 75010 Paris",
+            "coordinates": [
+              48.8715762,
+              2.3635803
+            ]
+          },
+          {
+            "id": "marche-saint-martin",
+            "name": "Marché Saint-Martin",
+            "description": "Mar/Ven/Sam matin, produits frais locaux",
+            "address": "31 Rue du Château d'Eau, 75010 Paris",
+            "coordinates": [
+              48.8709654,
+              2.358543
+            ]
+          },
+          {
+            "id": "la-consigne",
+            "name": "La Consigne",
+            "description": "Concept store zéro déchet, bocaux consignés",
+            "address": "53 Rue de Marseille, 75010 Paris",
+            "coordinates": [
+              48.8715762,
+              2.3635803
+            ]
+          },
+          {
+            "id": "artazart",
+            "name": "Artazart",
+            "description": "Librairie design, architecture, beaux livres",
+            "address": "83 Quai de Valmy, 75010 Paris",
+            "coordinates": [
+              48.872693,
+              2.3638018
+            ]
+          },
+          {
+            "id": "centre-commercial-republique",
+            "name": "Centre commercial République",
+            "description": "Marques tendance, food court",
+            "address": "25 Boulevard du Temple, 75003 Paris",
+            "coordinates": [
+              48.8648399,
+              2.3653911
+            ]
+          }
+        ]
+      },
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
         "places": [
           {
             "id": "copperbay",
             "name": "CopperBay",
             "description": "Bar maritime caché (5 rue Bouchardon), cocktails saisons",
-            "address": "5 Rue Bouchardon, 75010 Paris"
+            "address": "5 Rue Bouchardon, 75010 Paris",
+            "coordinates": [
+              48.8698469,
+              2.3571238
+            ]
           },
           {
             "id": "lavomatic",
             "name": "Lavomatic",
             "description": "Bar caché derrière machines à laver, concept original",
-            "address": "30 Rue René Boulanger, 75010 Paris"
+            "address": "30 Rue René Boulanger, 75010 Paris",
+            "coordinates": [
+              48.8684507,
+              2.3618395
+            ]
+          },
+          {
+            "id": "le-mary-celeste",
+            "name": "Le Mary Celeste",
+            "description": "Bar à huîtres, cocktails créatifs, happy hour",
+            "address": "1 Rue Commines, 75003 Paris",
+            "coordinates": [
+              48.8619727,
+              2.3657451
+            ]
           }
         ]
       }

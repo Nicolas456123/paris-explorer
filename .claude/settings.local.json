@@ -15,7 +15,9 @@
       "Bash(mv:*)",
       "Bash(grep:*)",
       "Bash(for f in *.js)",
-      "Bash(do node -c \"$f\")"
+      "Bash(do node -c \"$f\")",
+      "Bash(start http://localhost:8080)",
+      "Bash(del remove-duplicates.js final-analysis.js)"
     ],
     "deny": []
   }

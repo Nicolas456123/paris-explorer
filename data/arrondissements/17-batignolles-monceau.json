@@ -73,194 +73,305 @@
       "description": "Métro : Monceau (2), Rome (2), Place de Clichy (2,13), Wagram (3), Villiers (2,3)"
     },
     "categories": {
-      "parcs-jardins": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "parc-monceau",
             "name": "Parc Monceau",
             "description": "8,2 hectares, jardins anglais Haussmann, fabriques romantiques",
-            "address": "35 Boulevard de Courcelles, 75008 Paris"
+            "address": "35 Boulevard de Courcelles, 75008 Paris",
+            "coordinates": [
+              48.878179,
+              2.2988066
+            ]
           },
           {
             "id": "parc-clichy-batignolles-martin-luther-king",
             "name": "Parc Clichy-Batignolles Martin Luther King",
             "description": "10 hectares, parc écologique 2007",
-            "address": "147 Rue Cardinet, 75017 Paris"
+            "address": "147 Rue Cardinet, 75017 Paris",
+            "coordinates": [
+              48.888367,
+              2.3152533
+            ]
           },
           {
             "id": "square-des-batignolles",
             "name": "Square des Batignolles",
             "description": "Jardin anglais historique, grotte cascade",
-            "address": "Square des Batignolles, 75017 Paris"
+            "address": "Square des Batignolles, 75017 Paris",
+            "coordinates": [
+              48.8863726,
+              2.3173626
+            ]
           },
           {
             "id": "promenade-pereire",
             "name": "Promenade Pereire",
             "description": "Coulée verte métro aérien, jardins suspendus",
-            "address": "Boulevard Pereire, 75017 Paris"
+            "address": "Boulevard Pereire, 75017 Paris",
+            "coordinates": [
+              48.8880329,
+              2.308819
+            ]
           }
         ]
       },
-      "architecture-musees": {
-        "title": "Architecture et Musées Confidentiels",
+      "musees": {
+        "title": "Musées",
+        "description": "Collections et expositions culturelles",
         "places": [
           {
             "id": "musee-cernuschi",
             "name": "Musée Cernuschi",
             "description": "Arts asiatiques, hôtel particulier, bronzes chinois",
-            "address": "7 Avenue Vélasquez, 75008 Paris"
+            "address": "7 Avenue Vélasquez, 75008 Paris",
+            "coordinates": [
+              48.8794321,
+              2.3125644
+            ]
           },
           {
             "id": "eglise-saint-alexandre-nevsky",
             "name": "Église Saint-Alexandre-Nevsky",
             "description": "Cathédrale orthodoxe russe, iconostase",
-            "address": "12 Rue Daru, 75008 Paris"
+            "address": "12 Rue Daru, 75008 Paris",
+            "coordinates": [
+              48.8776132,
+              2.301992
+            ]
           },
           {
             "id": "palais-des-congres",
             "name": "Palais des Congrès",
             "description": "Architecture années 70, concerts, salons",
-            "address": "2 Place de la Porte Maillot, 75017 Paris"
+            "address": "2 Place de la Porte Maillot, 75017 Paris",
+            "coordinates": [
+              48.8788706,
+              2.2828716
+            ]
           },
           {
             "id": "cite-des-fleurs",
             "name": "Cité des Fleurs",
             "description": "Impasse fleurie 1847, villas anglo-normandes",
-            "address": "Cité des Fleurs, 75017 Paris"
+            "address": "Cité des Fleurs, 75017 Paris",
+            "coordinates": [
+              48.8926318,
+              2.3203175
+            ]
           }
         ]
       },
-      "restaurants-marches": {
+      "restaurants": {
         "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
             "id": "marche-des-batignolles",
             "name": "Marché des Batignolles",
             "description": "Marché bio réputé, producteurs locaux",
-            "address": "Boulevard des Batignolles, 75017 Paris"
+            "address": "Boulevard des Batignolles, 75017 Paris",
+            "coordinates": [
+              48.8818453,
+              2.3185362
+            ]
           },
           {
             "id": "rue-de-levis",
             "name": "Rue de Lévis",
             "description": "Rue commerçante animée, fromagers, bouchers",
-            "address": "Rue de Lévis, 75017 Paris"
+            "address": "Rue de Lévis, 75017 Paris",
+            "coordinates": [
+              48.8845338,
+              2.3121307
+            ]
           },
           {
             "id": "breizh-cafe-batignolles",
             "name": "Breizh Café Batignolles",
             "description": "Crêperie moderne, galettes sarrasin",
-            "address": "77 Rue des Batignolles, 75017 Paris"
+            "address": "77 Rue des Batignolles, 75017 Paris",
+            "coordinates": [
+              48.8853277,
+              2.3202839
+            ]
           },
           {
             "id": "poussin",
             "name": "Poussin",
             "description": "Bar vins naturels, bistronomie, produits saisons",
-            "address": "5 Rue Lemercier, 75017 Paris"
+            "address": "5 Rue Lemercier, 75017 Paris",
+            "coordinates": [
+              48.8855457,
+              2.3249386
+            ]
           },
           {
             "id": "le-bistrot-des-dames",
             "name": "Le Bistrot des Dames",
             "description": "Cuisine traditionnelle, ambiance quartier",
-            "address": "18 Rue des Dames, 75017 Paris"
+            "address": "18 Rue des Dames, 75017 Paris",
+            "coordinates": [
+              48.8850596,
+              2.3251011
+            ]
           }
         ]
       },
-      "shopping-village": {
+      "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "rue-des-batignolles",
             "name": "Rue des Batignolles",
             "description": "Boutiques créateurs indépendants, concept stores",
-            "address": "Rue des Batignolles, 75017 Paris"
+            "address": "Rue des Batignolles, 75017 Paris",
+            "coordinates": [
+              48.8853277,
+              2.3202839
+            ]
           },
           {
             "id": "village-des-batignolles",
             "name": "Village des Batignolles",
             "description": "Quartier village rénové, commerces proximité",
-            "address": "Quartier des Batignolles, 75017 Paris"
+            "address": "Quartier des Batignolles, 75017 Paris",
+            "coordinates": [
+              48.8863552,
+              2.321457
+            ]
           },
           {
             "id": "avenue-de-wagram",
             "name": "Avenue de Wagram",
             "description": "Commerces de proximité, boulangeries artisanales",
-            "address": "Avenue de Wagram, 75017 Paris"
+            "address": "Avenue de Wagram, 75017 Paris",
+            "coordinates": [
+              48.8790356,
+              2.29886
+            ]
           },
           {
             "id": "marche-poncelet",
             "name": "Marché Poncelet",
             "description": "Mar/Jeu/Sam/Dim, ambiance populaire",
-            "address": "Rue Poncelet, 75017 Paris"
+            "address": "Rue Poncelet, 75017 Paris",
+            "coordinates": [
+              48.8797288,
+              2.2982844
+            ]
           }
         ]
       },
-      "culture-spectacles": {
-        "title": "Culture",
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
             "id": "theatre-hebertot",
             "name": "Théâtre Hébertot",
             "description": "Théâtre privé historique, programmation contemporaine",
-            "address": "78 Boulevard des Batignolles, 75017 Paris"
+            "address": "78 Boulevard des Batignolles, 75017 Paris",
+            "coordinates": [
+              48.8820618,
+              2.3192669
+            ]
           },
           {
             "id": "salle-pleyel",
             "name": "Salle Pleyel",
             "description": "Concerts musique classique, Orchestre de Paris",
-            "address": "252 Rue du Faubourg Saint-Honoré, 75008 Paris"
+            "address": "252 Rue du Faubourg Saint-Honoré, 75008 Paris",
+            "coordinates": [
+              48.8769426,
+              2.301002
+            ]
           },
           {
             "id": "studio-des-ursulines",
             "name": "Studio des Ursulines",
             "description": "Cinéma art et essai, débats",
-            "address": "10 Rue des Ursulines, 75005 Paris"
-          }
-        ]
-      },
-      "bars-nocturne": {
-        "title": "Bars",
-        "places": [
-          {
-            "id": "le-consulat-17",
-            "name": "Le Consulat",
-            "description": "Bar de quartier convivial, habitants fidèles",
-            "address": "18 Rue Norvins, 75018 Paris"
+            "address": "10 Rue des Ursulines, 75005 Paris",
+            "coordinates": [
+              48.8427198,
+              2.3420521
+            ]
           },
-          {
-            "id": "cafe-des-deux-moulins-17",
-            "name": "Café des Deux Moulins",
-            "description": "Bar bistrot, ambiance authentique",
-            "address": "15 Rue Lepic, 75018 Paris"
-          },
-          {
-            "id": "lendroit",
-            "name": "L'Endroit",
-            "description": "Bar branché Batignolles, cocktails créatifs",
-            "address": "67 Place du Docteur Félix Lobligeois, 75017 Paris"
-          }
-        ]
-      },
-      "lieux-secrets": {
-        "title": "Lieux Secrets et Impasses",
-        "places": [
           {
             "id": "villa-des-ternes",
             "name": "Villa des Ternes",
             "description": "Impasse privée, maisons bourgeoises",
-            "address": "Villa des Ternes, 75017 Paris"
+            "address": "Villa des Ternes, 75017 Paris",
+            "coordinates": [
+              48.8812821,
+              2.2873959
+            ]
           },
           {
             "id": "cite-lemercier",
             "name": "Cité Lemercier",
             "description": "Passage résidentiel calme, pavés",
-            "address": "Cité Lemercier, 75017 Paris"
+            "address": "Cité Lemercier, 75017 Paris",
+            "coordinates": [
+              48.8869169,
+              2.3243628
+            ]
+          }
+        ]
+      },
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
+        "places": [
+          {
+            "id": "le-consulat-17",
+            "name": "Le Consulat",
+            "description": "Bar de quartier convivial, habitants fidèles",
+            "address": "18 Rue Norvins, 75018 Paris",
+            "coordinates": [
+              48.8870088,
+              2.3400481
+            ]
           },
+          {
+            "id": "cafe-des-deux-moulins-17",
+            "name": "Café des Deux Moulins",
+            "description": "Bar bistrot, ambiance authentique",
+            "address": "15 Rue Lepic, 75018 Paris",
+            "coordinates": [
+              48.8848988,
+              2.3337032
+            ]
+          },
+          {
+            "id": "lendroit",
+            "name": "L'Endroit",
+            "description": "Bar branché Batignolles, cocktails créatifs",
+            "address": "67 Place du Docteur Félix Lobligeois, 75017 Paris",
+            "coordinates": [
+              48.8863129,
+              2.3182769
+            ]
+          }
+        ]
+      },
+      "monuments": {
+        "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
+        "places": [
           {
             "id": "square-marcel-pagnol",
             "name": "Square Marcel-Pagnol",
             "description": "Petit jardin caché, aire jeux",
-            "address": "Square Marcel-Pagnol, 75008 Paris"
+            "address": "Square Marcel-Pagnol, 75008 Paris",
+            "coordinates": [
+              48.8759185,
+              2.3204255
+            ]
           }
         ]
       }

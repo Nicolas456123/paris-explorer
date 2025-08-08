@@ -78,200 +78,329 @@
       "description": "Métro : Charles-de-Gaulle-Étoile (1,2,6), George V (1), Concorde (1,8,12), Champs-Élysées-Clemenceau (1,13) | RER : Charles-de-Gaulle-Étoile (A)"
     },
     "categories": {
-      "monuments-prestigieux": {
+      "monuments": {
         "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "arc-de-triomphe",
             "name": "Arc de Triomphe",
             "description": "Vue 360° terrasse, Tombe du Soldat Inconnu",
-            "address": "Place Charles de Gaulle, 75008 Paris"
+            "address": "Place Charles de Gaulle, 75008 Paris",
+            "coordinates": [
+              48.8737673,
+              2.2954441
+            ]
           },
           {
             "id": "place-de-la-concorde",
             "name": "Place de la Concorde",
             "description": "Plus grande place Paris (8,64 ha), Obélisque Louxor",
-            "address": "Place de la Concorde, 75008 Paris"
-          },
-          {
-            "id": "obelisque-de-louxor",
-            "name": "Obélisque de Louxor",
-            "description": "Monument égyptien 3300 ans, hiéroglyphes",
-            "address": "Place de la Concorde, 75008 Paris"
+            "address": "Place de la Concorde, 75008 Paris",
+            "coordinates": [
+              48.8655715,
+              2.3212248
+            ]
           },
           {
             "id": "palais-de-lelysee",
             "name": "Palais de l'Élysée",
             "description": "Résidence présidentielle (extérieur), grilles dorées",
-            "address": "55 Rue du Faubourg Saint-Honoré, 75008 Paris"
+            "address": "55 Rue du Faubourg Saint-Honoré, 75008 Paris",
+            "coordinates": [
+              48.8706298,
+              2.3169336
+            ]
           },
           {
             "id": "madeleine",
             "name": "Madeleine",
             "description": "Église néoclassique, colonnes corinthiennes, concerts",
-            "address": "Place de la Madeleine, 75008 Paris"
-          }
-        ]
-      },
-      "palais-institutions": {
-        "title": "Palais",
-        "places": [
+            "address": "Place de la Madeleine, 75008 Paris",
+            "coordinates": [
+              48.8700879,
+              2.3249879
+            ]
+          },
           {
             "id": "grand-palais",
             "name": "Grand Palais",
             "description": "Expositions prestigieuses, verrière Art nouveau",
-            "address": "3 Avenue du Général Eisenhower, 75008 Paris"
+            "address": "3 Avenue du Général Eisenhower, 75008 Paris",
+            "coordinates": [
+              48.8672415,
+              2.3117837
+            ]
           },
           {
             "id": "petit-palais",
             "name": "Petit Palais",
             "description": "Musée Beaux-Arts gratuit, jardins intérieurs",
-            "address": "Avenue Winston Churchill, 75008 Paris"
+            "address": "Avenue Winston Churchill, 75008 Paris",
+            "coordinates": [
+              48.8651033,
+              2.3137181
+            ]
           },
           {
             "id": "palais-de-la-decouverte",
             "name": "Palais de la Découverte",
             "description": "Sciences interactives, planétarium",
-            "address": "Avenue Franklin Delano Roosevelt, 75008 Paris"
+            "address": "Avenue Franklin Delano Roosevelt, 75008 Paris",
+            "coordinates": [
+              48.8711347,
+              2.3100826
+            ]
           },
+          {
+            "id": "pont-de-la-concorde",
+            "name": "Pont de la Concorde",
+            "description": "Construit pierres Bastille, symbolisme révolutionnaire",
+            "address": "Pont de la Concorde, 75008 Paris",
+            "coordinates": [
+              48.8633779,
+              2.3195977
+            ]
+          }
+        ]
+      },
+      "musees": {
+        "title": "Musées",
+        "description": "Collections et expositions culturelles",
+        "places": [
           {
             "id": "musee-jacquemart-andre",
             "name": "Musée Jacquemart-André",
             "description": "Collection privée exceptionnelle, hôtel particulier",
-            "address": "158 Boulevard Haussmann, 75008 Paris"
+            "address": "158 Boulevard Haussmann, 75008 Paris",
+            "coordinates": [
+              48.8752531,
+              2.310789
+            ]
           }
         ]
       },
-      "shopping-prestige": {
+      "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "champs-elysees",
             "name": "Champs-Élysées",
             "description": "1,9km, flagship stores internationaux",
-            "address": "Avenue des Champs-Élysées, 75008 Paris"
+            "address": "Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8691716,
+              2.3095365
+            ]
           },
           {
             "id": "louis-vuitton-champs-elysees",
             "name": "Louis Vuitton Champs-Élysées",
             "description": "Plus grand magasin de la marque, 4 étages",
-            "address": "101 Avenue des Champs-Élysées, 75008 Paris"
+            "address": "101 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8716898,
+              2.3004973
+            ]
           },
           {
             "id": "triangle-dor",
             "name": "Triangle d'Or",
             "description": "Avenue Montaigne, Faubourg Saint-Honoré, George V",
-            "address": "Triangle d'Or, 75008 Paris"
+            "address": "Triangle d'Or, 75008 Paris",
+            "coordinates": [
+              48.8828925,
+              2.3218178
+            ]
           },
           {
             "id": "galeries-lafayette-champs-elysees",
             "name": "Galeries Lafayette Champs-Élysées",
             "description": "Grand magasin, terrasse panoramique",
-            "address": "60 Avenue des Champs-Élysées, 75008 Paris"
+            "address": "60 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8706225,
+              2.3060702
+            ]
+          },
+          {
+            "id": "apple-store-opera",
+            "name": "Apple Store Opéra",
+            "description": "Architecture verre, Genius Bar",
+            "address": "12 Rue Halévy, 75009 Paris",
+            "coordinates": [
+              48.8723133,
+              2.3331121
+            ]
           }
         ]
       },
-      "restaurants-mythiques": {
+      "restaurants": {
         "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
             "id": "fouquets",
             "name": "Fouquet's",
             "description": "Brasserie historique, remise prix César, terrasse rouge",
-            "address": "99 Avenue des Champs-Élysées, 75008 Paris"
+            "address": "99 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8714324,
+              2.3013076
+            ]
           },
           {
             "id": "pierre-herme-champs-elysees",
             "name": "Pierre Hermé Champs-Élysées",
             "description": "Macarons et pâtisseries d'exception",
-            "address": "72 Avenue des Champs-Élysées, 75008 Paris"
+            "address": "72 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8710085,
+              2.3048562
+            ]
           },
           {
             "id": "latelier-de-joel-robuchon",
             "name": "L'Atelier de Joël Robuchon",
             "description": "⭐⭐ Michelin - Comptoir gastronomique",
-            "address": "133 Avenue des Champs-Élysées, 75008 Paris"
+            "address": "133 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8727993,
+              2.297003
+            ]
           },
           {
             "id": "laduree-champs-elysees",
             "name": "Ladurée Champs-Élysées",
             "description": "Salon de thé historique, macarons",
-            "address": "75 Avenue des Champs-Élysées, 75008 Paris"
+            "address": "75 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8708948,
+              2.3030028
+            ]
           },
           {
             "id": "le-bristol",
             "name": "Le Bristol",
             "description": "⭐⭐⭐ Michelin - Gastronomie palace",
-            "address": "112 Rue du Faubourg Saint-Honoré, 75008 Paris"
+            "address": "112 Rue du Faubourg Saint-Honoré, 75008 Paris",
+            "coordinates": [
+              48.8716714,
+              2.3147666
+            ]
           },
           {
             "id": "apicius",
             "name": "Apicius",
             "description": "Terrasse secrète jardin 1500m², Mathieu Pacaud",
-            "address": "20 Rue d'Artois, 75008 Paris"
+            "address": "20 Rue d'Artois, 75008 Paris",
+            "coordinates": [
+              48.8733394,
+              2.307241
+            ]
           }
         ]
       },
-      "espaces-verts": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "parc-monceau",
             "name": "Parc Monceau",
             "description": "8,2 hectares, jardins anglais, fabriques romantiques",
-            "address": "35 Boulevard de Courcelles, 75008 Paris"
+            "address": "35 Boulevard de Courcelles, 75008 Paris",
+            "coordinates": [
+              48.878179,
+              2.2988066
+            ]
           },
           {
             "id": "square-marcel-pagnol",
             "name": "Square Marcel-Pagnol",
             "description": "Jardin caché près Madeleine",
-            "address": "Square Marcel-Pagnol, 75008 Paris"
+            "address": "Square Marcel-Pagnol, 75008 Paris",
+            "coordinates": [
+              48.8759185,
+              2.3204255
+            ]
           },
           {
             "id": "jardin-des-champs-elysees",
             "name": "Jardin des Champs-Élysées",
             "description": "Allées ombragées, théâtres Marigny",
-            "address": "Avenue des Champs-Élysées, 75008 Paris"
-          }
-        ]
-      },
-      "theatres": {
-        "title": "Spectacles",
-        "places": [
-          {
-            "id": "theatre-marigny",
-            "name": "Théâtre Marigny",
-            "description": "Programmation prestige, architecture Garnier",
-            "address": "Carré Marigny, 75008 Paris"
+            "address": "Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8691716,
+              2.3095365
+            ]
           },
-          {
-            "id": "theatre-des-champs-elysees",
-            "name": "Théâtre des Champs-Élysées",
-            "description": "Art déco, concerts classiques",
-            "address": "15 Avenue Montaigne, 75008 Paris"
-          },
-          {
-            "id": "lido",
-            "name": "Lido",
-            "description": "Revue parisienne, dîner-spectacle",
-            "address": "116 Avenue des Champs-Élysées, 75008 Paris"
-          }
-        ]
-      },
-      "lieux-insolites": {
-        "title": "Secrets",
-        "places": [
           {
             "id": "maison-loo",
             "name": "Maison Loo",
             "description": "Pagode chinoise privée (48 rue Courcelles), visites rares",
-            "address": "48 Rue de Courcelles, 75008 Paris"
+            "address": "48 Rue de Courcelles, 75008 Paris",
+            "coordinates": [
+              48.876749,
+              2.3077382
+            ]
           },
           {
             "id": "passage-des-deux-pavillons",
             "name": "Passage des Deux-Pavillons",
             "description": "Passage secret entre rue Boissy-d'Anglas",
-            "address": "Passage des Deux-Pavillons, 75008 Paris"
+            "address": "Passage des Deux-Pavillons, 75008 Paris",
+            "coordinates": [
+              48.8660881,
+              2.3389805
+            ]
+          }
+        ]
+      },
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
+        "places": [
+          {
+            "id": "theatre-marigny",
+            "name": "Théâtre Marigny",
+            "description": "Programmation prestige, architecture Garnier",
+            "address": "Carré Marigny, 75008 Paris",
+            "coordinates": [
+              48.8688976,
+              2.3123679
+            ]
+          },
+          {
+            "id": "theatre-des-champs-elysees",
+            "name": "Théâtre des Champs-Élysées",
+            "description": "Art déco, concerts classiques",
+            "address": "15 Avenue Montaigne, 75008 Paris",
+            "coordinates": [
+              48.8656742,
+              2.3032743
+            ]
+          },
+          {
+            "id": "lido",
+            "name": "Lido",
+            "description": "Revue parisienne, dîner-spectacle",
+            "address": "116 Avenue des Champs-Élysées, 75008 Paris",
+            "coordinates": [
+              48.8722524,
+              2.3009475
+            ]
+          },
+          {
+            "id": "salle-billard-olympia",
+            "name": "Salle billard Olympia",
+            "description": "Cachée sous célèbre salle, architecture 1893",
+            "address": "28 Boulevard des Capucines, 75009 Paris",
+            "coordinates": [
+              48.870144,
+              2.328372
+            ]
           }
         ]
       }

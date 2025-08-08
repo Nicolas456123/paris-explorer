@@ -1848,6 +1848,249 @@ body {
 .z-10 { z-index: 10; }
 .z-50 { z-index: 50; }
 
+/* ===== POPUPS DE LA CARTE ===== */
+.place-popup-card {
+    min-width: 300px;
+    max-width: 350px;
+    background: var(--paris-white);
+    border: 2px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font-family);
+}
+
+.place-popup-header {
+    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
+    color: var(--paris-white);
+    padding: 16px 20px;
+    position: relative;
+}
+
+.place-popup-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.place-popup-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.place-popup-title h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.place-popup-category {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.place-popup-visited {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: rgba(39, 174, 96, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.place-popup-content {
+    padding: 20px;
+}
+
+.place-popup-description {
+    margin: 0 0 16px 0;
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.place-popup-address,
+.place-popup-location {
+    margin: 8px 0 0 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* Popup des arrondissements */
+.arrondissement-popup-card {
+    min-width: 280px;
+    max-width: 320px;
+    background: var(--paris-white);
+    border: 2px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font-family);
+}
+
+.arrondissement-popup-header {
+    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
+    color: var(--paris-white);
+    padding: 20px;
+    position: relative;
+}
+
+.arrondissement-popup-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.completion-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(39, 174, 96, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.arrondissement-popup-content {
+    padding: 20px;
+}
+
+.arrondissement-popup-description {
+    margin: 0 0 16px 0;
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.arrondissement-popup-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--paris-blue);
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Adaptations pour les thèmes sombres */
+[data-mode="dark"] .place-popup-card,
+[data-mode="dark"] .arrondissement-popup-card {
+    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+    border-color: var(--border-color);
+}
+
+[data-mode="dark"] .place-popup-header,
+[data-mode="dark"] .arrondissement-popup-header {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
+    color: var(--paris-gold);
+}
+
+/* ===== ICÔNES DES MARQUEURS ===== */
+.place-icon {
+    background: var(--paris-white);
+    border: 2px solid var(--paris-gold);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.place-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.place-icon.visited {
+    background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
+    border-color: #27AE60;
+    color: white;
+}
+
+.place-icon .check-mark {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 12px;
+    background: #27AE60;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    line-height: 1;
+}
+
+.arrondissement-icon {
+    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
+    color: var(--paris-white);
+    border: 2px solid var(--paris-white);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.arrondissement-icon:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.arrondissement-icon span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Adaptations thèmes sombres pour les marqueurs */
+[data-mode="dark"] .arrondissement-icon {
+    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
+    color: var(--paris-gold);
+    border-color: var(--paris-gold);
+}
+
 /* === PRINT STYLES === */
 @media print {
     .app-container {

@@ -82,15 +82,22 @@
       "description": "Métro : Pigalle (2,12), Abbesses (12), Anvers (2), Marcadet-Poissonniers (4,12), Château Rouge (4) | Funiculaire : Place Saint-Pierre vers Sacré-Cœur"
     },
     "categories": {
-      "montmartre-mythique": {
-        "title": "Montmartre",
+      "monuments": {
+        "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "basilique-du-sacre-coeur",
             "name": "Basilique du Sacré-Cœur",
             "description": "Vue panoramique, romano-byzantine, 19M visiteurs/an",
             "address": "35 Rue du Chevalier de la Barre, 75018 Paris"
-          },
+          }
+        ]
+      },
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
+        "places": [
           {
             "id": "place-du-tertre",
             "name": "Place du Tertre",
@@ -110,190 +117,320 @@
             "address": "1 Avenue Junot, 75018 Paris"
           },
           {
-            "id": "au-lapin-agile",
-            "name": "Au Lapin Agile",
-            "description": "Cabaret artistique 1860, Picasso, Toulouse-Lautrec",
-            "address": "22 Rue des Saules, 75018 Paris"
-          },
-          {
             "id": "bateau-lavoir",
             "name": "Bateau-Lavoir",
             "description": "Ateliers artistes, berceau cubisme (reconstitué)",
             "address": "13 Place Emile Goudeau, 75018 Paris"
-          }
-        ]
-      },
-      "musees-lieux-artistiques": {
-        "title": "Musées",
-        "places": [
-          {
-            "id": "musee-de-montmartre",
-            "name": "Musée de Montmartre",
-            "description": "Histoire quartier, Jardin Renoir reconstitué",
-            "address": "12 Rue Cortot, 75018 Paris"
           },
-          {
-            "id": "dali-paris",
-            "name": "Dalí Paris",
-            "description": "300 œuvres Salvador Dalí, sculptures surréalistes",
-            "address": "11 Rue Poulbot, 75018 Paris"
-          },
-          {
-            "id": "halle-saint-pierre",
-            "name": "Halle Saint-Pierre",
-            "description": "Art brut, singulier, expositions décalées",
-            "address": "2 Rue Ronsard, 75018 Paris"
-          },
-          {
-            "id": "espace-dali",
-            "name": "Espace Dalí",
-            "description": "Collection permanente, ambiance mystique",
-            "address": "11 Rue Poulbot, 75018 Paris"
-          }
-        ]
-      },
-      "montmartre-secret": {
-        "title": "Montmartre",
-        "places": [
           {
             "id": "vignes-de-montmartre",
             "name": "Vignes de Montmartre",
             "description": "2000 ceps, Clos Montmartre, vendanges octobre",
-            "address": "Rue des Saules, 75018 Paris"
+            "address": "Rue des Saules, 75018 Paris",
+            "coordinates": [
+              48.8887808,
+              2.3399012
+            ]
           },
           {
             "id": "villa-leandre",
             "name": "Villa Léandre",
             "description": "Allée pavée maisons Art nouveau, escaliers fleuris",
-            "address": "Villa Léandre, 75018 Paris"
+            "address": "Villa Léandre, 75018 Paris",
+            "coordinates": [
+              48.8883987,
+              2.3350682
+            ]
           },
           {
             "id": "cimetiere-saint-vincent",
             "name": "Cimetière Saint-Vincent",
             "description": "Petit cimetière romantique, célébrités",
-            "address": "6 Rue Lucien Gaulard, 75018 Paris"
-          },
-          {
-            "id": "square-louise-michel",
-            "name": "Square Louise-Michel",
-            "description": "Jardin suspendu vue Paris, aires jeux",
-            "address": "Square Louise-Michel, 75018 Paris"
+            "address": "6 Rue Lucien Gaulard, 75018 Paris",
+            "coordinates": [
+              48.8894522,
+              2.3387042
+            ]
           },
           {
             "id": "rue-de-labreuvoir",
             "name": "Rue de l'Abreuvoir",
             "description": "Plus belle rue Montmartre, pavés, glycines",
-            "address": "Rue de l'Abreuvoir, 75018 Paris"
-          }
-        ]
-      },
-      "restaurants-guinguettes": {
-        "title": "Restaurants",
-        "places": [
-          {
-            "id": "la-maison-rose",
-            "name": "La Maison Rose",
-            "description": "Restaurant rose fréquenté Picasso, Utrillo",
-            "address": "2 Rue de l'Abreuvoir, 75018 Paris"
+            "address": "Rue de l'Abreuvoir, 75018 Paris",
+            "coordinates": [
+              48.8882277,
+              2.3389391
+            ]
           },
-          {
-            "id": "le-poulbot",
-            "name": "Le Poulbot",
-            "description": "Ambiance bohème authentique, cuisine traditionnelle",
-            "address": "3 Rue Poulbot, 75018 Paris"
-          },
-          {
-            "id": "cafe-des-deux-moulins",
-            "name": "Café des Deux Moulins",
-            "description": "Lieu tournage Amélie Poulain, brunch",
-            "address": "15 Rue Lepic, 75018 Paris"
-          },
-          {
-            "id": "le-consulat",
-            "name": "Le Consulat",
-            "description": "Restaurant place Tertre, terrasse historique",
-            "address": "18 Rue Norvins, 75018 Paris"
-          },
-          {
-            "id": "la-consigne",
-            "name": "La Consigne",
-            "description": "Bistrot Montmartre, cuisine généreuse, prix corrects",
-            "address": "16 Rue Norvins, 75018 Paris"
-          }
-        ]
-      },
-      "barbes-multiculturel": {
-        "title": "Barbès",
-        "places": [
           {
             "id": "marche-de-la-chapelle",
             "name": "Marché de la Chapelle",
             "description": "Ven/Dim, produits afrique, épices, tissus",
-            "address": "10 Rue de l'Olive, 75018 Paris"
+            "address": "10 Rue de l'Olive, 75018 Paris",
+            "coordinates": [
+              48.8909609,
+              2.3613333
+            ]
           },
           {
             "id": "rue-de-la-goutte-dor",
             "name": "Rue de la Goutte d'Or",
             "description": "Quartier Mali, restaurants africains authentiques",
-            "address": "Rue de la Goutte d'Or, 75018 Paris"
+            "address": "Rue de la Goutte d'Or, 75018 Paris",
+            "coordinates": [
+              48.8850881,
+              2.3510791
+            ]
           },
           {
             "id": "institut-des-cultures-dislam",
             "name": "Institut des Cultures d'Islam",
             "description": "Centre culturel contemporain, expositions",
-            "address": "56 Rue Stephenson, 75018 Paris"
+            "address": "56 Rue Stephenson, 75018 Paris",
+            "coordinates": [
+              48.8884672,
+              2.3561866
+            ]
           },
           {
             "id": "marche-barbes",
             "name": "Marché Barbès",
             "description": "Mer/Sam, fruits exotiques, prix populaires",
-            "address": "Boulevard de la Chapelle, 75018 Paris"
+            "address": "Boulevard de la Chapelle, 75018 Paris",
+            "coordinates": [
+              48.8842365,
+              2.3548299
+            ]
           }
         ]
       },
-      "spectacles-cabarets": {
-        "title": "Spectacles",
+      "musees": {
+        "title": "Musées",
+        "description": "Collections et expositions culturelles",
+        "places": [
+          {
+            "id": "au-lapin-agile",
+            "name": "Au Lapin Agile",
+            "description": "Cabaret artistique 1860, Picasso, Toulouse-Lautrec",
+            "address": "22 Rue des Saules, 75018 Paris",
+            "coordinates": [
+              48.8887313,
+              2.3399746
+            ]
+          },
+          {
+            "id": "musee-de-montmartre",
+            "name": "Musée de Montmartre",
+            "description": "Histoire quartier, Jardin Renoir reconstitué",
+            "address": "12 Rue Cortot, 75018 Paris",
+            "coordinates": [
+              48.8880499,
+              2.3406297
+            ]
+          },
+          {
+            "id": "dali-paris",
+            "name": "Dalí Paris",
+            "description": "300 œuvres Salvador Dalí, sculptures surréalistes",
+            "address": "11 Rue Poulbot, 75018 Paris",
+            "coordinates": [
+              48.88648,
+              2.3399022
+            ]
+          },
+          {
+            "id": "halle-saint-pierre",
+            "name": "Halle Saint-Pierre",
+            "description": "Art brut, singulier, expositions décalées",
+            "address": "2 Rue Ronsard, 75018 Paris",
+            "coordinates": [
+              48.8848912,
+              2.3445287
+            ]
+          }
+        ]
+      },
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
+        "places": [
+          {
+            "id": "square-louise-michel",
+            "name": "Square Louise-Michel",
+            "description": "Jardin suspendu vue Paris, aires jeux",
+            "address": "Square Louise-Michel, 75018 Paris",
+            "coordinates": [
+              48.884632,
+              2.3434221
+            ]
+          }
+        ]
+      },
+      "restaurants": {
+        "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
+        "places": [
+          {
+            "id": "la-maison-rose",
+            "name": "La Maison Rose",
+            "description": "Restaurant rose fréquenté Picasso, Utrillo",
+            "address": "2 Rue de l'Abreuvoir, 75018 Paris",
+            "coordinates": [
+              48.8879745,
+              2.3396091
+            ]
+          },
+          {
+            "id": "le-poulbot",
+            "name": "Le Poulbot",
+            "description": "Ambiance bohème authentique, cuisine traditionnelle",
+            "address": "3 Rue Poulbot, 75018 Paris",
+            "coordinates": [
+              48.8868754,
+              2.3398591
+            ]
+          },
+          {
+            "id": "cafe-des-deux-moulins",
+            "name": "Café des Deux Moulins",
+            "description": "Lieu tournage Amélie Poulain, brunch",
+            "address": "15 Rue Lepic, 75018 Paris",
+            "coordinates": [
+              48.8848988,
+              2.3337032
+            ]
+          },
+          {
+            "id": "le-consulat",
+            "name": "Le Consulat",
+            "description": "Restaurant place Tertre, terrasse historique",
+            "address": "18 Rue Norvins, 75018 Paris",
+            "coordinates": [
+              48.8870015,
+              2.340002
+            ]
+          },
+          {
+            "id": "la-consigne",
+            "name": "La Consigne",
+            "description": "Bistrot Montmartre, cuisine généreuse, prix corrects",
+            "address": "16 Rue Norvins, 75018 Paris",
+            "coordinates": [
+              48.8869599,
+              2.3402164
+            ]
+          }
+        ]
+      },
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
         "places": [
           {
             "id": "divan-du-monde",
             "name": "Divan du Monde",
             "description": "Concerts rock, électro, soirées étudiantes",
-            "address": "75 Rue des Martyrs, 75018 Paris"
+            "address": "75 Rue des Martyrs, 75018 Paris",
+            "coordinates": [
+              48.8824639,
+              2.3395776
+            ]
           },
           {
             "id": "la-cigale",
             "name": "La Cigale",
             "description": "Salle concert 1400 places, programmation éclectique",
-            "address": "120 Boulevard de Rochechouart, 75018 Paris"
+            "address": "120 Boulevard de Rochechouart, 75018 Paris",
+            "coordinates": [
+              48.882343,
+              2.3402758
+            ]
           },
           {
             "id": "bus-palladium",
             "name": "Bus Palladium",
             "description": "Club rock historique, concerts intimistes",
-            "address": "6 Rue Fontaine, 75009 Paris"
+            "address": "6 Rue Fontaine, 75009 Paris",
+            "coordinates": [
+              48.8807709,
+              2.3349113
+            ]
           },
           {
             "id": "theatre-de-latelier",
             "name": "Théâtre de l'Atelier",
             "description": "Théâtre Charles Dullin, créations contemporaines",
-            "address": "1 Place Charles Dullin, 75018 Paris"
+            "address": "1 Place Charles Dullin, 75018 Paris",
+            "coordinates": [
+              48.8833473,
+              2.3420437
+            ]
+          },
+          {
+            "id": "le-tres-particulier",
+            "name": "Le très Particulier",
+            "description": "Bar terrasse cachée avenue Junot, cocktails",
+            "address": "23 Avenue Junot, 75018 Paris",
+            "coordinates": [
+              48.888158,
+              2.3355125
+            ]
+          },
+          {
+            "id": "la-machine-du-moulin-rouge",
+            "name": "La Machine du Moulin Rouge",
+            "description": "Club sous Moulin Rouge, électro",
+            "address": "90 Boulevard de Clichy, 75018 Paris",
+            "coordinates": [
+              48.8841454,
+              2.3322002
+            ]
+          },
+          {
+            "id": "dirty-dick",
+            "name": "Dirty Dick",
+            "description": "Bar tiki, rhums, ambiance exotique",
+            "address": "10 Rue Frochot, 75009 Paris",
+            "coordinates": [
+              48.8815058,
+              2.3375653
+            ]
+          },
+          {
+            "id": "le-rendez-vous-des-amis",
+            "name": "Le Rendez-Vous des Amis",
+            "description": "Bar populaire, billard, ambiance authentique",
+            "address": "23 Rue Gabrielle, 75018 Paris",
+            "coordinates": [
+              48.8857453,
+              2.3405532
+            ]
           }
         ]
       },
-      "shopping-vintage": {
+      "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "rue-des-martyrs",
             "name": "Rue des Martyrs",
             "description": "Montée vers Montmartre, boutiques créateurs",
-            "address": "Rue des Martyrs, 75009 Paris"
+            "address": "Rue des Martyrs, 75009 Paris",
+            "coordinates": [
+              48.8778446,
+              2.3395219
+            ]
           },
           {
             "id": "marche-aux-puces-saint-ouen",
             "name": "Marché aux Puces Saint-Ouen",
             "description": "Plus grand marché antiquités monde",
-            "address": "Rue des Rosiers, 93400 Saint-Ouen"
+            "address": "Rue des Rosiers, 93400 Saint-Ouen",
+            "coordinates": [
+              48.9022672,
+              2.3422319
+            ]
           },
           {
             "id": "spree",
@@ -305,36 +442,11 @@
             "id": "rue-houdon",
             "name": "Rue Houdon",
             "description": "Artisans, ateliers, galeries art",
-            "address": "Rue Houdon, 75018 Paris"
-          }
-        ]
-      },
-      "vie-nocturne-bars": {
-        "title": "Bars",
-        "places": [
-          {
-            "id": "le-tres-particulier",
-            "name": "Le très Particulier",
-            "description": "Bar terrasse cachée avenue Junot, cocktails",
-            "address": "23 Avenue Junot, 75018 Paris"
-          },
-          {
-            "id": "la-machine-du-moulin-rouge",
-            "name": "La Machine du Moulin Rouge",
-            "description": "Club sous Moulin Rouge, électro",
-            "address": "90 Boulevard de Clichy, 75018 Paris"
-          },
-          {
-            "id": "dirty-dick",
-            "name": "Dirty Dick",
-            "description": "Bar tiki, rhums, ambiance exotique",
-            "address": "10 Rue Frochot, 75009 Paris"
-          },
-          {
-            "id": "le-rendez-vous-des-amis",
-            "name": "Le Rendez-Vous des Amis",
-            "description": "Bar populaire, billard, ambiance authentique",
-            "address": "23 Rue Gabrielle, 75018 Paris"
+            "address": "Rue Houdon, 75018 Paris",
+            "coordinates": [
+              48.8831914,
+              2.3385184
+            ]
           }
         ]
       }

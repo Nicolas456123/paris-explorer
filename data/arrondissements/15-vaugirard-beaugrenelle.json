@@ -93,113 +93,207 @@
       "description": "Métro : Charles-Michels (10), Bir-Hakeim (6), Commerce (8), Javel (10), Porte de Versailles (12) | RER : Javel (C), Boulevard Victor (C)"
     },
     "categories": {
-      "parcs-innovation": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "parc-andre-citroen",
             "name": "Parc André-Citroën",
             "description": "14 hectares, jardins thématiques, Ballon Paris",
-            "address": "Rue Cauchy, 75015 Paris"
+            "address": "Rue Cauchy, 75015 Paris",
+            "coordinates": [
+              48.8418349,
+              2.2792253
+            ]
           },
           {
             "id": "parc-georges-brassens",
             "name": "Parc Georges-Brassens",
             "description": "Vignes Clos Morillons, ruches, théâtre marionnettes",
-            "address": "2 Place Jacques Marette, 75015 Paris"
+            "address": "2 Place Jacques Marette, 75015 Paris",
+            "coordinates": [
+              48.8327064,
+              2.3004651
+            ]
           },
           {
             "id": "square-saint-lambert",
             "name": "Square Saint-Lambert",
             "description": "Jardin quartier paisible, jeux enfants",
-            "address": "Square Saint-Lambert, 75015 Paris"
+            "address": "Square Saint-Lambert, 75015 Paris",
+            "coordinates": [
+              48.8418347,
+              2.2979696
+            ]
           },
           {
             "id": "ile-aux-cygnes",
             "name": "Île aux Cygnes",
             "description": "Promenade 850m, Statue Liberté, jogging Seine",
-            "address": "Île aux Cygnes, 75015 Paris"
+            "address": "Île aux Cygnes, 75015 Paris",
+            "coordinates": [
+              48.8531182,
+              2.28408
+            ]
           },
           {
             "id": "jardin-atlantique-gare",
             "name": "Jardin Atlantique",
             "description": "Jardin suspendu gare, innovation paysagère",
-            "address": "Gare Montparnasse, 75014 Paris"
+            "address": "Gare Montparnasse, 75014 Paris",
+            "coordinates": [
+              48.8400624,
+              2.3191085
+            ]
+          },
+          {
+            "id": "square-blomet",
+            "name": "Square Blomet",
+            "description": "Jardin caché, pelouses, tranquillité résidentielle",
+            "address": "Square Blomet, 75015 Paris",
+            "coordinates": [
+              48.8421036,
+              2.3053683
+            ]
+          },
+          {
+            "id": "villa-seurat-15",
+            "name": "Villa Seurat",
+            "description": "Cité artistes privée, maisons individuelles",
+            "address": "Villa Seurat, 75014 Paris",
+            "coordinates": [
+              48.8261795,
+              2.3327771
+            ]
+          },
+          {
+            "id": "square-des-peupliers",
+            "name": "Square des Peupliers",
+            "description": "Quartier village, maisons basses (13e limitrophe)",
+            "address": "Square des Peupliers, 75013 Paris",
+            "coordinates": [
+              48.825462,
+              2.3532551
+            ]
           }
         ]
       },
-      "musees-patrimoine": {
+      "musees": {
         "title": "Musées",
+        "description": "Collections et expositions culturelles",
         "places": [
           {
             "id": "musee-bourdelle",
             "name": "Musée Bourdelle",
             "description": "Sculptures, atelier reconstitué, jardins",
-            "address": "18 Rue Antoine Bourdelle, 75015 Paris"
+            "address": "18 Rue Antoine Bourdelle, 75015 Paris",
+            "coordinates": [
+              48.8429656,
+              2.3185894
+            ]
           },
           {
             "id": "musee-de-la-poste",
             "name": "Musée de la Poste",
             "description": "Histoire postale rénové 2019, philatélie",
-            "address": "34 Boulevard de Vaugirard, 75015 Paris"
+            "address": "34 Boulevard de Vaugirard, 75015 Paris",
+            "coordinates": [
+              48.8414555,
+              2.317219
+            ]
           },
           {
             "id": "musee-pasteur",
             "name": "Musée Pasteur",
             "description": "Appartement et laboratoire savant, souvenirs",
-            "address": "25 Rue du Docteur Roux, 75015 Paris"
+            "address": "25 Rue du Docteur Roux, 75015 Paris",
+            "coordinates": [
+              48.8403827,
+              2.3113658
+            ]
           },
           {
             "id": "la-ruche",
             "name": "La Ruche",
             "description": "Cité artistes historique, ateliers Chagall, Modigliani",
-            "address": "2 Passage de Dantzig, 75015 Paris"
+            "address": "2 Passage de Dantzig, 75015 Paris",
+            "coordinates": [
+              48.8322723,
+              2.2971082
+            ]
           }
         ]
       },
-      "shopping-architecture": {
+      "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "centre-commercial-beaugrenelle",
             "name": "Centre Commercial Beaugrenelle",
             "description": "120 boutiques sur Seine, architecture contemporaine",
-            "address": "7 Rue Linois, 75015 Paris"
+            "address": "7 Rue Linois, 75015 Paris",
+            "coordinates": [
+              48.8488888,
+              2.2826046
+            ]
           },
           {
             "id": "rue-de-vaugirard",
             "name": "Rue de Vaugirard",
             "description": "Plus longue rue Paris 4,4km, commerces",
-            "address": "Rue de Vaugirard, 75015 Paris"
+            "address": "Rue de Vaugirard, 75015 Paris",
+            "coordinates": [
+              48.8384315,
+              2.2987478
+            ]
           },
           {
             "id": "marche-grenelle",
             "name": "Marché Grenelle",
             "description": "Mer/Dim sous métro aérien, ambiance populaire",
-            "address": "Boulevard de Grenelle, 75015 Paris"
+            "address": "Boulevard de Grenelle, 75015 Paris",
+            "coordinates": [
+              48.8532135,
+              2.2898314
+            ]
           },
           {
             "id": "rue-du-commerce",
             "name": "Rue du Commerce",
             "description": "Artère commerçante historique, tous commerces",
-            "address": "Rue du Commerce, 75015 Paris"
+            "address": "Rue du Commerce, 75015 Paris",
+            "coordinates": [
+              48.8453791,
+              2.2944747
+            ]
           }
         ]
       },
-      "restaurants-bistronomie": {
+      "restaurants": {
         "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
             "id": "le-troquet",
             "name": "Le Troquet",
             "description": "Bistrot gastronomique réputé, cuisine inventive",
-            "address": "21 Rue François Bonvin, 75015 Paris"
+            "address": "21 Rue François Bonvin, 75015 Paris",
+            "coordinates": [
+              48.8449862,
+              2.3057928
+            ]
           },
           {
             "id": "jadis",
             "name": "Jadis",
             "description": "Cuisine moderne inventive, produits saisons",
-            "address": "208 Rue de la Croix Nivert, 75015 Paris"
+            "address": "208 Rue de la Croix Nivert, 75015 Paris",
+            "coordinates": [
+              48.8372527,
+              2.2893421
+            ]
           },
           {
             "id": "walczak",
@@ -211,82 +305,93 @@
             "id": "los-a-moelle",
             "name": "L'Os à Moelle",
             "description": "Bistrot populaire, cuisine généreuse, prix doux",
-            "address": "3 Rue Vasco de Gama, 75015 Paris"
+            "address": "3 Rue Vasco de Gama, 75015 Paris",
+            "coordinates": [
+              48.838081,
+              2.2816498
+            ]
           }
         ]
       },
-      "sports-loisirs": {
-        "title": "Sports",
+      "monuments": {
+        "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "piscine-keller",
             "name": "Piscine Keller",
             "description": "Piscine Art déco 1924, architecture remarquable",
-            "address": "14 Rue de l'Ingénieur Robert Keller, 75015 Paris"
+            "address": "14 Rue de l'Ingénieur Robert Keller, 75015 Paris",
+            "coordinates": [
+              48.8472144,
+              2.2819359
+            ]
           },
           {
             "id": "front-de-seine",
             "name": "Front de Seine",
             "description": "Tours années 70, architecture brutaliste",
-            "address": "Front de Seine, 75015 Paris"
-          },
+            "address": "Front de Seine, 75015 Paris",
+            "coordinates": [
+              48.849119,
+              2.2853969
+            ]
+          }
+        ]
+      },
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
+        "places": [
           {
             "id": "port-de-javel",
             "name": "Port de Javel",
             "description": "Activités nautiques Seine, base voile",
-            "address": "Port de Javel, 75015 Paris"
+            "address": "Port de Javel, 75015 Paris",
+            "coordinates": [
+              48.8463341,
+              2.2766163
+            ]
           },
           {
             "id": "aquaboulevard",
             "name": "Aquaboulevard",
             "description": "Centre aquatique loisirs, toboggans, vagues",
-            "address": "4 Rue Louis Armand, 75015 Paris"
-          }
-        ]
-      },
-      "jardins-secrets": {
-        "title": "Jardins",
-        "places": [
-          {
-            "id": "square-blomet",
-            "name": "Square Blomet",
-            "description": "Jardin caché, pelouses, tranquillité résidentielle",
-            "address": "Square Blomet, 75015 Paris"
+            "address": "4 Rue Louis Armand, 75015 Paris",
+            "coordinates": [
+              48.8327539,
+              2.2768935
+            ]
           },
-          {
-            "id": "villa-seurat-15",
-            "name": "Villa Seurat",
-            "description": "Cité artistes privée, maisons individuelles",
-            "address": "Villa Seurat, 75014 Paris"
-          },
-          {
-            "id": "square-des-peupliers",
-            "name": "Square des Peupliers",
-            "description": "Quartier village, maisons basses (13e limitrophe)",
-            "address": "Square des Peupliers, 75013 Paris"
-          }
-        ]
-      },
-      "culture-theatre": {
-        "title": "Culture",
-        "places": [
           {
             "id": "theatre-montparnasse-15",
             "name": "Théâtre Montparnasse",
             "description": "Théâtre privé renommé, comédies succès",
-            "address": "31 Rue de la Gaîté, 75014 Paris"
+            "address": "31 Rue de la Gaîté, 75014 Paris",
+            "coordinates": [
+              48.8395109,
+              2.3235275
+            ]
           },
           {
             "id": "theatre-rive-gauche",
             "name": "Théâtre Rive Gauche",
             "description": "Petite salle intimiste, one-man-show",
-            "address": "6 Rue de la Gaîté, 75014 Paris"
+            "address": "6 Rue de la Gaîté, 75014 Paris",
+            "coordinates": [
+              48.8408073,
+              2.3244078
+            ]
           },
           {
             "id": "maison-des-metallos",
             "name": "Maison des Métallos",
             "description": "Arts du cirque, danse contemporaine",
-            "address": "94 Rue Jean-Pierre Timbaud, 75011 Paris"
+            "address": "94 Rue Jean-Pierre Timbaud, 75011 Paris",
+            "coordinates": [
+              48.8673646,
+              2.3780287
+            ]
           }
         ]
       }

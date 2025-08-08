@@ -501,7 +501,7 @@ class SearchFilter {
     clearSearchHistory() {
         this.searchHistory = [];
         this.saveSearchHistory();
-        this.app.showNotification('Historique de recherche effacé', 'info');
+        // Historique de recherche effacé
     }
     
     // === CHARGEMENT DES OPTIONS DE FILTRES ===

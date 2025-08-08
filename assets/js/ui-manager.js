@@ -732,7 +732,7 @@ class UIManager {
         this.renderContent();
         this.updateStatsHeader();
         
-        this.app.showNotification('Filtres effacés', 'success', 2000);
+        // Filtres effacés
     }
     
     // === MISE À JOUR DES STATISTIQUES HEADER ===
@@ -1323,7 +1323,7 @@ class UIManager {
         }
         
         this.app.userManager.saveUsers();
-        this.app.showNotification('Note sauvegardée', 'success');
+        // Note sauvegardée
     }
 }
 

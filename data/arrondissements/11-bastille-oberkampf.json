@@ -78,194 +78,369 @@
       "description": "Métro : Bastille (1,5,8), Oberkampf (5,9), République (3,5,8,9,11), Voltaire (9), Saint-Ambroise (9)"
     },
     "categories": {
-      "sites-historiques": {
+      "monuments": {
         "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "place-de-la-bastille",
             "name": "Place de la Bastille",
             "description": "Colonne de Juillet, symbole révolutionnaire",
-            "address": "Place de la Bastille, 75011 Paris"
+            "address": "Place de la Bastille, 75011 Paris",
+            "coordinates": [
+              48.8533968,
+              2.3696501
+            ]
           },
           {
             "id": "opera-bastille",
             "name": "Opéra Bastille",
             "description": "Architecture Carlos Ott, visites guidées",
-            "address": "Place de la Bastille, 75012 Paris"
-          },
+            "address": "Place de la Bastille, 75012 Paris",
+            "coordinates": [
+              48.8528601,
+              2.3695526
+            ]
+          }
+        ]
+      },
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
+        "places": [
           {
             "id": "rue-du-faubourg-saint-antoine",
             "name": "Rue du Faubourg-Saint-Antoine",
             "description": "Artisans ébénistes traditionnels",
-            "address": "Rue du Faubourg-Saint-Antoine, 75011 Paris"
-          },
-          {
-            "id": "passage-de-lhomme",
-            "name": "Passage de l'Homme",
-            "description": "Cour pavée artisans, ateliers ouverts",
-            "address": "102 Rue du Faubourg-Saint-Antoine, 75011 Paris"
-          },
-          {
-            "id": "cour-damoye",
-            "name": "Cour Damoye & Cour de l'Étoile d'Or",
-            "description": "Ateliers artisans, patrimoine vivant",
-            "address": "Rue de Charonne, 75011 Paris"
-          }
-        ]
-      },
-      "gastronomie-pointe": {
-        "title": "Restaurants",
-        "places": [
-          {
-            "id": "septime",
-            "name": "Septime",
-            "description": "Restaurant gastronomique Bertrand Grébaut (réservation 3 mois)",
-            "address": "80 Rue de Charonne, 75011 Paris"
-          },
-          {
-            "id": "le-chateaubriand",
-            "name": "Le Chateaubriand",
-            "description": "Bistrot gastronomique pionnier, Inaki Aizpitarte",
-            "address": "129 Avenue Parmentier, 75011 Paris"
+            "address": "Rue du Faubourg-Saint-Antoine, 75011 Paris",
+            "coordinates": [
+              48.8508285,
+              2.378123
+            ]
           },
           {
             "id": "pierre-sang-oberkampf",
             "name": "Pierre Sang in Oberkampf",
             "description": "Fusion franco-coréenne créative",
-            "address": "55 Rue Oberkampf, 75011 Paris"
-          },
-          {
-            "id": "le-6-paul-bert",
-            "name": "Le 6 Paul Bert",
-            "description": "Bistrot traditionnel authentique",
-            "address": "6 Rue Paul Bert, 75011 Paris"
+            "address": "55 Rue Oberkampf, 75011 Paris",
+            "coordinates": [
+              48.8647073,
+              2.3723484
+            ]
           },
           {
             "id": "utopie",
             "name": "Utopie",
             "description": "Boulangerie Prix meilleure baguette 2024",
-            "address": "20 Rue Jean-Pierre Timbaud, 75011 Paris"
-          }
-        ]
-      },
-      "vie-nocturne": {
-        "title": "Bars",
-        "places": [
-          {
-            "id": "rue-oberkampf",
-            "name": "Rue Oberkampf",
-            "description": "Concentration bars branchés, ambiance étudiante",
-            "address": "Rue Oberkampf, 75011 Paris"
+            "address": "20 Rue Jean-Pierre Timbaud, 75011 Paris",
+            "coordinates": [
+              48.865336,
+              2.368738
+            ]
           },
-          {
-            "id": "rue-de-lappe",
-            "name": "Rue de Lappe",
-            "description": "Bars à ambiance, tradition bal musette",
-            "address": "Rue de Lappe, 75011 Paris"
-          },
-          {
-            "id": "septime-la-cave",
-            "name": "Septime la Cave",
-            "description": "Bar vins naturels, sélection Bertrand",
-            "address": "3 Rue Basfroi, 75011 Paris"
-          },
-          {
-            "id": "mobster-bar",
-            "name": "Mobster Bar",
-            "description": "Speakeasy secret, entrée cabine téléphonique",
-            "address": "116 Boulevard Richard-Lenoir, 75011 Paris"
-          }
-        ]
-      },
-      "culture-arts": {
-        "title": "Culture",
-        "places": [
           {
             "id": "cirque-dhiver-bouglione",
             "name": "Cirque d'Hiver Bouglione",
             "description": "Cirque traditionnel depuis 1852, spectacles familiaux",
-            "address": "110 Rue Amelot, 75011 Paris"
+            "address": "110 Rue Amelot, 75011 Paris",
+            "coordinates": [
+              48.8635472,
+              2.3675789
+            ]
           },
           {
             "id": "le-bataclan",
             "name": "Le Bataclan",
             "description": "Salle concert historique, programmation éclectique",
-            "address": "50 Boulevard Voltaire, 75011 Paris"
+            "address": "50 Boulevard Voltaire, 75011 Paris",
+            "coordinates": [
+              48.8630357,
+              2.3706465
+            ]
           },
           {
             "id": "rue-de-la-roquette",
             "name": "Rue de la Roquette",
             "description": "Galeries art contemporain, vernissages",
-            "address": "Rue de la Roquette, 75011 Paris"
+            "address": "Rue de la Roquette, 75011 Paris",
+            "coordinates": [
+              48.8595847,
+              2.3878015
+            ]
           },
           {
             "id": "le-nouveau-casino",
             "name": "Le Nouveau Casino",
             "description": "Club électro, DJs internationaux",
-            "address": "109 Rue Oberkampf, 75011 Paris"
-          }
-        ]
-      },
-      "shopping-vintage": {
-        "title": "Shopping",
-        "places": [
-          {
-            "id": "rue-de-charonne",
-            "name": "Rue de Charonne",
-            "description": "Friperies, boutiques créateurs émergents",
-            "address": "Rue de Charonne, 75011 Paris"
+            "address": "109 Rue Oberkampf, 75011 Paris",
+            "coordinates": [
+              48.8658464,
+              2.3779133
+            ]
           },
-          {
-            "id": "centre-commercial-charonne",
-            "name": "Centre Commercial",
-            "description": "Concept store (rue de Charonne), mode alternative",
-            "address": "2 Rue de Charonne, 75011 Paris"
-          }
-        ]
-      },
-      "lieux-insolites": {
-        "title": "Secrets",
-        "places": [
           {
             "id": "cite-du-figuier",
             "name": "Cité du Figuier",
             "description": "Impasse tropicale, palmiers et façades colorées",
-            "address": "104 Rue Oberkampf, 75011 Paris"
+            "address": "104 Rue Oberkampf, 75011 Paris",
+            "coordinates": [
+              48.8658774,
+              2.3785891
+            ]
           },
-          {
-            "id": "musee-du-fumeur",
-            "name": "Musée du Fumeur",
-            "description": "Histoire pratiques fumage, collection pipes",
-            "address": "7 Rue Pache, 75011 Paris"
-          },
-          {
-            "id": "square-maurice-gardette",
-            "name": "Square Maurice-Gardette",
-            "description": "Jardin caché, aire jeux enfants",
-            "address": "Square Maurice-Gardette, 75011 Paris"
-          },
-          {
-            "id": "passage-saint-pierre-amelot",
-            "name": "Passage Saint-Pierre-Amelot",
-            "description": "Cour pavée préservée, ateliers",
-            "address": "Passage Saint-Pierre-Amelot, 75011 Paris"
-          }
-        ]
-      },
-      "street-art": {
-        "title": "StreetArt",
-        "places": [
           {
             "id": "oberkampf-menilmontant",
             "name": "Oberkampf-Ménilmontant",
             "description": "Murs peints, œuvres éphémères",
-            "address": "Oberkampf-Ménilmontant, 75011 Paris"
+            "address": "Oberkampf-Ménilmontant, 75011 Paris",
+            "coordinates": [
+              48.866621,
+              2.3830169
+            ]
           },
           {
             "id": "fresque-jerome-mesnager",
             "name": "Fresque Jérôme Mesnager",
             "description": "Homme blanc iconique",
             "address": "Various locations, 75011 Paris"
+          },
+          {
+            "id": "septime",
+            "name": "Septime",
+            "description": "Restaurant gastronomique Bertrand Grébaut (réservation 3 mois)",
+            "address": "80 Rue de Charonne, 75011 Paris",
+            "coordinates": [
+              48.8536035,
+              2.3808315
+            ]
+          },
+          {
+            "id": "le-chateaubriand",
+            "name": "Le Chateaubriand",
+            "description": "Bistrot gastronomique pionnier, Inaki Aizpitarte",
+            "address": "129 Avenue Parmentier, 75011 Paris",
+            "coordinates": [
+              48.8693522,
+              2.3713516
+            ]
+          },
+          {
+            "id": "marche-des-enfants-rouges",
+            "name": "Marché des Enfants Rouges",
+            "description": "Plus ancien marché couvert, cuisine monde",
+            "address": "39 Rue de Bretagne, 75003 Paris",
+            "coordinates": [
+              48.862792,
+              2.361978
+            ]
+          },
+          {
+            "id": "le-6-paul-bert",
+            "name": "Le 6 Paul Bert",
+            "description": "Bistrot traditionnel authentique",
+            "address": "6 Rue Paul Bert, 75011 Paris",
+            "coordinates": [
+              48.8513485,
+              2.3846064
+            ]
+          },
+          {
+            "id": "rue-oberkampf",
+            "name": "Rue Oberkampf",
+            "description": "Concentration bars branchés, ambiance étudiante",
+            "address": "Rue Oberkampf, 75011 Paris",
+            "coordinates": [
+              48.8657815,
+              2.3778386
+            ]
+          },
+          {
+            "id": "rue-de-lappe",
+            "name": "Rue de Lappe",
+            "description": "Bars à ambiance, tradition bal musette",
+            "address": "Rue de Lappe, 75011 Paris",
+            "coordinates": [
+              48.8532809,
+              2.373568
+            ]
+          },
+          {
+            "id": "le-mary-celeste",
+            "name": "Le Mary Celeste",
+            "description": "Bar à huîtres et cocktails, happy hour populaire",
+            "address": "1 Rue Commines, 75003 Paris",
+            "coordinates": [
+              48.8619727,
+              2.3657451
+            ]
+          },
+          {
+            "id": "septime-la-cave",
+            "name": "Septime la Cave",
+            "description": "Bar vins naturels, sélection Bertrand",
+            "address": "3 Rue Basfroi, 75011 Paris",
+            "coordinates": [
+              48.8537146,
+              2.380211
+            ]
+          },
+          {
+            "id": "mobster-bar",
+            "name": "Mobster Bar",
+            "description": "Speakeasy secret, entrée cabine téléphonique",
+            "address": "116 Boulevard Richard-Lenoir, 75011 Paris",
+            "coordinates": [
+              48.8646033,
+              2.3710055
+            ]
+          },
+          {
+            "id": "l-assassin",
+            "name": "L'Assassin",
+            "description": "Happy hour généreuse, ambiance décontractée",
+            "address": "15 Rue Jacob, 75006 Paris",
+            "coordinates": [
+              48.8550868,
+              2.3350785
+            ]
+          },
+          {
+            "id": "maroquinerie",
+            "name": "Maroquinerie",
+            "description": "Salle concert alternative, rock indépendant",
+            "address": "23 Rue Boyer, 75020 Paris",
+            "coordinates": [
+              48.8685287,
+              2.3920592
+            ]
+          },
+          {
+            "id": "rue-denoyez",
+            "name": "Rue Dénoyez",
+            "description": "Galerie street art légal (20e limitrophe)",
+            "address": "Rue Dénoyez, 75020 Paris",
+            "coordinates": [
+              48.8716515,
+              2.3785163
+            ]
+          }
+        ]
+      },
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
+        "places": [
+          {
+            "id": "passage-de-lhomme",
+            "name": "Passage de l'Homme",
+            "description": "Cour pavée artisans, ateliers ouverts",
+            "address": "102 Rue du Faubourg-Saint-Antoine, 75011 Paris",
+            "coordinates": [
+              48.8510752,
+              2.3766262
+            ]
+          },
+          {
+            "id": "cour-damoye",
+            "name": "Cour Damoye & Cour de l'Étoile d'Or",
+            "description": "Ateliers artisans, patrimoine vivant",
+            "address": "Rue de Charonne, 75011 Paris",
+            "coordinates": [
+              48.855664,
+              2.3906976
+            ]
+          },
+          {
+            "id": "square-maurice-gardette",
+            "name": "Square Maurice-Gardette",
+            "description": "Jardin caché, aire jeux enfants",
+            "address": "Square Maurice-Gardette, 75011 Paris",
+            "coordinates": [
+              48.8623249,
+              2.3789798
+            ]
+          },
+          {
+            "id": "passage-saint-pierre-amelot",
+            "name": "Passage Saint-Pierre-Amelot",
+            "description": "Cour pavée préservée, ateliers",
+            "address": "Passage Saint-Pierre-Amelot, 75011 Paris",
+            "coordinates": [
+              48.8621275,
+              2.3678379
+            ]
+          }
+        ]
+      },
+      "restaurants": {
+        "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
+        "places": []
+      },
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
+        "places": []
+      },
+      "shopping": {
+        "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
+        "places": [
+          {
+            "id": "rue-de-charonne",
+            "name": "Rue de Charonne",
+            "description": "Friperies, boutiques créateurs émergents",
+            "address": "Rue de Charonne, 75011 Paris",
+            "coordinates": [
+              48.855664,
+              2.3906976
+            ]
+          },
+          {
+            "id": "centre-commercial-charonne",
+            "name": "Centre Commercial",
+            "description": "Concept store (rue de Charonne), mode alternative",
+            "address": "2 Rue de Charonne, 75011 Paris",
+            "coordinates": [
+              48.855664,
+              2.3906976
+            ]
+          },
+          {
+            "id": "marche-aux-puces-de-montreuil",
+            "name": "Marché aux Puces de Montreuil",
+            "description": "Brocante week-end, prix abordables",
+            "address": "Avenue du Professeur André Lemierre, 75020 Paris",
+            "coordinates": [
+              48.8548273,
+              2.4152432
+            ]
+          },
+          {
+            "id": "kilwatch",
+            "name": "Kilwatch",
+            "description": "Vintage streetwear référence, pièces uniques",
+            "address": "64 Rue Tiquetonne, 75002 Paris",
+            "coordinates": [
+              48.8648343,
+              2.3455269
+            ]
+          }
+        ]
+      },
+      "musees": {
+        "title": "Musées",
+        "description": "Collections et expositions culturelles",
+        "places": [
+          {
+            "id": "musee-du-fumeur",
+            "name": "Musée du Fumeur",
+            "description": "Histoire pratiques fumage, collection pipes",
+            "address": "7 Rue Pache, 75011 Paris",
+            "coordinates": [
+              48.8586121,
+              2.3822451
+            ]
           }
         ]
       }

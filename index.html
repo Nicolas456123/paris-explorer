@@ -27,7 +27,7 @@
     
     <!-- CSS Principal -->
     <link rel="stylesheet" href="assets/css/main.css?v=2.1.0">
-    <link rel="stylesheet" href="assets/css/themes.css?v=2.1.0">
+    <link rel="stylesheet" href="assets/css/themes-v2.css?v=3.0.0">
     <link rel="stylesheet" href="assets/css/responsive.css?v=2.1.0">
     
     <!-- Styles additionnels pour les suggestions de recherche -->
@@ -81,6 +81,122 @@
         .suggestion-history {
             opacity: 0.4;
             font-size: 12px;
+        }
+        
+        /* Bouton toggle thème */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--paris-gold) 0%, var(--paris-gold-light) 100%);
+            border: 2px solid var(--paris-white);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .theme-icon-light,
+        .theme-icon-dark {
+            position: absolute;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .theme-icon-dark {
+            opacity: 0;
+            transform: rotate(-180deg);
+        }
+        
+        [data-mode="dark"] .theme-icon-light {
+            opacity: 0;
+            transform: rotate(180deg);
+        }
+        
+        [data-mode="dark"] .theme-icon-dark {
+            opacity: 1;
+            transform: rotate(0);
+        }
+        
+        /* Styles pour les paramètres */
+        .settings-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--paris-cream);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .setting-item {
+            margin-bottom: 20px;
+        }
+        
+        .setting-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--paris-blue);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            background: var(--paris-white);
+            color: var(--paris-dark);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus {
+            border-color: var(--paris-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            outline: none;
+        }
+        
+        .setting-help {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--paris-gray);
+            font-style: italic;
+        }
+        
+        .theme-preview {
+            margin-top: 15px;
+            padding: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+        }
+        
+        .preview-card {
+            background: linear-gradient(135deg, var(--paris-gold) 0%, var(--paris-gold-light) 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .preview-header {
+            height: 30px;
+            background: var(--paris-blue);
+        }
+        
+        .preview-content {
+            height: 40px;
+            background: linear-gradient(135deg, var(--paris-cream) 0%, var(--paris-white) 100%);
         }
         
         /* Styles pour les contrôles de carte */
@@ -166,6 +282,12 @@
         <header class="header">
             <h1>🗼 Paris Explorer</h1>
             <p class="subtitle">Découvrez tous les trésors de la Ville Lumière</p>
+            
+            <!-- Bouton toggle jour/nuit -->
+            <button id="themeToggle" class="theme-toggle" title="Basculer le thème">
+                <span class="theme-icon-light">☀️</span>
+                <span class="theme-icon-dark">🌙</span>
+            </button>
         </header>
         
         <!-- Statistiques générales -->
@@ -315,10 +437,30 @@
             
             <!-- Onglet Paramètres -->
             <div id="settingsContent" class="tab-content">
-                <div class="settings-loading">
-                    <div class="message-icon">⚙️</div>
-                    <h3>Configuration de l'application</h3>
-                    <p>Personnalisez votre expérience Paris Explorer</p>
+                <div class="settings-section">
+                    <h3>🎨 Apparence</h3>
+                    <div class="setting-item">
+                        <label for="themeSelect" class="setting-label">Thème :</label>
+                        <select id="themeSelect" class="form-select" onchange="changeTheme(this.value)">
+                            <option value="classic">🏛️ Classique</option>
+                            <option value="versailles">👑 Versailles</option>
+                            <option value="montmartre">🎨 Montmartre</option>
+                            <option value="saint-germain">🌿 Saint-Germain</option>
+                            <option value="marais">🏘️ Marais</option>
+                            <option value="haute-couture">🖤 Haute Couture</option>
+                            <option value="high-contrast">⚡ Contraste Élevé</option>
+                        </select>
+                        <small class="setting-help">Chaque thème a un mode jour et nuit disponible</small>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="theme-preview" id="themePreview">
+                            <div class="preview-card">
+                                <div class="preview-header"></div>
+                                <div class="preview-content"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -470,11 +612,68 @@
     <script src="assets/js/utils.js?v=1754648172"></script>
     <script src="assets/js/data-manager.js?v=1754648172"></script>
     <script src="assets/js/user-manager.js?v=1754648172"></script>
-    <script src="assets/js/map-manager.js?v=1754648561"></script>
+    <script src="assets/js/map-manager.js?v=1754673847"></script>
     <script src="assets/js/search-filter.js?v=1754648172"></script>
     <script src="assets/js/export-import.js?v=1754648172"></script>
     <script src="assets/js/ui-manager.js?v=1754648172"></script>
     <script src="assets/js/app.js?v=1754648172"></script>
+    
+    <!-- Script pour le toggle thème et mode -->
+    <script>
+        // Gestion des thèmes et du mode jour/nuit
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            // Charger les préférences sauvegardées
+            const savedTheme = localStorage.getItem('parisExplorerTheme') || 'classic';
+            const savedMode = localStorage.getItem('parisExplorerMode') || 'light';
+            
+            // Appliquer le thème et le mode sauvegardés
+            body.setAttribute('data-theme', savedTheme);
+            if (savedMode === 'dark') {
+                body.setAttribute('data-mode', 'dark');
+            }
+            
+            // Toggle du mode jour/nuit
+            themeToggle.addEventListener('click', function() {
+                const currentMode = body.getAttribute('data-mode');
+                const newMode = currentMode === 'dark' ? 'light' : 'dark';
+                
+                if (newMode === 'dark') {
+                    body.setAttribute('data-mode', 'dark');
+                } else {
+                    body.removeAttribute('data-mode');
+                }
+                
+                localStorage.setItem('parisExplorerMode', newMode);
+                
+                // Animation de rotation du bouton
+                this.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+            
+            // Fonction pour changer de thème (appelée depuis le sélecteur de thème)
+            window.changeTheme = function(themeName) {
+                body.setAttribute('data-theme', themeName);
+                localStorage.setItem('parisExplorerTheme', themeName);
+                updateThemePreview();
+            };
+            
+            // Initialiser le sélecteur de thème
+            const themeSelect = document.getElementById('themeSelect');
+            if (themeSelect) {
+                themeSelect.value = savedTheme;
+            }
+            
+            // Fonction pour mettre à jour l'aperçu du thème
+            function updateThemePreview() {
+                // Mise à jour automatique grâce aux variables CSS
+            }
+        });
+    </script>
     
     <!-- Service Worker pour PWA -->
     <script>

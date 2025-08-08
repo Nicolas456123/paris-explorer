@@ -76,222 +76,267 @@
     "categories": {
       "monuments": {
         "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "palais-du-luxembourg",
             "name": "Palais du Luxembourg",
             "description": "Siège Sénat, jardins Marie de Médicis",
-            "address": "15 Rue de Vaugirard, 75006 Paris"
+            "address": "15 Rue de Vaugirard, 75006 Paris",
+            "coordinates": [
+              48.8492162,
+              2.336455
+            ]
           },
           {
             "id": "eglise-saint-germain-des-pres",
             "name": "Église Saint-Germain-des-Prés",
             "description": "Plus ancienne église Paris (542)",
-            "address": "3 Place Saint-Germain des Prés, 75006 Paris"
+            "address": "3 Place Saint-Germain des Prés, 75006 Paris",
+            "coordinates": [
+              48.8539672,
+              2.3345203
+            ]
           },
           {
             "id": "eglise-saint-sulpice",
             "name": "Église Saint-Sulpice",
             "description": "Orgue Cavaillé-Coll, gnomon, fresques Delacroix",
-            "address": "Place Saint-Sulpice, 75006 Paris"
+            "address": "Place Saint-Sulpice, 75006 Paris",
+            "coordinates": [
+              48.8508692,
+              2.3337524
+            ]
           },
           {
             "id": "institut-de-france",
             "name": "Institut de France",
             "description": "Coupole, Académie française, bibliothèque Mazarine",
-            "address": "23 Quai de Conti, 75006 Paris"
+            "address": "23 Quai de Conti, 75006 Paris",
+            "coordinates": [
+              48.8572708,
+              2.3373594
+            ]
           },
           {
             "id": "ecole-des-beaux-arts",
             "name": "École des Beaux-Arts",
             "description": "Architecture néoclassique, ateliers d'artistes",
-            "address": "14 Rue Bonaparte, 75006 Paris"
+            "address": "14 Rue Bonaparte, 75006 Paris",
+            "coordinates": [
+              48.8571319,
+              2.333844
+            ]
           },
           {
             "id": "monnaie-de-paris",
             "name": "Monnaie de Paris",
             "description": "Plus ancienne institution française, expos design",
-            "address": "11 Quai de Conti, 75006 Paris"
+            "address": "11 Quai de Conti, 75006 Paris",
+            "coordinates": [
+              48.8564015,
+              2.3384956
+            ]
           }
         ]
       },
-      "jardins-luxembourg": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "bassin-octogonal",
             "name": "Bassin octogonal",
             "description": "Bateaux miniatures, chaises vertes iconiques",
-            "address": "Jardin du Luxembourg, 75006 Paris"
+            "address": "Jardin du Luxembourg, 75006 Paris",
+            "coordinates": [
+              48.8467227,
+              2.3364148
+            ]
           },
           {
-            "id": "theatre-des-marionnettes",
-            "name": "Théâtre des marionnettes",
-            "description": "Spectacles enfants, tradition séculaire",
-            "address": "Jardin du Luxembourg, 75006 Paris"
-          },
-          {
-            "id": "orangerie-luxembourg",
-            "name": "Orangerie",
-            "description": "Expositions temporaires, collection palmiers",
-            "address": "Jardin du Luxembourg, 75006 Paris"
-          },
-          {
-            "id": "rucher-du-luxembourg",
-            "name": "Rucher du Luxembourg",
-            "description": "Ruches pédagogiques, cours apiculture",
-            "address": "Jardin du Luxembourg, 75006 Paris"
-          },
-          {
-            "id": "fontaine-medicis",
-            "name": "Fontaine Médicis",
-            "description": "Grotte artificielle romantique, carpes koï",
-            "address": "Jardin du Luxembourg, 75006 Paris"
+            "id": "cour-du-commerce-saint-andre",
+            "name": "Cour du Commerce Saint-André",
+            "description": "Passage pavé XVIIIe, Guillotin",
+            "address": "Cour du Commerce Saint-André, 75006 Paris",
+            "coordinates": [
+              48.8525298,
+              2.3392977
+            ]
           }
         ]
       },
-      "cafes-historiques": {
-        "title": "Cafés",
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
         "places": [
-          {
-            "id": "cafe-de-flore",
-            "name": "Café de Flore",
-            "description": "Quartier général existentialistes, Sartre-Beauvoir",
-            "address": "172 Boulevard Saint-Germain, 75006 Paris"
-          },
-          {
-            "id": "les-deux-magots",
-            "name": "Les Deux Magots",
-            "description": "Prix littéraire Deux Magots, terrasse mythique",
-            "address": "6 Place Saint-Germain des Prés, 75006 Paris"
-          },
           {
             "id": "brasserie-lipp",
             "name": "Brasserie Lipp",
             "description": "Décor Art nouveau, clientèle politique",
-            "address": "151 Boulevard Saint-Germain, 75006 Paris"
-          },
-          {
-            "id": "le-procope",
-            "name": "Le Procope",
-            "description": "Premier café littéraire parisien, Voltaire",
-            "address": "13 Rue de l'Ancienne Comédie, 75006 Paris"
-          },
-          {
-            "id": "cafe-de-la-mairie",
-            "name": "Café de la Mairie",
-            "description": "Place Saint-Sulpice, cinéphiles et étudiants",
-            "address": "8 Place Saint-Sulpice, 75006 Paris"
-          },
-          {
-            "id": "la-palette",
-            "name": "La Palette",
-            "description": "Café d'artistes, décor Belle Époque préservé",
-            "address": "43 Rue de Seine, 75006 Paris"
+            "address": "151 Boulevard Saint-Germain, 75006 Paris",
+            "coordinates": [
+              48.8537528,
+              2.3324105
+            ]
           }
         ]
       },
-      "restaurants-gastronomiques": {
+      "restaurants": {
         "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
             "id": "guy-savoy",
             "name": "Guy Savoy",
             "description": "⭐⭐⭐ Michelin, Monnaie de Paris, vue Seine",
-            "address": "11 Quai de Conti, 75006 Paris"
+            "address": "11 Quai de Conti, 75006 Paris",
+            "coordinates": [
+              48.8564015,
+              2.3384956
+            ]
           },
           {
             "id": "ze-kitchen-galerie",
             "name": "Ze Kitchen Galerie",
             "description": "Cuisine fusion William Ledeuil",
-            "address": "4 Rue des Grands Augustins, 75006 Paris"
+            "address": "4 Rue des Grands Augustins, 75006 Paris",
+            "coordinates": [
+              48.8552578,
+              2.3403197
+            ]
           },
           {
             "id": "le-cherche-midi",
             "name": "Le Cherche Midi",
             "description": "Bistrot chic, cuisine moderne française",
-            "address": "22 Rue du Cherche-Midi, 75006 Paris"
+            "address": "22 Rue du Cherche-Midi, 75006 Paris",
+            "coordinates": [
+              48.8506782,
+              2.3280065
+            ]
           },
           {
             "id": "huguette-bistro",
             "name": "Huguette Bistro",
             "description": "Nouveau bistrot, carte courte et qualité",
-            "address": "81 Rue de Seine, 75006 Paris"
+            "address": "81 Rue de Seine, 75006 Paris",
+            "coordinates": [
+              48.8533123,
+              2.3370582
+            ]
+          },
+          {
+            "id": "l-ami-jean",
+            "name": "L'Ami Jean",
+            "description": "Bistrot basque survitaminé, Stéphane Jégo",
+            "address": "27 Rue Malar, 75007 Paris",
+            "coordinates": [
+              48.8603183,
+              2.3059915
+            ]
           }
         ]
       },
       "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "boulevard-saint-germain",
             "name": "Boulevard Saint-Germain",
             "description": "Maisons mode prestigieuses, Louis Vuitton flagship",
-            "address": "Boulevard Saint-Germain, 75006 Paris"
+            "address": "Boulevard Saint-Germain, 75006 Paris",
+            "coordinates": [
+              48.8519499,
+              2.3409359
+            ]
           },
           {
             "id": "rue-de-rennes",
             "name": "Rue de Rennes",
             "description": "Grands magasins, Zara, Fnac, Uniqlo",
-            "address": "Rue de Rennes, 75006 Paris"
+            "address": "Rue de Rennes, 75006 Paris",
+            "coordinates": [
+              48.8444039,
+              2.3243872
+            ]
           },
           {
             "id": "marche-saint-germain",
             "name": "Marché Saint-Germain",
             "description": "Centre commercial couvert, boutiques créateurs",
-            "address": "4 Rue Lobineau, 75006 Paris"
+            "address": "4 Rue Lobineau, 75006 Paris",
+            "coordinates": [
+              48.8518856,
+              2.3363143
+            ]
           },
           {
             "id": "pierre-herme-bonaparte",
             "name": "Pierre Hermé",
             "description": "Maître macaron, laboratoire visible",
-            "address": "72 Rue Bonaparte, 75006 Paris"
+            "address": "72 Rue Bonaparte, 75006 Paris",
+            "coordinates": [
+              48.8515389,
+              2.332827
+            ]
           },
           {
             "id": "librairie-la-hune",
             "name": "Librairie La Hune",
             "description": "Livres d'art, architecture, nocturnes",
-            "address": "170 Boulevard Saint-Germain, 75006 Paris"
+            "address": "170 Boulevard Saint-Germain, 75006 Paris",
+            "coordinates": [
+              48.8540317,
+              2.3329611
+            ]
           },
           {
             "id": "taschen",
             "name": "Taschen",
             "description": "Livres d'art grand format, design unique",
-            "address": "2 Rue de Buci, 75006 Paris"
+            "address": "2 Rue de Buci, 75006 Paris",
+            "coordinates": [
+              48.8537778,
+              2.3380961
+            ]
           }
         ]
       },
-      "theatres": {
-        "title": "Spectacles",
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
             "id": "theatre-de-lodeon",
             "name": "Théâtre de l'Odéon",
             "description": "Théâtre national, programmation européenne",
-            "address": "Place de l'Odéon, 75006 Paris"
+            "address": "Place de l'Odéon, 75006 Paris",
+            "coordinates": [
+              48.8498367,
+              2.3387164
+            ]
           },
           {
             "id": "cinema-saint-germain-des-pres",
             "name": "Cinéma Saint-Germain-des-Prés",
             "description": "Films d'art et d'essai, intimiste",
-            "address": "22 Rue Guillaume Apollinaire, 75006 Paris"
+            "address": "22 Rue Guillaume Apollinaire, 75006 Paris",
+            "coordinates": [
+              48.8545798,
+              2.3332821
+            ]
           },
           {
             "id": "musee-eugene-delacroix",
             "name": "Musée Eugène Delacroix",
             "description": "Atelier du peintre, jardin secret",
-            "address": "6 Rue de Furstenberg, 75006 Paris"
-          }
-        ]
-      },
-      "lieux-secrets": {
-        "title": "Lieux Secrets et Jardins Cachés",
-        "places": [
-          {
-            "id": "cour-du-commerce-saint-andre",
-            "name": "Cour du Commerce Saint-André",
-            "description": "Passage pavé XVIIIe, Guillotin",
-            "address": "Cour du Commerce Saint-André, 75006 Paris"
+            "address": "6 Rue de Furstenberg, 75006 Paris",
+            "coordinates": [
+              48.8544424,
+              2.3356553
+            ]
           },
           {
             "id": "place-furstenberg",
@@ -300,10 +345,90 @@
             "address": "Place de Furstenberg, 75006 Paris"
           },
           {
+            "id": "cafe-de-flore",
+            "name": "Café de Flore",
+            "description": "Quartier général existentialistes, Sartre-Beauvoir",
+            "address": "172 Boulevard Saint-Germain, 75006 Paris",
+            "coordinates": [
+              48.8541278,
+              2.3325499
+            ]
+          },
+          {
+            "id": "les-deux-magots",
+            "name": "Les Deux Magots",
+            "description": "Prix littéraire Deux Magots, terrasse mythique",
+            "address": "6 Place Saint-Germain des Prés, 75006 Paris",
+            "coordinates": [
+              48.8542327,
+              2.33321
+            ]
+          },
+          {
+            "id": "le-procope",
+            "name": "Le Procope",
+            "description": "Premier café littéraire parisien, Voltaire",
+            "address": "13 Rue de l'Ancienne Comédie, 75006 Paris",
+            "coordinates": [
+              48.8530058,
+              2.3387359
+            ]
+          },
+          {
+            "id": "cafe-de-la-mairie",
+            "name": "Café de la Mairie",
+            "description": "Place Saint-Sulpice, cinéphiles et étudiants",
+            "address": "8 Place Saint-Sulpice, 75006 Paris",
+            "coordinates": [
+              48.8514341,
+              2.3336815
+            ]
+          },
+          {
+            "id": "la-palette",
+            "name": "La Palette",
+            "description": "Café d'artistes, décor Belle Époque préservé",
+            "address": "43 Rue de Seine, 75006 Paris",
+            "coordinates": [
+              48.8554133,
+              2.3368241
+            ]
+          },
+          {
+            "id": "galerie-claude-bernard",
+            "name": "Galerie Claude Bernard",
+            "description": "Art contemporain depuis 1957",
+            "address": "7 Rue des Beaux-Arts, 75006 Paris",
+            "coordinates": [
+              48.8563152,
+              2.3358055
+            ]
+          },
+          {
+            "id": "jardin-catherine-laboure",
+            "name": "Jardin Catherine Labouré",
+            "description": "Potager secret 7ème, vignes Chardonnay",
+            "address": "29 Rue de Babylone, 75007 Paris",
+            "coordinates": [
+              48.8516386,
+              2.3205084
+            ]
+          }
+        ]
+      },
+      "musees": {
+        "title": "Musées",
+        "description": "Collections et expositions culturelles",
+        "places": [
+          {
             "id": "jardin-musee-delacroix",
             "name": "Jardin du Musée Delacroix",
             "description": "Écrin végétal, atelier reconstitué",
-            "address": "6 Rue de Furstenberg, 75006 Paris"
+            "address": "6 Rue de Furstenberg, 75006 Paris",
+            "coordinates": [
+              48.8544424,
+              2.3356553
+            ]
           }
         ]
       }

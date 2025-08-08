@@ -2,29 +2,35 @@
 
 /* ===== MODE SOMBRE PARISIEN ===== */
 [data-theme="dark"] {
-    /* Variables sombres */
-    --paris-white: #1f2937;
-    --paris-cream: #374151;
-    --paris-dark: #f9fafb;
-    --paris-gray: #d1d5db;
-    --paris-gold: #fbbf24;
-    --paris-gold-light: #fcd34d;
-    --paris-blue: #60a5fa;
-    --paris-blue-light: #93c5fd;
+    /* Variables sombres corrigées pour une meilleure lisibilité */
+    --paris-white: #1a1a2e;  /* Fond sombre mais pas noir */
+    --paris-cream: #2d2d44;   /* Fond secondaire */
+    --paris-dark: #e0e0e0;    /* Texte principal clair */
+    --paris-gray: #b0b0b0;    /* Texte secondaire */
+    --paris-gold: #ffd700;    /* Or plus brillant */
+    --paris-gold-light: #ffed4e;
+    --paris-blue: #5e9fff;    /* Bleu plus lumineux */
+    --paris-blue-light: #87bfff;
+    
+    /* Couleurs supplémentaires pour le contraste */
+    --text-primary: #f0f0f0;
+    --text-secondary: #c0c0c0;
+    --border-color: #404040;
+    --hover-bg: rgba(255, 255, 255, 0.1);
     
     /* Gradients sombres */
-    --gradient-paris: linear-gradient(135deg, #1e40af 0%, #fbbf24 100%);
-    --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
+    --gradient-paris: linear-gradient(135deg, #1e40af 0%, #ffd700 100%);
+    --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
     
     /* Ombres sombres */
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
 }
 
 [data-theme="dark"] body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #92400e 75%, #a16207 100%);
-    color: var(--paris-dark);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #614124 75%, #8b5a2b 100%);
+    color: var(--text-primary);
 }
 
 [data-theme="dark"] .app-container {
@@ -138,6 +144,31 @@
 
 [data-theme="dark"] .checkbox-label:hover {
     background: var(--paris-cream);
+}
+
+/* Notifications en mode sombre - texte sombre sur fond clair */
+[data-theme="dark"] .notification {
+    color: #1a1a1a !important;
+}
+
+[data-theme="dark"] .notification.success {
+    background: linear-gradient(135deg, #86efac 0%, #4ade80 100%) !important;
+    border-color: #22c55e !important;
+}
+
+[data-theme="dark"] .notification.error {
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%) !important;
+    border-color: #ef4444 !important;
+}
+
+[data-theme="dark"] .notification.info {
+    background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%) !important;
+    border-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .notification.warning {
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%) !important;
+    border-color: #f59e0b !important;
 }
 
 /* ===== THÈME VERSAILLES (OR ET BLANC) ===== */
@@ -359,6 +390,7 @@
     }
 }
 
+/* Détection automatique du thème système désactivée
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
         --paris-white: #1f2937;
@@ -371,6 +403,7 @@
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #92400e 75%, #a16207 100%);
     }
 }
+*/
 
 /* ===== ANIMATIONS THÉMATIQUES ===== */
 @keyframes parisSparkle {

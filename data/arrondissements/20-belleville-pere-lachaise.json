@@ -74,62 +74,145 @@
       "description": "Métro : Belleville (2,11), Père Lachaise (2,3), Gambetta (3,3bis), Ménilmontant (2), Pyrénées (11)"
     },
     "categories": {
-      "pere-lachaise": {
-        "title": "PèreLachaise",
-        "description": "44 hectares, 3M visiteurs/an, 70000 concessions",
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
             "id": "jim-morrison",
             "name": "Jim Morrison",
             "description": "Tombe la plus visitée, surveillance permanente (Division 6)",
-            "address": "16 Rue du Repos, 75020 Paris"
+            "address": "16 Rue du Repos, 75020 Paris",
+            "coordinates": [
+              48.8597843,
+              2.3908199
+            ]
           },
           {
-            "id": "edith-piaf",
-            "name": "Édith Piaf",
-            "description": "À côté Henri Salvador, pèlerinage quotidien (Division 97)",
-            "address": "16 Rue du Repos, 75020 Paris"
+            "id": "le-mur",
+            "name": "Le M.U.R.",
+            "description": "Mur art urbain renouvelé mensuellement, performances",
+            "address": "Rue Oberkampf, 75011 Paris",
+            "coordinates": [
+              48.8632005,
+              2.3687155
+            ]
           },
           {
-            "id": "oscar-wilde",
-            "name": "Oscar Wilde",
-            "description": "Sphinx ailé Jacob Epstein, tradition rouge lèvres (Division 89)",
-            "address": "16 Rue du Repos, 75020 Paris"
+            "id": "rue-de-belleville",
+            "name": "Rue de Belleville",
+            "description": "Restaurants monde entier, Chine, Tunisie, Turquie",
+            "address": "Rue de Belleville, 75020 Paris",
+            "coordinates": [
+              48.8765079,
+              2.4043621
+            ]
           },
           {
-            "id": "chopin-moliere-la-fontaine",
-            "name": "Chopin, Molière, La Fontaine",
-            "description": "Circuit tombes célébrités littéraires",
-            "address": "16 Rue du Repos, 75020 Paris"
+            "id": "chinatown-de-belleville",
+            "name": "Chinatown de Belleville",
+            "description": "Restaurants familiaux authentiques, épiceries",
+            "address": "Boulevard de Belleville, 75020 Paris",
+            "coordinates": [
+              48.8682168,
+              2.3817548
+            ]
           },
           {
-            "id": "mur-des-federes",
-            "name": "Mur des Fédérés",
-            "description": "Mémorial Commune Paris 1871, dernier combat",
-            "address": "16 Rue du Repos, 75020 Paris"
+            "id": "mosquee-de-belleville",
+            "name": "Mosquée de Belleville",
+            "description": "Architecture contemporaine, centre communautaire",
+            "address": "18 Rue de Tanger, 75019 Paris",
+            "coordinates": [
+              48.8868765,
+              2.369748
+            ]
           },
           {
-            "id": "columbarium",
-            "name": "Columbarium",
-            "description": "Incinérés célèbres, architecture Art nouveau",
-            "address": "16 Rue du Repos, 75020 Paris"
+            "id": "la-bellevilloise",
+            "name": "La Bellevilloise",
+            "description": "Concerts, DJ sets, événements culturels, coopérative",
+            "address": "19 Rue Boyer, 75020 Paris",
+            "coordinates": [
+              48.8682829,
+              2.3922306
+            ]
           },
           {
-            "id": "tombes-remarquables",
-            "name": "Tombes remarquables",
-            "description": "Balzac, Proust, Apollinaire, Delacroix, Bizet",
-            "address": "16 Rue du Repos, 75020 Paris"
-          }
-        ]
-      },
-      "belleville-street-art": {
-        "title": "Belleville",
-        "places": [
+            "id": "regard-saint-martin",
+            "name": "Regard Saint-Martin",
+            "description": "Construction aqueduc Belleville, patrimoine eau",
+            "address": "42 Rue des Cascades, 75020 Paris",
+            "coordinates": [
+              48.8716869,
+              2.3913949
+            ]
+          },
+          {
+            "id": "le-cent-quatre-20",
+            "name": "Le Cent Quatre",
+            "description": "Création artistique, résidences (limitrophe 19e)",
+            "address": "5 Rue Curial, 75019 Paris",
+            "coordinates": [
+              48.8900491,
+              2.3706808
+            ]
+          },
+          {
+            "id": "theatre-de-menilmontant",
+            "name": "Théâtre de Ménilmontant",
+            "description": "Créations contemporaines, prix populaires",
+            "address": "15 Rue du Retrait, 75020 Paris",
+            "coordinates": [
+              48.8680188,
+              2.3943422
+            ]
+          },
+          {
+            "id": "rue-des-pyrenees",
+            "name": "Rue des Pyrénées",
+            "description": "Artère commerçante, toutes nationalités",
+            "address": "Rue des Pyrénées, 75020 Paris",
+            "coordinates": [
+              48.8525797,
+              2.4061237
+            ]
+          },
           {
             "id": "rue-denoyez",
             "name": "Rue Dénoyez",
             "description": "Galerie street art légal permanente, tags autorisés",
-            "address": "Rue Dénoyez, 75020 Paris"
+            "address": "Rue Dénoyez, 75020 Paris",
+            "coordinates": [
+              48.8716515,
+              2.3785163
+            ]
+          },
+          {
+            "id": "aux-deux-amis",
+            "name": "Aux Deux Amis",
+            "description": "Bar vins naturels, ambiance décontractée, tapas",
+            "address": "45 Rue Oberkampf, 75011 Paris",
+            "coordinates": [
+              48.8645844,
+              2.3718765
+            ]
+          }
+        ]
+      },
+      "monuments": {
+        "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
+        "places": [
+          {
+            "id": "chopin-moliere-la-fontaine",
+            "name": "Chopin, Molière, La Fontaine",
+            "description": "Circuit tombes célébrités littéraires",
+            "address": "16 Rue du Repos, 75020 Paris",
+            "coordinates": [
+              48.8597843,
+              2.3908199
+            ]
           },
           {
             "id": "ateliers-dartistes-belleville",
@@ -138,138 +221,123 @@
             "address": "Various locations Belleville, 75020 Paris"
           },
           {
-            "id": "le-mur",
-            "name": "Le M.U.R.",
-            "description": "Mur art urbain renouvelé mensuellement, performances",
-            "address": "Rue Oberkampf, 75011 Paris"
-          },
-          {
-            "id": "galerie-magda-danysz",
-            "name": "Galerie Magda Danysz",
-            "description": "Art urbain contemporain, expositions pointues",
-            "address": "78 Rue Amelot, 75011 Paris"
-          }
-        ]
-      },
-      "quartiers-multiculturels": {
-        "title": "Multiculturel",
-        "places": [
-          {
-            "id": "rue-de-belleville",
-            "name": "Rue de Belleville",
-            "description": "Restaurants monde entier, Chine, Tunisie, Turquie",
-            "address": "Rue de Belleville, 75020 Paris"
-          },
-          {
-            "id": "chinatown-de-belleville",
-            "name": "Chinatown de Belleville",
-            "description": "Restaurants familiaux authentiques, épiceries",
-            "address": "Boulevard de Belleville, 75020 Paris"
-          },
-          {
-            "id": "marche-de-belleville",
-            "name": "Marché de Belleville",
-            "description": "Mar/Ven, plus long marché Paris 1km",
-            "address": "Boulevard de Belleville, 75020 Paris"
-          },
-          {
-            "id": "mosquee-de-belleville",
-            "name": "Mosquée de Belleville",
-            "description": "Architecture contemporaine, centre communautaire",
-            "address": "18 Rue de Tanger, 75019 Paris"
-          }
-        ]
-      },
-      "panoramas-espaces-verts": {
-        "title": "Parcs",
-        "places": [
-          {
-            "id": "parc-de-belleville",
-            "name": "Parc de Belleville",
-            "description": "Vue panoramique tout Paris, 4,5 hectares terrasses",
-            "address": "47 Rue Julien Lacroix, 75020 Paris"
-          },
-          {
-            "id": "villa-castel",
-            "name": "Villa Castel",
-            "description": "Impasse secrète, maisons atypiques, street art",
-            "address": "Villa Castel, 75020 Paris"
-          },
-          {
-            "id": "regards-de-laqueduc",
-            "name": "Regards de l'aqueduc",
-            "description": "Vestiges hydrauliques historiques, architecture industrielle",
-            "address": "Rue des Cascades, 75020 Paris"
-          },
-          {
-            "id": "square-de-la-roquette",
-            "name": "Square de la Roquette",
-            "description": "Jardin caché, ancien site prison, mémoire",
-            "address": "Square de la Roquette, 75011 Paris"
-          }
-        ]
-      },
-      "restaurants-populaires": {
-        "title": "Restaurants",
-        "places": [
-          {
-            "id": "le-baratin",
-            "name": "Le Baratin",
-            "description": "Bistrot culte Raquel Carena, cuisine instinctive",
-            "address": "3 Rue Jouye-Rouve, 75020 Paris"
-          },
-          {
-            "id": "chez-gladines",
-            "name": "Chez Gladines",
-            "description": "Institution basque, portions généreuses, prix étudiants",
-            "address": "30 Rue des Cinq Diamants, 75013 Paris"
-          },
-          {
-            "id": "aux-folies",
-            "name": "Aux Folies",
-            "description": "Grande terrasse populaire, cuisine traditionnelle, ambiance",
-            "address": "8 Rue de Belleville, 75020 Paris"
-          },
-          {
-            "id": "le-zephyr",
-            "name": "Le Zéphyr",
-            "description": "Brasserie Belle Époque préservée, décor authentique",
-            "address": "1 Rue du Jourdain, 75020 Paris"
-          }
-        ]
-      },
-      "vie-nocturne-underground": {
-        "title": "Bars",
-        "places": [
-          {
-            "id": "la-bellevilloise",
-            "name": "La Bellevilloise",
-            "description": "Concerts, DJ sets, événements culturels, coopérative",
-            "address": "19 Rue Boyer, 75020 Paris"
-          },
-          {
             "id": "mama-shelter",
             "name": "Mama Shelter",
             "description": "Rooftop vue panoramique 360°, cocktails, design Starck",
-            "address": "109 Rue de Bagnolet, 75020 Paris"
+            "address": "109 Rue de Bagnolet, 75020 Paris",
+            "coordinates": [
+              48.8599665,
+              2.4025574
+            ]
           },
           {
             "id": "le-perchoir-menilmontant",
             "name": "Le Perchoir Ménilmontant",
             "description": "Bar rooftop branché, vue Tour Eiffel",
-            "address": "14 Rue Crespin du Gast, 75011 Paris"
+            "address": "14 Rue Crespin du Gast, 75011 Paris",
+            "coordinates": [
+              48.8654176,
+              2.3819734
+            ]
           },
           {
-            "id": "aux-deux-amis",
-            "name": "Aux Deux Amis",
-            "description": "Bar vins naturels, ambiance décontractée, tapas",
-            "address": "45 Rue Oberkampf, 75011 Paris"
+            "id": "reservoirs-de-belleville",
+            "name": "Réservoirs de Belleville",
+            "description": "Architecture hydraulique XIXe, visites exceptionnelles",
+            "address": "Rue des Cascades, 75020 Paris",
+            "coordinates": [
+              48.8721891,
+              2.3904661
+            ]
+          },
+          {
+            "id": "marche-de-menilmontant",
+            "name": "Marché de Ménilmontant",
+            "description": "Jeu/Dim, produits frais, ambiance populaire",
+            "address": "Boulevard de Ménilmontant, 75020 Paris",
+            "coordinates": [
+              48.860068,
+              2.388918
+            ]
           }
         ]
       },
-      "patrimoine-industriel": {
-        "title": "Industriel",
+      "shopping": {
+        "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
+          {
+            "id": "brocante-pere-lachaise",
+            "name": "Brocante Père Lachaise",
+            "description": "Antiquités, vintage, objets insolites",
+            "address": "Boulevard de Ménilmontant, 75020 Paris",
+            "coordinates": [
+              48.860068,
+              2.388918
+            ]
+          }
+        ]
+      },
+      "musees": {
+        "title": "Musées",
+        "description": "Collections et expositions culturelles",
+        "places": [
+          {
+            "id": "galerie-magda-danysz",
+            "name": "Galerie Magda Danysz",
+            "description": "Art urbain contemporain, expositions pointues",
+            "address": "78 Rue Amelot, 75011 Paris",
+            "coordinates": [
+              48.8606142,
+              2.3679603
+            ]
+          }
+        ]
+      },
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
+        "places": [
+          {
+            "id": "parc-de-belleville",
+            "name": "Parc de Belleville",
+            "description": "Vue panoramique tout Paris, 4,5 hectares terrasses",
+            "address": "47 Rue Julien Lacroix, 75020 Paris",
+            "coordinates": [
+              48.8723503,
+              2.3824302
+            ]
+          },
+          {
+            "id": "villa-castel",
+            "name": "Villa Castel",
+            "description": "Impasse secrète, maisons atypiques, street art",
+            "address": "Villa Castel, 75020 Paris",
+            "coordinates": [
+              48.8713875,
+              2.3880123
+            ]
+          },
+          {
+            "id": "regards-de-laqueduc",
+            "name": "Regards de l'aqueduc",
+            "description": "Vestiges hydrauliques historiques, architecture industrielle",
+            "address": "Rue des Cascades, 75020 Paris",
+            "coordinates": [
+              48.8721891,
+              2.3904661
+            ]
+          },
+          {
+            "id": "square-de-la-roquette",
+            "name": "Square de la Roquette",
+            "description": "Jardin caché, ancien site prison, mémoire",
+            "address": "Square de la Roquette, 75011 Paris",
+            "coordinates": [
+              48.8591568,
+              2.3851738
+            ]
+          },
           {
             "id": "petite-ceinture",
             "name": "Petite Ceinture",
@@ -277,27 +345,14 @@
             "address": "Various access points, 75020 Paris"
           },
           {
-            "id": "reservoirs-de-belleville",
-            "name": "Réservoirs de Belleville",
-            "description": "Architecture hydraulique XIXe, visites exceptionnelles",
-            "address": "Rue des Cascades, 75020 Paris"
-          },
-          {
-            "id": "regard-saint-martin",
-            "name": "Regard Saint-Martin",
-            "description": "Construction aqueduc Belleville, patrimoine eau",
-            "address": "42 Rue des Cascades, 75020 Paris"
-          }
-        ]
-      },
-      "jardins-ecologie": {
-        "title": "Jardins",
-        "places": [
-          {
             "id": "jardin-naturel-pierre-emmanuel",
             "name": "Jardin naturel Pierre-Emmanuel",
             "description": "Bordure Père Lachaise, biodiversité",
-            "address": "Square du Père Lachaise, 75020 Paris"
+            "address": "Square du Père Lachaise, 75020 Paris",
+            "coordinates": [
+              48.8699058,
+              2.3966908
+            ]
           },
           {
             "id": "jardins-partages-belleville",
@@ -309,55 +364,64 @@
             "id": "villa-georgina",
             "name": "Villa Georgina",
             "description": "Impasse verdoyante, maisons vigneronnes",
-            "address": "Villa Georgina, 75020 Paris"
+            "address": "Villa Georgina, 75020 Paris",
+            "coordinates": [
+              48.8717334,
+              2.3977055
+            ]
           }
         ]
       },
-      "culture-alternative": {
-        "title": "Culture",
+      "restaurants": {
+        "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
-            "id": "le-cent-quatre-20",
-            "name": "Le Cent Quatre",
-            "description": "Création artistique, résidences (limitrophe 19e)",
-            "address": "5 Rue Curial, 75019 Paris"
+            "id": "le-baratin",
+            "name": "Le Baratin",
+            "description": "Bistrot culte Raquel Carena, cuisine instinctive",
+            "address": "3 Rue Jouye-Rouve, 75020 Paris",
+            "coordinates": [
+              48.8730762,
+              2.3828589
+            ]
           },
           {
-            "id": "les-voutes",
-            "name": "Les Voûtes",
-            "description": "Caves voûtées, concerts underground, électro",
-            "address": "19 Rue Boyer, 75020 Paris"
+            "id": "chez-gladines",
+            "name": "Chez Gladines",
+            "description": "Institution basque, portions généreuses, prix étudiants",
+            "address": "30 Rue des Cinq Diamants, 75013 Paris",
+            "coordinates": [
+              48.8287874,
+              2.3506413
+            ]
           },
           {
-            "id": "theatre-de-menilmontant",
-            "name": "Théâtre de Ménilmontant",
-            "description": "Créations contemporaines, prix populaires",
-            "address": "15 Rue du Retrait, 75020 Paris"
+            "id": "aux-folies",
+            "name": "Aux Folies",
+            "description": "Grande terrasse populaire, cuisine traditionnelle, ambiance",
+            "address": "8 Rue de Belleville, 75020 Paris",
+            "coordinates": [
+              48.8722451,
+              2.3778798
+            ]
+          },
+          {
+            "id": "le-zephyr",
+            "name": "Le Zéphyr",
+            "description": "Brasserie Belle Époque préservée, décor authentique",
+            "address": "1 Rue du Jourdain, 75020 Paris",
+            "coordinates": [
+              48.8738892,
+              2.3893951
+            ]
           }
         ]
       },
-      "marches-commerces": {
-        "title": "Shopping",
-        "places": [
-          {
-            "id": "marche-de-menilmontant",
-            "name": "Marché de Ménilmontant",
-            "description": "Jeu/Dim, produits frais, ambiance populaire",
-            "address": "Boulevard de Ménilmontant, 75020 Paris"
-          },
-          {
-            "id": "rue-des-pyrenees",
-            "name": "Rue des Pyrénées",
-            "description": "Artère commerçante, toutes nationalités",
-            "address": "Rue des Pyrénées, 75020 Paris"
-          },
-          {
-            "id": "brocante-pere-lachaise",
-            "name": "Brocante Père Lachaise",
-            "description": "Antiquités, vintage, objets insolites",
-            "address": "Boulevard de Ménilmontant, 75020 Paris"
-          }
-        ]
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
+        "places": []
       }
     }
   },

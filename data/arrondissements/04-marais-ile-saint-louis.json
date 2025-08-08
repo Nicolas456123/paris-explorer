@@ -68,269 +68,483 @@
     "categories": {
       "monuments": {
         "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "notre-dame-de-paris",
             "name": "Notre-Dame de Paris",
             "description": "✨ RÉOUVERT DÉCEMBRE 2024 après restauration",
-            "address": "6 Parvis Notre-Dame, 75004 Paris"
+            "address": "6 Parvis Notre-Dame, 75004 Paris",
+            "coordinates": [
+              48.8529312,
+              2.3500626
+            ]
           },
           {
             "id": "place-des-vosges",
             "name": "Place des Vosges",
             "description": "Plus ancienne place royale (1612), 36 pavillons",
-            "address": "Place des Vosges, 75004 Paris"
+            "address": "Place des Vosges, 75004 Paris",
+            "coordinates": [
+              48.8550655,
+              2.3653311
+            ]
           },
           {
             "id": "centre-pompidou",
             "name": "Centre Pompidou",
             "description": "Art moderne (⚠️ fermeture 2025 pour rénovation)",
-            "address": "Place Georges-Pompidou, 75004 Paris"
+            "address": "Place Georges-Pompidou, 75004 Paris",
+            "coordinates": [
+              48.8607767,
+              2.3517622
+            ]
           },
           {
             "id": "hotel-de-ville",
             "name": "Hôtel de Ville",
             "description": "Architecture néo-Renaissance, expositions gratuites",
-            "address": "Place de l'Hôtel de Ville, 75004 Paris"
+            "address": "Place de l'Hôtel de Ville, 75004 Paris",
+            "coordinates": [
+              48.8564459,
+              2.3508981
+            ]
           },
           {
             "id": "tour-saint-jacques",
             "name": "Tour Saint-Jacques",
             "description": "Vestige église gothique, point géodésique",
-            "address": "Square de la Tour Saint-Jacques, 75004 Paris"
+            "address": "Square de la Tour Saint-Jacques, 75004 Paris",
+            "coordinates": [
+              48.8578831,
+              2.3487609
+            ]
           },
           {
             "id": "hotel-de-sens",
             "name": "Hôtel de Sens",
             "description": "Architecture médiévale, Bibliothèque Forney",
-            "address": "1 Rue du Figuier, 75004 Paris"
+            "address": "1 Rue du Figuier, 75004 Paris",
+            "coordinates": [
+              48.8534255,
+              2.3591918
+            ]
           },
           {
             "id": "hotel-de-sully",
             "name": "Hôtel de Sully",
             "description": "Patrimoine XVIIe, Centre monuments nationaux",
-            "address": "62 Rue Saint-Antoine, 75004 Paris"
-          }
-        ]
-      },
-      "patrimoine-juif": {
-        "title": "PatrimoineJuif",
-        "places": [
-          {
-            "id": "rue-des-rosiers",
-            "name": "Rue des Rosiers",
-            "description": "Cœur historique quartier juif, devantures Yiddish",
-            "address": "Rue des Rosiers, 75004 Paris"
+            "address": "62 Rue Saint-Antoine, 75004 Paris",
+            "coordinates": [
+              48.8544026,
+              2.3636954
+            ]
           },
           {
             "id": "synagogue-des-tournelles",
             "name": "Synagogue des Tournelles",
             "description": "Architecture remarquable, visite guidée",
-            "address": "21 Rue des Tournelles, 75004 Paris"
+            "address": "21 Rue des Tournelles, 75004 Paris",
+            "coordinates": [
+              48.855067,
+              2.367221
+            ]
           },
           {
             "id": "memorial-de-la-shoah",
             "name": "Mémorial de la Shoah",
             "description": "Musée et lieu de mémoire, mur des noms",
-            "address": "17 Rue Geoffroy-l'Asnier, 75004 Paris"
+            "address": "17 Rue Geoffroy-l'Asnier, 75004 Paris",
+            "coordinates": [
+              48.8549847,
+              2.3566361
+            ]
           },
-          {
-            "id": "synagogue-agoudas-hakehilos",
-            "name": "Synagogue Agoudas Hakehilos",
-            "description": "Plus ancienne synagogue Paris",
-            "address": "10 Rue Pavée, 75004 Paris"
-          }
-        ]
-      },
-      "ile-saint-louis": {
-        "title": "IleSaintLouis",
-        "places": [
           {
             "id": "hotel-lambert",
             "name": "Hôtel Lambert",
             "description": "Architecture classique Louis Le Vau",
-            "address": "2 Rue Saint-Louis-en-l'Île, 75004 Paris"
-          },
-          {
-            "id": "quais-de-seine",
-            "name": "Quais de Seine",
-            "description": "Promenade romantique, péniches-restaurants",
-            "address": "Quai de Bourbon, 75004 Paris"
-          },
-          {
-            "id": "berthillon",
-            "name": "Berthillon",
-            "description": "Glacier mythique depuis 1954, 70 parfums",
-            "address": "31 Rue Saint-Louis-en-l'Île, 75004 Paris"
+            "address": "2 Rue Saint-Louis-en-l'Île, 75004 Paris",
+            "coordinates": [
+              48.8508561,
+              2.3594076
+            ]
           },
           {
             "id": "eglise-saint-louis-en-lile",
             "name": "Église Saint-Louis-en-l'Île",
             "description": "Architecture baroque, concerts",
-            "address": "19 Rue Saint-Louis-en-l'Île, 75004 Paris"
-          },
-          {
-            "id": "hotel-de-lauzun",
-            "name": "Hôtel de Lauzun",
-            "description": "Décors XVIIe, Club des Haschischins",
-            "address": "17 Quai d'Anjou, 75004 Paris"
+            "address": "19 Rue Saint-Louis-en-l'Île, 75004 Paris",
+            "coordinates": [
+              48.8512053,
+              2.358138
+            ]
           },
           {
             "id": "pont-saint-louis",
             "name": "Pont Saint-Louis",
             "description": "Vue Notre-Dame, musiciens de rue",
-            "address": "Pont Saint-Louis, 75004 Paris"
-          }
-        ]
-      },
-      "restaurants": {
-        "title": "Restaurants",
-        "places": [
-          {
-            "id": "las-du-fallafel",
-            "name": "L'As du Fallafel",
-            "description": "Institution fermée vendredi soir-samedi, Lenny Kravitz",
-            "address": "34 Rue des Rosiers, 75004 Paris"
-          },
-          {
-            "id": "ma-bourgogne",
-            "name": "Ma Bourgogne",
-            "description": "Bistrot place des Vosges, terrasse historique",
-            "address": "19 Place des Vosges, 75004 Paris"
-          },
-          {
-            "id": "jacques-genin",
-            "name": "Jacques Genin",
-            "description": "Chocolatier-confiseur, pâtes de fruits",
-            "address": "133 Rue de Turenne, 75003 Paris"
-          },
-          {
-            "id": "cafe-saint-regis",
-            "name": "Café Saint-Régis",
-            "description": "Institution île Saint-Louis depuis 1961",
-            "address": "6 Rue Jean du Bellay, 75004 Paris"
-          }
-        ]
-      },
-      "bars-gay": {
-        "title": "Bars",
-        "places": [
-          {
-            "id": "raidd-bar",
-            "name": "RAIDD Bar",
-            "description": "Bar gay emblématique, spectacles douche",
-            "address": "23 Rue du Temple, 75004 Paris"
-          },
-          {
-            "id": "open-cafe",
-            "name": "Open Café",
-            "description": "Terrasse mythique Marais, clientèle mixte",
-            "address": "17 Rue des Archives, 75004 Paris"
-          },
-          {
-            "id": "la-perle",
-            "name": "La Perle",
-            "description": "Apéritifs 1€, ouvert 7h30-2h, très populaire",
-            "address": "78 Rue Vieille du Temple, 75003 Paris"
-          },
-          {
-            "id": "3w-kafe",
-            "name": "3W Kafé",
-            "description": "Bar lesbien historique, soirées thématiques",
-            "address": "8 Rue des Écouffes, 75004 Paris"
-          },
-          {
-            "id": "le-tango",
-            "name": "Le Tango",
-            "description": "Club gay/hétéro, bal musette dimanche",
-            "address": "11 Rue au Maire, 75003 Paris"
-          },
-          {
-            "id": "cox",
-            "name": "Cox",
-            "description": "Bar gay décontracté, happy hour généreux",
-            "address": "15 Rue des Archives, 75004 Paris"
-          }
-        ]
-      },
-      "shopping": {
-        "title": "Shopping",
-        "places": [
-          {
-            "id": "rue-des-francs-bourgeois",
-            "name": "Rue des Franc-Bourgeois",
-            "description": "Boutiques mode et design, COS, Sézane",
-            "address": "Rue des Francs-Bourgeois, 75004 Paris"
-          },
-          {
-            "id": "village-saint-paul",
-            "name": "Village Saint-Paul",
-            "description": "Antiquaires et brocanteurs, cours pavées",
-            "address": "Rue Saint-Paul, 75004 Paris"
-          },
-          {
-            "id": "mariage-freres",
-            "name": "Mariage Frères",
-            "description": "Thés d'exception depuis 1854, salon historique",
-            "address": "30 Rue du Bourg-Tibourg, 75004 Paris"
-          },
-          {
-            "id": "bhv-marais",
-            "name": "BHV Marais",
-            "description": "Grand magasin historique, bricolage et mode",
-            "address": "52 Rue de Rivoli, 75004 Paris"
-          },
-          {
-            "id": "leclair-de-genie",
-            "name": "L'Éclair de Génie",
-            "description": "Pâtisseries Christophe Adam, éclairs revisités",
-            "address": "14 Rue Pavée, 75004 Paris"
+            "address": "Pont Saint-Louis, 75004 Paris",
+            "coordinates": [
+              48.8527602,
+              2.3527617
+            ]
           }
         ]
       },
       "culture": {
-        "title": "Culture",
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
         "places": [
+          {
+            "id": "rue-des-rosiers",
+            "name": "Rue des Rosiers",
+            "description": "Cœur historique quartier juif, devantures Yiddish",
+            "address": "Rue des Rosiers, 75004 Paris",
+            "coordinates": [
+              48.8577892,
+              2.3581374
+            ]
+          },
+          {
+            "id": "synagogue-agoudas-hakehilos",
+            "name": "Synagogue Agoudas Hakehilos",
+            "description": "Plus ancienne synagogue Paris",
+            "address": "10 Rue Pavée, 75004 Paris",
+            "coordinates": [
+              48.8560033,
+              2.3605059
+            ]
+          },
+          {
+            "id": "berthillon",
+            "name": "Berthillon",
+            "description": "Glacier mythique depuis 1954, 70 parfums",
+            "address": "31 Rue Saint-Louis-en-l'Île, 75004 Paris",
+            "coordinates": [
+              48.8517084,
+              2.356718
+            ]
+          },
+          {
+            "id": "hotel-de-lauzun",
+            "name": "Hôtel de Lauzun",
+            "description": "Décors XVIIe, Club des Haschischins",
+            "address": "17 Quai d'Anjou, 75004 Paris",
+            "coordinates": [
+              48.8517073,
+              2.3590648
+            ]
+          },
           {
             "id": "maison-europeenne-photographie",
             "name": "Maison Européenne de la Photographie",
             "description": "Expos photo contemporaine",
-            "address": "5 Rue de Fourcy, 75004 Paris"
+            "address": "5 Rue de Fourcy, 75004 Paris",
+            "coordinates": [
+              48.854979,
+              2.3591668
+            ]
           },
           {
             "id": "maison-victor-hugo",
             "name": "Maison Victor Hugo",
             "description": "Musée place des Vosges, appartements reconstitués",
-            "address": "6 Place des Vosges, 75004 Paris"
+            "address": "6 Place des Vosges, 75004 Paris",
+            "coordinates": [
+              48.854799,
+              2.3661358
+            ]
           },
           {
             "id": "pavillon-de-larsenal",
             "name": "Pavillon de l'Arsenal",
             "description": "Architecture et urbanisme parisien",
-            "address": "21 Boulevard Morland, 75004 Paris"
+            "address": "21 Boulevard Morland, 75004 Paris",
+            "coordinates": [
+              48.850598,
+              2.3621838
+            ]
+          },
+          {
+            "id": "galerie-marian-goodman",
+            "name": "Galerie Marian Goodman",
+            "description": "Art contemporain international",
+            "address": "79 Rue du Temple, 75003 Paris",
+            "coordinates": [
+              48.8615704,
+              2.3559047
+            ]
+          },
+          {
+            "id": "square-saint-gilles-grand-veneur",
+            "name": "Square Saint-Gilles-Grand-Veneur",
+            "description": "Jardin romantique hôtels particuliers",
+            "address": "Square Saint-Gilles-Grand-Veneur, 75003 Paris"
           }
         ]
       },
-      "jardins-secrets": {
-        "title": "Jardins",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
+          {
+            "id": "quais-de-seine",
+            "name": "Quais de Seine",
+            "description": "Promenade romantique, péniches-restaurants",
+            "address": "Quai de Bourbon, 75004 Paris",
+            "coordinates": [
+              48.8524957,
+              2.3568997
+            ]
+          },
           {
             "id": "jardin-anne-frank",
             "name": "Jardin Anne-Frank",
             "description": "Jardin secret 4000m², mémorial caché",
-            "address": "14 Impasse Berthaud, 75003 Paris"
+            "address": "14 Impasse Berthaud, 75003 Paris",
+            "coordinates": [
+              48.8614468,
+              2.3542771
+            ]
           },
           {
             "id": "jardin-des-rosiers",
             "name": "Jardin des Rosiers",
             "description": "2000m², aire de jeux, jardin partagé",
-            "address": "10 Rue des Rosiers, 75004 Paris"
+            "address": "10 Rue des Rosiers, 75004 Paris",
+            "coordinates": [
+              48.8568821,
+              2.3600915
+            ]
           },
           {
             "id": "cloitre-des-billettes",
             "name": "Cloître des Billettes",
             "description": "Seul cloître médiéval conservé Paris",
-            "address": "24 Rue des Archives, 75004 Paris"
+            "address": "24 Rue des Archives, 75004 Paris",
+            "coordinates": [
+              48.8581017,
+              2.3550347
+            ]
+          }
+        ]
+      },
+      "restaurants": {
+        "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
+        "places": [
+          {
+            "id": "las-du-fallafel",
+            "name": "L'As du Fallafel",
+            "description": "Institution fermée vendredi soir-samedi, Lenny Kravitz",
+            "address": "34 Rue des Rosiers, 75004 Paris",
+            "coordinates": [
+              48.8574095,
+              2.3590493
+            ]
+          },
+          {
+            "id": "ma-bourgogne",
+            "name": "Ma Bourgogne",
+            "description": "Bistrot place des Vosges, terrasse historique",
+            "address": "19 Place des Vosges, 75004 Paris",
+            "coordinates": [
+              48.8561931,
+              2.3647114
+            ]
+          },
+          {
+            "id": "jacques-genin",
+            "name": "Jacques Genin",
+            "description": "Chocolatier-confiseur, pâtes de fruits",
+            "address": "133 Rue de Turenne, 75003 Paris",
+            "coordinates": [
+              48.8644691,
+              2.364616
+            ]
+          },
+          {
+            "id": "cafe-saint-regis",
+            "name": "Café Saint-Régis",
+            "description": "Institution île Saint-Louis depuis 1961",
+            "address": "6 Rue Jean du Bellay, 75004 Paris",
+            "coordinates": [
+              48.8529282,
+              2.3536887
+            ]
+          },
+          {
+            "id": "breizh-cafe",
+            "name": "Breizh Café",
+            "description": "Crêperie gastronomique, sarrasin bio",
+            "address": "109 Rue Vieille du Temple, 75003 Paris",
+            "coordinates": [
+              48.8606169,
+              2.3618584
+            ]
+          },
+          {
+            "id": "l-ami-jean",
+            "name": "L'Ami Jean",
+            "description": "Bistrot basque, ambiance survoltée",
+            "address": "27 Rue Malar, 75007 Paris",
+            "coordinates": [
+              48.8603183,
+              2.3059915
+            ]
+          },
+          {
+            "id": "le-mary-celeste",
+            "name": "Le Mary Celeste",
+            "description": "Bar à huîtres, cocktails créatifs",
+            "address": "1 Rue Commines, 75003 Paris",
+            "coordinates": [
+              48.8619727,
+              2.3657451
+            ]
+          },
+          {
+            "id": "du-pain-et-des-idees",
+            "name": "Du Pain et des Idées",
+            "description": "Boulangerie artisanale référence",
+            "address": "34 Rue Yves Toudic, 75010 Paris",
+            "coordinates": [
+              48.871197,
+              2.3628861
+            ]
+          }
+        ]
+      },
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
+        "places": [
+          {
+            "id": "raidd-bar",
+            "name": "RAIDD Bar",
+            "description": "Bar gay emblématique, spectacles douche",
+            "address": "23 Rue du Temple, 75004 Paris",
+            "coordinates": [
+              48.8588639,
+              2.3534734
+            ]
+          },
+          {
+            "id": "open-cafe",
+            "name": "Open Café",
+            "description": "Terrasse mythique Marais, clientèle mixte",
+            "address": "17 Rue des Archives, 75004 Paris",
+            "coordinates": [
+              48.8583927,
+              2.3550312
+            ]
+          },
+          {
+            "id": "la-perle",
+            "name": "La Perle",
+            "description": "Apéritifs 1€, ouvert 7h30-2h, très populaire",
+            "address": "78 Rue Vieille du Temple, 75003 Paris",
+            "coordinates": [
+              48.8597538,
+              2.3605082
+            ]
+          },
+          {
+            "id": "3w-kafe",
+            "name": "3W Kafé",
+            "description": "Bar lesbien historique, soirées thématiques",
+            "address": "8 Rue des Écouffes, 75004 Paris",
+            "coordinates": [
+              48.8565814,
+              2.3584677
+            ]
+          },
+          {
+            "id": "le-tango",
+            "name": "Le Tango",
+            "description": "Club gay/hétéro, bal musette dimanche",
+            "address": "11 Rue au Maire, 75003 Paris",
+            "coordinates": [
+              48.8644966,
+              2.3568645
+            ]
+          },
+          {
+            "id": "cox",
+            "name": "Cox",
+            "description": "Bar gay décontracté, happy hour généreux",
+            "address": "15 Rue des Archives, 75004 Paris",
+            "coordinates": [
+              48.8582962,
+              2.3549319
+            ]
+          }
+        ]
+      },
+      "shopping": {
+        "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
+        "places": [
+          {
+            "id": "rue-des-francs-bourgeois",
+            "name": "Rue des Franc-Bourgeois",
+            "description": "Boutiques mode et design, COS, Sézane",
+            "address": "Rue des Francs-Bourgeois, 75004 Paris",
+            "coordinates": [
+              48.8581725,
+              2.3596941
+            ]
+          },
+          {
+            "id": "village-saint-paul",
+            "name": "Village Saint-Paul",
+            "description": "Antiquaires et brocanteurs, cours pavées",
+            "address": "Rue Saint-Paul, 75004 Paris",
+            "coordinates": [
+              48.8525274,
+              2.3606282
+            ]
+          },
+          {
+            "id": "mariage-freres",
+            "name": "Mariage Frères",
+            "description": "Thés d'exception depuis 1854, salon historique",
+            "address": "30 Rue du Bourg-Tibourg, 75004 Paris",
+            "coordinates": [
+              48.857691,
+              2.3564926
+            ]
+          },
+          {
+            "id": "bhv-marais",
+            "name": "BHV Marais",
+            "description": "Grand magasin historique, bricolage et mode",
+            "address": "52 Rue de Rivoli, 75004 Paris",
+            "coordinates": [
+              48.8572161,
+              2.3526435
+            ]
+          },
+          {
+            "id": "leclair-de-genie",
+            "name": "L'Éclair de Génie",
+            "description": "Pâtisseries Christophe Adam, éclairs revisités",
+            "address": "14 Rue Pavée, 75004 Paris",
+            "coordinates": [
+              48.8562014,
+              2.3606223
+            ]
+          },
+          {
+            "id": "papier-plus",
+            "name": "Papier Plus",
+            "description": "Papeterie raffinée, carnets artisanaux",
+            "address": "9 Rue du Pont Louis-Philippe, 75004 Paris",
+            "coordinates": [
+              48.8551123,
+              2.3555589
+            ]
           }
         ]
       }

@@ -68,170 +68,337 @@
     "categories": {
       "musees": {
         "title": "Musées",
+        "description": "Collections et expositions culturelles",
         "places": [
           {
             "id": "musee-des-arts-et-metiers",
             "name": "Musée des Arts et Métiers",
             "description": "Sciences et techniques, automates",
-            "address": "60 Rue Réaumur, 75003 Paris"
+            "address": "60 Rue Réaumur, 75003 Paris",
+            "coordinates": [
+              48.8660977,
+              2.3554138
+            ]
           },
           {
             "id": "musee-picasso",
             "name": "Musée Picasso",
             "description": "5000 œuvres dans hôtel Salé XVIIe",
-            "address": "5 Rue de Thorigny, 75003 Paris"
+            "address": "5 Rue de Thorigny, 75003 Paris",
+            "coordinates": [
+              48.8598698,
+              2.3621152
+            ]
           },
           {
             "id": "musee-carnavalet",
             "name": "Musée Carnavalet",
             "description": "Histoire de Paris, collections révolutionnaires",
-            "address": "23 Rue de Sévigné, 75003 Paris"
+            "address": "23 Rue de Sévigné, 75003 Paris",
+            "coordinates": [
+              48.855076,
+              2.3616609
+            ]
           },
           {
             "id": "archives-nationales",
             "name": "Archives Nationales",
             "description": "Hôtel de Soubise, documents historiques",
-            "address": "60 Rue des Francs-Bourgeois, 75003 Paris"
+            "address": "60 Rue des Francs-Bourgeois, 75003 Paris",
+            "coordinates": [
+              48.8604503,
+              2.3578119
+            ]
           },
           {
             "id": "maison-nicolas-flamel",
             "name": "Maison de Nicolas Flamel",
             "description": "Plus ancienne maison Paris (1407)",
-            "address": "51 Rue de Montmorency, 75003 Paris"
+            "address": "51 Rue de Montmorency, 75003 Paris",
+            "coordinates": [
+              48.8635758,
+              2.3531607
+            ]
           },
           {
             "id": "musee-chasse-nature",
             "name": "Musée de la Chasse et de la Nature",
             "description": "Hôtel Guénégaud, collections insolites",
-            "address": "62 Rue des Archives, 75003 Paris"
+            "address": "62 Rue des Archives, 75003 Paris",
+            "coordinates": [
+              48.8612556,
+              2.3587827
+            ]
           },
           {
             "id": "galerie-thaddaeus-ropac",
             "name": "Galerie Thaddaeus Ropac",
             "description": "Art contemporain international",
-            "address": "7 Rue Debelleyme, 75003 Paris"
+            "address": "7 Rue Debelleyme, 75003 Paris",
+            "coordinates": [
+              48.8606786,
+              2.3637216
+            ]
           }
         ]
       },
-      "espaces-verts": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "square-du-temple",
             "name": "Square du Temple",
             "description": "Plus grand parc Marais, ancien enclos Templiers",
-            "address": "64 Rue de Bretagne, 75003 Paris"
+            "address": "64 Rue de Bretagne, 75003 Paris",
+            "coordinates": [
+              48.8627449,
+              2.3628037
+            ]
           },
           {
             "id": "carreau-du-temple",
             "name": "Carreau du Temple",
             "description": "Marché couvert rénové, expos temporaires",
-            "address": "4 Rue Eugène Spuller, 75003 Paris"
+            "address": "4 Rue Eugène Spuller, 75003 Paris",
+            "coordinates": [
+              48.8644322,
+              2.3624253
+            ]
           },
           {
             "id": "square-emile-chautemps",
             "name": "Square Émile-Chautemps",
             "description": "Petit jardin caché, aires de jeux",
-            "address": "Square Émile-Chautemps, 75003 Paris"
+            "address": "Square Émile-Chautemps, 75003 Paris",
+            "coordinates": [
+              48.8672199,
+              2.3533263
+            ]
           },
           {
             "id": "jardin-archives-nationales",
             "name": "Jardin des Archives Nationales",
             "description": "8000m², jardins à la française",
-            "address": "60 Rue des Francs-Bourgeois, 75003 Paris"
+            "address": "60 Rue des Francs-Bourgeois, 75003 Paris",
+            "coordinates": [
+              48.8604503,
+              2.3578119
+            ]
           },
           {
             "id": "passage-de-lancre",
             "name": "Passage de l'Ancre",
             "description": "Passage secret végétalisé, réparateur parapluies",
-            "address": "223 Rue Saint-Martin, 75003 Paris"
+            "address": "223 Rue Saint-Martin, 75003 Paris",
+            "coordinates": [
+              48.8642873,
+              2.3529782
+            ]
           }
         ]
       },
       "restaurants": {
         "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
             "id": "marche-enfants-rouges",
             "name": "Marché des Enfants Rouges",
             "description": "Plus ancien marché couvert (1615), cuisine monde",
-            "address": "39 Rue de Bretagne, 75003 Paris"
+            "address": "39 Rue de Bretagne, 75003 Paris",
+            "coordinates": [
+              48.862792,
+              2.361978
+            ]
           },
           {
             "id": "breizh-cafe",
             "name": "Breizh Café",
             "description": "Crêperie moderne et raffinée, cidres bio",
-            "address": "109 Rue Vieille du Temple, 75003 Paris"
+            "address": "109 Rue Vieille du Temple, 75003 Paris",
+            "coordinates": [
+              48.8606169,
+              2.3618584
+            ]
           },
           {
             "id": "cafe-charlot",
             "name": "Café Charlot",
             "description": "Brasserie branchée, terrasse prisée",
-            "address": "38 Rue de Bretagne, 75003 Paris"
+            "address": "38 Rue de Bretagne, 75003 Paris",
+            "coordinates": [
+              48.8630258,
+              2.3624789
+            ]
           },
           {
             "id": "wild-and-the-moon",
             "name": "Wild & the Moon",
             "description": "Cuisine végétale, jus pressés",
-            "address": "55 Rue Charlot, 75003 Paris"
+            "address": "55 Rue Charlot, 75003 Paris",
+            "coordinates": [
+              48.8634076,
+              2.3631143
+            ]
+          },
+          {
+            "id": "du-pain-et-des-idees",
+            "name": "Du Pain et des Idées",
+            "description": "Boulangerie artisanale réputée, Christophe Vasseur",
+            "address": "34 Rue Yves Toudic, 75010 Paris",
+            "coordinates": [
+              48.871197,
+              2.3628861
+            ]
+          },
+          {
+            "id": "l-as-du-fallafel",
+            "name": "L'As du Fallafel",
+            "description": "Institution rue des Rosiers (fermé vendredi soir-samedi)",
+            "address": "34 Rue des Rosiers, 75004 Paris",
+            "coordinates": [
+              48.8574095,
+              2.3590493
+            ]
+          },
+          {
+            "id": "miznon",
+            "name": "Miznon",
+            "description": "Pita créatifs, légumes grillés",
+            "address": "22 Rue des Ecouffes, 75004 Paris",
+            "coordinates": [
+              48.8571596,
+              2.3589213
+            ]
+          },
+          {
+            "id": "pitzman",
+            "name": "Pitzman",
+            "description": "Pizza néo-napolitaine",
+            "address": "15 Rue Abel Rabaud, 75011 Paris",
+            "coordinates": [
+              48.8694118,
+              2.3718188
+            ]
           }
         ]
       },
       "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "rue-de-bretagne",
             "name": "Rue de Bretagne",
             "description": "Boutiques créateurs émergents, concept stores",
-            "address": "Rue de Bretagne, 75003 Paris"
+            "address": "Rue de Bretagne, 75003 Paris",
+            "coordinates": [
+              48.8627449,
+              2.3628037
+            ]
           },
           {
             "id": "rue-charlot",
             "name": "Rue Charlot",
             "description": "Galeries d'art contemporain, design",
-            "address": "Rue Charlot, 75003 Paris"
+            "address": "Rue Charlot, 75003 Paris",
+            "coordinates": [
+              48.8640861,
+              2.363958
+            ]
           },
           {
             "id": "merci",
             "name": "Merci",
             "description": "Concept store design et déco, café",
-            "address": "111 Boulevard Beaumarchais, 75003 Paris"
+            "address": "111 Boulevard Beaumarchais, 75003 Paris",
+            "coordinates": [
+              48.8607708,
+              2.3669292
+            ]
           },
           {
             "id": "the-broken-arm",
             "name": "The Broken Arm",
             "description": "Mode masculine/féminine avant-garde",
-            "address": "12 Rue Perrée, 75003 Paris"
+            "address": "12 Rue Perrée, 75003 Paris",
+            "coordinates": [
+              48.8646421,
+              2.3615166
+            ]
           },
           {
             "id": "leclaireur",
             "name": "L'Éclaireur",
             "description": "Mode conceptuelle depuis 1980",
-            "address": "40 Rue de Sévigné, 75003 Paris"
+            "address": "40 Rue de Sévigné, 75003 Paris",
+            "coordinates": [
+              48.855076,
+              2.3616609
+            ]
+          },
+          {
+            "id": "papier-plus",
+            "name": "Papier Plus",
+            "description": "Papeterie d'art, objets design",
+            "address": "9 Rue du Pont Louis-Philippe, 75004 Paris",
+            "coordinates": [
+              48.8551123,
+              2.3555589
+            ]
           }
         ]
       },
-      "bars": {
-        "title": "Bars",
+      "cafes": {
+        "title": "Cafés et Bars",
+        "description": "Lieux de convivialité",
         "places": [
           {
             "id": "andy-wahloo",
             "name": "Andy Wahloo",
             "description": "Bar marocain pop, décoration atypique",
-            "address": "69 Rue des Gravilliers, 75003 Paris"
+            "address": "69 Rue des Gravilliers, 75003 Paris",
+            "coordinates": [
+              48.8645113,
+              2.3542481
+            ]
           },
           {
             "id": "grazie",
             "name": "Grazie",
             "description": "Bar à vins italiens, charcuterie",
-            "address": "91 Boulevard Beaumarchais, 75003 Paris"
+            "address": "91 Boulevard Beaumarchais, 75003 Paris",
+            "coordinates": [
+              48.8593755,
+              2.3673858
+            ]
           },
           {
             "id": "le-progres",
             "name": "Le Progrès",
             "description": "Bistrot populaire, clientèle éclectique",
-            "address": "1 Rue de Bretagne, 75003 Paris"
+            "address": "1 Rue de Bretagne, 75003 Paris",
+            "coordinates": [
+              48.8619002,
+              2.3641598
+            ]
+          }
+        ]
+      },
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
+        "places": [
+          {
+            "id": "jardin-des-rosiers-joseph-migneret",
+            "name": "Jardin des Rosiers Joseph-Migneret",
+            "description": "Jardin partagé, parcelles thématiques",
+            "address": "10 Rue des Rosiers, 75004 Paris",
+            "coordinates": [
+              48.8568821,
+              2.3600915
+            ]
           }
         ]
       }

@@ -198,7 +198,7 @@ class UserManager {
         this.app.uiManager.showUserDisplay(userName);
         
         // Notification
-        this.app.showNotification(`Bienvenue ${userName}!`, 'success', 2000);
+        // Utilisateur connecté
         
         return true;
     }
@@ -418,7 +418,7 @@ class UserManager {
         this.applySettings();
         
         // Notification de confirmation
-        this.app.showNotification(`Paramètre "${key}" mis à jour !`, 'success', 2000);
+        // Paramètre mis à jour
     }
     
     applySingleSetting(key, value) {
@@ -455,7 +455,7 @@ class UserManager {
     // === RÉINITIALISATION DU THÈME ===
     resetTheme() {
         this.updateSettingAndApply('theme', 'paris-classic');
-        this.app.showNotification('Thème réinitialisé au style classique', 'info');
+        // Thème réinitialisé
     }
     
     // === GESTION DES VISITES ===
@@ -485,7 +485,7 @@ class UserManager {
         this.checkAchievements();
         
         const action = isCurrentlyVisited ? 'retiré de' : 'ajouté à';
-        this.app.showNotification(`${placeName} ${action} vos lieux visités`, 'success');
+        // Lieu marqué comme visité/non visité
         
         return !isCurrentlyVisited;
     }
@@ -534,7 +534,7 @@ class UserManager {
         if (favoriteIndex >= 0) {
             userData.favorites.splice(favoriteIndex, 1);
             this.saveUsers();
-            this.app.showNotification(`${placeName} retiré des favoris`, 'info');
+            // Lieu retiré des favoris
             return false;
         } else {
             userData.favorites.push({
@@ -546,7 +546,7 @@ class UserManager {
             });
             this.saveUsers();
             this.checkAchievements();
-            this.app.showNotification(`${placeName} ajouté aux favoris`, 'success');
+            // Lieu ajouté aux favoris
             return true;
         }
     }

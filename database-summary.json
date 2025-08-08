@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "analysisDate": "2025-08-08T17:36:21.953Z",
+    "totalPlaces": 796,
+    "totalArrondissements": 20,
+    "averagePerArrondissement": 40
+  },
+  "byArrondissement": [
+    {
+      "name": "marais-ile-saint-louis",
+      "places": 50,
+      "categories": 6
+    },
+    {
+      "name": "quartier-latin",
+      "places": 47,
+      "categories": 6
+    },
+    {
+      "name": "trocadero-passy",
+      "places": 46,
+      "categories": 6
+    },
+    {
+      "name": "louvre",
+      "places": 45,
+      "categories": 5
+    },
+    {
+      "name": "invalides-tour-eiffel",
+      "places": 45,
+      "categories": 6
+    },
+    {
+      "name": "bastille-oberkampf",
+      "places": 45,
+      "categories": 7
+    },
+    {
+      "name": "belleville-pere-lachaise",
+      "places": 44,
+      "categories": 7
+    },
+    {
+      "name": "opera-pigalle",
+      "places": 43,
+      "categories": 7
+    },
+    {
+      "name": "haut-marais",
+      "places": 41,
+      "categories": 6
+    },
+    {
+      "name": "saint-germain",
+      "places": 40,
+      "categories": 7
+    },
+    {
+      "name": "montmartre-barbes",
+      "places": 40,
+      "categories": 7
+    },
+    {
+      "name": "chinatown-bibliotheque",
+      "places": 39,
+      "categories": 5
+    },
+    {
+      "name": "montparnasse",
+      "places": 39,
+      "categories": 6
+    },
+    {
+      "name": "champs-elysees",
+      "places": 37,
+      "categories": 6
+    },
+    {
+      "name": "vaugirard-beaugrenelle",
+      "places": 36,
+      "categories": 6
+    },
+    {
+      "name": "buttes-chaumont-villette",
+      "places": 36,
+      "categories": 5
+    },
+    {
+      "name": "nation-bercy",
+      "places": 35,
+      "categories": 4
+    },
+    {
+      "name": "batignolles-monceau",
+      "places": 32,
+      "categories": 7
+    },
+    {
+      "name": "canal-saint-martin",
+      "places": 31,
+      "categories": 6
+    },
+    {
+      "name": "bourse",
+      "places": 25,
+      "categories": 5
+    }
+  ],
+  "byCategory": [
+    {
+      "category": "culture",
+      "count": 310,
+      "percentage": 39
+    },
+    {
+      "category": "restaurants",
+      "count": 108,
+      "percentage": 14
+    },
+    {
+      "category": "monuments",
+      "count": 107,
+      "percentage": 13
+    },
+    {
+      "category": "parcs",
+      "count": 102,
+      "percentage": 13
+    },
+    {
+      "category": "shopping",
+      "count": 75,
+      "percentage": 9
+    },
+    {
+      "category": "cafes",
+      "count": 50,
+      "percentage": 6
+    },
+    {
+      "category": "musees",
+      "count": 44,
+      "percentage": 6
+    }
+  ]
+}

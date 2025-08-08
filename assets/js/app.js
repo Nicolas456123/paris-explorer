@@ -87,7 +87,7 @@ class ParisExplorerApp {
             
             // Notification de succès
             const totalLieux = this.dataManager.getTotalPlaces();
-            this.showNotification(`🗼 Paris Explorer prêt ! ${totalLieux} lieux à découvrir`, 'success', 3000);
+            // Application prête
             
             // Vérifier les achievements au démarrage
             setTimeout(() => {
@@ -199,7 +199,7 @@ class ParisExplorerApp {
         this.dataManager.loadFallbackData();
         this.uiManager.renderContent();
         
-        this.showNotification('📋 Données minimales chargées', 'info');
+        // Données minimales chargées
     }
     
     // === PWA ===
@@ -271,12 +271,12 @@ class ParisExplorerApp {
         // Gestion de la connexion
         window.addEventListener('online', () => {
             console.log('🌐 Connexion rétablie');
-            this.showNotification('Connexion internet rétablie', 'success');
+            // Connexion internet rétablie
         });
         
         window.addEventListener('offline', () => {
             console.log('📵 Connexion perdue');
-            this.showNotification('Fonctionnement hors ligne activé', 'warning');
+            // Fonctionnement hors ligne activé
         });
         
         // Gestion du redimensionnement pour la carte

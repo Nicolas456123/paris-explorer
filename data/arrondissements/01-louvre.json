@@ -58,84 +58,143 @@
     "categories": {
       "monuments": {
         "title": "Monuments",
-        "description": "Patrimoine architectural et historique exceptionnel",
+        "description": "Patrimoine architectural et historique",
         "places": [
           {
             "id": "musee-du-louvre",
             "name": "Musée du Louvre",
             "description": "La Joconde, Vénus de Milo, Pyramide de verre, 35 000 œuvres",
-            "address": "Rue de Rivoli, 75001 Paris"
+            "address": "Rue de Rivoli, 75001 Paris",
+            "coordinates": [
+              48.8646158,
+              2.3295881
+            ]
           },
           {
             "id": "sainte-chapelle",
             "name": "Sainte-Chapelle",
             "description": "1113 vitraux du XIIIe siècle, chef-d'œuvre gothique",
-            "address": "8 Boulevard du Palais, 75001 Paris"
+            "address": "8 Boulevard du Palais, 75001 Paris",
+            "coordinates": [
+              48.8553933,
+              2.3449941
+            ]
           },
           {
             "id": "conciergerie",
             "name": "Conciergerie",
             "description": "Prison de Marie-Antoinette, salle des gardes médiévale",
-            "address": "2 Boulevard du Palais, 75001 Paris"
+            "address": "2 Boulevard du Palais, 75001 Paris",
+            "coordinates": [
+              48.8559492,
+              2.3460263
+            ]
           },
           {
             "id": "palais-royal",
             "name": "Palais-Royal",
             "description": "Jardins, galeries, colonnes de Buren controversées",
-            "address": "Place du Palais-Royal, 75001 Paris"
+            "address": "Place du Palais-Royal, 75001 Paris",
+            "coordinates": [
+              48.862564,
+              2.3367804
+            ]
           },
           {
             "id": "place-vendome",
             "name": "Place Vendôme",
             "description": "Architecture classique, bijoutiers de luxe, Colonne Vendôme",
-            "address": "Place Vendôme, 75001 Paris"
+            "address": "Place Vendôme, 75001 Paris",
+            "coordinates": [
+              48.8674634,
+              2.3294281
+            ]
           },
           {
             "id": "eglise-saint-germain-auxerrois",
             "name": "Église Saint-Germain-l'Auxerrois",
             "description": "Église des rois de France, carillon",
-            "address": "2 Place du Louvre, 75001 Paris"
+            "address": "2 Place du Louvre, 75001 Paris",
+            "coordinates": [
+              48.8595727,
+              2.3408274
+            ]
           },
           {
             "id": "pont-neuf",
             "name": "Pont Neuf",
             "description": "Plus ancien pont de Paris (1607), statue Henri IV",
-            "address": "Pont Neuf, 75001 Paris"
+            "address": "Pont Neuf, 75001 Paris",
+            "coordinates": [
+              48.8578031,
+              2.34192
+            ]
           },
           {
             "id": "chatelet-fontaine",
             "name": "Châtelet-Fontaine",
             "description": "Fontaine du Palmier, théâtres historiques",
-            "address": "Place du Châtelet, 75001 Paris"
+            "address": "Place du Châtelet, 75001 Paris",
+            "coordinates": [
+              48.8575227,
+              2.3474632
+            ]
           },
           {
             "id": "bourse-de-commerce",
             "name": "Bourse de Commerce",
             "description": "Fondation Pinault, architecture Tadao Ando",
-            "address": "2 Rue de Viarmes, 75001 Paris"
+            "address": "2 Rue de Viarmes, 75001 Paris",
+            "coordinates": [
+              48.8628174,
+              2.3428364
+            ]
           },
           {
             "id": "oratoire-du-louvre",
             "name": "Oratoire du Louvre",
             "description": "Temple protestant historique",
-            "address": "145 Rue Saint-Honoré, 75001 Paris"
+            "address": "145 Rue Saint-Honoré, 75001 Paris",
+            "coordinates": [
+              48.8618952,
+              2.3403317
+            ]
+          },
+          {
+            "id": "crypte-archeologique",
+            "name": "Crypte archéologique",
+            "description": "Vestiges gallo-romains sous parvis Notre-Dame",
+            "address": "7 Place Jean-Paul II, 75004 Paris",
+            "coordinates": [
+              48.8536507,
+              2.3477462
+            ]
           }
         ]
       },
-      "espaces-verts": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "jardin-des-tuileries",
             "name": "Jardin des Tuileries",
             "description": "Promenade entre Louvre et Concorde, Musée Orangerie",
-            "address": "Place de la Concorde, 75001 Paris"
+            "address": "Place de la Concorde, 75001 Paris",
+            "coordinates": [
+              48.8655715,
+              2.3212248
+            ]
           },
           {
             "id": "square-du-vert-galant",
             "name": "Square du Vert-Galant",
             "description": "Pointe de l'île de la Cité, couchers de soleil",
-            "address": "15 Place du Pont-Neuf, 75001 Paris"
+            "address": "15 Place du Pont-Neuf, 75001 Paris",
+            "coordinates": [
+              48.8568891,
+              2.3414623
+            ]
           },
           {
             "id": "cour-carree-du-louvre",
@@ -147,153 +206,269 @@
             "id": "jardin-de-linfante",
             "name": "Jardin de l'Infante",
             "description": "Jardin suspendu secret, vue Seine",
-            "address": "1 Place du Louvre, 75001 Paris"
+            "address": "1 Place du Louvre, 75001 Paris",
+            "coordinates": [
+              48.8593094,
+              2.3407761
+            ]
           },
           {
             "id": "square-jean-xxiii",
             "name": "Square Jean XXIII",
             "description": "Derrière Notre-Dame, rosiers et pelouses",
-            "address": "4 Parvis Notre-Dame, 75004 Paris"
+            "address": "4 Parvis Notre-Dame, 75004 Paris",
+            "coordinates": [
+              48.8532711,
+              2.348075
+            ]
           }
         ]
       },
       "restaurants": {
         "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
         "places": [
           {
             "id": "palais-royal-restaurant",
             "name": "Palais Royal Restaurant",
             "description": "⭐⭐ Michelin - 110 Galerie Valois, menu 165-195€",
-            "address": "110 Galerie de Valois, 75001 Paris"
+            "address": "110 Galerie de Valois, 75001 Paris",
+            "coordinates": [
+              48.8657551,
+              2.3389372
+            ]
           },
           {
             "id": "lescargot-montorgueil",
             "name": "L'Escargot Montorgueil",
             "description": "Institution depuis 1832, décor historique",
-            "address": "38 Rue Montorgueil, 75001 Paris"
+            "address": "38 Rue Montorgueil, 75001 Paris",
+            "coordinates": [
+              48.8641678,
+              2.3467038
+            ]
           },
           {
             "id": "rue-montorgueil",
             "name": "Rue Montorgueil",
             "description": "Marché piétonnier, boulangeries artisanales, Stohrer",
-            "address": "Rue Montorgueil, 75001 Paris"
+            "address": "Rue Montorgueil, 75001 Paris",
+            "coordinates": [
+              48.8638613,
+              2.3464827
+            ]
           },
           {
             "id": "angelina",
             "name": "Angelina",
             "description": "Chocolat chaud légendaire depuis 1903",
-            "address": "226 Rue de Rivoli, 75001 Paris"
+            "address": "226 Rue de Rivoli, 75001 Paris",
+            "coordinates": [
+              48.8650778,
+              2.3284104
+            ]
           },
           {
             "id": "loulou",
             "name": "Loulou",
             "description": "Restaurant terrasse Tuileries, vue Louvre",
-            "address": "Jardin des Tuileries, 75001 Paris"
+            "address": "Jardin des Tuileries, 75001 Paris",
+            "coordinates": [
+              48.8628127,
+              2.3253139
+            ]
           },
           {
             "id": "verjus",
             "name": "Verjus",
             "description": "Wine bar caché, cuisine moderne",
-            "address": "52 Rue de Richelieu, 75001 Paris"
-          },
-          {
-            "id": "restaurant-du-palais-royal",
-            "name": "Restaurant du Palais Royal",
-            "description": "Terrasse galeries historiques",
-            "address": "43 Rue de Valois, 75001 Paris"
+            "address": "52 Rue de Richelieu, 75001 Paris",
+            "coordinates": [
+              48.8663384,
+              2.3372758
+            ]
           },
           {
             "id": "yamtcha",
             "name": "Yam'Tcha",
             "description": "⭐ Michelin - Fusion franco-chinoise, thés d'exception",
-            "address": "4 Rue Sauval, 75001 Paris"
+            "address": "4 Rue Sauval, 75001 Paris",
+            "coordinates": [
+              48.8617098,
+              2.3424316
+            ]
           },
           {
             "id": "le-grand-vefour",
             "name": "Le Grand Véfour",
             "description": "⭐⭐⭐ Michelin - Restaurant historique Palais-Royal",
-            "address": "17 Rue de Beaujolais, 75001 Paris"
+            "address": "17 Rue de Beaujolais, 75001 Paris",
+            "coordinates": [
+              48.8662171,
+              2.3380154
+            ]
+          },
+          {
+            "id": "pierre-herme",
+            "name": "Pierre Hermé",
+            "description": "Macarons d'exception, créations saisonnières",
+            "address": "185 Rue de Vaugirard, 75015 Paris",
+            "coordinates": [
+              48.8427013,
+              2.3120721
+            ]
           }
         ]
       },
       "shopping": {
         "title": "Shopping",
+        "description": "Boutiques, marchés et centres commerciaux",
         "places": [
           {
             "id": "forum-des-halles",
             "name": "Forum des Halles",
             "description": "Centre commercial, 150 boutiques, Canopée architecture",
-            "address": "101 Porte Berger, 75001 Paris"
+            "address": "101 Porte Berger, 75001 Paris",
+            "coordinates": [
+              48.8613742,
+              2.3464116
+            ]
           },
           {
             "id": "rue-de-rivoli",
             "name": "Rue de Rivoli",
             "description": "Souvenirs, mode accessible, librairie Galignani",
-            "address": "Rue de Rivoli, 75001 Paris"
+            "address": "Rue de Rivoli, 75001 Paris",
+            "coordinates": [
+              48.8646158,
+              2.3295881
+            ]
           },
           {
             "id": "whsmith",
             "name": "Librairie anglaise WHSmith",
             "description": "Livres en anglais, presse internationale",
-            "address": "248 Rue de Rivoli, 75001 Paris"
+            "address": "248 Rue de Rivoli, 75001 Paris",
+            "coordinates": [
+              48.8661865,
+              2.3248636
+            ]
           },
           {
             "id": "galerie-vero-dodat",
             "name": "Galerie Véro-Dodat",
             "description": "Passage couvert 1826, antiquaires luxe",
-            "address": "2 Rue du Bouloi, 75001 Paris"
+            "address": "2 Rue du Bouloi, 75001 Paris",
+            "coordinates": [
+              48.8630647,
+              2.3398289
+            ]
           },
           {
             "id": "louvre-des-antiquaires",
             "name": "Louvre des Antiquaires",
             "description": "250 antiquaires sous un toit",
-            "address": "2 Place du Palais-Royal, 75001 Paris"
+            "address": "2 Place du Palais-Royal, 75001 Paris",
+            "coordinates": [
+              48.8624063,
+              2.3373242
+            ]
           },
           {
             "id": "rue-saint-honore",
             "name": "Rue Saint-Honoré",
             "description": "Haute couture, joaillerie, maroquinerie luxe",
-            "address": "Rue Saint-Honoré, 75001 Paris"
+            "address": "Rue Saint-Honoré, 75001 Paris",
+            "coordinates": [
+              48.864193,
+              2.3334628
+            ]
           }
         ]
       },
       "culture": {
-        "title": "Culture",
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
             "id": "comedie-francaise",
             "name": "Comédie-Française",
             "description": "Théâtre national, salle Richelieu",
-            "address": "1 Place Colette, 75001 Paris"
+            "address": "1 Place Colette, 75001 Paris",
+            "coordinates": [
+              48.8632276,
+              2.3360987
+            ]
           },
           {
             "id": "theatre-du-chatelet",
             "name": "Théâtre du Châtelet",
             "description": "Opéras, concerts classiques, comédies musicales",
-            "address": "1 Place du Châtelet, 75001 Paris"
+            "address": "1 Place du Châtelet, 75001 Paris",
+            "coordinates": [
+              48.8576003,
+              2.3467639
+            ]
           },
           {
             "id": "theatre-de-la-ville",
             "name": "Théâtre de la Ville",
             "description": "Danse contemporaine, théâtre d'avant-garde",
-            "address": "2 Place du Châtelet, 75001 Paris"
+            "address": "2 Place du Châtelet, 75001 Paris",
+            "coordinates": [
+              48.8572761,
+              2.3477347
+            ]
           },
           {
             "id": "auditorium-du-louvre",
             "name": "Auditorium du Louvre",
             "description": "Concerts musique de chambre",
-            "address": "Rue de Rivoli, 75001 Paris"
-          }
-        ]
-      },
-      "lieux-insolites": {
-        "title": "Secrets",
-        "places": [
+            "address": "Rue de Rivoli, 75001 Paris",
+            "coordinates": [
+              48.8646158,
+              2.3295881
+            ]
+          },
+          {
+            "id": "hotel-du-petit-moulin",
+            "name": "Hôtel du Petit Moulin",
+            "description": "Hôtel secret derrière plus ancienne boulangerie",
+            "address": "29 Rue de Poitou, 75003 Paris",
+            "coordinates": [
+              48.8615957,
+              2.3621692
+            ]
+          },
+          {
+            "id": "crypte-sainte-agnes",
+            "name": "Crypte Sainte-Agnès",
+            "description": "Vestiges église médiévale rue Mouffetard",
+            "address": "Rue Mouffetard, 75005 Paris",
+            "coordinates": [
+              48.8405883,
+              2.3497077
+            ]
+          },
           {
             "id": "passage-moliere",
             "name": "Passage Molière",
             "description": "Plus petit passage couvert Paris",
-            "address": "Passage Molière, 75001 Paris"
+            "address": "Passage Molière, 75001 Paris",
+            "coordinates": [
+              48.8623951,
+              2.3512173
+            ]
+          },
+          {
+            "id": "tour-jean-sans-peur",
+            "name": "Tour Jean-sans-Peur",
+            "description": "Dernière tour médiévale Paris",
+            "address": "20 Rue Étienne Marcel, 75002 Paris",
+            "coordinates": [
+              48.8641312,
+              2.3483145
+            ]
           }
         ]
       }

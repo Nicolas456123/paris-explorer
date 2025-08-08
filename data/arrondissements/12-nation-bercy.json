@@ -89,159 +89,277 @@
       "description": "Métro : Nation (1,2,6,9), Bercy (6,14), Gare de Lyon (1,14) | RER : Nation (A), Gare de Lyon (A,D), Vincennes (A)"
     },
     "categories": {
-      "espaces-verts": {
-        "title": "Parcs",
+      "parcs": {
+        "title": "Parcs et Jardins",
+        "description": "Espaces verts et détente",
         "places": [
           {
             "id": "bois-de-vincennes",
             "name": "Bois de Vincennes",
             "description": "995 hectares, lac Daumesnil, temple bouddhiste",
-            "address": "Bois de Vincennes, 75012 Paris"
+            "address": "Bois de Vincennes, 75012 Paris",
+            "coordinates": [
+              48.8200655,
+              2.4531312
+            ]
           },
           {
             "id": "parc-de-bercy",
             "name": "Parc de Bercy",
             "description": "Design contemporaire, Maison Jardinage, potagers",
-            "address": "128 Quai de Bercy, 75012 Paris"
+            "address": "128 Quai de Bercy, 75012 Paris",
+            "coordinates": [
+              48.8293566,
+              2.3873261
+            ]
           },
           {
             "id": "promenade-plantee",
             "name": "Promenade Plantée",
             "description": "Voie verte surélevée 4,7 km, jardins suspendus",
-            "address": "1 Coulée Verte René-Dumont, 75012 Paris"
+            "address": "1 Coulée Verte René-Dumont, 75012 Paris",
+            "coordinates": [
+              48.8433656,
+              2.3839407
+            ]
           },
           {
             "id": "square-charles-peguy",
             "name": "Square Charles-Péguy",
             "description": "Jardin caché, jeux enfants, tranquillité",
-            "address": "Square Charles-Péguy, 75012 Paris"
-          }
-        ]
-      },
-      "patrimoine-architecture": {
-        "title": "Monuments",
-        "places": [
-          {
-            "id": "chateau-de-vincennes",
-            "name": "Château de Vincennes",
-            "description": "Forteresse médiévale, Sainte-Chapelle gothique",
-            "address": "Avenue de Paris, 94300 Vincennes"
+            "address": "Square Charles-Péguy, 75012 Paris",
+            "coordinates": [
+              48.8391528,
+              2.4066183
+            ]
           },
-          {
-            "id": "cinematheque-francaise",
-            "name": "Cinémathèque Française",
-            "description": "Architecture Frank Gehry, musée cinéma",
-            "address": "51 Rue de Bercy, 75012 Paris"
-          },
-          {
-            "id": "opera-bastille",
-            "name": "Opéra de Paris Bastille",
-            "description": "Visites guidées techniques, coulisses",
-            "address": "Place de la Bastille, 75012 Paris"
-          },
-          {
-            "id": "viaduc-des-arts",
-            "name": "Viaduc des Arts",
-            "description": "50 ateliers artisans sous arches chemin fer",
-            "address": "9 Avenue Daumesnil, 75012 Paris"
-          },
-          {
-            "id": "palais-omnisports-bercy",
-            "name": "Palais Omnisports Bercy",
-            "description": "Architecture pyramidale, concerts",
-            "address": "8 Boulevard de Bercy, 75012 Paris"
-          }
-        ]
-      },
-      "restaurants-marches": {
-        "title": "Restaurants",
-        "places": [
-          {
-            "id": "bercy-village",
-            "name": "Bercy Village",
-            "description": "Restaurants anciennes halles à vin, terrasses",
-            "address": "Cour Saint-Emilion, 75012 Paris"
-          },
-          {
-            "id": "marche-daligre",
-            "name": "Marché d'Aligre",
-            "description": "Marché pittoresque, atmosphère authentique populaire",
-            "address": "Place d'Aligre, 75012 Paris"
-          },
-          {
-            "id": "le-train-bleu",
-            "name": "Le Train Bleu",
-            "description": "Restaurant Belle Époque Gare Lyon, décors historiques",
-            "address": "Place Louis-Armand, 75012 Paris"
-          },
-          {
-            "id": "rue-de-charenton",
-            "name": "Rue de Charenton",
-            "description": "Boulangeries artisanales, épiceries fines quartier",
-            "address": "Rue de Charenton, 75012 Paris"
-          },
-          {
-            "id": "douze",
-            "name": "Douze",
-            "description": "Food court 1000m², circuit court, anti-gaspillage",
-            "address": "12 Rue de Charenton, 75012 Paris"
-          }
-        ]
-      },
-      "divertissements": {
-        "title": "Spectacles",
-        "places": [
           {
             "id": "accorhotels-arena",
             "name": "AccorHotels Arena",
             "description": "Concerts internationaux, événements sportifs",
-            "address": "8 Boulevard de Bercy, 75012 Paris"
+            "address": "8 Boulevard de Bercy, 75012 Paris",
+            "coordinates": [
+              48.8406353,
+              2.3792398
+            ]
           },
           {
             "id": "zoo-de-vincennes",
             "name": "Zoo de Vincennes",
             "description": "Parc zoologique moderne, biodômes",
-            "address": "Avenue Daumesnil, 75012 Paris"
+            "address": "Avenue Daumesnil, 75012 Paris",
+            "coordinates": [
+              48.8397695,
+              2.3949141
+            ]
           },
           {
             "id": "foire-du-trone",
             "name": "Foire du Trône",
             "description": "Fête foraine historique (printemps), manèges",
-            "address": "Pelouse de Reuilly, 75012 Paris"
+            "address": "Pelouse de Reuilly, 75012 Paris",
+            "coordinates": [
+              48.8299638,
+              2.4068747
+            ]
           },
           {
             "id": "aquarium-tropical",
             "name": "Aquarium tropical",
             "description": "Palais Porte Dorée, poissons exotiques",
-            "address": "293 Avenue Daumesnil, 75012 Paris"
-          }
-        ]
-      },
-      "patrimoine-fluvial": {
-        "title": "Fluvial",
-        "places": [
+            "address": "293 Avenue Daumesnil, 75012 Paris",
+            "coordinates": [
+              48.8351424,
+              2.4093613
+            ]
+          },
           {
             "id": "port-de-larsenal",
             "name": "Port de l'Arsenal",
             "description": "Marina plaisance, promenade quais",
-            "address": "Port de l'Arsenal, 75012 Paris"
+            "address": "Port de l'Arsenal, 75012 Paris",
+            "coordinates": [
+              48.8499396,
+              2.3674625
+            ]
+          }
+        ]
+      },
+      "monuments": {
+        "title": "Monuments",
+        "description": "Patrimoine architectural et historique",
+        "places": [
+          {
+            "id": "chateau-de-vincennes",
+            "name": "Château de Vincennes",
+            "description": "Forteresse médiévale, Sainte-Chapelle gothique",
+            "address": "Avenue de Paris, 94300 Vincennes",
+            "coordinates": [
+              48.8448222,
+              2.4361005
+            ]
+          },
+          {
+            "id": "cinematheque-francaise",
+            "name": "Cinémathèque Française",
+            "description": "Architecture Frank Gehry, musée cinéma",
+            "address": "51 Rue de Bercy, 75012 Paris",
+            "coordinates": [
+              48.8372875,
+              2.3826412
+            ]
+          },
+          {
+            "id": "viaduc-des-arts",
+            "name": "Viaduc des Arts",
+            "description": "50 ateliers artisans sous arches chemin fer",
+            "address": "9 Avenue Daumesnil, 75012 Paris",
+            "coordinates": [
+              48.848937,
+              2.3723383
+            ]
+          },
+          {
+            "id": "palais-omnisports-bercy",
+            "name": "Palais Omnisports Bercy",
+            "description": "Architecture pyramidale, concerts",
+            "address": "8 Boulevard de Bercy, 75012 Paris",
+            "coordinates": [
+              48.8406353,
+              2.3792398
+            ]
+          }
+        ]
+      },
+      "culture": {
+        "title": "Culture et Spectacles",
+        "description": "Théâtres, cinémas et lieux culturels",
+        "places": [
+          {
+            "id": "opera-bastille",
+            "name": "Opéra de Paris Bastille",
+            "description": "Visites guidées techniques, coulisses",
+            "address": "Place de la Bastille, 75012 Paris",
+            "coordinates": [
+              48.8528601,
+              2.3695526
+            ]
           },
           {
             "id": "cimetiere-de-picpus",
             "name": "Cimetière de Picpus",
             "description": "Seul cimetière privé Paris, fosse commune 1794",
-            "address": "35 Rue de Picpus, 75012 Paris"
-          }
-        ]
-      },
-      "arts-culture": {
-        "title": "Culture",
-        "places": [
+            "address": "35 Rue de Picpus, 75012 Paris",
+            "coordinates": [
+              48.8442572,
+              2.3963129
+            ]
+          },
           {
             "id": "musee-des-arts-forains",
             "name": "Musée des Arts Forains",
             "description": "Collection unique manèges anciens (sur réservation)",
-            "address": "53 Avenue des Terroirs de France, 75012 Paris"
+            "address": "53 Avenue des Terroirs de France, 75012 Paris",
+            "coordinates": [
+              48.8327663,
+              2.3893382
+            ]
+          },
+          {
+            "id": "parc-de-la-villette",
+            "name": "Parc de la Villette",
+            "description": "Jardins thématiques, folies rouges (partie 12e)",
+            "address": "211 Avenue Jean Jaurès, 75019 Paris",
+            "coordinates": [
+              48.8922406,
+              2.3878226
+            ]
+          },
+          {
+            "id": "passerelle-solferino",
+            "name": "Passerelle Solférino",
+            "description": "Pont piétons, vue panoramique Seine",
+            "address": "Passerelle Solférino, 75007 Paris",
+            "coordinates": [
+              48.8618241,
+              2.3246472
+            ]
+          },
+          {
+            "id": "galerie-itinerrance",
+            "name": "Galerie Itinerrance",
+            "description": "Street art, art urbain contemporain",
+            "address": "7 Rue de la Fontaine au Roi, 75011 Paris",
+            "coordinates": [
+              48.8686586,
+              2.3691107
+            ]
+          },
+          {
+            "id": "centre-culturel-algerien",
+            "name": "Centre Culturel Algérien",
+            "description": "Expositions, spectacles, cinéma",
+            "address": "171 Rue de la Croix Nivert, 75015 Paris",
+            "coordinates": [
+              48.8395962,
+              2.2901916
+            ]
+          }
+        ]
+      },
+      "restaurants": {
+        "title": "Restaurants",
+        "description": "Gastronomie et cuisine",
+        "places": [
+          {
+            "id": "bercy-village",
+            "name": "Bercy Village",
+            "description": "Restaurants anciennes halles à vin, terrasses",
+            "address": "Cour Saint-Emilion, 75012 Paris",
+            "coordinates": [
+              48.8335432,
+              2.3859654
+            ]
+          },
+          {
+            "id": "marche-daligre",
+            "name": "Marché d'Aligre",
+            "description": "Marché pittoresque, atmosphère authentique populaire",
+            "address": "Place d'Aligre, 75012 Paris",
+            "coordinates": [
+              48.8488627,
+              2.3784356
+            ]
+          },
+          {
+            "id": "le-train-bleu",
+            "name": "Le Train Bleu",
+            "description": "Restaurant Belle Époque Gare Lyon, décors historiques",
+            "address": "Place Louis-Armand, 75012 Paris",
+            "coordinates": [
+              48.8451154,
+              2.3730357
+            ]
+          },
+          {
+            "id": "rue-de-charenton",
+            "name": "Rue de Charenton",
+            "description": "Boulangeries artisanales, épiceries fines quartier",
+            "address": "Rue de Charenton, 75012 Paris",
+            "coordinates": [
+              48.8351104,
+              2.3930179
+            ]
+          },
+          {
+            "id": "douze",
+            "name": "Douze",
+            "description": "Food court 1000m², circuit court, anti-gaspillage",
+            "address": "12 Rue de Charenton, 75012 Paris",
+            "coordinates": [
+              48.8523901,
+              2.3709431
+            ]
           }
         ]
       }
