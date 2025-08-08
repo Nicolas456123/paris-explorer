@@ -70,81 +70,49 @@
             "id": "palais-brongniart",
             "name": "Palais Brongniart",
             "description": "Ancienne Bourse, architecture néoclassique Théodore Brongniart",
-            "address": "Place de la Bourse, 75002 Paris",
-            "coordinates": [
-              48.8692,
-              2.3412
-            ]
+            "address": "Place de la Bourse, 75002 Paris"
           },
           {
             "id": "galerie-vivienne",
             "name": "Galerie Vivienne",
             "description": "Passage couvert (1823), verrière d'époque, boutiques luxe",
-            "address": "4 Rue des Petits-Champs, 75002 Paris",
-            "coordinates": [
-              48.8667,
-              2.3379
-            ]
+            "address": "4 Rue des Petits-Champs, 75002 Paris"
           },
           {
             "id": "passage-des-panoramas",
             "name": "Passage des Panoramas",
             "description": "Plus ancien passage de Paris (1799), philatélistes",
-            "address": "11 Boulevard Montmartre, 75002 Paris",
-            "coordinates": [
-              48.8719,
-              2.3436
-            ]
+            "address": "11 Boulevard Montmartre, 75002 Paris"
           },
           {
             "id": "galerie-colbert",
             "name": "Galerie Colbert",
             "description": "Passage élégant avec rotonde, Bibliothèque Nationale",
-            "address": "6 Rue des Petits-Champs, 75002 Paris",
-            "coordinates": [
-              48.8669,
-              2.3382
-            ]
+            "address": "6 Rue des Petits-Champs, 75002 Paris"
           },
           {
             "id": "bnf-richelieu",
             "name": "Bibliothèque Nationale de France - Richelieu",
             "description": "Site historique, Cabinet des Médailles",
-            "address": "5 Rue Vivienne, 75002 Paris",
-            "coordinates": [
-              48.8689,
-              2.3392
-            ]
+            "address": "5 Rue Vivienne, 75002 Paris"
           },
           {
             "id": "passage-jouffroy",
             "name": "Passage Jouffroy",
             "description": "Antiquités, librairies, Musée Grévin",
-            "address": "10 Boulevard Montmartre, 75009 Paris",
-            "coordinates": [
-              48.8719,
-              2.3436
-            ]
+            "address": "10 Boulevard Montmartre, 75009 Paris"
           },
           {
             "id": "passage-verdeau",
             "name": "Passage Verdeau",
             "description": "Librairies anciennes, galeries d'art",
-            "address": "6 Rue de la Grange-Batelière, 75009 Paris",
-            "coordinates": [
-              48.8719,
-              2.3436
-            ]
+            "address": "6 Rue de la Grange-Batelière, 75009 Paris"
           },
           {
             "id": "opera-comique",
             "name": "Opéra-Comique",
             "description": "Théâtre lyrique, Salle Favart",
-            "address": "1 Place Boieldieu, 75002 Paris",
-            "coordinates": [
-              48.8704,
-              2.3387
-            ]
+            "address": "1 Place Boieldieu, 75002 Paris"
           }
         ]
       },
@@ -155,31 +123,19 @@
             "id": "rue-sainte-anne",
             "name": "Rue Sainte-Anne",
             "description": "Quartier japonais authentique, restaurants familiaux",
-            "address": "Rue Sainte-Anne, 75002 Paris",
-            "coordinates": [
-              48.8689,
-              2.335
-            ]
+            "address": "Rue Sainte-Anne, 75002 Paris"
           },
           {
             "id": "frenchie",
             "name": "Frenchie",
             "description": "Bistrot moderne réputé, réservation difficile",
-            "address": "5 Rue du Nil, 75002 Paris",
-            "coordinates": [
-              48.8671,
-              2.347
-            ]
+            "address": "5 Rue du Nil, 75002 Paris"
           },
           {
             "id": "saturne",
             "name": "Saturne",
             "description": "Bar à vins naturels, assiettes créatives",
-            "address": "17 Rue Notre-Dame des Victoires, 75002 Paris",
-            "coordinates": [
-              48.8675,
-              2.3422
-            ]
+            "address": "17 Rue Notre-Dame des Victoires, 75002 Paris"
           }
         ]
       },
@@ -190,11 +146,7 @@
             "id": "experimental-cocktail-club",
             "name": "Experimental Cocktail Club",
             "description": "Speakeasy pionnier Paris",
-            "address": "37 Rue Saint-Sauveur, 75002 Paris",
-            "coordinates": [
-              48.8665,
-              2.3524
-            ]
+            "address": "37 Rue Saint-Sauveur, 75002 Paris"
           }
         ]
       },
@@ -205,31 +157,19 @@
             "id": "grand-rex",
             "name": "Grand Rex",
             "description": "Plus grand cinéma d'Europe, Art déco, visites coulisses",
-            "address": "1 Boulevard Poissonnière, 75002 Paris",
-            "coordinates": [
-              48.8719,
-              2.3486
-            ]
+            "address": "1 Boulevard Poissonnière, 75002 Paris"
           },
           {
             "id": "theatre-des-varietes",
             "name": "Théâtre des Variétés",
             "description": "Théâtre historique, opérettes",
-            "address": "7 Boulevard Montmartre, 75002 Paris",
-            "coordinates": [
-              48.8719,
-              2.3436
-            ]
+            "address": "7 Boulevard Montmartre, 75002 Paris"
           },
           {
             "id": "passage-du-grand-cerf",
             "name": "Passage du Grand-Cerf",
             "description": "Galeries d'art, ateliers créateurs",
-            "address": "145 Rue Saint-Denis, 75002 Paris",
-            "coordinates": [
-              48.8665,
-              2.3524
-            ]
+            "address": "145 Rue Saint-Denis, 75002 Paris"
           }
         ]
       },
@@ -240,31 +180,19 @@
             "id": "passage-du-caire",
             "name": "Passage du Caire",
             "description": "Plus long passage couvert, textile",
-            "address": "2 Rue du Caire, 75002 Paris",
-            "coordinates": [
-              48.8665,
-              2.3524
-            ]
+            "address": "2 Rue du Caire, 75002 Paris"
           },
           {
             "id": "rue-du-mail",
             "name": "Rue du Mail",
             "description": "Mode jeune créateurs",
-            "address": "Rue du Mail, 75002 Paris",
-            "coordinates": [
-              48.8665,
-              2.344
-            ]
+            "address": "Rue du Mail, 75002 Paris"
           },
           {
             "id": "sentier",
             "name": "Sentier",
             "description": "Quartier textile historique",
-            "address": "Quartier du Sentier, 75002 Paris",
-            "coordinates": [
-              48.8671,
-              2.347
-            ]
+            "address": "Quartier du Sentier, 75002 Paris"
           }
         ]
       }

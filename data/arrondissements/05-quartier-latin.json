@@ -91,71 +91,43 @@
             "id": "pantheon",
             "name": "Panthéon",
             "description": "Mausolée grands hommes, pendule de Foucault",
-            "address": "Place du Panthéon, 75005 Paris",
-            "coordinates": [
-              48.8462,
-              2.3456
-            ]
+            "address": "Place du Panthéon, 75005 Paris"
           },
           {
             "id": "sorbonne",
             "name": "Sorbonne",
             "description": "Université historique, Chapelle Richelieu, amphithéâtres",
-            "address": "21 Rue de l'École de Médecine, 75006 Paris",
-            "coordinates": [
-              48.8484,
-              2.3428
-            ]
+            "address": "21 Rue de l'École de Médecine, 75006 Paris"
           },
           {
             "id": "arenes-de-lutece",
             "name": "Arènes de Lutèce",
             "description": "Amphithéâtre gallo-romain Ier siècle, gratuit",
-            "address": "49 Rue Monge, 75005 Paris",
-            "coordinates": [
-              48.8434,
-              2.3531
-            ]
+            "address": "49 Rue Monge, 75005 Paris"
           },
           {
             "id": "eglise-saint-etienne-du-mont",
             "name": "Église Saint-Étienne-du-Mont",
             "description": "Architecture gothique-Renaissance, jubé unique",
-            "address": "Place Sainte-Geneviève, 75005 Paris",
-            "coordinates": [
-              48.8467,
-              2.3472
-            ]
+            "address": "Place Sainte-Geneviève, 75005 Paris"
           },
           {
             "id": "college-de-france",
             "name": "Collège de France",
             "description": "Cours publics gratuits, recherche d'excellence",
-            "address": "11 Place Marcelin Berthelot, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3444
-            ]
+            "address": "11 Place Marcelin Berthelot, 75005 Paris"
           },
           {
             "id": "ecole-normale-superieure",
             "name": "École Normale Supérieure",
             "description": "Cour d'honneur, bibliothèque Jourdan",
-            "address": "45 Rue d'Ulm, 75005 Paris",
-            "coordinates": [
-              48.8431,
-              2.3445
-            ]
+            "address": "45 Rue d'Ulm, 75005 Paris"
           },
           {
             "id": "college-des-bernardins",
             "name": "Collège des Bernardins",
             "description": "Architecture cistercienne, nef restaurée",
-            "address": "20 Rue de Poissy, 75005 Paris",
-            "coordinates": [
-              48.8509,
-              2.3536
-            ]
+            "address": "20 Rue de Poissy, 75005 Paris"
           }
         ]
       },
@@ -166,41 +138,25 @@
             "id": "musee-de-cluny",
             "name": "Musée de Cluny",
             "description": "Art médiéval, Tapisseries Dame à la Licorne",
-            "address": "6 Place Paul Painlevé, 75005 Paris",
-            "coordinates": [
-              48.8507,
-              2.3441
-            ]
+            "address": "6 Place Paul Painlevé, 75005 Paris"
           },
           {
             "id": "institut-du-monde-arabe",
             "name": "Institut du Monde Arabe",
             "description": "Architecture Jean Nouvel, terrasse panoramique",
-            "address": "1 Rue des Fossés Saint-Bernard, 75005 Paris",
-            "coordinates": [
-              48.8487,
-              2.3559
-            ]
+            "address": "1 Rue des Fossés Saint-Bernard, 75005 Paris"
           },
           {
             "id": "museum-national-histoire-naturelle",
             "name": "Muséum National d'Histoire Naturelle",
             "description": "Grande Galerie Évolution, minéralogie",
-            "address": "57 Rue Cuvier, 75005 Paris",
-            "coordinates": [
-              48.8434,
-              2.3565
-            ]
+            "address": "57 Rue Cuvier, 75005 Paris"
           },
           {
             "id": "musee-sculpture-plein-air",
             "name": "Musée de la Sculpture en Plein Air",
             "description": "Quai Saint-Bernard, gratuit",
-            "address": "Quai Saint-Bernard, 75005 Paris",
-            "coordinates": [
-              48.8467,
-              2.3598
-            ]
+            "address": "Quai Saint-Bernard, 75005 Paris"
           }
         ]
       },
@@ -211,41 +167,25 @@
             "id": "jardin-des-plantes",
             "name": "Jardin des Plantes",
             "description": "28 hectares, serres tropicales, roseraie",
-            "address": "57 Rue Cuvier, 75005 Paris",
-            "coordinates": [
-              48.8434,
-              2.3565
-            ]
+            "address": "57 Rue Cuvier, 75005 Paris"
           },
           {
             "id": "square-rene-viviani",
             "name": "Square René-Viviani",
             "description": "Vue Notre-Dame, arbre le plus vieux Paris",
-            "address": "Square René-Viviani, 75005 Paris",
-            "coordinates": [
-              48.8522,
-              2.3476
-            ]
+            "address": "Square René-Viviani, 75005 Paris"
           },
           {
             "id": "jardin-medieval-cluny",
             "name": "Jardin Médiéval Musée Cluny",
             "description": "Plantes médicinales, atmosphère Moyen-Âge",
-            "address": "6 Place Paul Painlevé, 75005 Paris",
-            "coordinates": [
-              48.8507,
-              2.3441
-            ]
+            "address": "6 Place Paul Painlevé, 75005 Paris"
           },
           {
             "id": "square-capitan",
             "name": "Square Capitan",
             "description": "Petit jardin caché, fontaine Wallace",
-            "address": "Square Capitan, 75005 Paris",
-            "coordinates": [
-              48.8456,
-              2.3478
-            ]
+            "address": "Square Capitan, 75005 Paris"
           }
         ]
       },
@@ -256,51 +196,31 @@
             "id": "shakespeare-and-company-cafe",
             "name": "Shakespeare and Company Café",
             "description": "Café littéraire, brunch anglais",
-            "address": "37 Rue de la Bûcherie, 75005 Paris",
-            "coordinates": [
-              48.8522,
-              2.3467
-            ]
+            "address": "37 Rue de la Bûcherie, 75005 Paris"
           },
           {
             "id": "le-coupe-chou",
             "name": "Le Coupe-Chou",
             "description": "Restaurant médiéval Louis XIII, cheminées",
-            "address": "9 Rue de Lanneau, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3478
-            ]
+            "address": "9 Rue de Lanneau, 75005 Paris"
           },
           {
             "id": "rue-mouffetard",
             "name": "Rue Mouffetard",
             "description": "Marché, restaurants du monde, ambiance étudiante",
-            "address": "Rue Mouffetard, 75005 Paris",
-            "coordinates": [
-              48.8423,
-              2.3489
-            ]
+            "address": "Rue Mouffetard, 75005 Paris"
           },
           {
             "id": "le-polidor",
             "name": "Le Polidor",
             "description": "Bistrot 1845, décor préservé, cuisine traditionnelle",
-            "address": "41 Rue Monsieur le Prince, 75006 Paris",
-            "coordinates": [
-              48.8498,
-              2.3398
-            ]
+            "address": "41 Rue Monsieur le Prince, 75006 Paris"
           },
           {
             "id": "brasserie-balzar",
             "name": "Brasserie Balzar",
             "description": "Institution, clientèle littéraire et universitaire",
-            "address": "49 Rue des École, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3456
-            ]
+            "address": "49 Rue des École, 75005 Paris"
           }
         ]
       },
@@ -311,31 +231,19 @@
             "id": "shakespeare-and-company",
             "name": "Shakespeare and Company",
             "description": "Librairie anglaise mythique, événements",
-            "address": "37 Rue de la Bûcherie, 75005 Paris",
-            "coordinates": [
-              48.8522,
-              2.3467
-            ]
+            "address": "37 Rue de la Bûcherie, 75005 Paris"
           },
           {
             "id": "gibert-jeune",
             "name": "Gibert Jeune",
             "description": "Livres neufs et d'occasion, plusieurs magasins",
-            "address": "5 Place Saint-Michel, 75006 Paris",
-            "coordinates": [
-              48.8534,
-              2.3434
-            ]
+            "address": "5 Place Saint-Michel, 75006 Paris"
           },
           {
             "id": "abbey-bookshop",
             "name": "Abbey Bookshop",
             "description": "Librairie canadienne, thé offert",
-            "address": "29 Rue de la Parcheminerie, 75005 Paris",
-            "coordinates": [
-              48.8521,
-              2.3465
-            ]
+            "address": "29 Rue de la Parcheminerie, 75005 Paris"
           }
         ]
       },
@@ -346,31 +254,19 @@
             "id": "cinema-du-pantheon",
             "name": "Cinéma du Panthéon",
             "description": "Films d'auteur, rétrospectives",
-            "address": "13 Rue Victor Cousin, 75005 Paris",
-            "coordinates": [
-              48.8467,
-              2.3445
-            ]
+            "address": "13 Rue Victor Cousin, 75005 Paris"
           },
           {
             "id": "studio-des-ursulines",
             "name": "Studio des Ursulines",
             "description": "Cinéma historique, débats post-projection",
-            "address": "10 Rue des Ursulines, 75005 Paris",
-            "coordinates": [
-              48.8445,
-              2.3423
-            ]
+            "address": "10 Rue des Ursulines, 75005 Paris"
           },
           {
             "id": "le-champo",
             "name": "Le Champo",
             "description": "Cinéma culte, programmation éclectique",
-            "address": "51 Rue des École, 75005 Paris",
-            "coordinates": [
-              48.8498,
-              2.3456
-            ]
+            "address": "51 Rue des École, 75005 Paris"
           }
         ]
       }

@@ -90,51 +90,31 @@
             "id": "cite-des-sciences-et-de-lindustrie",
             "name": "Cité des Sciences et de l'Industrie",
             "description": "Plus grand musée science Europe",
-            "address": "30 Avenue Corentin Cariou, 75019 Paris",
-            "coordinates": [
-              48.8958,
-              2.3878
-            ]
+            "address": "30 Avenue Corentin Cariou, 75019 Paris"
           },
           {
             "id": "philharmonie-de-paris",
             "name": "Philharmonie de Paris",
             "description": "Salle Jean Nouvel 2400 places, acoustique parfaite",
-            "address": "221 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "221 Avenue Jean Jaurès, 75019 Paris"
           },
           {
             "id": "le-centquatre",
             "name": "Le Centquatre",
             "description": "Centre artistique pluridisciplinaire, résidences artistes",
-            "address": "5 Rue Curial, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.37
-            ]
+            "address": "5 Rue Curial, 75019 Paris"
           },
           {
             "id": "grande-halle-de-la-villette",
             "name": "Grande Halle de la Villette",
             "description": "Expositions, concerts, architecture industrielle",
-            "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "211 Avenue Jean Jaurès, 75019 Paris"
           },
           {
             "id": "cite-de-la-musique",
             "name": "Cité de la Musique",
             "description": "Musée instruments, concerts, médiathèque",
-            "address": "221 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "221 Avenue Jean Jaurès, 75019 Paris"
           }
         ]
       },
@@ -145,41 +125,25 @@
             "id": "parc-des-buttes-chaumont",
             "name": "Parc des Buttes-Chaumont",
             "description": "25 hectares, Temple Sybille, lac, belvédère",
-            "address": "1 Rue Botzaris, 75019 Paris",
-            "coordinates": [
-              48.8754,
-              2.3811
-            ]
+            "address": "1 Rue Botzaris, 75019 Paris"
           },
           {
             "id": "parc-de-la-villette",
             "name": "Parc de la Villette",
             "description": "55 hectares, jardins thématiques, folies Bernard Tschumi",
-            "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "211 Avenue Jean Jaurès, 75019 Paris"
           },
           {
             "id": "bassin-de-la-villette",
             "name": "Bassin de la Villette",
             "description": "Plus grand plan eau Paris, baignade été gratuite",
-            "address": "Bassin de la Villette, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.37
-            ]
+            "address": "Bassin de la Villette, 75019 Paris"
           },
           {
             "id": "canal-de-lourcq",
             "name": "Canal de l'Ourcq",
             "description": "Promenade vélo 108km, croisières fluviales, jogging",
-            "address": "Canal de l'Ourcq, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.38
-            ]
+            "address": "Canal de l'Ourcq, 75019 Paris"
           }
         ]
       },
@@ -190,41 +154,25 @@
             "id": "la-mouzaia",
             "name": "La Mouzaïa",
             "description": "Villas pittoresques 1920, ruelles fleuries pavées",
-            "address": "Rue de la Mouzaïa, 75019 Paris",
-            "coordinates": [
-              48.875,
-              2.388
-            ]
+            "address": "Rue de la Mouzaïa, 75019 Paris"
           },
           {
             "id": "butte-bergeyre",
             "name": "Butte Bergeyre",
             "description": "Point culminant 100m, vignes Clos Chaufourniers, vue panoramique",
-            "address": "Rue Georges Lardennois, 75019 Paris",
-            "coordinates": [
-              48.878,
-              2.385
-            ]
+            "address": "Rue Georges Lardennois, 75019 Paris"
           },
           {
             "id": "quartier-damerique",
             "name": "Quartier d'Amérique",
             "description": "Ancien carrières, architecture éclectique",
-            "address": "Avenue Mathurin Moreau, 75019 Paris",
-            "coordinates": [
-              48.88,
-              2.382
-            ]
+            "address": "Avenue Mathurin Moreau, 75019 Paris"
           },
           {
             "id": "villa-de-lermitage",
             "name": "Villa de l'Ermitage",
             "description": "Impasse privée, maisons individuelles jardins",
-            "address": "Villa de l'Ermitage, 75020 Paris",
-            "coordinates": [
-              48.872,
-              2.385
-            ]
+            "address": "Villa de l'Ermitage, 75020 Paris"
           }
         ]
       },
@@ -235,41 +183,25 @@
             "id": "rosa-bonheur",
             "name": "Rosa Bonheur",
             "description": "Guinguette Buttes-Chaumont, terrasse populaire, tapas",
-            "address": "2 Avenue de la Cascade, 75019 Paris",
-            "coordinates": [
-              48.8754,
-              2.3811
-            ]
+            "address": "2 Avenue de la Cascade, 75019 Paris"
           },
           {
             "id": "paname-brewing-company",
             "name": "Paname Brewing Company",
             "description": "Brasserie artisanale bassin, terrasse eau",
-            "address": "41 Quai de la Loire, 75019 Paris",
-            "coordinates": [
-              48.887,
-              2.372
-            ]
+            "address": "41 Quai de la Loire, 75019 Paris"
           },
           {
             "id": "le-pavillon-du-lac",
             "name": "Le Pavillon du Lac",
             "description": "Restaurant romantique parc, cuisine française",
-            "address": "1 Rue Botzaris, 75019 Paris",
-            "coordinates": [
-              48.8754,
-              2.3811
-            ]
+            "address": "1 Rue Botzaris, 75019 Paris"
           },
           {
             "id": "rue-de-belleville",
             "name": "Rue de Belleville",
             "description": "Restaurants monde entier, prix étudiants",
-            "address": "Rue de Belleville, 75019 Paris",
-            "coordinates": [
-              48.872,
-              2.3767
-            ]
+            "address": "Rue de Belleville, 75019 Paris"
           }
         ]
       },
@@ -280,41 +212,25 @@
             "id": "zenith-de-paris",
             "name": "Zénith de Paris",
             "description": "Concerts internationaux 6400 places, programmation éclectique",
-            "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "211 Avenue Jean Jaurès, 75019 Paris"
           },
           {
             "id": "theatre-paris-villette",
             "name": "Théâtre Paris-Villette",
             "description": "Créations contemporaines, résidences artistes",
-            "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "211 Avenue Jean Jaurès, 75019 Paris"
           },
           {
             "id": "cabaret-sauvage",
             "name": "Cabaret Sauvage",
             "description": "Spectacles éclectiques sous chapiteau, world music",
-            "address": "59 Boulevard Macdonald, 75019 Paris",
-            "coordinates": [
-              48.895,
-              2.385
-            ]
+            "address": "59 Boulevard Macdonald, 75019 Paris"
           },
           {
             "id": "cinema-en-plein-air",
             "name": "Cinéma en plein air",
             "description": "Projections été Parc Villette, entrée gratuite",
-            "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "211 Avenue Jean Jaurès, 75019 Paris"
           }
         ]
       },
@@ -325,31 +241,19 @@
             "id": "les-orgues-de-flandre",
             "name": "Les Orgues de Flandre",
             "description": "Tours iconiques Martin Schulz van Treeck 1980",
-            "address": "Avenue de Flandre, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.375
-            ]
+            "address": "Avenue de Flandre, 75019 Paris"
           },
           {
             "id": "siege-parti-communiste",
             "name": "Siège Parti Communiste",
             "description": "Architecture Oscar Niemeyer 1971, béton courbe",
-            "address": "2 Place du Colonel Fabien, 75019 Paris",
-            "coordinates": [
-              48.8766,
-              2.3697
-            ]
+            "address": "2 Place du Colonel Fabien, 75019 Paris"
           },
           {
             "id": "rotonde-de-la-villette",
             "name": "Rotonde de la Villette",
             "description": "Barrière d'octroi Ledoux, pavillon historique",
-            "address": "Place de la Bataille de Stalingrad, 75019 Paris",
-            "coordinates": [
-              48.8837,
-              2.3681
-            ]
+            "address": "Place de la Bataille de Stalingrad, 75019 Paris"
           }
         ]
       },
@@ -360,31 +264,19 @@
             "id": "jardin-naturel-pierre-emmanuel",
             "name": "Jardin naturel Pierre-Emmanuel",
             "description": "Nature sauvage, biodiversité préservée",
-            "address": "Square du Père Lachaise, 75020 Paris",
-            "coordinates": [
-              48.863,
-              2.3969
-            ]
+            "address": "Square du Père Lachaise, 75020 Paris"
           },
           {
             "id": "square-severine",
             "name": "Square Séverine",
             "description": "Petit jardin caché, tranquillité résidentielle",
-            "address": "Square Séverine, 75019 Paris",
-            "coordinates": [
-              48.878,
-              2.385
-            ]
+            "address": "Square Séverine, 75019 Paris"
           },
           {
             "id": "parc-de-la-butte-du-chapeau-rouge",
             "name": "Parc de la Butte-du-Chapeau-Rouge",
             "description": "Colline méconnue, vue Est parisien",
-            "address": "Rue de la Butte du Chapeau Rouge, 75019 Paris",
-            "coordinates": [
-              48.88,
-              2.39
-            ]
+            "address": "Rue de la Butte du Chapeau Rouge, 75019 Paris"
           }
         ]
       },
@@ -395,31 +287,19 @@
             "id": "parc-de-la-villette-art",
             "name": "Parc de la Villette",
             "description": "Œuvres art contemporain plein air",
-            "address": "211 Avenue Jean Jaurès, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.393
-            ]
+            "address": "211 Avenue Jean Jaurès, 75019 Paris"
           },
           {
             "id": "canal-de-lourcq-art",
             "name": "Canal de l'Ourcq",
             "description": "Fresques murales, art urbain légal",
-            "address": "Canal de l'Ourcq, 75019 Paris",
-            "coordinates": [
-              48.89,
-              2.38
-            ]
+            "address": "Canal de l'Ourcq, 75019 Paris"
           },
           {
             "id": "pont-de-crimee",
             "name": "Pont de Crimée",
             "description": "Tags autorisés, galerie urbaine évolutive",
-            "address": "Rue de Crimée, 75019 Paris",
-            "coordinates": [
-              48.889,
-              2.382
-            ]
+            "address": "Rue de Crimée, 75019 Paris"
           }
         ]
       }

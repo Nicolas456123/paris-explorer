@@ -93,71 +93,43 @@
             "id": "musee-dart-moderne",
             "name": "Musée d'Art Moderne",
             "description": "Art XXe siècle, gratuit collections permanentes",
-            "address": "11 Avenue du Président Wilson, 75116 Paris",
-            "coordinates": [
-              48.864,
-              2.297
-            ]
+            "address": "11 Avenue du Président Wilson, 75116 Paris"
           },
           {
             "id": "palais-de-tokyo",
             "name": "Palais de Tokyo",
             "description": "Art contemporain, nocturnes minuit, programmation avant-garde",
-            "address": "13 Avenue du Président Wilson, 75116 Paris",
-            "coordinates": [
-              48.864,
-              2.2975
-            ]
+            "address": "13 Avenue du Président Wilson, 75116 Paris"
           },
           {
             "id": "musee-marmottan-monet",
             "name": "Musée Marmottan Monet",
             "description": "Plus grande collection Monet mondiale, impressionnistes",
-            "address": "2 Rue Louis Boilly, 75116 Paris",
-            "coordinates": [
-              48.855,
-              2.265
-            ]
+            "address": "2 Rue Louis Boilly, 75116 Paris"
           },
           {
             "id": "musee-guimet",
             "name": "Musée Guimet",
             "description": "Arts asiatiques exceptionnels, Angkor, Gandhara",
-            "address": "6 Place d'Iéna, 75116 Paris",
-            "coordinates": [
-              48.865,
-              2.294
-            ]
+            "address": "6 Place d'Iéna, 75116 Paris"
           },
           {
             "id": "fondation-louis-vuitton",
             "name": "Fondation Louis Vuitton",
             "description": "Architecture Gehry, art contemporain, jardins",
-            "address": "8 Avenue du Mahatma Gandhi, 75116 Paris",
-            "coordinates": [
-              48.877,
-              2.263
-            ]
+            "address": "8 Avenue du Mahatma Gandhi, 75116 Paris"
           },
           {
             "id": "musee-galliera",
             "name": "Musée Galliera",
             "description": "Mode Paris, expositions temporaires couture",
-            "address": "10 Avenue Pierre 1er de Serbie, 75116 Paris",
-            "coordinates": [
-              48.867,
-              2.297
-            ]
+            "address": "10 Avenue Pierre 1er de Serbie, 75116 Paris"
           },
           {
             "id": "musee-du-vin",
             "name": "Musée du Vin",
             "description": "Caves voûtées XVe, dégustation, histoire viticulture",
-            "address": "5 Square Charles Dickens, 75116 Paris",
-            "coordinates": [
-              48.857,
-              2.279
-            ]
+            "address": "5 Square Charles Dickens, 75116 Paris"
           }
         ]
       },
@@ -168,51 +140,31 @@
             "id": "bois-de-boulogne",
             "name": "Bois de Boulogne",
             "description": "846 hectares, lacs, Longchamp, Auteuil, prostituées nuit",
-            "address": "Bois de Boulogne, 75116 Paris",
-            "coordinates": [
-              48.862,
-              2.249
-            ]
+            "address": "Bois de Boulogne, 75116 Paris"
           },
           {
             "id": "jardins-du-trocadero",
             "name": "Jardins du Trocadéro",
             "description": "Vue Tour Eiffel, fontaines Varsovie, selfies",
-            "address": "Place du Trocadéro, 75116 Paris",
-            "coordinates": [
-              48.863,
-              2.287
-            ]
+            "address": "Place du Trocadéro, 75116 Paris"
           },
           {
             "id": "parc-de-bagatelle",
             "name": "Parc de Bagatelle",
             "description": "Roseraie 10000 rosiers, château XVIIIe, paons",
-            "address": "Route de Sèvres à Neuilly, 75116 Paris",
-            "coordinates": [
-              48.869,
-              2.246
-            ]
+            "address": "Route de Sèvres à Neuilly, 75116 Paris"
           },
           {
             "id": "jardins-dacclimatation",
             "name": "Jardins d'Acclimatation",
             "description": "Parc attractions familial, manèges historiques",
-            "address": "Bois de Boulogne, 75116 Paris",
-            "coordinates": [
-              48.878,
-              2.265
-            ]
+            "address": "Bois de Boulogne, 75116 Paris"
           },
           {
             "id": "serres-dauteuil",
             "name": "Serres d'Auteuil",
             "description": "Jardins botaniques, serres tropicales, bambous",
-            "address": "3 Avenue de la Porte d'Auteuil, 75116 Paris",
-            "coordinates": [
-              48.847,
-              2.258
-            ]
+            "address": "3 Avenue de la Porte d'Auteuil, 75116 Paris"
           }
         ]
       },
@@ -223,51 +175,31 @@
             "id": "palais-de-chaillot",
             "name": "Palais de Chaillot",
             "description": "Architecture Art déco, terrasse Trocadéro",
-            "address": "1 Place du Trocadéro, 75116 Paris",
-            "coordinates": [
-              48.863,
-              2.287
-            ]
+            "address": "1 Place du Trocadéro, 75116 Paris"
           },
           {
             "id": "maison-de-radio-france",
             "name": "Maison de Radio France",
             "description": "Architecture circulaire, visites studios",
-            "address": "116 Avenue du Président Kennedy, 75116 Paris",
-            "coordinates": [
-              48.857,
-              2.278
-            ]
+            "address": "116 Avenue du Président Kennedy, 75116 Paris"
           },
           {
             "id": "cimetiere-de-passy",
             "name": "Cimetière de Passy",
             "description": "Vue Tour Eiffel, tombes Debussy, Fauré",
-            "address": "2 Rue du Commandant Schloesing, 75116 Paris",
-            "coordinates": [
-              48.858,
-              2.282
-            ]
+            "address": "2 Rue du Commandant Schloesing, 75116 Paris"
           },
           {
             "id": "palais-galliera-architecture",
             "name": "Palais Galliera",
             "description": "Architecture Belle Époque, jardins intérieurs",
-            "address": "10 Avenue Pierre 1er de Serbie, 75116 Paris",
-            "coordinates": [
-              48.867,
-              2.297
-            ]
+            "address": "10 Avenue Pierre 1er de Serbie, 75116 Paris"
           },
           {
             "id": "villa-montmorency",
             "name": "Villa Montmorency",
             "description": "Quartier privé, portail surveillé",
-            "address": "Villa Montmorency, 75116 Paris",
-            "coordinates": [
-              48.844,
-              2.265
-            ]
+            "address": "Villa Montmorency, 75116 Paris"
           }
         ]
       },
@@ -278,41 +210,25 @@
             "id": "avenue-victor-hugo",
             "name": "Avenue Victor Hugo",
             "description": "Boutiques grandes marques, luxe accessible",
-            "address": "Avenue Victor Hugo, 75116 Paris",
-            "coordinates": [
-              48.871,
-              2.2885
-            ]
+            "address": "Avenue Victor Hugo, 75116 Paris"
           },
           {
             "id": "rue-de-passy",
             "name": "Rue de Passy",
             "description": "Shopping chic décontracté, cafés terrasses",
-            "address": "Rue de Passy, 75116 Paris",
-            "coordinates": [
-              48.8575,
-              2.2855
-            ]
+            "address": "Rue de Passy, 75116 Paris"
           },
           {
             "id": "reciproque",
             "name": "Réciproqué",
             "description": "Dépôt-vente luxe mythique, Chanel d'occasion",
-            "address": "95 Rue de la Pompe, 75116 Paris",
-            "coordinates": [
-              48.871,
-              2.282
-            ]
+            "address": "95 Rue de la Pompe, 75116 Paris"
           },
           {
             "id": "avenue-montaigne-16",
             "name": "Avenue Montaigne",
             "description": "Haute couture, maisons mode (8e limitrophe)",
-            "address": "Avenue Montaigne, 75008 Paris",
-            "coordinates": [
-              48.867,
-              2.305
-            ]
+            "address": "Avenue Montaigne, 75008 Paris"
           }
         ]
       },
@@ -323,51 +239,31 @@
             "id": "lastrance",
             "name": "L'Astrance",
             "description": "⭐⭐⭐ Michelin - Fusion franco-asiatique Pascal Barbot",
-            "address": "4 Rue Beethoven, 75116 Paris",
-            "coordinates": [
-              48.855,
-              2.277
-            ]
+            "address": "4 Rue Beethoven, 75116 Paris"
           },
           {
             "id": "le-pre-catelan",
             "name": "Le Pré Catelan",
             "description": "⭐⭐⭐ Michelin - Gastronomie Bois Boulogne",
-            "address": "Route de Suresnes, 75116 Paris",
-            "coordinates": [
-              48.865,
-              2.245
-            ]
+            "address": "Route de Suresnes, 75116 Paris"
           },
           {
             "id": "6-new-york",
             "name": "6 New York",
             "description": "Brasserie chic avenue New York, vue Seine",
-            "address": "6 Avenue de New York, 75116 Paris",
-            "coordinates": [
-              48.862,
-              2.298
-            ]
+            "address": "6 Avenue de New York, 75116 Paris"
           },
           {
             "id": "maison-de-balzac-cafe",
             "name": "Maison de Balzac",
             "description": "Café jardin secret, vue Tour Eiffel",
-            "address": "47 Rue Raynouard, 75116 Paris",
-            "coordinates": [
-              48.855,
-              2.282
-            ]
+            "address": "47 Rue Raynouard, 75116 Paris"
           },
           {
             "id": "tokyo-eat",
             "name": "Tokyo Eat",
             "description": "Restaurant Palais Tokyo, design Philippe Starck",
-            "address": "13 Avenue du Président Wilson, 75116 Paris",
-            "coordinates": [
-              48.864,
-              2.2975
-            ]
+            "address": "13 Avenue du Président Wilson, 75116 Paris"
           }
         ]
       },
@@ -378,41 +274,25 @@
             "id": "roland-garros",
             "name": "Roland Garros",
             "description": "Tournoi tennis mai-juin, Centre Court Lenglen",
-            "address": "2 Avenue Gordon Bennett, 75116 Paris",
-            "coordinates": [
-              48.846,
-              2.251
-            ]
+            "address": "2 Avenue Gordon Bennett, 75116 Paris"
           },
           {
             "id": "parc-des-princes",
             "name": "Parc des Princes",
             "description": "Stade PSG 48712 places, visites guidées",
-            "address": "24 Rue du Commandant Guilbaud, 75116 Paris",
-            "coordinates": [
-              48.842,
-              2.253
-            ]
+            "address": "24 Rue du Commandant Guilbaud, 75116 Paris"
           },
           {
             "id": "hippodrome-de-longchamp",
             "name": "Hippodrome de Longchamp",
             "description": "Courses chevaux, Prix Arc Triomphe octobre",
-            "address": "Route des Tribunes, 75116 Paris",
-            "coordinates": [
-              48.856,
-              2.229
-            ]
+            "address": "Route des Tribunes, 75116 Paris"
           },
           {
             "id": "racing-club-de-france",
             "name": "Racing Club de France",
             "description": "Club sportif chic, piscine, tennis",
-            "address": "3 Rue Eblé, 75007 Paris",
-            "coordinates": [
-              48.853,
-              2.308
-            ]
+            "address": "3 Rue Eblé, 75007 Paris"
           }
         ]
       },
@@ -423,41 +303,25 @@
             "id": "maison-de-balzac",
             "name": "Maison de Balzac",
             "description": "Demeure écrivain, jardin secret vue Tour Eiffel",
-            "address": "47 Rue Raynouard, 75116 Paris",
-            "coordinates": [
-              48.855,
-              2.282
-            ]
+            "address": "47 Rue Raynouard, 75116 Paris"
           },
           {
             "id": "villa-montmorency-jardins",
             "name": "Villa Montmorency",
             "description": "Cité privée, portails, maisons bourgeoises",
-            "address": "Villa Montmorency, 75116 Paris",
-            "coordinates": [
-              48.844,
-              2.265
-            ]
+            "address": "Villa Montmorency, 75116 Paris"
           },
           {
             "id": "square-du-ranelagh",
             "name": "Square du Ranelagh",
             "description": "Jardin anglais, théâtre marionnettes",
-            "address": "Avenue Ingres, 75116 Paris",
-            "coordinates": [
-              48.855,
-              2.275
-            ]
+            "address": "Avenue Ingres, 75116 Paris"
           },
           {
             "id": "jardin-du-ranelagh",
             "name": "Jardin du Ranelagh",
             "description": "Pelouses, jeux enfants, manège 1860",
-            "address": "Avenue Prudhon, 75116 Paris",
-            "coordinates": [
-              48.855,
-              2.276
-            ]
+            "address": "Avenue Prudhon, 75116 Paris"
           }
         ]
       }

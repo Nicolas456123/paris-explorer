@@ -85,51 +85,31 @@
             "id": "place-de-la-bastille",
             "name": "Place de la Bastille",
             "description": "Colonne de Juillet, symbole révolutionnaire",
-            "address": "Place de la Bastille, 75011 Paris",
-            "coordinates": [
-              48.8534,
-              2.3689
-            ]
+            "address": "Place de la Bastille, 75011 Paris"
           },
           {
             "id": "opera-bastille",
             "name": "Opéra Bastille",
             "description": "Architecture Carlos Ott, visites guidées",
-            "address": "Place de la Bastille, 75012 Paris",
-            "coordinates": [
-              48.8534,
-              2.3689
-            ]
+            "address": "Place de la Bastille, 75012 Paris"
           },
           {
             "id": "rue-du-faubourg-saint-antoine",
             "name": "Rue du Faubourg-Saint-Antoine",
             "description": "Artisans ébénistes traditionnels",
-            "address": "Rue du Faubourg-Saint-Antoine, 75011 Paris",
-            "coordinates": [
-              48.8523,
-              2.3734
-            ]
+            "address": "Rue du Faubourg-Saint-Antoine, 75011 Paris"
           },
           {
             "id": "passage-de-lhomme",
             "name": "Passage de l'Homme",
             "description": "Cour pavée artisans, ateliers ouverts",
-            "address": "102 Rue du Faubourg-Saint-Antoine, 75011 Paris",
-            "coordinates": [
-              48.8523,
-              2.3734
-            ]
+            "address": "102 Rue du Faubourg-Saint-Antoine, 75011 Paris"
           },
           {
             "id": "cour-damoye",
             "name": "Cour Damoye & Cour de l'Étoile d'Or",
             "description": "Ateliers artisans, patrimoine vivant",
-            "address": "Rue de Charonne, 75011 Paris",
-            "coordinates": [
-              48.8556,
-              2.3789
-            ]
+            "address": "Rue de Charonne, 75011 Paris"
           }
         ]
       },
@@ -140,51 +120,31 @@
             "id": "septime",
             "name": "Septime",
             "description": "Restaurant gastronomique Bertrand Grébaut (réservation 3 mois)",
-            "address": "80 Rue de Charonne, 75011 Paris",
-            "coordinates": [
-              48.8556,
-              2.3789
-            ]
+            "address": "80 Rue de Charonne, 75011 Paris"
           },
           {
             "id": "le-chateaubriand",
             "name": "Le Chateaubriand",
             "description": "Bistrot gastronomique pionnier, Inaki Aizpitarte",
-            "address": "129 Avenue Parmentier, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3723
-            ]
+            "address": "129 Avenue Parmentier, 75011 Paris"
           },
           {
             "id": "pierre-sang-oberkampf",
             "name": "Pierre Sang in Oberkampf",
             "description": "Fusion franco-coréenne créative",
-            "address": "55 Rue Oberkampf, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3701
-            ]
+            "address": "55 Rue Oberkampf, 75011 Paris"
           },
           {
             "id": "le-6-paul-bert",
             "name": "Le 6 Paul Bert",
             "description": "Bistrot traditionnel authentique",
-            "address": "6 Rue Paul Bert, 75011 Paris",
-            "coordinates": [
-              48.8523,
-              2.3823
-            ]
+            "address": "6 Rue Paul Bert, 75011 Paris"
           },
           {
             "id": "utopie",
             "name": "Utopie",
             "description": "Boulangerie Prix meilleure baguette 2024",
-            "address": "20 Rue Jean-Pierre Timbaud, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3712
-            ]
+            "address": "20 Rue Jean-Pierre Timbaud, 75011 Paris"
           }
         ]
       },
@@ -195,41 +155,25 @@
             "id": "rue-oberkampf",
             "name": "Rue Oberkampf",
             "description": "Concentration bars branchés, ambiance étudiante",
-            "address": "Rue Oberkampf, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3701
-            ]
+            "address": "Rue Oberkampf, 75011 Paris"
           },
           {
             "id": "rue-de-lappe",
             "name": "Rue de Lappe",
             "description": "Bars à ambiance, tradition bal musette",
-            "address": "Rue de Lappe, 75011 Paris",
-            "coordinates": [
-              48.8534,
-              2.3712
-            ]
+            "address": "Rue de Lappe, 75011 Paris"
           },
           {
             "id": "septime-la-cave",
             "name": "Septime la Cave",
             "description": "Bar vins naturels, sélection Bertrand",
-            "address": "3 Rue Basfroi, 75011 Paris",
-            "coordinates": [
-              48.8534,
-              2.3789
-            ]
+            "address": "3 Rue Basfroi, 75011 Paris"
           },
           {
             "id": "mobster-bar",
             "name": "Mobster Bar",
             "description": "Speakeasy secret, entrée cabine téléphonique",
-            "address": "116 Boulevard Richard-Lenoir, 75011 Paris",
-            "coordinates": [
-              48.8612,
-              2.3712
-            ]
+            "address": "116 Boulevard Richard-Lenoir, 75011 Paris"
           }
         ]
       },
@@ -240,41 +184,25 @@
             "id": "cirque-dhiver-bouglione",
             "name": "Cirque d'Hiver Bouglione",
             "description": "Cirque traditionnel depuis 1852, spectacles familiaux",
-            "address": "110 Rue Amelot, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3689
-            ]
+            "address": "110 Rue Amelot, 75011 Paris"
           },
           {
             "id": "le-bataclan",
             "name": "Le Bataclan",
             "description": "Salle concert historique, programmation éclectique",
-            "address": "50 Boulevard Voltaire, 75011 Paris",
-            "coordinates": [
-              48.8556,
-              2.3789
-            ]
+            "address": "50 Boulevard Voltaire, 75011 Paris"
           },
           {
             "id": "rue-de-la-roquette",
             "name": "Rue de la Roquette",
             "description": "Galeries art contemporain, vernissages",
-            "address": "Rue de la Roquette, 75011 Paris",
-            "coordinates": [
-              48.8556,
-              2.3734
-            ]
+            "address": "Rue de la Roquette, 75011 Paris"
           },
           {
             "id": "le-nouveau-casino",
             "name": "Le Nouveau Casino",
             "description": "Club électro, DJs internationaux",
-            "address": "109 Rue Oberkampf, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3701
-            ]
+            "address": "109 Rue Oberkampf, 75011 Paris"
           }
         ]
       },
@@ -285,21 +213,13 @@
             "id": "rue-de-charonne",
             "name": "Rue de Charonne",
             "description": "Friperies, boutiques créateurs émergents",
-            "address": "Rue de Charonne, 75011 Paris",
-            "coordinates": [
-              48.8556,
-              2.3789
-            ]
+            "address": "Rue de Charonne, 75011 Paris"
           },
           {
             "id": "centre-commercial-charonne",
             "name": "Centre Commercial",
             "description": "Concept store (rue de Charonne), mode alternative",
-            "address": "2 Rue de Charonne, 75011 Paris",
-            "coordinates": [
-              48.8556,
-              2.3789
-            ]
+            "address": "2 Rue de Charonne, 75011 Paris"
           }
         ]
       },
@@ -310,41 +230,25 @@
             "id": "cite-du-figuier",
             "name": "Cité du Figuier",
             "description": "Impasse tropicale, palmiers et façades colorées",
-            "address": "104 Rue Oberkampf, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3701
-            ]
+            "address": "104 Rue Oberkampf, 75011 Paris"
           },
           {
             "id": "musee-du-fumeur",
             "name": "Musée du Fumeur",
             "description": "Histoire pratiques fumage, collection pipes",
-            "address": "7 Rue Pache, 75011 Paris",
-            "coordinates": [
-              48.8534,
-              2.3823
-            ]
+            "address": "7 Rue Pache, 75011 Paris"
           },
           {
             "id": "square-maurice-gardette",
             "name": "Square Maurice-Gardette",
             "description": "Jardin caché, aire jeux enfants",
-            "address": "Square Maurice-Gardette, 75011 Paris",
-            "coordinates": [
-              48.8612,
-              2.3789
-            ]
+            "address": "Square Maurice-Gardette, 75011 Paris"
           },
           {
             "id": "passage-saint-pierre-amelot",
             "name": "Passage Saint-Pierre-Amelot",
             "description": "Cour pavée préservée, ateliers",
-            "address": "Passage Saint-Pierre-Amelot, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3689
-            ]
+            "address": "Passage Saint-Pierre-Amelot, 75011 Paris"
           }
         ]
       },
@@ -355,21 +259,13 @@
             "id": "oberkampf-menilmontant",
             "name": "Oberkampf-Ménilmontant",
             "description": "Murs peints, œuvres éphémères",
-            "address": "Oberkampf-Ménilmontant, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3701
-            ]
+            "address": "Oberkampf-Ménilmontant, 75011 Paris"
           },
           {
             "id": "fresque-jerome-mesnager",
             "name": "Fresque Jérôme Mesnager",
             "description": "Homme blanc iconique",
-            "address": "Various locations, 75011 Paris",
-            "coordinates": [
-              48.8634,
-              2.3701
-            ]
+            "address": "Various locations, 75011 Paris"
           }
         ]
       }

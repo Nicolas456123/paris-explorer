@@ -91,70 +91,37 @@
             "id": "tour-eiffel",
             "name": "Tour Eiffel",
             "description": "3 étages, sommet 276m, illuminations nocturnes",
-            "address": "Champ de Mars, 5 Avenue Anatole France, 75007 Paris",
-            "coordinates": [
-              48.85826,
-              2.294501
-            ],
-            "geocoding": {
-              "source": "Photon",
-              "confidence": 0.7,
-              "corrected_at": "2025-08-07T23:48:05.957Z",
-              "old_coordinates": [
-                48.8584,
-                2.2945
-              ]
-            }
+            "address": "Champ de Mars, 5 Avenue Anatole France, 75007 Paris"
           },
           {
             "id": "hotel-des-invalides",
             "name": "Hôtel des Invalides",
             "description": "Tombeau Napoléon, Dôme Mansart",
-            "address": "129 Rue de Grenelle, 75007 Paris",
-            "coordinates": [
-              48.8564,
-              2.3134
-            ]
+            "address": "129 Rue de Grenelle, 75007 Paris"
           },
           {
             "id": "pont-alexandre-iii",
             "name": "Pont Alexandre III",
             "description": "Plus beau pont Paris, Art nouveau",
-            "address": "Pont Alexandre III, 75008 Paris",
-            "coordinates": [
-              48.8634,
-              2.3134
-            ]
+            "address": "Pont Alexandre III, 75008 Paris"
           },
           {
             "id": "assemblee-nationale",
             "name": "Assemblée Nationale",
             "description": "Palais Bourbon, visites citoyennes",
-            "address": "126 Rue de l'Université, 75007 Paris",
-            "coordinates": [
-              48.8612,
-              2.3189
-            ]
+            "address": "126 Rue de l'Université, 75007 Paris"
           },
           {
             "id": "ecole-militaire",
             "name": "École Militaire",
             "description": "Architecture Gabriel, cour d'honneur",
-            "address": "1 Place Joffre, 75007 Paris",
-            "coordinates": [
-              48.8534,
-              2.3056
-            ]
+            "address": "1 Place Joffre, 75007 Paris"
           },
           {
             "id": "champ-de-mars",
             "name": "Champ-de-Mars",
             "description": "24 hectares, jardins à la française",
-            "address": "2 Allée Adrienne Lecouvreur, 75007 Paris",
-            "coordinates": [
-              48.8556,
-              2.2978
-            ]
+            "address": "2 Allée Adrienne Lecouvreur, 75007 Paris"
           }
         ]
       },
@@ -165,51 +132,31 @@
             "id": "musee-dorsay",
             "name": "Musée d'Orsay",
             "description": "Plus grande collection impressionniste mondiale",
-            "address": "1 Rue de la Légion d'Honneur, 75007 Paris",
-            "coordinates": [
-              48.8598,
-              2.3267
-            ]
+            "address": "1 Rue de la Légion d'Honneur, 75007 Paris"
           },
           {
             "id": "musee-rodin",
             "name": "Musée Rodin",
             "description": "Sculptures dans hôtel Biron XVIIIe, jardin 3 hectares",
-            "address": "77 Rue de Varenne, 75007 Paris",
-            "coordinates": [
-              48.8556,
-              2.3145
-            ]
+            "address": "77 Rue de Varenne, 75007 Paris"
           },
           {
             "id": "musee-du-quai-branly",
             "name": "Musée du Quai Branly",
             "description": "Arts et civilisations, architecture Jean Nouvel",
-            "address": "37 Quai Branly, 75007 Paris",
-            "coordinates": [
-              48.8601,
-              2.2978
-            ]
+            "address": "37 Quai Branly, 75007 Paris"
           },
           {
             "id": "musee-de-larmee",
             "name": "Musée de l'Armée",
             "description": "Histoire militaire française, armes anciennes",
-            "address": "129 Rue de Grenelle, 75007 Paris",
-            "coordinates": [
-              48.8564,
-              2.3134
-            ]
+            "address": "129 Rue de Grenelle, 75007 Paris"
           },
           {
             "id": "musee-des-plans-reliefs",
             "name": "Musée des Plans-Reliefs",
             "description": "Maquettes villes fortifiées, unique au monde",
-            "address": "129 Rue de Grenelle, 75007 Paris",
-            "coordinates": [
-              48.8564,
-              2.3134
-            ]
+            "address": "129 Rue de Grenelle, 75007 Paris"
           }
         ]
       },
@@ -220,41 +167,25 @@
             "id": "champ-de-mars-parc",
             "name": "Champ-de-Mars",
             "description": "Parc devant Tour Eiffel, aires de jeux",
-            "address": "2 Allée Adrienne Lecouvreur, 75007 Paris",
-            "coordinates": [
-              48.8556,
-              2.2978
-            ]
+            "address": "2 Allée Adrienne Lecouvreur, 75007 Paris"
           },
           {
             "id": "esplanade-des-invalides",
             "name": "Esplanade des Invalides",
             "description": "Perspective monumentale 500m",
-            "address": "Esplanade des Invalides, 75007 Paris",
-            "coordinates": [
-              48.8578,
-              2.3134
-            ]
+            "address": "Esplanade des Invalides, 75007 Paris"
           },
           {
             "id": "jardin-ecole-militaire",
             "name": "Jardin de l'École Militaire",
             "description": "Jardin à la française, grilles dorées",
-            "address": "1 Place Joffre, 75007 Paris",
-            "coordinates": [
-              48.8534,
-              2.3056
-            ]
+            "address": "1 Place Joffre, 75007 Paris"
           },
           {
             "id": "quai-branly",
             "name": "Quai Branly",
             "description": "Promenade Seine, architecture contemporaine",
-            "address": "Quai Branly, 75007 Paris",
-            "coordinates": [
-              48.8601,
-              2.2978
-            ]
+            "address": "Quai Branly, 75007 Paris"
           }
         ]
       },
@@ -265,51 +196,31 @@
             "id": "rue-cler",
             "name": "Rue Cler",
             "description": "Marché piétonnier \"village parisien\", fromagers artisans",
-            "address": "Rue Cler, 75007 Paris",
-            "coordinates": [
-              48.8578,
-              2.3056
-            ]
+            "address": "Rue Cler, 75007 Paris"
           },
           {
             "id": "lami-jean",
             "name": "L'Ami Jean",
             "description": "Bistrot basque renommé, ambiance survoltée",
-            "address": "27 Rue Malar, 75007 Paris",
-            "coordinates": [
-              48.8589,
-              2.3034
-            ]
+            "address": "27 Rue Malar, 75007 Paris"
           },
           {
             "id": "marche-saxe-breteuil",
             "name": "Marché Saxe-Breteuil",
             "description": "Jeu/Sam, vue Tour Eiffel, bio et local",
-            "address": "Avenue de Saxe, 75007 Paris",
-            "coordinates": [
-              48.8534,
-              2.3089
-            ]
+            "address": "Avenue de Saxe, 75007 Paris"
           },
           {
             "id": "poilane",
             "name": "Poilâne",
             "description": "Boulangerie mythique, pain Poilâne traditionnel",
-            "address": "8 Rue du Cherche-Midi, 75006 Paris",
-            "coordinates": [
-              48.8489,
-              2.3289
-            ]
+            "address": "8 Rue du Cherche-Midi, 75006 Paris"
           },
           {
             "id": "la-grande-epicerie-bon-marche",
             "name": "La Grande Épicerie Bon Marché",
             "description": "Temple gastronomie française",
-            "address": "38 Rue de Sèvres, 75007 Paris",
-            "coordinates": [
-              48.8489,
-              2.3223
-            ]
+            "address": "38 Rue de Sèvres, 75007 Paris"
           }
         ]
       },
@@ -320,31 +231,19 @@
             "id": "le-bon-marche",
             "name": "Le Bon Marché",
             "description": "Premier grand magasin monde (1852), mode luxe",
-            "address": "24 Rue de Sèvres, 75007 Paris",
-            "coordinates": [
-              48.8489,
-              2.3223
-            ]
+            "address": "24 Rue de Sèvres, 75007 Paris"
           },
           {
             "id": "la-grande-epicerie",
             "name": "La Grande Épicerie",
             "description": "Gastronomie internationale, cave exceptionnelle",
-            "address": "38 Rue de Sèvres, 75007 Paris",
-            "coordinates": [
-              48.8489,
-              2.3223
-            ]
+            "address": "38 Rue de Sèvres, 75007 Paris"
           },
           {
             "id": "rue-du-bac",
             "name": "Rue du Bac",
             "description": "Boutiques créateurs, antiquaires, décoration",
-            "address": "Rue du Bac, 75007 Paris",
-            "coordinates": [
-              48.8556,
-              2.3223
-            ]
+            "address": "Rue du Bac, 75007 Paris"
           }
         ]
       },
@@ -355,31 +254,19 @@
             "id": "jardin-catherine-laboure",
             "name": "Jardin Catherine Labouré",
             "description": "Potager caché, vignes, poules, tranquillité",
-            "address": "29 Rue de Babylone, 75007 Paris",
-            "coordinates": [
-              48.8523,
-              2.3189
-            ]
+            "address": "29 Rue de Babylone, 75007 Paris"
           },
           {
             "id": "square-des-missions-etrangeres",
             "name": "Square des Missions Étrangères",
             "description": "Jardin secret diplomates",
-            "address": "128 Rue du Bac, 75007 Paris",
-            "coordinates": [
-              48.8545,
-              2.3223
-            ]
+            "address": "128 Rue du Bac, 75007 Paris"
           },
           {
             "id": "jardin-vallee-suisse",
             "name": "Jardin de la Vallée Suisse",
             "description": "Parc miniature, faux rochers",
-            "address": "Jardin de la Vallée Suisse, 75007 Paris",
-            "coordinates": [
-              48.8534,
-              2.3
-            ]
+            "address": "Jardin de la Vallée Suisse, 75007 Paris"
           }
         ]
       }
