@@ -77,7 +77,7 @@
     },
     "categories": {
       "spectacles": {
-        "title": "🎭 Temples du Spectacle",
+        "title": "Spectacles",
         "places": [
           {
             "id": "palais-garnier",
@@ -142,7 +142,7 @@
         ]
       },
       "musees-confidentiels": {
-        "title": "🎨 Musées Confidentiels",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-gustave-moreau",
@@ -197,7 +197,7 @@
         ]
       },
       "grands-magasins": {
-        "title": "🛍️ Grands Magasins Historiques",
+        "title": "Shopping",
         "places": [
           {
             "id": "galeries-lafayette-haussmann",
@@ -252,7 +252,7 @@
         ]
       },
       "restaurants-bistrots": {
-        "title": "🍽️ Restaurants & Bistrots",
+        "title": "Restaurants",
         "places": [
           {
             "id": "chartier",
@@ -297,7 +297,7 @@
         ]
       },
       "bars-nocturne": {
-        "title": "🍸 Bars & Vie Nocturne",
+        "title": "Bars",
         "places": [
           {
             "id": "harrys-bar",
@@ -342,7 +342,7 @@
         ]
       },
       "cinemas-historiques": {
-        "title": "🎬 Cinémas Historiques",
+        "title": "Cinémas",
         "places": [
           {
             "id": "grand-rex",
@@ -367,7 +367,7 @@
         ]
       },
       "jardins-secrets": {
-        "title": "🌿 Jardins & Squares Secrets",
+        "title": "Parcs",
         "places": [
           {
             "id": "square-dorleans",

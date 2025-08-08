@@ -74,7 +74,7 @@
     },
     "categories": {
       "parcs-jardins": {
-        "title": "🌳 Parcs & Jardins Remarquables",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-monceau",
@@ -119,7 +119,7 @@
         ]
       },
       "architecture-musees": {
-        "title": "🏛️ Architecture & Musées Confidentiels",
+        "title": "Architecture et Musées Confidentiels",
         "places": [
           {
             "id": "musee-cernuschi",
@@ -164,7 +164,7 @@
         ]
       },
       "restaurants-marches": {
-        "title": "🍽️ Restaurants & Marchés Bio",
+        "title": "Restaurants",
         "places": [
           {
             "id": "marche-des-batignolles",
@@ -219,7 +219,7 @@
         ]
       },
       "shopping-village": {
-        "title": "🛍️ Shopping Village & Créateurs",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-des-batignolles",
@@ -264,7 +264,7 @@
         ]
       },
       "culture-spectacles": {
-        "title": "🎭 Culture & Spectacles",
+        "title": "Culture",
         "places": [
           {
             "id": "theatre-hebertot",
@@ -299,7 +299,7 @@
         ]
       },
       "bars-nocturne": {
-        "title": "🍻 Bars & Vie Nocturne Familiale",
+        "title": "Bars",
         "places": [
           {
             "id": "le-consulat-17",
@@ -334,7 +334,7 @@
         ]
       },
       "lieux-secrets": {
-        "title": "🌿 Lieux Secrets & Impasses",
+        "title": "Lieux Secrets et Impasses",
         "places": [
           {
             "id": "villa-des-ternes",

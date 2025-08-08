@@ -79,7 +79,7 @@
     },
     "categories": {
       "monuments-prestigieux": {
-        "title": "🏆 Monuments Prestigieux",
+        "title": "Monuments",
         "places": [
           {
             "id": "arc-de-triomphe",
@@ -134,7 +134,7 @@
         ]
       },
       "palais-institutions": {
-        "title": "🏛️ Palais & Institutions",
+        "title": "Palais",
         "places": [
           {
             "id": "grand-palais",
@@ -179,7 +179,7 @@
         ]
       },
       "shopping-prestige": {
-        "title": "🛍️ Shopping Avenue Prestigieuse",
+        "title": "Shopping",
         "places": [
           {
             "id": "champs-elysees",
@@ -224,7 +224,7 @@
         ]
       },
       "restaurants-mythiques": {
-        "title": "🍽️ Restaurants & Brasseries Mythiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "fouquets",
@@ -289,7 +289,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Jardins & Espaces Verts",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-monceau",
@@ -333,7 +333,7 @@
         ]
       },
       "theatres": {
-        "title": "🎭 Théâtres & Spectacles",
+        "title": "Spectacles",
         "places": [
           {
             "id": "theatre-marigny",
@@ -368,7 +368,7 @@
         ]
       },
       "lieux-insolites": {
-        "title": "🔍 Lieux Secrets & Insolites",
+        "title": "Secrets",
         "places": [
           {
             "id": "maison-loo",

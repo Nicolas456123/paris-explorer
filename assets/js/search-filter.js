@@ -283,8 +283,8 @@ class SearchFilter {
     }
     
     matchesCategoryFilter(data, catFilter) {
-        return data.catKey.toLowerCase().includes(catFilter.toLowerCase()) ||
-               data.catData.title.toLowerCase().includes(catFilter.toLowerCase());
+        return data.catData.title.toLowerCase().includes(catFilter.toLowerCase()) ||
+               data.catData.title.toLowerCase() === catFilter.toLowerCase();
     }
     
     matchesStatusFilter(data, statusFilter) {
@@ -549,30 +549,30 @@ class SearchFilter {
         select.innerHTML = '<option value="">Toutes les catégories</option>';
         
         if (this.app.isDataLoaded && this.app.parisData) {
-            const categories = new Set();
+            const uniqueTitles = new Set();
             
+            // Collecter tous les titres uniques
             Object.values(this.app.parisData).forEach(arrData => {
-                Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                    categories.add({
-                        key: catKey,
-                        title: catData.title
-                    });
+                Object.values(arrData.categories || {}).forEach(catData => {
+                    if (catData.title && catData.title.trim()) {
+                        uniqueTitles.add(catData.title.trim());
+                    }
                 });
             });
             
             // Convertir en array et trier
-            const sortedCategories = Array.from(categories)
-                .sort((a, b) => a.title.localeCompare(b.title));
+            const sortedTitles = Array.from(uniqueTitles).sort();
             
-            sortedCategories.forEach(cat => {
+            // Ajouter chaque titre unique comme option
+            sortedTitles.forEach(title => {
                 const option = document.createElement('option');
-                option.value = cat.key;
-                option.textContent = cat.title;
+                option.value = title;
+                option.textContent = title;
                 select.appendChild(option);
             });
+            
+            console.log(`🏷️ ${sortedTitles.length} catégories uniques chargées:`, sortedTitles);
         }
-        
-        console.log('🏷️ Options de catégorie chargées');
     }
     
     loadStatusFilter() {

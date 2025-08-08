@@ -94,7 +94,7 @@
     },
     "categories": {
       "parcs-innovation": {
-        "title": "🌿 Parcs d'Exception & Innovation",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-andre-citroen",
@@ -149,7 +149,7 @@
         ]
       },
       "musees-patrimoine": {
-        "title": "🎨 Musées & Patrimoine Artistique",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-bourdelle",
@@ -194,7 +194,7 @@
         ]
       },
       "shopping-architecture": {
-        "title": "🏢 Shopping & Architecture Moderne",
+        "title": "Shopping",
         "places": [
           {
             "id": "centre-commercial-beaugrenelle",
@@ -239,7 +239,7 @@
         ]
       },
       "restaurants-bistronomie": {
-        "title": "🍽️ Restaurants & Bistronomie",
+        "title": "Restaurants",
         "places": [
           {
             "id": "le-troquet",
@@ -284,7 +284,7 @@
         ]
       },
       "sports-loisirs": {
-        "title": "🏊 Sports & Loisirs Aquatiques",
+        "title": "Sports",
         "places": [
           {
             "id": "piscine-keller",
@@ -329,7 +329,7 @@
         ]
       },
       "jardins-secrets": {
-        "title": "🌿 Jardins Secrets & Méconnus",
+        "title": "Jardins",
         "places": [
           {
             "id": "square-blomet",
@@ -364,7 +364,7 @@
         ]
       },
       "culture-theatre": {
-        "title": "🎭 Culture & Théâtre",
+        "title": "Culture",
         "places": [
           {
             "id": "theatre-montparnasse-15",

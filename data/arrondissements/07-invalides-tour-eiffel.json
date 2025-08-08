@@ -85,7 +85,7 @@
     },
     "categories": {
       "monuments-iconiques": {
-        "title": "🗼 Monuments Iconiques",
+        "title": "Monuments",
         "places": [
           {
             "id": "tour-eiffel",
@@ -159,7 +159,7 @@
         ]
       },
       "musees-excellence": {
-        "title": "🎨 Musées d'Excellence Mondiale",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-dorsay",
@@ -214,7 +214,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Parcs & Promenades",
+        "title": "Parcs",
         "places": [
           {
             "id": "champ-de-mars-parc",
@@ -259,7 +259,7 @@
         ]
       },
       "gastronomie": {
-        "title": "🍽️ Gastronomie & Marchés",
+        "title": "Restaurants",
         "places": [
           {
             "id": "rue-cler",
@@ -314,7 +314,7 @@
         ]
       },
       "shopping-luxe": {
-        "title": "🛍️ Shopping Luxe & Épiceries Fines",
+        "title": "Shopping",
         "places": [
           {
             "id": "le-bon-marche",
@@ -349,7 +349,7 @@
         ]
       },
       "jardins-secrets": {
-        "title": "🌿 Jardins Secrets",
+        "title": "Jardins",
         "places": [
           {
             "id": "jardin-catherine-laboure",

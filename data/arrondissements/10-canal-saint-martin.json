@@ -66,7 +66,7 @@
     },
     "categories": {
       "canal-promenades": {
-        "title": "🌊 Canal & Promenades Romantiques",
+        "title": "Canal",
         "places": [
           {
             "id": "canal-saint-martin",
@@ -131,7 +131,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Espaces Verts & Loisirs",
+        "title": "Parcs",
         "places": [
           {
             "id": "square-villemin",
@@ -176,7 +176,7 @@
         ]
       },
       "restaurants-cultes": {
-        "title": "🍽️ Restaurants & Cafés Cultes",
+        "title": "Restaurants",
         "places": [
           {
             "id": "du-pain-et-des-idees",
@@ -221,7 +221,7 @@
         ]
       },
       "shopping-creatif": {
-        "title": "🛍️ Shopping Créatif & Vintage",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-de-marseille",
@@ -266,7 +266,7 @@
         ]
       },
       "culture-alternative": {
-        "title": "🎨 Culture Alternative",
+        "title": "Culture",
         "places": [
           {
             "id": "point-ephemere",
@@ -291,7 +291,7 @@
         ]
       },
       "bars-secrets": {
-        "title": "🍻 Bars Secrets & Speakeasy",
+        "title": "Bars",
         "places": [
           {
             "id": "copperbay",

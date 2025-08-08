@@ -84,7 +84,7 @@
     },
     "categories": {
       "institutions-culturelles": {
-        "title": "🏛️ Institutions Culturelles Majeures",
+        "title": "Institutions",
         "places": [
           {
             "id": "cite-des-sciences-et-de-lindustrie",
@@ -139,7 +139,7 @@
         ]
       },
       "parcs-exceptionnels": {
-        "title": "🌳 Parcs Exceptionnels & Romantiques",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-des-buttes-chaumont",
@@ -184,7 +184,7 @@
         ]
       },
       "quartiers-secrets": {
-        "title": "🏘️ Quartiers Secrets & Villages Urbains",
+        "title": "Quartiers",
         "places": [
           {
             "id": "la-mouzaia",
@@ -229,7 +229,7 @@
         ]
       },
       "restaurants-guinguettes": {
-        "title": "🍽️ Restaurants & Guinguettes Authentiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "rosa-bonheur",
@@ -274,7 +274,7 @@
         ]
       },
       "spectacles-evenements": {
-        "title": "🎭 Spectacles & Événements",
+        "title": "Spectacles",
         "places": [
           {
             "id": "zenith-de-paris",
@@ -319,7 +319,7 @@
         ]
       },
       "architecture-remarquable": {
-        "title": "🏗️ Architecture Remarquable",
+        "title": "Architecture",
         "places": [
           {
             "id": "les-orgues-de-flandre",
@@ -354,7 +354,7 @@
         ]
       },
       "espaces-verts-secrets": {
-        "title": "🌿 Espaces Verts Secrets",
+        "title": "Jardins",
         "places": [
           {
             "id": "jardin-naturel-pierre-emmanuel",
@@ -389,7 +389,7 @@
         ]
       },
       "street-art": {
-        "title": "🎨 Street Art & Art Urbain",
+        "title": "StreetArt",
         "places": [
           {
             "id": "parc-de-la-villette-art",

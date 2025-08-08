@@ -67,7 +67,7 @@
     },
     "categories": {
       "monuments": {
-        "title": "🏛️ Monuments Emblématiques",
+        "title": "Monuments",
         "places": [
           {
             "id": "notre-dame-de-paris",
@@ -142,7 +142,7 @@
         ]
       },
       "patrimoine-juif": {
-        "title": "✡️ Patrimoine Juif & Mémoire",
+        "title": "PatrimoineJuif",
         "places": [
           {
             "id": "rue-des-rosiers",
@@ -187,7 +187,7 @@
         ]
       },
       "ile-saint-louis": {
-        "title": "🏝️ Île Saint-Louis - Village sur Seine",
+        "title": "IleSaintLouis",
         "places": [
           {
             "id": "hotel-lambert",
@@ -252,7 +252,7 @@
         ]
       },
       "restaurants": {
-        "title": "🍽️ Restaurants & Cafés Emblématiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "las-du-fallafel",
@@ -297,7 +297,7 @@
         ]
       },
       "bars-gay": {
-        "title": "🌈 Bars Gay-Friendly & Vie Nocturne",
+        "title": "Bars",
         "places": [
           {
             "id": "raidd-bar",
@@ -362,7 +362,7 @@
         ]
       },
       "shopping": {
-        "title": "🛍️ Shopping & Artisanat",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-des-francs-bourgeois",
@@ -417,7 +417,7 @@
         ]
       },
       "culture": {
-        "title": "🎭 Culture & Arts",
+        "title": "Culture",
         "places": [
           {
             "id": "maison-europeenne-photographie",
@@ -452,7 +452,7 @@
         ]
       },
       "jardins-secrets": {
-        "title": "🌿 Jardins Secrets du Marais",
+        "title": "Jardins",
         "places": [
           {
             "id": "jardin-anne-frank",

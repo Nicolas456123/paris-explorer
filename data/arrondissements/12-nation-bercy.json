@@ -90,7 +90,7 @@
     },
     "categories": {
       "espaces-verts": {
-        "title": "🌳 Espaces Verts Exceptionnels",
+        "title": "Parcs",
         "places": [
           {
             "id": "bois-de-vincennes",
@@ -135,7 +135,7 @@
         ]
       },
       "patrimoine-architecture": {
-        "title": "🏛️ Patrimoine & Architecture",
+        "title": "Monuments",
         "places": [
           {
             "id": "chateau-de-vincennes",
@@ -190,7 +190,7 @@
         ]
       },
       "restaurants-marches": {
-        "title": "🍽️ Restaurants & Marchés Pittoresques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "bercy-village",
@@ -245,7 +245,7 @@
         ]
       },
       "divertissements": {
-        "title": "🎪 Divertissements & Spectacles",
+        "title": "Spectacles",
         "places": [
           {
             "id": "accorhotels-arena",
@@ -290,7 +290,7 @@
         ]
       },
       "patrimoine-fluvial": {
-        "title": "🚢 Patrimoine Fluvial",
+        "title": "Fluvial",
         "places": [
           {
             "id": "port-de-larsenal",
@@ -315,7 +315,7 @@
         ]
       },
       "arts-culture": {
-        "title": "🎨 Arts & Culture",
+        "title": "Culture",
         "places": [
           {
             "id": "musee-des-arts-forains",

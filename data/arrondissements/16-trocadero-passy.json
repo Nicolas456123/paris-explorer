@@ -87,7 +87,7 @@
     },
     "categories": {
       "musees-classe-mondiale": {
-        "title": "🎨 Musées Classe Mondiale",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-dart-moderne",
@@ -162,7 +162,7 @@
         ]
       },
       "parcs-jardins-prestigieux": {
-        "title": "🌳 Parcs & Jardins Prestigieux",
+        "title": "Parcs",
         "places": [
           {
             "id": "bois-de-boulogne",
@@ -217,7 +217,7 @@
         ]
       },
       "architecture-monuments": {
-        "title": "🏛️ Architecture & Monuments",
+        "title": "Monuments",
         "places": [
           {
             "id": "palais-de-chaillot",
@@ -272,7 +272,7 @@
         ]
       },
       "shopping-luxe": {
-        "title": "🛍️ Shopping Luxe & Quartiers Chic",
+        "title": "Shopping",
         "places": [
           {
             "id": "avenue-victor-hugo",
@@ -317,7 +317,7 @@
         ]
       },
       "restaurants-gastronomiques": {
-        "title": "🍽️ Restaurants Gastronomiques & Palaces",
+        "title": "Restaurants",
         "places": [
           {
             "id": "lastrance",
@@ -372,7 +372,7 @@
         ]
       },
       "sports-evenements": {
-        "title": "⚽ Sports & Événements Internationaux",
+        "title": "Sports",
         "places": [
           {
             "id": "roland-garros",
@@ -417,7 +417,7 @@
         ]
       },
       "jardins-secrets": {
-        "title": "🌿 Jardins Secrets & Maisons d'Écrivains",
+        "title": "Jardins",
         "places": [
           {
             "id": "maison-de-balzac",

@@ -57,7 +57,7 @@
     },
     "categories": {
       "monuments": {
-        "title": "🏛️ Monuments & Sites Historiques",
+        "title": "Monuments",
         "description": "Patrimoine architectural et historique exceptionnel",
         "places": [
           {
@@ -181,7 +181,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Espaces Verts & Lieux Secrets",
+        "title": "Parcs",
         "places": [
           {
             "id": "jardin-des-tuileries",
@@ -236,7 +236,7 @@
         ]
       },
       "restaurants": {
-        "title": "🍽️ Restaurants & Gastronomie",
+        "title": "Restaurants",
         "places": [
           {
             "id": "palais-royal-restaurant",
@@ -340,7 +340,7 @@
         ]
       },
       "shopping": {
-        "title": "🛍️ Shopping & Marchés",
+        "title": "Shopping",
         "places": [
           {
             "id": "forum-des-halles",
@@ -405,7 +405,7 @@
         ]
       },
       "culture": {
-        "title": "🎭 Culture & Spectacles",
+        "title": "Culture",
         "places": [
           {
             "id": "comedie-francaise",
@@ -450,7 +450,7 @@
         ]
       },
       "lieux-insolites": {
-        "title": "🔍 Lieux Insolites & Secrets",
+        "title": "Secrets",
         "places": [
           {
             "id": "passage-moliere",

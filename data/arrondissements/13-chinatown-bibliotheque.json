@@ -76,7 +76,7 @@
     },
     "categories": {
       "architecture-moderne": {
-        "title": "🏗️ Architecture Moderne & Bibliothèques",
+        "title": "Architecture",
         "places": [
           {
             "id": "bibliotheque-nationale-france",
@@ -121,7 +121,7 @@
         ]
       },
       "chinatown": {
-        "title": "🥢 Chinatown Authentique - Triangle de Choisy",
+        "title": "Chinatown",
         "places": [
           {
             "id": "tang-freres",
@@ -156,7 +156,7 @@
         ]
       },
       "restaurants-asiatiques": {
-        "title": "🍽️ Restaurants Asiatiques Authentiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "lao-lane-xang",
@@ -221,7 +221,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Espaces Verts & Lieux Insolites",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-de-choisy",
@@ -286,7 +286,7 @@
         ]
       },
       "culture-cinema": {
-        "title": "🎬 Culture & Cinéma",
+        "title": "Culture",
         "places": [
           {
             "id": "cinema-mk2-bibliotheque",
@@ -311,7 +311,7 @@
         ]
       },
       "architecture-contemporaine": {
-        "title": "🏗️ Architecture Contemporaine",
+        "title": "Architecture",
         "places": [
           {
             "id": "towers-duo",
@@ -346,7 +346,7 @@
         ]
       },
       "vie-nocturne": {
-        "title": "🕺 Vie Nocturne Alternative",
+        "title": "Bars",
         "places": [
           {
             "id": "wanderlust",

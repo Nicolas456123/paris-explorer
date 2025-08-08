@@ -75,7 +75,7 @@
     },
     "categories": {
       "pere-lachaise": {
-        "title": "⚰️ Cimetière du Père Lachaise - Nécropole Mondiale",
+        "title": "PèreLachaise",
         "description": "44 hectares, 3M visiteurs/an, 70000 concessions",
         "places": [
           {
@@ -151,7 +151,7 @@
         ]
       },
       "belleville-street-art": {
-        "title": "🎨 Belleville - Street Art & Diversité Culturelle",
+        "title": "Belleville",
         "places": [
           {
             "id": "rue-denoyez",
@@ -196,7 +196,7 @@
         ]
       },
       "quartiers-multiculturels": {
-        "title": "🌍 Quartiers Multiculturels Authentiques",
+        "title": "Multiculturel",
         "places": [
           {
             "id": "rue-de-belleville",
@@ -241,7 +241,7 @@
         ]
       },
       "panoramas-espaces-verts": {
-        "title": "🌄 Panoramas & Espaces Verts",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-de-belleville",
@@ -286,7 +286,7 @@
         ]
       },
       "restaurants-populaires": {
-        "title": "🍽️ Restaurants Populaires & Authentiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "le-baratin",
@@ -331,7 +331,7 @@
         ]
       },
       "vie-nocturne-underground": {
-        "title": "🍻 Vie Nocturne Underground & Alternative",
+        "title": "Bars",
         "places": [
           {
             "id": "la-bellevilloise",
@@ -376,7 +376,7 @@
         ]
       },
       "patrimoine-industriel": {
-        "title": "🏭 Patrimoine Industriel & Historique",
+        "title": "Industriel",
         "places": [
           {
             "id": "petite-ceinture",
@@ -411,7 +411,7 @@
         ]
       },
       "jardins-ecologie": {
-        "title": "🌿 Jardins Partagés & Écologie Urbaine",
+        "title": "Jardins",
         "places": [
           {
             "id": "jardin-naturel-pierre-emmanuel",
@@ -446,7 +446,7 @@
         ]
       },
       "culture-alternative": {
-        "title": "🎭 Culture Alternative & Associative",
+        "title": "Culture",
         "places": [
           {
             "id": "le-cent-quatre-20",
@@ -481,7 +481,7 @@
         ]
       },
       "marches-commerces": {
-        "title": "🛒 Marchés & Commerces Populaires",
+        "title": "Shopping",
         "places": [
           {
             "id": "marche-de-menilmontant",

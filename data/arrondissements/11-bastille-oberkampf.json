@@ -79,7 +79,7 @@
     },
     "categories": {
       "sites-historiques": {
-        "title": "🏛️ Sites Historiques & Révolutionnaires",
+        "title": "Monuments",
         "places": [
           {
             "id": "place-de-la-bastille",
@@ -134,7 +134,7 @@
         ]
       },
       "gastronomie-pointe": {
-        "title": "🍽️ Gastronomie de Pointe",
+        "title": "Restaurants",
         "places": [
           {
             "id": "septime",
@@ -189,7 +189,7 @@
         ]
       },
       "vie-nocturne": {
-        "title": "🍻 Vie Nocturne Légendaire",
+        "title": "Bars",
         "places": [
           {
             "id": "rue-oberkampf",
@@ -234,7 +234,7 @@
         ]
       },
       "culture-arts": {
-        "title": "🎨 Culture & Arts Vivants",
+        "title": "Culture",
         "places": [
           {
             "id": "cirque-dhiver-bouglione",
@@ -279,7 +279,7 @@
         ]
       },
       "shopping-vintage": {
-        "title": "🛍️ Shopping Vintage & Créateurs",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-de-charonne",
@@ -304,7 +304,7 @@
         ]
       },
       "lieux-insolites": {
-        "title": "🌿 Lieux Insolites & Secrets",
+        "title": "Secrets",
         "places": [
           {
             "id": "cite-du-figuier",
@@ -349,7 +349,7 @@
         ]
       },
       "street-art": {
-        "title": "🎨 Street Art & Art Urbain",
+        "title": "StreetArt",
         "places": [
           {
             "id": "oberkampf-menilmontant",

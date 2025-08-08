@@ -318,7 +318,7 @@ class UIManager {
             Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
                 // Filtrer par catégorie
                 if (this.app.searchFilter.activeFilters.category && 
-                    !catKey.toLowerCase().includes(this.app.searchFilter.activeFilters.category.toLowerCase())) {
+                    !catData.title.toLowerCase().includes(this.app.searchFilter.activeFilters.category.toLowerCase())) {
                     return;
                 }
                 

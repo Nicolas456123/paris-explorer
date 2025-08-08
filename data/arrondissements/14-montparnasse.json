@@ -88,7 +88,7 @@
     },
     "categories": {
       "monuments-panoramas": {
-        "title": "🏢 Monuments & Panoramas",
+        "title": "Monuments et Panoramas",
         "places": [
           {
             "id": "tour-montparnasse",
@@ -143,7 +143,7 @@
         ]
       },
       "parcs-jardins": {
-        "title": "🌳 Parcs & Jardins Secrets",
+        "title": "Parcs",
         "places": [
           {
             "id": "parc-montsouris",
@@ -198,7 +198,7 @@
         ]
       },
       "cafes-montparnos": {
-        "title": "☕ Cafés Historiques \"Montparnos\" - Années Folles",
+        "title": "Cafés",
         "places": [
           {
             "id": "la-coupole",
@@ -253,7 +253,7 @@
         ]
       },
       "restaurants-creperies": {
-        "title": "🥞 Restaurants & Crêperies",
+        "title": "Restaurants",
         "places": [
           {
             "id": "creperie-josselin",
@@ -308,7 +308,7 @@
         ]
       },
       "shopping-marches": {
-        "title": "🛒 Shopping & Marchés Authentiques",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-daguerre-pietonnier",
@@ -353,7 +353,7 @@
         ]
       },
       "culture-spectacles": {
-        "title": "🎭 Culture & Spectacles",
+        "title": "Culture",
         "places": [
           {
             "id": "theatre-montparnasse",
@@ -398,7 +398,7 @@
         ]
       },
       "lieux-secrets": {
-        "title": "🤫 Lieux Secrets & Insolites",
+        "title": "Secrets",
         "places": [
           {
             "id": "villa-seurat",

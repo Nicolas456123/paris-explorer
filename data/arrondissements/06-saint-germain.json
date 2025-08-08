@@ -75,7 +75,7 @@
     },
     "categories": {
       "monuments": {
-        "title": "🏛️ Monuments & Institutions",
+        "title": "Monuments",
         "places": [
           {
             "id": "palais-du-luxembourg",
@@ -140,7 +140,7 @@
         ]
       },
       "jardins-luxembourg": {
-        "title": "🌳 Jardins du Luxembourg - 25 hectares",
+        "title": "Parcs",
         "places": [
           {
             "id": "bassin-octogonal",
@@ -195,7 +195,7 @@
         ]
       },
       "cafes-historiques": {
-        "title": "☕ Cafés Historiques & Philosophiques",
+        "title": "Cafés",
         "places": [
           {
             "id": "cafe-de-flore",
@@ -260,7 +260,7 @@
         ]
       },
       "restaurants-gastronomiques": {
-        "title": "🍽️ Restaurants Gastronomiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "guy-savoy",
@@ -305,7 +305,7 @@
         ]
       },
       "shopping": {
-        "title": "🛍️ Shopping Haute Couture & Librairies",
+        "title": "Shopping",
         "places": [
           {
             "id": "boulevard-saint-germain",
@@ -370,7 +370,7 @@
         ]
       },
       "theatres": {
-        "title": "🎭 Théâtres & Culture",
+        "title": "Spectacles",
         "places": [
           {
             "id": "theatre-de-lodeon",
@@ -405,7 +405,7 @@
         ]
       },
       "lieux-secrets": {
-        "title": "🌿 Lieux Secrets & Jardins Cachés",
+        "title": "Lieux Secrets et Jardins Cachés",
         "places": [
           {
             "id": "cour-du-commerce-saint-andre",

@@ -85,7 +85,7 @@
     },
     "categories": {
       "monuments": {
-        "title": "🏛️ Monuments Historiques & Universitaires",
+        "title": "Monuments",
         "places": [
           {
             "id": "pantheon",
@@ -160,7 +160,7 @@
         ]
       },
       "musees": {
-        "title": "🎨 Musées Spécialisés",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-de-cluny",
@@ -205,7 +205,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Espaces Verts & Jardins",
+        "title": "Parcs",
         "places": [
           {
             "id": "jardin-des-plantes",
@@ -250,7 +250,7 @@
         ]
       },
       "restaurants": {
-        "title": "🍽️ Restaurants & Brasseries Historiques",
+        "title": "Restaurants",
         "places": [
           {
             "id": "shakespeare-and-company-cafe",
@@ -305,7 +305,7 @@
         ]
       },
       "librairies": {
-        "title": "📚 Librairies & Culture Littéraire",
+        "title": "Librairies",
         "places": [
           {
             "id": "shakespeare-and-company",
@@ -340,7 +340,7 @@
         ]
       },
       "cinemas": {
-        "title": "🎬 Cinémas d'Art & Essai",
+        "title": "Cinémas",
         "places": [
           {
             "id": "cinema-du-pantheon",

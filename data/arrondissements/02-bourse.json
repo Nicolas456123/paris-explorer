@@ -64,7 +64,7 @@
     },
     "categories": {
       "monuments": {
-        "title": "🏛️ Architecture & Monuments",
+        "title": "Monuments",
         "places": [
           {
             "id": "palais-brongniart",
@@ -149,7 +149,7 @@
         ]
       },
       "restaurants": {
-        "title": "🍽️ Restaurants & Spécialités",
+        "title": "Restaurants",
         "places": [
           {
             "id": "rue-sainte-anne",
@@ -184,7 +184,7 @@
         ]
       },
       "bars": {
-        "title": "🍸 Bars Secrets & Speakeasy",
+        "title": "Bars",
         "places": [
           {
             "id": "experimental-cocktail-club",
@@ -199,7 +199,7 @@
         ]
       },
       "culture": {
-        "title": "🎬 Culture & Spectacles",
+        "title": "Culture",
         "places": [
           {
             "id": "grand-rex",
@@ -234,7 +234,7 @@
         ]
       },
       "shopping": {
-        "title": "🛍️ Shopping Spécialisé",
+        "title": "Shopping",
         "places": [
           {
             "id": "passage-du-caire",

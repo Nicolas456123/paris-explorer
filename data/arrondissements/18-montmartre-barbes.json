@@ -83,7 +83,7 @@
     },
     "categories": {
       "montmartre-mythique": {
-        "title": "⛪ Montmartre Mythique & Bohème",
+        "title": "Montmartre",
         "places": [
           {
             "id": "basilique-du-sacre-coeur",
@@ -148,7 +148,7 @@
         ]
       },
       "musees-lieux-artistiques": {
-        "title": "🎨 Musées & Lieux Artistiques",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-de-montmartre",
@@ -193,7 +193,7 @@
         ]
       },
       "montmartre-secret": {
-        "title": "🌿 Montmartre Secret & Romantique",
+        "title": "Montmartre",
         "places": [
           {
             "id": "vignes-de-montmartre",
@@ -248,7 +248,7 @@
         ]
       },
       "restaurants-guinguettes": {
-        "title": "🍽️ Restaurants Historiques & Guinguettes",
+        "title": "Restaurants",
         "places": [
           {
             "id": "la-maison-rose",
@@ -303,7 +303,7 @@
         ]
       },
       "barbes-multiculturel": {
-        "title": "🌍 Barbès - Quartier Multiculturel Authentique",
+        "title": "Barbès",
         "places": [
           {
             "id": "marche-de-la-chapelle",
@@ -348,7 +348,7 @@
         ]
       },
       "spectacles-cabarets": {
-        "title": "🎭 Spectacles & Cabarets Alternatifs",
+        "title": "Spectacles",
         "places": [
           {
             "id": "divan-du-monde",
@@ -393,7 +393,7 @@
         ]
       },
       "shopping-vintage": {
-        "title": "🛍️ Shopping Vintage & Créateurs",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-des-martyrs",
@@ -438,7 +438,7 @@
         ]
       },
       "vie-nocturne-bars": {
-        "title": "🌃 Vie Nocturne & Bars Secrets",
+        "title": "Bars",
         "places": [
           {
             "id": "le-tres-particulier",

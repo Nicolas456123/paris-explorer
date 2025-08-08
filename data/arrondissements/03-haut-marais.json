@@ -67,7 +67,7 @@
     },
     "categories": {
       "musees": {
-        "title": "🎨 Musées & Culture",
+        "title": "Musées",
         "places": [
           {
             "id": "musee-des-arts-et-metiers",
@@ -142,7 +142,7 @@
         ]
       },
       "espaces-verts": {
-        "title": "🌳 Parcs & Espaces Secrets",
+        "title": "Parcs",
         "places": [
           {
             "id": "square-du-temple",
@@ -197,7 +197,7 @@
         ]
       },
       "restaurants": {
-        "title": "🍽️ Gastronomie & Marchés",
+        "title": "Restaurants",
         "places": [
           {
             "id": "marche-enfants-rouges",
@@ -242,7 +242,7 @@
         ]
       },
       "shopping": {
-        "title": "🛍️ Shopping & Créateurs",
+        "title": "Shopping",
         "places": [
           {
             "id": "rue-de-bretagne",
@@ -297,7 +297,7 @@
         ]
       },
       "bars": {
-        "title": "🍻 Vie Nocturne",
+        "title": "Bars",
         "places": [
           {
             "id": "andy-wahloo",
