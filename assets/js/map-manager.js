@@ -92,7 +92,7 @@ class MapManager {
                 // Ne recharger que si on change de mode (overview ↔ détaillé)
                 if (wasOverviewMode !== isOverviewMode) {
                     console.log(`🔍 Changement de mode: ${isOverviewMode ? 'vue d\'ensemble' : 'vue détaillée'}`);
-                    this.clearMapMarkers();
+                    this.clearMarkers();
                     this.loadMapContent();
                 }
                 
@@ -107,10 +107,7 @@ class MapManager {
                 this.app.showNotification('Erreur de chargement de la carte', 'error');
             });
             
-            // Initialiser les contrôles après un délai pour s'assurer que les boutons sont dans le DOM
-            setTimeout(() => {
-                this.setupMapControls();
-            }, 200);
+            // Les contrôles sont déjà configurés via Leaflet
             
             console.log('✅ Carte complètement initialisée');
             
@@ -121,7 +118,7 @@ class MapManager {
     }
     
     // === CHARGEMENT DU CONTENU ===
-    loadMapContent() {
+    async loadMapContent() {
         console.log('📍 Chargement du contenu de la carte...');
         
         if (!this.isMapReady) {
@@ -131,775 +128,194 @@ class MapManager {
         }
         
         // Nettoyer le contenu existant
-        this.clearMapMarkers();
+        this.clearMarkers();
         
         if (this.app.isDataLoaded && this.app.parisData && Object.keys(this.app.parisData).length > 0) {
             console.log('✅ Utilisation des vraies données');
-            this.loadRealData();
+            await this.loadRealData();
         } else {
-            console.log('📋 Utilisation des données de démonstration');
-            this.loadDemoData();
+            console.log('📋 Aucune donnée chargée');
+            this.app.uiManager.showNotification('Veuillez charger les données pour afficher la carte.', 'warning');
         }
     }
     
     // === CHARGEMENT DES VRAIES DONNÉES ===
-    loadRealData() {
+    async loadRealData() {
+        console.log('🗺️ Chargement des lieux via géocodage des adresses...');
+        console.log('📊 Données disponibles:', Object.keys(this.app.parisData));
         const zoom = this.map.getZoom();
+        console.log('🔍 Zoom actuel:', zoom);
         let markersAdded = 0;
         
-        if (zoom <= 12) {
-            // Vue d'ensemble : cercles d'arrondissements
-            console.log('🏛️ Affichage des arrondissements (vue d\'ensemble)');
-            
-            Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
-                const coords = this.getArrondissementCoordinates(arrKey);
-                if (!coords) {
-                    console.warn(`⚠️ Pas de coordonnées pour ${arrKey}`);
-                    return;
+        try {
+            if (zoom <= 12) {
+                // Vue d'ensemble : marqueurs d'arrondissements
+                console.log('🏛️ Affichage des arrondissements (vue d\'ensemble)');
+                
+                // Test avec seulement 2 arrondissements pour commencer
+                const testArrs = Object.entries(this.app.parisData).slice(0, 2);
+                console.log('🧪 Test avec arrondissements:', testArrs.map(([key]) => key));
+                
+                for (const [arrKey, arrData] of testArrs) {
+                    const arrInfo = arrData.arrondissement || arrData;
+                    const arrName = arrInfo.name || arrKey;
+                    console.log(`📍 Test géocodage: ${arrKey} -> ${arrName}`);
+                    
+                    const coords = await this.geocodeAddress(arrName + " Paris");
+                    if (!coords) {
+                        console.warn(`⚠️ Échec géocodage pour ${arrKey}`);
+                        continue;
+                    }
+                    
+                    console.log(`✅ Coordonnées obtenues pour ${arrKey}:`, coords);
+                    
+                    // Créer un marqueur simple
+                    const marker = L.marker(coords).addTo(this.map);
+                    marker.bindPopup(`<b>${arrName}</b><br>Arrondissement ${arrKey}`);
+                    
+                    this.markers.push(marker);
+                    markersAdded++;
+                    
+                    console.log(`✅ Marqueur ${markersAdded} ajouté pour ${arrKey}`);
+                    
+                    // Délai entre requêtes
+                    await new Promise(resolve => setTimeout(resolve, 500));
                 }
-                
-                const totalPlaces = this.app.dataManager.getTotalPlacesInArrondissement(arrData);
-                const visitedPlaces = this.app.dataManager.getVisitedPlacesInArrondissement(arrData, arrKey);
-                const completionPercent = totalPlaces > 0 ? Math.round((visitedPlaces / totalPlaces) * 100) : 0;
-                
-                // Couleur selon completion
-                let fillColor = '#dc2626'; // Rouge par défaut
-                if (completionPercent === 100) fillColor = '#059669'; // Vert complet
-                else if (completionPercent >= 70) fillColor = '#059669'; // Vert
-                else if (completionPercent >= 40) fillColor = '#d97706'; // Orange
-                else if (completionPercent > 0) fillColor = '#dc2626'; // Rouge
-                else fillColor = '#6b7280'; // Gris non visité
-                
-                const marker = L.circleMarker(coords, {
-                    color: '#1e3a8a',
-                    fillColor: fillColor,
-                    fillOpacity: 0.7,
-                    radius: Math.max(8, Math.min(25, completionPercent / 4 + 10)),
-                    weight: 2
-                }).addTo(this.map);
-                
-                marker.bindPopup(this.createArrondissementPopup(arrKey, arrData, visitedPlaces, totalPlaces, completionPercent));
-                
-                // Effet hover
-                marker.on('mouseover', function() {
-                    this.setStyle({ radius: this.options.radius + 3, weight: 4 });
-                });
-                marker.on('mouseout', function() {
-                    this.setStyle({ radius: this.options.radius - 3, weight: 2 });
-                });
-                
-                this.markers.push(marker);
-                markersAdded++;
-            });
-            
-        } else {
-            // Vue détaillée : lieux individuels
-            console.log('📍 Affichage des lieux individuels (vue détaillée)');
-            
-            const userData = this.app.getCurrentUserData();
-            
-            Object.entries(this.app.parisData).forEach(([arrKey, arrData]) => {
-                Object.entries(arrData.categories || {}).forEach(([catKey, catData]) => {
-                    (catData.places || []).forEach(place => {
-                        const coords = this.app.dataManager.getPlaceCoordinates(place, arrKey);
-                        if (!coords) return;
-                        
-                        const placeId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
-                        const isVisited = userData && userData.visitedPlaces instanceof Set ? 
-                            userData.visitedPlaces.has(placeId) : false;
-                        
-                        const arrondissementName = arrData.name || arrKey;
-                        const marker = this.createPlaceMarker(coords, place, catKey, isVisited, arrondissementName);
-                        if (marker) {
-                            this.markers.push(marker);
-                            markersAdded++;
-                        }
-                    });
-                });
-            });
+            } else {
+                console.log('📍 Vue détaillée - pas encore implémentée avec géocodage simple');
+            }
+        } catch (error) {
+            console.error('❌ Erreur lors du géocodage:', error);
         }
         
-        console.log(`✅ ${markersAdded} marqueurs ajoutés à la carte`);
+        console.log(`📊 Résultat final: ${markersAdded} marqueurs ajoutés`);
         
         if (markersAdded === 0) {
-            console.warn('⚠️ Aucun marqueur ajouté, fallback vers les données demo');
-            this.loadDemoData();
+            console.warn('⚠️ Aucun marqueur ajouté');
+            // Vérifier si c'est un problème de coordonnées
+            console.log('Vérifiez que les données contiennent des coordonnées valides.');
         } else {
-            console.log(`🗺️ ${markersAdded} lieux affichés sur la carte`);
-            // Notification supprimée - information visible dans la console
+            console.log(`🎉 ${markersAdded} lieux affichés sur la carte !`);
         }
     }
     
-    // === CHARGEMENT DES DONNÉES DEMO ===
-    loadDemoData() {
-        console.log('📋 Chargement des données de démonstration...');
+    // === GÉOCODAGE DES ADRESSES ===
+    async geocodeAddress(address) {
+        console.log(`🔍 Tentative de géocodage pour: "${address}"`);
         
-        const demoLocations = [
-            { name: "1er - Louvre", coords: [48.8607, 2.3358], places: 15, visited: 5, emoji: "🏛️", color: "#dc2626", description: "Musée du Louvre, Sainte-Chapelle, Palais-Royal" },
-            { name: "4ème - Le Marais", coords: [48.8534, 2.3488], places: 12, visited: 8, emoji: "🏘️", color: "#059669", description: "Notre-Dame, Place des Vosges, Hôtel de Ville" },
-            { name: "7ème - Tour Eiffel", coords: [48.8534, 2.2944], places: 18, visited: 12, emoji: "🗼", color: "#d97706", description: "Tour Eiffel, Invalides, Musée d'Orsay" },
-            { name: "8ème - Champs-Élysées", coords: [48.8718, 2.3075], places: 20, visited: 15, emoji: "🛍️", color: "#059669", description: "Arc de Triomphe, Champs-Élysées, Place Vendôme" },
-            { name: "18ème - Montmartre", coords: [48.8867, 2.3431], places: 16, visited: 10, emoji: "🎨", color: "#d97706", description: "Sacré-Cœur, Moulin Rouge, Place du Tertre" },
-            { name: "16ème - Trocadéro", coords: [48.8635, 2.2773], places: 14, visited: 3, emoji: "🏢", color: "#dc2626", description: "Trocadéro, Bois de Boulogne, Palais de Chaillot" },
-            { name: "5ème - Latin", coords: [48.8462, 2.3372], places: 13, visited: 6, emoji: "📚", color: "#d97706", description: "Panthéon, Sorbonne, Jardin du Luxembourg" },
-            { name: "6ème - Saint-Germain", coords: [48.8496, 2.3341], places: 11, visited: 4, emoji: "☕", color: "#dc2626", description: "Saint-Germain-des-Prés, Café de Flore" }
-        ];
-        
-        demoLocations.forEach((location, index) => {
-            const completionPercent = Math.round((location.visited / location.places) * 100);
-            
-            const marker = L.circleMarker(location.coords, {
-                color: '#1e3a8a',
-                fillColor: location.color,
-                fillOpacity: 0.8,
-                radius: Math.max(10, Math.min(25, completionPercent / 4 + 12)),
-                weight: 3
-            }).addTo(this.map);
-            
-            marker.bindPopup(this.createDemoPopup(location, completionPercent));
-            
-            // Effet hover
-            marker.on('mouseover', function() {
-                this.setStyle({ radius: this.options.radius + 4, weight: 4 });
-            });
-            marker.on('mouseout', function() {
-                this.setStyle({ radius: this.options.radius - 4, weight: 3 });
-            });
-            
-            this.markers.push(marker);
-        });
-        
-        // Centrer sur tous les marqueurs
-        if (this.markers.length > 0) {
-            const group = new L.featureGroup(this.markers);
-            this.map.fitBounds(group.getBounds().pad(0.1), { maxZoom: 12 });
+        if (!address) {
+            console.warn('⚠️ Adresse vide fournie au géocodage');
+            return null;
         }
-        
-        console.log(`✅ ${this.markers.length} marqueurs demo ajoutés`);
-        // Notification demo supprimée
-    }
-    
-    // === CRÉATION DES POPUPS ===
-    createArrondissementPopup(arrKey, arrData, visitedPlaces, totalPlaces, completionPercent) {
-        const progressColor = completionPercent >= 70 ? '#059669' : completionPercent >= 40 ? '#d97706' : '#dc2626';
-        
-        return `
-            <div style="font-family: 'Segoe UI', sans-serif; text-align: center; min-width: 250px;">
-                <h3 style="color: #1e3a8a; margin: 0 0 12px 0; font-size: 16px;">${arrData.name || arrKey}</h3>
-                <div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 16px; border-radius: 8px; margin: 12px 0;">
-                    <p style="margin: 6px 0; font-weight: bold; font-size: 18px;">${visitedPlaces}/${totalPlaces} lieux explorés</p>
-                    <div style="background: #e5e7eb; height: 8px; border-radius: 4px; margin: 10px 0; overflow: hidden;">
-                        <div style="background: ${progressColor}; height: 100%; width: ${completionPercent}%; border-radius: 4px; transition: width 0.3s ease;"></div>
-                    </div>
-                    <p style="margin: 6px 0; color: ${progressColor}; font-weight: bold; font-size: 16px;">${completionPercent}% complété</p>
-                </div>
-                <button onclick="app.uiManager.switchTab('list'); app.searchFilter.filterByArrondissement('${arrKey}')" 
-                        style="background: #1e3a8a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-top: 8px;">
-                    🔍 Explorer cet arrondissement
-                </button>
-            </div>
-        `;
-    }
-    
-    createDemoPopup(location, completionPercent) {
-        return `
-            <div style="font-family: 'Segoe UI', sans-serif; text-align: center; min-width: 250px;">
-                <div style="font-size: 40px; margin-bottom: 12px;">${location.emoji}</div>
-                <h3 style="color: #1e3a8a; margin: 0 0 12px 0; font-size: 18px;">${location.name}</h3>
-                <p style="color: #6b7280; font-size: 14px; margin: 8px 0; font-style: italic;">${location.description}</p>
-                <div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 16px; border-radius: 8px; margin: 12px 0;">
-                    <p style="margin: 6px 0; font-weight: bold; font-size: 18px;">${location.visited}/${location.places} lieux explorés</p>
-                    <div style="background: #e5e7eb; height: 8px; border-radius: 4px; margin: 10px 0; overflow: hidden;">
-                        <div style="background: ${location.color}; height: 100%; width: ${completionPercent}%; border-radius: 4px; transition: width 0.3s ease;"></div>
-                    </div>
-                    <p style="margin: 6px 0; color: ${location.color}; font-weight: bold; font-size: 16px;">${completionPercent}% complété</p>
-                </div>
-                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
-                    <p style="font-size: 12px; color: #6b7280; margin: 0; font-style: italic;">
-                        💡 Mode démonstration - Créez un profil pour explorer Paris !
-                    </p>
-                </div>
-            </div>
-        `;
-    }
-    
-    // === CRÉATION DES MARQUEURS DE LIEUX ===
-    createPlaceMarker(coords, place, categoryKey, isVisited, arrondissementName) {
-        const placeType = this.getPlaceType(categoryKey);
-        const markerColor = isVisited ? '#059669' : this.getCategoryColor(categoryKey);
-        const markerIcon = this.getPlaceIcon(categoryKey);
         
         try {
-            // Créer un marqueur avec icône personnalisée
-            const customIcon = L.divIcon({
-                className: 'custom-marker',
-                html: `
-                    <div class="marker-content" style="
-                        background: ${markerColor}; 
-                        border: 3px solid #ffffff;
-                        border-radius: 50%;
-                        width: ${isVisited ? 32 : 28}px;
-                        height: ${isVisited ? 32 : 28}px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: ${isVisited ? 16 : 14}px;
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                        transition: all 0.3s ease;
-                        cursor: pointer;
-                    ">
-                        ${markerIcon}
-                    </div>
-                `,
-                iconSize: [isVisited ? 32 : 28, isVisited ? 32 : 28],
-                iconAnchor: [isVisited ? 16 : 14, isVisited ? 16 : 14],
-                popupAnchor: [0, isVisited ? -16 : -14]
+            // Utiliser Nominatim (OpenStreetMap) pour le géocodage gratuit
+            const encodedAddress = encodeURIComponent(address);
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodedAddress}&limit=1`;
+            console.log(`🌐 URL de géocodage: ${url}`);
+            
+            const response = await fetch(url, {
+                headers: {
+                    'User-Agent': 'Paris Explorer App (contact: admin@parisexplorer.app)'
+                }
             });
             
-            const marker = L.marker(coords, { icon: customIcon }).addTo(this.map);
+            console.log(`📡 Réponse HTTP: status ${response.status}`);
             
-            // Créer un ID unique pour ce lieu
-            const placeId = this.app.dataManager.createPlaceId(
-                Object.keys(this.app.parisData).find(arrKey => 
-                    Object.values(this.app.parisData[arrKey].categories || {}).some(cat =>
-                        (cat.places || []).some(p => p.name === place.name)
-                    )
-                ), 
-                categoryKey, 
-                place.name
-            );
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             
-            marker.bindPopup(this.createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId, coords));
+            const data = await response.json();
+            console.log(`📊 Données reçues:`, data);
             
-            // Stocker l'ID pour pouvoir mettre à jour le marqueur
-            marker._placeId = placeId;
-            marker._isVisited = isVisited;
-            
-            return marker;
+            if (data && data.length > 0) {
+                const result = data[0];
+                const coords = [parseFloat(result.lat), parseFloat(result.lon)];
+                console.log(`✅ Géocodage réussi pour "${address}" -> ${coords}`);
+                console.log(`📍 Nom trouvé: ${result.display_name}`);
+                return coords;
+            } else {
+                console.warn(`⚠️ Aucun résultat de géocodage pour "${address}"`);
+                return null;
+            }
             
         } catch (error) {
-            console.error('❌ Erreur création marqueur lieu:', error);
+            console.error(`❌ Erreur de géocodage pour "${address}":`, error);
             return null;
         }
     }
     
-    createPlacePopup(place, categoryKey, isVisited, arrondissementName, markerIcon, placeId, coords) {
-        const statusColor = isVisited ? '#059669' : '#6b7280';
-        const statusText = isVisited ? '✅ Visité' : '⭕ Non visité';
+    // === CRÉATION DE MARQUEURS DEPUIS COORDONNÉES ===
+    createArrondissementMarkerFromCoords(coords, arrData, arrKey, totalPlaces, visitedPlaces, completionPercent) {
+        if (!coords) return null;
         
-        // Tags
-        const tagsHtml = '';
+        // Couleur selon completion
+        let fillColor = '#dc2626'; // Rouge par défaut
+        if (completionPercent === 100) fillColor = '#059669'; // Vert complet
+        else if (completionPercent >= 70) fillColor = '#059669'; // Vert
+        else if (completionPercent >= 40) fillColor = '#d97706'; // Orange
+        else if (completionPercent > 0) fillColor = '#dc2626'; // Rouge
+        else fillColor = '#6b7280'; // Gris non visité
         
-        return `
-            <div style="font-family: 'Segoe UI', sans-serif; min-width: 220px; max-width: 300px;">
-                <div style="text-align: center; margin-bottom: 12px;">
-                    <div style="font-size: 32px; margin-bottom: 8px;">${markerIcon}</div>
-                    <h3 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 16px;">${place.name}</h3>
-                    <div style="color: ${statusColor}; font-weight: bold; font-size: 14px;">${statusText}</div>
-                </div>
-                
-                ${place.description ? `
-                    <p style="color: #4b5563; font-size: 14px; line-height: 1.4; margin: 10px 0; text-align: center;">${place.description}</p>
-                ` : ''}
-                
-                ${tagsHtml ? `<div style="text-align: center; margin: 10px 0;">${tagsHtml}</div>` : ''}
-                
-                ${place.address ? `
-                    <div style="text-align: center; margin: 12px 0;">
-                        <p style="margin: 6px 0;">
-                            <a href="${generateGoogleMapsUrl(place, coords)}" 
-                               target="_blank" 
-                               style="color: #6b7280; font-size: 13px; font-style: italic; text-decoration: none;"
-                               title="Voir sur Google Maps">
-                                📍 ${place.address}
-                            </a>
-                        </p>
-                    </div>
-                ` : ''}
-                
-                <div style="text-align: center; margin: 12px 0;">
-                    <button onclick="window.app.mapManager.toggleVisitedFromMap('${placeId}')" 
-                            style="
-                                background: ${isVisited ? '#dc2626' : '#059669'}; 
-                                color: white; 
-                                border: none; 
-                                padding: 8px 16px; 
-                                border-radius: 8px; 
-                                cursor: pointer; 
-                                font-size: 14px; 
-                                font-weight: bold;
-                                transition: all 0.3s ease;
-                            "
-                            onmouseover="this.style.opacity='0.8'"
-                            onmouseout="this.style.opacity='1'">
-                        ${isVisited ? '❌ Marquer non visité' : '✅ Marquer visité'}
-                    </button>
-                </div>
-                
-                <div style="text-align: center; margin-top: 12px; padding-top: 8px; border-top: 1px solid #e5e7eb;">
-                    <p style="color: #9ca3af; font-size: 12px; margin: 0;">${arrondissementName}</p>
-                </div>
-            </div>
-        `;
-    }
-    
-    // === TOGGLE VISITÉ DEPUIS LA CARTE ===
-    toggleVisitedFromMap(placeId) {
-        if (!placeId) {
-            console.error('❌ PlaceId manquant pour toggle');
-            return;
-        }
+        const marker = L.circleMarker(coords, {
+            color: '#1e3a8a',
+            fillColor: fillColor,
+            fillOpacity: 0.7,
+            radius: Math.max(8, Math.min(25, completionPercent / 4 + 10)),
+            weight: 2
+        }).addTo(this.map);
         
-        console.log(`🔄 Toggle visité pour: ${placeId}`);
+        marker.bindPopup(this.createArrondissementPopup(arrKey, arrData, visitedPlaces, totalPlaces, completionPercent));
         
-        // Utiliser la méthode existante du userManager
-        const success = this.app.userManager.togglePlaceVisited(placeId);
-        
-        if (success) {
-            // Mettre à jour le marqueur sur la carte
-            this.updateMarkerAfterToggle(placeId);
-            
-            // Notification
-            const userData = this.app.getCurrentUserData();
-            const isNowVisited = userData && userData.visitedPlaces.has(placeId);
-            
-            this.app.showNotification(
-                isNowVisited ? '✅ Lieu marqué comme visité' : '⭕ Lieu marqué comme non visité',
-                'success',
-                1000  // Durée réduite à 1 seconde
-            );
-            
-            // Fermer le popup et le rouvrir pour mettre à jour le contenu
-            this.map.closePopup();
-        } else {
-            this.app.showNotification('❌ Erreur lors de la mise à jour', 'error');
-        }
-    }
-    
-    // === MISE À JOUR DES MARQUEURS ===
-    updateMarkerAfterToggle(placeId) {
-        // Trouver le marqueur correspondant
-        const marker = this.markers.find(m => m._placeId === placeId);
-        if (!marker) {
-            console.warn(`⚠️ Marqueur non trouvé pour ${placeId}`);
-            return;
-        }
-        
-        // Obtenir le nouveau statut
-        const userData = this.app.getCurrentUserData();
-        const isNowVisited = userData && userData.visitedPlaces.has(placeId);
-        
-        // Mettre à jour l'icône du marqueur
-        const coords = marker.getLatLng();
-        const place = this.getPlaceFromMarker(marker);
-        const categoryKey = this.getCategoryFromMarker(marker);
-        const arrondissementName = this.getArrondissementFromMarker(marker);
-        
-        if (place && categoryKey && arrondissementName) {
-            // Supprimer l'ancien marqueur
-            this.map.removeLayer(marker);
-            
-            // Créer le nouveau marqueur avec le bon statut
-            const newMarker = this.createPlaceMarker(coords, place, categoryKey, isNowVisited, arrondissementName);
-            
-            // Remplacer dans la liste
-            const index = this.markers.indexOf(marker);
-            if (index !== -1) {
-                this.markers[index] = newMarker;
-            }
-        }
-    }
-    
-    // Méthodes utilitaires pour récupérer les données du marqueur
-    getPlaceFromMarker(marker) {
-        // Chercher dans toutes les données pour retrouver le lieu
-        const placeId = marker._placeId;
-        if (!placeId) return null;
-        
-        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
-            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
-                for (const place of catData.places || []) {
-                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
-                    if (currentPlaceId === placeId) {
-                        return place;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
-    getCategoryFromMarker(marker) {
-        const placeId = marker._placeId;
-        if (!placeId) return null;
-        
-        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
-            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
-                for (const place of catData.places || []) {
-                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
-                    if (currentPlaceId === placeId) {
-                        return catKey;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
-    getArrondissementFromMarker(marker) {
-        const placeId = marker._placeId;
-        if (!placeId) return null;
-        
-        for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
-            for (const [catKey, catData] of Object.entries(arrData.categories || {})) {
-                for (const place of catData.places || []) {
-                    const currentPlaceId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
-                    if (currentPlaceId === placeId) {
-                        return arrData.name || arrKey;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
-    // === UTILITAIRES ===
-    getPlaceType(categoryKey) {
-        const catKey = categoryKey.toLowerCase();
-        
-        if (catKey.includes('monument') || catKey.includes('patrimoine')) return 'monument';
-        if (catKey.includes('restaurant') || catKey.includes('gastronomie')) return 'restaurant';
-        if (catKey.includes('café') || catKey.includes('cafe')) return 'cafe';
-        if (catKey.includes('bar') || catKey.includes('cocktail')) return 'bar';
-        if (catKey.includes('shopping') || catKey.includes('boutique')) return 'shopping';
-        if (catKey.includes('musée') || catKey.includes('museum')) return 'museum';
-        if (catKey.includes('parc') || catKey.includes('jardin')) return 'park';
-        if (catKey.includes('église') || catKey.includes('cathédrale')) return 'church';
-        if (catKey.includes('hôtel') || catKey.includes('hotel')) return 'hotel';
-        if (catKey.includes('théâtre') || catKey.includes('opéra')) return 'theater';
-        
-        return 'default';
-    }
-    
-    getPlaceIcon(categoryKey) {
-        const catKey = categoryKey.toLowerCase();
-        
-        // Monuments et patrimoine
-        if (catKey.includes('monument') || catKey.includes('patrimoine')) return '🏛️';
-        if (catKey.includes('église') || catKey.includes('cathédrale') || catKey.includes('basilique')) return '⛪';
-        if (catKey.includes('château') || catKey.includes('palais')) return '🏰';
-        if (catKey.includes('pont')) return '🌉';
-        
-        // Culture et art
-        if (catKey.includes('musée') || catKey.includes('museum')) return '🎨';
-        if (catKey.includes('théâtre') || catKey.includes('opéra') || catKey.includes('spectacle')) return '🎭';
-        if (catKey.includes('cinéma')) return '🎬';
-        if (catKey.includes('galerie')) return '🖼️';
-        if (catKey.includes('bibliothèque')) return '📚';
-        
-        // Restauration
-        if (catKey.includes('restaurant') || catKey.includes('gastronomie')) return '🍽️';
-        if (catKey.includes('café') || catKey.includes('salon-de-thé')) return '☕';
-        if (catKey.includes('bar') || catKey.includes('cocktail') || catKey.includes('brasserie')) return '🍺';
-        if (catKey.includes('boulangerie') || catKey.includes('pâtisserie')) return '🥖';
-        if (catKey.includes('marché') || catKey.includes('food')) return '🏪';
-        
-        // Shopping et commerce
-        if (catKey.includes('shopping') || catKey.includes('boutique') || catKey.includes('magasin')) return '🛍️';
-        if (catKey.includes('grand-magasin')) return '🏬';
-        
-        // Nature et espaces verts
-        if (catKey.includes('parc') || catKey.includes('jardin')) return '🌳';
-        if (catKey.includes('square')) return '🌿';
-        if (catKey.includes('fontaine')) return '⛲';
-        
-        // Hébergement
-        if (catKey.includes('hôtel') || catKey.includes('hotel')) return '🏨';
-        
-        // Architecture moderne
-        if (catKey.includes('moderne') || catKey.includes('contemporain')) return '🏢';
-        if (catKey.includes('tour') || catKey.includes('gratte-ciel')) return '🏗️';
-        
-        // Transport
-        if (catKey.includes('gare') || catKey.includes('station')) return '🚉';
-        if (catKey.includes('métro')) return '🚇';
-        
-        // Quartiers et zones
-        if (catKey.includes('quartier') || catKey.includes('village')) return '🏘️';
-        
-        return '📍';
-    }
-    
-    getCategoryColor(categoryKey) {
-        const catKey = categoryKey.toLowerCase();
-        
-        if (catKey.includes('monument')) return '#8b5cf6';
-        if (catKey.includes('restaurant')) return '#f59e0b';
-        if (catKey.includes('café')) return '#92400e';
-        if (catKey.includes('bar')) return '#dc2626';
-        if (catKey.includes('shopping')) return '#ec4899';
-        if (catKey.includes('musée')) return '#7c3aed';
-        if (catKey.includes('parc') || catKey.includes('jardin')) return '#059669';
-        if (catKey.includes('église')) return '#1e40af';
-        if (catKey.includes('hôtel')) return '#0284c7';
-        if (catKey.includes('théâtre')) return '#dc2626';
-        
-        return '#6b7280';
-    }
-    
-    // === COORDONNÉES ===
-    getArrondissementCoordinates(arrKey) {
-        const coords = {
-            '1er': [48.8607, 2.3358], '2ème': [48.8700, 2.3408], '3ème': [48.8630, 2.3626],
-            '4ème': [48.8534, 2.3488], '5ème': [48.8462, 2.3372], '6ème': [48.8496, 2.3341],
-            '7ème': [48.8534, 2.2944], '8ème': [48.8718, 2.3075], '9ème': [48.8768, 2.3364],
-            '10ème': [48.8709, 2.3674], '11ème': [48.8594, 2.3765], '12ème': [48.8448, 2.3776],
-            '13ème': [48.8282, 2.3555], '14ème': [48.8323, 2.3255], '15ème': [48.8428, 2.2944],
-            '16ème': [48.8635, 2.2773], '17ème': [48.8799, 2.2951], '18ème': [48.8867, 2.3431],
-            '19ème': [48.8799, 2.3831], '20ème': [48.8631, 2.3969]
-        };
-        return coords[arrKey] || null;
-    }
-    
-    // === CONTRÔLES DE CARTE ===
-    setupMapControls() {
-        console.log('🎮 Configuration des contrôles de carte...');
-        
-        const fullscreenBtn = document.getElementById('fullscreenBtn');
-        const centerMapBtn = document.getElementById('centerMapBtn');
-        
-        console.log('🔍 Boutons trouvés:', { 
-            fullscreen: !!fullscreenBtn, 
-            center: !!centerMapBtn 
+        // Effet hover
+        marker.on('mouseover', function() {
+            this.setStyle({ radius: this.options.radius + 3, weight: 4 });
+        });
+        marker.on('mouseout', function() {
+            this.setStyle({ radius: this.options.radius - 3, weight: 2 });
         });
         
-        if (fullscreenBtn) {
-            // Supprimer les anciens événements s'ils existent
-            fullscreenBtn.replaceWith(fullscreenBtn.cloneNode(true));
-            const newFullscreenBtn = document.getElementById('fullscreenBtn');
-            
-            newFullscreenBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('🔲 Clic bouton plein écran');
-                this.toggleFullscreen();
-            });
-            console.log('✅ Événement plein écran configuré');
-        } else {
-            console.error('❌ Bouton plein écran introuvable');
-        }
+        return marker;
+    }
+    
+    createPlaceMarkerFromCoords(coords, place, catKey, isVisited, arrondissementName) {
+        if (!coords) return null;
         
-        if (centerMapBtn) {
-            centerMapBtn.addEventListener('click', () => {
-                console.log('🎯 Clic bouton centrage');
-                this.centerMap();
-            });
-            console.log('✅ Événement centrage configuré');
-        } else {
-            console.error('❌ Bouton centrage introuvable');
-        }
+        const icon = this.getPlaceIcon(catKey, isVisited);
+        const marker = L.marker(coords, { icon }).addTo(this.map);
         
-        // Écouteur pour la touche Escape (une seule fois)
-        if (!this.escapeListenerAdded) {
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.isFullscreen) {
-                    console.log('⌨️ Touche Escape pressée, sortie du plein écran');
-                    this.exitFullscreen();
+        marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName));
+        
+        return marker;
+    }
+    
+    clearMarkers() {
+        // Supprimer tous les marqueurs de la carte
+        if (this.currentMarkers && this.currentMarkers.length > 0) {
+            this.currentMarkers.forEach(marker => {
+                if (marker && this.map) {
+                    this.map.removeLayer(marker);
                 }
             });
-            this.escapeListenerAdded = true;
+            this.currentMarkers = [];
+        }
+        
+        // Supprimer aussi les marqueurs d'arrondissements si présents
+        if (this.arrondissementMarkers) {
+            this.arrondissementMarkers.forEach(marker => {
+                if (marker && this.map) {
+                    this.map.removeLayer(marker);
+                }
+            });
+            this.arrondissementMarkers.clear();
         }
     }
     
-    toggleFullscreen() {
-        // Éviter les doubles clics
-        if (this.fullscreenToggling) {
-            console.log('🔄 Toggle en cours, ignoré');
-            return;
-        }
-        
-        this.fullscreenToggling = true;
-        console.log('🔄 Toggle fullscreen, état actuel:', this.isFullscreen);
-        
-        if (this.isFullscreen) {
-            this.exitFullscreen();
-        } else {
-            this.enterFullscreen();
-        }
-        
-        // Réactiver après 500ms
-        setTimeout(() => {
-            this.fullscreenToggling = false;
-        }, 500);
-    }
-    
-    enterFullscreen() {
-        const mapContainer = document.getElementById('mapContainer');
-        if (!mapContainer) {
-            console.error('❌ MapContainer introuvable pour le plein écran');
-            return;
-        }
-        
-        console.log('📦 Container avant plein écran:', {
-            className: mapContainer.className,
-            parent: mapContainer.parentElement.tagName,
-            position: getComputedStyle(mapContainer).position
-        });
-        
-        // Sauvegarder la position originale dans le DOM
-        this.originalParent = mapContainer.parentElement;
-        this.originalNextSibling = mapContainer.nextSibling;
-        
-        // Déplacer le container vers le body pour éviter les contraintes CSS
-        document.body.appendChild(mapContainer);
-        
-        // Ajouter la classe CSS pour le plein écran
-        mapContainer.classList.add('map-fullscreen');
-        
-        // Force les styles directement
-        mapContainer.style.position = 'fixed';
-        mapContainer.style.top = '0';
-        mapContainer.style.left = '0';
-        mapContainer.style.width = '100vw';
-        mapContainer.style.height = '100vh';
-        mapContainer.style.zIndex = '99999';
-        mapContainer.style.backgroundColor = 'white';
-        mapContainer.style.borderRadius = '0';
-        mapContainer.style.margin = '0';
-        mapContainer.style.padding = '0';
-        mapContainer.style.boxSizing = 'border-box';
-        
-        this.isFullscreen = true;
-        
-        console.log('📦 Container après plein écran:', {
-            className: mapContainer.className,
-            parent: mapContainer.parentElement.tagName,
-            position: getComputedStyle(mapContainer).position,
-            width: getComputedStyle(mapContainer).width,
-            height: getComputedStyle(mapContainer).height
-        });
-        
-        // Invalider la taille de la carte
-        setTimeout(() => {
-            if (this.map) {
-                this.map.invalidateSize();
-                console.log('🗺️ Taille de carte invalidée');
-            }
-        }, 100);
-        
-        console.log('🔲 Mode plein écran activé - container déplacé vers body');
-    }
-    
-    exitFullscreen() {
-        const mapContainer = document.getElementById('mapContainer');
-        if (!mapContainer) return;
-        
-        console.log('📤 Sortie du plein écran');
-        
-        // Supprimer la classe CSS
-        mapContainer.classList.remove('map-fullscreen');
-        
-        // Réinitialiser tous les styles directs
-        mapContainer.style.position = '';
-        mapContainer.style.top = '';
-        mapContainer.style.left = '';
-        mapContainer.style.width = '';
-        mapContainer.style.height = '';
-        mapContainer.style.zIndex = '';
-        mapContainer.style.backgroundColor = '';
-        mapContainer.style.borderRadius = '';
-        mapContainer.style.margin = '';
-        mapContainer.style.padding = '';
-        mapContainer.style.boxSizing = '';
-        
-        // Remettre le container à sa place originale dans le DOM
-        if (this.originalParent) {
-            if (this.originalNextSibling) {
-                this.originalParent.insertBefore(mapContainer, this.originalNextSibling);
-            } else {
-                this.originalParent.appendChild(mapContainer);
-            }
-        }
-        
-        this.isFullscreen = false;
-        
-        setTimeout(() => {
-            if (this.map) {
-                this.map.invalidateSize();
-                console.log('🗺️ Taille de carte réajustée');
-            }
-        }, 100);
-        
-        console.log('🔲 Mode plein écran désactivé - container remis à sa place');
-    }
-    
-    centerMap() {
-        if (!this.map) return;
-        
-        if (this.markers.length > 0) {
-            const group = new L.featureGroup(this.markers);
-            this.map.fitBounds(group.getBounds().pad(0.1), { maxZoom: 12 });
-        } else {
-            this.map.setView([48.8566, 2.3522], 11);
-        }
-        
-        console.log('🎯 Carte centrée');
-        // Notification 'centrage' supprimée - action évidente
-    }
-    
-    // === GESTION DES MARQUEURS ===
-    clearMapMarkers() {
-        this.markers.forEach(marker => {
-            if (this.map && this.map.hasLayer(marker)) {
-                this.map.removeLayer(marker);
-            }
-        });
-        this.markers = [];
-        
-        if (this.arrondissementLayer) {
-            this.map.removeLayer(this.arrondissementLayer);
-            this.arrondissementLayer = null;
-        }
-    }
-    
-    updateMapContent() {
-        if (this.isMapReady) {
-            this.loadMapContent();
-        }
-    }
-    
-    // === GESTION D'ERREURS ===
-    showMapError(message) {
-        const mapContainer = document.getElementById('mapContainer');
-        if (mapContainer) {
-            mapContainer.innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 40px; text-align: center; background: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 8px; color: #495057;">
-                    <div style="font-size: 64px; margin-bottom: 20px; opacity: 0.6;">🗺️</div>
-                    <h3 style="color: #dc3545; margin-bottom: 15px; font-size: 20px;">Erreur de chargement de la carte</h3>
-                    <p style="color: #6c757d; margin-bottom: 25px; max-width: 400px; line-height: 1.4;">${message}</p>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                        <button class="btn btn-primary" onclick="app.mapManager.initMap()" style="padding: 10px 20px; font-size: 14px;">
-                            🔄 Réessayer
-                        </button>
-                        <button class="btn btn-secondary" onclick="app.uiManager.switchTab('list')" style="padding: 10px 20px; font-size: 14px;">
-                            📋 Vue Liste
-                        </button>
-                    </div>
-                    <p style="font-size: 12px; color: #9ca3af; margin-top: 20px; font-style: italic;">
-                        Vérifiez votre connexion internet ou utilisez la vue liste
-                    </p>
-                </div>
-            `;
-        }
-    }
-    
-    // === NETTOYAGE ===
     cleanupMap() {
         console.log('🧹 Nettoyage de la carte...');
         
         if (this.map) {
             // Supprimer tous les marqueurs
-            this.clearMapMarkers();
+            this.clearMarkers();
             
             // Supprimer la carte
             this.map.remove();
@@ -918,14 +334,20 @@ class MapManager {
         
         if (this.map) {
             this.map.invalidateSize();
-            this.updateMapContent();
+            this.loadMapContent();
         } else {
             this.initMap();
         }
     }
     
-    focusOnArrondissement(arrKey) {
-        const coords = this.getArrondissementCoordinates(arrKey);
+    async focusOnArrondissement(arrKey) {
+        // Géocoder le nom de l'arrondissement pour obtenir les coordonnées
+        const arrData = this.app.parisData[arrKey];
+        if (!arrData) return;
+        
+        const arrInfo = arrData.arrondissement || arrData;
+        const arrName = arrInfo.name || arrKey;
+        const coords = await this.geocodeAddress(arrName + " Paris");
         if (coords && this.map) {
             this.map.setView(coords, 14);
             console.log(`🎯 Zoom sur ${arrKey}`);

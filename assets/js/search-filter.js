@@ -340,11 +340,6 @@ class SearchFilter {
             if (data.place.name.toLowerCase().includes(lowerQuery)) {
                 suggestions.add(data.place.name);
             }
-            
-            // Suggestions depuis tags populaires
-            
-                });
-            }
         });
         
         return Array.from(suggestions).slice(0, maxSuggestions);
@@ -718,7 +713,16 @@ class SearchFilter {
         const lowerTags = tags.map(tag => tag.toLowerCase());
         
         this.searchIndex.forEach((data, placeId) => {
-            );
+            // Implémentation simplifiée pour le moment
+            const place = data.place;
+            if (place && place.tags) {
+                const placeTags = place.tags.map(t => t.toLowerCase());
+                const matchingTags = lowerTags.filter(tag => placeTags.includes(tag));
+                if (matchingTags.length > 0) {
+                    results.push({
+                        place: place,
+                        score: matchingTags.length
+                    });
                 }
             }
         });

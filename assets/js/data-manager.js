@@ -563,7 +563,7 @@ delay(ms) {
                 
                 places.forEach(place => {
                     if (place.address) placesWithAddress++;
-                    );
+                });
             });
             
             totalPlaces += arrPlaces;

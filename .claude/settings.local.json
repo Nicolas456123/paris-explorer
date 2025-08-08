@@ -12,7 +12,10 @@
       "Bash(start python -m http.server 8080)",
       "Bash(node:*)",
       "Bash(move:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(grep:*)",
+      "Bash(for f in *.js)",
+      "Bash(do node -c \"$f\")"
     ],
     "deny": []
   }
