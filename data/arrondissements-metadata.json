@@ -1,0 +1,1554 @@
+[
+  {
+    "id": "1er",
+    "name": "1ER ARRONDISSEMENT - LE LOUVRE",
+    "description": "Cœur historique et artistique de Paris",
+    "bounds": {
+      "north": 48.8675,
+      "south": 48.855,
+      "east": 2.35,
+      "west": 2.325
+    },
+    "center": [
+      48.8607,
+      2.3358
+    ],
+    "area_km2": 1.83,
+    "population": 16888,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Louvre-Rivoli",
+          "lines": [
+            "1"
+          ],
+          "coordinates": [
+            48.8606,
+            2.3354
+          ]
+        },
+        {
+          "name": "Châtelet-Les Halles",
+          "lines": [
+            "1",
+            "4",
+            "7",
+            "11",
+            "14"
+          ],
+          "coordinates": [
+            48.8608,
+            2.347
+          ]
+        },
+        {
+          "name": "Palais-Royal",
+          "lines": [
+            "1",
+            "7"
+          ],
+          "coordinates": [
+            48.8656,
+            2.3364
+          ]
+        }
+      ],
+      "description": "Métro : Louvre-Rivoli (1), Châtelet-Les Halles (1,4,7,11,14), Palais-Royal (1,7)"
+    }
+  },
+  {
+    "id": "2ème",
+    "name": "2ÈME ARRONDISSEMENT - LA BOURSE",
+    "description": "Passages couverts et quartier japonais",
+    "bounds": {
+      "north": 48.8725,
+      "south": 48.8625,
+      "east": 2.355,
+      "west": 2.33
+    },
+    "center": [
+      48.87,
+      2.3408
+    ],
+    "area_km2": 0.99,
+    "population": 22190,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Bourse",
+          "lines": [
+            "3"
+          ],
+          "coordinates": [
+            48.8692,
+            2.3412
+          ]
+        },
+        {
+          "name": "Grands Boulevards",
+          "lines": [
+            "8",
+            "9"
+          ],
+          "coordinates": [
+            48.8719,
+            2.3436
+          ]
+        },
+        {
+          "name": "Réaumur-Sébastopol",
+          "lines": [
+            "3",
+            "4"
+          ],
+          "coordinates": [
+            48.8665,
+            2.3524
+          ]
+        },
+        {
+          "name": "Sentier",
+          "lines": [
+            "3"
+          ],
+          "coordinates": [
+            48.8671,
+            2.347
+          ]
+        }
+      ],
+      "description": "Métro : Bourse (3), Grands Boulevards (8,9), Réaumur-Sébastopol (3,4), Sentier (3)"
+    }
+  },
+  {
+    "id": "3ème",
+    "name": "3ÈME ARRONDISSEMENT - HAUT-MARAIS",
+    "description": "Musées remarquables et vie créative",
+    "bounds": {
+      "north": 48.87,
+      "south": 48.858,
+      "east": 2.368,
+      "west": 2.35
+    },
+    "center": [
+      48.863,
+      2.3626
+    ],
+    "area_km2": 1.17,
+    "population": 34248,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Arts et Métiers",
+          "lines": [
+            "3",
+            "11"
+          ],
+          "coordinates": [
+            48.8665,
+            2.3553
+          ]
+        },
+        {
+          "name": "République",
+          "lines": [
+            "3",
+            "5",
+            "8",
+            "9",
+            "11"
+          ],
+          "coordinates": [
+            48.8676,
+            2.3633
+          ]
+        },
+        {
+          "name": "Temple",
+          "lines": [
+            "3"
+          ],
+          "coordinates": [
+            48.8658,
+            2.3616
+          ]
+        },
+        {
+          "name": "Filles du Calvaire",
+          "lines": [
+            "8"
+          ],
+          "coordinates": [
+            48.8635,
+            2.3665
+          ]
+        }
+      ],
+      "description": "Métro : Arts et Métiers (3,11), République (3,5,8,9,11), Temple (3), Filles du Calvaire (8)"
+    }
+  },
+  {
+    "id": "4ème",
+    "name": "4ÈME ARRONDISSEMENT - MARAIS & ÎLE SAINT-LOUIS",
+    "description": "Cœur historique du Marais et patrimoine juif",
+    "bounds": {
+      "north": 48.858,
+      "south": 48.848,
+      "east": 2.365,
+      "west": 2.345
+    },
+    "center": [
+      48.8534,
+      2.3488
+    ],
+    "area_km2": 1.6,
+    "population": 28088,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Saint-Paul",
+          "lines": [
+            "1"
+          ],
+          "coordinates": [
+            48.8554,
+            2.3597
+          ]
+        },
+        {
+          "name": "Hôtel de Ville",
+          "lines": [
+            "1",
+            "11"
+          ],
+          "coordinates": [
+            48.8565,
+            2.3515
+          ]
+        },
+        {
+          "name": "Pont Marie",
+          "lines": [
+            "7"
+          ],
+          "coordinates": [
+            48.8533,
+            2.3566
+          ]
+        },
+        {
+          "name": "Châtelet",
+          "lines": [
+            "1",
+            "4",
+            "7",
+            "11",
+            "14"
+          ],
+          "coordinates": [
+            48.8584,
+            2.347
+          ]
+        }
+      ],
+      "description": "Métro : Saint-Paul (1), Hôtel de Ville (1,11), Pont Marie (7), Châtelet (1,4,7,11,14)"
+    }
+  },
+  {
+    "id": "5ème",
+    "name": "5ÈME ARRONDISSEMENT - QUARTIER LATIN",
+    "description": "Universités prestigieuses et patrimoine historique",
+    "bounds": {
+      "north": 48.852,
+      "south": 48.84,
+      "east": 2.365,
+      "west": 2.32
+    },
+    "center": [
+      48.8462,
+      2.3372
+    ],
+    "area_km2": 2.54,
+    "population": 61531,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Place Monge",
+          "lines": [
+            "7"
+          ],
+          "coordinates": [
+            48.8434,
+            2.3517
+          ]
+        },
+        {
+          "name": "Cluny-La Sorbonne",
+          "lines": [
+            "10"
+          ],
+          "coordinates": [
+            48.8507,
+            2.3441
+          ]
+        },
+        {
+          "name": "Maubert-Mutualité",
+          "lines": [
+            "10"
+          ],
+          "coordinates": [
+            48.8495,
+            2.3485
+          ]
+        },
+        {
+          "name": "Cardinal Lemoine",
+          "lines": [
+            "10"
+          ],
+          "coordinates": [
+            48.8473,
+            2.3515
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Luxembourg",
+          "lines": [
+            "B"
+          ],
+          "coordinates": [
+            48.8462,
+            2.3372
+          ]
+        },
+        {
+          "name": "Saint-Michel-Notre-Dame",
+          "lines": [
+            "B",
+            "C"
+          ],
+          "coordinates": [
+            48.8534,
+            2.3444
+          ]
+        }
+      ],
+      "description": "Métro : Place Monge (7), Cluny-La Sorbonne (10), Maubert-Mutualité (10), Cardinal Lemoine (10) | RER : Luxembourg (B), Saint-Michel-Notre-Dame (B,C)"
+    }
+  },
+  {
+    "id": "6ème",
+    "name": "6ÈME ARRONDISSEMENT - SAINT-GERMAIN-DES-PRÉS",
+    "description": "Cafés littéraires et jardins du Luxembourg",
+    "bounds": {
+      "north": 48.855,
+      "south": 48.842,
+      "east": 2.345,
+      "west": 2.315
+    },
+    "center": [
+      48.8496,
+      2.3341
+    ],
+    "area_km2": 2.15,
+    "population": 41100,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Saint-Germain-des-Prés",
+          "lines": [
+            "4"
+          ],
+          "coordinates": [
+            48.8537,
+            2.3334
+          ]
+        },
+        {
+          "name": "Odéon",
+          "lines": [
+            "4",
+            "10"
+          ],
+          "coordinates": [
+            48.8523,
+            2.3389
+          ]
+        },
+        {
+          "name": "Mabillon",
+          "lines": [
+            "10"
+          ],
+          "coordinates": [
+            48.8523,
+            2.3356
+          ]
+        },
+        {
+          "name": "Saint-Sulpice",
+          "lines": [
+            "4"
+          ],
+          "coordinates": [
+            48.8506,
+            2.3334
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Luxembourg",
+          "lines": [
+            "B"
+          ],
+          "coordinates": [
+            48.8462,
+            2.3372
+          ]
+        }
+      ],
+      "description": "Métro : Saint-Germain-des-Prés (4), Odéon (4,10), Mabillon (10), Saint-Sulpice (4) | RER : Luxembourg (B)"
+    }
+  },
+  {
+    "id": "7ème",
+    "name": "7ÈME ARRONDISSEMENT - INVALIDES & TOUR EIFFEL",
+    "description": "Monuments iconiques et musées d'exception",
+    "bounds": {
+      "north": 48.862,
+      "south": 48.848,
+      "east": 2.335,
+      "west": 2.28
+    },
+    "center": [
+      48.8534,
+      2.2944
+    ],
+    "area_km2": 4.09,
+    "population": 51367,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Invalides",
+          "lines": [
+            "8",
+            "13"
+          ],
+          "coordinates": [
+            48.8564,
+            2.3134
+          ]
+        },
+        {
+          "name": "École Militaire",
+          "lines": [
+            "8"
+          ],
+          "coordinates": [
+            48.8534,
+            2.3056
+          ]
+        },
+        {
+          "name": "La Tour-Maubourg",
+          "lines": [
+            "8"
+          ],
+          "coordinates": [
+            48.8576,
+            2.3089
+          ]
+        },
+        {
+          "name": "Varenne",
+          "lines": [
+            "13"
+          ],
+          "coordinates": [
+            48.8556,
+            2.3145
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Invalides",
+          "lines": [
+            "C"
+          ],
+          "coordinates": [
+            48.8564,
+            2.3134
+          ]
+        },
+        {
+          "name": "Champ-de-Mars-Tour Eiffel",
+          "lines": [
+            "C"
+          ],
+          "coordinates": [
+            48.8567,
+            2.2889
+          ]
+        }
+      ],
+      "description": "Métro : Invalides (8,13), École Militaire (8), La Tour-Maubourg (8), Varenne (13) | RER : Invalides (C), Champ-de-Mars-Tour Eiffel (C)"
+    }
+  },
+  {
+    "id": "8ème",
+    "name": "8ÈME ARRONDISSEMENT - CHAMPS-ÉLYSÉES",
+    "description": "Luxe, prestige et avenue mythique",
+    "bounds": {
+      "north": 48.882,
+      "south": 48.858,
+      "east": 2.335,
+      "west": 2.29
+    },
+    "center": [
+      48.8718,
+      2.3075
+    ],
+    "area_km2": 3.88,
+    "population": 37346,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Charles-de-Gaulle-Étoile",
+          "lines": [
+            "1",
+            "2",
+            "6"
+          ],
+          "coordinates": [
+            48.8738,
+            2.295
+          ]
+        },
+        {
+          "name": "George V",
+          "lines": [
+            "1"
+          ],
+          "coordinates": [
+            48.8689,
+            2.3011
+          ]
+        },
+        {
+          "name": "Concorde",
+          "lines": [
+            "1",
+            "8",
+            "12"
+          ],
+          "coordinates": [
+            48.8656,
+            2.3212
+          ]
+        },
+        {
+          "name": "Champs-Élysées-Clemenceau",
+          "lines": [
+            "1",
+            "13"
+          ],
+          "coordinates": [
+            48.8676,
+            2.3134
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Charles-de-Gaulle-Étoile",
+          "lines": [
+            "A"
+          ],
+          "coordinates": [
+            48.8738,
+            2.295
+          ]
+        }
+      ],
+      "description": "Métro : Charles-de-Gaulle-Étoile (1,2,6), George V (1), Concorde (1,8,12), Champs-Élysées-Clemenceau (1,13) | RER : Charles-de-Gaulle-Étoile (A)"
+    }
+  },
+  {
+    "id": "9ème",
+    "name": "9ÈME ARRONDISSEMENT - OPÉRA & PIGALLE",
+    "description": "Temples du spectacle et quartier rouge",
+    "bounds": {
+      "north": 48.885,
+      "south": 48.867,
+      "east": 2.352,
+      "west": 2.32
+    },
+    "center": [
+      48.8768,
+      2.3364
+    ],
+    "area_km2": 2.18,
+    "population": 59555,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Opéra",
+          "lines": [
+            "3",
+            "7",
+            "8"
+          ],
+          "coordinates": [
+            48.8701,
+            2.3322
+          ]
+        },
+        {
+          "name": "Pigalle",
+          "lines": [
+            "2",
+            "12"
+          ],
+          "coordinates": [
+            48.8823,
+            2.3378
+          ]
+        },
+        {
+          "name": "Saint-Georges",
+          "lines": [
+            "12"
+          ],
+          "coordinates": [
+            48.8789,
+            2.3378
+          ]
+        },
+        {
+          "name": "Grands Boulevards",
+          "lines": [
+            "8",
+            "9"
+          ],
+          "coordinates": [
+            48.8712,
+            2.3434
+          ]
+        },
+        {
+          "name": "Chaussée d'Antin",
+          "lines": [
+            "7",
+            "9"
+          ],
+          "coordinates": [
+            48.8712,
+            2.3322
+          ]
+        }
+      ],
+      "description": "Métro : Opéra (3,7,8), Pigalle (2,12), Saint-Georges (12), Grands Boulevards (8,9), Chaussée d'Antin (7,9)"
+    }
+  },
+  {
+    "id": "10ème",
+    "name": "10ÈME ARRONDISSEMENT - CANAL SAINT-MARTIN",
+    "description": "Canal romantique et vie bohème",
+    "bounds": {
+      "north": 48.883,
+      "south": 48.865,
+      "east": 2.375,
+      "west": 2.345
+    },
+    "center": [
+      48.8709,
+      2.3674
+    ],
+    "area_km2": 2.89,
+    "population": 83459,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "République",
+          "lines": [
+            "3",
+            "5",
+            "8",
+            "9",
+            "11"
+          ],
+          "coordinates": [
+            48.8673,
+            2.3634
+          ]
+        },
+        {
+          "name": "Goncourt",
+          "lines": [
+            "11"
+          ],
+          "coordinates": [
+            48.8701,
+            2.3712
+          ]
+        },
+        {
+          "name": "Jacques-Bonsergent",
+          "lines": [
+            "5"
+          ],
+          "coordinates": [
+            48.8712,
+            2.3612
+          ]
+        },
+        {
+          "name": "Colonel Fabien",
+          "lines": [
+            "2"
+          ],
+          "coordinates": [
+            48.8756,
+            2.3701
+          ]
+        }
+      ],
+      "description": "Métro : République (3,5,8,9,11), Goncourt (11), Jacques-Bonsergent (5), Colonel Fabien (2)"
+    }
+  },
+  {
+    "id": "11ème",
+    "name": "11ÈME ARRONDISSEMENT - BASTILLE & OBERKAMPF",
+    "description": "Révolution, gastronomie et vie nocturne",
+    "bounds": {
+      "north": 48.872,
+      "south": 48.852,
+      "east": 2.385,
+      "west": 2.36
+    },
+    "center": [
+      48.8594,
+      2.3765
+    ],
+    "area_km2": 3.67,
+    "population": 147568,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Bastille",
+          "lines": [
+            "1",
+            "5",
+            "8"
+          ],
+          "coordinates": [
+            48.8534,
+            2.3689
+          ]
+        },
+        {
+          "name": "Oberkampf",
+          "lines": [
+            "5",
+            "9"
+          ],
+          "coordinates": [
+            48.8634,
+            2.3701
+          ]
+        },
+        {
+          "name": "République",
+          "lines": [
+            "3",
+            "5",
+            "8",
+            "9",
+            "11"
+          ],
+          "coordinates": [
+            48.8673,
+            2.3634
+          ]
+        },
+        {
+          "name": "Voltaire",
+          "lines": [
+            "9"
+          ],
+          "coordinates": [
+            48.8556,
+            2.3789
+          ]
+        },
+        {
+          "name": "Saint-Ambroise",
+          "lines": [
+            "9"
+          ],
+          "coordinates": [
+            48.8612,
+            2.3723
+          ]
+        }
+      ],
+      "description": "Métro : Bastille (1,5,8), Oberkampf (5,9), République (3,5,8,9,11), Voltaire (9), Saint-Ambroise (9)"
+    }
+  },
+  {
+    "id": "12ème",
+    "name": "12ÈME ARRONDISSEMENT - NATION & BERCY",
+    "description": "Espaces verts exceptionnels et patrimoine moderne",
+    "bounds": {
+      "north": 48.855,
+      "south": 48.83,
+      "east": 2.41,
+      "west": 2.365
+    },
+    "center": [
+      48.8448,
+      2.3776
+    ],
+    "area_km2": 16.32,
+    "population": 143577,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Nation",
+          "lines": [
+            "1",
+            "2",
+            "6",
+            "9"
+          ],
+          "coordinates": [
+            48.8489,
+            2.3967
+          ]
+        },
+        {
+          "name": "Bercy",
+          "lines": [
+            "6",
+            "14"
+          ],
+          "coordinates": [
+            48.8434,
+            2.3789
+          ]
+        },
+        {
+          "name": "Gare de Lyon",
+          "lines": [
+            "1",
+            "14"
+          ],
+          "coordinates": [
+            48.8445,
+            2.3734
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Nation",
+          "lines": [
+            "A"
+          ],
+          "coordinates": [
+            48.8489,
+            2.3967
+          ]
+        },
+        {
+          "name": "Gare de Lyon",
+          "lines": [
+            "A",
+            "D"
+          ],
+          "coordinates": [
+            48.8445,
+            2.3734
+          ]
+        },
+        {
+          "name": "Vincennes",
+          "lines": [
+            "A"
+          ],
+          "coordinates": [
+            48.8456,
+            2.4389
+          ]
+        }
+      ],
+      "description": "Métro : Nation (1,2,6,9), Bercy (6,14), Gare de Lyon (1,14) | RER : Nation (A), Gare de Lyon (A,D), Vincennes (A)"
+    }
+  },
+  {
+    "id": "13ème",
+    "name": "13ÈME ARRONDISSEMENT - CHINATOWN & BIBLIOTHÈQUE",
+    "description": "Architecture moderne et diversité culturelle",
+    "bounds": {
+      "north": 48.845,
+      "south": 48.82,
+      "east": 2.375,
+      "west": 2.34
+    },
+    "center": [
+      48.8282,
+      2.3555
+    ],
+    "area_km2": 7.15,
+    "population": 183222,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Place d'Italie",
+          "lines": [
+            "5",
+            "6",
+            "7"
+          ],
+          "coordinates": [
+            48.8312,
+            2.3556
+          ]
+        },
+        {
+          "name": "Tolbiac",
+          "lines": [
+            "7"
+          ],
+          "coordinates": [
+            48.8267,
+            2.3556
+          ]
+        },
+        {
+          "name": "Olympiades",
+          "lines": [
+            "14"
+          ],
+          "coordinates": [
+            48.8278,
+            2.3667
+          ]
+        },
+        {
+          "name": "Chevaleret",
+          "lines": [
+            "6"
+          ],
+          "coordinates": [
+            48.8312,
+            2.3678
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Bibliothèque François Mitterrand",
+          "lines": [
+            "C"
+          ],
+          "coordinates": [
+            48.8267,
+            2.3756
+          ]
+        }
+      ],
+      "description": "Métro : Place d'Italie (5,6,7), Tolbiac (7), Olympiades (14), Chevaleret (6) | RER : Bibliothèque François Mitterrand (C)"
+    }
+  },
+  {
+    "id": "14ème",
+    "name": "14ÈME ARRONDISSEMENT - MONTPARNASSE",
+    "description": "Panoramas et cafés historiques des années folles",
+    "bounds": {
+      "north": 48.841,
+      "south": 48.823,
+      "east": 2.338,
+      "west": 2.305
+    },
+    "center": [
+      48.8323,
+      2.3255
+    ],
+    "area_km2": 5.64,
+    "population": 137834,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Montparnasse-Bienvenüe",
+          "lines": [
+            "4",
+            "6",
+            "12",
+            "13"
+          ],
+          "coordinates": [
+            48.842,
+            2.322
+          ]
+        },
+        {
+          "name": "Edgar Quinet",
+          "lines": [
+            "6"
+          ],
+          "coordinates": [
+            48.8407,
+            2.3258
+          ]
+        },
+        {
+          "name": "Denfert-Rochereau",
+          "lines": [
+            "4",
+            "6"
+          ],
+          "coordinates": [
+            48.8337,
+            2.3324
+          ]
+        },
+        {
+          "name": "Pernety",
+          "lines": [
+            "13"
+          ],
+          "coordinates": [
+            48.8338,
+            2.3178
+          ]
+        },
+        {
+          "name": "Plaisance",
+          "lines": [
+            "13"
+          ],
+          "coordinates": [
+            48.8315,
+            2.3151
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Denfert-Rochereau",
+          "lines": [
+            "B"
+          ],
+          "coordinates": [
+            48.8337,
+            2.3324
+          ]
+        }
+      ],
+      "description": "Métro : Montparnasse-Bienvenüe (4,6,12,13), Edgar Quinet (6), Denfert-Rochereau (4,6) | RER : Denfert-Rochereau (B)"
+    }
+  },
+  {
+    "id": "15ème",
+    "name": "15ÈME ARRONDISSEMENT - VAUGIRARD & BEAUGRENELLE",
+    "description": "Innovation urbaine et patrimoine artistique",
+    "bounds": {
+      "north": 48.855,
+      "south": 48.827,
+      "east": 2.305,
+      "west": 2.275
+    },
+    "center": [
+      48.8428,
+      2.2944
+    ],
+    "area_km2": 8.5,
+    "population": 232340,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Charles-Michels",
+          "lines": [
+            "10"
+          ],
+          "coordinates": [
+            48.8475,
+            2.2848
+          ]
+        },
+        {
+          "name": "Bir-Hakeim",
+          "lines": [
+            "6"
+          ],
+          "coordinates": [
+            48.854,
+            2.2885
+          ]
+        },
+        {
+          "name": "Commerce",
+          "lines": [
+            "8"
+          ],
+          "coordinates": [
+            48.845,
+            2.295
+          ]
+        },
+        {
+          "name": "Javel",
+          "lines": [
+            "10"
+          ],
+          "coordinates": [
+            48.845,
+            2.2765
+          ]
+        },
+        {
+          "name": "Porte de Versailles",
+          "lines": [
+            "12"
+          ],
+          "coordinates": [
+            48.8335,
+            2.289
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Javel",
+          "lines": [
+            "C"
+          ],
+          "coordinates": [
+            48.845,
+            2.2765
+          ]
+        },
+        {
+          "name": "Boulevard Victor",
+          "lines": [
+            "C"
+          ],
+          "coordinates": [
+            48.838,
+            2.2805
+          ]
+        }
+      ],
+      "description": "Métro : Charles-Michels (10), Bir-Hakeim (6), Commerce (8), Javel (10), Porte de Versailles (12) | RER : Javel (C), Boulevard Victor (C)"
+    }
+  },
+  {
+    "id": "16ème",
+    "name": "16ÈME ARRONDISSEMENT - TROCADÉRO & PASSY",
+    "description": "Musées d'exception et quartiers chics",
+    "bounds": {
+      "north": 48.878,
+      "south": 48.842,
+      "east": 2.295,
+      "west": 2.245
+    },
+    "center": [
+      48.8635,
+      2.2773
+    ],
+    "area_km2": 7.91,
+    "population": 166361,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Trocadéro",
+          "lines": [
+            "6",
+            "9"
+          ],
+          "coordinates": [
+            48.863,
+            2.287
+          ]
+        },
+        {
+          "name": "Passy",
+          "lines": [
+            "6"
+          ],
+          "coordinates": [
+            48.8575,
+            2.2855
+          ]
+        },
+        {
+          "name": "Charles de Gaulle-Étoile",
+          "lines": [
+            "1",
+            "2",
+            "6"
+          ],
+          "coordinates": [
+            48.8738,
+            2.295
+          ]
+        },
+        {
+          "name": "Bir-Hakeim",
+          "lines": [
+            "6"
+          ],
+          "coordinates": [
+            48.854,
+            2.2885
+          ]
+        },
+        {
+          "name": "Victor Hugo",
+          "lines": [
+            "2"
+          ],
+          "coordinates": [
+            48.871,
+            2.2885
+          ]
+        }
+      ],
+      "rer_stations": [
+        {
+          "name": "Charles de Gaulle-Étoile",
+          "lines": [
+            "A"
+          ],
+          "coordinates": [
+            48.8738,
+            2.295
+          ]
+        }
+      ],
+      "description": "Métro : Trocadéro (6,9), Passy (6), Charles de Gaulle-Étoile (1,2,6), Bir-Hakeim (6) | RER : Charles de Gaulle-Étoile (A)"
+    }
+  },
+  {
+    "id": "17ème",
+    "name": "17ÈME ARRONDISSEMENT - BATIGNOLLES & MONCEAU",
+    "description": "Quartiers villages et parc écologique",
+    "bounds": {
+      "north": 48.895,
+      "south": 48.872,
+      "east": 2.32,
+      "west": 2.29
+    },
+    "center": [
+      48.8799,
+      2.2951
+    ],
+    "area_km2": 5.67,
+    "population": 169012,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Monceau",
+          "lines": [
+            "2"
+          ],
+          "coordinates": [
+            48.8795,
+            2.3089
+          ]
+        },
+        {
+          "name": "Rome",
+          "lines": [
+            "2"
+          ],
+          "coordinates": [
+            48.8827,
+            2.302
+          ]
+        },
+        {
+          "name": "Place de Clichy",
+          "lines": [
+            "2",
+            "13"
+          ],
+          "coordinates": [
+            48.8834,
+            2.3274
+          ]
+        },
+        {
+          "name": "Wagram",
+          "lines": [
+            "3"
+          ],
+          "coordinates": [
+            48.8844,
+            2.303
+          ]
+        },
+        {
+          "name": "Villiers",
+          "lines": [
+            "2",
+            "3"
+          ],
+          "coordinates": [
+            48.8825,
+            2.3135
+          ]
+        }
+      ],
+      "description": "Métro : Monceau (2), Rome (2), Place de Clichy (2,13), Wagram (3), Villiers (2,3)"
+    }
+  },
+  {
+    "id": "18ème",
+    "name": "18ÈME ARRONDISSEMENT - MONTMARTRE & BARBÈS",
+    "description": "Bohème mythique et diversité culturelle",
+    "bounds": {
+      "north": 48.905,
+      "south": 48.875,
+      "east": 2.37,
+      "west": 2.32
+    },
+    "center": [
+      48.8867,
+      2.3431
+    ],
+    "area_km2": 6,
+    "population": 190648,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Pigalle",
+          "lines": [
+            "2",
+            "12"
+          ],
+          "coordinates": [
+            48.8823,
+            2.3372
+          ]
+        },
+        {
+          "name": "Abbesses",
+          "lines": [
+            "12"
+          ],
+          "coordinates": [
+            48.8843,
+            2.3387
+          ]
+        },
+        {
+          "name": "Anvers",
+          "lines": [
+            "2"
+          ],
+          "coordinates": [
+            48.8835,
+            2.3444
+          ]
+        },
+        {
+          "name": "Marcadet-Poissonniers",
+          "lines": [
+            "4",
+            "12"
+          ],
+          "coordinates": [
+            48.8909,
+            2.3497
+          ]
+        },
+        {
+          "name": "Château Rouge",
+          "lines": [
+            "4"
+          ],
+          "coordinates": [
+            48.8866,
+            2.3492
+          ]
+        }
+      ],
+      "funicular": [
+        {
+          "name": "Place Saint-Pierre vers Sacré-Cœur",
+          "coordinates": [
+            48.8847,
+            2.3427
+          ]
+        }
+      ],
+      "description": "Métro : Pigalle (2,12), Abbesses (12), Anvers (2), Marcadet-Poissonniers (4,12), Château Rouge (4) | Funiculaire : Place Saint-Pierre vers Sacré-Cœur"
+    }
+  },
+  {
+    "id": "19ème",
+    "name": "19ÈME ARRONDISSEMENT - BUTTES-CHAUMONT & LA VILLETTE",
+    "description": "Institutions culturelles et parcs romantiques",
+    "bounds": {
+      "north": 48.9,
+      "south": 48.87,
+      "east": 2.4,
+      "west": 2.35
+    },
+    "center": [
+      48.8799,
+      2.3831
+    ],
+    "area_km2": 6.79,
+    "population": 184712,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Belleville",
+          "lines": [
+            "2",
+            "11"
+          ],
+          "coordinates": [
+            48.872,
+            2.3767
+          ]
+        },
+        {
+          "name": "Buttes Chaumont",
+          "lines": [
+            "7bis"
+          ],
+          "coordinates": [
+            48.8754,
+            2.3811
+          ]
+        },
+        {
+          "name": "Stalingrad",
+          "lines": [
+            "2",
+            "5",
+            "7"
+          ],
+          "coordinates": [
+            48.8837,
+            2.3681
+          ]
+        },
+        {
+          "name": "Botzaris",
+          "lines": [
+            "7bis"
+          ],
+          "coordinates": [
+            48.8758,
+            2.3811
+          ]
+        },
+        {
+          "name": "Porte de Pantin",
+          "lines": [
+            "5"
+          ],
+          "coordinates": [
+            48.8936,
+            2.3901
+          ]
+        }
+      ],
+      "tramway": [
+        {
+          "name": "T3b Porte de Pantin",
+          "coordinates": [
+            48.8936,
+            2.3901
+          ]
+        }
+      ],
+      "description": "Métro : Belleville (2,11), Buttes Chaumont (7bis), Stalingrad (2,5,7), Botzaris (7bis), Porte de Pantin (5) | Tramway : T3b Porte de Pantin"
+    }
+  },
+  {
+    "id": "20ème",
+    "name": "20ÈME ARRONDISSEMENT - BELLEVILLE & PÈRE LACHAISE",
+    "description": "Nécropole mondiale et diversité culturelle",
+    "bounds": {
+      "north": 48.878,
+      "south": 48.853,
+      "east": 2.41,
+      "west": 2.375
+    },
+    "center": [
+      48.8631,
+      2.3969
+    ],
+    "area_km2": 5.98,
+    "population": 196936,
+    "transport": {
+      "metro_stations": [
+        {
+          "name": "Belleville",
+          "lines": [
+            "2",
+            "11"
+          ],
+          "coordinates": [
+            48.872,
+            2.3767
+          ]
+        },
+        {
+          "name": "Père Lachaise",
+          "lines": [
+            "2",
+            "3"
+          ],
+          "coordinates": [
+            48.863,
+            2.3969
+          ]
+        },
+        {
+          "name": "Gambetta",
+          "lines": [
+            "3",
+            "3bis"
+          ],
+          "coordinates": [
+            48.8645,
+            2.3989
+          ]
+        },
+        {
+          "name": "Ménilmontant",
+          "lines": [
+            "2"
+          ],
+          "coordinates": [
+            48.8661,
+            2.3809
+          ]
+        },
+        {
+          "name": "Pyrénées",
+          "lines": [
+            "11"
+          ],
+          "coordinates": [
+            48.8734,
+            2.3844
+          ]
+        }
+      ],
+      "description": "Métro : Belleville (2,11), Père Lachaise (2,3), Gambetta (3,3bis), Ménilmontant (2), Pyrénées (11)"
+    }
+  }
+]
