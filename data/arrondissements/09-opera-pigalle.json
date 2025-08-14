@@ -81,6 +81,16 @@
         "description": "Patrimoine architectural et historique",
         "places": [
           {
+            "id": "passage-jouffroy",
+            "name": "Passage Jouffroy",
+            "description": "Antiquités, librairies, Musée Grévin",
+            "address": "10 Boulevard Montmartre, 75009 Paris",
+            "coordinates": [
+              48.8718365,
+              2.3420974
+            ]
+          },
+          {
             "id": "palais-garnier",
             "name": "Palais Garnier",
             "description": "Opéra Paris, architecture néo-baroque Charles Garnier",
@@ -205,6 +215,16 @@
               48.8834754,
               2.3498469
             ]
+          },
+          {
+            "id": "salle-billard-olympia",
+            "name": "Salle billard Olympia",
+            "description": "Cachée sous célèbre salle, architecture 1893",
+            "address": "28 Boulevard des Capucines, 75009 Paris",
+            "coordinates": [
+              48.870144,
+              2.328372
+            ]
           }
         ]
       },
@@ -286,6 +306,16 @@
             "coordinates": [
               48.873887,
               2.3290507
+            ]
+          },
+          {
+            "id": "apple-store-opera",
+            "name": "Apple Store Opéra",
+            "description": "Architecture verre, Genius Bar",
+            "address": "12 Rue Halévy, 75009 Paris",
+            "coordinates": [
+              48.8723133,
+              2.3331121
             ]
           }
         ]

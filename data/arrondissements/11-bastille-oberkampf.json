@@ -245,6 +245,16 @@
             ]
           },
           {
+            "id": "pitzman",
+            "name": "Pitzman",
+            "description": "Pizza néo-napolitaine",
+            "address": "15 Rue Abel Rabaud, 75011 Paris",
+            "coordinates": [
+              48.8694118,
+              2.3718188
+            ]
+          },
+          {
             "id": "rue-oberkampf",
             "name": "Rue Oberkampf",
             "description": "Concentration bars branchés, ambiance étudiante",

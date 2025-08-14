@@ -405,6 +405,16 @@
               48.8646309,
               2.29647
             ]
+          },
+          {
+            "id": "cafe-de-l-homme",
+            "name": "Café de l'Homme",
+            "description": "Restaurant terrasse Trocadéro, vue Tour Eiffel",
+            "address": "17 Place du Trocadéro, 75016 Paris",
+            "coordinates": [
+              48.8617725,
+              2.2880949
+            ]
           }
         ]
       },

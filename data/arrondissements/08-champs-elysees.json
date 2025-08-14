@@ -161,6 +161,16 @@
               48.8633779,
               2.3195977
             ]
+          },
+          {
+            "id": "pont-alexandre-iii",
+            "name": "Pont Alexandre III",
+            "description": "Plus beau pont Paris, Art nouveau",
+            "address": "Pont Alexandre III, 75008 Paris",
+            "coordinates": [
+              48.8634697,
+              2.3135181
+            ]
           }
         ]
       },
@@ -224,16 +234,6 @@
               2.3060702
             ]
           },
-          {
-            "id": "apple-store-opera",
-            "name": "Apple Store Opéra",
-            "description": "Architecture verre, Genius Bar",
-            "address": "12 Rue Halévy, 75009 Paris",
-            "coordinates": [
-              48.8723133,
-              2.3331121
-            ]
-          }
         ]
       },
       "restaurants": {
@@ -392,16 +392,6 @@
               2.3009475
             ]
           },
-          {
-            "id": "salle-billard-olympia",
-            "name": "Salle billard Olympia",
-            "description": "Cachée sous célèbre salle, architecture 1893",
-            "address": "28 Boulevard des Capucines, 75009 Paris",
-            "coordinates": [
-              48.870144,
-              2.328372
-            ]
-          }
         ]
       }
     }

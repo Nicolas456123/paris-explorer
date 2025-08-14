@@ -137,6 +137,16 @@
               48.8564015,
               2.3384956
             ]
+          },
+          {
+            "id": "sorbonne",
+            "name": "Sorbonne",
+            "description": "Université historique, Chapelle Richelieu, amphithéâtres",
+            "address": "21 Rue de l'École de Médecine, 75006 Paris",
+            "coordinates": [
+              48.8511944,
+              2.3403301
+            ]
           }
         ]
       },
@@ -227,13 +237,13 @@
             ]
           },
           {
-            "id": "l-ami-jean",
-            "name": "L'Ami Jean",
-            "description": "Bistrot basque survitaminé, Stéphane Jégo",
-            "address": "27 Rue Malar, 75007 Paris",
+            "id": "le-polidor",
+            "name": "Le Polidor",
+            "description": "Bistrot 1845, décor préservé, cuisine traditionnelle",
+            "address": "41 Rue Monsieur le Prince, 75006 Paris",
             "coordinates": [
-              48.8603183,
-              2.3059915
+              48.8497734,
+              2.340117
             ]
           }
         ]
@@ -300,6 +310,16 @@
             "coordinates": [
               48.8537778,
               2.3380961
+            ]
+          },
+          {
+            "id": "poilane",
+            "name": "Poilâne",
+            "description": "Boulangerie mythique, pain Poilâne traditionnel",
+            "address": "8 Rue du Cherche-Midi, 75006 Paris",
+            "coordinates": [
+              48.8512738,
+              2.3289815
             ]
           }
         ]

@@ -81,6 +81,16 @@
             ]
           },
           {
+            "id": "crypte-archeologique",
+            "name": "Crypte archéologique",
+            "description": "Vestiges gallo-romains sous parvis Notre-Dame",
+            "address": "7 Place Jean-Paul II, 75004 Paris",
+            "coordinates": [
+              48.8536507,
+              2.3477462
+            ]
+          },
+          {
             "id": "place-des-vosges",
             "name": "Place des Vosges",
             "description": "Plus ancienne place royale (1612), 36 pavillons",
@@ -266,22 +276,6 @@
               2.3621838
             ]
           },
-          {
-            "id": "galerie-marian-goodman",
-            "name": "Galerie Marian Goodman",
-            "description": "Art contemporain international",
-            "address": "79 Rue du Temple, 75003 Paris",
-            "coordinates": [
-              48.8615704,
-              2.3559047
-            ]
-          },
-          {
-            "id": "square-saint-gilles-grand-veneur",
-            "name": "Square Saint-Gilles-Grand-Veneur",
-            "description": "Jardin romantique hôtels particuliers",
-            "address": "Square Saint-Gilles-Grand-Veneur, 75003 Paris"
-          }
         ]
       },
       "parcs": {
@@ -296,16 +290,6 @@
             "coordinates": [
               48.8524957,
               2.3568997
-            ]
-          },
-          {
-            "id": "jardin-anne-frank",
-            "name": "Jardin Anne-Frank",
-            "description": "Jardin secret 4000m², mémorial caché",
-            "address": "14 Impasse Berthaud, 75003 Paris",
-            "coordinates": [
-              48.8614468,
-              2.3542771
             ]
           },
           {
@@ -355,16 +339,6 @@
             ]
           },
           {
-            "id": "jacques-genin",
-            "name": "Jacques Genin",
-            "description": "Chocolatier-confiseur, pâtes de fruits",
-            "address": "133 Rue de Turenne, 75003 Paris",
-            "coordinates": [
-              48.8644691,
-              2.364616
-            ]
-          },
-          {
             "id": "cafe-saint-regis",
             "name": "Café Saint-Régis",
             "description": "Institution île Saint-Louis depuis 1961",
@@ -375,43 +349,13 @@
             ]
           },
           {
-            "id": "breizh-cafe",
-            "name": "Breizh Café",
-            "description": "Crêperie gastronomique, sarrasin bio",
-            "address": "109 Rue Vieille du Temple, 75003 Paris",
+            "id": "miznon",
+            "name": "Miznon",
+            "description": "Pita créatifs, légumes grillés",
+            "address": "22 Rue des Ecouffes, 75004 Paris",
             "coordinates": [
-              48.8606169,
-              2.3618584
-            ]
-          },
-          {
-            "id": "l-ami-jean",
-            "name": "L'Ami Jean",
-            "description": "Bistrot basque, ambiance survoltée",
-            "address": "27 Rue Malar, 75007 Paris",
-            "coordinates": [
-              48.8603183,
-              2.3059915
-            ]
-          },
-          {
-            "id": "le-mary-celeste",
-            "name": "Le Mary Celeste",
-            "description": "Bar à huîtres, cocktails créatifs",
-            "address": "1 Rue Commines, 75003 Paris",
-            "coordinates": [
-              48.8619727,
-              2.3657451
-            ]
-          },
-          {
-            "id": "du-pain-et-des-idees",
-            "name": "Du Pain et des Idées",
-            "description": "Boulangerie artisanale référence",
-            "address": "34 Rue Yves Toudic, 75010 Paris",
-            "coordinates": [
-              48.871197,
-              2.3628861
+              48.8571596,
+              2.3589213
             ]
           }
         ]
@@ -441,16 +385,6 @@
             ]
           },
           {
-            "id": "la-perle",
-            "name": "La Perle",
-            "description": "Apéritifs 1€, ouvert 7h30-2h, très populaire",
-            "address": "78 Rue Vieille du Temple, 75003 Paris",
-            "coordinates": [
-              48.8597538,
-              2.3605082
-            ]
-          },
-          {
             "id": "3w-kafe",
             "name": "3W Kafé",
             "description": "Bar lesbien historique, soirées thématiques",
@@ -458,16 +392,6 @@
             "coordinates": [
               48.8565814,
               2.3584677
-            ]
-          },
-          {
-            "id": "le-tango",
-            "name": "Le Tango",
-            "description": "Club gay/hétéro, bal musette dimanche",
-            "address": "11 Rue au Maire, 75003 Paris",
-            "coordinates": [
-              48.8644966,
-              2.3568645
             ]
           },
           {
@@ -527,6 +451,16 @@
             ]
           },
           {
+            "id": "papier-plus",
+            "name": "Papier Plus",
+            "description": "Papeterie d'art, objets design",
+            "address": "9 Rue du Pont Louis-Philippe, 75004 Paris",
+            "coordinates": [
+              48.8551123,
+              2.3555589
+            ]
+          },
+          {
             "id": "leclair-de-genie",
             "name": "L'Éclair de Génie",
             "description": "Pâtisseries Christophe Adam, éclairs revisités",
@@ -536,16 +470,6 @@
               2.3606223
             ]
           },
-          {
-            "id": "papier-plus",
-            "name": "Papier Plus",
-            "description": "Papeterie raffinée, carnets artisanaux",
-            "address": "9 Rue du Pont Louis-Philippe, 75004 Paris",
-            "coordinates": [
-              48.8551123,
-              2.3555589
-            ]
-          }
         ]
       }
     }

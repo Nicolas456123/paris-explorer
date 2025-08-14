@@ -195,6 +195,26 @@
               48.8642873,
               2.3529782
             ]
+          },
+          {
+            "id": "square-saint-gilles-grand-veneur",
+            "name": "Square Saint-Gilles-Grand-Veneur",
+            "description": "Jardin romantique hôtels particuliers",
+            "address": "Square Saint-Gilles-Grand-Veneur, 75003 Paris",
+            "coordinates": [
+              48.8614468,
+              2.3542771
+            ]
+          },
+          {
+            "id": "jardin-anne-frank",
+            "name": "Jardin Anne-Frank",
+            "description": "Jardin secret 4000m², mémorial caché",
+            "address": "14 Impasse Berthaud, 75003 Paris",
+            "coordinates": [
+              48.8614468,
+              2.3542771
+            ]
           }
         ]
       },
@@ -243,43 +263,13 @@
             ]
           },
           {
-            "id": "du-pain-et-des-idees",
-            "name": "Du Pain et des Idées",
-            "description": "Boulangerie artisanale réputée, Christophe Vasseur",
-            "address": "34 Rue Yves Toudic, 75010 Paris",
+            "id": "jacques-genin",
+            "name": "Jacques Genin",
+            "description": "Chocolatier-confiseur, pâtes de fruits",
+            "address": "133 Rue de Turenne, 75003 Paris",
             "coordinates": [
-              48.871197,
-              2.3628861
-            ]
-          },
-          {
-            "id": "l-as-du-fallafel",
-            "name": "L'As du Fallafel",
-            "description": "Institution rue des Rosiers (fermé vendredi soir-samedi)",
-            "address": "34 Rue des Rosiers, 75004 Paris",
-            "coordinates": [
-              48.8574095,
-              2.3590493
-            ]
-          },
-          {
-            "id": "miznon",
-            "name": "Miznon",
-            "description": "Pita créatifs, légumes grillés",
-            "address": "22 Rue des Ecouffes, 75004 Paris",
-            "coordinates": [
-              48.8571596,
-              2.3589213
-            ]
-          },
-          {
-            "id": "pitzman",
-            "name": "Pitzman",
-            "description": "Pizza néo-napolitaine",
-            "address": "15 Rue Abel Rabaud, 75011 Paris",
-            "coordinates": [
-              48.8694118,
-              2.3718188
+              48.8644691,
+              2.364616
             ]
           }
         ]
@@ -337,16 +327,6 @@
               48.855076,
               2.3616609
             ]
-          },
-          {
-            "id": "papier-plus",
-            "name": "Papier Plus",
-            "description": "Papeterie d'art, objets design",
-            "address": "9 Rue du Pont Louis-Philippe, 75004 Paris",
-            "coordinates": [
-              48.8551123,
-              2.3555589
-            ]
           }
         ]
       },
@@ -383,6 +363,36 @@
               48.8619002,
               2.3641598
             ]
+          },
+          {
+            "id": "la-perle",
+            "name": "La Perle",
+            "description": "Apéritifs 1€, ouvert 7h30-2h, très populaire",
+            "address": "78 Rue Vieille du Temple, 75003 Paris",
+            "coordinates": [
+              48.8597538,
+              2.3605082
+            ]
+          },
+          {
+            "id": "le-tango",
+            "name": "Le Tango",
+            "description": "Club gay/hétéro, bal musette dimanche",
+            "address": "11 Rue au Maire, 75003 Paris",
+            "coordinates": [
+              48.8644966,
+              2.3568645
+            ]
+          },
+          {
+            "id": "le-mary-celeste",
+            "name": "Le Mary Celeste",
+            "description": "Bar à huîtres, cocktails créatifs",
+            "address": "1 Rue Commines, 75003 Paris",
+            "coordinates": [
+              48.8619727,
+              2.3657451
+            ]
           }
         ]
       },
@@ -391,13 +401,13 @@
         "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
-            "id": "jardin-des-rosiers-joseph-migneret",
-            "name": "Jardin des Rosiers Joseph-Migneret",
-            "description": "Jardin partagé, parcelles thématiques",
-            "address": "10 Rue des Rosiers, 75004 Paris",
+            "id": "galerie-marian-goodman",
+            "name": "Galerie Marian Goodman",
+            "description": "Art contemporain international",
+            "address": "79 Rue du Temple, 75003 Paris",
             "coordinates": [
-              48.8568821,
-              2.3600915
+              48.8615704,
+              2.3559047
             ]
           }
         ]

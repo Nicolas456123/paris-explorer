@@ -99,16 +99,6 @@
             ]
           },
           {
-            "id": "sorbonne",
-            "name": "Sorbonne",
-            "description": "Université historique, Chapelle Richelieu, amphithéâtres",
-            "address": "21 Rue de l'École de Médecine, 75006 Paris",
-            "coordinates": [
-              48.8511944,
-              2.3403301
-            ]
-          },
-          {
             "id": "arenes-de-lutece",
             "name": "Arènes de Lutèce",
             "description": "Amphithéâtre gallo-romain Ier siècle, gratuit",
@@ -307,16 +297,6 @@
             ]
           },
           {
-            "id": "le-polidor",
-            "name": "Le Polidor",
-            "description": "Bistrot 1845, décor préservé, cuisine traditionnelle",
-            "address": "41 Rue Monsieur le Prince, 75006 Paris",
-            "coordinates": [
-              48.8497734,
-              2.340117
-            ]
-          },
-          {
             "id": "brasserie-balzar",
             "name": "Brasserie Balzar",
             "description": "Institution, clientèle littéraire et universitaire",
@@ -324,16 +304,6 @@
             "coordinates": [
               48.8471828,
               2.3200724
-            ]
-          },
-          {
-            "id": "le-procope",
-            "name": "Le Procope",
-            "description": "Plus ancien café Paris (1686), Voltaire, Diderot",
-            "address": "13 Rue de l'Ancienne Comédie, 75006 Paris",
-            "coordinates": [
-              48.8530058,
-              2.3387359
             ]
           },
           {

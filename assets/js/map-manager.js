@@ -643,6 +643,10 @@ class MapManager {
 
         const categoryIcon = categoryIcons[catKey] || '📍';
         const categoryName = categoryNames[catKey] || catKey;
+        
+        // Créer le lien Google Maps si l'adresse existe
+        const googleMapsLink = place.address ? 
+            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}` : '';
 
         return `
             <div class="place-popup-card">
@@ -656,8 +660,13 @@ class MapManager {
                 </div>
                 <div class="place-popup-content">
                     ${place.description ? `<p class="place-popup-description">${place.description}</p>` : ''}
-                    ${place.address ? `<p class="place-popup-address">📍 ${place.address}</p>` : ''}
-                    <p class="place-popup-location">📍 ${arrondissementName}</p>
+                    ${place.address ? `
+                        <p class="place-popup-address">
+                            📍 <a href="${googleMapsLink}" target="_blank" style="color: var(--paris-blue); text-decoration: none; border-bottom: 1px solid var(--paris-blue);">
+                                ${place.address}
+                            </a>
+                        </p>
+                    ` : ''}
                 </div>
             </div>
         `;

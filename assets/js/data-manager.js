@@ -146,27 +146,28 @@ async loadSingleArrondissement(arrKey, arrInfo, attempt = 1) {
         try {
             const response = await fetch(filePath, {
                 method: 'GET',
-                headers: { 'Accept': 'application/json' },
-                cache: 'no-cache'
+                headers: { 'Accept': 'application/json' }
             });
             
             if (response.ok) {
                 const arrData = await response.json();
+                console.log(`📋 Données reçues pour ${arrKey}:`, Object.keys(arrData));
                 
                 // Valider les données
                 if (this.validateArrondissementData(arrData)) {
                     // Processus des données
                     this.processArrondissementData(arrKey, arrData);
-                    console.log(`✅ ${arrKey} chargé`);
+                    console.log(`✅ ${arrKey} chargé avec succès`);
                     return true;
                 } else {
-                    console.warn(`⚠️ Données invalides dans ${filePath}`);
+                    console.warn(`⚠️ Données invalides pour ${arrKey} dans ${filePath}`);
                     return false;
                 }
             } else {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
         } catch (fetchError) {
+            console.error(`❌ Erreur fetch pour ${filePath}:`, fetchError);
             throw fetchError;
         }
         
@@ -389,50 +390,11 @@ delay(ms) {
     
     // === DONNÉES DE FALLBACK ===
     loadFallbackData() {
-        console.log('🚨 Chargement des données de fallback...');
-        
-        this.app.parisData = {
-            '1er': {
-                title: '1ER ARRONDISSEMENT - LE LOUVRE',
-                categories: {
-                    monuments: {
-                        title: 'Monuments',
-                        places: [
-                            { name: 'Musée du Louvre', description: 'Le plus grand musée du monde', coordinates: [48.8606, 2.3376] },
-                            { name: 'Sainte-Chapelle', description: 'Joyau de l\'art gothique', coordinates: [48.8553, 2.3451] }
-                        ]
-                    }
-                }
-            },
-            '4ème': {
-                title: '4ÈME ARRONDISSEMENT - LE MARAIS',
-                categories: {
-                    monuments: {
-                        title: 'Monuments',
-                        places: [
-                            { name: 'Notre-Dame de Paris', description: 'Cathédrale gothique emblématique', coordinates: [48.8530, 2.3499] },
-                            { name: 'Place des Vosges', description: 'Plus ancienne place de Paris', coordinates: [48.8558, 2.3660] }
-                        ]
-                    }
-                }
-            },
-            '7ème': {
-                title: '7ÈME ARRONDISSEMENT - TOUR EIFFEL',
-                categories: {
-                    monuments: {
-                        title: 'Monuments',
-                        places: [
-                            { name: 'Tour Eiffel', description: 'Dame de fer parisienne', coordinates: [48.8584, 2.2945] },
-                            { name: 'Invalides', description: 'Tombeau de Napoléon', coordinates: [48.8560, 2.3124] }
-                        ]
-                    }
-                }
-            }
-        };
-        
-        this.app.isDataLoaded = true;
-        console.log('✅ Données de fallback chargées');
-        // Notification de fallback supprimée
+        console.log('🚨 Chargement des données de fallback désactivé');
+        // Ne pas charger de données de fallback pour forcer l'utilisation des vraies données
+        console.log('⚠️ Veuillez recharger la page pour charger les données complètes');
+        this.app.showNotification('Veuillez recharger la page pour charger les données', 'warning');
+        this.app.isDataLoaded = false;
     }
     
     // === UTILITAIRES DE DONNÉES ===

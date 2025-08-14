@@ -159,16 +159,6 @@
               48.8618952,
               2.3403317
             ]
-          },
-          {
-            "id": "crypte-archeologique",
-            "name": "Crypte archéologique",
-            "description": "Vestiges gallo-romains sous parvis Notre-Dame",
-            "address": "7 Place Jean-Paul II, 75004 Paris",
-            "coordinates": [
-              48.8536507,
-              2.3477462
-            ]
           }
         ]
       },
@@ -180,10 +170,10 @@
             "id": "jardin-des-tuileries",
             "name": "Jardin des Tuileries",
             "description": "Promenade entre Louvre et Concorde, Musée Orangerie",
-            "address": "Place de la Concorde, 75001 Paris",
+            "address": "Jardin des Tuileries, 75001 Paris",
             "coordinates": [
-              48.8655715,
-              2.3212248
+              48.8634133,
+              2.3277845
             ]
           },
           {
@@ -200,7 +190,11 @@
             "id": "cour-carree-du-louvre",
             "name": "Cour Carrée du Louvre",
             "description": "Architecture Renaissance, concerts gratuits été",
-            "address": "Cour Carrée du Louvre, 75001 Paris"
+            "address": "Cour Carrée du Louvre, 75001 Paris",
+            "coordinates": [
+              48.8608547,
+              2.3378126
+            ]
           },
           {
             "id": "jardin-de-linfante",
@@ -213,13 +207,13 @@
             ]
           },
           {
-            "id": "square-jean-xxiii",
-            "name": "Square Jean XXIII",
-            "description": "Derrière Notre-Dame, rosiers et pelouses",
-            "address": "4 Parvis Notre-Dame, 75004 Paris",
+            "id": "place-dauphine",
+            "name": "Place Dauphine",
+            "description": "Place triangulaire sur l'île de la Cité, restaurants intimes",
+            "address": "Place Dauphine, 75001 Paris",
             "coordinates": [
-              48.8532711,
-              2.348075
+              48.8566447,
+              2.3423318
             ]
           }
         ]
@@ -309,13 +303,23 @@
             ]
           },
           {
-            "id": "pierre-herme",
-            "name": "Pierre Hermé",
-            "description": "Macarons d'exception, créations saisonnières",
-            "address": "185 Rue de Vaugirard, 75015 Paris",
+            "id": "lemoni-cafe",
+            "name": "Lemoni Café",
+            "description": "Brunch tendance, avocado toast",
+            "address": "5 Rue Hérold, 75001 Paris",
             "coordinates": [
-              48.8427013,
-              2.3120721
+              48.8647829,
+              2.3412129
+            ]
+          },
+          {
+            "id": "o-chateau",
+            "name": "O Château",
+            "description": "Bar à vins, dégustations, cours d'œnologie",
+            "address": "68 Rue Jean-Jacques Rousseau, 75001 Paris",
+            "coordinates": [
+              48.8642784,
+              2.3421874
             ]
           }
         ]
@@ -345,13 +349,13 @@
             ]
           },
           {
-            "id": "whsmith",
-            "name": "Librairie anglaise WHSmith",
-            "description": "Livres en anglais, presse internationale",
-            "address": "248 Rue de Rivoli, 75001 Paris",
+            "id": "galignani",
+            "name": "Librairie Galignani",
+            "description": "Plus ancienne librairie anglaise d'Europe continentale",
+            "address": "224 Rue de Rivoli, 75001 Paris",
             "coordinates": [
-              48.8661865,
-              2.3248636
+              48.8649286,
+              2.3305419
             ]
           },
           {
@@ -431,43 +435,43 @@
             ]
           },
           {
-            "id": "hotel-du-petit-moulin",
-            "name": "Hôtel du Petit Moulin",
-            "description": "Hôtel secret derrière plus ancienne boulangerie",
-            "address": "29 Rue de Poitou, 75003 Paris",
+            "id": "musee-des-arts-decoratifs",
+            "name": "Musée des Arts décoratifs",
+            "description": "Mode, publicité, arts décoratifs dans l'aile Marsan",
+            "address": "107 Rue de Rivoli, 75001 Paris",
             "coordinates": [
-              48.8615957,
-              2.3621692
+              48.8608547,
+              2.3323126
             ]
           },
           {
-            "id": "crypte-sainte-agnes",
-            "name": "Crypte Sainte-Agnès",
-            "description": "Vestiges église médiévale rue Mouffetard",
-            "address": "Rue Mouffetard, 75005 Paris",
+            "id": "musee-en-herbe",
+            "name": "Musée en Herbe",
+            "description": "Musée pour enfants, expositions interactives",
+            "address": "23 Rue de L'Arbre-Sec, 75001 Paris",
             "coordinates": [
-              48.8405883,
-              2.3497077
+              48.8593184,
+              2.3411437
             ]
           },
           {
-            "id": "passage-moliere",
-            "name": "Passage Molière",
-            "description": "Plus petit passage couvert Paris",
-            "address": "Passage Molière, 75001 Paris",
+            "id": "place-vendome-colonne",
+            "name": "Colonne Vendôme",
+            "description": "Colonne triomphale de Napoléon, bronze des canons d'Austerlitz",
+            "address": "Place Vendôme, 75001 Paris",
             "coordinates": [
-              48.8623951,
-              2.3512173
+              48.8674634,
+              2.3294281
             ]
           },
           {
-            "id": "tour-jean-sans-peur",
-            "name": "Tour Jean-sans-Peur",
-            "description": "Dernière tour médiévale Paris",
-            "address": "20 Rue Étienne Marcel, 75002 Paris",
+            "id": "eglise-saint-roch",
+            "name": "Église Saint-Roch",
+            "description": "Baroque parisien, tombeaux de personnages célèbres",
+            "address": "284 Rue Saint-Honoré, 75001 Paris",
             "coordinates": [
-              48.8641312,
-              2.3483145
+              48.8648179,
+              2.3319482
             ]
           }
         ]

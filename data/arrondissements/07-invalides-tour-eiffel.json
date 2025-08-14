@@ -105,16 +105,6 @@
             ]
           },
           {
-            "id": "pont-alexandre-iii",
-            "name": "Pont Alexandre III",
-            "description": "Plus beau pont Paris, Art nouveau",
-            "address": "Pont Alexandre III, 75008 Paris",
-            "coordinates": [
-              48.8634697,
-              2.3135181
-            ]
-          },
-          {
             "id": "assemblee-nationale",
             "name": "Assemblée Nationale",
             "description": "Palais Bourbon, visites citoyennes",
@@ -298,16 +288,6 @@
         "description": "Théâtres, cinémas et lieux culturels",
         "places": [
           {
-            "id": "poilane",
-            "name": "Poilâne",
-            "description": "Boulangerie mythique, pain Poilâne traditionnel",
-            "address": "8 Rue du Cherche-Midi, 75006 Paris",
-            "coordinates": [
-              48.8512738,
-              2.3289815
-            ]
-          },
-          {
             "id": "musee-de-l-ordre-de-la-liberation",
             "name": "Musée de l'Ordre de la Libération",
             "description": "Résistance, déportation",
@@ -337,26 +317,6 @@
               2.3059915
             ]
           },
-          {
-            "id": "du-pain-et-des-idees",
-            "name": "Du Pain et des Idées",
-            "description": "Boulangerie artisanale, pains anciens",
-            "address": "34 Rue Yves Toudic, 75010 Paris",
-            "coordinates": [
-              48.871197,
-              2.3628861
-            ]
-          },
-          {
-            "id": "cafe-de-l-homme",
-            "name": "Café de l'Homme",
-            "description": "Restaurant terrasse Trocadéro, vue Tour Eiffel",
-            "address": "17 Place du Trocadéro, 75016 Paris",
-            "coordinates": [
-              48.8617725,
-              2.2880949
-            ]
-          }
         ]
       },
       "shopping": {

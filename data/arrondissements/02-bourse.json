@@ -118,23 +118,13 @@
             ]
           },
           {
-            "id": "passage-jouffroy",
-            "name": "Passage Jouffroy",
-            "description": "Antiquités, librairies, Musée Grévin",
-            "address": "10 Boulevard Montmartre, 75009 Paris",
+            "id": "passage-choiseul",
+            "name": "Passage Choiseul",
+            "description": "Librairies, théâtres, restaurants",
+            "address": "40 Rue des Petits-Champs, 75002 Paris",
             "coordinates": [
-              48.8718365,
-              2.3420974
-            ]
-          },
-          {
-            "id": "passage-verdeau",
-            "name": "Passage Verdeau",
-            "description": "Librairies anciennes, galeries d'art",
-            "address": "6 Rue de la Grange-Batelière, 75009 Paris",
-            "coordinates": [
-              48.8731221,
-              2.3421505
+              48.8677316,
+              2.3359442
             ]
           },
           {
@@ -184,43 +174,43 @@
             ]
           },
           {
-            "id": "bistrot-paul-bert",
-            "name": "Bistrot Paul Bert",
-            "description": "Cuisine française traditionnelle",
-            "address": "18 Rue Paul Bert, 75011 Paris",
+            "id": "aux-lyonnais",
+            "name": "Aux Lyonnais",
+            "description": "Bistrot lyonnais d'Alain Ducasse",
+            "address": "32 Rue Saint-Marc, 75002 Paris",
             "coordinates": [
-              48.8522292,
-              2.3848682
+              48.8702374,
+              2.3397516
             ]
           },
           {
-            "id": "lemoni-cafe",
-            "name": "Lemoni Café",
-            "description": "Brunch tendance, avocado toast",
-            "address": "5 Rue Hérold, 75001 Paris",
+            "id": "pur-restaurant",
+            "name": "PUR' - Jean-François Rouquette",
+            "description": "Gastronomie moderne au Park Hyatt",
+            "address": "5 Rue de la Paix, 75002 Paris",
             "coordinates": [
-              48.8647829,
-              2.3412129
+              48.8693562,
+              2.3310172
             ]
           },
           {
-            "id": "candelaria",
-            "name": "Candelaria",
-            "description": "Tacos mexicains + speakeasy caché",
-            "address": "52 Rue de Saintonge, 75003 Paris",
+            "id": "racines",
+            "name": "Racines",
+            "description": "Néo-bistrot, cave à vins naturels",
+            "address": "8 Passage des Panoramas, 75002 Paris",
             "coordinates": [
-              48.8629844,
-              2.3639861
+              48.8713908,
+              2.3420584
             ]
           },
           {
-            "id": "des-gars-dans-la-cuisine",
-            "name": "Des Gars dans la Cuisine",
-            "description": "Bistrot décontracté",
-            "address": "72 Rue des Martyrs, 75018 Paris",
+            "id": "cedric-grolet",
+            "name": "Cédric Grolet Opera",
+            "description": "Pâtisseries artistiques, fruits trompe-l'œil",
+            "address": "35 Avenue de l'Opéra, 75002 Paris",
             "coordinates": [
-              48.8813033,
-              2.3400524
+              48.8668434,
+              2.3344286
             ]
           }
         ]
@@ -240,23 +230,13 @@
             ]
           },
           {
-            "id": "little-red-door",
-            "name": "Little Red Door",
-            "description": "Cocktails créatifs, ambiance feutrée",
-            "address": "60 Rue Charlot, 75003 Paris",
+            "id": "harry-s-bar",
+            "name": "Harry's Bar",
+            "description": "Bar historique, birthplace du Bloody Mary",
+            "address": "5 Rue Daunou, 75002 Paris",
             "coordinates": [
-              48.8636541,
-              2.3635309
-            ]
-          },
-          {
-            "id": "mary-celeste",
-            "name": "Mary Celeste",
-            "description": "Huîtres et cocktails, Happy Hour",
-            "address": "1 Rue Commines, 75003 Paris",
-            "coordinates": [
-              48.8619727,
-              2.3657451
+              48.8693159,
+              2.3320444
             ]
           }
         ]

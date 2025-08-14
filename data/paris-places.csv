@@ -1,0 +1,226 @@
+id,name,category,description,address,lat,lng,arr
+# 1er arrondissement (19 lieux)
+louvre,Musée du Louvre,musee,Plus grande collection art monde,Rue de Rivoli 75001,48.8606111,2.337644,1
+palais-royal,Palais-Royal,monument,Jardins et galeries XVIIe,Place du Palais-Royal 75001,48.8631,2.3376,1
+tuileries,Jardin des Tuileries,parc,28 hectares jardins à la française,Place de la Concorde 75001,48.8634,2.3275,1
+vendome,Place Vendôme,monument,Joaillerie luxe colonne Napoléon,Place Vendôme 75001,48.8679,2.3289,1
+chatelet,Place du Châtelet,monument,Fontaine et théâtres,Place du Châtelet 75001,48.8583,2.3470,1
+samaritaine,La Samaritaine,shopping,Grand magasin Art déco rénové,19 Rue de la Monnaie 75001,48.8603,2.3421,1
+comedie-francaise,Comédie-Française,culture,Théâtre national historique,Place Colette 75001,48.8639,2.3356,1
+les-halles,Forum des Halles,shopping,Centre commercial souterrain,101 Porte Berger 75001,48.8626,2.3472,1
+eglise-saint-eustache,Église Saint-Eustache,monument,Architecture gothique Renaissance,2 Impasse Saint-Eustache 75001,48.8634,2.3453,1
+conciergerie,Conciergerie,monument,Prison révolutionnaire Sainte-Chapelle,2 Boulevard du Palais 75001,48.8559,2.3450,1
+sainte-chapelle,Sainte-Chapelle,monument,Verrières gothiques XIIIe,8 Boulevard du Palais 75001,48.8554,2.3450,1
+pont-neuf,Pont-Neuf,monument,Plus ancien pont Paris,Pont Neuf 75001,48.8566,2.3412,1
+square-du-vert-galant,Square du Vert-Galant,parc,Pointe île de la Cité,15 Place du Pont-Neuf 75001,48.8568,2.3408,1
+eglise-saint-germain-auxerrois,Église Saint-Germain-l'Auxerrois,monument,Église des rois carillon,2 Place du Louvre 75001,48.8595727,2.3408274,1
+place-dauphine,Place Dauphine,parc,Place triangulaire île de la Cité,Place Dauphine 75001,48.8566447,2.3423318,1
+angelina,Angelina,restaurant,Chocolat chaud légendaire depuis 1903,226 Rue de Rivoli 75001,48.8650778,2.3284104,1
+rue-montorgueil,Rue Montorgueil,restaurant,Marché piétonnier boulangeries Stohrer,Rue Montorgueil 75001,48.8638613,2.3464827,1
+galerie-vero-dodat,Galerie Véro-Dodat,shopping,Passage couvert 1826 antiquaires luxe,2 Rue du Bouloi 75001,48.8630647,2.3398289,1
+rue-saint-honore,Rue Saint-Honoré,shopping,Haute couture joaillerie maroquinerie luxe,Rue Saint-Honoré 75001,48.864193,2.3334628,1
+# 2ème arrondissement (20 lieux)
+palais-brongniart,Palais Brongniart,monument,Ancienne Bourse architecture néoclassique,Place de la Bourse 75002,48.8687751,2.3407143,2
+galerie-vivienne,Galerie Vivienne,monument,Passage couvert 1823 verrière boutiques luxe,4 Rue des Petits-Champs 75002,48.8662096,2.3394637,2
+passage-des-panoramas,Passage des Panoramas,monument,Plus ancien passage Paris 1799,11 Boulevard Montmartre 75002,48.8715151,2.3419216,2
+galerie-colbert,Galerie Colbert,monument,Passage élégant rotonde Bibliothèque Nationale,6 Rue des Petits-Champs 75002,48.8662775,2.3390892,2
+bnf-richelieu,Bibliothèque Nationale de France - Richelieu,monument,Site historique Cabinet des Médailles,5 Rue Vivienne 75002,48.8670223,2.3389229,2
+passage-choiseul,Passage Choiseul,monument,Librairies théâtres restaurants,40 Rue des Petits-Champs 75002,48.8677316,2.3359442,2
+opera-comique,Opéra-Comique,culture,Théâtre lyrique Salle Favart,1 Place Boieldieu 75002,48.8706806,2.3376559,2
+grand-rex,Grand Rex,culture,Plus grand cinéma Europe Art déco,1 Boulevard Poissonnière 75002,48.8705535,2.3477496,2
+theatre-des-varietes,Théâtre des Variétés,culture,Théâtre historique opérettes,7 Boulevard Montmartre 75002,48.8714333,2.3421383,2
+passage-du-grand-cerf,Passage du Grand-Cerf,culture,Galeries art ateliers créateurs,145 Rue Saint-Denis 75002,48.8646674,2.3501215,2
+passage-du-caire,Passage du Caire,shopping,Plus long passage couvert textile,2 Rue du Caire 75002,48.8671493,2.3527086,2
+sentier,Sentier,shopping,Quartier textile historique,Quartier du Sentier 75002,48.8680539,2.3445929,2
+rue-sainte-anne,Rue Sainte-Anne,restaurant,Quartier japonais authentique,Rue Sainte-Anne 75002,48.8679328,2.3362996,2
+frenchie,Frenchie,restaurant,Bistrot moderne réputé,5 Rue du Nil 75002,48.8677443,2.347922,2
+saturne,Saturne,restaurant,Bar à vins naturels assiettes créatives,17 Rue Notre-Dame des Victoires 75002,48.8683042,2.3417483,2
+aux-lyonnais,Aux Lyonnais,restaurant,Bistrot lyonnais Alain Ducasse,32 Rue Saint-Marc 75002,48.8702374,2.3397516,2
+racines,Racines,restaurant,Néo-bistrot cave vins naturels,8 Passage des Panoramas 75002,48.8713908,2.3420584,2
+cedric-grolet,Cédric Grolet Opera,restaurant,Pâtisseries artistiques fruits trompe-œil,35 Avenue de l'Opéra 75002,48.8668434,2.3344286,2
+experimental-cocktail-club,Experimental Cocktail Club,cafe,Speakeasy pionnier Paris,37 Rue Saint-Sauveur 75002,48.8660836,2.3482998,2
+harry-s-bar,Harry's Bar,cafe,Bar historique birthplace Bloody Mary,5 Rue Daunou 75002,48.8693159,2.3320444,2
+# 3ème arrondissement (9 lieux)
+musee-des-arts-et-metiers,Musée des Arts et Métiers,musee,Sciences et techniques automates,60 Rue Réaumur 75003,48.8660977,2.3554138,3
+musee-picasso,Musée Picasso,musee,5000 œuvres hôtel Salé XVIIe,5 Rue de Thorigny 75003,48.8598698,2.3621152,3
+musee-carnavalet,Musée Carnavalet,musee,Histoire de Paris collections révolutionnaires,23 Rue de Sévigné 75003,48.855076,2.3616609,3
+archives-nationales,Archives Nationales,musee,Hôtel de Soubise documents historiques,60 Rue des Francs-Bourgeois 75003,48.8604503,2.3578119,3
+maison-nicolas-flamel,Maison de Nicolas Flamel,monument,Plus ancienne maison Paris 1407,51 Rue de Montmorency 75003,48.8635758,2.3531607,3
+square-du-temple,Square du Temple,parc,Plus grand parc Marais ancien enclos Templiers,64 Rue de Bretagne 75003,48.8627449,2.3628037,3
+rue-de-rivoli-marais,Rue de Rivoli (Marais),shopping,Boutiques tendance et vintage,Rue de Rivoli 75003,48.8583,2.3635,3
+marche-enfants-rouges,Marché des Enfants Rouges,restaurant,Plus ancien marché couvert 1615 cuisine monde,39 Rue de Bretagne 75003,48.862792,2.361978,3
+breizh-cafe,Breizh Café,restaurant,Crêperie moderne et raffinée cidres bio,109 Rue Vieille du Temple 75003,48.8606169,2.3618584,3
+# 4ème arrondissement (7 lieux)
+place-des-vosges,Place des Vosges,monument,Plus ancienne place planifiée Paris,Place des Vosges 75004,48.8555,2.3659,4
+notre-dame,Notre-Dame de Paris,monument,Cathédrale gothique XIIe siècle,6 Parvis Notre-Dame 75004,48.8530,2.3499,4
+hotel-de-ville,Hôtel de Ville,monument,Architecture néo-Renaissance façade sculptée,Place de l'Hôtel de Ville 75004,48.8566,2.3522,4
+ile-saint-louis,Île Saint-Louis,parc,Île résidentielle glaces Berthillon,Île Saint-Louis 75004,48.8517,2.3564,4
+place-saint-michel,Place Saint-Michel,monument,Fontaine archange Michel,Place Saint-Michel 75006,48.8534,2.3441,4
+rue-des-rosiers,Rue des Rosiers,restaurant,Quartier juif falafels L'As du Fallafel,Rue des Rosiers 75004,48.8575,2.3594,4
+berthillon,Berthillon,restaurant,Glaciers artisanaux Île Saint-Louis,31 Rue Saint-Louis en l'Île 75004,48.8516,2.3564,4
+# 5ème arrondissement (6 lieux)
+pantheon,Panthéon,monument,Mausolée grands hommes pendule Foucault,Place du Panthéon 75005,48.8464478,2.3448919,5
+sorbonne,Sorbonne,monument,Université historique Chapelle Richelieu,21 Rue de l'École de Médecine 75006,48.8511944,2.3403301,5
+arenes-de-lutece,Arènes de Lutèce,monument,Amphithéâtre gallo-romain Ier siècle,49 Rue Monge 75005,48.8451262,2.3523089,5
+jardin-des-plantes,Jardin des Plantes,parc,24 hectares serres ménagerie,57 Rue Cuvier 75005,48.843991,2.3607481,5
+rue-mouffetard,Rue Mouffetard,restaurant,Marché restaurants monde ambiance étudiante,Rue Mouffetard 75005,48.8395779,2.3498423,5
+shakespeare-and-company,Shakespeare and Company,shopping,Librairie anglophone mythique,37 Rue de la Bûcherie 75005,48.8522,2.3472,5
+# 6ème arrondissement (6 lieux)
+luxembourg,Jardin du Luxembourg,parc,23 hectares Sénat Palais Luxembourg,Place André Honnorat 75006,48.8462,2.3372,6
+saint-germain-des-pres,Saint-Germain-des-Prés,monument,Plus ancienne église Paris cafés célèbres,3 Place Saint-Germain des Prés 75006,48.8540,2.3344,6
+saint-sulpice,Saint-Sulpice,monument,Église baroque gnomon méridienne,Place Saint-Sulpice 75006,48.8508,2.3344,6
+musee-delacroix,Musée Delacroix,musee,Atelier peintre romantique,6 Rue de Furstemberg 75006,48.8546,2.3370,6
+cafe-de-flore,Café de Flore,restaurant,Café historique intellectuels Sartre,172 Boulevard Saint-Germain 75006,48.8542,2.3322,6
+les-deux-magots,Les Deux Magots,restaurant,Café littéraire prix littéraire,6 Place Saint-Germain des Prés 75006,48.8540,2.3344,6
+# 7ème arrondissement (6 lieux)
+tour-eiffel,Tour Eiffel,monument,324m symbole Paris 3 étages restaurants,Champ de Mars 75007,48.8584,2.2945,7
+invalides,Invalides,monument,Tombeau Napoléon Dôme Mansart,129 Rue de Grenelle 75007,48.8570374,2.3118779,7
+musee-dorsay,Musée d'Orsay,musee,Plus grande collection impressionnistes monde,1 Rue de la Légion d'Honneur 75007,48.8600,2.3266,7
+assemblee-nationale,Assemblée Nationale,monument,Palais Bourbon visites citoyennes,126 Rue de l'Université 75007,48.8608616,2.3183886,7
+champ-de-mars,Champ de Mars,parc,Esplanade 780m Tour Eiffel École Militaire,Champ de Mars 75007,48.8559,2.2976,7
+musee-rodin,Musée Rodin,musee,Sculptures jardins Penseur Baiser,77 Rue de Varenne 75007,48.8553,2.3159,7
+# 8ème arrondissement (6 lieux)
+arc-de-triomphe,Arc de Triomphe,monument,Vue 360° terrasse Tombe Soldat Inconnu,Place Charles de Gaulle 75008,48.8737673,2.2954441,8
+champs-elysees,Champs-Élysées,shopping,1.9km flagship stores internationaux,Avenue des Champs-Élysées 75008,48.8691716,2.3095365,8
+place-de-la-concorde,Place de la Concorde,monument,Plus grande place Paris Obélisque Louxor,Place de la Concorde 75008,48.8655715,2.3212248,8
+palais-de-lelysee,Palais de l'Élysée,monument,Résidence présidentielle grilles dorées,55 Rue du Faubourg Saint-Honoré 75008,48.8706298,2.3169336,8
+grand-palais,Grand Palais,monument,Expositions prestigieuses verrière Art nouveau,3 Avenue du Général Eisenhower 75008,48.8672415,2.3117837,8
+parc-monceau,Parc Monceau,parc,8.2 hectares jardins anglais fabriques romantiques,35 Boulevard de Courcelles 75008,48.878179,2.2988066,8
+# 9ème arrondissement (36 lieux)
+passage-jouffroy,Passage Jouffroy,monument,Antiquités librairies Musée Grévin,10 Boulevard Montmartre 75009,48.8718365,2.3420974,9
+palais-garnier,Palais Garnier,monument,Opéra Paris architecture néo-baroque Charles Garnier,Place de l'Opéra 75009,48.8710187,2.3324068,9
+theatre-mogador,Théâtre Mogador,monument,Comédies musicales architecture Art déco,25 Rue de Mogador 75009,48.8753635,2.3312348,9
+moulin-rouge,Moulin Rouge,culture,Cabaret légendaire French Cancan depuis 1889,82 Boulevard de Clichy 75018,48.8841094,2.3323564,9
+folies-bergere,Folies Bergère,culture,Music-hall historique revues à plumes,32 Rue Richer 75009,48.8740806,2.3448971,9
+casino-de-paris,Casino de Paris,culture,Salle spectacle mythique concerts variété,16 Rue de Clichy 75009,48.8783731,2.3300574,9
+opera-comique-9,Opéra-Comique Salle Favart,culture,Opéras français répertoire spécialisé,1 Place Boieldieu 75002,48.8706806,2.3376559,9
+rue-des-martyrs,Rue des Martyrs,culture,200 commerces épiceries fines Delmontel boulangerie,Rue des Martyrs 75009,48.8778446,2.3395219,9
+grand-rex-9,Grand Rex,culture,Plus grand cinéma Europe Art déco visite étoilée,1 Boulevard Poissonnière 75002,48.8705535,2.3477496,9
+gaumont-opera,Gaumont Opéra,culture,Multiplexe historique avant-premières,2 Boulevard des Capucines 75009,48.8704514,2.3310548,9
+galeries-lafayette-haussmann,Galeries Lafayette Haussmann,culture,Coupole Art nouveau terrasse gratuite,40 Boulevard Haussmann 75009,48.8736459,2.3321271,9
+passage-verdeau,Passage Verdeau,culture,Librairies spécialisées cartes postales anciennes,6 Rue de la Grange-Batelière 75009,48.8731221,2.3421505,9
+louxor,Louxor,culture,Cinéma 1921 mosaïques dorées programmation éclectique,170 Boulevard de Magenta 75010,48.8834754,2.3498469,9
+salle-billard-olympia,Salle billard Olympia,culture,Cachée sous célèbre salle architecture 1893,28 Boulevard des Capucines 75009,48.870144,2.328372,9
+musee-gustave-moreau,Musée Gustave Moreau,musee,Maison-atelier peintre symboliste escalier caracole,14 Rue de la Rochefoucauld 75009,48.8778955,2.3345468,9
+musee-de-lopera,Musée de l'Opéra,musee,Histoire lyrique costumes maquettes décors,Place de l'Opéra 75009,48.8710187,2.3324068,9
+musee-franc-maconnerie,Musée de la Franc-Maçonnerie,musee,Symboles rituels objets ésotériques,16 Rue Cadet 75009,48.8749151,2.3431481,9
+musee-vie-romantique,Musée de la Vie Romantique,musee,George Sand Ary Scheffer salon littéraire,16 Rue Chaptal 75009,48.8813455,2.3335217,9
+fondation-taylor,Fondation Taylor,musee,250m² galeries ateliers artistes expositions,1 Rue La Bruyère 75009,48.8788226,2.3368757,9
+passage-jouffroy-musee,Passage Jouffroy,musee,Antiquités librairies anciennes Musée Grévin,10 Boulevard Montmartre 75009,48.8718365,2.3420974,9
+printemps-haussmann,Printemps Haussmann,shopping,Grand magasin 1889 mode et beauté,64 Boulevard Haussmann 75009,48.873887,2.3290507,9
+apple-store-opera,Apple Store Opéra,shopping,Architecture verre Genius Bar,12 Rue Halévy 75009,48.8723133,2.3331121,9
+chartier,Chartier,restaurant,Bouillon 1896 décor Belle Époque préservé prix populaires,7 Rue du Faubourg Montmartre 75009,48.8719356,2.3430137,9
+cafe-de-la-paix,Café de la Paix,restaurant,Institution place Opéra terrasse dorée,5 Place de l'Opéra 75009,48.8709426,2.3317527,9
+lalsaco,L'Alsaco,restaurant,Choucroute traditionnelle bières alsaciennes,10 Rue Condorcet 75009,48.8795649,2.3480965,9
+artigelato,Artigelato,restaurant,Glacier artisanal rue La Fayette glaces généreuses,61 Rue La Fayette 75009,48.8758986,2.3434612,9
+des-gars-dans-la-cuisine-9,Des Gars dans la Cuisine,restaurant,Bistrot décontracté,72 Rue des Martyrs 75018,48.8813033,2.3400524,9
+harrys-bar-9,Harry's Bar,cafe,Berceau Bloody Mary ambiance américaine,5 Rue Daunou 75002,48.8692491,2.3321281,9
+pigalle-quartier,Pigalle,cafe,Quartier rouge bars clubs cabarets alternatifs,Place Pigalle 75009,48.8821516,2.3374288,9
+glass,Glass,cafe,Bar cocktails créatifs mixologie moderne,7 Rue Frochot 75009,48.8815097,2.3373392,9
+dirty-dick,Dirty Dick,cafe,Bar tiki exotique rhums rares,10 Rue Frochot 75009,48.8815185,2.3375057,9
+hemingway-bar-ritz-9,Hemingway Bar Ritz,cafe,Cocktails de légende Colin Field,15 Place Vendôme 75001,48.8679507,2.328898,9
+square-dorleans,Square d'Orléans,parc,Cité privée musiciens Chopin George Sand,Square d'Orléans 75009,48.8777362,2.3359041,9
+square-de-montholon,Square de Montholon,parc,Parc romantique grotte artificielle,Square de Montholon 75009,48.8766136,2.3457634,9
+jardin-musee-vie-romantique,Jardin Musée Vie Romantique,parc,Glycines salon thé concerts été,16 Rue Chaptal 75009,48.8813455,2.3335217,9
+# 10ème arrondissement (26 lieux)
+canal-saint-martin,Canal Saint-Martin,parc,4.6 km 9 écluses croisières fluviales,Canal Saint-Martin 75010,48.8688696,2.3673736,10
+ecluses-du-canal,Écluses du Canal,monument,Mécanisme XIXe passage bateaux spectaculaire,Écluses du Canal Saint-Martin 75010,48.8735,2.3640,10
+square-villemin,Square Villemin,parc,Parc ancien hôpital militaire aires jeux,Square Villemin 75010,48.875028,2.3598013,10
+jardin-lucien-bossoutrot,Jardin Lucien-Bossoutrot,parc,Jardin de poche caché rosiers,Jardin Lucien-Bossoutrot 75010,48.8750,2.3598,10
+square-alban-satragne,Square Alban-Satragne,parc,Petit square méconnu tranquillité,Square Alban-Satragne 75010,48.8753961,2.3553082,10
+hotel-du-nord,Hôtel du Nord,monument,Façade mythique film Marcel Carné restaurant,102 Quai de Jemmapes 75010,48.8735504,2.3640543,10
+pont-tournant-crimee,Pont tournant rue Crimée,monument,Dernier pont mobile Paris,Rue de Crimée 75019,48.8872669,2.3806718,10
+bassin-de-la-villette,Bassin de la Villette,culture,Plus grand plan eau Paris cinéma plein air,Bassin de la Villette 75019,48.883966,2.3693023,10
+point-ephemere,Point Éphémère,culture,Centre artistique concerts expositions péniche,200 Quai de Valmy 75010,48.8815168,2.3685729,10
+new-morning,New Morning,culture,Jazz club mythique programmation internationale,7 Rue des Petites Écuries 75010,48.8730649,2.3534395,10
+espace-pierre-cardin,Espace Pierre Cardin,culture,Théâtre et expositions art contemporain,1 Avenue Gabriel 75008,48.8674937,2.3187387,10
+du-pain-et-des-idees,Du Pain et des Idées,restaurant,Boulangerie artisanale référence Christophe Vasseur,34 Rue Yves Toudic 75010,48.871197,2.3628861,10
+chez-prune,Chez Prune,restaurant,Café emblématique canal depuis 2000 brunch,36 Rue Beaurepaire 75010,48.8715315,2.3645207,10
+le-verre-vole,Le Verre Volé,restaurant,Bar vins naturels incontournable cave sélection,67 Rue de Lancry 75010,48.8728588,2.3635317,10
+du-pain-et-des-idees-dup,Du Pain et des Idées,restaurant,Boulangerie artisanale réputée Christophe Vasseur,34 Rue Yves Toudic 75010,48.871197,2.3628861,10
+holybelly,Holybelly,restaurant,Coffee shop australien brunch tendance,19 Rue Lucien Sampaix 75010,48.8723817,2.3608685,10
+myrthe,Myrthe,restaurant,Épicerie fine + cantine plateaux charcuterie-fromage,64 Rue de la Folie-Méricourt 75011,48.8649676,2.3711282,10
+rue-de-marseille,Rue de Marseille,shopping,Boutiques vintage créateurs indépendants,Rue de Marseille 75010,48.8715762,2.3635803,10
+marche-saint-martin,Marché Saint-Martin,shopping,Mar/Ven/Sam matin produits frais locaux,31 Rue du Château d'Eau 75010,48.8709654,2.358543,10
+la-consigne,La Consigne,shopping,Concept store zéro déchet bocaux consignés,53 Rue de Marseille 75010,48.8715762,2.3635803,10
+artazart,Artazart,shopping,Librairie design architecture beaux livres,83 Quai de Valmy 75010,48.872693,2.3638018,10
+centre-commercial-republique,Centre commercial République,shopping,Marques tendance food court,25 Boulevard du Temple 75003,48.8648399,2.3653911,10
+copperbay,CopperBay,cafe,Bar maritime caché cocktails saisons,5 Rue Bouchardon 75010,48.8698469,2.3571238,10
+lavomatic,Lavomatic,cafe,Bar caché derrière machines à laver,30 Rue René Boulanger 75010,48.8684507,2.3618395,10
+le-mary-celeste-10,Le Mary Celeste,cafe,Bar à huîtres cocktails créatifs happy hour,1 Rue Commines 75003,48.8619727,2.3657451,10
+# 11ème arrondissement (35 lieux)
+place-de-la-bastille,Place de la Bastille,monument,Colonne Juillet symbole révolutionnaire,Place de la Bastille 75011,48.8533968,2.3696501,11
+opera-bastille,Opéra Bastille,culture,Architecture Carlos Ott visites guidées,Place de la Bastille 75012,48.8528601,2.3695526,11
+rue-du-faubourg-saint-antoine,Rue du Faubourg-Saint-Antoine,culture,Artisans ébénistes traditionnels,Rue du Faubourg-Saint-Antoine 75011,48.8508285,2.378123,11
+pierre-sang-oberkampf,Pierre Sang in Oberkampf,restaurant,Fusion franco-coréenne créative,55 Rue Oberkampf 75011,48.8647073,2.3723484,11
+utopie,Utopie,restaurant,Boulangerie Prix meilleure baguette 2024,20 Rue Jean-Pierre Timbaud 75011,48.865336,2.368738,11
+cirque-dhiver-bouglione,Cirque d'Hiver Bouglione,culture,Cirque traditionnel depuis 1852 spectacles familiaux,110 Rue Amelot 75011,48.8635472,2.3675789,11
+le-bataclan,Le Bataclan,culture,Salle concert historique programmation éclectique,50 Boulevard Voltaire 75011,48.8630357,2.3706465,11
+rue-de-la-roquette,Rue de la Roquette,culture,Galeries art contemporain vernissages,Rue de la Roquette 75011,48.8595847,2.3878015,11
+le-nouveau-casino,Le Nouveau Casino,culture,Club électro DJs internationaux,109 Rue Oberkampf 75011,48.8658464,2.3779133,11
+cite-du-figuier,Cité du Figuier,culture,Impasse tropicale palmiers façades colorées,104 Rue Oberkampf 75011,48.8658774,2.3785891,11
+oberkampf-menilmontant,Oberkampf-Ménilmontant,culture,Murs peints œuvres éphémères,Oberkampf-Ménilmontant 75011,48.866621,2.3830169,11
+fresque-jerome-mesnager,Fresque Jérôme Mesnager,culture,Homme blanc iconique,Various locations 75011,48.8650,2.3750,11
+septime,Septime,restaurant,Restaurant gastronomique Bertrand Grébaut,80 Rue de Charonne 75011,48.8536035,2.3808315,11
+le-chateaubriand,Le Chateaubriand,restaurant,Bistrot gastronomique pionnier Inaki Aizpitarte,129 Avenue Parmentier 75011,48.8693522,2.3713516,11
+marche-des-enfants-rouges-11,Marché des Enfants Rouges,restaurant,Plus ancien marché couvert cuisine monde,39 Rue de Bretagne 75003,48.862792,2.361978,11
+le-6-paul-bert,Le 6 Paul Bert,restaurant,Bistrot traditionnel authentique,6 Rue Paul Bert 75011,48.8513485,2.3846064,11
+pitzman,Pitzman,restaurant,Pizza néo-napolitaine,15 Rue Abel Rabaud 75011,48.8694118,2.3718188,11
+rue-oberkampf,Rue Oberkampf,cafe,Concentration bars branchés ambiance étudiante,Rue Oberkampf 75011,48.8657815,2.3778386,11
+rue-de-lappe,Rue de Lappe,cafe,Bars à ambiance tradition bal musette,Rue de Lappe 75011,48.8532809,2.373568,11
+le-mary-celeste-11,Le Mary Celeste,cafe,Bar à huîtres cocktails happy hour populaire,1 Rue Commines 75003,48.8619727,2.3657451,11
+septime-la-cave,Septime la Cave,cafe,Bar vins naturels sélection Bertrand,3 Rue Basfroi 75011,48.8537146,2.380211,11
+mobster-bar,Mobster Bar,cafe,Speakeasy secret entrée cabine téléphonique,116 Boulevard Richard-Lenoir 75011,48.8646033,2.3710055,11
+l-assassin,L'Assassin,cafe,Happy hour généreuse ambiance décontractée,15 Rue Jacob 75006,48.8550868,2.3350785,11
+maroquinerie,Maroquinerie,culture,Salle concert alternative rock indépendant,23 Rue Boyer 75020,48.8685287,2.3920592,11
+rue-denoyez,Rue Dénoyez,culture,Galerie street art légal,Rue Dénoyez 75020,48.8716515,2.3785163,11
+passage-de-lhomme,Passage de l'Homme,parc,Cour pavée artisans ateliers ouverts,102 Rue du Faubourg-Saint-Antoine 75011,48.8510752,2.3790123,11
+square-maurice-gardette,Square Maurice-Gardette,parc,Jardin de quartier aires de jeux,Square Maurice-Gardette 75011,48.8593,2.3821,11
+square-leon-serpollet,Square Léon-Serpollet,parc,Petit square tranquille,Square Léon-Serpollet 75011,48.8642,2.3756,11
+jardin-du-clos-des-blancs-manteaux,Jardin du Clos des Blancs-Manteaux,parc,Jardin caché ancien couvent,Rue des Blancs-Manteaux 75004,48.8582,2.3575,11
+cour-damoye,Cour Damoye,parc,Passage secret artisans,12 Rue Damoye 75011,48.8513,2.3824,11
+villa-du-borrego,Villa du Borrego,parc,Impasse privée verdoyante,Villa du Borrego 75020,48.8676,2.3902,11
+impasse-de-la-poissonnerie,Impasse de la Poissonnerie,parc,Passage piéton calme,Impasse de la Poissonnerie 75011,48.8657,2.3778,11
+rue-du-general-blaise,Rue du Général-Blaise,parc,Petite rue résidentielle,Rue du Général-Blaise 75011,48.8569,2.3843,11
+square-de-la-roquette,Square de la Roquette,parc,Ancien cimetière transformé,Square de la Roquette 75011,48.8591,2.3871,11
+jardin-nomade,Jardin Nomade,parc,Jardin partagé associatif,Jardin Nomade 75011,48.8645,2.3789,11
+# 12ème arrondissement (4 lieux)
+bois-de-vincennes,Bois de Vincennes,parc,995 hectares zoo château lac Daumesnil,Bois de Vincennes 75012,48.8292,2.4324,12
+parc-de-bercy,Parc de Bercy,parc,14 hectares jardins thématiques Maison du Jardinage,128 Quai de Bercy 75012,48.8368,2.3786,12
+bercy-village,Bercy Village,shopping,Anciens chais réhabilités boutiques restaurants,Cour Saint-Émilion 75012,48.8325,2.3852,12
+coulee-verte,Coulée Verte René-Dumont,parc,4.7km promenade plantée viaduc arts,Coulée Verte 75012,48.8465,2.3695,12
+# 13ème arrondissement (4 lieux)
+bibliotheque-nationale-france,Bibliothèque Nationale de France,musee,4 tours livres François Mitterrand,Quai François Mauriac 75013,48.8338,2.3754,13
+quartier-chinois,Quartier Chinois,restaurant,Triangle Ivry Choisy Tolbiac restaurants asiatiques,Avenue de Choisy 75013,48.8292,2.3634,13
+manufacture-des-gobelins,Manufacture des Gobelins,musee,Tapissiers depuis Louis XIV visites ateliers,42 Avenue des Gobelins 75013,48.8355,2.3522,13
+butte-aux-cailles,Butte aux Cailles,parc,Village dans Paris street art cafés,Rue de la Butte aux Cailles 75013,48.8278,2.3488,13
+# 14ème arrondissement (4 lieux)
+catacombes,Catacombes de Paris,musee,6 millions squelettes Empire de la Mort,1 Avenue du Colonel Henri Rol-Tanguy 75014,48.8338,2.3324,14
+tour-montparnasse,Tour Montparnasse,monument,210m vue panoramique 56e étage terrasse,33 Avenue du Maine 75015,48.8422,2.3219,14
+observatoire-de-paris,Observatoire de Paris,musee,Astronomie méridien de Paris,61 Avenue de l'Observatoire 75014,48.8367,2.3362,14
+cimetiere-du-montparnasse,Cimetière du Montparnasse,monument,Tombes Baudelaire Sartre Beauvoir,3 Boulevard Edgar Quinet 75014,48.8388,2.3265,14
+# 15ème arrondissement (3 lieux)
+parc-andre-citroen,Parc André Citroën,parc,14 hectares jardins thématiques ballon captif,Rue Saint-Charles 75015,48.8484,2.2726,15
+musee-bourdelle,Musée Bourdelle,musee,Atelier sculpteur Antoine Bourdelle,18 Rue Antoine Bourdelle 75015,48.8430,2.3183,15
+beaugrenelle,Beaugrenelle,shopping,Centre commercial moderne Seine,12 Rue Linois 75015,48.8485,2.2835,15
+# 16ème arrondissement (4 lieux)
+trocadero,Trocadéro,monument,Palais Chaillot vue Tour Eiffel,Place du Trocadéro 75116,48.8617725,2.2880949,16
+bois-de-boulogne,Bois de Boulogne,parc,846 hectares lacs Longchamp Auteuil,Bois de Boulogne 75116,48.8708738,2.2755605,16
+musee-marmottan-monet,Musée Marmottan Monet,musee,Plus grande collection Monet mondiale,2 Rue Louis Boilly 75116,48.8592281,2.2671622,16
+fondation-louis-vuitton,Fondation Louis Vuitton,musee,Architecture Gehry art contemporain jardins,8 Avenue du Mahatma Gandhi 75116,48.87665,2.2633381,16
+# 17ème arrondissement (2 lieux)
+parc-monceau-17,Parc Monceau,parc,8.2 hectares jardins anglais fabriques romantiques,35 Boulevard de Courcelles 75017,48.878179,2.2988066,17
+arc-de-triomphe-17,Arc de Triomphe,monument,Vue panoramique place Étoile,Place Charles de Gaulle 75017,48.8738,2.295,17
+# 18ème arrondissement (4 lieux)
+sacre-coeur,Sacré-Cœur,monument,Basilique vue panoramique Montmartre,35 Rue du Chevalier de la Barre 75018,48.8867,2.3431,18
+moulin-rouge-18,Moulin Rouge,culture,Cabaret légendaire French Cancan depuis 1889,82 Boulevard de Clichy 75018,48.8841094,2.3323564,18
+montmartre,Montmartre,parc,Butte artistique Place du Tertre peintres,Place du Tertre 75018,48.8865,2.3407,18
+basilique-saint-denis,Basilique Saint-Denis,monument,Nécropole royale gothique rayonnant,1 Rue de la Légion d'Honneur 93200,48.9356,2.3598,18
+# 19ème arrondissement (3 lieux)
+parc-des-buttes-chaumont,Parc des Buttes-Chaumont,parc,25 hectares temple Sibylle lac cascades,1 Rue Botzaris 75019,48.8798,2.3832,19
+cite-des-sciences,Cité des Sciences et de l'Industrie,musee,Planétarium Géode expositions interactives,30 Avenue Corentin Cariou 75019,48.8959,2.3877,19
+parc-de-la-villette,Parc de la Villette,parc,55 hectares jardins thématiques Philharmonie,211 Avenue Jean Jaurès 75019,48.8938,2.3900,19
+# 20ème arrondissement (3 lieux)
+pere-lachaise,Cimetière du Père-Lachaise,monument,Plus grand cimetière Paris tombes célèbres,16 Rue du Repos 75020,48.8619,2.3933,20
+parc-de-belleville,Parc de Belleville,parc,Vue panoramique 108m altitude vignes,47 Rue des Couronnes 75020,48.8720,2.3829,20
+menilmontant,Ménilmontant,culture,Quartier populaire bars alternatifs street art,Rue de Ménilmontant 75020,48.8697,2.3849,20

@@ -220,6 +220,16 @@
             ]
           },
           {
+            "id": "du-pain-et-des-idees",
+            "name": "Du Pain et des Idées",
+            "description": "Boulangerie artisanale réputée, Christophe Vasseur",
+            "address": "34 Rue Yves Toudic, 75010 Paris",
+            "coordinates": [
+              48.871197,
+              2.3628861
+            ]
+          },
+          {
             "id": "holybelly",
             "name": "Holybelly",
             "description": "Coffee shop australien, brunch tendance",
