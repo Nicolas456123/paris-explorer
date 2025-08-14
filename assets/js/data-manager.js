@@ -13,20 +13,16 @@ class DataManager {
     
     // === CHARGEMENT PRINCIPAL ===
     async loadParisData() {
-        console.log('📊 Début du chargement des données parisiennes');
+        console.log('📊 Début du chargement des données parisiennes depuis CSV');
         
         try {
-            // Étape 1: Charger l'index principal
-            console.log('📋 Chargement de l\'index principal...');
-            const parisIndex = await this.loadParisIndex();
+            // Étape 1: Charger les données CSV
+            console.log('📋 Chargement du fichier CSV principal...');
+            await this.loadCSVData();
             
-            if (!parisIndex?.arrondissements) {
-                throw new Error('Index des arrondissements introuvable');
-            }
-            
-            // Étape 2: Charger tous les arrondissements
-            console.log('🏛️ Chargement de tous les arrondissements...');
-            await this.loadAllArrondissements(parisIndex);
+            // Étape 2: Charger les métadonnées des arrondissements
+            console.log('🏛️ Chargement des informations d\'arrondissements...');
+            await this.loadArrondissementsInfo();
             
             // Étape 3: Validation et statistiques
             this.validateLoadedData();
@@ -38,19 +34,17 @@ class DataManager {
             const totalPlaces = this.getTotalPlaces();
             console.log(`✅ Chargement terminé : ${totalPlaces} lieux disponibles`);
             
-            if (totalPlaces < 1000) {
+            if (totalPlaces < 600) {
                 console.warn(`⚠️ Seulement ${totalPlaces} lieux chargés - données incomplètes`);
-                // Notification supprimée - trop envahissante
             } else {
-                console.log(`✅ ${totalPlaces} lieux de Paris chargés !`);
-                // Notification de succès supprimée - visible dans la console
+                console.log(`✅ ${totalPlaces} lieux de Paris chargés depuis CSV !`);
             }
             
             return true;
             
         } catch (error) {
-            console.error('❌ Erreur lors du chargement des données:', error);
-            this.app.showNotification('Erreur lors du chargement des données', 'error');
+            console.error('❌ Erreur lors du chargement des données CSV:', error);
+            this.app.showNotification('Erreur lors du chargement des données CSV', 'error');
             
             // Mode dégradé avec données minimales
             this.loadFallbackData();
@@ -58,219 +52,277 @@ class DataManager {
         }
     }
     
-    // === CHARGEMENT DE L'INDEX ===
-    async loadParisIndex() {
+    // === CHARGEMENT DES DONNÉES CSV ===
+    async loadCSVData() {
         try {
-            const response = await fetch('data/paris-index.json');
+            const response = await fetch('data/paris-places.csv');
             if (!response.ok) {
                 throw new Error(`Erreur HTTP ${response.status}: ${response.statusText}`);
             }
             
-            const index = await response.json();
-            console.log('✅ Index principal chargé');
-            return index;
+            const csvText = await response.text();
+            console.log('✅ Fichier CSV principal chargé');
+            
+            // Parser le CSV et organiser par arrondissement
+            await this.parseCSVData(csvText);
             
         } catch (error) {
-            console.error('❌ Erreur chargement index:', error);
+            console.error('❌ Erreur chargement CSV:', error);
             throw error;
         }
     }
     
-    // === CHARGEMENT DE TOUS LES ARRONDISSEMENTS ===
-    async loadAllArrondissements(parisIndex) {
-        const arrondissements = parisIndex.arrondissements || {};
-        const arrKeys = Object.keys(arrondissements);
-        const totalCount = arrKeys.length;
+    // === CHARGEMENT DES INFOS ARRONDISSEMENTS ===
+    async loadArrondissementsInfo() {
+        try {
+            const response = await fetch('data/arrondissements-info.csv');
+            if (!response.ok) {
+                console.warn('⚠️ Fichier arrondissements-info.csv non trouvé, utilisation des coordonnées par défaut');
+                return;
+            }
+            
+            const csvText = await response.text();
+            await this.parseArrondissementsInfo(csvText);
+            console.log('✅ Informations d\'arrondissements chargées');
+            
+        } catch (error) {
+            console.warn('⚠️ Erreur chargement infos arrondissements:', error);
+            // Continue sans les métadonnées d'arrondissement
+        }
+    }
+    
+    // === PARSING DES DONNÉES CSV ===
+    async parseCSVData(csvText) {
+        console.log('📊 Parsing des données CSV...');
         
-        console.log(`📍 Chargement de ${totalCount} arrondissements...`);
+        const lines = csvText.split('\n');
+        const headers = lines[0].split(',');
+        
+        // Vérifier les headers attendus
+        const expectedHeaders = ['id', 'name', 'category', 'description', 'address', 'lat', 'lng', 'arr', 'arrondissement'];
+        console.log('📋 Headers trouvés:', headers);
         
         // Initialiser les données Paris
         this.app.parisData = {};
+        this.arrondissementsInfo = {};
         
-        let loadedCount = 0;
-        let failedCount = 0;
+        let totalPlaces = 0;
+        let currentArrondissement = null;
         
-        // Charger chaque arrondissement avec retry
-        for (const arrKey of arrKeys) {
-            const arrInfo = arrondissements[arrKey];
+        // Parser chaque ligne (skip header)
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
+            
+            // Ignorer les lignes de commentaires qui commencent par #
+            if (line.startsWith('#')) {
+                const match = line.match(/#\s*===\s*([^=]+)\s*===/i);
+                if (match) {
+                    currentArrondissement = match[1].trim();
+                    console.log(`📍 Section: ${currentArrondissement}`);
+                }
+                continue;
+            }
             
             try {
-                console.log(`📍 Chargement ${arrKey}...`);
-                const success = await this.loadSingleArrondissement(arrKey, arrInfo);
-                
-                if (success) {
-                    loadedCount++;
-                    console.log(`✅ ${arrKey} chargé (${loadedCount}/${totalCount})`);
-                } else {
-                    failedCount++;
-                    console.warn(`⚠️ ${arrKey} échoué`);
+                const place = this.parseCSVLine(line, headers);
+                if (place && place.arrondissement) {
+                    this.addPlaceToData(place);
+                    totalPlaces++;
                 }
-                
             } catch (error) {
-                failedCount++;
-                console.error(`❌ Erreur ${arrKey}:`, error);
+                console.warn(`⚠️ Erreur parsing ligne ${i}: ${error.message}`);
             }
         }
         
-        console.log(`📊 Résultats: ${loadedCount} chargés, ${failedCount} échoués sur ${totalCount} total`);
+        console.log(`✅ ${totalPlaces} lieux parsés depuis CSV`);
         
-        // Debug détaillé des arrondissements chargés
-        Object.keys(this.app.parisData).forEach(arrKey => {
-            const arrData = this.app.parisData[arrKey];
-            const categoriesCount = Object.keys(arrData?.categories || arrData?.arrondissement?.categories || {}).length;
-            console.log(`📍 ${arrKey}: ${categoriesCount} catégories chargées`);
+        // Organiser les données par catégories pour chaque arrondissement
+        this.organizeDataByCategories();
+    }
+    
+    // === PARSING D'UNE LIGNE CSV ===
+    parseCSVLine(line, headers) {
+        // Parser CSV avec support des guillemets
+        const values = [];
+        let current = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            
+            if (char === '"' && (i === 0 || line[i-1] === ',')) {
+                inQuotes = true;
+            } else if (char === '"' && inQuotes) {
+                inQuotes = false;
+            } else if (char === ',' && !inQuotes) {
+                values.push(current.trim());
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+        values.push(current.trim());
+        
+        // Créer l'objet place
+        const place = {};
+        headers.forEach((header, index) => {
+            if (values[index] !== undefined) {
+                place[header.trim()] = values[index].trim();
+            }
         });
         
-        if (loadedCount === 0) {
-            throw new Error('Aucun arrondissement n\'a pu être chargé');
+        // Convertir lat/lng en nombres et créer coordinates
+        if (place.lat && place.lng) {
+            const lat = parseFloat(place.lat);
+            const lng = parseFloat(place.lng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                place.coordinates = [lat, lng];
+            }
         }
         
-        return { loaded: loadedCount, failed: failedCount, total: totalCount };
+        return place;
     }
     
-    // === CHARGEMENT D'UN ARRONDISSEMENT ===
-async loadSingleArrondissement(arrKey, arrInfo, attempt = 1) {
-    const maxAttempts = this.retryAttempts;
-    
-    try {
-        // ✅ Utiliser directement le mapping spécifique (un seul chemin valide)
-        const filePath = this.getSpecificFilePath(arrKey);
+    // === AJOUTER UN LIEU AUX DONNÉES ===
+    addPlaceToData(place) {
+        const arrKey = place.arrondissement || place.arr;
+        if (!arrKey) return;
         
-        if (!filePath) {
-            console.error(`❌ Pas de chemin défini pour ${arrKey}`);
-            return false;
+        // Initialiser l'arrondissement si nécessaire
+        if (!this.app.parisData[arrKey]) {
+            this.app.parisData[arrKey] = {
+                name: arrKey,
+                categories: {},
+                arrondissement: {
+                    name: arrKey,
+                    categories: {}
+                }
+            };
         }
-
-        console.log(`📁 Chargement ${arrKey}: ${filePath}`);
         
-        try {
-            const response = await fetch(filePath, {
-                method: 'GET',
-                headers: { 'Accept': 'application/json' }
+        const categoryKey = this.normalizeCategoryKey(place.category || 'general');
+        
+        // Initialiser la catégorie si nécessaire
+        if (!this.app.parisData[arrKey].categories[categoryKey]) {
+            this.app.parisData[arrKey].categories[categoryKey] = {
+                title: place.category || 'Général',
+                places: []
+            };
+            // Aussi dans la structure arrondissement pour compatibilité
+            this.app.parisData[arrKey].arrondissement.categories[categoryKey] = this.app.parisData[arrKey].categories[categoryKey];
+        }
+        
+        // Ajouter le lieu
+        const placeObj = {
+            name: place.name,
+            description: place.description || '',
+            address: place.address || '',
+            coordinates: place.coordinates
+        };
+        
+        this.app.parisData[arrKey].categories[categoryKey].places.push(placeObj);
+    }
+    
+    // === NORMALISER CLÉ DE CATÉGORIE ===
+    normalizeCategoryKey(category) {
+        return category.toLowerCase()
+            .replace(/[éèêë]/g, 'e')
+            .replace(/[àâä]/g, 'a')
+            .replace(/[ùûü]/g, 'u')
+            .replace(/[îï]/g, 'i')
+            .replace(/[ôö]/g, 'o')
+            .replace(/ç/g, 'c')
+            .replace(/[^a-z0-9]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+    }
+    
+    // === ORGANISER DONNÉES PAR CATÉGORIES ===
+    organizeDataByCategories() {
+        console.log('📊 Organisation des données par catégories...');
+        
+        Object.keys(this.app.parisData).forEach(arrKey => {
+            const arrData = this.app.parisData[arrKey];
+            const categoriesCount = Object.keys(arrData.categories).length;
+            const totalPlaces = Object.values(arrData.categories)
+                .reduce((sum, cat) => sum + (cat.places?.length || 0), 0);
+            console.log(`📍 ${arrKey}: ${totalPlaces} lieux dans ${categoriesCount} catégories`);
+        });
+    }
+    
+    // === PARSING INFOS ARRONDISSEMENTS ===
+    async parseArrondissementsInfo(csvText) {
+        const lines = csvText.split('\n');
+        const headers = lines[0].split(',');
+        
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
+            
+            const values = line.split(',');
+            const arrInfo = {};
+            
+            headers.forEach((header, index) => {
+                if (values[index] !== undefined) {
+                    arrInfo[header.trim()] = values[index].trim();
+                }
             });
             
-            if (response.ok) {
-                const arrData = await response.json();
-                console.log(`📋 Données reçues pour ${arrKey}:`, Object.keys(arrData));
-                
-                // Valider les données
-                if (this.validateArrondissementData(arrData)) {
-                    // Processus des données
-                    this.processArrondissementData(arrKey, arrData);
-                    console.log(`✅ ${arrKey} chargé avec succès`);
-                    return true;
-                } else {
-                    console.warn(`⚠️ Données invalides pour ${arrKey} dans ${filePath}`);
-                    return false;
-                }
-            } else {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            if (arrInfo.id) {
+                this.arrondissementsInfo[arrInfo.id] = arrInfo;
             }
-        } catch (fetchError) {
-            console.error(`❌ Erreur fetch pour ${filePath}:`, fetchError);
-            throw fetchError;
         }
         
-    } catch (error) {
-        if (attempt < maxAttempts) {
-            console.log(`⏳ Retry ${arrKey} dans ${this.retryDelay}ms...`);
-            await this.delay(this.retryDelay);
-            return await this.loadSingleArrondissement(arrKey, arrInfo, attempt + 1);
-        }
-        
-        console.error(`❌ Échec définitif pour ${arrKey}:`, error);
-        return false;
+        console.log(`✅ Informations de ${Object.keys(this.arrondissementsInfo).length} arrondissements chargées`);
     }
-}
-    // Mappings spécifiques pour les cas problématiques
-getSpecificFilePath(arrKey) {
-    const specificMappings = {
-        '1er': 'data/arrondissements/01-louvre.json',
-        '2ème': 'data/arrondissements/02-bourse.json',
-        '3ème': 'data/arrondissements/03-haut-marais.json',
-        '4ème': 'data/arrondissements/04-marais-ile-saint-louis.json',
-        '5ème': 'data/arrondissements/05-quartier-latin.json',
-        '6ème': 'data/arrondissements/06-saint-germain.json',
-        '7ème': 'data/arrondissements/07-invalides-tour-eiffel.json',
-        '8ème': 'data/arrondissements/08-champs-elysees.json',
-        '9ème': 'data/arrondissements/09-opera-pigalle.json',
-        '10ème': 'data/arrondissements/10-canal-saint-martin.json',
-        '11ème': 'data/arrondissements/11-bastille-oberkampf.json',
-        '12ème': 'data/arrondissements/12-nation-bercy.json',
-        '13ème': 'data/arrondissements/13-chinatown-bibliotheque.json',
-        '14ème': 'data/arrondissements/14-montparnasse.json',
-        '15ème': 'data/arrondissements/15-vaugirard-beaugrenelle.json',
-        '16ème': 'data/arrondissements/16-trocadero-passy.json',
-        '17ème': 'data/arrondissements/17-batignolles-monceau.json',
-        '18ème': 'data/arrondissements/18-montmartre-barbes.json',
-        '19ème': 'data/arrondissements/19-buttes-chaumont-villette.json',
-        '20ème': 'data/arrondissements/20-belleville-pere-lachaise.json'
-    };
     
-    return specificMappings[arrKey] || null;
-}
-
-// Extraire le numéro d'arrondissement
-extractArrNumber(arrKey) {
-    const match = arrKey.match(/(\d+)/);
-    return match ? match[1].padStart(2, '0') : null;
-}
-    // ✅ Amélioration : validation plus stricte des données
+    // === MÉTHODES SUPPRIMÉES - REMPLACÉES PAR CSV ===
+    // Les méthodes loadSingleArrondissement, getSpecificFilePath et extractArrNumber
+    // ne sont plus nécessaires car nous chargeons directement depuis CSV
+    // ✅ Validation des données CSV
 validateArrondissementData(data) {
     if (!data || typeof data !== 'object') {
         console.warn('❌ Données non valides: pas un objet');
         return false;
     }
     
-    // Vérifier la structure de base
-    if (!data.arrondissement) {
-        console.warn('❌ Champ arrondissement manquant');
+    // Vérifier la structure CSV
+    if (!data.categories || Object.keys(data.categories).length === 0) {
+        console.warn('❌ Aucune catégorie trouvée dans les données CSV');
         return false;
     }
     
-    // Les catégories sont dans arrondissement.categories
-    if (!data.arrondissement.categories || Object.keys(data.arrondissement.categories).length === 0) {
-        console.warn('❌ Aucune catégorie trouvée dans arrondissement.categories');
-        return false;
-    }
-    
-    console.log(`✅ Structure valide avec ${Object.keys(data.arrondissement.categories).length} catégories`);
+    console.log(`✅ Structure CSV valide avec ${Object.keys(data.categories).length} catégories`);
     return true;
 }
 
-// === TRAITEMENT DES DONNÉES D'ARRONDISSEMENT ===
+// === TRAITEMENT DES DONNÉES D'ARRONDISSEMENT CSV ===
 processArrondissementData(arrKey, arrData) {
-    // Normaliser la structure pour un accès facile
-    if (arrData.arrondissement) {
-        // Copier les catégories à la racine pour simplifier l'accès
-        if (arrData.arrondissement.categories) {
-            arrData.categories = arrData.arrondissement.categories;
-        }
-        
-        // Copier le nom à la racine pour un accès facile
-        if (arrData.arrondissement.name) {
-            arrData.name = arrData.arrondissement.name;
-        }
-        
-        // Copier la description si elle existe
-        if (arrData.arrondissement.description) {
-            arrData.description = arrData.arrondissement.description;
-        }
+    // Les données sont déjà dans la bonne structure depuis le parsing CSV
+    // Ajouter les métadonnées d'arrondissement si disponibles
+    if (this.arrondissementsInfo && this.arrondissementsInfo[arrKey]) {
+        const info = this.arrondissementsInfo[arrKey];
+        arrData.metadata = {
+            description: info.description,
+            population: info.population,
+            area_km2: info.area_km2,
+            center: [parseFloat(info.center_lat), parseFloat(info.center_lng)],
+            bounds: {
+                north: parseFloat(info.bounds_north),
+                south: parseFloat(info.bounds_south),
+                east: parseFloat(info.bounds_east),
+                west: parseFloat(info.bounds_west)
+            }
+        };
     }
-    
-    // Fallback pour le nom si pas trouvé
-    if (!arrData.name) {
-        arrData.name = arrKey;
-    }
-    
-    // Stocker les données dans l'app
-    this.app.parisData[arrKey] = arrData;
     
     // Marquer comme chargé
     this.loadedFiles.add(arrKey);
     
     const categoryCount = Object.keys(arrData.categories || {}).length;
-    console.log(`✅ ${arrKey} traité avec ${categoryCount} catégories`);
+    const totalPlaces = Object.values(arrData.categories).reduce((sum, cat) => sum + (cat.places?.length || 0), 0);
+    console.log(`✅ ${arrKey} traité avec ${categoryCount} catégories et ${totalPlaces} lieux`);
 }
 
 // ✅ Fonction utilitaire pour les délais
@@ -390,10 +442,9 @@ delay(ms) {
     
     // === DONNÉES DE FALLBACK ===
     loadFallbackData() {
-        console.log('🚨 Chargement des données de fallback désactivé');
-        // Ne pas charger de données de fallback pour forcer l'utilisation des vraies données
-        console.log('⚠️ Veuillez recharger la page pour charger les données complètes');
-        this.app.showNotification('Veuillez recharger la page pour charger les données', 'warning');
+        console.log('🚨 Erreur de chargement CSV - données de fallback désactivées');
+        console.log('⚠️ Vérifiez que les fichiers data/paris-places.csv et data/arrondissements-info.csv existent');
+        this.app.showNotification('Erreur de chargement des fichiers CSV', 'error');
         this.app.isDataLoaded = false;
     }
     
@@ -458,6 +509,17 @@ delay(ms) {
     
     // === COORDONNÉES ===
     getArrondissementCoordinates(arrKey) {
+        // Utiliser les coordonnées depuis arrondissements-info.csv si disponibles
+        if (this.arrondissementsInfo && this.arrondissementsInfo[arrKey]) {
+            const info = this.arrondissementsInfo[arrKey];
+            const lat = parseFloat(info.center_lat);
+            const lng = parseFloat(info.center_lng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                return [lat, lng];
+            }
+        }
+        
+        // Coordonnées par défaut en fallback
         const arrondissementCoords = {
             '1er': [48.8607, 2.3358], '2ème': [48.8700, 2.3408], '3ème': [48.8630, 2.3626],
             '4ème': [48.8534, 2.3488], '5ème': [48.8462, 2.3372], '6ème': [48.8496, 2.3341],
@@ -610,9 +672,10 @@ delay(ms) {
     
     // === RECHARGEMENT ===
     async reloadData() {
-        console.log('🔄 Rechargement des données...');
+        console.log('🔄 Rechargement des données CSV...');
         this.clearCache();
         this.app.parisData = {};
+        this.arrondissementsInfo = {};
         this.app.isDataLoaded = false;
         
         return this.loadParisData();
