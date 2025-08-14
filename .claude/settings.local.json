@@ -17,7 +17,10 @@
       "Bash(for f in *.js)",
       "Bash(do node -c \"$f\")",
       "Bash(start http://localhost:8080)",
-      "Bash(del remove-duplicates.js final-analysis.js)"
+      "Bash(del remove-duplicates.js final-analysis.js)",
+      "Bash(del \"C:\\Users\\nicol\\Desktop\\paris-explorer\\temp_jacques.json\")",
+      "Bash(git stash:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
