@@ -2015,80 +2015,151 @@ body {
 }
 
 /* ===== ICÔNES DES MARQUEURS ===== */
-.place-icon {
-    background: var(--paris-white);
-    border: 2px solid var(--paris-gold);
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+/* Reset des styles Leaflet par défaut */
+.custom-div-icon {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Conteneur du marqueur */
+.marker-pin {
     position: relative;
-    transition: all 0.3s ease;
+    width: 36px;
+    height: 36px;
 }
 
-.place-icon:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+/* Marqueur pour arrondissement avec label */
+.arr-marker-container {
+    width: 40px;
+    height: 55px;
 }
 
-.place-icon.visited {
-    background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
-    border-color: #27AE60;
-    color: white;
-}
-
-.place-icon .check-mark {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    font-size: 12px;
-    background: #27AE60;
+/* Cercle du marqueur */
+.marker-circle {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    width: 16px;
-    height: 16px;
+    background: white;
+    border: 3px solid var(--paris-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+/* Emoji dans le cercle */
+.marker-emoji {
+    font-size: 20px;
     line-height: 1;
 }
 
-.arrondissement-icon {
-    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
-    color: var(--paris-white);
-    border: 2px solid var(--paris-white);
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-weight: 700;
-    font-size: 14px;
+/* Label sous les arrondissements */
+.marker-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paris-blue);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Marqueur d'arrondissement */
+.arr-marker {
+    background: linear-gradient(135deg, var(--paris-blue) 0%, #4169E1 100%);
+    border-color: white;
+    width: 40px;
+    height: 40px;
+}
+
+.arr-marker .marker-emoji {
+    font-size: 24px;
+    filter: brightness(0) invert(1);
+}
+
+/* Marqueurs de lieux par catégorie */
+.monuments-marker {
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+    border-color: #654321;
+}
+
+.musees-marker {
+    background: linear-gradient(135deg, #4B0082 0%, #8A2BE2 100%);
+    border-color: #4B0082;
+}
+
+.parcs-marker {
+    background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
+    border-color: #228B22;
+}
+
+.culture-marker {
+    background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+    border-color: #C71585;
+}
+
+.shopping-marker {
+    background: linear-gradient(135deg, #FF6347 0%, #FF8C00 100%);
+    border-color: #FF4500;
+}
+
+.restaurants-marker {
+    background: linear-gradient(135deg, #DC143C 0%, #FF0000 100%);
+    border-color: #8B0000;
+}
+
+.cafes-marker {
+    background: linear-gradient(135deg, #6F4E37 0%, #8B4513 100%);
+    border-color: #5D4037;
+}
+
+/* Effet hover */
+.marker-circle:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+/* Marqueur visité */
+.marker-circle.visited {
+    border-color: #27AE60;
+    border-width: 4px;
+}
+
+.visited-check {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #27AE60;
+    color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 6px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
-    white-space: nowrap;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.arrondissement-icon:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+/* Adaptations thème sombre */
+[data-mode="dark"] .marker-circle {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.arrondissement-icon span {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Adaptations thèmes sombres pour les marqueurs */
-[data-mode="dark"] .arrondissement-icon {
-    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
-    color: var(--paris-gold);
-    border-color: var(--paris-gold);
+[data-mode="dark"] .marker-label {
+    background: var(--paris-gold);
+    color: var(--paris-dark);
 }
 
 /* === PRINT STYLES === */

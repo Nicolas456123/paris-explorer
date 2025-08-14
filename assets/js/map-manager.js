@@ -169,10 +169,15 @@ class MapManager {
                         // Créer un marqueur pour l'arrondissement
                         const marker = L.marker(coords, {
                             icon: L.divIcon({
-                                className: 'arrondissement-marker',
-                                html: `<div class="arrondissement-icon">🗺️ <span>${arrKey}</span></div>`,
-                                iconSize: [80, 35],
-                                iconAnchor: [40, 17]
+                                className: 'custom-div-icon',
+                                html: `<div class="marker-pin">
+                                          <div class="marker-circle arr-marker">
+                                              <span class="marker-emoji">🏛️</span>
+                                          </div>
+                                          <div class="marker-label">${arrKey}</div>
+                                       </div>`,
+                                iconSize: [40, 55],
+                                iconAnchor: [20, 55] // Pointe du marqueur
                             })
                         }).addTo(this.map);
                         
@@ -259,13 +264,16 @@ class MapManager {
                                             // Créer le marqueur
                                             const marker = L.marker([lat, lng], {
                                                 icon: L.divIcon({
-                                                    className: 'place-marker',
-                                                    html: `<div class="place-icon ${isVisited ? 'visited' : ''}" title="${place.name}">
-                                                           ${categoryIcon}
-                                                           ${isVisited ? '<span class="check-mark">✅</span>' : ''}
+                                                    className: 'custom-div-icon',
+                                                    html: `<div class="marker-pin" title="${place.name}">
+                                                              <div class="marker-circle place-marker ${catKey}-marker ${isVisited ? 'visited' : ''}">
+                                                                  <span class="marker-emoji">${categoryIcon}</span>
+                                                                  ${isVisited ? '<span class="visited-check">✓</span>' : ''}
+                                                              </div>
                                                            </div>`,
-                                                    iconSize: [32, 32],
-                                                    iconAnchor: [16, 16]
+                                                    iconSize: [36, 36],
+                                                    iconAnchor: [18, 36], // Base du marqueur
+                                                    popupAnchor: [0, -36]
                                                 })
                                             }).addTo(this.map);
                                             
