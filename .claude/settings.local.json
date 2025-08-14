@@ -20,7 +20,9 @@
       "Bash(del remove-duplicates.js final-analysis.js)",
       "Bash(del \"C:\\Users\\nicol\\Desktop\\paris-explorer\\temp_jacques.json\")",
       "Bash(git stash:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(start http://localhost:8000/test-csv.html)"
     ],
     "deny": []
   }

@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER PARIS EXPLORER - VERSION SANS IMAGES =====
 
-const CACHE_NAME = 'paris-explorer-v2.0.0';
+const CACHE_NAME = 'paris-explorer-v3.0.0';
 const OFFLINE_URL = '/offline.html';
 
 // === RESSOURCES À METTRE EN CACHE ===
@@ -10,12 +10,12 @@ const CORE_ASSETS = [
     '/offline.html',
     '/manifest.json',
     '/config.js',
-    '/paris-index.json',
     
     // CSS
     '/assets/css/main.css',
     '/assets/css/responsive.css',
     '/assets/css/themes.css',
+    '/assets/css/themes-v2.css',
     
     // JavaScript
     '/assets/js/utils.js',
@@ -27,27 +27,9 @@ const CORE_ASSETS = [
     '/assets/js/export-import.js',
     '/assets/js/app.js',
     
-    // Données Paris
-    '/arrondissements/01-louvre.json',
-    '/arrondissements/02-bourse.json',
-    '/arrondissements/03-haut-marais.json',
-    '/arrondissements/04-marais-ile-saint-louis.json',
-    '/arrondissements/05-quartier-latin.json',
-    '/arrondissements/06-saint-germain.json',
-    '/arrondissements/07-invalides-tour-eiffel.json',
-    '/arrondissements/08-champs-elysees.json',
-    '/arrondissements/09-opera-pigalle.json',
-    '/arrondissements/10-canal-saint-martin.json',
-    '/arrondissements/11-bastille-oberkampf.json',
-    '/arrondissements/12-nation-bercy.json',
-    '/arrondissements/13-chinatown-bibliotheque.json',
-    '/arrondissements/14-montparnasse.json',
-    '/arrondissements/15-beaugrenelle-commerce.json',
-    '/arrondissements/16-trocadero-auteuil.json',
-    '/arrondissements/17-batignolles-monceau.json',
-    '/arrondissements/18-montmartre.json',
-    '/arrondissements/19-villette-buttes-chaumont.json',
-    '/arrondissements/20-belleville-menilmontant.json'
+    // Données Paris CSV
+    '/data/paris-places.csv',
+    '/data/arrondissements-info.csv'
 ];
 
 // === INSTALLATION ===
@@ -132,7 +114,7 @@ self.addEventListener('fetch', event => {
     }
     
     // Stratégie Network First pour les données dynamiques et externes
-    else if (isAllowedExternal(url) || url.pathname.includes('.json')) {
+    else if (isAllowedExternal(url) || url.pathname.includes('.json') || url.pathname.includes('.csv')) {
         event.respondWith(
             fetch(request)
                 .then(response => {
