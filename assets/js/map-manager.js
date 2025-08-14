@@ -162,8 +162,8 @@ class MapManager {
                     const arrName = arrInfo.name || arrKey;
                     
                     // Utiliser les coordonnées du centre de l'arrondissement
-                    if (arrInfo.center) {
-                        const coords = arrInfo.center;
+                    const coords = arrInfo.center || arrData.center;
+                    if (coords) {
                         console.log(`📍 Arrondissement ${arrKey}: ${arrName} à`, coords);
                         
                         // Créer un marqueur pour l'arrondissement
@@ -203,8 +203,9 @@ class MapManager {
                     const arrondissementName = arrInfo.name || arrKey.charAt(0).toUpperCase() + arrKey.slice(1);
                     
                     // Vérifier si l'arrondissement est dans la vue actuelle
-                    if (arrInfo.center) {
-                        const arrCenter = L.latLng(arrInfo.center[0], arrInfo.center[1]);
+                    const centerCoords = arrInfo.center || arrData.center;
+                    if (centerCoords) {
+                        const arrCenter = L.latLng(centerCoords[0], centerCoords[1]);
                         
                         if (bounds.contains(arrCenter)) {
                             console.log(`📍 Affichage des lieux de ${arrKey}`);
@@ -238,8 +239,9 @@ class MapManager {
                                                 const angle = (placeIndex * 137.5) % 360;
                                                 const radius = 0.002 + (placeIndex % 8) * 0.0008;
                                                 
-                                                lat = arrInfo.center[0] + baseOffset.lat + radius * Math.cos(angle * Math.PI / 180);
-                                                lng = arrInfo.center[1] + baseOffset.lng + radius * Math.sin(angle * Math.PI / 180);
+                                                const fallbackCoords = arrInfo.center || arrData.center || [48.8566, 2.3522];
+                                                lat = fallbackCoords[0] + baseOffset.lat + radius * Math.cos(angle * Math.PI / 180);
+                                                lng = fallbackCoords[1] + baseOffset.lng + radius * Math.sin(angle * Math.PI / 180);
                                                 console.log(`📍 ${place.name}: coordonnées approximatives [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
                                             }
                                             
