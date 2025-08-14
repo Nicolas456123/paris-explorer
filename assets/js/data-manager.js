@@ -303,11 +303,13 @@ processArrondissementData(arrKey, arrData) {
     // Ajouter les métadonnées d'arrondissement si disponibles
     if (this.arrondissementsInfo && this.arrondissementsInfo[arrKey]) {
         const info = this.arrondissementsInfo[arrKey];
+        const centerCoords = [parseFloat(info.center_lat), parseFloat(info.center_lng)];
+        
         arrData.metadata = {
             description: info.description,
             population: info.population,
             area_km2: info.area_km2,
-            center: [parseFloat(info.center_lat), parseFloat(info.center_lng)],
+            center: centerCoords,
             bounds: {
                 north: parseFloat(info.bounds_north),
                 south: parseFloat(info.bounds_south),
@@ -315,6 +317,19 @@ processArrondissementData(arrKey, arrData) {
                 west: parseFloat(info.bounds_west)
             }
         };
+        
+        // IMPORTANT: Le map-manager cherche les coordonnées dans arrondissement.center
+        arrData.arrondissement.center = centerCoords;
+        // Et aussi directement dans arrData pour compatibilité
+        arrData.center = centerCoords;
+    } else {
+        // Fallback : utiliser les coordonnées par défaut si pas d'infos CSV
+        const fallbackCoords = this.getArrondissementCoordinates(arrKey);
+        if (fallbackCoords) {
+            arrData.arrondissement.center = fallbackCoords;
+            arrData.center = fallbackCoords;
+            console.log(`📍 ${arrKey}: utilisation coordonnées fallback`, fallbackCoords);
+        }
     }
     
     // Marquer comme chargé
