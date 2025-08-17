@@ -19,6 +19,9 @@ class ParisExplorerApp {
         this.searchFilter = new SearchFilter(this);
         this.exportImport = new ExportImport(this);
         
+        // Rendre le MapManager accessible globalement pour les interactions sur la carte
+        window.mapManager = this.mapManager;
+        
         // États d'initialisation
         this.initializationSteps = {
             config: false,

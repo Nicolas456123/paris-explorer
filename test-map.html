@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Map avec Marqueurs</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; }
+        body { margin: 0; padding: 10px; }
+        #info { padding: 10px; background: #f0f0f0; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div id="info">Test de la carte avec marqueurs depuis CSV</div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialiser la carte
+        const map = L.map('map').setView([48.8566, 2.3522], 12);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        let markersCount = 0;
+
+        // Charger et afficher les données CSV
+        fetch('data/paris-places.csv')
+            .then(response => response.text())
+            .then(csvText => {
+                const lines = csvText.split('\n');
+                const headers = lines[0].split(',');
+                
+                console.log('Headers:', headers);
+                
+                // Parser chaque ligne
+                for (let i = 1; i < lines.length && i < 100; i++) {
+                    const line = lines[i].trim();
+                    if (!line || line.startsWith('#')) continue;
+                    
+                    const values = line.split(',');
+                    if (values.length >= 7) {
+                        const lat = parseFloat(values[5]);
+                        const lng = parseFloat(values[6]);
+                        const name = values[1];
+                        const category = values[2];
+                        
+                        if (!isNaN(lat) && !isNaN(lng)) {
+                            const marker = L.marker([lat, lng]).addTo(map);
+                            marker.bindPopup(`<b>${name}</b><br>${category}`);
+                            markersCount++;
+                            
+                            if (markersCount <= 5) {
+                                console.log(`Marqueur ${markersCount}: ${name} [${lat}, ${lng}]`);
+                            }
+                        }
+                    }
+                }
+                
+                document.getElementById('info').innerHTML += ` - ${markersCount} marqueurs affichés`;
+                console.log(`Total: ${markersCount} marqueurs ajoutés`);
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                document.getElementById('info').innerHTML = 'Erreur: ' + error.message;
+            });
+
+        // Test aussi les coordonnées des arrondissements
+        fetch('data/arrondissements-info.csv')
+            .then(response => response.text())
+            .then(csvText => {
+                const lines = csvText.split('\n');
+                
+                for (let i = 1; i < lines.length && i < 22; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    
+                    const values = line.split(',');
+                    if (values.length >= 7) {
+                        const id = values[0];
+                        const lat = parseFloat(values[5]);
+                        const lng = parseFloat(values[6]);
+                        
+                        if (!isNaN(lat) && !isNaN(lng)) {
+                            const circle = L.circleMarker([lat, lng], {
+                                radius: 15,
+                                color: 'blue',
+                                fillColor: '#30f',
+                                fillOpacity: 0.5
+                            }).addTo(map);
+                            circle.bindPopup(`<b>Arrondissement ${id}</b>`);
+                            console.log(`Arrondissement ${id}: [${lat}, ${lng}]`);
+                        }
+                    }
+                }
+            })
+            .catch(error => console.error('Erreur arrondissements:', error));
+    </script>
+</body>
+</html>

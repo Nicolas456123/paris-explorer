@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test CSV Loading</title>
+</head>
+<body>
+    <h1>Test Chargement CSV</h1>
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.getElementById('output');
+        
+        function log(msg) {
+            output.textContent += msg + '\n';
+            console.log(msg);
+        }
+
+        async function testCSVLoading() {
+            log('🔄 Début du test de chargement CSV...');
+            
+            try {
+                const response = await fetch('data/paris-places.csv');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const csvText = await response.text();
+                log(`✅ CSV chargé: ${csvText.length} caractères`);
+                
+                const lines = csvText.split('\n');
+                log(`📊 Nombre de lignes: ${lines.length}`);
+                
+                const headers = lines[0].split(',');
+                log(`📋 Headers: ${headers.join(', ')}`);
+                
+                let placesCount = 0;
+                let arrondissementsData = {};
+                
+                for (let i = 1; i < lines.length && i < 50; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    if (line.startsWith('#')) continue;
+                    
+                    const values = line.split(',');
+                    if (values.length >= 9) {
+                        const place = {
+                            id: values[0],
+                            name: values[1],
+                            category: values[2],
+                            lat: parseFloat(values[5]),
+                            lng: parseFloat(values[6]),
+                            arr: values[7],
+                            arrondissement: values[8]
+                        };
+                        
+                        if (!isNaN(place.lat) && !isNaN(place.lng)) {
+                            placesCount++;
+                            const arrKey = place.arrondissement || place.arr;
+                            if (!arrondissementsData[arrKey]) {
+                                arrondissementsData[arrKey] = [];
+                            }
+                            arrondissementsData[arrKey].push(place);
+                            
+                            if (placesCount <= 5) {
+                                log(`📍 Lieu ${placesCount}: ${place.name} [${place.lat}, ${place.lng}] - Arr: ${arrKey}`);
+                            }
+                        }
+                    }
+                }
+                
+                log(`\n✅ Total: ${placesCount} lieux avec coordonnées valides`);
+                log(`🏛️ Arrondissements: ${Object.keys(arrondissementsData).join(', ')}`);
+                
+                for (const [arr, places] of Object.entries(arrondissementsData)) {
+                    log(`  - ${arr}: ${places.length} lieux`);
+                }
+                
+            } catch (error) {
+                log(`❌ Erreur: ${error.message}`);
+                console.error(error);
+            }
+        }
+
+        testCSVLoading();
+    </script>
+</body>
+</html>

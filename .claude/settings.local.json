@@ -22,8 +22,11 @@
       "Bash(git stash:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(start http://localhost:8000/test-csv.html)"
+      "Bash(start http://localhost:8000/test-csv.html)",
+      "Bash(start http://localhost:8080/test-map.html)",
+      "WebSearch"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits"
   }
 }

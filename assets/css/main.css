@@ -1221,6 +1221,85 @@ body {
     color: var(--paris-white);
 }
 
+/* === STYLES POUR LES POPUPS DE CARTE === */
+.place-popup-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.place-popup-checkbox input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.place-popup-checkbox span {
+    user-select: none;
+    cursor: pointer;
+}
+
+.place-popup-card {
+    min-width: 250px;
+    max-width: 350px;
+}
+
+.place-popup-header {
+    margin-bottom: 12px;
+}
+
+.place-popup-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.place-popup-title-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.place-popup-title h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--paris-blue);
+}
+
+.place-popup-category {
+    font-size: 12px;
+    color: var(--paris-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.place-popup-visited {
+    background: #059669;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.place-popup-description {
+    font-size: 14px;
+    color: #374151;
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.place-popup-address {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 8px 0;
+}
+
 /* === LOADING GLOBAL === */
 .global-loading {
     position: fixed;

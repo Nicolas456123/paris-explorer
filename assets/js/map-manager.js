@@ -135,7 +135,7 @@ class MapManager {
             await this.loadRealData();
         } else {
             console.log('📋 Aucune donnée chargée');
-            this.app.uiManager.showNotification('Veuillez charger les données pour afficher la carte.', 'warning');
+            this.app.showNotification('Veuillez charger les données pour afficher la carte.', 'warning');
         }
     }
     
@@ -143,6 +143,19 @@ class MapManager {
     async loadRealData() {
         console.log('🗺️ Chargement des lieux sur la carte...');
         console.log('📊 Données disponibles:', Object.keys(this.app.parisData));
+        
+        // Debug: Afficher la structure des données pour le premier arrondissement
+        const firstArr = Object.keys(this.app.parisData)[0];
+        if (firstArr) {
+            console.log(`📊 Structure de ${firstArr}:`, this.app.parisData[firstArr]);
+            if (this.app.parisData[firstArr].center) {
+                console.log(`📍 Centre de ${firstArr}:`, this.app.parisData[firstArr].center);
+            }
+            if (this.app.parisData[firstArr].arrondissement) {
+                console.log(`📍 Arrondissement data:`, this.app.parisData[firstArr].arrondissement);
+            }
+        }
+        
         const zoom = this.map.getZoom();
         console.log('🔍 Zoom actuel:', zoom);
         let markersAdded = 0;
@@ -152,19 +165,69 @@ class MapManager {
             this.currentMarkers = [];
         }
         
+        // Obtenir les résultats filtrés de la recherche si des filtres sont actifs
+        const hasActiveFilters = this.app.searchFilter && (
+            this.app.searchFilter.activeFilters.arrondissement ||
+            this.app.searchFilter.activeFilters.category ||
+            this.app.searchFilter.activeFilters.status ||
+            this.app.searchFilter.activeFilters.hideCompleted ||
+            this.app.searchQuery
+        );
+        
+        let filteredResults = null;
+        if (hasActiveFilters) {
+            filteredResults = this.app.searchFilter.performSearch(this.app.searchQuery || '', this.app.searchFilter.activeFilters);
+            console.log(`🔍 Filtres actifs détectés: ${filteredResults.length} lieux correspondants`);
+        }
+        
         try {
             if (zoom <= 12) {
                 // Vue d'ensemble : marqueurs d'arrondissements
                 console.log('🏛️ Affichage des arrondissements (vue d\'ensemble)');
+                console.log('📊 Structure complète des données:', this.app.parisData);
                 
                 for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
+                    console.log(`🔍 Traitement de ${arrKey}:`, arrData);
+                    
                     const arrInfo = arrData.arrondissement || arrData;
                     const arrName = arrInfo.name || arrKey;
                     
-                    // Utiliser les coordonnées du centre de l'arrondissement
-                    const coords = arrInfo.center || arrData.center;
+                    // Utiliser les coordonnées du centre de l'arrondissement ou fallback
+                    let coords = arrInfo.center || arrData.center;
+                    
+                    // Si pas de coordonnées, utiliser les coordonnées par défaut
+                    if (!coords) {
+                        const defaultCoords = {
+                            '1': [48.8607, 2.3358],
+                            '2': [48.87, 2.3408],
+                            '3': [48.863, 2.3626],
+                            '4': [48.8534, 2.3488],
+                            '5': [48.8462, 2.3372],
+                            '6': [48.8496, 2.3341],
+                            '7': [48.8534, 2.2944],
+                            '8': [48.8718, 2.3075],
+                            '9': [48.8768, 2.3364],
+                            '10': [48.8709, 2.3674],
+                            '11': [48.8594, 2.3765],
+                            '12': [48.8448, 2.3776],
+                            '13': [48.8282, 2.3555],
+                            '14': [48.8323, 2.3255],
+                            '15': [48.8428, 2.2944],
+                            '16': [48.8635, 2.2773],
+                            '17': [48.8799, 2.2951],
+                            '18': [48.8867, 2.3431],
+                            '19': [48.8799, 2.3831],
+                            '20': [48.8631, 2.3969]
+                        };
+                        
+                        // Essayer avec juste le numéro
+                        const arrNum = arrKey.replace(/[^0-9]/g, '');
+                        coords = defaultCoords[arrNum] || defaultCoords[arrKey] || [48.8566, 2.3522];
+                        console.log(`⚠️ Utilisation coordonnées par défaut pour ${arrKey}: ${coords}`);
+                    }
+                    
                     if (coords) {
-                        console.log(`📍 Arrondissement ${arrKey}: ${arrName} à`, coords);
+                        console.log(`✅ Arrondissement ${arrKey}: ${arrName} à`, coords);
                         
                         // Créer un marqueur pour l'arrondissement
                         const marker = L.marker(coords, {
@@ -195,96 +258,178 @@ class MapManager {
                 // Vue détaillée : afficher les lieux individuels
                 console.log('📍 Vue détaillée - affichage des lieux');
                 
-                // Obtenir les limites de la vue actuelle
-                const bounds = this.map.getBounds();
-                
-                for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
-                    const arrInfo = arrData.arrondissement || arrData;
-                    const arrondissementName = arrInfo.name || arrKey.charAt(0).toUpperCase() + arrKey.slice(1);
+                if (hasActiveFilters && filteredResults) {
+                    // Utiliser les résultats filtrés
+                    console.log(`🔍 Application des filtres: ${filteredResults.length} lieux à afficher`);
                     
-                    // Vérifier si l'arrondissement est dans la vue actuelle
-                    const centerCoords = arrInfo.center || arrData.center;
-                    if (centerCoords) {
-                        const arrCenter = L.latLng(centerCoords[0], centerCoords[1]);
+                    filteredResults.forEach(result => {
+                        const { place, arrKey, catKey, arrData, catData } = result;
+                        const arrInfo = arrData.arrondissement || arrData;
+                        const arrondissementName = arrInfo.name || arrKey.charAt(0).toUpperCase() + arrKey.slice(1);
                         
-                        if (bounds.contains(arrCenter)) {
-                            console.log(`📍 Affichage des lieux de ${arrKey}`);
-                            
-                            if (arrData.categories) {
-                                let placeIndex = 0;
-                                
-                                for (const [catKey, catData] of Object.entries(arrData.categories)) {
-                                    if (catData.places) {
-                                        for (const place of catData.places) {
-                                            let lat, lng;
-                                            
-                                            // Utiliser les vraies coordonnées si disponibles
-                                            if (place.coordinates && Array.isArray(place.coordinates) && place.coordinates.length === 2) {
-                                                lat = place.coordinates[0];
-                                                lng = place.coordinates[1];
-                                                console.log(`📍 ${place.name}: vraies coordonnées [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
-                                            } else {
-                                                // Fallback : coordonnées approximatives par catégorie
-                                                const categoryOffsets = {
-                                                    'monuments': { lat: 0.001, lng: 0.001 },
-                                                    'musees': { lat: -0.001, lng: 0.001 }, 
-                                                    'parcs': { lat: 0.001, lng: -0.001 },
-                                                    'culture': { lat: -0.001, lng: -0.001 },
-                                                    'shopping': { lat: 0.0005, lng: 0.0005 },
-                                                    'restaurants': { lat: -0.0005, lng: 0.0005 },
-                                                    'cafes': { lat: 0.0005, lng: -0.0005 }
-                                                };
+                        let lat, lng;
+                        
+                        // Utiliser les vraies coordonnées si disponibles
+                        if (place.coordinates && Array.isArray(place.coordinates) && place.coordinates.length === 2) {
+                            lat = place.coordinates[0];
+                            lng = place.coordinates[1];
+                            console.log(`📍 ${place.name}: vraies coordonnées [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
+                        } else {
+                            // Fallback : coordonnées approximatives par catégorie
+                            const categoryOffsets = {
+                                'monument': { lat: 0.001, lng: 0.001 },
+                                'musee': { lat: -0.001, lng: 0.001 }, 
+                                'parc': { lat: 0.001, lng: -0.001 },
+                                'culture': { lat: -0.001, lng: -0.001 },
+                                'shopping': { lat: 0.0005, lng: 0.0005 },
+                                'restaurant': { lat: -0.0005, lng: 0.0005 },
+                                'cafe': { lat: 0.0005, lng: -0.0005 }
+                            };
 
-                                                const baseOffset = categoryOffsets[catKey] || { lat: 0, lng: 0 };
-                                                const angle = (placeIndex * 137.5) % 360;
-                                                const radius = 0.002 + (placeIndex % 8) * 0.0008;
+                            const baseOffset = categoryOffsets[catKey] || { lat: 0, lng: 0 };
+                            const angle = (markersAdded * 137.5) % 360;
+                            const radius = 0.002 + (markersAdded % 8) * 0.0008;
+                            
+                            const fallbackCoords = arrInfo.center || arrData.center || [48.8566, 2.3522];
+                            lat = fallbackCoords[0] + baseOffset.lat + radius * Math.cos(angle * Math.PI / 180);
+                            lng = fallbackCoords[1] + baseOffset.lng + radius * Math.sin(angle * Math.PI / 180);
+                            console.log(`📍 ${place.name}: coordonnées approximatives [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
+                        }
+                        
+                        // Créer l'icône selon la catégorie
+                        const categoryIcons = {
+                            'monument': '🏛️',
+                            'musee': '🎨', 
+                            'parc': '🌳',
+                            'culture': '🎭',
+                            'shopping': '🛍️',
+                            'restaurant': '🍽️',
+                            'cafe': '☕'
+                        };
+                        
+                        const categoryIcon = categoryIcons[catKey] || '📍';
+                        
+                        // Vérifier si le lieu est visité  
+                        const placeId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
+                        const isVisited = this.app.userManager && this.app.userManager.currentUser &&
+                            this.app.userManager.currentUser.visitedPlaces &&
+                            this.app.userManager.currentUser.visitedPlaces.has(placeId);
+                        
+                        // Créer le marqueur
+                        const marker = L.marker([lat, lng], {
+                            icon: L.divIcon({
+                                className: 'custom-div-icon',
+                                html: `<div class="marker-pin" title="${place.name}">
+                                          <div class="marker-circle place-marker ${catKey}-marker ${isVisited ? 'visited' : ''}">
+                                              <span class="marker-emoji">${categoryIcon}</span>
+                                              ${isVisited ? '<span class="visited-check">✓</span>' : ''}
+                                          </div>
+                                       </div>`,
+                                iconSize: [36, 36],
+                                iconAnchor: [18, 36],
+                                popupAnchor: [0, -36]
+                            })
+                        }).addTo(this.map);
+                        
+                        // Popup avec informations du lieu
+                        marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName, placeId));
+                        
+                        this.currentMarkers.push(marker);
+                        markersAdded++;
+                    });
+                } else {
+                    // Affichage normal sans filtres - limiter par bounds de la vue
+                    const bounds = this.map.getBounds();
+                    
+                    for (const [arrKey, arrData] of Object.entries(this.app.parisData)) {
+                        const arrInfo = arrData.arrondissement || arrData;
+                        const arrondissementName = arrInfo.name || arrKey.charAt(0).toUpperCase() + arrKey.slice(1);
+                        
+                        // Vérifier si l'arrondissement est dans la vue actuelle
+                        const centerCoords = arrInfo.center || arrData.center;
+                        if (centerCoords) {
+                            const arrCenter = L.latLng(centerCoords[0], centerCoords[1]);
+                            
+                            if (bounds.contains(arrCenter)) {
+                                console.log(`📍 Affichage des lieux de ${arrKey}`);
+                                
+                                if (arrData.categories) {
+                                    let placeIndex = 0;
+                                    
+                                    for (const [catKey, catData] of Object.entries(arrData.categories)) {
+                                        if (catData.places) {
+                                            for (const place of catData.places) {
+                                                let lat, lng;
                                                 
-                                                const fallbackCoords = arrInfo.center || arrData.center || [48.8566, 2.3522];
-                                                lat = fallbackCoords[0] + baseOffset.lat + radius * Math.cos(angle * Math.PI / 180);
-                                                lng = fallbackCoords[1] + baseOffset.lng + radius * Math.sin(angle * Math.PI / 180);
-                                                console.log(`📍 ${place.name}: coordonnées approximatives [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
+                                                // Utiliser les vraies coordonnées si disponibles
+                                                if (place.coordinates && Array.isArray(place.coordinates) && place.coordinates.length === 2) {
+                                                    lat = place.coordinates[0];
+                                                    lng = place.coordinates[1];
+                                                    console.log(`📍 ${place.name}: vraies coordonnées [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
+                                                } else {
+                                                    // Fallback : coordonnées approximatives par catégorie
+                                                    const categoryOffsets = {
+                                                        'monument': { lat: 0.001, lng: 0.001 },
+                                                        'musee': { lat: -0.001, lng: 0.001 }, 
+                                                        'parc': { lat: 0.001, lng: -0.001 },
+                                                        'culture': { lat: -0.001, lng: -0.001 },
+                                                        'shopping': { lat: 0.0005, lng: 0.0005 },
+                                                        'restaurant': { lat: -0.0005, lng: 0.0005 },
+                                                        'cafe': { lat: 0.0005, lng: -0.0005 }
+                                                    };
+
+                                                    const baseOffset = categoryOffsets[catKey] || { lat: 0, lng: 0 };
+                                                    const angle = (placeIndex * 137.5) % 360;
+                                                    const radius = 0.002 + (placeIndex % 8) * 0.0008;
+                                                    
+                                                    const fallbackCoords = arrInfo.center || arrData.center || [48.8566, 2.3522];
+                                                    lat = fallbackCoords[0] + baseOffset.lat + radius * Math.cos(angle * Math.PI / 180);
+                                                    lng = fallbackCoords[1] + baseOffset.lng + radius * Math.sin(angle * Math.PI / 180);
+                                                    console.log(`📍 ${place.name}: coordonnées approximatives [${lat.toFixed(4)}, ${lng.toFixed(4)}]`);
+                                                }
+                                                
+                                                // Créer l'icône selon la catégorie
+                                                const categoryIcons = {
+                                                    'monument': '🏛️',
+                                                    'musee': '🎨', 
+                                                    'parc': '🌳',
+                                                    'culture': '🎭',
+                                                    'shopping': '🛍️',
+                                                    'restaurant': '🍽️',
+                                                    'cafe': '☕'
+                                                };
+                                                
+                                                const categoryIcon = categoryIcons[catKey] || '📍';
+                                                
+                                                // Vérifier si le lieu est visité  
+                                                const placeId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
+                                                const isVisited = this.app.userManager && this.app.userManager.currentUser &&
+                                                    this.app.userManager.currentUser.visitedPlaces &&
+                                                    this.app.userManager.currentUser.visitedPlaces.has(placeId);
+                                                
+                                                // Créer le marqueur
+                                                const marker = L.marker([lat, lng], {
+                                                    icon: L.divIcon({
+                                                        className: 'custom-div-icon',
+                                                        html: `<div class="marker-pin" title="${place.name}">
+                                                                  <div class="marker-circle place-marker ${catKey}-marker ${isVisited ? 'visited' : ''}">
+                                                                      <span class="marker-emoji">${categoryIcon}</span>
+                                                                      ${isVisited ? '<span class="visited-check">✓</span>' : ''}
+                                                                  </div>
+                                                               </div>`,
+                                                        iconSize: [36, 36],
+                                                        iconAnchor: [18, 36], // Base du marqueur
+                                                        popupAnchor: [0, -36]
+                                                    })
+                                                }).addTo(this.map);
+                                                
+                                                // Popup avec informations du lieu
+                                                marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName, placeId));
+                                                
+                                                this.currentMarkers.push(marker);
+                                                markersAdded++;
+                                                placeIndex++;
                                             }
-                                            
-                                            // Créer l'icône selon la catégorie
-                                            const categoryIcons = {
-                                                'monuments': '🏛️',
-                                                'musees': '🏛️', 
-                                                'parcs': '🌳',
-                                                'culture': '🎭',
-                                                'shopping': '🛍️',
-                                                'restaurants': '🍽️',
-                                                'cafes': '☕'
-                                            };
-                                            
-                                            const categoryIcon = categoryIcons[catKey] || '📍';
-                                            
-                                            // Vérifier si le lieu est visité
-                                            const isVisited = this.app.userManager && this.app.userManager.currentUser &&
-                                                this.app.userManager.currentUser.visitedPlaces &&
-                                                this.app.userManager.currentUser.visitedPlaces[`${arrKey}_${place.id}`];
-                                            
-                                            // Créer le marqueur
-                                            const marker = L.marker([lat, lng], {
-                                                icon: L.divIcon({
-                                                    className: 'custom-div-icon',
-                                                    html: `<div class="marker-pin" title="${place.name}">
-                                                              <div class="marker-circle place-marker ${catKey}-marker ${isVisited ? 'visited' : ''}">
-                                                                  <span class="marker-emoji">${categoryIcon}</span>
-                                                                  ${isVisited ? '<span class="visited-check">✓</span>' : ''}
-                                                              </div>
-                                                           </div>`,
-                                                    iconSize: [36, 36],
-                                                    iconAnchor: [18, 36], // Base du marqueur
-                                                    popupAnchor: [0, -36]
-                                                })
-                                            }).addTo(this.map);
-                                            
-                                            // Popup avec informations du lieu
-                                            marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName));
-                                            
-                                            this.currentMarkers.push(marker);
-                                            markersAdded++;
-                                            placeIndex++;
                                         }
                                     }
                                 }
@@ -388,16 +533,6 @@ class MapManager {
         return marker;
     }
     
-    createPlaceMarkerFromCoords(coords, place, catKey, isVisited, arrondissementName) {
-        if (!coords) return null;
-        
-        const icon = this.getPlaceIcon(catKey, isVisited);
-        const marker = L.marker(coords, { icon }).addTo(this.map);
-        
-        marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName));
-        
-        return marker;
-    }
     
     clearMarkers() {
         // Supprimer tous les marqueurs de la carte
@@ -466,6 +601,46 @@ class MapManager {
         }
     }
     
+    // === GESTION DES LIEUX VISITÉS ===
+    toggleVisitedPlace(placeId) {
+        console.log(`🔄 Toggle du lieu: ${placeId}`);
+        
+        // Vérifier qu'un utilisateur est connecté
+        if (!this.app.userManager || !this.app.userManager.currentUser) {
+            this.app.showNotification('Veuillez d\'abord sélectionner un utilisateur', 'warning');
+            return;
+        }
+        
+        // Toggle le statut visité du lieu
+        this.app.userManager.togglePlaceVisited(placeId);
+        
+        // Fermer la popup pour éviter les problèmes de rafraîchissement
+        if (this.map) {
+            this.map.closePopup();
+        }
+        
+        // Afficher une notification simple
+        const userData = this.app.userManager.getCurrentUserData();
+        const isNowVisited = userData && userData.visitedPlaces && userData.visitedPlaces.has(placeId);
+        this.app.showNotification(
+            isNowVisited ? 'Lieu marqué comme visité !' : 'Lieu marqué comme non visité', 
+            isNowVisited ? 'success' : 'info'
+        );
+        
+        // Mettre à jour visuellement le marqueur correspondant si possible
+        this.updateMarkerVisualState(placeId, isNowVisited);
+        
+        console.log(`✅ Statut mis à jour pour: ${placeId}`);
+    }
+    
+    // === MISE À JOUR VISUELLE DES MARQUEURS ===
+    updateMarkerVisualState(placeId, isVisited) {
+        // Pour une mise à jour immédiate, nous pourrions parcourir les marqueurs
+        // et mettre à jour leurs icônes, mais c'est complexe avec Leaflet
+        // Le changement sera visible au prochain zoom/déplacement de la carte
+        console.log(`🎨 Marqueur ${placeId} sera mis à jour visuellement au prochain rafraîchissement`);
+    }
+    
     // === ÉTAT ===
     isInitialized() {
         return this.map !== null && this.isMapReady;
@@ -530,7 +705,7 @@ class MapManager {
             
         } catch (error) {
             console.error('❌ Erreur lors du toggle plein écran:', error);
-            this.app.uiManager.showNotification('Erreur lors du passage en plein écran', 'error');
+            this.app.showNotification('Erreur lors du passage en plein écran', 'error');
         }
     }
     
@@ -622,25 +797,25 @@ class MapManager {
     }
 
     // === CRÉATION DES POPUPS ===
-    createPlacePopup(place, catKey, isVisited, arrondissementName) {
+    createPlacePopup(place, catKey, isVisited, arrondissementName, placeId) {
         const categoryIcons = {
-            'monuments': '🏛️',
-            'musees': '🏛️',  
-            'parcs': '🌳',
+            'monument': '🏛️',
+            'musee': '🎨',  
+            'parc': '🌳',
             'culture': '🎭',
             'shopping': '🛍️',
-            'restaurants': '🍽️',
-            'cafes': '☕'
+            'restaurant': '🍽️',
+            'cafe': '☕'
         };
 
         const categoryNames = {
-            'monuments': 'Monuments',
-            'musees': 'Musées',
-            'parcs': 'Parcs et Jardins',
+            'monument': 'Monument',
+            'musee': 'Musée',
+            'parc': 'Parc et Jardin',
             'culture': 'Culture',
             'shopping': 'Shopping',
-            'restaurants': 'Restaurants',
-            'cafes': 'Cafés'
+            'restaurant': 'Restaurant',
+            'cafe': 'Café'
         };
 
         const categoryIcon = categoryIcons[catKey] || '📍';
@@ -650,15 +825,25 @@ class MapManager {
         const googleMapsLink = place.address ? 
             `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}` : '';
 
+        // Utiliser l'ID fourni ou générer un fallback (ne devrait pas arriver)
+        const uniqueId = placeId;
+
         return `
             <div class="place-popup-card">
                 <div class="place-popup-header">
                     <div class="place-popup-title">
-                        <span class="place-popup-icon">${categoryIcon}</span>
-                        <h4>${place.name}</h4>
+                        <div class="place-popup-title-left">
+                            <span class="place-popup-icon">${categoryIcon}</span>
+                            <h4>${place.name}</h4>
+                        </div>
+                        <label class="place-popup-checkbox">
+                            <input type="checkbox" ${isVisited ? 'checked' : ''} 
+                                   onchange="window.mapManager.toggleVisitedPlace('${uniqueId}')"
+                                   style="transform: scale(1.2); cursor: pointer;">
+                            <span style="margin-left: 4px; font-size: 12px; color: #6b7280;">Visité</span>
+                        </label>
                     </div>
                     <div class="place-popup-category">${categoryName}</div>
-                    ${isVisited ? '<div class="place-popup-visited">✅ Visité</div>' : ''}
                 </div>
                 <div class="place-popup-content">
                     ${place.description ? `<p class="place-popup-description">${place.description}</p>` : ''}

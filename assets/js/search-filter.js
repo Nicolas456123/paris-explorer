@@ -155,6 +155,12 @@ class SearchFilter {
         // Mettre à jour l'affichage
         this.app.uiManager.renderContent();
         
+        // Mettre à jour la carte si elle est visible et initialisée
+        if (this.app.currentTab === 'map' && this.app.mapManager && this.app.mapManager.isInitialized()) {
+            console.log('🗺️ Mise à jour de la carte avec la recherche');
+            this.app.mapManager.refreshMap();
+        }
+        
         // Statistiques de recherche
         if (trimmedQuery) {
             const results = this.performSearch(trimmedQuery, this.activeFilters);
@@ -278,8 +284,23 @@ class SearchFilter {
     // === FILTRES DE CORRESPONDANCE ===
     matchesArrondissementFilter(data, arrFilter) {
         const arrName = data.arrData.name || '';
-        return data.arrKey.includes(arrFilter) || 
-               arrName.toLowerCase().includes(arrFilter.toLowerCase());
+        
+        // Correspondance exacte pour éviter que "3" matche "13"
+        if (data.arrKey === arrFilter || 
+            data.arrKey.toLowerCase() === arrFilter.toLowerCase() ||
+            arrName.toLowerCase() === arrFilter.toLowerCase()) {
+            return true;
+        }
+        
+        // Gestion des variantes numériques : si l'utilisateur tape "3", on veut "3ème" mais pas "13ème"
+        const filterNumber = arrFilter.replace(/[^0-9]/g, '');
+        const arrKeyNumber = data.arrKey.replace(/[^0-9]/g, '');
+        
+        if (filterNumber && arrKeyNumber) {
+            return filterNumber === arrKeyNumber;
+        }
+        
+        return false;
     }
     
     matchesCategoryFilter(data, catFilter) {
@@ -604,6 +625,12 @@ class SearchFilter {
             hideCompletedFilter.addEventListener('change', (e) => {
                 this.activeFilters.hideCompleted = e.target.checked;
                 this.app.uiManager.renderContent();
+                
+                // Mettre à jour la carte si elle est visible et initialisée
+                if (this.app.currentTab === 'map' && this.app.mapManager && this.app.mapManager.isInitialized()) {
+                    console.log('🗺️ Mise à jour de la carte avec le filtre hideCompleted');
+                    this.app.mapManager.refreshMap();
+                }
             });
         }
         
@@ -630,6 +657,12 @@ class SearchFilter {
         
         // Mettre à jour l'affichage
         this.app.uiManager.renderContent();
+        
+        // Mettre à jour la carte si elle est visible et initialisée
+        if (this.app.currentTab === 'map' && this.app.mapManager && this.app.mapManager.isInitialized()) {
+            console.log('🗺️ Mise à jour de la carte avec les filtres');
+            this.app.mapManager.refreshMap();
+        }
         
         // Statistiques de filtrage
         const results = this.performSearch(this.app.searchQuery, this.activeFilters);
@@ -788,6 +821,12 @@ class SearchFilter {
         
         // Mettre à jour l'affichage
         this.app.uiManager.renderContent();
+        
+        // Mettre à jour la carte si elle est visible et initialisée
+        if (this.app.currentTab === 'map' && this.app.mapManager && this.app.mapManager.isInitialized()) {
+            console.log('🗺️ Mise à jour de la carte après effacement des filtres');
+            this.app.mapManager.refreshMap();
+        }
         
         console.log('✅ Tous les filtres effacés');
     }

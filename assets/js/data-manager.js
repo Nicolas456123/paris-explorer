@@ -244,6 +244,10 @@ class DataManager {
         
         Object.keys(this.app.parisData).forEach(arrKey => {
             const arrData = this.app.parisData[arrKey];
+            
+            // Appeler processArrondissementData pour ajouter les coordonnées du centre
+            this.processArrondissementData(arrKey, arrData);
+            
             const categoriesCount = Object.keys(arrData.categories).length;
             const totalPlaces = Object.values(arrData.categories)
                 .reduce((sum, cat) => sum + (cat.places?.length || 0), 0);
@@ -260,7 +264,8 @@ class DataManager {
             const line = lines[i].trim();
             if (!line) continue;
             
-            const values = line.split(',');
+            // Parser CSV plus robuste pour gérer les virgules dans les descriptions
+            const values = this.parseCSVLine(line, headers);
             const arrInfo = {};
             
             headers.forEach((header, index) => {
@@ -270,6 +275,14 @@ class DataManager {
             });
             
             if (arrInfo.id) {
+                // Mapper l'ID pour correspondre aux clés dans parisData
+                // Par exemple: "1er" au lieu de "1ER ARRONDISSEMENT - LE LOUVRE"
+                const mappedId = arrInfo.id.toLowerCase()
+                    .replace('ème', 'ème')
+                    .replace('er', 'er');
+                this.arrondissementsInfo[mappedId] = arrInfo;
+                
+                // Aussi stocker avec l'id original au cas où
                 this.arrondissementsInfo[arrInfo.id] = arrInfo;
             }
         }
@@ -344,6 +357,33 @@ processArrondissementData(arrKey, arrData) {
 delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+    
+    // === COORDONNÉES PAR DÉFAUT DES ARRONDISSEMENTS ===
+    getArrondissementCoordinates(arrKey) {
+        const coordinates = {
+            '1er': [48.8607, 2.3358],
+            '2ème': [48.87, 2.3408],
+            '3ème': [48.863, 2.3626],
+            '4ème': [48.8534, 2.3488],
+            '5ème': [48.8462, 2.3372],
+            '6ème': [48.8496, 2.3341],
+            '7ème': [48.8534, 2.2944],
+            '8ème': [48.8718, 2.3075],
+            '9ème': [48.8768, 2.3364],
+            '10ème': [48.8709, 2.3674],
+            '11ème': [48.8594, 2.3765],
+            '12ème': [48.8448, 2.3776],
+            '13ème': [48.8282, 2.3555],
+            '14ème': [48.8323, 2.3255],
+            '15ème': [48.8428, 2.2944],
+            '16ème': [48.8635, 2.2773],
+            '17ème': [48.8799, 2.2951],
+            '18ème': [48.8867, 2.3431],
+            '19ème': [48.8799, 2.3831],
+            '20ème': [48.8631, 2.3969]
+        };
+        return coordinates[arrKey] || [48.8566, 2.3522]; // Centre de Paris par défaut
+    }
     
     // === VALIDATION DES DONNÉES ===
     validateLoadedData() {
