@@ -1,6 +1,6 @@
 id,name,category,description,address,lat,lng,arr,arrondissement
 
-# 1er arrondissement (48 lieux)
+# 1er arrondissement (49 lieux)
 auditorium-du-louvre,Auditorium du Louvre,culture,Concerts musique de chambre,Rue de Rivoli 75001,48.8646158,2.3295881,1,1er
 place-vendome-colonne,Colonne Vendôme,culture,Colonne triomphale Napoléon bronze canons Austerlitz,Place Vendôme 75001,48.8674634,2.3294281,1,1er
 comedie-francaise,Comédie-Française,culture,Théâtre national historique,Place Colette 75001,48.8639,2.3356,1,1er
@@ -44,6 +44,7 @@ whsmith,Librairie anglaise WHSmith,shopping,Livres en anglais presse internation
 louvre-des-antiquaires,Louvre des Antiquaires,shopping,250 antiquaires sous un toit,2 Place du Palais-Royal 75001,48.8624063,2.3373242,1,1er
 rue-saint-honore,Rue Saint-Honoré,shopping,Haute couture joaillerie maroquinerie luxe,Rue Saint-Honoré 75001,48.864193,2.3334628,1,1er
 promenade-rivoli-tuileries,Promenade Rivoli-Tuileries,parc,Arcades historiques du Louvre aux Tuileries,Rue de Rivoli 75001,48.8620,2.3350,1,1er
+boulangerie-julien,Boulangerie Julien,culture,Pain traditionnel  viennoiseries artisanales,75 Rue Saint-Honoré  75001,48.8611263,2.3441399,1,1er
 
 # 2ème arrondissement (22 lieux)
 experimental-cocktail-club,Experimental Cocktail Club,cafe,Speakeasy pionnier Paris,37 Rue Saint-Sauveur 75002,48.8660836,2.3482998,2,2ème
@@ -144,11 +145,9 @@ bhv-marais,BHV Marais,shopping,Grand magasin historique  bricolage et mode,52 Ru
 papier-plus,Papier Plus,shopping,Papeterie d'art  objets design,9 Rue du Pont Louis-Philippe  75004 Paris,48.8551123,2.3555589,4,4ème
 leclair-de-genie,L'Éclair de Génie,shopping,Pâtisseries Christophe Adam  éclairs revisités,14 Rue Pavée  75004 Paris,48.8562014,2.3606223,4,4ème
 
-# 5ème arrondissement (31 lieux)
-boulangerie-julien,Boulangerie Julien,culture,Pain traditionnel  viennoiseries artisanales,75 Rue Saint-Honoré  75005,48.8611263,2.3441399,5,5ème
+# 5ème arrondissement (29 lieux)
 filmotheque-du-quartier-latin,Filmothèque du Quartier Latin,culture,Archives cinéma  films rares,9 Rue Champollion  75005,48.8495297,2.3427868,5,5ème
 gibert-jeune,Gibert Jeune,culture,Livres neufs et d'occasion  plusieurs magasins,5 Place Saint-Michel  75005,48.853187,2.3443087,5,5ème
-jardin-du-luxembourg,Jardin du Luxembourg,culture,Côté université  terrain de jeux,Rue de Vaugirard  75005,48.8455862,2.3219197,5,5ème
 le-champo,Le Champo,culture,Cinéma culte  programmation éclectique,51 Rue des École  75005,48.8471828,2.3200724,5,5ème
 marche-monge,Marché Monge,culture,Mer/Ven/Dim  produits locaux  fromageries,Place Monge  75005,48.8429053,2.3522772,5,5ème
 musee-de-la-prefecture-de-police,Musée de la Préfecture de Police,culture,Histoire police parisienne,4 Rue de la Montagne Sainte-Geneviève  75005,48.8494311,2.3483534,5,5ème
@@ -177,7 +176,7 @@ rue-mouffetard,Rue Mouffetard,restaurant,Marché restaurants monde ambiance étu
 shakespeare-and-company-cafe,Shakespeare and Company Café,restaurant,Café littéraire  brunch anglais,37 Rue de la Bûcherie  75005,48.8525876,2.3471495,5,5ème
 shakespeare-and-company,Shakespeare and Company,shopping,Librairie anglophone mythique,37 Rue de la Bûcherie 75005,48.8522,2.3472,5,5ème
 
-# 6ème arrondissement (40 lieux)
+# 6ème arrondissement (41 lieux)
 brasserie-lipp,Brasserie Lipp,cafe,Décor Art nouveau  clientèle politique,151 Boulevard Saint-Germain  75006,48.8537528,2.3324105,6,6ème
 cafe-de-la-mairie,Café de la Mairie,culture,Place Saint-Sulpice  cinéphiles et étudiants,8 Place Saint-Sulpice  75006,48.8514341,2.3336815,6,6ème
 cinema-saint-germain-des-pres,Cinéma Saint-Germain-des-Prés,culture,Films d'art et d'essai  intimiste,22 Rue Guillaume Apollinaire  75006,48.8545798,2.3332821,6,6ème
@@ -200,6 +199,7 @@ eglise-saint-sulpice,Église Saint-Sulpice,monument,Orgue Cavaillé-Coll  gnomon
 jardin-musee-delacroix,Jardin du Musée Delacroix,musee,Écrin végétal  atelier reconstitué,6 Rue de Furstenberg  75006,48.8544424,2.3356553,6,6ème
 musee-delacroix,Musée Delacroix,musee,Atelier peintre romantique,6 Rue de Furstemberg 75006,48.8546,2.3370,6,6ème
 bassin-octogonal,Bassin octogonal,parc,Bateaux miniatures  chaises vertes iconiques,Jardin du Luxembourg  75006,48.8467227,2.3364148,6,6ème
+jardin-du-luxembourg,Jardin du Luxembourg,parc,Côté université  terrain de jeux,Rue de Vaugirard  75006,48.8455862,2.3219197,6,6ème
 cour-du-commerce-saint-andre,Cour du Commerce Saint-André,parc,Passage pavé XVIIIe  Guillotin,Cour du Commerce Saint-André  75006,48.8525298,2.3392977,6,6ème
 cafe-de-flore,Café de Flore,restaurant,Café historique intellectuels Sartre,172 Boulevard Saint-Germain 75006,48.8542,2.3322,6,6ème
 guy-savoy,Guy Savoy,restaurant,⭐⭐⭐ Michelin  Monnaie de Paris  vue Seine,11 Quai de Conti  75006,48.8564015,2.3384956,6,6ème
@@ -325,7 +325,6 @@ la-consigne,La Consigne,shopping,Concept store zéro déchet bocaux consignés,5
 marche-saint-martin,Marché Saint-Martin,shopping,Mar/Ven/Sam matin produits frais locaux,31 Rue du Château d'Eau 75010,48.8709654,2.358543,10,10ème
 
 # 11ème arrondissement (34 lieux)
-l-assassin,L'Assassin,cafe,Happy hour généreuse ambiance décontractée,15 Rue Jacob 75006,48.8550868,2.3350785,6,6ème
 mobster-bar,Mobster Bar,cafe,Speakeasy secret entrée cabine téléphonique,116 Boulevard Richard-Lenoir 75011,48.8646033,2.3710055,11,11ème
 quartier-oberkampf,Quartier Oberkampf,cafe,Concentration bars branchés vie nocturne,Rue Oberkampf 75011,48.8657815,2.3778386,11,11ème
 promenade-republique-bastille,Promenade République-Bastille,parc,Rue Oberkampf créative bars et boutiques vintage,Rue de Charonne 75011,48.8555,2.3800,11,11ème
@@ -336,10 +335,7 @@ cite-du-figuier,Cité du Figuier,culture,Impasse tropicale palmiers façades col
 fresque-jerome-mesnager,Fresque Jérôme Mesnager,culture,Homme blanc iconique,Various locations 75011,48.8650,2.3750,11,11ème
 le-bataclan,Le Bataclan,culture,Salle concert historique programmation éclectique,50 Boulevard Voltaire 75011,48.8630357,2.3706465,11,11ème
 le-nouveau-casino,Le Nouveau Casino,culture,Club électro DJs internationaux,109 Rue Oberkampf 75011,48.8658464,2.3779133,11,11ème
-maroquinerie,Maroquinerie,culture,Salle concert alternative rock indépendant,23 Rue Boyer 75020,48.8685287,2.3920592,20,20ème
 oberkampf-menilmontant,Oberkampf-Ménilmontant,culture,Murs peints œuvres éphémères,Oberkampf-Ménilmontant 75011,48.866621,2.3830169,11,11ème
-opera-bastille,Opéra Bastille,culture,Architecture Carlos Ott visites guidées,Place de la Bastille 75012,48.8528601,2.3695526,12,12ème
-rue-denoyez,Rue Dénoyez,culture,Galerie street art légal,Rue Dénoyez 75020,48.8716515,2.3785163,20,20ème
 rue-de-la-roquette,Rue de la Roquette,culture,Galeries art contemporain vernissages,Rue de la Roquette 75011,48.8595847,2.3878015,11,11ème
 rue-du-faubourg-saint-antoine,Rue du Faubourg-Saint-Antoine,culture,Artisans ébénistes traditionnels,Rue du Faubourg-Saint-Antoine 75011,48.8508285,2.378123,11,11ème
 place-de-la-bastille,Place de la Bastille,monument,Colonne Juillet symbole révolutionnaire,Place de la Bastille 75011,48.8533968,2.3696501,11,11ème
@@ -347,14 +343,12 @@ musee-du-fumeur,Musée du Fumeur,musee,Histoire pratiques fumage  collection pip
 cour-damoye,Cour Damoye,parc,Passage secret artisans,12 Rue Damoye 75011,48.8513,2.3824,11,11ème
 impasse-de-la-poissonnerie,Impasse de la Poissonnerie,parc,Passage piéton calme,Impasse de la Poissonnerie 75011,48.8657,2.3778,11,11ème
 jardin-nomade,Jardin Nomade,parc,Jardin partagé associatif,Jardin Nomade 75011,48.8645,2.3789,11,11ème
-jardin-du-clos-des-blancs-manteaux,Jardin du Clos des Blancs-Manteaux,parc,Jardin caché ancien couvent,Rue des Blancs-Manteaux 75004,48.8582,2.3575,4,4ème
 passage-saint-pierre-amelot,Passage Saint-Pierre-Amelot,parc,Cour pavée préservée  ateliers,Passage Saint-Pierre-Amelot  75011,48.8621275,2.3678379,11,11ème
 passage-de-lhomme,Passage de l'Homme,parc,Cour pavée artisans ateliers ouverts,102 Rue du Faubourg-Saint-Antoine 75011,48.8510752,2.3790123,11,11ème
 rue-du-general-blaise,Rue du Général-Blaise,parc,Petite rue résidentielle,Rue du Général-Blaise 75011,48.8569,2.3843,11,11ème
 square-leon-serpollet,Square Léon-Serpollet,parc,Petit square tranquille,Square Léon-Serpollet 75011,48.8642,2.3756,11,11ème
 square-maurice-gardette,Square Maurice-Gardette,parc,Jardin de quartier aires de jeux,Square Maurice-Gardette 75011,48.8593,2.3821,11,11ème
 square-de-la-roquette,Square de la Roquette,parc,Ancien cimetière transformé,Square de la Roquette 75011,48.8591,2.3871,11,11ème
-villa-du-borrego,Villa du Borrego,parc,Impasse privée verdoyante,Villa du Borrego 75020,48.8676,2.3902,20,20ème
 le-6-paul-bert,Le 6 Paul Bert,restaurant,Bistrot traditionnel authentique,6 Rue Paul Bert 75011,48.8513485,2.3846064,11,11ème
 le-chateaubriand,Le Chateaubriand,restaurant,Bistrot gastronomique pionnier Inaki Aizpitarte,129 Avenue Parmentier 75011,48.8693522,2.3713516,11,11ème
 pierre-sang-oberkampf,Pierre Sang in Oberkampf,restaurant,Fusion franco-coréenne créative,55 Rue Oberkampf 75011,48.8647073,2.3723484,11,11ème
@@ -362,7 +356,6 @@ pitzman,Pitzman,restaurant,Pizza néo-napolitaine,15 Rue Abel Rabaud 75011,48.86
 septime,Septime,restaurant,Restaurant gastronomique Bertrand Grébaut,80 Rue de Charonne 75011,48.8536035,2.3808315,11,11ème
 utopie,Utopie,restaurant,Boulangerie Prix meilleure baguette 2024,20 Rue Jean-Pierre Timbaud 75011,48.865336,2.368738,11,11ème
 centre-commercial-charonne,Centre Commercial,shopping,Concept store (rue de Charonne)  mode alternative,2 Rue de Charonne  75011,48.855664,2.3906976,11,11ème
-kilwatch,Kilwatch,shopping,Vintage streetwear référence  pièces uniques,64 Rue Tiquetonne  75002,48.8648343,2.3455269,2,2ème
 
 # 12ème arrondissement (23 lieux)
 centre-culturel-algerien,Centre Culturel Algérien,culture,Expositions  spectacles  cinéma,171 Rue de la Croix Nivert  75012,48.8395962,2.2901916,12,12ème
