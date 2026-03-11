@@ -1,45 +1,59 @@
-/* ===== PARIS EXPLORER - STYLES PRINCIPAUX CORRIGÉS ===== */
+/* ===== PARIS EXPLORER - DESIGN ÉLÉGANT PARISIEN ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 /* === VARIABLES CSS GLOBALES === */
 :root {
-    /* Couleurs parisiennes */
-    --paris-gold: #D4AF37;
-    --paris-gold-light: #F7DC6F;
-    --paris-blue: #1e3a8a;
-    --paris-blue-light: #3b82f6;
-    --paris-white: #fefefe;
-    --paris-cream: #faf8f5;
-    --paris-red: #dc2626;
-    --paris-gray: #6b7280;
-    --paris-dark: #1f2937;
-    
-    /* Couleurs fonctionnelles étendues */
-    --success: #059669;
-    --success-light: #10b981;
-    --warning: #d97706;
-    --warning-light: #f59e0b;
-    --info: #0284c7;
-    --info-light: #0ea5e9;
-    --favorite: #f59e0b;
-    --favorite-active: #d97706;
-    --note: #8b5cf6;
-    --note-active: #7c3aed;
-    
-    /* Ombres et effets */
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    
+    /* Palette parisienne raffinée */
+    --paris-gold: #C9B882;
+    --paris-gold-light: #E8DFC4;
+    --paris-blue: #2C2C2C;
+    --paris-blue-light: #5A5A5A;
+    --paris-white: #FDFBF7;
+    --paris-cream: #F5F0E8;
+    --paris-red: #C4616C;
+    --paris-gray: #8C8578;
+    --paris-dark: #1A1A1A;
+
+    /* Nouvelles variables */
+    --paris-blush: #D4A0A7;
+    --paris-slate: #6B6B6B;
+    --paris-stone: #E8E2D6;
+    --paris-charcoal: #2C2C2C;
+    --paris-ivory: #FDFBF7;
+    --paris-zinc: #7A7D7F;
+
+    /* Typographie */
+    --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+
+    /* Couleurs fonctionnelles */
+    --success: #5B8C5A;
+    --success-light: #7BAF7B;
+    --warning: #C49A3C;
+    --warning-light: #DAB862;
+    --info: #5F7F9A;
+    --info-light: #7A9BB5;
+    --favorite: #C9B882;
+    --favorite-active: #B5A46E;
+    --note: #8B7BAE;
+    --note-active: #7A6A9D;
+
+    /* Ombres élégantes */
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 4px 8px rgba(0, 0, 0, 0.04), 0 16px 40px rgba(0, 0, 0, 0.08);
+    --shadow-2xl: 0 8px 16px rgba(0, 0, 0, 0.06), 0 24px 56px rgba(0, 0, 0, 0.1);
+
     /* Transitions */
     --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     /* Bordures */
-    --border-radius: 12px;
-    --border-radius-lg: 16px;
-    --border-radius-xl: 20px;
+    --border-radius: 8px;
+    --border-radius-lg: 10px;
+    --border-radius-xl: 12px;
 }
 
 /* === RESET ET BASE === */
@@ -50,10 +64,10 @@
 }
 
 body {
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
+    font-family: var(--font-body);
+    line-height: 1.7;
     color: var(--paris-dark);
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, var(--paris-gold) 75%, var(--paris-gold-light) 100%);
+    background: #F0EBE1;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -64,53 +78,54 @@ body {
 /* === CONTAINER PRINCIPAL === */
 .app-container {
     max-width: 1400px;
-    margin: 20px auto;
+    margin: 24px auto;
     padding: 0;
     background: var(--paris-white);
     border-radius: var(--border-radius-xl);
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid var(--paris-stone);
     box-shadow: var(--shadow-xl);
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh - 48px);
     overflow: hidden;
     position: relative;
 }
 
 /* === HEADER === */
 .header {
-    background: var(--gradient-paris, linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%));
-    color: var(--paris-white);
-    padding: 32px;
+    background: var(--paris-ivory);
+    color: var(--paris-charcoal);
+    padding: 48px 32px 40px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--paris-stone);
 }
 
 .header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="0.8" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-    pointer-events: none;
+    display: none;
 }
 
 .header h1 {
+    font-family: var(--font-heading);
     font-size: 2.8rem;
     font-weight: 300;
     margin: 0;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    letter-spacing: 1px;
+    text-shadow: none;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--paris-charcoal);
     position: relative;
     z-index: 1;
 }
 
 .header .subtitle {
-    font-size: 1.2rem;
-    opacity: 0.95;
-    margin-top: 8px;
-    font-weight: 300;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-top: 12px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--paris-slate);
     position: relative;
     z-index: 1;
 }
@@ -119,7 +134,7 @@ body {
 .stats-header {
     background: var(--paris-cream);
     padding: 20px 32px;
-    border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid var(--paris-stone);
 }
 
 .stats-overview {
@@ -140,25 +155,26 @@ body {
 }
 
 .stats-overview .stat-number {
+    font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 600;
-    color: var(--paris-blue);
+    color: var(--paris-charcoal);
     line-height: 1.2;
 }
 
 .stats-overview .stat-label {
-    font-size: 0.9rem;
-    color: var(--paris-gray);
+    font-size: 0.75rem;
+    color: var(--paris-slate);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
 }
 
 /* === NAVIGATION === */
 .nav-section {
-    background: var(--paris-cream);
+    background: var(--paris-white);
     padding: 20px 32px;
-    border-bottom: 3px solid var(--paris-gold);
+    border-bottom: 1px solid var(--paris-stone);
 }
 
 /* === SÉLECTEUR ET AFFICHAGE UTILISATEUR === */
@@ -175,14 +191,14 @@ body {
     background: var(--paris-white);
     padding: 10px 20px;
     border-radius: var(--border-radius);
-    border: 2px solid var(--paris-gold);
+    border: 1px solid var(--paris-stone);
     box-shadow: var(--shadow);
 }
 
 .user-name {
     font-weight: 600;
-    color: var(--paris-blue);
-    font-size: 1rem;
+    color: var(--paris-charcoal);
+    font-size: 0.95rem;
 }
 
 .user-selector {
@@ -197,32 +213,34 @@ body {
     flex: 1;
     min-width: 250px;
     padding: 12px 20px;
-    border: 2px solid var(--paris-gold);
+    border: 1px solid var(--paris-stone);
     border-radius: var(--border-radius);
     background: var(--paris-white);
     color: var(--paris-dark);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
+    font-family: var(--font-body);
     transition: var(--transition);
     cursor: pointer;
 }
 
 .user-select:focus {
     outline: none;
-    border-color: var(--paris-blue);
-    box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+    border-color: var(--paris-gold);
+    box-shadow: 0 0 0 3px rgba(201, 184, 130, 0.15);
     background: var(--paris-cream);
 }
 
 /* === BOUTONS === */
 .btn {
-    padding: 12px 24px;
+    padding: 10px 22px;
     border-radius: var(--border-radius);
-    border: 2px solid transparent;
-    background: var(--paris-blue);
-    color: var(--paris-white);
-    font-size: 15px;
-    font-weight: 600;
+    border: 1px solid transparent;
+    background: var(--paris-charcoal);
+    color: var(--paris-ivory);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-body);
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
@@ -233,35 +251,40 @@ body {
     text-align: center;
     min-width: 100px;
     white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow: var(--shadow-lg);
+    opacity: 0.9;
 }
 
 .btn:active {
     transform: translateY(0);
+    opacity: 1;
 }
 
 .btn-primary {
-    background: var(--paris-blue);
-    border-color: var(--paris-blue);
+    background: var(--paris-charcoal);
+    border-color: var(--paris-charcoal);
 }
 
 .btn-primary:hover {
-    background: var(--paris-blue-light);
-    border-color: var(--paris-blue-light);
+    background: #3D3D3D;
+    border-color: #3D3D3D;
 }
 
 .btn-secondary {
-    background: var(--paris-gray);
-    border-color: var(--paris-gray);
+    background: transparent;
+    border-color: var(--paris-stone);
+    color: var(--paris-charcoal);
 }
 
 .btn-secondary:hover {
-    background: #4b5563;
-    border-color: #4b5563;
+    background: var(--paris-cream);
+    border-color: var(--paris-gold);
 }
 
 .btn-success {
@@ -290,13 +313,13 @@ body {
 }
 
 .btn-danger:hover {
-    background: #b91c1c;
-    border-color: #b91c1c;
+    background: #B05058;
+    border-color: #B05058;
 }
 
 .btn-sm {
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 12px;
     min-width: 80px;
 }
 
@@ -321,44 +344,44 @@ body {
 
 .search-input {
     flex: 1;
-    padding: 16px 20px;
-    border: 2px solid var(--paris-gold);
+    padding: 14px 20px;
+    border: 1px solid var(--paris-stone);
     border-radius: var(--border-radius);
-    background: var(--paris-white);
+    background: var(--paris-cream);
     color: var(--paris-dark);
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--font-body);
     transition: var(--transition);
 }
 
 .search-input:focus {
     outline: none;
-    border-color: var(--paris-blue);
-    background: var(--paris-cream);
-    box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+    border-color: var(--paris-gold);
+    background: var(--paris-white);
+    box-shadow: 0 0 0 3px rgba(201, 184, 130, 0.12);
 }
 
 .search-input::placeholder {
-    color: var(--paris-gray);
-    opacity: 0.8;
+    color: var(--paris-zinc);
+    opacity: 0.7;
     font-weight: 400;
 }
 
 .search-btn {
-    padding: 16px 20px;
-    background: var(--paris-gold);
-    border: 2px solid var(--paris-gold);
+    padding: 14px 18px;
+    background: var(--paris-charcoal);
+    border: 1px solid var(--paris-charcoal);
     border-radius: var(--border-radius);
-    color: var(--paris-white);
-    font-size: 16px;
+    color: var(--paris-ivory);
+    font-size: 14px;
     cursor: pointer;
     transition: var(--transition);
 }
 
 .search-btn:hover {
-    background: var(--paris-gold-light);
-    border-color: var(--paris-gold-light);
-    transform: translateY(-2px);
+    background: #3D3D3D;
+    transform: translateY(-1px);
 }
 
 /* === FILTRES === */
@@ -367,20 +390,21 @@ body {
     gap: 16px;
     flex-wrap: wrap;
     align-items: center;
-    padding: 20px;
-    background: rgba(212, 175, 55, 0.05);
+    padding: 16px 20px;
+    background: var(--paris-cream);
     border-radius: var(--border-radius);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid var(--paris-stone);
 }
 
 .filter-select {
     padding: 10px 16px;
-    border: 2px solid var(--paris-gold);
+    border: 1px solid var(--paris-stone);
     border-radius: var(--border-radius);
     background: var(--paris-white);
     color: var(--paris-dark);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: var(--font-body);
     min-width: 180px;
     cursor: pointer;
     transition: var(--transition);
@@ -388,8 +412,8 @@ body {
 
 .filter-select:focus {
     outline: none;
-    border-color: var(--paris-blue);
-    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    border-color: var(--paris-gold);
+    box-shadow: 0 0 0 3px rgba(201, 184, 130, 0.12);
 }
 
 .filter-actions {
@@ -405,7 +429,7 @@ body {
     gap: 8px;
     cursor: pointer;
     user-select: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--paris-dark);
     padding: 8px 12px;
@@ -414,13 +438,13 @@ body {
 }
 
 .checkbox-label:hover {
-    background: rgba(30, 58, 138, 0.05);
+    background: rgba(201, 184, 130, 0.08);
 }
 
 .checkbox-label input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    accent-color: var(--paris-blue);
+    accent-color: var(--paris-gold);
     cursor: pointer;
 }
 
@@ -429,14 +453,14 @@ body {
     display: flex;
     gap: 0;
     margin-bottom: 0;
-    border-bottom: 3px solid var(--paris-gold);
-    background: var(--paris-cream);
+    border-bottom: 1px solid var(--paris-stone);
+    background: var(--paris-white);
     overflow-x: auto;
     scrollbar-width: thin;
 }
 
 .tabs-container::-webkit-scrollbar {
-    height: 4px;
+    height: 3px;
 }
 
 .tabs-container::-webkit-scrollbar-track {
@@ -444,44 +468,41 @@ body {
 }
 
 .tabs-container::-webkit-scrollbar-thumb {
-    background: var(--paris-gold);
+    background: var(--paris-stone);
     border-radius: 2px;
 }
 
 .tab-btn {
-    padding: 16px 24px;
+    padding: 16px 28px;
     background: transparent;
     border: none;
-    border-bottom: 3px solid transparent;
-    color: var(--paris-gray);
-    font-size: 15px;
-    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    color: var(--paris-zinc);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--font-body);
     cursor: pointer;
     transition: var(--transition);
     white-space: nowrap;
     position: relative;
     min-width: 120px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 .tab-btn:hover {
-    color: var(--paris-blue);
-    background: rgba(30, 58, 138, 0.08);
+    color: var(--paris-charcoal);
+    background: transparent;
 }
 
 .tab-btn.active {
-    color: var(--paris-blue);
-    border-bottom-color: var(--paris-blue);
-    background: rgba(30, 58, 138, 0.12);
+    color: var(--paris-charcoal);
+    border-bottom-color: var(--paris-gold);
+    background: transparent;
 }
 
 .tab-btn.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--paris-gold);
+    display: none;
 }
 
 /* === CONTENU DES ONGLETS === */
@@ -499,7 +520,7 @@ body {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(8px);
     }
     to {
         opacity: 1;
@@ -510,18 +531,18 @@ body {
 /* === CARTES D'ARRONDISSEMENT === */
 .arrondissement-card {
     background: var(--paris-white);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-xl);
-    margin-bottom: 32px;
-    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
     overflow: hidden;
     transition: var(--transition);
     position: relative;
 }
 
 .arrondissement-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-2xl);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
     border-color: var(--paris-gold);
 }
 
@@ -530,8 +551,8 @@ body {
 }
 
 .arrondissement-header {
-    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
-    color: var(--paris-white);
+    background: var(--paris-cream);
+    color: var(--paris-charcoal);
     padding: 24px 32px;
     cursor: pointer;
     user-select: none;
@@ -540,17 +561,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--paris-stone);
 }
 
 .arrondissement-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="0.8" fill="white" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-    pointer-events: none;
+    display: none;
 }
 
 .arrondissement-info {
@@ -560,10 +575,12 @@ body {
 }
 
 .arrondissement-header h3 {
-    margin: 0 0 16px 0;
-    font-size: 1.5rem;
+    margin: 0 0 12px 0;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
     font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: none;
+    color: var(--paris-charcoal);
 }
 
 .arrondissement-stats {
@@ -580,16 +597,20 @@ body {
 }
 
 .stat-number {
-    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
     font-weight: 700;
-    color: var(--paris-gold-light);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    color: var(--paris-gold);
+    text-shadow: none;
 }
 
 .stat-label {
-    font-size: 0.9rem;
-    opacity: 0.95;
+    font-size: 0.8rem;
+    opacity: 0.7;
     font-weight: 500;
+    color: var(--paris-slate);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .arrondissement-progress {
@@ -603,29 +624,29 @@ body {
 
 .progress-bar {
     width: 120px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
+    height: 6px;
+    background: var(--paris-stone);
+    border-radius: 3px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
     background: var(--success);
-    border-radius: 4px;
+    border-radius: 3px;
     transition: var(--transition);
 }
 
 .expand-icon {
     font-size: 1.2rem;
     transition: var(--transition);
-    color: var(--paris-gold-light);
+    color: var(--paris-slate);
 }
 
 /* === CONTENU DES ARRONDISSEMENTS === */
 .arrondissement-content {
     padding: 32px;
-    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+    background: var(--paris-white);
     display: none;
 }
 
@@ -655,26 +676,29 @@ body {
 }
 
 .category-header {
-    color: var(--paris-blue);
-    font-size: 1.3rem;
+    color: var(--paris-charcoal);
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
     font-weight: 600;
     margin-bottom: 20px;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
-    border-radius: var(--border-radius);
-    border-left: 4px solid var(--paris-gold);
+    padding: 14px 20px;
+    background: transparent;
+    border-radius: 0;
+    border-left: 3px solid var(--paris-gold);
+    border-bottom: 1px solid var(--paris-stone);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .category-count {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: var(--paris-gray);
-    background: rgba(255, 255, 255, 0.8);
+    color: var(--paris-slate);
+    background: var(--paris-cream);
     padding: 4px 12px;
     border-radius: 12px;
+    font-family: var(--font-body);
 }
 
 /* === GRILLE DES LIEUX === */
@@ -686,10 +710,10 @@ body {
 
 /* === CARTES DE LIEUX === */
 .place-card {
-    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
-    border: 2px solid rgba(212, 175, 55, 0.2);
-    border-radius: var(--border-radius-lg);
-    padding: 20px;
+    background: var(--paris-white);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
+    padding: 24px;
     transition: var(--transition);
     cursor: pointer;
     position: relative;
@@ -697,39 +721,34 @@ body {
 }
 
 .place-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.05) 50%, transparent 70%);
-    opacity: 0;
-    transition: var(--transition);
+    display: none;
 }
 
 .place-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
     border-color: var(--paris-gold);
 }
 
 .place-card:hover::before {
-    opacity: 1;
+    display: none;
 }
 
 .place-card.visited {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: #F7F5F0;
     border-color: var(--success);
+    border-left: 3px solid var(--success);
 }
 
 .place-card.visited::after {
-    content: '✅';
+    content: '\2713';
     position: absolute;
     top: 16px;
     right: 16px;
-    font-size: 1.2rem;
-    opacity: 0.7;
+    font-size: 0.9rem;
+    opacity: 0.5;
+    color: var(--success);
+    font-weight: 700;
 }
 
 .place-header {
@@ -742,9 +761,10 @@ body {
 }
 
 .place-name {
-    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
     font-weight: 600;
-    color: var(--paris-blue);
+    color: var(--paris-charcoal);
     margin: 0;
     flex: 1;
     line-height: 1.4;
@@ -761,7 +781,7 @@ body {
     width: 32px;
     height: 32px;
     border: none;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--paris-cream);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -769,41 +789,41 @@ body {
     font-size: 14px;
     cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 }
 
 .btn-action:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
 }
 
 .btn-action.visit {
-    background: rgba(5, 150, 105, 0.1);
-    border: 1px solid var(--success);
+    background: rgba(91, 140, 90, 0.1);
+    border: 1px solid rgba(91, 140, 90, 0.3);
 }
 
 .btn-action.favorite {
-    background: rgba(245, 158, 11, 0.1);
-    border: 1px solid var(--favorite);
+    background: rgba(201, 184, 130, 0.15);
+    border: 1px solid rgba(201, 184, 130, 0.4);
 }
 
 .btn-action.note {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid var(--note);
+    background: rgba(139, 123, 174, 0.1);
+    border: 1px solid rgba(139, 123, 174, 0.3);
 }
 
 .place-description {
-    color: var(--paris-gray);
-    font-size: 0.95rem;
-    line-height: 1.5;
+    color: var(--paris-slate);
+    font-size: 0.9rem;
+    line-height: 1.6;
     margin-bottom: 12px;
     position: relative;
     z-index: 1;
 }
 
 .place-address {
-    font-size: 0.9rem;
-    color: var(--paris-gray);
+    font-size: 0.85rem;
+    color: var(--paris-zinc);
     font-style: italic;
     margin-bottom: 12px;
     position: relative;
@@ -817,8 +837,10 @@ body {
 }
 
 .place-address a:hover {
-    color: var(--paris-blue);
+    color: var(--paris-gold);
     text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
 }
 
 /* === MARQUEURS DE CARTE PERSONNALISÉS === */
@@ -829,7 +851,7 @@ body {
 
 .custom-marker .marker-content:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
 }
 
 .place-tags {
@@ -841,27 +863,28 @@ body {
     z-index: 1;
 }
 
-
 .place-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 16px;
     padding-top: 12px;
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-top: 1px solid var(--paris-stone);
     position: relative;
     z-index: 1;
 }
 
 .place-category {
-    font-size: 0.85rem;
-    color: var(--paris-gray);
+    font-size: 0.8rem;
+    color: var(--paris-slate);
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* === MISE EN ÉVIDENCE DE LA RECHERCHE === */
 .search-highlight {
-    background: rgba(245, 158, 11, 0.3);
+    background: rgba(201, 184, 130, 0.3);
     color: var(--paris-dark);
     font-weight: 600;
     padding: 1px 3px;
@@ -875,8 +898,8 @@ body {
     min-height: 500px !important;
     position: relative !important;
     background: #a8d3f0;
-    border: 3px solid var(--paris-gold);
-    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
     overflow: hidden;
     z-index: 1;
 }
@@ -902,7 +925,7 @@ body {
 
 #mapContainer .leaflet-popup-content {
     margin: 16px;
-    font-family: inherit;
+    font-family: var(--font-body);
     line-height: 1.5;
 }
 
@@ -930,7 +953,7 @@ body {
 .map-controls .btn {
     padding: 8px 12px;
     min-width: auto;
-    font-size: 14px;
+    font-size: 12px;
     box-shadow: var(--shadow);
 }
 
@@ -945,26 +968,27 @@ body {
     justify-content: center;
     text-align: center;
     padding: 60px 40px;
-    color: var(--paris-gray);
+    color: var(--paris-slate);
     background: var(--paris-cream);
-    border-radius: var(--border-radius-lg);
-    border: 2px dashed rgba(212, 175, 55, 0.3);
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--paris-stone);
 }
 
 .message-icon,
 .empty-icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 24px;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .no-data-message h3,
 .no-user-message h3,
 .no-results-message h3,
 .empty-state h3 {
-    color: var(--paris-blue);
+    font-family: var(--font-heading);
+    color: var(--paris-charcoal);
     margin-bottom: 16px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .no-data-message p,
@@ -972,8 +996,9 @@ body {
 .no-results-message p,
 .empty-state p {
     margin-bottom: 24px;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     max-width: 400px;
+    color: var(--paris-slate);
 }
 
 /* === MODALS === */
@@ -984,8 +1009,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
     z-index: 10000;
     opacity: 0;
     transition: var(--transition);
@@ -1000,13 +1025,13 @@ body {
 
 .modal-content {
     background: var(--paris-white);
-    border-radius: var(--border-radius-xl);
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-2xl);
-    border: 3px solid var(--paris-gold);
+    border: 1px solid var(--paris-stone);
     max-width: 90vw;
     max-height: 90vh;
     overflow-y: auto;
-    transform: scale(0.9);
+    transform: scale(0.95);
     transition: var(--transition);
 }
 
@@ -1020,9 +1045,9 @@ body {
 }
 
 .modal-header {
-    padding: 24px 32px;
-    border-bottom: 2px solid var(--paris-gold);
-    background: linear-gradient(135deg, var(--paris-cream) 0%, rgba(212, 175, 55, 0.1) 100%);
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--paris-stone);
+    background: var(--paris-white);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1030,20 +1055,22 @@ body {
 
 .modal-title {
     margin: 0;
-    color: var(--paris-blue);
+    color: var(--paris-charcoal);
+    font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .close-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    background: var(--paris-red);
-    color: var(--paris-white);
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--paris-stone);
+    background: transparent;
+    color: var(--paris-slate);
     border-radius: 50%;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 400;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
@@ -1052,8 +1079,10 @@ body {
 }
 
 .close-btn:hover {
-    background: #b91c1c;
-    transform: scale(1.1);
+    background: var(--paris-cream);
+    border-color: var(--paris-gold);
+    color: var(--paris-charcoal);
+    transform: none;
 }
 
 .modal-body {
@@ -1065,13 +1094,13 @@ body {
 .form-textarea,
 .form-select {
     width: 100%;
-    padding: 16px 20px;
-    border: 2px solid var(--paris-gold);
+    padding: 14px 18px;
+    border: 1px solid var(--paris-stone);
     border-radius: var(--border-radius);
     background: var(--paris-white);
     color: var(--paris-dark);
-    font-size: 16px;
-    font-family: inherit;
+    font-size: 14px;
+    font-family: var(--font-body);
     transition: var(--transition);
 }
 
@@ -1079,8 +1108,8 @@ body {
 .form-textarea:focus,
 .form-select:focus {
     outline: none;
-    border-color: var(--paris-blue);
-    box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+    border-color: var(--paris-gold);
+    box-shadow: 0 0 0 3px rgba(201, 184, 130, 0.12);
     background: var(--paris-cream);
 }
 
@@ -1095,7 +1124,7 @@ body {
     justify-content: flex-end;
     margin-top: 24px;
     padding-top: 24px;
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-top: 1px solid var(--paris-stone);
 }
 
 /* === NOTIFICATIONS === */
@@ -1109,11 +1138,11 @@ body {
 
 .notification {
     background: var(--paris-white);
-    border: 2px solid var(--paris-gold);
-    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
     padding: 0;
-    box-shadow: var(--shadow-xl);
-    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+    max-width: 380px;
     margin-bottom: 12px;
     transform: translateX(100%);
     transition: var(--transition);
@@ -1127,28 +1156,33 @@ body {
 
 .notification.success {
     border-color: var(--success);
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: var(--paris-white);
+    border-left: 3px solid var(--success);
 }
 
 .notification.error {
     border-color: var(--paris-red);
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    background: var(--paris-white);
+    border-left: 3px solid var(--paris-red);
 }
 
 .notification.warning {
     border-color: var(--warning);
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    background: var(--paris-white);
+    border-left: 3px solid var(--warning);
 }
 
 .notification.info {
     border-color: var(--info);
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    background: var(--paris-white);
+    border-left: 3px solid var(--info);
 }
 
 .notification.achievement {
     border-color: var(--paris-gold);
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    background: var(--paris-white);
+    border-left: 3px solid var(--paris-gold);
+    box-shadow: var(--shadow-lg);
 }
 
 .notification-content {
@@ -1167,7 +1201,7 @@ body {
 
 .notification-message {
     flex: 1;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     line-height: 1.4;
     color: var(--paris-dark);
@@ -1181,9 +1215,9 @@ body {
     width: 24px;
     height: 24px;
     border: none;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 50%;
-    color: var(--paris-dark);
+    color: var(--paris-slate);
     font-size: 14px;
     cursor: pointer;
     transition: var(--transition);
@@ -1193,7 +1227,7 @@ body {
 }
 
 .notification-close:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.12);
 }
 
 .notification-actions {
@@ -1201,24 +1235,26 @@ body {
     gap: 8px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--paris-stone);
 }
 
 .notification-btn {
     padding: 6px 12px;
-    border: 1px solid var(--paris-blue);
+    border: 1px solid var(--paris-charcoal);
     background: transparent;
-    color: var(--paris-blue);
+    color: var(--paris-charcoal);
     border-radius: var(--border-radius);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .notification-btn:hover {
-    background: var(--paris-blue);
-    color: var(--paris-white);
+    background: var(--paris-charcoal);
+    color: var(--paris-ivory);
 }
 
 /* === STYLES POUR LES POPUPS DE CARTE === */
@@ -1265,19 +1301,22 @@ body {
 
 .place-popup-title h4 {
     margin: 0;
+    font-family: var(--font-heading);
     font-size: 16px;
-    color: var(--paris-blue);
+    font-weight: 600;
+    color: var(--paris-charcoal);
 }
 
 .place-popup-category {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--paris-gold);
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .place-popup-visited {
-    background: #059669;
+    background: var(--success);
     color: white;
     padding: 2px 8px;
     border-radius: 12px;
@@ -1288,15 +1327,15 @@ body {
 }
 
 .place-popup-description {
-    font-size: 14px;
-    color: #374151;
+    font-size: 13px;
+    color: var(--paris-slate);
     margin: 8px 0;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .place-popup-address {
-    font-size: 13px;
-    color: #6b7280;
+    font-size: 12px;
+    color: var(--paris-zinc);
     margin: 8px 0;
 }
 
@@ -1307,7 +1346,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(253, 251, 247, 0.95);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1318,20 +1357,20 @@ body {
 
 .loading-content {
     text-align: center;
-    padding: 40px;
+    padding: 48px;
     background: var(--paris-white);
-    border-radius: var(--border-radius-xl);
-    box-shadow: var(--shadow-2xl);
-    border: 2px solid var(--paris-gold);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--paris-stone);
 }
 
 .loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 4px solid var(--paris-cream);
-    border-top: 4px solid var(--paris-gold);
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--paris-stone);
+    border-top: 2px solid var(--paris-gold);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 1.2s linear infinite;
     margin: 0 auto 24px;
 }
 
@@ -1342,9 +1381,12 @@ body {
 
 .loading-content p {
     margin: 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--paris-blue);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--paris-slate);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 /* === STATS ET DASHBOARD === */
@@ -1356,16 +1398,16 @@ body {
 }
 
 .stat-card {
-    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-lg);
-    padding: 24px;
+    background: var(--paris-white);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
+    padding: 28px 24px;
     text-align: center;
     transition: var(--transition);
 }
 
 .stat-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
     border-color: var(--paris-gold);
 }
@@ -1373,34 +1415,36 @@ body {
 .stat-card .stat-icon {
     font-size: 2.5rem;
     margin-bottom: 16px;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .stat-card .stat-value {
+    font-family: var(--font-heading);
     font-size: 2.2rem;
     font-weight: 700;
-    color: var(--paris-blue);
+    color: var(--paris-charcoal);
     margin-bottom: 8px;
 }
 
 .stat-card .stat-label {
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    color: var(--paris-gray);
+    color: var(--paris-slate);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
 }
 
 /* === PROGRESSION === */
 .progress-section {
     background: var(--paris-cream);
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius);
     padding: 32px;
-    border: 2px solid rgba(212, 175, 55, 0.25);
+    border: 1px solid var(--paris-stone);
 }
 
 .progress-section h4 {
-    color: var(--paris-blue);
+    font-family: var(--font-heading);
+    color: var(--paris-charcoal);
     margin-bottom: 24px;
     font-size: 1.3rem;
 }
@@ -1426,12 +1470,13 @@ body {
 .progress-name {
     font-weight: 600;
     color: var(--paris-dark);
+    font-size: 0.9rem;
 }
 
 .progress-stats {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: var(--paris-gray);
+    color: var(--paris-slate);
 }
 
 /* === ACHIEVEMENTS === */
@@ -1442,22 +1487,23 @@ body {
 }
 
 .achievement-card {
-    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-lg);
-    padding: 24px;
+    background: var(--paris-white);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
+    padding: 28px;
     text-align: center;
     transition: var(--transition);
 }
 
 .achievement-card.unlocked {
     border-color: var(--paris-gold);
-    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-top: 3px solid var(--paris-gold);
+    background: var(--paris-white);
 }
 
 .achievement-card.locked {
-    opacity: 0.6;
-    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    opacity: 0.5;
+    background: var(--paris-cream);
 }
 
 .achievement-icon {
@@ -1466,20 +1512,21 @@ body {
 }
 
 .achievement-title {
-    color: var(--paris-blue);
+    font-family: var(--font-heading);
+    color: var(--paris-charcoal);
     margin-bottom: 12px;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
 }
 
 .achievement-description {
-    color: var(--paris-gray);
-    font-size: 0.95rem;
+    color: var(--paris-slate);
+    font-size: 0.9rem;
     margin-bottom: 16px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .achievement-date {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--success);
     font-weight: 500;
 }
@@ -1494,12 +1541,13 @@ body {
 .user-creation {
     background: var(--paris-cream);
     padding: 24px;
-    border-radius: var(--border-radius-lg);
-    border: 2px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--paris-stone);
 }
 
 .user-creation h4 {
-    color: var(--paris-blue);
+    font-family: var(--font-heading);
+    color: var(--paris-charcoal);
     margin-bottom: 16px;
 }
 
@@ -1521,21 +1569,22 @@ body {
 }
 
 .user-card {
-    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-lg);
+    background: var(--paris-white);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
     padding: 24px;
     transition: var(--transition);
 }
 
 .user-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
 }
 
 .user-card.active {
     border-color: var(--success);
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-left: 3px solid var(--success);
+    background: #F7F5F0;
 }
 
 .user-info {
@@ -1543,15 +1592,16 @@ body {
 }
 
 .user-info h5 {
-    color: var(--paris-blue);
+    font-family: var(--font-heading);
+    color: var(--paris-charcoal);
     margin-bottom: 8px;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
 }
 
 .user-info p {
     margin: 4px 0;
-    color: var(--paris-gray);
-    font-size: 0.9rem;
+    color: var(--paris-slate);
+    font-size: 0.85rem;
 }
 
 .user-actions {
@@ -1566,8 +1616,10 @@ body {
     color: var(--paris-white);
     padding: 4px 12px;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* === SETTINGS === */
@@ -1578,16 +1630,17 @@ body {
 }
 
 .settings-section {
-    background: var(--paris-cream);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-lg);
-    padding: 24px;
+    background: var(--paris-white);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
+    padding: 28px;
 }
 
 .settings-section h4 {
-    color: var(--paris-blue);
+    font-family: var(--font-heading);
+    color: var(--paris-charcoal);
     margin: 0 0 20px 0;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1606,23 +1659,32 @@ body {
     font-weight: 600;
     color: var(--paris-dark);
     margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
 .setting-item select {
     width: 100%;
     padding: 12px 16px;
-    border: 2px solid var(--paris-gold);
+    border: 1px solid var(--paris-stone);
     border-radius: var(--border-radius);
     background: var(--paris-white);
     color: var(--paris-dark);
-    font-size: 15px;
+    font-size: 14px;
+    font-family: var(--font-body);
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.setting-item select:focus {
+    outline: none;
+    border-color: var(--paris-gold);
+    box-shadow: 0 0 0 3px rgba(201, 184, 130, 0.12);
 }
 
 .setting-help {
     display: block;
-    font-size: 0.85rem;
-    color: var(--paris-gray);
+    font-size: 0.8rem;
+    color: var(--paris-zinc);
     margin-top: 6px;
     font-style: italic;
     line-height: 1.4;
@@ -1640,7 +1702,7 @@ body {
     gap: 10px;
     cursor: pointer;
     user-select: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--paris-dark);
     padding: 8px 0;
@@ -1649,7 +1711,7 @@ body {
 .checkbox-container input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    accent-color: var(--paris-blue);
+    accent-color: var(--paris-gold);
     cursor: pointer;
 }
 
@@ -1701,140 +1763,142 @@ body {
         margin: 5px;
         border-radius: var(--border-radius);
     }
-    
+
     .header {
-        padding: 20px;
+        padding: 28px 20px 24px;
     }
-    
+
     .header h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
+        letter-spacing: 2px;
     }
-    
+
     .nav-section {
         padding: 16px 20px;
     }
-    
+
     .user-selector {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .user-select {
         min-width: 100%;
     }
-    
+
     .search-container {
         flex-direction: column;
     }
-    
+
     .filters-container {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
     }
-    
+
     .filter-select {
         min-width: 100%;
     }
-    
+
     .filter-actions {
         margin-left: 0;
         justify-content: space-between;
     }
-    
+
     .tabs-container {
         justify-content: space-between;
     }
-    
+
     .tab-btn {
         flex: 1;
         text-align: center;
         padding: 12px 8px;
-        font-size: 14px;
+        font-size: 11px;
         min-width: auto;
+        letter-spacing: 1px;
     }
-    
+
     .tab-content {
         padding: 20px;
     }
-    
+
     .arrondissement-header {
         flex-direction: column;
         gap: 16px;
         align-items: stretch;
         text-align: left;
     }
-    
+
     .arrondissement-stats {
         gap: 20px;
     }
-    
+
     .arrondissement-progress {
         align-items: flex-start;
     }
-    
+
     .progress-bar {
         width: 100%;
     }
-    
+
     .places-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    
+
     .place-header {
         flex-direction: column;
         gap: 12px;
         align-items: stretch;
     }
-    
+
     .place-actions {
         justify-content: center;
         margin-left: 0;
     }
-    
+
     #mapContainer {
         height: 400px !important;
     }
-    
+
     .stats-overview {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 16px;
     }
-    
+
     .achievements-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    
+
     .user-cards {
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    
+
     .user-form {
         flex-direction: column;
     }
-    
+
     .modal-content {
         margin: 20px;
         max-height: calc(100vh - 40px);
     }
-    
+
     .modal-header {
         padding: 20px;
     }
-    
+
     .modal-body {
         padding: 20px;
     }
-    
+
     .notifications-container {
         left: 10px;
         right: 10px;
         top: 10px;
     }
-    
+
     .notification {
         max-width: none;
     }
@@ -1842,37 +1906,39 @@ body {
 
 @media (max-width: 480px) {
     .header h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        letter-spacing: 2px;
     }
-    
+
     .btn {
         padding: 10px 16px;
-        font-size: 14px;
+        font-size: 12px;
         min-width: 80px;
     }
-    
+
     .search-input {
         padding: 14px 16px;
-        font-size: 15px;
+        font-size: 16px;
     }
-    
+
     .tab-btn {
         padding: 10px 6px;
-        font-size: 13px;
+        font-size: 10px;
+        letter-spacing: 0.5px;
     }
-    
+
     .arrondissement-header h3 {
-        font-size: 1.3rem;
+        font-size: 1.15rem;
     }
-    
+
     .stat-number {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
-    
+
     .place-name {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
-    
+
     #mapContainer {
         height: 300px !important;
     }
@@ -1932,16 +1998,16 @@ body {
     min-width: 300px;
     max-width: 350px;
     background: var(--paris-white);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
-    font-family: var(--font-family);
+    font-family: var(--font-body);
 }
 
 .place-popup-header {
-    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
-    color: var(--paris-white);
+    background: var(--paris-cream);
+    color: var(--paris-charcoal);
     padding: 16px 20px;
     position: relative;
 }
@@ -1960,24 +2026,27 @@ body {
 
 .place-popup-title h4 {
     margin: 0;
+    font-family: var(--font-heading);
     font-size: 18px;
     font-weight: 600;
     line-height: 1.2;
+    color: var(--paris-charcoal);
 }
 
 .place-popup-category {
-    font-size: 12px;
-    opacity: 0.9;
+    font-size: 11px;
+    opacity: 0.7;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    color: var(--paris-gold);
 }
 
 .place-popup-visited {
     position: absolute;
     top: 12px;
     right: 16px;
-    background: rgba(39, 174, 96, 0.9);
+    background: var(--success);
     color: white;
     padding: 4px 8px;
     border-radius: var(--border-radius);
@@ -1991,15 +2060,15 @@ body {
 
 .place-popup-description {
     margin: 0 0 16px 0;
-    color: var(--text-primary);
+    color: var(--paris-slate);
     line-height: 1.5;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .place-popup-address,
 .place-popup-location {
     margin: 8px 0 0 0;
-    color: var(--text-secondary);
+    color: var(--paris-zinc);
     font-size: 12px;
     opacity: 0.8;
 }
@@ -2009,22 +2078,23 @@ body {
     min-width: 280px;
     max-width: 320px;
     background: var(--paris-white);
-    border: 2px solid rgba(212, 175, 55, 0.25);
-    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--paris-stone);
+    border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
-    font-family: var(--font-family);
+    font-family: var(--font-body);
 }
 
 .arrondissement-popup-header {
-    background: linear-gradient(135deg, var(--paris-blue) 0%, var(--paris-gold) 100%);
-    color: var(--paris-white);
+    background: var(--paris-cream);
+    color: var(--paris-charcoal);
     padding: 20px;
     position: relative;
 }
 
 .arrondissement-popup-header h3 {
     margin: 0;
+    font-family: var(--font-heading);
     font-size: 16px;
     font-weight: 600;
     line-height: 1.2;
@@ -2034,7 +2104,7 @@ body {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: rgba(39, 174, 96, 0.9);
+    background: var(--success);
     color: white;
     padding: 4px 8px;
     border-radius: var(--border-radius);
@@ -2048,9 +2118,9 @@ body {
 
 .arrondissement-popup-description {
     margin: 0 0 16px 0;
-    color: var(--text-primary);
+    color: var(--paris-slate);
     line-height: 1.5;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .arrondissement-popup-stats {
@@ -2065,96 +2135,92 @@ body {
 
 .stat-number {
     display: block;
+    font-family: var(--font-heading);
     font-size: 24px;
     font-weight: 700;
-    color: var(--paris-blue);
+    color: var(--paris-charcoal);
     line-height: 1;
 }
 
 .stat-label {
     display: block;
-    font-size: 12px;
-    color: var(--text-secondary);
+    font-size: 11px;
+    color: var(--paris-slate);
     margin-top: 4px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 /* Adaptations pour les thèmes sombres */
 [data-mode="dark"] .place-popup-card,
 [data-mode="dark"] .arrondissement-popup-card {
-    background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+    background: var(--paris-white);
     border-color: var(--border-color);
 }
 
 [data-mode="dark"] .place-popup-header,
 [data-mode="dark"] .arrondissement-popup-header {
-    background: linear-gradient(135deg, var(--paris-cream) 0%, var(--bg-secondary) 100%);
-    color: var(--paris-gold);
+    background: var(--paris-cream);
+    color: var(--paris-dark);
 }
 
 /* ===== ICÔNES DES MARQUEURS ===== */
-/* Reset des styles Leaflet par défaut */
 .custom-div-icon {
     background: transparent !important;
     border: none !important;
 }
 
-/* Conteneur du marqueur */
 .marker-pin {
     position: relative;
     width: 36px;
     height: 36px;
 }
 
-/* Marqueur pour arrondissement avec label */
 .arr-marker-container {
     width: 40px;
     height: 55px;
 }
 
-/* Cercle du marqueur */
 .marker-circle {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     background: white;
-    border: 3px solid var(--paris-gold);
+    border: 2px solid var(--paris-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
 }
 
-/* Emoji dans le cercle */
 .marker-emoji {
     font-size: 20px;
     line-height: 1;
 }
 
-/* Label sous les arrondissements */
 .marker-label {
     position: absolute;
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--paris-blue);
+    background: var(--paris-charcoal);
     color: white;
     padding: 2px 6px;
     border-radius: 10px;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font-body);
     white-space: nowrap;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
 }
 
-/* Marqueur d'arrondissement */
 .arr-marker {
-    background: linear-gradient(135deg, var(--paris-blue) 0%, #4169E1 100%);
-    border-color: white;
+    background: var(--paris-charcoal);
+    border-color: var(--paris-gold);
     width: 40px;
     height: 40px;
 }
@@ -2166,58 +2232,56 @@ body {
 
 /* Marqueurs de lieux par catégorie */
 .monuments-marker {
-    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-    border-color: #654321;
+    background: linear-gradient(135deg, #8B6B4A 0%, #B8956A 100%);
+    border-color: #8B6B4A;
 }
 
 .musees-marker {
-    background: linear-gradient(135deg, #4B0082 0%, #8A2BE2 100%);
-    border-color: #4B0082;
+    background: linear-gradient(135deg, #5B4A8A 0%, #7B6AAA 100%);
+    border-color: #5B4A8A;
 }
 
 .parcs-marker {
-    background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
-    border-color: #228B22;
+    background: linear-gradient(135deg, #5B8C5A 0%, #7BAF7B 100%);
+    border-color: #5B8C5A;
 }
 
 .culture-marker {
-    background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
-    border-color: #C71585;
+    background: linear-gradient(135deg, #C4616C 0%, #D4818A 100%);
+    border-color: #C4616C;
 }
 
 .shopping-marker {
-    background: linear-gradient(135deg, #FF6347 0%, #FF8C00 100%);
-    border-color: #FF4500;
+    background: linear-gradient(135deg, #C49A3C 0%, #DAB862 100%);
+    border-color: #C49A3C;
 }
 
 .restaurants-marker {
-    background: linear-gradient(135deg, #DC143C 0%, #FF0000 100%);
-    border-color: #8B0000;
+    background: linear-gradient(135deg, #A04050 0%, #C46070 100%);
+    border-color: #A04050;
 }
 
 .cafes-marker {
-    background: linear-gradient(135deg, #6F4E37 0%, #8B4513 100%);
-    border-color: #5D4037;
+    background: linear-gradient(135deg, #6B5B4A 0%, #8B7B6A 100%);
+    border-color: #6B5B4A;
 }
 
-/* Effet hover */
 .marker-circle:hover {
-    transform: scale(1.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
 
-/* Marqueur visité */
 .marker-circle.visited {
-    border-color: #27AE60;
-    border-width: 4px;
+    border-color: var(--success);
+    border-width: 3px;
 }
 
 .visited-check {
     position: absolute;
     top: -5px;
     right: -5px;
-    background: #27AE60;
+    background: var(--success);
     color: white;
     width: 16px;
     height: 16px;
@@ -2228,12 +2292,11 @@ body {
     font-size: 10px;
     font-weight: bold;
     border: 2px solid white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Adaptations thème sombre */
 [data-mode="dark"] .marker-circle {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 [data-mode="dark"] .marker-label {
@@ -2249,13 +2312,13 @@ body {
         margin: 0;
         max-width: none;
     }
-    
+
     .header {
         background: none;
         color: #000;
-        border-bottom: 2px solid #000;
+        border-bottom: 1px solid #000;
     }
-    
+
     .nav-section,
     .tabs-container,
     .btn,
@@ -2263,15 +2326,15 @@ body {
     .map-controls {
         display: none;
     }
-    
+
     .tab-content {
         display: block !important;
         padding: 0;
     }
-    
+
     .place-card,
     .arrondissement-card {
         break-inside: avoid;
-        border-color: #000;
+        border-color: #ccc;
     }
 }

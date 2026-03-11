@@ -15,8 +15,8 @@
     
     
     <!-- Meta PWA -->
-    <meta name="theme-color" content="#D4AF37">
-    <meta name="background-color" content="#1e3a8a">
+    <meta name="theme-color" content="#C9B882">
+    <meta name="background-color" content="#F0EBE1">
     <meta name="display" content="standalone">
     <meta name="orientation" content="portrait-primary">
     
@@ -26,9 +26,9 @@
           crossorigin="">
     
     <!-- CSS Principal -->
-    <link rel="stylesheet" href="assets/css/main.css?v=3.0.0">
-    <link rel="stylesheet" href="assets/css/themes-v2.css?v=3.0.0">
-    <link rel="stylesheet" href="assets/css/responsive.css?v=2.1.0">
+    <link rel="stylesheet" href="assets/css/main.css?v=4.0.0">
+    <link rel="stylesheet" href="assets/css/themes-v2.css?v=4.0.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=4.0.0">
     
     <!-- Styles additionnels pour les suggestions de recherche -->
     <style>
@@ -38,7 +38,7 @@
             left: 0;
             right: 0;
             background: var(--paris-white);
-            border: 2px solid var(--paris-gold);
+            border: 1px solid var(--paris-stone, #E8E2D6);
             border-top: none;
             border-radius: 0 0 var(--border-radius) var(--border-radius);
             box-shadow: var(--shadow-lg);
@@ -47,7 +47,7 @@
             overflow-y: auto;
             display: none;
         }
-        
+
         .suggestion-item {
             padding: 12px 16px;
             cursor: pointer;
@@ -55,17 +55,17 @@
             align-items: center;
             gap: 12px;
             transition: var(--transition-fast);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid var(--paris-stone, #E8E2D6);
         }
-        
+
         .suggestion-item:last-child {
             border-bottom: none;
         }
-        
+
         .suggestion-item:hover,
         .suggestion-item.highlighted {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--paris-blue);
+            background: rgba(201, 184, 130, 0.08);
+            color: var(--paris-charcoal, #2C2C2C);
         }
         
         .suggestion-icon {
@@ -88,24 +88,25 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--paris-gold) 0%, var(--paris-gold-light) 100%);
-            border: 2px solid var(--paris-white);
-            box-shadow: var(--shadow-lg);
+            background: var(--paris-cream, #F5F0E8);
+            border: 1px solid var(--paris-stone, #E8E2D6);
+            box-shadow: var(--shadow);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            font-size: 24px;
+            font-size: 20px;
             z-index: 100;
         }
-        
+
         .theme-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: var(--shadow-xl);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--paris-gold, #C9B882);
         }
         
         .theme-icon-light,
@@ -131,72 +132,75 @@
         
         /* Styles pour les paramètres */
         .settings-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: var(--paris-cream);
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 24px;
+            padding: 28px;
+            background: var(--paris-white, #FDFBF7);
+            border-radius: 8px;
+            border: 1px solid var(--paris-stone, #E8E2D6);
         }
-        
+
         .setting-item {
             margin-bottom: 20px;
         }
-        
+
         .setting-label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--paris-blue);
+            font-weight: 600;
+            color: var(--paris-charcoal, #2C2C2C);
+            font-size: 0.9rem;
         }
-        
+
         .form-select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 12px 16px;
+            border: 1px solid var(--paris-stone, #E8E2D6);
             border-radius: 8px;
-            background: var(--paris-white);
+            background: var(--paris-white, #FDFBF7);
             color: var(--paris-dark);
             font-size: 14px;
+            font-family: var(--font-body);
             transition: all 0.3s ease;
         }
-        
+
         .form-select:focus {
-            border-color: var(--paris-gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            border-color: var(--paris-gold, #C9B882);
+            box-shadow: 0 0 0 3px rgba(201, 184, 130, 0.12);
             outline: none;
         }
-        
+
         .setting-help {
             display: block;
             margin-top: 5px;
-            font-size: 12px;
-            color: var(--paris-gray);
+            font-size: 0.8rem;
+            color: var(--paris-zinc, #7A7D7F);
             font-style: italic;
         }
-        
+
         .theme-preview {
             margin-top: 15px;
             padding: 20px;
-            border: 2px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--paris-stone, #E8E2D6);
             border-radius: 8px;
-            background: linear-gradient(135deg, var(--paris-white) 0%, var(--paris-cream) 100%);
+            background: var(--paris-cream, #F5F0E8);
         }
-        
+
         .preview-card {
-            background: linear-gradient(135deg, var(--paris-gold) 0%, var(--paris-gold-light) 100%);
+            background: var(--paris-cream, #F5F0E8);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--shadow);
+            border: 1px solid var(--paris-stone, #E8E2D6);
         }
-        
+
         .preview-header {
             height: 30px;
-            background: var(--paris-blue);
+            background: var(--paris-charcoal, #2C2C2C);
         }
-        
+
         .preview-content {
             height: 40px;
-            background: linear-gradient(135deg, var(--paris-cream) 0%, var(--paris-white) 100%);
+            background: var(--paris-white, #FDFBF7);
         }
         
         /* Styles pour les contrôles de carte */
