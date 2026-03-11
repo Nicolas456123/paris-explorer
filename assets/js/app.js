@@ -318,24 +318,48 @@ class ParisExplorerApp {
     
     // === SYSTÈME DE NOTIFICATIONS ===
     showNotification(message, type = 'info', duration = 3000, actions = []) {
+        // Respect user notification preference (always show errors)
+        if (type !== 'error') {
+            const userData = this.getCurrentUserData();
+            if (userData && userData.settings && userData.settings.notifications === false) {
+                console.log(`📢 Notification supprimée (préférence): ${message}`);
+                return;
+            }
+        }
+
         console.log(`📢 Notification ${type}:`, message);
-        
+
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
+
+        // Escape message for XSS protection
+        const safeMessage = escapeHtml(message);
+
         notification.innerHTML = `
             <div class="notification-content">
                 <div class="notification-icon">${this.getNotificationIcon(type)}</div>
-                <div class="notification-message">${message}</div>
+                <div class="notification-message">${safeMessage}</div>
                 ${actions.length > 0 ? `
                     <div class="notification-actions">
                         ${actions.map(action => `
-                            <button class="notification-btn" onclick="${action.onclick}">${action.label}</button>
+                            <button class="notification-btn">${escapeHtml(action.label)}</button>
                         `).join('')}
                     </div>
                 ` : ''}
-                <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                <button class="notification-close">×</button>
             </div>
         `;
+
+        // Event delegation for notification buttons
+        notification.querySelector('.notification-close').onclick = () => notification.remove();
+        if (actions.length > 0) {
+            const btns = notification.querySelectorAll('.notification-btn');
+            actions.forEach((action, i) => {
+                if (btns[i] && typeof action.onclick === 'function') {
+                    btns[i].onclick = action.onclick;
+                }
+            });
+        }
         
         // Container des notifications
         let container = document.getElementById('notificationsContainer');

@@ -319,8 +319,8 @@ class MapManager {
                         const marker = L.marker([lat, lng], {
                             icon: L.divIcon({
                                 className: 'custom-div-icon',
-                                html: `<div class="marker-pin" title="${place.name}">
-                                          <div class="marker-circle place-marker ${catKey}-marker ${isVisited ? 'visited' : ''}">
+                                html: `<div class="marker-pin" title="${escapeHtml(place.name)}">
+                                          <div class="marker-circle place-marker ${escapeHtml(catKey)}-marker ${isVisited ? 'visited' : ''}">
                                               <span class="marker-emoji">${categoryIcon}</span>
                                               ${isVisited ? '<span class="visited-check">✓</span>' : ''}
                                           </div>
@@ -330,10 +330,10 @@ class MapManager {
                                 popupAnchor: [0, -36]
                             })
                         }).addTo(this.map);
-                        
+
                         // Popup avec informations du lieu
                         marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName, placeId));
-                        
+
                         this.currentMarkers.push(marker);
                         markersAdded++;
                     });
@@ -411,8 +411,8 @@ class MapManager {
                                                 const marker = L.marker([lat, lng], {
                                                     icon: L.divIcon({
                                                         className: 'custom-div-icon',
-                                                        html: `<div class="marker-pin" title="${place.name}">
-                                                                  <div class="marker-circle place-marker ${catKey}-marker ${isVisited ? 'visited' : ''}">
+                                                        html: `<div class="marker-pin" title="${escapeHtml(place.name)}">
+                                                                  <div class="marker-circle place-marker ${escapeHtml(catKey)}-marker ${isVisited ? 'visited' : ''}">
                                                                       <span class="marker-emoji">${categoryIcon}</span>
                                                                       ${isVisited ? '<span class="visited-check">✓</span>' : ''}
                                                                   </div>
@@ -820,13 +820,15 @@ class MapManager {
 
         const categoryIcon = categoryIcons[catKey] || '📍';
         const categoryName = categoryNames[catKey] || catKey;
-        
-        // Créer le lien Google Maps si l'adresse existe
-        const googleMapsLink = place.address ? 
-            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}` : '';
 
-        // Utiliser l'ID fourni ou générer un fallback (ne devrait pas arriver)
-        const uniqueId = placeId;
+        // Use the shared utility for Google Maps URL
+        const googleMapsLink = generateGoogleMapsUrl(place, place.coordinates);
+
+        // Escape all dynamic content for XSS protection
+        const safeName = escapeHtml(place.name);
+        const safeDescription = escapeHtml(place.description);
+        const safeAddress = escapeHtml(place.address);
+        const safeId = escapeHtml(placeId);
 
         return `
             <div class="place-popup-card">
@@ -834,23 +836,24 @@ class MapManager {
                     <div class="place-popup-title">
                         <div class="place-popup-title-left">
                             <span class="place-popup-icon">${categoryIcon}</span>
-                            <h4>${place.name}</h4>
+                            <h4>${safeName}</h4>
                         </div>
                         <label class="place-popup-checkbox">
-                            <input type="checkbox" ${isVisited ? 'checked' : ''} 
-                                   onchange="window.mapManager.toggleVisitedPlace('${uniqueId}')"
+                            <input type="checkbox" ${isVisited ? 'checked' : ''}
+                                   data-place-id="${safeId}"
+                                   onchange="window.mapManager.toggleVisitedPlace(this.dataset.placeId)"
                                    style="transform: scale(1.2); cursor: pointer;">
                             <span style="margin-left: 4px; font-size: 12px; color: #6b7280;">Visité</span>
                         </label>
                     </div>
-                    <div class="place-popup-category">${categoryName}</div>
+                    <div class="place-popup-category">${escapeHtml(categoryName)}</div>
                 </div>
                 <div class="place-popup-content">
-                    ${place.description ? `<p class="place-popup-description">${place.description}</p>` : ''}
+                    ${place.description ? `<p class="place-popup-description">${safeDescription}</p>` : ''}
                     ${place.address ? `
                         <p class="place-popup-address">
-                            📍 <a href="${googleMapsLink}" target="_blank" style="color: var(--paris-blue); text-decoration: none; border-bottom: 1px solid var(--paris-blue);">
-                                ${place.address}
+                            📍 <a href="${googleMapsLink}" target="_blank" rel="noopener" style="color: var(--paris-blue); text-decoration: none; border-bottom: 1px solid var(--paris-blue);">
+                                ${safeAddress}
                             </a>
                         </p>
                     ` : ''}
@@ -861,8 +864,9 @@ class MapManager {
 
     createArrondissementPopup(arrKey, arrData, visitedPlaces, totalPlaces, completionPercent) {
         const arrInfo = arrData.arrondissement || arrData;
-        const arrName = arrInfo.name || arrKey.charAt(0).toUpperCase() + arrKey.slice(1);
-        
+        const arrName = escapeHtml(arrInfo.name || arrKey.charAt(0).toUpperCase() + arrKey.slice(1));
+        const safeDescription = escapeHtml(arrInfo.description);
+
         return `
             <div class="arrondissement-popup-card">
                 <div class="arrondissement-popup-header">
@@ -870,7 +874,7 @@ class MapManager {
                     ${completionPercent > 0 ? `<div class="completion-badge">${completionPercent}% exploré</div>` : ''}
                 </div>
                 <div class="arrondissement-popup-content">
-                    ${arrInfo.description ? `<p class="arrondissement-popup-description">${arrInfo.description}</p>` : ''}
+                    ${arrInfo.description ? `<p class="arrondissement-popup-description">${safeDescription}</p>` : ''}
                     <div class="arrondissement-popup-stats">
                         <div class="stat-item">
                             <span class="stat-number">${totalPlaces}</span>

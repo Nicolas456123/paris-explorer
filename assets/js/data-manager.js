@@ -141,25 +141,36 @@ class DataManager {
         this.organizeDataByCategories();
     }
     
-    // === PARSING D'UNE LIGNE CSV ===
+    // === PARSING D'UNE LIGNE CSV (RFC 4180) ===
     parseCSVLine(line, headers) {
-        // Parser CSV avec support des guillemets
         const values = [];
         let current = '';
         let inQuotes = false;
-        
+
         for (let i = 0; i < line.length; i++) {
             const char = line[i];
-            
-            if (char === '"' && (i === 0 || line[i-1] === ',')) {
-                inQuotes = true;
-            } else if (char === '"' && inQuotes) {
-                inQuotes = false;
-            } else if (char === ',' && !inQuotes) {
-                values.push(current.trim());
-                current = '';
+
+            if (inQuotes) {
+                if (char === '"') {
+                    // Escaped quote (double quote) inside quoted field
+                    if (i + 1 < line.length && line[i + 1] === '"') {
+                        current += '"';
+                        i++; // skip next quote
+                    } else {
+                        inQuotes = false; // end of quoted field
+                    }
+                } else {
+                    current += char;
+                }
             } else {
-                current += char;
+                if (char === '"') {
+                    inQuotes = true;
+                } else if (char === ',') {
+                    values.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
             }
         }
         values.push(current.trim());

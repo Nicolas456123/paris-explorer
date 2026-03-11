@@ -288,7 +288,7 @@
             <p class="subtitle">Découvrez tous les trésors de la Ville Lumière</p>
             
             <!-- Bouton toggle jour/nuit -->
-            <button id="themeToggle" class="theme-toggle" title="Basculer le thème">
+            <button id="themeToggle" class="theme-toggle" title="Basculer le thème" aria-label="Basculer entre mode jour et nuit">
                 <span class="theme-icon-light">☀️</span>
                 <span class="theme-icon-dark">🌙</span>
             </button>
@@ -330,32 +330,36 @@
             <div class="user-display" id="userDisplaySection" style="display: none;">
                 <div class="current-user-info">
                     <span class="user-name" id="currentUserName">-</span>
-                    <button class="btn btn-sm btn-secondary" id="changeUserBtn" title="Changer d'utilisateur">👤</button>
+                    <button class="btn btn-sm btn-secondary" id="changeUserBtn" title="Changer d'utilisateur" aria-label="Changer d'utilisateur">👤</button>
                 </div>
             </div>
             
             <!-- Recherche Avancée -->
             <div class="search-section">
                 <div class="search-container" style="position: relative;">
-                    <input type="text" id="searchInput" class="search-input" 
-                           placeholder="🔍 Rechercher un lieu, monument, restaurant..." 
+                    <label for="searchInput" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0">Rechercher un lieu</label>
+                    <input type="text" id="searchInput" class="search-input"
+                           placeholder="🔍 Rechercher un lieu, monument, restaurant..."
                            autocomplete="off">
-                    <button class="search-btn" id="searchBtn">🔍</button>
+                    <button class="search-btn" id="searchBtn" aria-label="Rechercher">🔍</button>
                     
                     <!-- Container pour les suggestions (sera créé dynamiquement) -->
                 </div>
                 
                 <!-- Filtres Avancés -->
                 <div class="filters-container">
-                    <select id="arrondissementFilter" class="filter-select">
+                    <label for="arrondissementFilter" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0">Filtrer par arrondissement</label>
+                    <select id="arrondissementFilter" class="filter-select" aria-label="Filtrer par arrondissement">
                         <option value="">Tous les arrondissements</option>
                     </select>
-                    
-                    <select id="categoryFilter" class="filter-select">
+
+                    <label for="categoryFilter" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0">Filtrer par catégorie</label>
+                    <select id="categoryFilter" class="filter-select" aria-label="Filtrer par catégorie">
                         <option value="">Toutes les catégories</option>
                     </select>
-                    
-                    <select id="statusFilter" class="filter-select">
+
+                    <label for="statusFilter" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0">Filtrer par statut</label>
+                    <select id="statusFilter" class="filter-select" aria-label="Filtrer par statut">
                         <option value="">Tous les statuts</option>
                         <option value="visited">✅ Visités</option>
                         <option value="not-visited">⭕ Non visités</option>
@@ -374,20 +378,20 @@
         </section>
         
         <!-- Onglets de Navigation -->
-        <nav class="tabs-container">
-            <button class="tab-btn active" data-tab="list">📋 Liste</button>
-            <button class="tab-btn" data-tab="map">🗺️ Carte</button>
-            <button class="tab-btn" data-tab="favorites">⭐ Favoris</button>
-            <button class="tab-btn" data-tab="stats">📊 Statistiques</button>
-            <button class="tab-btn" data-tab="achievements">🏆 Succès</button>
-            <button class="tab-btn" data-tab="settings">⚙️ Paramètres</button>
-            <button class="tab-btn" data-tab="users">👥 Utilisateurs</button>
+        <nav class="tabs-container" role="tablist" aria-label="Navigation principale">
+            <button class="tab-btn active" data-tab="list" role="tab" aria-selected="true" aria-controls="listContent">📋 Liste</button>
+            <button class="tab-btn" data-tab="map" role="tab" aria-selected="false" aria-controls="mapContent">🗺️ Carte</button>
+            <button class="tab-btn" data-tab="favorites" role="tab" aria-selected="false" aria-controls="favoritesContent">⭐ Favoris</button>
+            <button class="tab-btn" data-tab="stats" role="tab" aria-selected="false" aria-controls="statsContent">📊 Statistiques</button>
+            <button class="tab-btn" data-tab="achievements" role="tab" aria-selected="false" aria-controls="achievementsContent">🏆 Succès</button>
+            <button class="tab-btn" data-tab="settings" role="tab" aria-selected="false" aria-controls="settingsContent">⚙️ Paramètres</button>
+            <button class="tab-btn" data-tab="users" role="tab" aria-selected="false" aria-controls="usersContent">👥 Utilisateurs</button>
         </nav>
         
         <!-- Contenu des Onglets -->
         <main>
             <!-- Onglet Liste -->
-            <div id="listContent" class="tab-content active">
+            <div id="listContent" class="tab-content active" role="tabpanel" aria-labelledby="list">
                 <div class="loading-message">
                     <div class="message-icon">🗼</div>
                     <h3>Chargement des données parisiennes...</h3>
@@ -396,7 +400,7 @@
             </div>
             
             <!-- Onglet Carte -->
-            <div id="mapContent" class="tab-content">
+            <div id="mapContent" class="tab-content" role="tabpanel" aria-labelledby="map">
                 <div id="mapContainer" style="position: relative;">
                     <!-- La carte Leaflet sera initialisée ici -->
                     <div class="map-loading" style="display: flex; align-items: center; justify-content: center; height: 100%; background: #a8d3f0; color: white; font-size: 1.2rem;">
@@ -405,8 +409,8 @@
                     
                     <!-- Contrôles de Carte -->
                     <div class="map-controls">
-                        <button class="btn btn-primary" id="fullscreenBtn" title="Plein écran">🔲</button>
-                        <button class="btn btn-secondary" id="centerMapBtn" title="Centrer">🎯</button>
+                        <button class="btn btn-primary" id="fullscreenBtn" title="Plein écran" aria-label="Basculer le plein écran">🔲</button>
+                        <button class="btn btn-secondary" id="centerMapBtn" title="Centrer" aria-label="Centrer la carte sur Paris">🎯</button>
                     </div>
                 </div>
             </div>
@@ -482,11 +486,11 @@
     <!-- MODALS -->
     
     <!-- Modal Création/Gestion Utilisateur -->
-    <div class="modal" id="userModal">
+    <div class="modal" id="userModal" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">👤 Gestion des Utilisateurs</h3>
-                <button class="close-btn" id="closeUserModalBtn">&times;</button>
+                <h3 class="modal-title" id="userModalTitle">👤 Gestion des Utilisateurs</h3>
+                <button class="close-btn" id="closeUserModalBtn" aria-label="Fermer">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="user-form">
@@ -506,11 +510,11 @@
     </div>
     
     <!-- Modal Notes -->
-    <div class="modal" id="noteModal">
+    <div class="modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📝 Note Personnelle</h3>
-                <button class="close-btn" id="closeNoteModalBtn">&times;</button>
+                <h3 class="modal-title" id="noteModalTitle">📝 Note Personnelle</h3>
+                <button class="close-btn" id="closeNoteModalBtn" aria-label="Fermer">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="note-form">
@@ -527,11 +531,11 @@
     </div>
     
     <!-- Modal Détails Lieu -->
-    <div class="modal" id="placeModal">
+    <div class="modal" id="placeModal" role="dialog" aria-modal="true" aria-labelledby="placeModalTitle">
         <div class="modal-content large">
             <div class="modal-header">
                 <h3 class="modal-title" id="placeModalTitle">Détails du lieu</h3>
-                <button class="close-btn" id="closePlaceModalBtn">&times;</button>
+                <button class="close-btn" id="closePlaceModalBtn" aria-label="Fermer">&times;</button>
             </div>
             <div class="modal-body" id="placeModalContent">
                 <!-- Le contenu sera généré dynamiquement -->
@@ -540,11 +544,11 @@
     </div>
     
     <!-- Modal Import -->
-    <div class="modal" id="importModal">
+    <div class="modal" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📥 Importer des données</h3>
-                <button class="close-btn" onclick="app.uiManager.hideModal()">&times;</button>
+                <h3 class="modal-title" id="importModalTitle">📥 Importer des données</h3>
+                <button class="close-btn" onclick="app.uiManager.hideModal()" aria-label="Fermer">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="import-section">
@@ -587,7 +591,7 @@
     </div>
     
     <!-- Container des Notifications -->
-    <div class="notifications-container" id="notificationsContainer">
+    <div class="notifications-container" id="notificationsContainer" aria-live="polite" role="status">
         <!-- Les notifications dynamiques apparaîtront ici -->
     </div>
     
@@ -613,14 +617,14 @@
             crossorigin=""></script>
     
     <!-- Modules JavaScript (dans le bon ordre) -->
-    <script src="assets/js/utils.js?v=1754648172"></script>
-    <script src="assets/js/data-manager.js?v=1754648172"></script>
-    <script src="assets/js/user-manager.js?v=1754648172"></script>
-    <script src="assets/js/map-manager.js?v=1754673847"></script>
-    <script src="assets/js/search-filter.js?v=1754648172"></script>
-    <script src="assets/js/export-import.js?v=1754648172"></script>
-    <script src="assets/js/ui-manager.js?v=1754648172"></script>
-    <script src="assets/js/app.js?v=1754648172"></script>
+    <script src="assets/js/utils.js?v=1754938800"></script>
+    <script src="assets/js/data-manager.js?v=1754938800"></script>
+    <script src="assets/js/user-manager.js?v=1754938800"></script>
+    <script src="assets/js/map-manager.js?v=1754938800"></script>
+    <script src="assets/js/search-filter.js?v=1754938800"></script>
+    <script src="assets/js/export-import.js?v=1754938800"></script>
+    <script src="assets/js/ui-manager.js?v=1754938800"></script>
+    <script src="assets/js/app.js?v=1754938800"></script>
     
     <!-- Script pour le toggle thème et mode -->
     <script>

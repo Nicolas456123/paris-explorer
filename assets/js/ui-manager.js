@@ -183,14 +183,20 @@ class UIManager {
         console.log(`🔄 Changement d'onglet vers: ${tabName}`);
         
         // Désactiver tous les onglets et contenus
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
         document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        
+
         // Activer le nouvel onglet
         const newTab = document.querySelector(`[data-tab="${tabName}"]`);
         const newContent = document.getElementById(`${tabName}Content`);
-        
-        if (newTab) newTab.classList.add('active');
+
+        if (newTab) {
+            newTab.classList.add('active');
+            newTab.setAttribute('aria-selected', 'true');
+        }
         if (newContent) newContent.classList.add('active');
         
         // Actions spécifiques par onglet
@@ -401,10 +407,10 @@ class UIManager {
         const progressColor = completionPercent >= 70 ? '#059669' : completionPercent >= 40 ? '#d97706' : '#dc2626';
         
         let html = `
-            <div class="arrondissement-card" data-arr="${arrKey}">
+            <div class="arrondissement-card" data-arr="${escapeHtml(arrKey)}">
                 <div class="arrondissement-header" onclick="this.parentElement.classList.toggle('expanded')">
                     <div class="arrondissement-info">
-                        <h3>${arrData.name || arrKey}</h3>
+                        <h3>${escapeHtml(arrData.name || arrKey)}</h3>
                         <div class="arrondissement-stats">
                             <div class="stat-item">
                                 <span class="stat-number">${visitedPlaces}/${totalPlaces}</span>
@@ -444,9 +450,9 @@ class UIManager {
         const categoryIcon = this.getCategoryIcon(catData.title);
         
         let html = `
-            <div class="category-section" data-category="${catKey}">
+            <div class="category-section" data-category="${escapeHtml(catKey)}">
                 <h4 class="category-header">
-                    ${categoryIcon} ${catData.title}
+                    ${categoryIcon} ${escapeHtml(catData.title)}
                     <span class="category-count">(${(catData.places || []).length})</span>
                 </h4>
                 <div class="places-grid">
@@ -480,7 +486,7 @@ class UIManager {
         const highlightedDescription = place.description ? this.highlightSearchTerms(place.description) : '';
         
         return `
-            <div class="${cardClass}" data-place-id="${placeId}" data-arr="${arrKey}" data-cat="${catKey}">
+            <div class="${cardClass}" data-place-id="${escapeHtml(placeId)}" data-arr="${escapeHtml(arrKey)}" data-cat="${escapeHtml(catKey)}">
                 <div class="place-header">
                     <h5 class="place-name">${highlightedName}</h5>
                     <div class="place-actions">
@@ -495,30 +501,24 @@ class UIManager {
                         </button>
                     </div>
                 </div>
-                
+
                 ${place.description ? `
                     <p class="place-description">${highlightedDescription}</p>
                 ` : ''}
-                
+
                 ${place.address ? `
                     <p class="place-address">
-                        <a href="${generateGoogleMapsUrl(place, this.app.dataManager.getPlaceCoordinates(place, arrKey))}" 
-                           target="_blank" 
+                        <a href="${generateGoogleMapsUrl(place, this.app.dataManager.getPlaceCoordinates(place, arrKey))}"
+                           target="_blank" rel="noopener"
                            style="color: inherit; text-decoration: none; cursor: pointer;"
                            title="Voir sur Google Maps">
-                            📍 ${place.address}
+                            📍 ${escapeHtml(place.address)}
                         </a>
                     </p>
                 ` : ''}
-                
-                ${place.tags && place.tags.length > 0 ? `
-                    <div class="place-tags">
-                        ${''}
-                    </div>
-                ` : ''}
-                
+
                 <div class="place-meta">
-                    <small class="place-category">${this.getCategoryIcon(catKey)} ${catKey}</small>
+                    <small class="place-category">${this.getCategoryIcon(catKey)} ${escapeHtml(catKey)}</small>
                 </div>
             </div>
         `;
@@ -692,10 +692,15 @@ class UIManager {
     }
     
     highlightSearchTerms(text) {
-        if (!this.app.searchQuery || !text) return text;
-        
-        const regex = new RegExp(`(${this.app.searchQuery})`, 'gi');
-        return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+        if (!text) return '';
+        // Escape HTML first to prevent XSS
+        const escaped = escapeHtml(text);
+        if (!this.app.searchQuery) return escaped;
+
+        // Escape regex special characters in the query
+        const safeQuery = this.app.searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${safeQuery})`, 'gi');
+        return escaped.replace(regex, '<mark class="search-highlight">$1</mark>');
     }
     
     // === NETTOYAGE DES FILTRES ===
@@ -1078,27 +1083,28 @@ class UIManager {
             users.forEach(userName => {
                 const userData = this.app.userManager.users[userName];
                 const isActive = userName === this.app.userManager.currentUser;
-                
+                const safeName = escapeHtml(userName);
+
                 html += `
-                    <div class="user-card ${isActive ? 'active' : ''}">
+                    <div class="user-card ${isActive ? 'active' : ''}" data-username="${safeName}">
                         <div class="user-info">
-                            <h5>${userName}</h5>
+                            <h5>${safeName}</h5>
                             <p>${userData.visitedPlaces.size} lieux visités</p>
                             <p>${userData.favorites.length} favoris</p>
                             <small>Créé le ${new Date(userData.stats.createdAt).toLocaleDateString('fr-FR')}</small>
                         </div>
                         <div class="user-actions">
                             ${!isActive ? `
-                                <button class="btn btn-sm btn-primary" onclick="app.userManager.selectUser('${userName}')">
+                                <button class="btn btn-sm btn-primary" data-action="select-user" data-user="${safeName}">
                                     Sélectionner
                                 </button>
                             ` : `
                                 <span class="active-badge">✅ Actif</span>
                             `}
-                            <button class="btn btn-sm btn-secondary" onclick="app.exportImport.exportUserData('${userName}')">
+                            <button class="btn btn-sm btn-secondary" data-action="export-user" data-user="${safeName}">
                                 📤 Export
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="app.userManager.deleteUser('${userName}')">
+                            <button class="btn btn-sm btn-danger" data-action="delete-user" data-user="${safeName}">
                                 🗑️ Suppr.
                             </button>
                         </div>
@@ -1112,10 +1118,22 @@ class UIManager {
                 </div>
             </div>
         `;
-        
+
         container.innerHTML = html;
+
+        // Event delegation for user action buttons
+        container.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-action]');
+            if (!btn) return;
+            const action = btn.dataset.action;
+            const user = btn.dataset.user;
+            if (!user) return;
+            if (action === 'select-user') app.userManager.selectUser(user);
+            else if (action === 'export-user') app.exportImport.exportUserData(user);
+            else if (action === 'delete-user') app.userManager.deleteUser(user);
+        });
     }
-    
+
     // === CRÉATION D'UTILISATEUR ===
     createNewUser() {
         const input = document.getElementById('newUserNameInput');
@@ -1152,9 +1170,9 @@ class UIManager {
     renderFavoriteCard(favorite, details) {
         return `
             <div class="favorite-card">
-                <h5>${details.place.name}</h5>
-                <p class="favorite-location">${details.arrData.name || details.arrKey}</p>
-                <p class="favorite-category">${this.getCategoryIcon(details.catKey)} ${details.catData.title}</p>
+                <h5>${escapeHtml(details.place.name)}</h5>
+                <p class="favorite-location">${escapeHtml(details.arrData.name || details.arrKey)}</p>
+                <p class="favorite-category">${this.getCategoryIcon(details.catKey)} ${escapeHtml(details.catData.title)}</p>
                 <small>Ajouté le ${new Date(favorite.addedAt).toLocaleDateString('fr-FR')}</small>
             </div>
         `;
@@ -1172,7 +1190,7 @@ class UIManager {
             html += `
                 <div class="arrondissement-progress-item">
                     <div class="progress-info">
-                        <span class="progress-name">${arrData.name || arrKey}</span>
+                        <span class="progress-name">${escapeHtml(arrData.name || arrKey)}</span>
                         <span class="progress-stats">${visitedPlaces}/${totalPlaces} - ${completionPercent}%</span>
                     </div>
                     <div class="progress-bar">
@@ -1192,8 +1210,8 @@ class UIManager {
             <div class="achievement-card ${isUnlocked ? 'unlocked' : 'locked'}">
                 <div class="achievement-icon">${isUnlocked ? achievement.icon : '🔒'}</div>
                 <div class="achievement-content">
-                    <h4 class="achievement-title">${achievement.title}</h4>
-                    <p class="achievement-description">${achievement.description}</p>
+                    <h4 class="achievement-title">${escapeHtml(achievement.title)}</h4>
+                    <p class="achievement-description">${escapeHtml(achievement.description)}</p>
                     ${isUnlocked ? `
                         <div class="achievement-date">
                             Débloqué le ${new Date(unlockedData.unlockedAt).toLocaleDateString('fr-FR')}
@@ -1238,66 +1256,90 @@ class UIManager {
         }
         
         if (modalContent) {
+            const safeDescription = escapeHtml(place.description);
+            const safeAddress = escapeHtml(place.address);
+            const safeNote = escapeHtml(userNote);
+            const safePlaceId = escapeHtml(placeId);
+            const safeArrKey = escapeHtml(arrKey);
+            const safeCatKey = escapeHtml(catKey);
+            const safePlaceName = escapeHtml(placeName);
+
             modalContent.innerHTML = `
-                <div class="place-details">
+                <div class="place-details"
+                     data-place-id="${safePlaceId}"
+                     data-arr="${safeArrKey}"
+                     data-cat="${safeCatKey}"
+                     data-place-name="${safePlaceName}">
                     <div class="place-status">
                         <span class="status-badge ${isVisited ? 'visited' : 'not-visited'}">
                             ${isVisited ? '✅ Visité' : '⭕ Non visité'}
                         </span>
                         ${isFavorite ? '<span class="status-badge favorite">⭐ Favori</span>' : ''}
                     </div>
-                    
+
                     ${place.description ? `
                         <div class="detail-section">
                             <h5>📋 Description</h5>
-                            <p>${place.description}</p>
+                            <p>${safeDescription}</p>
                         </div>
                     ` : ''}
-                    
+
                     ${place.address ? `
                         <div class="detail-section">
                             <h5>📍 Adresse</h5>
                             <p>
-                                <a href="${generateGoogleMapsUrl(place, this.app.dataManager.getPlaceCoordinates(place, arrKey))}" 
-                                   target="_blank" 
+                                <a href="${generateGoogleMapsUrl(place, this.app.dataManager.getPlaceCoordinates(place, arrKey))}"
+                                   target="_blank" rel="noopener"
                                    style="color: var(--paris-blue); text-decoration: underline; cursor: pointer;"
                                    title="Voir sur Google Maps">
-                                    ${place.address} 🗺️
+                                    ${safeAddress} 🗺️
                                 </a>
                             </p>
                         </div>
                     ` : ''}
-                    
-                    ${place.tags && place.tags.length > 0 ? `
-                        <div class="detail-section">
-                            <h5>🏷️ Tags</h5>
-                            <div class="tags-list">
-                                ${''}
-                            </div>
-                        </div>
-                    ` : ''}
-                    
+
                     <div class="detail-section">
                         <h5>📝 Ma note personnelle</h5>
-                        <textarea id="placeNoteTextarea" class="form-textarea" placeholder="Ajoutez votre note sur ce lieu...">${userNote}</textarea>
-                        <button class="btn btn-primary" onclick="app.uiManager.savePlaceNote('${placeId}')">
+                        <textarea id="placeNoteTextarea" class="form-textarea" placeholder="Ajoutez votre note sur ce lieu...">${safeNote}</textarea>
+                        <button class="btn btn-primary" data-action="save-note">
                             💾 Sauvegarder la note
                         </button>
                     </div>
-                    
+
                     <div class="detail-actions">
-                        <button class="btn ${isVisited ? 'btn-success' : 'btn-secondary'}" 
-                                onclick="app.userManager.togglePlaceVisit('${arrKey}', '${catKey}', '${placeName}'); app.uiManager.hideModal(); app.uiManager.renderContent();">
+                        <button class="btn ${isVisited ? 'btn-success' : 'btn-secondary'}" data-action="toggle-visit">
                             ${isVisited ? '✅ Marquer non visité' : '⭕ Marquer visité'}
                         </button>
-                        
-                        <button class="btn ${isFavorite ? 'btn-warning' : 'btn-secondary'}" 
-                                onclick="app.userManager.toggleFavorite('${arrKey}', '${catKey}', '${placeName}'); app.uiManager.hideModal(); app.uiManager.renderContent();">
+
+                        <button class="btn ${isFavorite ? 'btn-warning' : 'btn-secondary'}" data-action="toggle-favorite">
                             ${isFavorite ? '⭐ Retirer favori' : '☆ Ajouter favori'}
                         </button>
                     </div>
                 </div>
             `;
+
+            // Event delegation for modal actions
+            modalContent.onclick = (e) => {
+                const btn = e.target.closest('[data-action]');
+                if (!btn) return;
+                const details = modalContent.querySelector('.place-details');
+                const pId = details.dataset.placeId;
+                const aKey = details.dataset.arr;
+                const cKey = details.dataset.cat;
+                const pName = details.dataset.placeName;
+
+                if (btn.dataset.action === 'save-note') {
+                    this.savePlaceNote(pId);
+                } else if (btn.dataset.action === 'toggle-visit') {
+                    app.userManager.togglePlaceVisit(aKey, cKey, pName);
+                    this.hideModal();
+                    this.renderContent();
+                } else if (btn.dataset.action === 'toggle-favorite') {
+                    app.userManager.toggleFavorite(aKey, cKey, pName);
+                    this.hideModal();
+                    this.renderContent();
+                }
+            };
         }
         
         this.showModal('placeModal');

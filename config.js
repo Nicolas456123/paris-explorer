@@ -19,7 +19,7 @@
   "features": {
     "export": {
       "enabled": true,
-      "formats": ["json", "csv", "pdf", "html"]
+      "formats": ["json", "csv", "html"]
     },
     "notifications": {
       "enabled": true,
@@ -29,7 +29,7 @@
     "search": {
       "enabled": true,
       "fuzzySearch": true,
-      "voiceSearch": true,
+      "voiceSearch": false,
       "minChars": 2,
       "maxResults": 500
     },
@@ -38,7 +38,7 @@
       "defaultZoom": 12,
       "clustering": true,
       "fullscreen": true,
-      "geolocation": true
+      "geolocation": false
     },
     "collections": {
       "enabled": true,

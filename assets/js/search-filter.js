@@ -14,6 +14,7 @@ class SearchFilter {
         this.maxHistorySize = 20;
         this.debounceTimer = null;
         this.isInitialized = false;
+        this._suggestionKeyHandler = null;
     }
     
     // === INITIALISATION ===
@@ -388,14 +389,25 @@ class SearchFilter {
             }
         }
         
-        // Remplir les suggestions
+        // Remplir les suggestions (escaped for XSS protection)
         suggestionsContainer.innerHTML = suggestions.map((suggestion, index) => `
-            <div class="suggestion-item" data-suggestion="${suggestion}" onclick="app.searchFilter.selectSuggestion('${suggestion}')">
+            <div class="suggestion-item" data-index="${index}">
                 <span class="suggestion-icon">🔍</span>
-                <span class="suggestion-text">${suggestion}</span>
+                <span class="suggestion-text">${escapeHtml(suggestion)}</span>
                 ${this.searchHistory.includes(suggestion) ? '<span class="suggestion-history">📚</span>' : ''}
             </div>
         `).join('');
+
+        // Event delegation for suggestion clicks
+        suggestionsContainer.onclick = (e) => {
+            const item = e.target.closest('.suggestion-item');
+            if (item) {
+                const idx = parseInt(item.dataset.index, 10);
+                if (idx >= 0 && idx < suggestions.length) {
+                    this.selectSuggestion(suggestions[idx]);
+                }
+            }
+        };
         
         suggestionsContainer.style.display = 'block';
         
@@ -407,6 +419,14 @@ class SearchFilter {
         const suggestionsContainer = document.getElementById('searchSuggestions');
         if (suggestionsContainer) {
             suggestionsContainer.style.display = 'none';
+        }
+        // Clean up keyboard handler
+        if (this._suggestionKeyHandler) {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.removeEventListener('keydown', this._suggestionKeyHandler);
+            }
+            this._suggestionKeyHandler = null;
         }
     }
     
@@ -423,46 +443,45 @@ class SearchFilter {
     setupSuggestionNavigation(suggestions) {
         const searchInput = document.getElementById('searchInput');
         if (!searchInput) return;
-        
+
+        // Remove previous handler to prevent stacking
+        if (this._suggestionKeyHandler) {
+            searchInput.removeEventListener('keydown', this._suggestionKeyHandler);
+        }
+
         let selectedIndex = -1;
-        
+
         const keyHandler = (e) => {
             const suggestionItems = document.querySelectorAll('.suggestion-item');
-            
+
             switch (e.key) {
                 case 'ArrowDown':
                     e.preventDefault();
                     selectedIndex = Math.min(selectedIndex + 1, suggestionItems.length - 1);
                     this.highlightSuggestion(selectedIndex);
                     break;
-                    
+
                 case 'ArrowUp':
                     e.preventDefault();
                     selectedIndex = Math.max(selectedIndex - 1, -1);
                     this.highlightSuggestion(selectedIndex);
                     break;
-                    
+
                 case 'Enter':
                     if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
                         e.preventDefault();
                         this.selectSuggestion(suggestions[selectedIndex]);
-                        searchInput.removeEventListener('keydown', keyHandler);
                     }
                     break;
-                    
+
                 case 'Escape':
                     this.hideSuggestions();
-                    searchInput.removeEventListener('keydown', keyHandler);
                     break;
             }
         };
-        
+
+        this._suggestionKeyHandler = keyHandler;
         searchInput.addEventListener('keydown', keyHandler);
-        
-        // Nettoyer l'event listener après un délai
-        setTimeout(() => {
-            searchInput.removeEventListener('keydown', keyHandler);
-        }, 30000);
     }
     
     highlightSuggestion(index) {

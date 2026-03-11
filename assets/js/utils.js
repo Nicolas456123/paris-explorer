@@ -67,6 +67,24 @@ function validateAndSuggestCoordinates(coordinates, placeName) {
     return { isValid: true, suggestion: null };
 }
 
+// === PROTECTION XSS ===
+
+/**
+ * Échappe les caractères HTML dangereux pour prévenir les attaques XSS
+ * @param {string} str - Chaîne à échapper
+ * @returns {string} - Chaîne échappée
+ */
+function escapeHtml(str) {
+    if (str == null) return '';
+    if (typeof str !== 'string') str = String(str);
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // === UTILITAIRES DE BASE ===
 
 /**
@@ -894,6 +912,9 @@ function createEventEmitter() {
 // Export pour utilisation dans d'autres modules
 if (typeof window !== 'undefined') {
     window.Utils = {
+        // Security
+        escapeHtml,
+
         // Base
         debounce,
         throttle,

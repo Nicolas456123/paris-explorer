@@ -24,7 +24,8 @@
       "Bash(git commit:*)",
       "Bash(start http://localhost:8000/test-csv.html)",
       "Bash(start http://localhost:8080/test-map.html)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(wc -l \"C:/Users/nicol/Desktop/paris-explorer/assets/js/\"*.js \"C:/Users/nicol/Desktop/paris-explorer/config.js\")"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

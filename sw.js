@@ -1,6 +1,6 @@
 // ===== SERVICE WORKER PARIS EXPLORER - VERSION SANS IMAGES =====
 
-const CACHE_NAME = 'paris-explorer-v3.0.0';
+const CACHE_NAME = 'paris-explorer-v3.1.0';
 const OFFLINE_URL = '/offline.html';
 
 // === RESSOURCES À METTRE EN CACHE ===
