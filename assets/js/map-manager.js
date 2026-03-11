@@ -331,6 +331,10 @@ class MapManager {
                             })
                         }).addTo(this.map);
 
+                        // Stocker le placeId pour mise à jour visuelle
+                        marker._placeId = placeId;
+                        marker._catKey = catKey;
+
                         // Popup avec informations du lieu
                         marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName, placeId));
 
@@ -423,9 +427,13 @@ class MapManager {
                                                     })
                                                 }).addTo(this.map);
                                                 
+                                                // Stocker le placeId pour mise à jour visuelle
+                                                marker._placeId = placeId;
+                                                marker._catKey = catKey;
+
                                                 // Popup avec informations du lieu
                                                 marker.bindPopup(this.createPlacePopup(place, catKey, isVisited, arrondissementName, placeId));
-                                                
+
                                                 this.currentMarkers.push(marker);
                                                 markersAdded++;
                                                 placeIndex++;
@@ -635,10 +643,40 @@ class MapManager {
     
     // === MISE À JOUR VISUELLE DES MARQUEURS ===
     updateMarkerVisualState(placeId, isVisited) {
-        // Pour une mise à jour immédiate, nous pourrions parcourir les marqueurs
-        // et mettre à jour leurs icônes, mais c'est complexe avec Leaflet
-        // Le changement sera visible au prochain zoom/déplacement de la carte
-        console.log(`🎨 Marqueur ${placeId} sera mis à jour visuellement au prochain rafraîchissement`);
+        if (!this.currentMarkers) return;
+
+        const marker = this.currentMarkers.find(m => m._placeId === placeId);
+        if (!marker) return;
+
+        // Mettre à jour le DOM du marqueur
+        const el = marker.getElement();
+        if (el) {
+            const circle = el.querySelector('.marker-circle');
+            if (circle) {
+                if (isVisited) {
+                    circle.classList.add('visited');
+                    if (!circle.querySelector('.visited-check')) {
+                        const check = document.createElement('span');
+                        check.className = 'visited-check';
+                        check.textContent = '✓';
+                        circle.appendChild(check);
+                    }
+                } else {
+                    circle.classList.remove('visited');
+                    const check = circle.querySelector('.visited-check');
+                    if (check) check.remove();
+                }
+            }
+        }
+
+        // Mettre à jour aussi la checkbox dans le popup s'il est ouvert
+        const popup = marker.getPopup();
+        if (popup && popup.isOpen()) {
+            const checkbox = popup.getElement()?.querySelector('.visited-checkbox');
+            if (checkbox) checkbox.checked = isVisited;
+        }
+
+        console.log(`🎨 Marqueur ${placeId} mis à jour: ${isVisited ? 'visité' : 'non visité'}`);
     }
     
     // === ÉTAT ===
@@ -667,45 +705,49 @@ class MapManager {
         }
         
         try {
+            // iOS Safari ne supporte pas l'API Fullscreen - utiliser le mode simulé
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const supportsFullscreen = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+
             if (!this.isFullscreen) {
-                // Passer en plein écran
-                if (mapContainer.requestFullscreen) {
-                    mapContainer.requestFullscreen();
-                } else if (mapContainer.webkitRequestFullscreen) {
-                    mapContainer.webkitRequestFullscreen();
-                } else if (mapContainer.mozRequestFullScreen) {
-                    mapContainer.mozRequestFullScreen();
-                } else if (mapContainer.msRequestFullscreen) {
-                    mapContainer.msRequestFullscreen();
+                if (!isIOS && supportsFullscreen) {
+                    // API Fullscreen native (desktop, Android)
+                    if (mapContainer.requestFullscreen) {
+                        mapContainer.requestFullscreen();
+                    } else if (mapContainer.webkitRequestFullscreen) {
+                        mapContainer.webkitRequestFullscreen();
+                    }
                 } else {
-                    // Fallback : mode plein écran simulé
+                    // Mode simulé pour iOS et navigateurs sans API Fullscreen
                     this.enterSimulatedFullscreen(mapContainer);
                 }
             } else {
-                // Sortir du plein écran
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
+                if (!isIOS && supportsFullscreen) {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
                 } else {
-                    // Fallback : sortir du mode simulé
                     this.exitSimulatedFullscreen(mapContainer);
                 }
             }
-            
-            // Événements pour détecter les changements de plein écran
-            document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
-            document.addEventListener('webkitfullscreenchange', () => this.handleFullscreenChange());
-            document.addEventListener('mozfullscreenchange', () => this.handleFullscreenChange());
-            document.addEventListener('MSFullscreenChange', () => this.handleFullscreenChange());
-            
+
+            // Événements pour détecter les changements de plein écran natif
+            if (!this._fullscreenListenersAdded) {
+                document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
+                document.addEventListener('webkitfullscreenchange', () => this.handleFullscreenChange());
+                this._fullscreenListenersAdded = true;
+            }
+
         } catch (error) {
             console.error('❌ Erreur lors du toggle plein écran:', error);
-            this.app.showNotification('Erreur lors du passage en plein écran', 'error');
+            // Fallback ultime : mode simulé
+            if (!this.isFullscreen) {
+                this.enterSimulatedFullscreen(mapContainer);
+            } else {
+                this.exitSimulatedFullscreen(mapContainer);
+            }
         }
     }
     
