@@ -273,8 +273,10 @@
         font-size: 0.9rem;
     }
 
-    .map-container {
-        height: 60vh;
+    .map-container,
+    #mapContainer {
+        height: 60vh !important;
+        min-height: auto !important;
     }
 
     .map-controls {
@@ -529,8 +531,10 @@
         transform: scale(1.2);
     }
 
-    .map-container {
-        height: 50vh;
+    .map-container,
+    #mapContainer {
+        height: 50vh !important;
+        min-height: auto !important;
     }
 
     .map-controls {
@@ -662,8 +666,10 @@
         max-height: calc(100vh - 280px);
     }
 
-    .map-container {
-        height: 70vh;
+    .map-container,
+    #mapContainer {
+        height: 70vh !important;
+        min-height: auto !important;
     }
 }
 
