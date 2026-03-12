@@ -902,6 +902,8 @@ body {
     border-radius: var(--border-radius);
     overflow: hidden;
     z-index: 1;
+    touch-action: none;
+    -webkit-touch-callout: none;
 }
 
 #mapContainer .leaflet-container {
