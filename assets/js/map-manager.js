@@ -37,7 +37,7 @@ class MapManager {
             mapContainer.style.position = 'relative';
             mapContainer.style.zIndex = '1';
             
-            // Créer la carte Leaflet
+            // Créer la carte Leaflet avec support tactile explicite pour iOS
             this.map = L.map(mapContainer, {
                 center: [48.8566, 2.3522], // Centre de Paris
                 zoom: 11,
@@ -45,7 +45,11 @@ class MapManager {
                 attributionControl: true,
                 preferCanvas: true, // Améliore les performances
                 maxBounds: [[48.815, 2.224], [48.902, 2.469]], // Limites de Paris
-                maxBoundsViscosity: 0.5
+                maxBoundsViscosity: 0.5,
+                touchZoom: true,
+                dragging: true,
+                tap: true,
+                tapTolerance: 15
             });
             
             console.log('✅ Instance Leaflet créée');
@@ -309,12 +313,12 @@ class MapManager {
                         
                         const categoryIcon = categoryIcons[catKey] || '📍';
                         
-                        // Vérifier si le lieu est visité  
+                        // Vérifier si le lieu est visité
                         const placeId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
-                        const isVisited = this.app.userManager && this.app.userManager.currentUser &&
-                            this.app.userManager.currentUser.visitedPlaces &&
-                            this.app.userManager.currentUser.visitedPlaces.has(placeId);
-                        
+                        const currentUserData = this.app.userManager ? this.app.userManager.getCurrentUserData() : null;
+                        const isVisited = currentUserData && currentUserData.visitedPlaces &&
+                            currentUserData.visitedPlaces.has(placeId);
+
                         // Créer le marqueur
                         const marker = L.marker([lat, lng], {
                             icon: L.divIcon({
@@ -405,11 +409,11 @@ class MapManager {
                                                 
                                                 const categoryIcon = categoryIcons[catKey] || '📍';
                                                 
-                                                // Vérifier si le lieu est visité  
+                                                // Vérifier si le lieu est visité
                                                 const placeId = this.app.dataManager.createPlaceId(arrKey, catKey, place.name);
-                                                const isVisited = this.app.userManager && this.app.userManager.currentUser &&
-                                                    this.app.userManager.currentUser.visitedPlaces &&
-                                                    this.app.userManager.currentUser.visitedPlaces.has(placeId);
+                                                const currentUserData = this.app.userManager ? this.app.userManager.getCurrentUserData() : null;
+                                                const isVisited = currentUserData && currentUserData.visitedPlaces &&
+                                                    currentUserData.visitedPlaces.has(placeId);
                                                 
                                                 // Créer le marqueur
                                                 const marker = L.marker([lat, lng], {
