@@ -157,7 +157,6 @@ class UserManager {
         this.users[userName] = newUser;
         this.saveUsers();
         
-        this.app.showNotification(`Utilisateur "${userName}" créé avec succès!`, 'success');
         console.log('✅ Utilisateur créé');
         
         return true;
@@ -585,11 +584,7 @@ class UserManager {
         
         console.log(`🏆 Achievement débloqué: ${achievement.title}`);
         
-        this.app.showNotification(
-            `🏆 Achievement débloqué!\n${achievement.title}: ${achievement.description}`, 
-            'achievement', 
-            5000
-        );
+        console.log(`🏆 Achievement débloqué: ${achievement.title}: ${achievement.description}`);
     }
     
     // === CONDITIONS D'ACHIEVEMENTS ===
@@ -694,7 +689,6 @@ class UserManager {
             this.autoSelectUser();
         }
         
-        this.app.showNotification(`Utilisateur "${userName}" supprimé`, 'success');
         console.log(`🗑️ Utilisateur ${userName} supprimé`);
         
         return true;
@@ -714,7 +708,7 @@ class UserManager {
             
             this.saveUsers();
             this.app.uiManager.renderContent();
-            this.app.showNotification('Progression réinitialisée', 'success');
+            console.log('✅ Progression réinitialisée');
         }
     }
     
@@ -777,7 +771,7 @@ class UserManager {
             localStorage.removeItem('paris-explorer-users');
             
             console.log('✅ Migration terminée');
-            this.app.showNotification('Données migrées vers le nouveau format', 'success');
+            console.log('✅ Données migrées vers le nouveau format');
             
         } catch (error) {
             console.error('❌ Erreur migration legacy:', error);

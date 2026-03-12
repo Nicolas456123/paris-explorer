@@ -627,13 +627,8 @@ class MapManager {
             this.map.closePopup();
         }
         
-        // Afficher une notification simple
         const userData = this.app.userManager.getCurrentUserData();
         const isNowVisited = userData && userData.visitedPlaces && userData.visitedPlaces.has(placeId);
-        this.app.showNotification(
-            isNowVisited ? 'Lieu marqué comme visité !' : 'Lieu marqué comme non visité', 
-            isNowVisited ? 'success' : 'info'
-        );
         
         // Mettre à jour visuellement le marqueur correspondant si possible
         this.updateMarkerVisualState(placeId, isNowVisited);
@@ -759,10 +754,22 @@ class MapManager {
         container.style.height = '100vh';
         container.style.zIndex = '9999';
         container.style.background = '#000';
-        
+
+        // Empêcher le scroll du body (important sur iOS)
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+
+        // Ajouter un bouton de fermeture flottant
+        const closeBtn = document.createElement('button');
+        closeBtn.id = 'simulated-fullscreen-close';
+        closeBtn.innerHTML = '✕';
+        closeBtn.style.cssText = 'position:fixed;top:12px;right:12px;z-index:10000;width:40px;height:40px;border-radius:50%;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;';
+        closeBtn.addEventListener('click', () => this.toggleFullscreen());
+        document.body.appendChild(closeBtn);
+
         this.isFullscreen = true;
         this.updateFullscreenUI();
-        
+
         // Redimensionner la carte après le changement
         setTimeout(() => {
             if (this.map) {
@@ -770,7 +777,7 @@ class MapManager {
             }
         }, 100);
     }
-    
+
     exitSimulatedFullscreen(container) {
         container.style.position = '';
         container.style.top = '';
@@ -779,10 +786,18 @@ class MapManager {
         container.style.height = '';
         container.style.zIndex = '';
         container.style.background = '';
-        
+
+        // Restaurer le scroll du body
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+
+        // Retirer le bouton de fermeture
+        const closeBtn = document.getElementById('simulated-fullscreen-close');
+        if (closeBtn) closeBtn.remove();
+
         this.isFullscreen = false;
         this.updateFullscreenUI();
-        
+
         // Redimensionner la carte après le changement
         setTimeout(() => {
             if (this.map) {

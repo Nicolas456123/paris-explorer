@@ -64,7 +64,6 @@ class ExportImport {
             // Télécharger le fichier
             this.downloadFile(JSON.stringify(exportData, null, 2), filename, 'application/json');
             
-            this.app.showNotification(`✅ Données de ${targetUser} exportées !`, 'success');
             console.log('✅ Export utilisateur terminé');
             
         } catch (error) {
@@ -95,8 +94,6 @@ class ExportImport {
             
             this.downloadFile(csvData, filename, 'text/csv');
             
-            this.app.showNotification(`📊 Export CSV terminé !`, 'success');
-            
         } catch (error) {
             console.error('❌ Erreur export CSV:', error);
             this.app.showNotification('Erreur lors de l\'export CSV', 'error');
@@ -121,8 +118,6 @@ class ExportImport {
             const filename = `paris-explorer-${targetUser}-${timestamp}.html`;
             
             this.downloadFile(htmlData, filename, 'text/html');
-            
-            this.app.showNotification(`📄 Rapport HTML généré !`, 'success');
             
         } catch (error) {
             console.error('❌ Erreur export HTML:', error);
@@ -528,7 +523,7 @@ class ExportImport {
             
             if (success) {
                 this.app.uiManager.hideModal();
-                this.app.showNotification('✅ Données importées avec succès !', 'success');
+                console.log('✅ Données importées avec succès');
                 
                 // Recharger l'interface
                 this.app.uiManager.loadUserSelector();
@@ -767,7 +762,7 @@ class ExportImport {
             
             this.downloadFile(JSON.stringify(allUsersData, null, 2), filename, 'application/json');
             
-            this.app.showNotification(`✅ Toutes les données exportées !`, 'success');
+            console.log('✅ Toutes les données exportées');
             console.log('✅ Export global terminé');
             
         } catch (error) {
@@ -857,7 +852,7 @@ class ExportImport {
                     this.app.userManager.saveUsers();
                     this.app.uiManager.renderContent();
                     
-                    this.app.showNotification('✅ Sauvegarde restaurée !', 'success');
+                    console.log('✅ Sauvegarde restaurée');
                 }
             }
             

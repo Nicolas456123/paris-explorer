@@ -231,29 +231,11 @@ class ParisExplorerApp {
             });
         }
         
-        // Installation PWA
+        // Installation PWA - stocker l'événement sans popup intrusif
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('📱 PWA installable détectée');
             e.preventDefault();
-            
-            this.showNotification(
-                '📱 Installer Paris Explorer comme application ?', 
-                'info', 
-                10000,
-                [
-                    { 
-                        label: 'Installer', 
-                        onclick: `
-                            e.prompt();
-                            e.userChoice.then((choiceResult) => {
-                                console.log(choiceResult.outcome === 'accepted' ? '✅ PWA installée' : '❌ Installation annulée');
-                            });
-                            this.parentElement.parentElement.remove();
-                        `
-                    },
-                    { label: 'Plus tard', onclick: 'this.parentElement.parentElement.remove()' }
-                ]
-            );
+            this.deferredInstallPrompt = e;
         });
     }
     
