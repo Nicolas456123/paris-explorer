@@ -954,85 +954,35 @@ class UIManager {
         container.innerHTML = `
             <div class="settings-sections">
                 <div class="settings-section">
-                    <h4>🎨 Apparence</h4>
-                    
+                    <h4>🎨 Thème</h4>
                     <div class="setting-item">
-                        <label for="themeSelect">Thème de l'interface :</label>
+                        <label for="themeSelect">Interface :</label>
                         <select id="themeSelect" onchange="app.userManager.updateSettingAndApply('theme', this.value)">
-                            <option value="paris-classic" ${settings.theme === 'paris-classic' ? 'selected' : ''}>🏛️ Paris Classique</option>
-                            <option value="dark" ${settings.theme === 'dark' ? 'selected' : ''}>🌙 Mode Sombre</option>
-                            <option value="versailles" ${settings.theme === 'versailles' ? 'selected' : ''}>👑 Versailles</option>
-                            <option value="montmartre" ${settings.theme === 'montmartre' ? 'selected' : ''}>🎨 Montmartre</option>
-                            <option value="saint-germain" ${settings.theme === 'saint-germain' ? 'selected' : ''}>🌿 Saint-Germain</option>
-                            <option value="marais" ${settings.theme === 'marais' ? 'selected' : ''}>🏛️ Le Marais</option>
-                            <option value="haute-couture" ${settings.theme === 'haute-couture' ? 'selected' : ''}>👗 Haute Couture</option>
-                            <option value="high-contrast" ${settings.theme === 'high-contrast' ? 'selected' : ''}>🔲 Contraste Élevé</option>
-                            <option value="auto" ${settings.theme === 'auto' ? 'selected' : ''}>🍂 Automatique Saisonnier</option>
+                            <option value="paris-classic" ${settings.theme === 'paris-classic' ? 'selected' : ''}>Paris Classique</option>
+                            <option value="dark" ${settings.theme === 'dark' ? 'selected' : ''}>Mode Sombre</option>
+                            <option value="versailles" ${settings.theme === 'versailles' ? 'selected' : ''}>Versailles</option>
+                            <option value="montmartre" ${settings.theme === 'montmartre' ? 'selected' : ''}>Montmartre</option>
+                            <option value="saint-germain" ${settings.theme === 'saint-germain' ? 'selected' : ''}>Saint-Germain</option>
+                            <option value="marais" ${settings.theme === 'marais' ? 'selected' : ''}>Le Marais</option>
+                            <option value="haute-couture" ${settings.theme === 'haute-couture' ? 'selected' : ''}>Haute Couture</option>
                         </select>
-                        <small class="setting-help">Le thème s'applique instantanément à toute l'interface</small>
-                    </div>
-                    
-                    <div class="setting-item">
-                        <label class="checkbox-container">
-                            <input type="checkbox" ${settings.compactMode ? 'checked' : ''} 
-                                   onchange="app.userManager.updateSettingAndApply('compactMode', this.checked)">
-                            <span class="checkmark"></span>
-                            Mode compact
-                        </label>
-                        <small class="setting-help">Affichage plus dense pour les écrans plus petits</small>
-                    </div>
-                    
-                    <div class="setting-item">
-                        <label class="checkbox-container">
-                            <input type="checkbox" ${settings.animations !== false ? 'checked' : ''} 
-                                   onchange="app.userManager.updateSettingAndApply('animations', this.checked)">
-                            <span class="checkmark"></span>
-                            Animations et transitions
-                        </label>
-                        <small class="setting-help">Désactiver si vous préférez une interface plus rapide</small>
-                    </div>
-                    
-                    <div class="setting-item">
-                        <label class="checkbox-container">
-                            <input type="checkbox" ${settings.highContrast ? 'checked' : ''} 
-                                   onchange="app.userManager.updateSettingAndApply('highContrast', this.checked)">
-                            <span class="checkmark"></span>
-                            Contraste élevé (accessibilité)
-                        </label>
-                        <small class="setting-help">Pour une meilleure visibilité</small>
-                    </div>
-                    
-                    <div class="setting-item">
-                        <button class="btn btn-secondary" onclick="app.userManager.resetTheme()">
-                            🔄 Réinitialiser le thème
-                        </button>
                     </div>
                 </div>
-                
-                <div class="settings-section">
-                    <h4>🔔 Notifications</h4>
-                    <div class="setting-item">
-                        <label class="checkbox-container">
-                            <input type="checkbox" ${settings.notifications !== false ? 'checked' : ''} 
-                                   onchange="app.userManager.updateSettingAndApply('notifications', this.checked)">
-                            <span class="checkmark"></span>
-                            Activer les notifications
-                        </label>
-                    </div>
-                </div>
-                
+
                 <div class="settings-section">
                     <h4>🗺️ Carte</h4>
                     <div class="setting-item">
                         <label for="mapStyleSelect">Style de carte :</label>
-                        <select id="mapStyleSelect" onchange="app.userManager.updateSettingAndApply('mapStyle', this.value)">
+                        <select id="mapStyleSelect" onchange="app.mapManager.changeMapStyle(this.value)">
                             <option value="standard" ${settings.mapStyle === 'standard' ? 'selected' : ''}>Standard</option>
-                            <option value="satellite" ${settings.mapStyle === 'satellite' ? 'selected' : ''}>Satellite</option>
-                            <option value="terrain" ${settings.mapStyle === 'terrain' ? 'selected' : ''}>Terrain</option>
+                            <option value="watercolor" ${settings.mapStyle === 'watercolor' ? 'selected' : ''}>Aquarelle</option>
+                            <option value="toner" ${settings.mapStyle === 'toner' ? 'selected' : ''}>Noir & Blanc</option>
+                            <option value="carto-light" ${settings.mapStyle === 'carto-light' ? 'selected' : ''}>Clair</option>
+                            <option value="carto-dark" ${settings.mapStyle === 'carto-dark' ? 'selected' : ''}>Sombre</option>
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="settings-section">
                     <h4>📊 Données</h4>
                     <div class="setting-actions">

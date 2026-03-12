@@ -54,21 +54,13 @@ class MapManager {
             
             console.log('✅ Instance Leaflet créée');
             
-            // Ajouter la couche de tuiles avec gestion d'erreur
-            const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                maxZoom: 19,
-                minZoom: 10,
-                errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', // Pixel transparent
-                crossOrigin: true
-            });
-            
-            tileLayer.addTo(this.map);
+            // Ajouter la couche de tuiles
+            const savedStyle = this.app.userManager?.getCurrentUserData()?.settings?.mapStyle || 'standard';
+            this.tileLayer = this._createTileLayer(savedStyle);
+            this.tileLayer.addTo(this.map);
             
             // Événements de debugging pour les tuiles
-            tileLayer.on('loading', () => console.log('📡 Chargement des tuiles...'));
-            tileLayer.on('load', () => console.log('✅ Tuiles chargées'));
-            tileLayer.on('tileerror', (e) => {
+            this.tileLayer.on('tileerror', (e) => {
                 console.warn('⚠️ Erreur tuile:', e.tile.src);
             });
             
@@ -695,6 +687,48 @@ class MapManager {
         return this.map ? this.map.getCenter() : null;
     }
     
+    // === STYLE DE CARTE ===
+    _createTileLayer(style) {
+        const styles = {
+            standard: {
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            },
+            watercolor: {
+                url: 'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg',
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com/">Stamen</a>'
+            },
+            toner: {
+                url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com/">Stamen</a>'
+            },
+            'carto-light': {
+                url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+            },
+            'carto-dark': {
+                url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+            }
+        };
+        const s = styles[style] || styles.standard;
+        return L.tileLayer(s.url, {
+            attribution: s.attribution,
+            maxZoom: 19,
+            minZoom: 10
+        });
+    }
+
+    changeMapStyle(style) {
+        if (!this.map) return;
+        if (this.tileLayer) {
+            this.map.removeLayer(this.tileLayer);
+        }
+        this.tileLayer = this._createTileLayer(style);
+        this.tileLayer.addTo(this.map);
+        this.app.userManager.updateSettingAndApply('mapStyle', style);
+    }
+
     // === PLEIN ÉCRAN ===
     toggleFullscreen() {
         const mapContainer = document.getElementById('mapContainer');
